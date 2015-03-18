@@ -6,13 +6,13 @@ public class ThreadExample {
 		MyThread myThread = new MyThread();
 		myThread.start();
 
-		Thread thread = new Thread(new MyRunnable());
-		thread.start();
+		Thread myRunnable = new Thread(new MyRunnable());
+		myRunnable.start();
 
 	}
 }
 
-// Thread Subclass
+// Thread Subclass implementation
 class MyThread extends Thread {
 
 	public void run() {
@@ -21,7 +21,7 @@ class MyThread extends Thread {
 
 }
 
-// Runnable Interface Implemention
+// Runnable Interface implementation
 class MyRunnable implements Runnable {
 
 	public void run() {

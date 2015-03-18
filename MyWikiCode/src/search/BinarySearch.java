@@ -4,8 +4,7 @@ public class BinarySearch {
 	public static void main(String[] args) {
 		int[] arr = { 2, 4, 6, 8, 10, 12, 14, 16 };
 		System.out.println("Key 14's position: " + binarySearch(arr, 14));
-		System.out.println("Key 14's position: "
-				+ recursiveBinarySearch(arr, 0, arr.length, 14));
+		System.out.println("Key 14's position: " + recursiveBinarySearch(arr, 0, arr.length, 14));
 	}
 
 	// divide and conquer technique
@@ -26,8 +25,7 @@ public class BinarySearch {
 	}
 
 	// recursive algorithm
-	static int recursiveBinarySearch(int[] sortedArray, int start, int end,
-			int key) {
+	static int recursiveBinarySearch(int[] sortedArray, int start, int end, int key) {
 		if (start < end) {
 			int mid = start + (end - start) / 2;
 			if (key == sortedArray[mid]) {
