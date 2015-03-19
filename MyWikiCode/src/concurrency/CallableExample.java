@@ -14,12 +14,11 @@ public class CallableExample {
 
 	public static void main(String args[]) {
 
-		// return first result when any task is completed, until all tasks are completed
+		// return first result when any task is completed, finish until all tasks are completed
 		submit1();
 
 		// wait until all tasks are completed before returns.
 		submit2();
-
 	}
 
 	private static void submit1() {
@@ -29,8 +28,7 @@ public class CallableExample {
 		List<Future<String>> futureList = new ArrayList<Future<String>>();
 
 		// parallel the tasks
-		for (int i = 0; i < 10; i++) {
-
+		for (int i = 0; i < 5; i++) {
 			Callable<String> callable = new CallableExample().new MyCallable(i);
 
 			// submit Callable tasks to be executed by thread pool
@@ -56,9 +54,8 @@ public class CallableExample {
 
 		List<Callable<String>> callableList = new ArrayList<Callable<String>>();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			callableList.add(new CallableExample().new MyCallable(i));
-
 		}
 
 		ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -73,10 +70,10 @@ public class CallableExample {
 			futureList = executor.invokeAll(callableList);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		} finally {
-			executor.shutdown();
-		}
-
+		} 
+		
+		executor.shutdown();
+		
 		for (Future<String> future : futureList) {
 			try {
 				System.out.println(new Date() + "::" + future.get());
@@ -84,7 +81,6 @@ public class CallableExample {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	// Callable thread
@@ -102,6 +98,5 @@ public class CallableExample {
 			Thread.sleep(x);
 			return "task " + id + " is done " + x;
 		}
-
 	}
 }

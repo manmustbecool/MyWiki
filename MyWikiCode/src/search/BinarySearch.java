@@ -1,6 +1,7 @@
 package search;
 
 public class BinarySearch {
+	
 	public static void main(String[] args) {
 		int[] arr = { 2, 4, 6, 8, 10, 12, 14, 16 };
 		System.out.println("Key 14's position: " + binarySearch(arr, 14));
