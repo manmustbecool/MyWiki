@@ -18,7 +18,6 @@ class MyThread extends Thread {
 	public void run() {
 		System.out.println("MyThread running");
 	}
-
 }
 
 // Runnable Interface implementation
