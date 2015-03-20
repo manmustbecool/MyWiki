@@ -98,12 +98,15 @@ http://bigocheatsheet.com/
   1. Select a pivot, normally the middle one
   1. From both ends, swap elements and make all elements on the left less than the pivot and all elements on the right greater than the pivot
   1. Recursively sort left part and right part
+  
+  code : https://github.com/manmustbecool/MyWiki/tree/gh-pages
 
 ## Bubble Sort ##
 
   1. Compare each pair of adjacent elements from the beginning of an array and, if they are in reversed order, swap them.
   1. If at least one swap has been done, repeat step 1.
-
+  
+  code : https://github.com/manmustbecool/MyWiki/tree/gh-pages
 
 # java 8 #
 http://winterbe.com/posts/2014/03/16/java-8-tutorial/
