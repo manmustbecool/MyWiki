@@ -72,13 +72,8 @@ img {
 <li><a href="#common-functions"><span class="toc-section-number">0.8</span> Common functions</a></li>
 <li><a href="#parallel-r-in-windows"><span class="toc-section-number">0.9</span> Parallel R in Windows</a></li>
 <li><a href="#sql-query"><span class="toc-section-number">0.10</span> SQL query</a></li>
-<li><a href="#tutorial"><span class="toc-section-number">1</span> Tutorial</a><ul>
-<li><a href="#call-r-from-java"><span class="toc-section-number">1.1</span> Call R from Java</a><ul>
-<li><a href="#rcaller"><span class="toc-section-number">1.1.1</span> RCaller</a></li>
-<li><a href="#rserve"><span class="toc-section-number">1.1.2</span> Rserve</a></li>
-<li><a href="#jri"><span class="toc-section-number">1.1.3</span> JRI</a></li>
-<li><a href="#renjin"><span class="toc-section-number">1.1.4</span> Renjin</a></li>
-</ul></li>
+<li><a href="#others"><span class="toc-section-number">1</span> Others</a><ul>
+<li><a href="#call-r-from-java"><span class="toc-section-number">1.1</span> Call R from Java</a></li>
 <li><a href="#call-java-from-r"><span class="toc-section-number">1.2</span> Call Java from R</a></li>
 </ul></li>
 </ul>
@@ -187,8 +182,7 @@ m &lt;- t(m)</code></pre>
 <div id="common-data-frame-operations" class="section level2">
 <h2><span class="header-section-number">0.6</span> Common Data Frame operations</h2>
 <p>A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
-<pre><code>
-# Get and Set Row and Column Names for Data Frames
+<pre class="r"><code># Get and Set Row and Column Names for Data Frames
 rownames(df)   
 colnames(df) 
 rownames(df) &lt;- value
@@ -299,8 +293,7 @@ df &lt;- df[,colSums(is.na(df))&lt;nrow(df)]
 <div id="common-list-operations" class="section level2">
 <h2><span class="header-section-number">0.7</span> Common List operations</h2>
 <p>A List is an ordered collection of objects.</p>
-<pre><code>
-# convert a list to a data frame
+<pre class="r"><code># convert a list to a data frame
 my_df &lt;- as.data.frame(do.call(rbind, my_ls))
 
 # select a subset from a list
@@ -312,8 +305,7 @@ l1 &lt;- append(l1, list(l2)) # the l2 will be one element of l1</code></pre>
 </div>
 <div id="common-functions" class="section level2">
 <h2><span class="header-section-number">0.8</span> Common functions</h2>
-<pre><code>
--------- apply --------
+<pre class="r"><code>-------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 
 ----- Sample --------
@@ -345,7 +337,7 @@ mtext(&quot;second Y&quot;, side=4, line=2.3, adj=0.5, cex=1) # add test label o
 <div id="parallel-r-in-windows" class="section level2">
 <h2><span class="header-section-number">0.9</span> Parallel R in Windows</h2>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
-<pre><code>require(doSNOW)
+<pre class="r"><code>require(doSNOW)
 cl&lt;-makeCluster(2) # I have two cores
 registerDoSNOW(cl)
 
@@ -367,8 +359,7 @@ stopCluster(cl)</code></pre>
 </div>
 <div id="sql-query" class="section level2">
 <h2><span class="header-section-number">0.10</span> SQL query</h2>
-<pre><code>
-library(RJDBC) 
+<pre class="r"><code>library(RJDBC) 
 postgres &lt;- JDBC( &quot;org.postgresql.Driver&quot;, &quot;C:/.../postgresql-8.4-703.jdbc4.jar&quot;)
 
 conn &lt;- dbConnect(postgres, &quot;jdbc:postgresql://*.*.*.*:5432/xxdb&quot;, user=&quot;postgres&quot;, password=&quot;postgres&quot;)
@@ -376,8 +367,8 @@ conn &lt;- dbConnect(postgres, &quot;jdbc:postgresql://*.*.*.*:5432/xxdb&quot;, 
 myDf &lt;- dbGetQuery(conn, &quot;select * from tableX&quot;)
 </code></pre>
 </div>
-<div id="tutorial" class="section level1">
-<h1><span class="header-section-number">1</span> Tutorial</h1>
+<div id="others" class="section level1">
+<h1><span class="header-section-number">1</span> Others</h1>
 <p><strong>pakcages overview</strong> <a href="http://cran.r-project.org/web/views/">http://cran.r-project.org/web/views/</a></p>
 <p><strong>QuickR</strong> <a href="http://www.statmethods.net/index.html">http://www.statmethods.net/index.html</a></p>
 <p><strong>plot</strong> <a href="http://personality-project.org/r/r.plottingdates.html">http://personality-project.org/r/r.plottingdates.html</a></p>
@@ -390,20 +381,21 @@ plot(ecdf(x))</code></pre>
 <p><strong>Histograms in R</strong> <a href="http://msenux.redwoods.edu/math/R/hist.php">http://msenux.redwoods.edu/math/R/hist.php</a></p>
 <div id="call-r-from-java" class="section level2">
 <h2><span class="header-section-number">1.1</span> Call R from Java</h2>
-<div id="rcaller" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> RCaller</h3>
+<ul>
+<li>RCaller</li>
+</ul>
 <blockquote>
 <p><a href="http://www.mhsatman.com/rcaller.php">http://www.mhsatman.com/rcaller.php</a></p>
 </blockquote>
-</div>
-<div id="rserve" class="section level3">
-<h3><span class="header-section-number">1.1.2</span> Rserve</h3>
+<ul>
+<li>Rserve</li>
+</ul>
 <blockquote>
 <p>An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.</p>
 </blockquote>
-</div>
-<div id="jri" class="section level3">
-<h3><span class="header-section-number">1.1.3</span> JRI</h3>
+<ul>
+<li>JRI</li>
+</ul>
 <blockquote>
 <p>Java/R Interface It use uses the JNI and is part of rJava. <a href="http://www.rforge.net/JRI/">http://www.rforge.net/JRI/</a> Install rJava in R <code>install.packages(&quot;rJava&quot;)</code></p>
 </blockquote>
@@ -411,15 +403,15 @@ plot(ecdf(x))</code></pre>
 <p>JRI can be found be the R library directory <code>C:\Program Files\R\R-2.15.0\library\rJava\jri</code></p>
 </blockquote>
 <p>Run example in the Windows CMD. (i386 for 32bit)</p>
-<pre><code>set R_HOME= C:\Program Files\R\R-2.15.0
+<pre class="auto"><code>set R_HOME= C:\Program Files\R\R-2.15.0
 //The environment variable R_HOME has to be set globally for the system, not only for the current user (restart of the system!) 
 set path= %PATH%;C:\Program Files\R\R-2.15.0\bin\i386;C:\Program Files\R\R-2.15.0\library\rJava\jri
 cd C:\Program Files\R\R-2.15.0\library\rJava\jri\
 java -cp JRI.jar;examples rtest</code></pre>
 <p>Development in Eclipse Java project</p>
-<pre><code> build path &gt; add external class folder : C:\Program Files\R\R-2.15.0\library\rJava\jri</code></pre>
+<pre class="auto"><code> build path &gt; add external class folder : C:\Program Files\R\R-2.15.0\library\rJava\jri</code></pre>
 <p>In Linux,</p>
-<pre><code>//sudo R CMD javareconf
+<pre class="auto"><code>//sudo R CMD javareconf
 
 sudo apt-get install r-cran-rjava
 
@@ -431,10 +423,9 @@ cd /usr/lib/R/site-library/rJava/jri
 java -cp JRI.jar:examples rtest
 
 //sudo cp /usr/lib/R/site-library/rJava/jri libjri.so  /usr/lib
-
 </code></pre>
 <p>JRI sample:</p>
-<pre><code>import org.rosuda.JRI.REXP;
+<pre class="java"><code>import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
 public class rtest 
 {
@@ -448,19 +439,21 @@ public class rtest
  }
 }
 </code></pre>
-</div>
-<div id="renjin" class="section level3">
-<h3><span class="header-section-number">1.1.4</span> Renjin</h3>
+<ul>
+<li>Renjin</li>
+</ul>
 <blockquote>
 <p>A new JVM-based R language interpreter. <a href="http://code.google.com/p/renjin/">http://code.google.com/p/renjin/</a> <a href="http://stdioe.blogspot.ie/2011/09/embedding-r-in-java-applications-using.html">http://stdioe.blogspot.ie/2011/09/embedding-r-in-java-applications-using.html</a></p>
 </blockquote>
 </div>
-</div>
 <div id="call-java-from-r" class="section level2">
 <h2><span class="header-section-number">1.2</span> Call Java from R</h2>
 <ul>
-<li>rJava &gt; &gt; <a href="http://www.rforge.net/rJava/">http://www.rforge.net/rJava/</a></li>
+<li>rJava</li>
 </ul>
+<blockquote>
+<p><a href="http://www.rforge.net/rJava/">http://www.rforge.net/rJava/</a></p>
+</blockquote>
 </div>
 </div>
 
