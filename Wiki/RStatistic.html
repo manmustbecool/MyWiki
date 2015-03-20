@@ -62,25 +62,30 @@ img {
 
 <div id="TOC">
 <ul>
-<li><a href="#installing-r-in-ubuntu"><span class="toc-section-number">0.1</span> Installing R in Ubuntu</a></li>
-<li><a href="#data-initialization"><span class="toc-section-number">0.2</span> Data initialization</a></li>
-<li><a href="#common-vector-operations"><span class="toc-section-number">0.3</span> Common Vector operations</a></li>
-<li><a href="#common-factor-operations"><span class="toc-section-number">0.4</span> Common Factor operations</a></li>
-<li><a href="#common-matrix-operations"><span class="toc-section-number">0.5</span> Common Matrix operations</a></li>
-<li><a href="#common-data-frame-operations"><span class="toc-section-number">0.6</span> Common Data Frame operations</a></li>
-<li><a href="#common-list-operations"><span class="toc-section-number">0.7</span> Common List operations</a></li>
-<li><a href="#common-functions"><span class="toc-section-number">0.8</span> Common functions</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">0.9</span> Parallel R in Windows</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">0.10</span> SQL query</a></li>
-<li><a href="#others"><span class="toc-section-number">1</span> Others</a><ul>
-<li><a href="#call-r-from-java"><span class="toc-section-number">1.1</span> Call R from Java</a></li>
-<li><a href="#call-java-from-r"><span class="toc-section-number">1.2</span> Call Java from R</a></li>
+<li><a href="#basic"><span class="toc-section-number">1</span> Basic</a><ul>
+<li><a href="#installing-r-in-ubuntu"><span class="toc-section-number">1.1</span> Installing R in Ubuntu</a></li>
+<li><a href="#data-initialization"><span class="toc-section-number">1.2</span> Data initialization</a></li>
+<li><a href="#common-vector-operations"><span class="toc-section-number">1.3</span> Common Vector operations</a></li>
+<li><a href="#common-factor-operations"><span class="toc-section-number">1.4</span> Common Factor operations</a></li>
+<li><a href="#common-matrix-operations"><span class="toc-section-number">1.5</span> Common Matrix operations</a></li>
+<li><a href="#common-data-frame-operations"><span class="toc-section-number">1.6</span> Common Data Frame operations</a></li>
+<li><a href="#common-list-operations"><span class="toc-section-number">1.7</span> Common List operations</a></li>
+<li><a href="#common-functions"><span class="toc-section-number">1.8</span> Common functions</a></li>
+<li><a href="#plot"><span class="toc-section-number">1.9</span> Plot</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">1.10</span> Parallel R in Windows</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">1.11</span> SQL query</a></li>
+</ul></li>
+<li><a href="#others"><span class="toc-section-number">2</span> Others</a><ul>
+<li><a href="#call-r-from-java"><span class="toc-section-number">2.1</span> Call R from Java</a></li>
+<li><a href="#call-java-from-r"><span class="toc-section-number">2.2</span> Call Java from R</a></li>
 </ul></li>
 </ul>
 </div>
 
+<div id="basic" class="section level1">
+<h1><span class="header-section-number">1</span> Basic</h1>
 <div id="installing-r-in-ubuntu" class="section level2">
-<h2><span class="header-section-number">0.1</span> Installing R in Ubuntu</h2>
+<h2><span class="header-section-number">1.1</span> Installing R in Ubuntu</h2>
 <pre class="auto"><code>sudo apt-get update
 sudo apt-get install r-base r-base-dev</code></pre>
 <p>The atomic data types are “logical”, “integer”, “numeric” (synonym “double”), “complex”, “character” and “raw”.</p>
@@ -89,7 +94,7 @@ x &lt;- 1.224554
 round(x, digits=2)</code></pre>
 </div>
 <div id="data-initialization" class="section level2">
-<h2><span class="header-section-number">0.2</span> Data initialization</h2>
+<h2><span class="header-section-number">1.2</span> Data initialization</h2>
 <pre class="r"><code># initialize a list
 my_ls &lt;- vector('list', 50) # vector(mode=&quot;list&quot;, length=50)
 my_ls[[3]] &lt;- c(1,2,3) # assign a value
@@ -111,7 +116,7 @@ df &lt;- data.frame(matrix(ncol=50, nrow=1))
 df &lt;- df[-1,]</code></pre>
 </div>
 <div id="common-vector-operations" class="section level2">
-<h2><span class="header-section-number">0.3</span> Common Vector operations</h2>
+<h2><span class="header-section-number">1.3</span> Common Vector operations</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
 <pre class="r"><code># select a subset
 v &lt;- c(1,2,3,4)
@@ -159,19 +164,19 @@ paste(x, sep=&quot;&quot;, collapse=&quot;&quot;)
 </code></pre>
 </div>
 <div id="common-factor-operations" class="section level2">
-<h2><span class="header-section-number">0.4</span> Common Factor operations</h2>
+<h2><span class="header-section-number">1.4</span> Common Factor operations</h2>
 <pre><code># Factor to Numeric vector
 f &lt;- factor(c(&quot;10&quot;, &quot;11&quot;, &quot;12&quot;))
 v &lt;- as.numeric(as.character(f))</code></pre>
 </div>
 <div id="common-matrix-operations" class="section level2">
-<h2><span class="header-section-number">0.5</span> Common Matrix operations</h2>
+<h2><span class="header-section-number">1.5</span> Common Matrix operations</h2>
 <p>A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.</p>
 <pre class="R"><code># Convert a vector to a matrix
 v &lt;- seq(1, 6)
 m &lt;- array(v, c(3,2)) # or m &lt;- matrix(v, nrow=3, ncol=2)
 m
-//    
+      [,2]  [,3]
 [1,]    1    4
 [2,]    2    5
 [3,]    3    6
@@ -180,7 +185,7 @@ m
 m &lt;- t(m)</code></pre>
 </div>
 <div id="common-data-frame-operations" class="section level2">
-<h2><span class="header-section-number">0.6</span> Common Data Frame operations</h2>
+<h2><span class="header-section-number">1.6</span> Common Data Frame operations</h2>
 <p>A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
 <pre class="r"><code># Get and Set Row and Column Names for Data Frames
 rownames(df)   
@@ -291,7 +296,7 @@ df &lt;- df[,colSums(is.na(df))&lt;nrow(df)]
 </code></pre>
 </div>
 <div id="common-list-operations" class="section level2">
-<h2><span class="header-section-number">0.7</span> Common List operations</h2>
+<h2><span class="header-section-number">1.7</span> Common List operations</h2>
 <p>A List is an ordered collection of objects.</p>
 <pre class="r"><code># convert a list to a data frame
 my_df &lt;- as.data.frame(do.call(rbind, my_ls))
@@ -304,7 +309,7 @@ l1 &lt;- append(l1, l2) # each elements of l2 will be an element of l1
 l1 &lt;- append(l1, list(l2)) # the l2 will be one element of l1</code></pre>
 </div>
 <div id="common-functions" class="section level2">
-<h2><span class="header-section-number">0.8</span> Common functions</h2>
+<h2><span class="header-section-number">1.8</span> Common functions</h2>
 <pre class="r"><code>-------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 
@@ -334,8 +339,19 @@ plot(y2~x,data=t, ...) # do second plot.
 axis(4,pretty(range(t$y2)),ylab='y2') # draw second axis on the right
 mtext(&quot;second Y&quot;, side=4, line=2.3, adj=0.5, cex=1) # add test label on the right </code></pre>
 </div>
+<div id="plot" class="section level2">
+<h2><span class="header-section-number">1.9</span> Plot</h2>
+<p><a href="http://personality-project.org/r/r.plottingdates.html">http://personality-project.org/r/r.plottingdates.html</a></p>
+<p><a href="http://www.harding.edu/fmccown/r/">http://www.harding.edu/fmccown/r/</a></p>
+<pre class="r"><code># plot a line of a set of points without showing the points
+points(x, y,  type=&quot;o&quot;, pch=46)</code></pre>
+<pre class="r"><code># x is a vector that you wish to find the CDF for
+plot(ecdf(x))</code></pre>
+<p><em>Hmisc</em> <a href="http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf">http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf</a></p>
+<p><em>Histograms in R</em> <a href="http://msenux.redwoods.edu/math/R/hist.php">http://msenux.redwoods.edu/math/R/hist.php</a></p>
+</div>
 <div id="parallel-r-in-windows" class="section level2">
-<h2><span class="header-section-number">0.9</span> Parallel R in Windows</h2>
+<h2><span class="header-section-number">1.10</span> Parallel R in Windows</h2>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <pre class="r"><code>require(doSNOW)
 cl&lt;-makeCluster(2) # I have two cores
@@ -350,58 +366,41 @@ check &lt;-function(n) {
  }
 
 times &lt;- 10   # times to run the loop
-
 system.time(x &lt;- foreach(j=1:times ) %dopar% check(j))
-
 system.time(for(j in 1:times ) x &lt;- check(j))
-
 stopCluster(cl)</code></pre>
 </div>
 <div id="sql-query" class="section level2">
-<h2><span class="header-section-number">0.10</span> SQL query</h2>
+<h2><span class="header-section-number">1.11</span> SQL query</h2>
 <pre class="r"><code>library(RJDBC) 
+
 postgres &lt;- JDBC( &quot;org.postgresql.Driver&quot;, &quot;C:/.../postgresql-8.4-703.jdbc4.jar&quot;)
-
 conn &lt;- dbConnect(postgres, &quot;jdbc:postgresql://*.*.*.*:5432/xxdb&quot;, user=&quot;postgres&quot;, password=&quot;postgres&quot;)
-
 myDf &lt;- dbGetQuery(conn, &quot;select * from tableX&quot;)
 </code></pre>
 </div>
+</div>
 <div id="others" class="section level1">
-<h1><span class="header-section-number">1</span> Others</h1>
+<h1><span class="header-section-number">2</span> Others</h1>
 <p><strong>pakcages overview</strong> <a href="http://cran.r-project.org/web/views/">http://cran.r-project.org/web/views/</a></p>
 <p><strong>QuickR</strong> <a href="http://www.statmethods.net/index.html">http://www.statmethods.net/index.html</a></p>
-<p><strong>plot</strong> <a href="http://personality-project.org/r/r.plottingdates.html">http://personality-project.org/r/r.plottingdates.html</a></p>
-<p><a href="http://www.harding.edu/fmccown/r/">http://www.harding.edu/fmccown/r/</a></p>
-<pre><code># plot a line of a set of points without showing the points
-points(x, y,  type=&quot;o&quot;, pch=46)</code></pre>
-<pre><code># x is a vector of items that you wish to find the CDF for
-plot(ecdf(x))</code></pre>
-<p><strong>Hmisc</strong> <a href="http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf">http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf</a></p>
-<p><strong>Histograms in R</strong> <a href="http://msenux.redwoods.edu/math/R/hist.php">http://msenux.redwoods.edu/math/R/hist.php</a></p>
 <div id="call-r-from-java" class="section level2">
-<h2><span class="header-section-number">1.1</span> Call R from Java</h2>
+<h2><span class="header-section-number">2.1</span> Call R from Java</h2>
 <ul>
 <li>RCaller</li>
 </ul>
-<blockquote>
 <p><a href="http://www.mhsatman.com/rcaller.php">http://www.mhsatman.com/rcaller.php</a></p>
-</blockquote>
 <ul>
 <li>Rserve</li>
 </ul>
-<blockquote>
 <p>An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.</p>
-</blockquote>
 <ul>
 <li>JRI</li>
 </ul>
-<blockquote>
-<p>Java/R Interface It use uses the JNI and is part of rJava. <a href="http://www.rforge.net/JRI/">http://www.rforge.net/JRI/</a> Install rJava in R <code>install.packages(&quot;rJava&quot;)</code></p>
-</blockquote>
-<blockquote>
+<p>Java/R Interface</p>
+<p>It use uses the JNI and is part of rJava. <a href="http://www.rforge.net/JRI/">http://www.rforge.net/JRI/</a></p>
+<p>Install rJava in R <code>install.packages(&quot;rJava&quot;)</code></p>
 <p>JRI can be found be the R library directory <code>C:\Program Files\R\R-2.15.0\library\rJava\jri</code></p>
-</blockquote>
 <p>Run example in the Windows CMD. (i386 for 32bit)</p>
 <pre class="auto"><code>set R_HOME= C:\Program Files\R\R-2.15.0
 //The environment variable R_HOME has to be set globally for the system, not only for the current user (restart of the system!) 
@@ -425,7 +424,7 @@ java -cp JRI.jar:examples rtest
 //sudo cp /usr/lib/R/site-library/rJava/jri libjri.so  /usr/lib
 </code></pre>
 <p>JRI sample:</p>
-<pre class="java"><code>import org.rosuda.JRI.REXP;
+<pre class="auto"><code>import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
 public class rtest 
 {
@@ -437,23 +436,18 @@ public class rtest
   System.out.println(result.asDouble());
   engine.end();
  }
-}
-</code></pre>
+}</code></pre>
 <ul>
 <li>Renjin</li>
 </ul>
-<blockquote>
 <p>A new JVM-based R language interpreter. <a href="http://code.google.com/p/renjin/">http://code.google.com/p/renjin/</a> <a href="http://stdioe.blogspot.ie/2011/09/embedding-r-in-java-applications-using.html">http://stdioe.blogspot.ie/2011/09/embedding-r-in-java-applications-using.html</a></p>
-</blockquote>
 </div>
 <div id="call-java-from-r" class="section level2">
-<h2><span class="header-section-number">1.2</span> Call Java from R</h2>
+<h2><span class="header-section-number">2.2</span> Call Java from R</h2>
 <ul>
 <li>rJava</li>
 </ul>
-<blockquote>
 <p><a href="http://www.rforge.net/rJava/">http://www.rforge.net/rJava/</a></p>
-</blockquote>
 </div>
 </div>
 
