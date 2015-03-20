@@ -24,22 +24,22 @@
 <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
 td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; }
-code > span.dt { color: #204a87; }
-code > span.dv { color: #0000cf; }
-code > span.bn { color: #0000cf; }
-code > span.fl { color: #0000cf; }
-code > span.ch { color: #4e9a06; }
-code > span.st { color: #4e9a06; }
-code > span.co { color: #8f5902; font-style: italic; }
-code > span.ot { color: #8f5902; }
-code > span.al { color: #ef2929; }
-code > span.fu { color: #000000; }
-code > span.er { font-weight: bold; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; }
+code > span.dt { color: #dfdfbf; }
+code > span.dv { color: #dcdccc; }
+code > span.bn { color: #dca3a3; }
+code > span.fl { color: #c0bed1; }
+code > span.ch { color: #dca3a3; }
+code > span.st { color: #cc9393; }
+code > span.co { color: #7f9f7f; }
+code > span.ot { color: #efef8f; }
+code > span.al { color: #ffcfaf; }
+code > span.fu { color: #efef8f; }
+code > span.er { color: #c3bf9f; }
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -292,7 +292,6 @@ dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">
 <span class="co"># NaN means not a number</span>
 <span class="co"># is.nan() returns False for NA and Ture for NaN</span>
 
-
 <span class="co"># Convert all Na's in data frames to other values</span>
 df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value
 
@@ -336,14 +335,23 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 <span class="co"># get replicable sample </span>
 <span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># sample results are same everytime for same seed</span>
 <span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)
+</code></pre>
+</div>
+<div id="plot" class="section level2">
+<h2><span class="header-section-number">1.10</span> Plot</h2>
+<p><a href="http://personality-project.org/r/r.plottingdates.html">http://personality-project.org/r/r.plottingdates.html</a></p>
+<p><a href="http://www.harding.edu/fmccown/r/">http://www.harding.edu/fmccown/r/</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a line of a set of points without showing the points</span>
+<span class="kw">points</span>(x, y,  <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">pch=</span><span class="dv">46</span>)
 
+<span class="co"># x is a vector that you wish to find the CDF for</span>
+<span class="kw">plot</span>(<span class="kw">ecdf</span>(x))
 
 <span class="co"># Sorting a boxplot based on median value</span>
 bymedian &lt;-<span class="st"> </span><span class="kw">with</span>(InsectSprays, <span class="kw">reorder</span>(spray, -count, median))
 <span class="kw">boxplot</span>(count ~<span class="st"> </span>bymedian, <span class="dt">data =</span> InsectSprays,
           <span class="dt">xlab =</span> <span class="st">&quot;spray&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;count&quot;</span>, <span class="dt">varwidth =</span> <span class="ot">TRUE</span>,
           <span class="dt">col =</span> <span class="st">&quot;lightgray&quot;</span>)
-
 
 <span class="co"># plot with multiple Y scales</span>
 <span class="kw">par</span>(<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># all sides have 2 lines of space margin</span>
@@ -352,15 +360,6 @@ bymedian &lt;-<span class="st"> </span><span class="kw">with</span>(InsectSprays
 <span class="kw">plot</span>(y2~x,<span class="dt">data=</span>t, ...) <span class="co"># do second plot. </span>
 <span class="kw">axis</span>(<span class="dv">4</span>,<span class="kw">pretty</span>(<span class="kw">range</span>(t$y2)),<span class="dt">ylab=</span><span class="st">'y2'</span>) <span class="co"># draw second axis on the right</span>
 <span class="kw">mtext</span>(<span class="st">&quot;second Y&quot;</span>, <span class="dt">side=</span><span class="dv">4</span>, <span class="dt">line=</span><span class="fl">2.3</span>, <span class="dt">adj=</span><span class="fl">0.5</span>, <span class="dt">cex=</span><span class="dv">1</span>) <span class="co"># add test label on the right </span></code></pre>
-</div>
-<div id="plot" class="section level2">
-<h2><span class="header-section-number">1.10</span> Plot</h2>
-<p><a href="http://personality-project.org/r/r.plottingdates.html">http://personality-project.org/r/r.plottingdates.html</a></p>
-<p><a href="http://www.harding.edu/fmccown/r/">http://www.harding.edu/fmccown/r/</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a line of a set of points without showing the points</span>
-<span class="kw">points</span>(x, y,  <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">pch=</span><span class="dv">46</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># x is a vector that you wish to find the CDF for</span>
-<span class="kw">plot</span>(<span class="kw">ecdf</span>(x))</code></pre>
 <p><em>Hmisc</em> <a href="http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf">http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf</a></p>
 <p><em>Histograms in R</em> <a href="http://msenux.redwoods.edu/math/R/hist.php">http://msenux.redwoods.edu/math/R/hist.php</a></p>
 </div>
@@ -423,7 +422,7 @@ java -cp JRI.jar;examples rtest</code></pre>
 <p>Development in Eclipse Java project</p>
 <pre class="auto"><code> build path &gt; add external class folder : C:\Program Files\R\R-2.15.0\library\rJava\jri</code></pre>
 <p>In Linux,</p>
-<pre class="auto"><code>//sudo R CMD javareconf
+<pre class="shell"><code>//sudo R CMD javareconf
 
 sudo apt-get install r-cran-rjava
 
@@ -437,17 +436,17 @@ java -cp JRI.jar:examples rtest
 //sudo cp /usr/lib/R/site-library/rJava/jri libjri.so  /usr/lib
 </code></pre>
 <p>JRI sample:</p>
-<pre class="auto"><code>import org.rosuda.JRI.REXP;
-import org.rosuda.JRI.Rengine;
-public class rtest 
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import org.rosuda.JRI.REXP;</span>
+<span class="kw">import org.rosuda.JRI.Rengine;</span>
+<span class="kw">public</span> <span class="kw">class</span> rtest 
 {
- public static void main(String[] args) 
+ <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) 
  {
-  Rengine engine = new Rengine(new String[]{&quot;--no-save&quot;}, false, null);
-  engine.assign(&quot;a&quot;, new int[]{81});
-  REXP result = engine.eval(&quot;sqrt(a)&quot;);
-  System.out.println(result.asDouble());
-  engine.end();
+  Rengine engine = <span class="kw">new</span> <span class="fu">Rengine</span>(<span class="kw">new</span> String[]{<span class="st">&quot;--no-save&quot;</span>}, <span class="kw">false</span>, <span class="kw">null</span>);
+  engine.<span class="fu">assign</span>(<span class="st">&quot;a&quot;</span>, <span class="kw">new</span> <span class="dt">int</span>[]{<span class="dv">81</span>});
+  REXP result = engine.<span class="fu">eval</span>(<span class="st">&quot;sqrt(a)&quot;</span>);
+  System.<span class="fu">out</span>.<span class="fu">println</span>(result.<span class="fu">asDouble</span>());
+  engine.<span class="fu">end</span>();
  }
 }</code></pre>
 <ul>
