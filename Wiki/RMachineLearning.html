@@ -135,19 +135,23 @@ img {
 </div>
 <div id="association-rule-learning" class="section level2">
 <h2><span class="header-section-number">0.9</span> Association rule learning</h2>
+<ul>
+<li>package arulesSequences</li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample events </span>
 <span class="co">#322282,20100827,2,AA,BB</span>
 <span class="co">#312980,20100622,3,CC,DD,EE</span>
 <span class="co">#312246,20100218,7,FF,GG,HH,II,MM,OO,NN</span>
 
-t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class="dt">con  =</span> <span class="kw">system.file</span>(<span class="st">&quot;misc&quot;</span>, <span class="st">&quot;zaki.txt&quot;</span>, <span class="dt">package =</span><span class="st">&quot;arulesSequences&quot;</span>), <span class="dt">info =</span> <span class="kw">c</span>(<span class="st">&quot;eventID&quot;</span>,<span class="st">&quot;sequenceID&quot;</span>,<span class="st">&quot;size&quot;</span>))
+t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class="dt">con=</span><span class="kw">system.file</span>(<span class="st">&quot;misc&quot;</span>, <span class="st">&quot;zaki.txt&quot;</span>, <span class="dt">package=</span><span class="st">&quot;arulesSequences&quot;</span>), 
+         <span class="dt">info=</span><span class="kw">c</span>(<span class="st">&quot;eventID&quot;</span>,<span class="st">&quot;sequenceID&quot;</span>,<span class="st">&quot;size&quot;</span>))
 
 <span class="co"># get all eventId</span>
 <span class="kw">transactionInfo</span>(t)$eventID
 
 <span class="co"># mine frequent sequences</span>
-s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter =</span> <span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.4</span>), 
-           <span class="dt">control   =</span> <span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))
+s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.4</span>), 
+           <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))
 <span class="kw">summary</span>(s1)
 <span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre>
 </div>
@@ -156,7 +160,6 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
 <p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert data.frame to time series</span>
-
 stockprices
 <span class="kw">prices</span>(numeric)    <span class="kw">timestamps</span>(character)
 <span class="fl">1.1</span>         <span class="dv">2011-01-05</span> <span class="dv">11</span>:<span class="dv">00</span>
@@ -172,7 +175,7 @@ stockpricesTs
 <span class="dv">2011-01-05</span> <span class="dv">13</span>:<span class="dv">00</span>:<span class="dv">00</span>  <span class="fl">3.3</span>
 
 <span class="co"># select a time range</span>
-t1&lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]</code></pre>
+t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]</code></pre>
 <div id="moving-averages" class="section level3">
 <h3><span class="header-section-number">0.10.1</span> Moving Averages</h3>
 <ul>

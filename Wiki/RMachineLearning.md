@@ -67,20 +67,23 @@ http://www.johnmyleswhite.com/notebook/2009/02/25/text-processing-in-r/
 
 ## Association rule learning ##
 
+ * package arulesSequences
+
 ``` r
 # sample events 
 #322282,20100827,2,AA,BB
 #312980,20100622,3,CC,DD,EE
 #312246,20100218,7,FF,GG,HH,II,MM,OO,NN
 
-t <- read_baskets(con  = system.file("misc", "zaki.txt", package ="arulesSequences"), info = c("eventID","sequenceID","size"))
+t <- read_baskets(con=system.file("misc", "zaki.txt", package="arulesSequences"), 
+         info=c("eventID","sequenceID","size"))
 
 # get all eventId
 transactionInfo(t)$eventID
 
 # mine frequent sequences
-s1 <- cspade(t, parameter = list(support = 0.4), 
-           control   = list(verbose = TRUE))
+s1 <- cspade(t, parameter=list(support = 0.4), 
+           control=list(verbose = TRUE))
 summary(s1)
 as(s1, "data.frame")
 
@@ -94,7 +97,6 @@ http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseri
 
 ``` r
 # convert data.frame to time series
-
 stockprices
 prices(numeric)    timestamps(character)
 1.1         2011-01-05 11:00
@@ -110,8 +112,7 @@ stockpricesTs
 2011-01-05 13:00:00  3.3
 
 # select a time range
-t1<- stockpricesTs["2011-01-04T05:00/2011-01-05"]
-
+t1 <- stockpricesTs["2011-01-04T05:00/2011-01-05"]
 ``` 
 
 ### Moving Averages ###
