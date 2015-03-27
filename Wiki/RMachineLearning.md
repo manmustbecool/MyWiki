@@ -10,7 +10,6 @@ output:
 ---
 
 
-
 ## Gradient descents ##
 
 Linear regression by gradient descents
