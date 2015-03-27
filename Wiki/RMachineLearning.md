@@ -125,7 +125,7 @@ http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
 
 ### Arima ###
 
-``` r
+```r
 fit <- Arima(WWWusage,order=c(3,1,0))
 plot(fit$x,col="red")
 lines(fitted(fit),col="blue")
