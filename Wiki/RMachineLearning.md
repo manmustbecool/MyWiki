@@ -58,8 +58,9 @@ http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selectio
 
 http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reduction/Singular_Value_Decomposition
 
-## Text mining ##
+## Text mining
 
+...
 
 
 ### Text Processing
@@ -69,7 +70,7 @@ http://www.johnmyleswhite.com/notebook/2009/02/25/text-processing-in-r/
 
  * package arulesSequences
 
-``` r
+```r
 # sample events 
 #322282,20100827,2,AA,BB
 #312980,20100622,3,CC,DD,EE
@@ -95,7 +96,7 @@ http://www.statmethods.net/advstats/timeseries.html
 
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
-``` r
+```r
 # convert data.frame to time series
 stockprices
 prices(numeric)    timestamps(character)
