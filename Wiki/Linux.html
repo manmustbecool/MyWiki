@@ -74,139 +74,149 @@ img {
 
 <div id="TOC">
 <ul>
-<li><a href="#gradient-descents"><span class="toc-section-number">0.1</span> Gradient descents</a></li>
-<li><a href="#neural-networks"><span class="toc-section-number">0.2</span> Neural networks</a></li>
-<li><a href="#k-means"><span class="toc-section-number">0.3</span> K-Means</a></li>
-<li><a href="#hidden-markov-models"><span class="toc-section-number">0.4</span> Hidden Markov Models</a></li>
-<li><a href="#logistic-regression"><span class="toc-section-number">0.5</span> Logistic Regression</a></li>
-<li><a href="#support-vector-machine-svm"><span class="toc-section-number">0.6</span> Support Vector Machine (SVM)</a></li>
-<li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.7</span> Singular Value Decomposition (SVD)</a></li>
-<li><a href="#text-mining"><span class="toc-section-number">0.8</span> Text mining</a><ul>
-<li><a href="#text-processing"><span class="toc-section-number">0.8.1</span> Text Processing</a></li>
+<li><a href="#cheat-sheet"><span class="toc-section-number">1</span> cheat sheet</a></li>
+<li><a href="#others"><span class="toc-section-number">2</span> Others</a><ul>
+<li><a href="#remote-desktop"><span class="toc-section-number">2.1</span> Remote desktop</a></li>
+<li><a href="#install-jdk"><span class="toc-section-number">2.2</span> Install JDK</a></li>
+<li><a href="#install-leiningen"><span class="toc-section-number">2.3</span> Install Leiningen</a></li>
 </ul></li>
-<li><a href="#association-rule-learning"><span class="toc-section-number">0.9</span> Association rule learning</a></li>
-<li><a href="#time-series"><span class="toc-section-number">0.10</span> Time Series</a><ul>
-<li><a href="#moving-averages"><span class="toc-section-number">0.10.1</span> Moving Averages</a></li>
-<li><a href="#arima"><span class="toc-section-number">0.10.2</span> Arima</a></li>
-</ul></li>
-<li><a href="#recommender-system"><span class="toc-section-number">0.11</span> Recommender system</a></li>
-<li><a href="#feature-selection"><span class="toc-section-number">0.12</span> Feature selection</a></li>
 </ul>
 </div>
 
-<div id="gradient-descents" class="section level2">
-<h2><span class="header-section-number">0.1</span> Gradient descents</h2>
-<p>Linear regression by gradient descents</p>
-<p><a href="http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_70219%2Egde_70219_member_139405437">http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_70219%2Egde_70219_member_139405437</a></p>
+<div id="cheat-sheet" class="section level1">
+<h1><span class="header-section-number">1</span> cheat sheet</h1>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Add user to âsudoâ group</span>
+<span class="kw">adduser</span> <span class="kw">&lt;</span>username<span class="kw">&gt;</span>
+<span class="kw">adduser</span> <span class="kw">&lt;</span>username<span class="kw">&gt;</span> sudo
+
+<span class="co"># list groups</span>
+<span class="kw">groups</span>
+
+<span class="co"># list groups which a user belong to</span>
+<span class="kw">groups</span> <span class="kw">&lt;</span>username<span class="kw">&gt;</span>
+
+<span class="co"># list group members</span>
+<span class="kw">sudo</span> apt-get install members
+<span class="kw">members</span> <span class="kw">&lt;</span>groupname<span class="kw">&gt;</span>
+
+<span class="co"># rename a folder name</span>
+<span class="kw">mv</span> <span class="kw">&lt;</span>oldname<span class="kw">&gt;</span> <span class="kw">&lt;</span>newname<span class="kw">&gt;</span>
+
+<span class="co"># reset root password </span>
+<span class="kw">http</span>://askubuntu.com/questions/24006/how-do-i-reset-a-lost-administrative-password
+
+<span class="co">#  unzip </span>
+<span class="kw">sudo</span> apt-get install unzip
+<span class="kw">unzip</span> <span class="kw">&lt;</span>file<span class="kw">&gt;</span>
+
+<span class="co"># power down now</span>
+<span class="kw">shutdown</span> -h now
+<span class="kw">reboot</span> -h now
+
+<span class="co"># list of all sockets in use</span>
+<span class="kw">netstat</span> -a 
+
+<span class="co"># execute 'ntpdate' with the ntp daemon already up and running, use the following command which uses a different port</span>
+<span class="kw">ntpdate</span> -u pool.ntp.org 
+
+
+<span class="co"># install Linux / UNIX *.tar.gz tarball files</span>
+<span class="kw">http</span>://www.cyberciti.biz/faq/install-tarballs/
+
+<span class="co"># ---- File Search --------</span>
+
+<span class="co"># scroll result</span>
+<span class="kw">ls</span> <span class="kw">|</span> <span class="kw">less</span>
+
+<span class="co"># count number of files in a directory</span>
+<span class="kw">ls</span> /user <span class="kw">|</span> <span class="kw">wc</span> -l
+
+<span class="co"># find a file</span>
+<span class="kw">find</span> / -name <span class="st">'program.c'</span> 
+
+<span class="co"># find files containing a text string. -r for subdirectories</span>
+<span class="kw">grep</span> -r <span class="st">&quot;text string to search&quot;</span> directory-path
+
+<span class="co"># ---- Disk/File Size check ----</span>
+
+<span class="co"># file size</span>
+<span class="co"># -l    Displays file types, owner, group, size, date and filename.</span>
+<span class="co"># -a    Displays all files, including hidden files (suffixed with â.â). </span>
+<span class="co"># -h    human readable format, e.g. 1k, 100MB, 1G.  </span>
+<span class="kw">ls</span> -lah
+
+<span class="co"># disk space usage</span>
+<span class="kw">df</span> -k
+
+<span class="co"># ---- Manage Processes -------</span>
+
+<span class="co"># top processes</span>
+<span class="kw">top</span>
+<span class="kw">//</span> or
+<span class="kw">sudo</span> apt-get install htop
+<span class="kw">htop</span>
+
+<span class="co"># -e: select all processes; -f: does full listing</span>
+<span class="kw">ps</span> -ef <span class="kw">|</span> <span class="kw">grep</span> java
+
+<span class="co"># show all processes for all users. -x:all users</span>
+<span class="kw">ps</span> -aux
+<span class="co"># for root user</span>
+<span class="kw">ps</span> -auroot
+</code></pre>
 </div>
-<div id="neural-networks" class="section level2">
-<h2><span class="header-section-number">0.2</span> Neural networks</h2>
-<p><a href="http://www.ai-junkie.com/ann/evolved/nnt8.html" class="uri">http://www.ai-junkie.com/ann/evolved/nnt8.html</a></p>
+<div id="others" class="section level1">
+<h1><span class="header-section-number">2</span> Others</h1>
+<div id="remote-desktop" class="section level2">
+<h2><span class="header-section-number">2.1</span> Remote desktop</h2>
+<p>install XRDP</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install xrdp</code></pre>
 </div>
-<div id="k-means" class="section level2">
-<h2><span class="header-section-number">0.3</span> K-Means</h2>
-<p><a href="http://www.mattpeeples.net/kmeans.html" class="uri">http://www.mattpeeples.net/kmeans.html</a></p>
-</div>
-<div id="hidden-markov-models" class="section level2">
-<h2><span class="header-section-number">0.4</span> Hidden Markov Models</h2>
-<p><a href="http://web.stanford.edu/class/stats366/hmmR2.html" class="uri">http://web.stanford.edu/class/stats366/hmmR2.html</a></p>
-<p><a href="http://yunus.hacettepe.edu.tr/~iozkan/eco742/hmm.html" class="uri">http://yunus.hacettepe.edu.tr/~iozkan/eco742/hmm.html</a></p>
-</div>
-<div id="logistic-regression" class="section level2">
-<h2><span class="header-section-number">0.5</span> Logistic Regression</h2>
-<p><a href="https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/" class="uri">https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/</a></p>
-</div>
-<div id="support-vector-machine-svm" class="section level2">
-<h2><span class="header-section-number">0.6</span> Support Vector Machine (SVM)</h2>
+<div id="install-jdk" class="section level2">
+<h2><span class="header-section-number">2.2</span> Install JDK</h2>
 <ul>
-<li>package <strong>e1071</strong></li>
+<li>Ubuntu 12 + Oracle JDK 6</li>
 </ul>
-<p>tune <a href="http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:tune" class="uri">http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:tune</a></p>
-<p>svm <a href="http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:svm" class="uri">http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:svm</a></p>
-<p><a href="http://stackoverflow.com/questions/7390173/svm-equations-from-e1071-r-package" class="uri">http://stackoverflow.com/questions/7390173/svm-equations-from-e1071-r-package</a></p>
-<p>Recursive Feature Extraction (SVM-RFE)</p>
-<p><a href="http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selection" class="uri">http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selection</a></p>
-</div>
-<div id="singular-value-decomposition-svd" class="section level2">
-<h2><span class="header-section-number">0.7</span> Singular Value Decomposition (SVD)</h2>
-<p><a href="http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reduction/Singular_Value_Decomposition" class="uri">http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reduction/Singular_Value_Decomposition</a></p>
-</div>
-<div id="text-mining" class="section level2">
-<h2><span class="header-section-number">0.8</span> Text mining</h2>
-<div id="text-processing" class="section level3">
-<h3><span class="header-section-number">0.8.1</span> Text Processing</h3>
-<p><a href="http://www.johnmyleswhite.com/notebook/2009/02/25/text-processing-in-r/" class="uri">http://www.johnmyleswhite.com/notebook/2009/02/25/text-processing-in-r/</a></p>
-</div>
-</div>
-<div id="association-rule-learning" class="section level2">
-<h2><span class="header-section-number">0.9</span> Association rule learning</h2>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># detail: http://jamesslootweg.com/view/Manually_Install_Oracle_JDK_6_on_Ubuntu_12.10</span>
+<span class="co"># download jdk-6u43-linux-i586.bin</span>
+<span class="kw">chmod</span> a+x jdk-6u43-linux-i586.bin
+<span class="kw">sudo</span> jvm/jdk-6u43-linux-i586.bin
+<span class="kw">sudo</span> mkdir /usr/lib/jvm 
+<span class="kw">sudo</span> mv jdk1.6.0_43 /usr/lib/jvm/
+<span class="kw">sudo</span> ln -s -b /usr/lib/jvm/jdk1.6.0_43/jre/bin/java /etc/alternatives/java
+<span class="kw">sudo</span> ln -s -b /usr/lib/jvm/jdk1.6.0_43/jre/bin/java /usr/bin/java</code></pre>
 <ul>
-<li>package arulesSequences</li>
+<li>Oracle JDK 7</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample events </span>
-<span class="co">#322282,20100827,2,AA,BB</span>
-<span class="co">#312980,20100622,3,CC,DD,EE</span>
-<span class="co">#312246,20100218,7,FF,GG,HH,II,MM,OO,NN</span>
-
-t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class="dt">con=</span><span class="kw">system.file</span>(<span class="st">&quot;misc&quot;</span>, <span class="st">&quot;zaki.txt&quot;</span>, <span class="dt">package=</span><span class="st">&quot;arulesSequences&quot;</span>), 
-         <span class="dt">info=</span><span class="kw">c</span>(<span class="st">&quot;eventID&quot;</span>,<span class="st">&quot;sequenceID&quot;</span>,<span class="st">&quot;size&quot;</span>))
-
-<span class="co"># get all eventId</span>
-<span class="kw">transactionInfo</span>(t)$eventID
-
-<span class="co"># mine frequent sequences</span>
-s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.4</span>), 
-           <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))
-<span class="kw">summary</span>(s1)
-<span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">http</span>://linuxdrops.com/install-jre-or-jdk-7-on-centos-rhel-fedora-ubuntu-debian/</code></pre>
 </div>
-<div id="time-series" class="section level2">
-<h2><span class="header-section-number">0.10</span> Time Series</h2>
-<p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
-<p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert data.frame to time series</span>
-stockprices
-<span class="kw">prices</span>(numeric)    <span class="kw">timestamps</span>(character)
-<span class="fl">1.1</span>         <span class="dv">2011-01-05</span> <span class="dv">11</span>:<span class="dv">00</span>
-<span class="fl">2.2</span>         <span class="dv">2011-01-05</span> <span class="dv">12</span>:<span class="dv">00</span>
-<span class="fl">3.3</span>         <span class="dv">2011-01-05</span> <span class="dv">13</span>:<span class="dv">00</span>
+<div id="install-leiningen" class="section level2">
+<h2><span class="header-section-number">2.3</span> Install Leiningen</h2>
+<p>download the “lein.bat” in a path folder to start self-install</p>
+<p>sudo apt-get install leiningen ??</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># find a path to install leiningen,  or add a folder (/usr/bin/leiningen) to the paths</span>
+<span class="kw">echo</span> <span class="ot">$PATH</span> 
+<span class="kw">sudo</span> mkdir /usr/bin/leiningen
 
-<span class="kw">require</span>(xts)
-stockpricesTs &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">rder.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
-stockpricesTs
-                    [,<span class="dv">1</span>]
-<span class="dv">2011-01-05</span> <span class="dv">11</span>:<span class="dv">00</span>:<span class="dv">00</span>  <span class="fl">1.1</span>
-<span class="dv">2011-01-05</span> <span class="dv">12</span>:<span class="dv">00</span>:<span class="dv">00</span>  <span class="fl">2.2</span>
-<span class="dv">2011-01-05</span> <span class="dv">13</span>:<span class="dv">00</span>:<span class="dv">00</span>  <span class="fl">3.3</span>
+<span class="kw">//add</span> the leiningen folder to your <span class="ot">$PATH</span>
 
-<span class="co"># select a time range</span>
-t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]</code></pre>
-<div id="moving-averages" class="section level3">
-<h3><span class="header-section-number">0.10.1</span> Moving Averages</h3>
-<ul>
-<li>package <strong>TTR</strong></li>
-</ul>
-<p><a href="http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html" class="uri">http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html</a></p>
+<span class="kw">nano</span> ~/.bashrc 
+<span class="kw">//</span> Open nano and add the following line to the bottom of .bashrc
+<span class="kw">export</span> <span class="ot">PATH=$PATH</span>:/usr/bin/leiningen // <span class="ot">Add</span> <span class="ot">this</span> <span class="ot">line</span>. 
+
+<span class="kw">source</span> .bashrc // Reload .bashrc
+<span class="kw">echo</span> <span class="ot">$PATH</span> // check that your leiningen folder is added
+
+<span class="kw">cd</span> /usr/bin/leiningen
+
+<span class="kw">//</span> download <span class="st">&quot;lein.bat&quot;</span> to the path
+<span class="kw">sudo</span> wget --no-check-certificate https://raw.github.com/technomancy/leiningen/stable/bin/lein 
+
+<span class="kw">//</span> start self-install
+<span class="kw">sudo</span> chmod +x lein
+<span class="kw">./lein</span> self-install
+<span class="kw">lein</span> repl // To test, Crtl + Z to exit repl</code></pre>
 </div>
-<div id="arima" class="section level3">
-<h3><span class="header-section-number">0.10.2</span> Arima</h3>
-<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
-<span class="kw">plot</span>(fit$x,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
-<span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre>
-</div>
-</div>
-<div id="recommender-system" class="section level2">
-<h2><span class="header-section-number">0.11</span> Recommender system</h2>
-<ul>
-<li>package <strong>recommenderlab</strong></li>
-</ul>
-</div>
-<div id="feature-selection" class="section level2">
-<h2><span class="header-section-number">0.12</span> Feature selection</h2>
-<ul>
-<li>package <strong>caret</strong></li>
-</ul>
-<p><a href="http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html" class="uri">http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html</a></p>
 </div>
 
 

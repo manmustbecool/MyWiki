@@ -1,103 +1,112 @@
+---
+output:
+  html_document:
+    fig_caption: yes
+    highlight: zenburn
+    keep_md: yes
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+---
+
 # cheat sheet #
 
-```
-
-// Add user to “sudo” group
+```bash
+# Add user to “sudo” group
 adduser <username>
 adduser <username> sudo
 
-// list groups
+# list groups
 groups
 
-// list groups which a user belong to
+# list groups which a user belong to
 groups <username>
 
-// list group members
+# list group members
 sudo apt-get install members
 members <groupname>
 
-// rename a folder name
+# rename a folder name
 mv <oldname> <newname>
 
-// reset root password 
+# reset root password 
 http://askubuntu.com/questions/24006/how-do-i-reset-a-lost-administrative-password
 
-//  unzip 
+#  unzip 
 sudo apt-get install unzip
 unzip <file>
 
-// power down now
+# power down now
 shutdown -h now
 reboot -h now
 
-// list of all sockets in use
+# list of all sockets in use
 netstat -a 
 
-//execute 'ntpdate' with the ntp daemon already up and running, use the following command which uses a different port
+# execute 'ntpdate' with the ntp daemon already up and running, use the following command which uses a different port
 ntpdate -u pool.ntp.org 
 
 
-//install Linux / UNIX *.tar.gz tarball files
+# install Linux / UNIX *.tar.gz tarball files
 http://www.cyberciti.biz/faq/install-tarballs/
 
+# ---- File Search --------
 
----- File Search --------
-
-// scroll result
+# scroll result
 ls | less
 
-// count number of files in a directory
+# count number of files in a directory
 ls /user | wc -l
 
-// find a file
+# find a file
 find / -name 'program.c' 
 
-// find files containing a text string. -r for subdirectories
+# find files containing a text string. -r for subdirectories
 grep -r "text string to search" directory-path
 
+# ---- Disk/File Size check ----
 
----- Disk/File Size check ----
-
-// file size
-// -l 	Displays file types, owner, group, size, date and filename.
-// -a 	Displays all files, including hidden files (suffixed with “.”). 
-// -h 	human readable format, e.g. 1k, 100MB, 1G. 	
+# file size
+# -l 	Displays file types, owner, group, size, date and filename.
+# -a 	Displays all files, including hidden files (suffixed with “.”). 
+# -h 	human readable format, e.g. 1k, 100MB, 1G. 	
 ls -lah
 
-// disk space usage
+# disk space usage
 df -k
 
+# ---- Manage Processes -------
 
----- Manage Processes -------
-
-// top processes
+# top processes
 top
 // or
 sudo apt-get install htop
 htop
 
-// -e: select all processes; -f: does full listing
+# -e: select all processes; -f: does full listing
 ps -ef | grep java
 
-//show all processes for all users. -x:all users
+# show all processes for all users. -x:all users
 ps -aux
-// for root user
+# for root user
 ps -auroot
 
 
 ```
+# Others #
 
 ## Remote desktop ##
 install XRDP
-```
+```bash
 sudo apt-get install xrdp
 ```
 
 ## Install JDK ##
-Ubuntu 12 + Oracle JDK 6
-```
-//detail: http://jamesslootweg.com/view/Manually_Install_Oracle_JDK_6_on_Ubuntu_12.10
-// download jdk-6u43-linux-i586.bin
+ * Ubuntu 12 + Oracle JDK 6
+ 
+```bash
+# detail: http://jamesslootweg.com/view/Manually_Install_Oracle_JDK_6_on_Ubuntu_12.10
+# download jdk-6u43-linux-i586.bin
 chmod a+x jdk-6u43-linux-i586.bin
 sudo jvm/jdk-6u43-linux-i586.bin
 sudo mkdir /usr/lib/jvm 
@@ -106,8 +115,9 @@ sudo ln -s -b /usr/lib/jvm/jdk1.6.0_43/jre/bin/java /etc/alternatives/java
 sudo ln -s -b /usr/lib/jvm/jdk1.6.0_43/jre/bin/java /usr/bin/java
 ```
 
-+ Oracle JDK 7
-```
+ *  Oracle JDK 7
+ 
+```bash
 http://linuxdrops.com/install-jre-or-jdk-7-on-centos-rhel-fedora-ubuntu-debian/
 ```
 
@@ -120,9 +130,8 @@ download the "lein.bat" in a path folder to start self-install
 sudo apt-get install leiningen ??
 
 
-```
-
-// find a path to install leiningen,  or add a folder (/usr/bin/leiningen) to the paths
+```bash
+# find a path to install leiningen,  or add a folder (/usr/bin/leiningen) to the paths
 echo $PATH 
 sudo mkdir /usr/bin/leiningen
 

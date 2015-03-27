@@ -17,11 +17,9 @@ Linear regression by gradient descents
 
 http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_70219%2Egde_70219_member_139405437
 
-
 ## Neural networks ##
 
 http://www.ai-junkie.com/ann/evolved/nnt8.html
-
 
 ## K-Means ##
 
@@ -61,8 +59,11 @@ http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selectio
 
 http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reduction/Singular_Value_Decomposition
 
-## Text Processing ##
+## Text mining ##
 
+
+
+### Text Processing
 http://www.johnmyleswhite.com/notebook/2009/02/25/text-processing-in-r/
 
 ## Association rule learning ##
