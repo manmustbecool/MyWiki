@@ -14,7 +14,7 @@ output:
 
 Networking mode Overview:
 
--- ![images\vm_networking.png](images\vm_networking.png)
+![images\vm_networking.png](images\vm_networking.png)
 
 * Bridged mode
     + The guest machine becomes a peer of all the other computers on that network virtualy. All network traffics will through the host network interface card (NIC). See the above picture, dot lines/links virtually connect guest machines's NICs to the network, but solid lines conect all NICs representing real traffics.
@@ -90,20 +90,19 @@ $ VBoxManage setextradata "GuestVMName" "VBoxInternal/Devices/e1000/0/LUN#0/Atta
 
     Updating will be refected on the VM XML. ` <ExtraDataItem name="VBoxInternal/D ... ` will be added.
 
-### Host-only mode ###
+### Host-only mode 
 
 #### VirtualBox: Add hotst-only network ####
 
 Go to File > Preferences > Network > Add host-only network. The DHCP can also be configured in here.
 
-Reference site: <br>
-<a href='http://communities.vmware.com/docs/DOC-2527'>http://communities.vmware.com/docs/DOC-2527</a> <br>
+Reference site: 
+<a href='http://communities.vmware.com/docs/DOC-2527'>http://communities.vmware.com/docs/DOC-2527</a> 
+
 <a href='http://www.virtualbox.org/manual/ch06.html'>http://www.virtualbox.org/manual/ch06.html</a>
 
 # Others
 start vm in backgroup without GUI.
-<br>
-
 
 ```bash
 VBoxManage startvm $VM --type headless
