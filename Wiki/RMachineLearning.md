@@ -142,3 +142,5 @@ lines(fitted(fit),col="blue")
   * package **caret**
 
 http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html
+
+
