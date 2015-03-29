@@ -133,11 +133,67 @@ img {
 <div id="text-mining" class="section level2">
 <h2><span class="header-section-number">0.8</span> Text mining</h2>
 <p><a href="http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/" class="uri">http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/</a></p>
+<pre class="sourceCode r"><code class="sourceCode r">rdmTweets &lt;-<span class="st"> </span><span class="kw">list</span>(
+<span class="st">&quot;Text Mining Tutorial http://t.co/jPHHLEGm&quot;</span>,
+<span class="st">&quot;He likes dogs r Singapore http://t.co/GPA0TyG5&quot;</span>,
+<span class="st">&quot;RDataMining: Easier Parallel Computing in R with snowfall and sfCluster http://t.co/BPcinvzK&quot;</span>,
+<span class="st">&quot;RDataMining: Tutorial: Parallel computing using R package snowfall http://t.co/CHBCyr76&quot;</span>,
+<span class="st">&quot;handling big data: Interacting with Data using the filehash Package for R http://t.co/7RB3sChx&quot;</span>
+)
+
+df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">do.call</span>(rbind, rdmTweets))
+<span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'text'</span>)
+
+<span class="kw">library</span>(tm)
+<span class="co"># ---- build a corpus</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">Corpus</span>(<span class="kw">VectorSource</span>(df$text)) <span class="co"># VectorSource specifies the text source</span>
+
+<span class="co"># ---- Transforming Text</span>
+
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(tolower)) <span class="co">#  to lower case</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removePunctuation) <span class="co"># remove punctuation</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removeNumbers) <span class="co"># remove numbers</span>
+myStopwords &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">stopwords</span>(<span class="st">'english'</span>), <span class="st">&quot;available&quot;</span>, <span class="st">&quot;dogs&quot;</span>) <span class="co"># add two additional stopwords</span>
+myStopwords &lt;-<span class="st"> </span><span class="kw">setdiff</span>(myStopwords, <span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;big&quot;</span>)) <span class="co"># remove 'r' and 'big' from stopwords</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removeWords, myStopwords) <span class="co"># remove stopwords</span>
+
+<span class="co"># ---- Stemming Words</span>
+
+dictCorpus &lt;-<span class="st"> </span>myCorpus <span class="co"># keep a copy as a dictionary for stem completion</span>
+<span class="co">#library(&quot;SnowballC&quot;) # for stemDocument</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, stemDocument) <span class="co"># stem words</span>
+<span class="kw">inspect</span>(myCorpus)
+<span class="co"># myCorpus &lt;- tm_map(myCorpus, stemCompletion, dictionary=dictCorpus) # stem completion</span>
+<span class="co"># the following stem completion works in tm v0.6 </span>
+<span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(function(x, d)
+  <span class="kw">paste</span>(<span class="kw">stemCompletion</span>(<span class="kw">strsplit</span>(<span class="kw">stemDocument</span>(x), <span class="st">' '</span>)[[<span class="dv">1</span>]], d), <span class="dt">collapse =</span> <span class="st">' '</span>)), dictCorpus)
+<span class="kw">inspect</span>(myCorpus)
+<span class="kw">inspect</span>(dictCorpus)
+
+<span class="co"># ---- Building a Document-Term Matrix</span>
+
+myDtm &lt;-<span class="st"> </span><span class="kw">TermDocumentMatrix</span>(myCorpus, <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">wordLengths =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">Inf</span>)))
+<span class="kw">inspect</span>(myDtm)
+<span class="co">#                  Docs</span>
+<span class="co"># Terms             1 2 3 4 5</span>
+<span class="co">#   big             0 0 0 0 1</span>
+<span class="co">#   comput          0 0 1 1 0</span>
+<span class="co">#   data            0 0 0 0 2  </span>
+<span class="co">#   ...</span>
+
+<span class="co"># Based on the above matrix, many data mining tasks can be done, for example, clustering, classification and association analysis.</span>
+
+<span class="co"># ----- Frequent Terms and Associations</span>
+
+<span class="kw">findFreqTerms</span>(myDtm, <span class="dt">lowfreq=</span><span class="dv">2</span>)
+
+<span class="co"># which words are associated with &quot;r&quot;?</span>
+<span class="kw">findAssocs</span>(myDtm, <span class="st">'r'</span>, <span class="fl">0.30</span>)</code></pre>
 </div>
 <div id="decision-tree" class="section level2">
 <h2><span class="header-section-number">0.9</span> Decision Tree</h2>
 <ul>
-<li>rpat</li>
+<li>rpart</li>
 </ul>
 <p><a href="http://www.statmethods.net/advstats/cart.html" class="uri">http://www.statmethods.net/advstats/cart.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Classification Tree with rpart</span>

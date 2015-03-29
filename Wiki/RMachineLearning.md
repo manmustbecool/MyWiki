@@ -63,9 +63,70 @@ http://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reductio
 
 http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/
 
+
+```r
+rdmTweets <- list(
+"Text Mining Tutorial http://t.co/jPHHLEGm",
+"He likes dogs r Singapore http://t.co/GPA0TyG5",
+"RDataMining: Easier Parallel Computing in R with snowfall and sfCluster http://t.co/BPcinvzK",
+"RDataMining: Tutorial: Parallel computing using R package snowfall http://t.co/CHBCyr76",
+"handling big data: Interacting with Data using the filehash Package for R http://t.co/7RB3sChx"
+)
+
+df <- as.data.frame(do.call(rbind, rdmTweets))
+names(df) <- c('text')
+
+library(tm)
+# ---- build a corpus
+myCorpus <- Corpus(VectorSource(df$text)) # VectorSource specifies the text source
+
+# ---- Transforming Text
+
+myCorpus <- tm_map(myCorpus, content_transformer(tolower)) #  to lower case
+myCorpus <- tm_map(myCorpus, removePunctuation) # remove punctuation
+myCorpus <- tm_map(myCorpus, removeNumbers) # remove numbers
+myStopwords <- c(stopwords('english'), "available", "dogs") # add two additional stopwords
+myStopwords <- setdiff(myStopwords, c("r", "big")) # remove 'r' and 'big' from stopwords
+myCorpus <- tm_map(myCorpus, removeWords, myStopwords) # remove stopwords
+
+# ---- Stemming Words
+
+dictCorpus <- myCorpus # keep a copy as a dictionary for stem completion
+#library("SnowballC") # for stemDocument
+myCorpus <- tm_map(myCorpus, stemDocument) # stem words
+inspect(myCorpus)
+# myCorpus <- tm_map(myCorpus, stemCompletion, dictionary=dictCorpus) # stem completion
+# the following stem completion works in tm v0.6 
+tm_map(myCorpus, content_transformer(function(x, d)
+  paste(stemCompletion(strsplit(stemDocument(x), ' ')[[1]], d), collapse = ' ')), dictCorpus)
+inspect(myCorpus)
+inspect(dictCorpus)
+
+# ---- Building a Document-Term Matrix
+
+myDtm <- TermDocumentMatrix(myCorpus, control = list(wordLengths = c(1, Inf)))
+inspect(myDtm)
+#                  Docs
+# Terms             1 2 3 4 5
+#   big             0 0 0 0 1
+#   comput          0 0 1 1 0
+#   data            0 0 0 0 2  
+#   ...
+
+# Based on the above matrix, many data mining tasks can be done, for example, clustering, classification and association analysis.
+
+# ----- Frequent Terms and Associations
+
+findFreqTerms(myDtm, lowfreq=2)
+
+# which words are associated with "r"?
+findAssocs(myDtm, 'r', 0.30)
+```
+
+
 ## Decision Tree
 
- * rpat
+ * rpart
  
 http://www.statmethods.net/advstats/cart.html
 
