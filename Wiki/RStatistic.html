@@ -135,7 +135,12 @@ mr &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt"
 <span class="co"># Initialize a dataframe</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">1</span>))
 ...
-df &lt;-<span class="st"> </span>df[-<span class="dv">1</span>,]</code></pre>
+df &lt;-<span class="st"> </span>df[-<span class="dv">1</span>,]
+
+<span class="co"># </span>
+prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
+timestamps &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
+stockprices &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)</code></pre>
 </div>
 <div id="common-vector-operations" class="section level2">
 <h2><span class="header-section-number">1.4</span> Common Vector operations</h2>
@@ -392,11 +397,17 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 </div>
 <div id="sql-query" class="section level2">
 <h2><span class="header-section-number">1.12</span> SQL query</h2>
+<ul>
+<li><p>JDBC</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 
-
 postgres &lt;-<span class="st"> </span><span class="kw">JDBC</span>( <span class="st">&quot;org.postgresql.Driver&quot;</span>, <span class="st">&quot;C:/.../postgresql-8.4-703.jdbc4.jar&quot;</span>)
 conn &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(postgres, <span class="st">&quot;jdbc:postgresql://*.*.*.*:5432/xxdb&quot;</span>, <span class="dt">user=</span><span class="st">&quot;postgres&quot;</span>, <span class="dt">password=</span><span class="st">&quot;postgres&quot;</span>)
-myDf &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(conn, <span class="st">&quot;select * from tableX&quot;</span>)</code></pre>
+myDf &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(conn, <span class="st">&quot;select * from tableX&quot;</span>)</code></pre></li>
+<li><p>ODBC</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RODBC)
+conn &lt;-<span class="st"> </span><span class="kw">odbcDriverConnect</span>(<span class="st">'Driver=SQL Server; Server=10.x.x.x</span><span class="ch">\\</span><span class="st">SQLEXPRESS; Database=xxx;'</span>)
+myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span class="st">&quot;select * from [xxx].[dbo].[myTable]&quot;</span>)</code></pre></li>
+</ul>
 </div>
 </div>
 <div id="others" class="section level1">

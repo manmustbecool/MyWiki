@@ -27,15 +27,18 @@ Go to the pre-existing `org.*.Domainmodel.ui` package in the `org.*.Domainmodel.
 
 The `HighlightingConfiguration` class example:
 
-```
-public class DomainmodelHighlightingConfiguration extends DefaultHighlightingConfiguration  {
+```java
+public class DomainmodelHighlightingConfiguration extends DefaultHighlightingConfiguration 
+{
  
     public static final String DATA_TYPE_ID = "datatype";
  
-    public void configure(IHighlightingConfigurationAcceptor  acceptor)
+    public void configure(IHighlightingConfigurationAcceptor
+ acceptor)
     {
         super.configure(acceptor);
-        acceptor.acceptDefaultHighlighting( DATA_TYPE_ID, "DataType", dataTypeTextStyle());
+        acceptor.acceptDefaultHighlighting(
+DATA_TYPE_ID, "DataType", dataTypeTextStyle());
     }
  
     public TextStyle dataTypeTextStyle()
@@ -50,7 +53,7 @@ public class DomainmodelHighlightingConfiguration extends DefaultHighlightingCon
 
 The `SemanticHighlightingCalculator` class example:
 
-```
+```java
 public class DomainmodelSemanticHighlightingCalculator implements ISemanticHighlightingCalculator
 {
     public void provideHighlightingFor(XtextResource resource,

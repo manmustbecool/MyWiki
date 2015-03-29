@@ -81,16 +81,15 @@ img {
 <li><a href="#logistic-regression"><span class="toc-section-number">0.5</span> Logistic Regression</a></li>
 <li><a href="#support-vector-machine-svm"><span class="toc-section-number">0.6</span> Support Vector Machine (SVM)</a></li>
 <li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.7</span> Singular Value Decomposition (SVD)</a></li>
-<li><a href="#text-mining"><span class="toc-section-number">0.8</span> Text mining</a><ul>
-<li><a href="#text-processing"><span class="toc-section-number">0.8.1</span> Text Processing</a></li>
+<li><a href="#text-mining"><span class="toc-section-number">0.8</span> Text mining</a></li>
+<li><a href="#decision-tree"><span class="toc-section-number">0.9</span> Decision Tree</a></li>
+<li><a href="#association-rule-learning"><span class="toc-section-number">0.10</span> Association rule learning</a></li>
+<li><a href="#time-series"><span class="toc-section-number">0.11</span> Time Series</a><ul>
+<li><a href="#moving-averages"><span class="toc-section-number">0.11.1</span> Moving Averages</a></li>
+<li><a href="#arima"><span class="toc-section-number">0.11.2</span> Arima</a></li>
 </ul></li>
-<li><a href="#association-rule-learning"><span class="toc-section-number">0.9</span> Association rule learning</a></li>
-<li><a href="#time-series"><span class="toc-section-number">0.10</span> Time Series</a><ul>
-<li><a href="#moving-averages"><span class="toc-section-number">0.10.1</span> Moving Averages</a></li>
-<li><a href="#arima"><span class="toc-section-number">0.10.2</span> Arima</a></li>
-</ul></li>
-<li><a href="#recommender-system"><span class="toc-section-number">0.11</span> Recommender system</a></li>
-<li><a href="#feature-selection"><span class="toc-section-number">0.12</span> Feature selection</a></li>
+<li><a href="#recommender-system"><span class="toc-section-number">0.12</span> Recommender system</a></li>
+<li><a href="#feature-selection"><span class="toc-section-number">0.13</span> Feature selection</a></li>
 </ul>
 </div>
 
@@ -133,21 +132,57 @@ img {
 </div>
 <div id="text-mining" class="section level2">
 <h2><span class="header-section-number">0.8</span> Text mining</h2>
-<p>…</p>
-<div id="text-processing" class="section level3">
-<h3><span class="header-section-number">0.8.1</span> Text Processing</h3>
-<p><a href="http://www.johnmyleswhite.com/notebook/2009/02/25/text-processing-in-r/" class="uri">http://www.johnmyleswhite.com/notebook/2009/02/25/text-processing-in-r/</a></p>
+<p><a href="http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/" class="uri">http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/</a></p>
 </div>
+<div id="decision-tree" class="section level2">
+<h2><span class="header-section-number">0.9</span> Decision Tree</h2>
+<ul>
+<li>rpat</li>
+</ul>
+<p><a href="http://www.statmethods.net/advstats/cart.html" class="uri">http://www.statmethods.net/advstats/cart.html</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Classification Tree with rpart</span>
+<span class="kw">library</span>(rpart)
+
+kyphosis[<span class="dv">1</span>:<span class="dv">3</span>,]
+<span class="co">#   Kyphosis Age Number Start</span>
+<span class="co"># 1   absent  71      3     5</span>
+<span class="co"># 2   absent 158      3    14</span>
+<span class="co"># 3  present 128      4     5</span>
+
+<span class="co"># grow tree  </span>
+fit &lt;-<span class="st"> </span><span class="kw">rpart</span>(Kyphosis ~<span class="st"> </span>Age +<span class="st"> </span>Number +<span class="st"> </span>Start, <span class="dt">method=</span><span class="st">&quot;class&quot;</span>, <span class="dt">data=</span>kyphosis) <span class="co"># classfication tree</span>
+
+<span class="kw">printcp</span>(fit) <span class="co"># display the results</span>
+<span class="kw">plotcp</span>(fit) <span class="co"># visualize cross-validation results</span>
+<span class="kw">summary</span>(fit) <span class="co"># detailed summary of splits</span>
+
+<span class="co"># plot tree</span>
+<span class="kw">plot</span>(fit, <span class="dt">uniform=</span><span class="ot">TRUE</span>, <span class="dt">main=</span><span class="st">&quot;Classification Tree for Kyphosis&quot;</span>)
+<span class="kw">text</span>(fit, <span class="dt">use.n=</span><span class="ot">TRUE</span>, <span class="dt">all=</span><span class="ot">TRUE</span>, <span class="dt">cex=</span>.<span class="dv">8</span>)
+
+<span class="co"># create attractive postscript plot of tree</span>
+<span class="kw">post</span>(fit, <span class="dt">file =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">title =</span> <span class="st">&quot;Classification Tree for Kyphosis&quot;</span>)
+
+<span class="co"># prune the tree</span>
+pfit&lt;-<span class="st"> </span><span class="kw">prune</span>(fit, <span class="dt">cp=</span>fit$cptable[<span class="kw">which.min</span>(fit$cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>])
+
+<span class="co"># plot the pruned tree</span>
+<span class="kw">plot</span>(pfit, <span class="dt">uniform=</span><span class="ot">TRUE</span>,
+     <span class="dt">main=</span><span class="st">&quot;Pruned Classification Tree for Kyphosis&quot;</span>)
+<span class="kw">text</span>(pfit, <span class="dt">use.n=</span><span class="ot">TRUE</span>, <span class="dt">all=</span><span class="ot">TRUE</span>, <span class="dt">cex=</span>.<span class="dv">8</span>)
+<span class="kw">post</span>(pfit,  <span class="dt">file =</span> <span class="st">&quot;&quot;</span>,
+     <span class="dt">title =</span> <span class="st">&quot;Pruned Classification Tree for Kyphosis&quot;</span>)</code></pre>
 </div>
 <div id="association-rule-learning" class="section level2">
-<h2><span class="header-section-number">0.9</span> Association rule learning</h2>
+<h2><span class="header-section-number">0.10</span> Association rule learning</h2>
 <ul>
-<li>package arulesSequences</li>
+<li>arulesSequences</li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sample events </span>
-<span class="co">#322282,20100827,2,AA,BB</span>
-<span class="co">#312980,20100622,3,CC,DD,EE</span>
-<span class="co">#312246,20100218,7,FF,GG,HH,II,MM,OO,NN</span>
+<span class="co"># 322282,20100827,2,AA,BB</span>
+<span class="co"># 312980,20100622,3,CC,DD,EE</span>
+<span class="co"># 312246,20100218,7,FF,GG,HH,II,MM,OO,NN</span>
 
 t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class="dt">con=</span><span class="kw">system.file</span>(<span class="st">&quot;misc&quot;</span>, <span class="st">&quot;zaki.txt&quot;</span>, <span class="dt">package=</span><span class="st">&quot;arulesSequences&quot;</span>), 
          <span class="dt">info=</span><span class="kw">c</span>(<span class="st">&quot;eventID&quot;</span>,<span class="st">&quot;sequenceID&quot;</span>,<span class="st">&quot;size&quot;</span>))
@@ -162,50 +197,50 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre>
 </div>
 <div id="time-series" class="section level2">
-<h2><span class="header-section-number">0.10</span> Time Series</h2>
+<h2><span class="header-section-number">0.11</span> Time Series</h2>
 <p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
 <p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert data.frame to time series</span>
+<pre class="sourceCode r"><code class="sourceCode r">prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
+timestamps &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
+stockprices &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
+
+<span class="co"># convert data.frame to time series</span>
 stockprices
-<span class="kw">prices</span>(numeric)    <span class="kw">timestamps</span>(character)
-<span class="fl">1.1</span>         <span class="dv">2011-01-05</span> <span class="dv">11</span>:<span class="dv">00</span>
-<span class="fl">2.2</span>         <span class="dv">2011-01-05</span> <span class="dv">12</span>:<span class="dv">00</span>
-<span class="fl">3.3</span>         <span class="dv">2011-01-05</span> <span class="dv">13</span>:<span class="dv">00</span>
+<span class="co"># prices(numeric)    timestamps(character)</span>
+<span class="co"># 1.1         2011-01-05 11:00</span>
+<span class="co"># 2.2         2011-01-05 12:00</span>
+<span class="co"># 3.3         2011-01-05 13:00</span>
 
 <span class="kw">require</span>(xts)
-stockpricesTs &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">rder.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
+stockpricesTs &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">order.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
 stockpricesTs
-                    [,<span class="dv">1</span>]
-<span class="dv">2011-01-05</span> <span class="dv">11</span>:<span class="dv">00</span>:<span class="dv">00</span>  <span class="fl">1.1</span>
-<span class="dv">2011-01-05</span> <span class="dv">12</span>:<span class="dv">00</span>:<span class="dv">00</span>  <span class="fl">2.2</span>
-<span class="dv">2011-01-05</span> <span class="dv">13</span>:<span class="dv">00</span>:<span class="dv">00</span>  <span class="fl">3.3</span>
 
 <span class="co"># select a time range</span>
 t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]</code></pre>
 <div id="moving-averages" class="section level3">
-<h3><span class="header-section-number">0.10.1</span> Moving Averages</h3>
+<h3><span class="header-section-number">0.11.1</span> Moving Averages</h3>
 <ul>
-<li>package <strong>TTR</strong></li>
+<li>TTR</li>
 </ul>
 <p><a href="http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html" class="uri">http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html</a></p>
 </div>
 <div id="arima" class="section level3">
-<h3><span class="header-section-number">0.10.2</span> Arima</h3>
+<h3><span class="header-section-number">0.11.2</span> Arima</h3>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
 <span class="kw">plot</span>(fit$x,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre>
 </div>
 </div>
 <div id="recommender-system" class="section level2">
-<h2><span class="header-section-number">0.11</span> Recommender system</h2>
+<h2><span class="header-section-number">0.12</span> Recommender system</h2>
 <ul>
-<li>package <strong>recommenderlab</strong></li>
+<li>recommenderlab</li>
 </ul>
 </div>
 <div id="feature-selection" class="section level2">
-<h2><span class="header-section-number">0.12</span> Feature selection</h2>
+<h2><span class="header-section-number">0.13</span> Feature selection</h2>
 <ul>
-<li>package <strong>caret</strong></li>
+<li>caret</li>
 </ul>
 <p><a href="http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html" class="uri">http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html</a></p>
 </div>
