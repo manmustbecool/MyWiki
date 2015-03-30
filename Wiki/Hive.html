@@ -72,58 +72,51 @@ img {
 
 
 
-<div id="TOC">
-<ul>
-<li><a href="#trouble-shooting"><span class="toc-section-number">0.1</span> Trouble shooting</a></li>
-<li><a href="#impala-performance-tuning"><span class="toc-section-number">0.2</span> Impala performance tuning</a></li>
-</ul>
+
+<div id="quick-installation" class="section level1">
+<h1>Quick installation</h1>
+<p><strong>Assuming that the Hadoop is installed</strong></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">HADOOP_HOME=</span>/home/ubuntu/hadoop-0.20.205.0</code></pre>
+<p><strong>Download the Hive</strong></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> wget http://ftp.heanet.ie/mirrors/www.apache.org/dist/hive/hive-0.9.0/hive-0.9.0.tar.gz
+<span class="kw">tar</span> axzvf hive-0.9.0.tar.gz</code></pre>
+<p><strong>Set the variables</strong></p>
+<p>Edit .bash_profile to add entry for $HIVE_HOME and change $PATH. <code>vim ~/.bash_profile</code></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">HIVE_HOME=</span>/home/ubuntu/hive-0.9.0
+<span class="kw">export</span> <span class="ot">PATH=$PATH</span>:<span class="ot">$HIVE_HOME</span>/bin</code></pre>
+<p>Logout and login for the changes to take effect. After successful login, typing echo $HIVE_HOME to check</p>
+<p><strong>Create a space in HDFS for Hive</strong></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">$HADOOP_HOME</span><span class="kw">/bin/start-all.sh</span> // start the Hadoop
+
+<span class="ot">$HADOOP_HOME</span><span class="kw">/bin/hadoop</span> fs -mkdir /tmp
+<span class="ot">$HADOOP_HOME</span><span class="kw">/bin/hadoop</span> fs -mkdir /user/hive/warehouse
+<span class="ot">$HADOOP_HOME</span><span class="kw">/bin/hadoop</span> fs -chmod g+w /tmp
+<span class="ot">$HADOOP_HOME</span><span class="kw">/bin/hadoop</span> fs -chmod g+w /user/hive/warehouse</code></pre>
+<p>Start the Hive CLI</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">$HIVE_HOME</span><span class="kw">/bin/hive</span></code></pre>
 </div>
-
-<div id="trouble-shooting" class="section level2">
-<h2><span class="header-section-number">0.1</span> Trouble shooting</h2>
-<p><strong>problem : Installing Cloudera on a fresh Ubuntu and adding a host. error: Could not connect to host.</strong></p>
-<p><em>fix :</em> It is possible because of the SSH is not installed.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install openssh-client openssh-server</code></pre>
-<hr />
-<p><strong>problem : hdfs healthy, percentage under replicated blocks is too high</strong></p>
-<p><em>fix :</em> execute fsck commend the under replicated blocks</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">hdfs</span> fsck /user/hive/ -blocks</code></pre>
-<p>HDFS will automatically fix the under replicated blocks in the background.</p>
-<p>If you really want to speed things up, you can run hadoop <code>dfs -setrep</code> on the affected files to increase the replication factor and then decrease it back to the default.</p>
-<hr />
-<p><strong>problem : start HUE by runserver <code>Error: That port is already in use</code></strong></p>
-<p><em>fix :</em> <code>http://codeureka.blogspot.ie/2013/07/error-that-port-is-already-in-use.html</code></p>
-<ol style="list-style-type: decimal">
-<li>Finding process for port 8000</li>
-</ol>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">sudo</span> netstat -lpn <span class="kw">|grep</span> :8000
-<span class="co"># -l : listening ports; -p: display PID; -n : in numeric</span>
-
-<span class="kw">tcp</span>        0      0 192.168.1.5:8000    0.0.0.0:*        LISTEN      10797/python   
-
-<span class="kw">here</span> 10797 is a process id running on port 8000.</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Kill the process</li>
-</ol>
-<pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">kill</span> -9 10797</code></pre>
-<hr />
-<p><strong>problem : <code>Datanode denied communication with namenode: DatanodeRegistration(...</code></strong></p>
-<p><em>fix :</em> the namenode IP might is not in the allow list. Common is a case which 2 IP is assigned for a machine e.g. 127.0.0.1; 127.0.1.1</p>
-<p>the allowed list is available at: by command:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">$sudo</span> <span class="kw">cat</span> /proc/<span class="ot">$(</span><span class="kw">pgrep</span> -f namenode.NameNode<span class="ot">)</span>/cwd/dfs_hosts_allow.txt </code></pre>
-<p>or UI:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">via</span> Cloudera Manager: All Services <span class="kw">&gt;</span> hdfs1 <span class="kw">&gt;</span> Instances <span class="kw">&gt;</span> namenode (Active) <span class="kw">&gt;</span> <span class="kw">Processes</span> <span class="kw">&gt;</span> Configuration Files/Environment <span class="kw">&gt;</span> Show <span class="kw">&gt;</span> dfs_hosts_allow.txt </code></pre>
-<p>Append the datanode IP in the CM namenode configuration &gt; advance &gt; dfs_hosts_allow.txt</p>
-<hr />
-<p><strong>problem : Hive <code>SemanticException Unable to fetch table correlation</code></strong></p>
-<p><em>fix :</em> Run the jps command, look for “RunJar” process and kill it using</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">kill</span> -9 <span class="dt">{{{&lt;RunJarprocessId&gt;}}}</span> command</code></pre>
-<hr />
+<div id="web-interface" class="section level1">
+<h1>Web interface</h1>
+<p>Start the web application</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">$HIVE_HOME</span><span class="kw">/bin/hive</span> --service hwi</code></pre>
+<p>To access Hive using the web interface (default port: 9999) - <code>&lt;Hive Server Address&gt;:9999/hwi</code></p>
+<p>Creating a <code>hive-site.xml</code> in the <code>hive/con</code> folder, if it can not find the hwi.war file</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;?xml-stylesheet</span> type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;configuration&gt;</span>
+  <span class="kw">&lt;property&gt;</span>
+    <span class="kw">&lt;name&gt;</span>hive.hwi.war.file<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;value&gt;</span>lib/hive-hwi-0.9.0.war<span class="kw">&lt;/value&gt;</span>
+    <span class="kw">&lt;description&gt;</span>This sets the path to the HWI war file, relative to ${HIVE_HOME}. <span class="kw">&lt;/description&gt;</span>
+  <span class="kw">&lt;/property&gt;</span>
+<span class="kw">&lt;/configuration&gt;</span></code></pre>
 </div>
-<div id="impala-performance-tuning" class="section level2">
-<h2><span class="header-section-number">0.2</span> Impala performance tuning</h2>
-<p><code>http://php.sabscape.com/blog/?p=598</code></p>
-<p>use impala query manager port:7180</p>
+<div id="jdbc-connection" class="section level1">
+<h1>JDBC connection</h1>
+<p>To interact with Hive using JDBC, first run the Hive Thrift Server (default port: 10000) -</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">hive</span> --service hiveserver
+<span class="co"># or </span>
+<span class="kw">hive</span> --service hiveserver2</code></pre>
 </div>
 
 
