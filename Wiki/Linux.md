@@ -46,11 +46,10 @@ netstat -a
 # execute 'ntpdate' with the ntp daemon already up and running, use the following command which uses a different port
 ntpdate -u pool.ntp.org 
 
-
 # install Linux / UNIX *.tar.gz tarball files
 http://www.cyberciti.biz/faq/install-tarballs/
 
-# ---- File Search --------
+# ---- File Search ------
 
 # scroll result
 ls | less
@@ -62,7 +61,7 @@ ls /user | wc -l
 find / -name 'program.c' 
 
 # find files containing a text string. -r for subdirectories
-grep -r "text string to search" directory-path
+grep -r "text string to search" <directorypath>
 
 # ---- Disk/File Size check ----
 
@@ -79,7 +78,7 @@ df -k
 
 # top processes
 top
-// or
+# or
 sudo apt-get install htop
 htop
 
@@ -91,11 +90,10 @@ ps -aux
 # for root user
 ps -auroot
 
-
 ```
 # Others #
 
-## Remote desktop ##
+## Windows Remote desktop ##
 install XRDP
 ```bash
 sudo apt-get install xrdp

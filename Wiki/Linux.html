@@ -76,7 +76,7 @@ img {
 <ul>
 <li><a href="#cheat-sheet"><span class="toc-section-number">1</span> cheat sheet</a></li>
 <li><a href="#others"><span class="toc-section-number">2</span> Others</a><ul>
-<li><a href="#remote-desktop"><span class="toc-section-number">2.1</span> Remote desktop</a></li>
+<li><a href="#windows-remote-desktop"><span class="toc-section-number">2.1</span> Windows Remote desktop</a></li>
 <li><a href="#install-jdk"><span class="toc-section-number">2.2</span> Install JDK</a></li>
 <li><a href="#install-leiningen"><span class="toc-section-number">2.3</span> Install Leiningen</a></li>
 </ul></li>
@@ -119,11 +119,10 @@ img {
 <span class="co"># execute 'ntpdate' with the ntp daemon already up and running, use the following command which uses a different port</span>
 <span class="kw">ntpdate</span> -u pool.ntp.org 
 
-
 <span class="co"># install Linux / UNIX *.tar.gz tarball files</span>
 <span class="kw">http</span>://www.cyberciti.biz/faq/install-tarballs/
 
-<span class="co"># ---- File Search --------</span>
+<span class="co"># ---- File Search ------</span>
 
 <span class="co"># scroll result</span>
 <span class="kw">ls</span> <span class="kw">|</span> <span class="kw">less</span>
@@ -135,7 +134,7 @@ img {
 <span class="kw">find</span> / -name <span class="st">'program.c'</span> 
 
 <span class="co"># find files containing a text string. -r for subdirectories</span>
-<span class="kw">grep</span> -r <span class="st">&quot;text string to search&quot;</span> directory-path
+<span class="kw">grep</span> -r <span class="st">&quot;text string to search&quot;</span> <span class="kw">&lt;</span>directorypath<span class="kw">&gt;</span>
 
 <span class="co"># ---- Disk/File Size check ----</span>
 
@@ -152,7 +151,7 @@ img {
 
 <span class="co"># top processes</span>
 <span class="kw">top</span>
-<span class="kw">//</span> or
+<span class="co"># or</span>
 <span class="kw">sudo</span> apt-get install htop
 <span class="kw">htop</span>
 
@@ -162,13 +161,12 @@ img {
 <span class="co"># show all processes for all users. -x:all users</span>
 <span class="kw">ps</span> -aux
 <span class="co"># for root user</span>
-<span class="kw">ps</span> -auroot
-</code></pre>
+<span class="kw">ps</span> -auroot</code></pre>
 </div>
 <div id="others" class="section level1">
 <h1><span class="header-section-number">2</span> Others</h1>
-<div id="remote-desktop" class="section level2">
-<h2><span class="header-section-number">2.1</span> Remote desktop</h2>
+<div id="windows-remote-desktop" class="section level2">
+<h2><span class="header-section-number">2.1</span> Windows Remote desktop</h2>
 <p>install XRDP</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install xrdp</code></pre>
 </div>
