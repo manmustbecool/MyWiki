@@ -164,7 +164,10 @@ text(pfit, use.n=TRUE, all=TRUE, cex=.8)
 post(pfit,  file = "",
      title = "Pruned Classification Tree for Kyphosis")
 ```
- 
+
+## Random forest
+
+http://trevorstephens.com/post/73770963794/titanic-getting-started-with-r-part-5-random
  
 ## Association rule learning ##
 

@@ -83,13 +83,14 @@ img {
 <li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.7</span> Singular Value Decomposition (SVD)</a></li>
 <li><a href="#text-mining"><span class="toc-section-number">0.8</span> Text mining</a></li>
 <li><a href="#decision-tree"><span class="toc-section-number">0.9</span> Decision Tree</a></li>
-<li><a href="#association-rule-learning"><span class="toc-section-number">0.10</span> Association rule learning</a></li>
-<li><a href="#time-series"><span class="toc-section-number">0.11</span> Time Series</a><ul>
-<li><a href="#moving-averages"><span class="toc-section-number">0.11.1</span> Moving Averages</a></li>
-<li><a href="#arima"><span class="toc-section-number">0.11.2</span> Arima</a></li>
+<li><a href="#random-forest"><span class="toc-section-number">0.10</span> Random forest</a></li>
+<li><a href="#association-rule-learning"><span class="toc-section-number">0.11</span> Association rule learning</a></li>
+<li><a href="#time-series"><span class="toc-section-number">0.12</span> Time Series</a><ul>
+<li><a href="#moving-averages"><span class="toc-section-number">0.12.1</span> Moving Averages</a></li>
+<li><a href="#arima"><span class="toc-section-number">0.12.2</span> Arima</a></li>
 </ul></li>
-<li><a href="#recommender-system"><span class="toc-section-number">0.12</span> Recommender system</a></li>
-<li><a href="#feature-selection"><span class="toc-section-number">0.13</span> Feature selection</a></li>
+<li><a href="#recommender-system"><span class="toc-section-number">0.13</span> Recommender system</a></li>
+<li><a href="#feature-selection"><span class="toc-section-number">0.14</span> Feature selection</a></li>
 </ul>
 </div>
 
@@ -230,8 +231,12 @@ pfit&lt;-<span class="st"> </span><span class="kw">prune</span>(fit, <span class
 <span class="kw">post</span>(pfit,  <span class="dt">file =</span> <span class="st">&quot;&quot;</span>,
      <span class="dt">title =</span> <span class="st">&quot;Pruned Classification Tree for Kyphosis&quot;</span>)</code></pre>
 </div>
+<div id="random-forest" class="section level2">
+<h2><span class="header-section-number">0.10</span> Random forest</h2>
+<p><a href="http://trevorstephens.com/post/73770963794/titanic-getting-started-with-r-part-5-random" class="uri">http://trevorstephens.com/post/73770963794/titanic-getting-started-with-r-part-5-random</a></p>
+</div>
 <div id="association-rule-learning" class="section level2">
-<h2><span class="header-section-number">0.10</span> Association rule learning</h2>
+<h2><span class="header-section-number">0.11</span> Association rule learning</h2>
 <ul>
 <li>arulesSequences</li>
 </ul>
@@ -253,7 +258,7 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre>
 </div>
 <div id="time-series" class="section level2">
-<h2><span class="header-section-number">0.11</span> Time Series</h2>
+<h2><span class="header-section-number">0.12</span> Time Series</h2>
 <p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
 <p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
 <pre class="sourceCode r"><code class="sourceCode r">prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
@@ -274,27 +279,27 @@ stockpricesTs
 <span class="co"># select a time range</span>
 t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]</code></pre>
 <div id="moving-averages" class="section level3">
-<h3><span class="header-section-number">0.11.1</span> Moving Averages</h3>
+<h3><span class="header-section-number">0.12.1</span> Moving Averages</h3>
 <ul>
 <li>TTR</li>
 </ul>
 <p><a href="http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html" class="uri">http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html</a></p>
 </div>
 <div id="arima" class="section level3">
-<h3><span class="header-section-number">0.11.2</span> Arima</h3>
+<h3><span class="header-section-number">0.12.2</span> Arima</h3>
 <pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
 <span class="kw">plot</span>(fit$x,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre>
 </div>
 </div>
 <div id="recommender-system" class="section level2">
-<h2><span class="header-section-number">0.12</span> Recommender system</h2>
+<h2><span class="header-section-number">0.13</span> Recommender system</h2>
 <ul>
 <li>recommenderlab</li>
 </ul>
 </div>
 <div id="feature-selection" class="section level2">
-<h2><span class="header-section-number">0.13</span> Feature selection</h2>
+<h2><span class="header-section-number">0.14</span> Feature selection</h2>
 <ul>
 <li>caret</li>
 </ul>

@@ -7,6 +7,8 @@ output:
     number_sections: yes
     theme: united
     toc: yes
+    includes:
+      after_body: footer\footer.html
 ---
 
 # Basic #

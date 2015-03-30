@@ -2,6 +2,8 @@
 output:
   html_document:
     theme: united
+    includes:
+      after_body: wiki\footer\footer.html
 ---
 
 
@@ -17,7 +19,7 @@ output:
 
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
-* <a href="Wiki/Hive.html">Hive</a> 
+ * <a href="Wiki/Hive.html">Hive</a> 
  
 ### Others
 

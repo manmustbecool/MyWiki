@@ -7,6 +7,8 @@ output:
     number_sections: yes
     theme: spacelab
     toc: yes
+    includes:
+      after_body: footer\footer.html
 ---
 
 
@@ -110,3 +112,6 @@ http://bigocheatsheet.com/
 
 # java 8 #
 http://winterbe.com/posts/2014/03/16/java-8-tutorial/
+
+
+
