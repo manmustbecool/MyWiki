@@ -2,10 +2,10 @@
 output:
   html_document:
     fig_caption: yes
-    # highlight: zenburn
+    highlight: zenburn
     keep_md: yes
     number_sections: yes
-    theme: spacelab
+    theme: united
     toc: yes
 ---
 
@@ -33,7 +33,7 @@ Check if java is installed `java version`
 
   * Adding a ubuntu user if necessary. For example, a new user(ubuntu) in a group(hadoop) :
 
-```
+```bash
 sudo addgroup hadoop
 sudo adduser -ingroup hadoop ubuntu
 ```
@@ -42,7 +42,7 @@ We use the default ubuntu:ubuntu user from Amazon EC2 instance in the following.
 
   * Setup passphraseless ssh
 
-```
+```bash
 su - ubuntu
 ssh-keygen -t rsa -P ""
 
@@ -52,7 +52,7 @@ cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
   * Download hadoop-0.20.2.tar.gz,Unzip then give chown permissions to user(ubuntu) for all files in the work directory.
   
 
-```
+```bash
 wget https://archive.apache.org/dist/hadoop/core/hadoop-0.20.205.0/hadoop-0.20.205.0.tar.gz
 sudo tar xzf hadoop-0.20.205.0.tar.gz
 sudo chown -R ubuntu hadoop-0.20.205.0
@@ -60,15 +60,15 @@ sudo chown -R ubuntu hadoop-0.20.205.0
 
   * Creating a file directory (hadoop.tmp.dir) for HDFS.
   
-```
+```bash
 sudo mkdir -p /home/ubuntu/myhdfs
 sudo chown ubuntu:ubuntu /home/ubuntu/myhdfs
 ```
 
   * Basic Hadoop configuation
-    * Adding the following in the `hadoop-env.sh`
+    * Adding the following in the `hadoop-env.sh`  
     
-    ```
+    ```bash
     export JAVA_HOME=/usr/lib/jvm/java-6-sun
     export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true
     ```
@@ -107,13 +107,13 @@ sudo chown ubuntu:ubuntu /home/ubuntu/myhdfs
 
   * Format the HDFS. This is only needed for first time on setup.
   
-```
+```bash
 hadoop-0.20.205.0/bin/hadoop namenode –format
 ```
 
   * Start Hadoop
   
-```
+```bash
 hadoop-0.20.205.0/bin/start-all.sh
 ```
 Using `bin/hadoop fsck /` to ckeck if all data nodes are on.
@@ -126,7 +126,8 @@ Using `bin/hadoop fsck /` to ckeck if all data nodes are on.
   * Adding a hadoop user if necessary.
 
 Copying the master's key to the salve, on the master node types follows
-```
+
+```bash
 ssh-copy-id -i $HOME/.ssh/id_rsa.pub ubuntu@159.xxx.xxx.xxx
 ```
 
@@ -139,7 +140,8 @@ Following configuation with files which are all from the `hadoop_home/conf`
     * Copying the configuations of `core-site.xml`, `hdfs-site.xml` and `mapred-site.xml` from the master to the slave node. In this case, there is no custom settings on the new node. The `localhost` should be replaced with IP of the master node.
 
   * Editing the `Slaves` file of the master node. Appending the IP address or hostname of the slave node at the end of file.
-```
+  
+```bash
 localhost
 159.xxx.xxx.xxx
 ```
@@ -158,15 +160,17 @@ localhost
 
 ## Troubleshooting ##
 
-### DFS Format ###
+**DFS Format** 
 
 The command for DFS format
-```
+
+```bash
 bin/hadoop namenode -format
 ```
 
-#### Problem: Format aborted ####
-```
+**Problem: Format aborted** 
+
+```bash
 Format aborted in /home/hduser/hadooptmp/dfs/name
 11/10/25 04:29:40 INFO namenode.NameNode: SHUTDOWN_MSG: 
 /************************************************************
@@ -174,11 +178,13 @@ SHUTDOWN_MSG: Shutting down NameNode at ubuntu/127.0.1.1
 ```
 If the name node is already shutdown, then go to the dfs directory and manually delete all files. After this, input the format command again.
 
-#### Problem: safe mode ####
+**Problem: safe mode** 
+
 Name node stucks in safe mode
 `org.apache.hadoop.dfs.SafeModeException`
 Use the following command to turn off the safe mode.
-```
+
+```bash
 bin/hadoop dfsadmin -safemode leave
 ```
 
@@ -189,9 +195,11 @@ bin/hadoop dfsadmin -safemode leave
 
 With many hadoop tutorials I had following problems with Hadoop Eclipse plugin.
 
-#### Problem: failed on connection ####
+**Problem: failed on connection** 
+
 The possible error messages:
-```
+
+```bash
 Error:null
 
 Error: Call to localhost/127.0.0.1:54310 failed on local exception: java.io.EOFException
@@ -205,9 +213,9 @@ _Fix_:
 Just install the **Cygwin**, then adding the cygwin path to the `Path` of Environment Variables: `;c:\cygwin\bin;c:\cygwin\usr\bin`. Restart the eclipse, the problem will be fixed.
 
 
-#### Problem: Permission denied ####
+**Problem: Permission denied** 
 
-```
+```bash
 Permission denied: user=xxx\xxxxx, access=WRITE, inode="":hduser:supergroup:rwxr-xr-
 ```
 

@@ -61,8 +61,8 @@ df <- df[-1,]
 
 # 
 prices <- c(1.1, 2.2, 3.3)
-timestamps <-  c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
-stockprices <- data.frame(prices, timestamps)
+timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
+stockpricesDf <- data.frame(prices, timestamps)
 
 ```
 

@@ -5,10 +5,9 @@ output:
     highlight: zenburn
     keep_md: yes
     number_sections: yes
-    theme: spacelab
+    theme: united
     toc: yes
 ---
-
 
 ## Gradient descents 
 
