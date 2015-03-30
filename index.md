@@ -14,7 +14,7 @@
  
 ### Hadoop
 
- * <a href="Wiki/hadoop.html">Hadoop</a> 
+ * <a href="Wiki/Hadoop.html">Hadoop</a> 
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
 ### ...
