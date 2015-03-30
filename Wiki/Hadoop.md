@@ -1,4 +1,13 @@
-
+---
+output:
+  html_document:
+    fig_caption: yes
+    # highlight: zenburn
+    keep_md: yes
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+---
 
 # Setup quick guide #
 
@@ -6,22 +15,21 @@
 
   * Installing Java and SSH
 
-```
-// For Ubuntu 11
+```bash
+# For Ubuntu 11
 sudo apt-add-repository ppa:flexiondotorg/java
 sudo apt-get update
 sudo apt-get install sun-java6-jdk
 
-
-// if installation is inside of a VM and behined a proxy
-// In addition to configuring proxies, tell sudo to consider the environment with the flag -E
+# if installation is inside of a VM and behined a proxy
+# In addition to configuring proxies, tell sudo to consider the environment with the flag -E
 export http_proxy=http://<proxy>:<port>
 export https_proxy=http://<proxy>:<port>
 sudo -E apt-add-repository ppa:flexiondotorg/java
 
 ```
 
-Check if java is installed `java –version`
+Check if java is installed `java version`
 
   * Adding a ubuntu user if necessary. For example, a new user(ubuntu) in a group(hadoop) :
 
@@ -42,6 +50,7 @@ cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
 ```
 
   * Download hadoop-0.20.2.tar.gz,Unzip then give chown permissions to user(ubuntu) for all files in the work directory.
+  
 
 ```
 wget https://archive.apache.org/dist/hadoop/core/hadoop-0.20.205.0/hadoop-0.20.205.0.tar.gz
@@ -50,6 +59,7 @@ sudo chown -R ubuntu hadoop-0.20.205.0
 ```
 
   * Creating a file directory (hadoop.tmp.dir) for HDFS.
+  
 ```
 sudo mkdir -p /home/ubuntu/myhdfs
 sudo chown ubuntu:ubuntu /home/ubuntu/myhdfs
@@ -57,44 +67,52 @@ sudo chown ubuntu:ubuntu /home/ubuntu/myhdfs
 
   * Basic Hadoop configuation
     * Adding the following in the `hadoop-env.sh`
-```
-export JAVA_HOME=/usr/lib/jvm/java-6-sun
-export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true
-```
-    * Adding the following between the `<configuration> ... </configuration>` tags of `inconf/core-site.xml`.
-```
-<property>
-  <name>hadoop.tmp.dir</name>
-  <value>/home/ubuntu/myhdfs</value>
-  <!-- For default : mkdir -p /tmp/hadoop-username/dfs -->
-</property> 
+    
+    ```
+    export JAVA_HOME=/usr/lib/jvm/java-6-sun
+    export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true
+    ```
 
-<property>
-  <name>fs.default.name</name>
-  <value>hdfs://localhost:54310</value>
-</property>
-```
+    * Adding the following between the `<configuration> ... </configuration>` tags of `inconf/core-site.xml`.
+      
+    ```xml
+    <property>
+      <name>hadoop.tmp.dir</name>
+      <value>/home/ubuntu/myhdfs</value>
+      <!-- For default : mkdir -p /tmp/hadoop-username/dfs -->
+    </property> 
+    
+    <property>
+      <name>fs.default.name</name>
+      <value>hdfs://localhost:54310</value>
+    </property>
+    ```
     * Adding in file `conf/mapred-site.xml`:
-```
-<property>
-  <name>mapred.job.tracker</name>
-  <value>localhost:54311</value>
-</property>
-```
+
+    ```xml
+    <property>
+      <name>mapred.job.tracker</name>
+      <value>localhost:54311</value>
+    </property>
+    ```
+
     * Adding in file `conf/hdfs-site.xml`:
-```
-<property>
-  <name>dfs.replication</name>
-  <value>1</value>
-</property>
-```
+    
+    ```xml
+    <property>
+      <name>dfs.replication</name>
+      <value>1</value>
+    </property>
+    ```
 
   * Format the HDFS. This is only needed for first time on setup.
+  
 ```
 hadoop-0.20.205.0/bin/hadoop namenode –format
 ```
 
   * Start Hadoop
+  
 ```
 hadoop-0.20.205.0/bin/start-all.sh
 ```
