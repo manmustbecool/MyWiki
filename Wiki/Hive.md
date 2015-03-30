@@ -14,7 +14,7 @@ export HADOOP_HOME=/home/ubuntu/hadoop-0.20.205.0
 **Download the Hive**
 ```bash
 sudo wget http://ftp.heanet.ie/mirrors/www.apache.org/dist/hive/hive-0.9.0/hive-0.9.0.tar.gz
-tar a€“xzvf hive-0.9.0.tar.gz
+tar xzvf hive-0.9.0.tar.gz
 ```
 
 
