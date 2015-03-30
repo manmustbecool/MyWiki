@@ -17,7 +17,6 @@ sudo wget http://ftp.heanet.ie/mirrors/www.apache.org/dist/hive/hive-0.9.0/hive-
 tar xzvf hive-0.9.0.tar.gz
 ```
 
-
 **Set the variables**
 
 Edit .bash\_profile to add entry for $HIVE\_HOME and change $PATH.
