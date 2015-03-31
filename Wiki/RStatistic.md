@@ -298,6 +298,7 @@ sample(300, 30)
 
 http://personality-project.org/r/r.plottingdates.html
 
+Producing Simple Graphs with R : 
 http://www.harding.edu/fmccown/r/
 
 ``` r

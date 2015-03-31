@@ -12,7 +12,7 @@ output:
 
 ### R
  
- * <a href="Wiki/RStatistic.html">RStatistic.html</a>
+ * <a href="Wiki/RStatistic.html">R basic</a>
  * <a href="Wiki/RMachineLearning.html">RMachineLearning.html</a>
  
 ### Hadoop
@@ -23,8 +23,8 @@ output:
  
 ### Others
 
- * <a href="Wiki/Linux.html">Linux.html</a>
- * <a href="Wiki/VirtualMachine.html">VirtualMachine.html</a>
+ * <a href="Wiki/Linux.html">Linux</a>
+ * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  
  
 

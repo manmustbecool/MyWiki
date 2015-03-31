@@ -7,6 +7,9 @@ output:
     number_sections: yes
     theme: spacelab
     toc: yes
+    includes:
+      before_body: hf\header.html
+      after_body: hf\footer.html
 ---
 
 
