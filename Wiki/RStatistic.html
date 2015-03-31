@@ -70,6 +70,9 @@ img {
 </style>
 <div class="container-fluid main-container">
 
+<div>
+<p>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></p>
+</div>
 
 
 <div id="TOC">
@@ -417,49 +420,46 @@ myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span 
 <div id="call-r-from-java" class="section level2">
 <h2><span class="header-section-number">2.1</span> Call R from Java</h2>
 <ul>
-<li>RCaller</li>
+<li><strong>RCaller</strong></li>
 </ul>
 <p><a href="http://www.mhsatman.com/rcaller.php" class="uri">http://www.mhsatman.com/rcaller.php</a></p>
 <ul>
-<li>Rserve</li>
+<li><strong>Rserve</strong></li>
 </ul>
 <p>An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.</p>
 <ul>
-<li>JRI</li>
+<li><strong>JRI</strong></li>
 </ul>
 <p>Java/R Interface</p>
 <p>It use uses the JNI and is part of rJava. <a href="http://www.rforge.net/JRI/" class="uri">http://www.rforge.net/JRI/</a></p>
 <p>Install rJava in R <code>install.packages(&quot;rJava&quot;)</code></p>
 <p>JRI can be found be the R library directory <code>C:\Program Files\R\R-2.15.0\library\rJava\jri</code></p>
 <p>Run example in the Windows CMD. (i386 for 32bit)</p>
-<pre class="auto"><code>set R_HOME= C:\Program Files\R\R-2.15.0
-//The environment variable R_HOME has to be set globally for the system, not only for the current user (restart of the system!) 
-set path= %PATH%;C:\Program Files\R\R-2.15.0\bin\i386;C:\Program Files\R\R-2.15.0\library\rJava\jri
-cd C:\Program Files\R\R-2.15.0\library\rJava\jri\
-java -cp JRI.jar;examples rtest</code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">set</span> <span class="ot">R_HOME=</span> <span class="kw">C</span>:\Program Files\R\R-2.15.0
+<span class="co"># The environment variable R_HOME has to be set globally for the system, not only for the current user (restart of the system!) </span>
+<span class="kw">set</span> <span class="ot">path=</span> <span class="kw">%PATH%;C</span>:\Program Files\R\R-2.15.0\bin\i386<span class="kw">;C</span>:\Program Files\R\R-2.15.0\library\rJava\jri
+<span class="kw">cd</span> C:\Program Files\R\R-2.15.0\library\rJava\jri\
+<span class="kw">java</span> -cp JRI.jar<span class="kw">;examples</span> rtest</code></pre>
 <p>Development in Eclipse Java project</p>
-<pre class="auto"><code> build path &gt; add external class folder : C:\Program Files\R\R-2.15.0\library\rJava\jri</code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"> <span class="kw">build</span> path <span class="kw">&gt;</span> add external class folder : C:\Program Files\R\R-2.15.0\library\rJava\jri</code></pre>
 <p>In Linux,</p>
-<pre class="shell"><code>//sudo R CMD javareconf
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># sudo R CMD javareconf</span>
 
-sudo apt-get install r-cran-rjava
+<span class="kw">sudo</span> apt-get install r-cran-rjava
 
-export JAVA_HOME=/usr/lib/jvm/java-6-sun
-export R_HOME=/usr/lib/R
-//export PATH=$PATH:/usr/lib/R/site-library/rJava/jri
+<span class="kw">export</span> <span class="ot">JAVA_HOME=</span>/usr/lib/jvm/java-6-sun
+<span class="kw">export</span> <span class="ot">R_HOME=</span>/usr/lib/R
+<span class="co"># export PATH=$PATH:/usr/lib/R/site-library/rJava/jri</span>
 
-cd /usr/lib/R/site-library/rJava/jri
-java -cp JRI.jar:examples rtest
+<span class="kw">cd</span> /usr/lib/R/site-library/rJava/jri
+<span class="kw">java</span> -cp JRI.jar:examples rtest
 
-//sudo cp /usr/lib/R/site-library/rJava/jri libjri.so  /usr/lib
-</code></pre>
+<span class="co"># sudo cp /usr/lib/R/site-library/rJava/jri libjri.so  /usr/lib</span></code></pre>
 <p>JRI sample:</p>
 <pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import org.rosuda.JRI.REXP;</span>
 <span class="kw">import org.rosuda.JRI.Rengine;</span>
-<span class="kw">public</span> <span class="kw">class</span> rtest 
-{
- <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) 
- {
+<span class="kw">public</span> <span class="kw">class</span> RTest {
+ <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) {
   Rengine engine = <span class="kw">new</span> <span class="fu">Rengine</span>(<span class="kw">new</span> String[]{<span class="st">&quot;--no-save&quot;</span>}, <span class="kw">false</span>, <span class="kw">null</span>);
   engine.<span class="fu">assign</span>(<span class="st">&quot;a&quot;</span>, <span class="kw">new</span> <span class="dt">int</span>[]{<span class="dv">81</span>});
   REXP result = engine.<span class="fu">eval</span>(<span class="st">&quot;sqrt(a)&quot;</span>);
@@ -468,14 +468,14 @@ java -cp JRI.jar:examples rtest
  }
 }</code></pre>
 <ul>
-<li>Renjin</li>
+<li><strong>Renjin</strong></li>
 </ul>
 <p>A new JVM-based R language interpreter. <a href="http://code.google.com/p/renjin/" class="uri">http://code.google.com/p/renjin/</a> <a href="http://stdioe.blogspot.ie/2011/09/embedding-r-in-java-applications-using.html" class="uri">http://stdioe.blogspot.ie/2011/09/embedding-r-in-java-applications-using.html</a></p>
 </div>
 <div id="call-java-from-r" class="section level2">
 <h2><span class="header-section-number">2.2</span> Call Java from R</h2>
 <ul>
-<li>rJava</li>
+<li><strong>rJava</strong></li>
 </ul>
 <p><a href="http://www.rforge.net/rJava/" class="uri">http://www.rforge.net/rJava/</a></p>
 </div>
