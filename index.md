@@ -3,7 +3,7 @@ output:
   html_document:
     theme: united
     includes:
-      after_body: wiki\footer\footer.html
+      after_body: wiki\hf\footer.html
 ---
 
 
