@@ -3,6 +3,7 @@
 # Tutorial #
 
 _Programming Pig_ by Alan F Gates
+
 http://ofps.oreilly.com/titles/9781449302641/index.html
 
 # Development #
@@ -33,11 +34,11 @@ The hadoop version bundled with Pig is different with the version of the hadoop 
 _Fix:_
 
 Set HADOOP\_HOME for pig execution enviroment. E.g.,
+
 ```
 export HADOOP_HOME=/home/ubuntu/hadoop-0.20.205.0
 java -cp pig-0.11.0-SNAPSHOT-withouthadoop.jar:$HADOOP_HOME/hadoop-core-0.20.205.0.jar:$HADOOP_HOME/lib/*:$HADOOP_HOME/conf:...
 ```
-
 
 ---
 
@@ -50,6 +51,7 @@ java.io.IOException: Deserialization error: could not instantiate 'org.apache.pi
 _Fix:_
 
 Use relative path for registering UDF scripts.
+
 ```
 Register 'test.py' using jython as myfuncs;
 ```
@@ -61,8 +63,9 @@ Register 'test.py' using jython as myfuncs;
 
 _Fix:_
 
+```
 TOBAG(TOTUPLE(...)) as bag{tuple(val:double)}
-
+```
 
 ---
 
@@ -74,4 +77,4 @@ ERROR 2998: Unhandled internal error. org/apache/pig/LoadFunc
 _Fix:_
 
 Add the pig.jar to the classpath
-copy the pig-
+copy the pig-*-amzn.jar file to `/home/hadoop/lib`
