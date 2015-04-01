@@ -5,6 +5,7 @@ html_document:
   number_sections: yes
   theme: united
   toc: yes
+  date: "`r format(Sys.time(), '%d %B, %Y')`"
   includes:
     before_body: includes\header.html
     after_body: includes\footer.html

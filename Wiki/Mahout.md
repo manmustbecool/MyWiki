@@ -1,6 +1,4 @@
-#Apache Mahout
-
-
+Apache Mahout
 
 # Development #
 
@@ -13,8 +11,7 @@
 
 ## Write a reader for Mahout output file ##
 
-```
-
+```java
 import org.apache.hadoop.io.Text;
 import org.apache.mahout.clustering.kmeans.Cluster;
 
@@ -37,12 +34,12 @@ import org.apache.mahout.clustering.kmeans.Cluster;
 
 In above case, each row of reading is (text, cluster). When we open the raw Hadoop output file with a text editor, we will see the _text_ and _cluster_ at the head of the file.
 
-```
+```bash
 SEQorg.apache.hadoop.io.Text+org.apache.mahout.clustering.kmeans.Cluster...
 ```
 
 An example of another case:
-```
+```java
 SEQorg.apache.hadoop.io.Text%org.apache.mahout.math.VectorWritable...
 ```
 
@@ -72,7 +69,7 @@ http://subclipse.tigris.org/update_1.8.x
 
 #### Problem: proxy server configuation ####
 
-```
+```bash
 RA layer request failed
 ```
 
@@ -91,20 +88,21 @@ Uncomment `http-proxy-host` and `http-proxy-port` under the `[global]` section.
 
 Making sure that the edited lines are without any space:
 
-```
+```bash
 http-proxy-host = www-proxy.xxxx.se
 http-proxy-port = 8080
 ```
 
 to
 
-```
+```bash
 http-proxy-host=www-proxy.xxxx.se
 http-proxy-port=8080
 ```
 
 Otherwise, it gives a error message:
-```
+
+```bash
 Malformed file
 svn: C:\Users\xxxxxx\AppData\Roaming\Subversion\servers:144: Option expected
 ```

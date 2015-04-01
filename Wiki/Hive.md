@@ -1,6 +1,8 @@
 ---
 
+
 ---
+
 # Quick installation #
 
 **Assuming that the Hadoop is installed**
