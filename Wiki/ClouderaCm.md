@@ -1,13 +1,9 @@
+
 ---
-output:
-  html_document:
-    fig_caption: yes
-    highlight: zenburn
-    keep_md: yes
-    number_sections: yes
-    theme: united
-    toc: yes
+
 ---
+
+
 
 ## Trouble shooting
 
@@ -18,20 +14,6 @@ _fix :_ It is possible because of the SSH is not installed.
 ```bash
 sudo apt-get install openssh-client openssh-server
 ```
-
----
-
-**problem : hdfs healthy, percentage under replicated blocks is too high**
-
-_fix :_ execute fsck commend the under replicated blocks
-
-```bash
-hdfs fsck /user/hive/ -blocks
-```
-
-HDFS will automatically fix the under replicated blocks in the background.
-
-If you really want to speed things up, you can run hadoop `dfs -setrep` on the affected files to increase the replication factor and then decrease it back to the default.
 
 ---
 

@@ -1,20 +1,11 @@
 ---
-output:
-  html_document:
-    fig_caption: yes
-    highlight: zenburn
-    keep_md: yes
-    number_sections: yes
-    theme: spacelab
-    toc: yes
-    includes:
-      after_body: footer\footer.html
+
 ---
 
 
-## Singleton using enum 
+# Singleton using enum 
 
-``` java
+```java
 public enum UserActivity {
     INSTANCE;
 
@@ -56,7 +47,7 @@ The value of this variable will never be cached thread-locally: all reads and wr
 
 only a single thread can execute a block of code at the same time
 
-``` java
+```java
 synchronized void dostuff(){
   ...
 }
@@ -64,7 +55,7 @@ synchronized void dostuff(){
 
 or
 
-``` java
+```java
 void dostuff(){
   ...
   synchronized(this){...}

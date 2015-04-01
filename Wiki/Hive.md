@@ -1,8 +1,5 @@
 ---
-output:
-  html_document:
-    highlight: zenburn
-    theme: united
+
 ---
 # Quick installation #
 

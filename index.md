@@ -18,8 +18,8 @@ output:
 ### Hadoop
 
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
- * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  * <a href="Wiki/Hive.html">Hive</a> 
+ * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
 ### Others
 
@@ -27,7 +27,6 @@ output:
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  
  
-
 
 
 

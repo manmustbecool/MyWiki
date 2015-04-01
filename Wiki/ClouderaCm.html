@@ -70,6 +70,9 @@ img {
 </style>
 <div class="container-fluid main-container">
 
+<div>
+<p>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></p>
+</div>
 
 
 <div id="TOC">
@@ -79,17 +82,13 @@ img {
 </ul>
 </div>
 
+<hr />
+<hr />
 <div id="trouble-shooting" class="section level2">
 <h2><span class="header-section-number">0.1</span> Trouble shooting</h2>
 <p><strong>problem : Installing Cloudera on a fresh Ubuntu and adding a host. error: Could not connect to host.</strong></p>
 <p><em>fix :</em> It is possible because of the SSH is not installed.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install openssh-client openssh-server</code></pre>
-<hr />
-<p><strong>problem : hdfs healthy, percentage under replicated blocks is too high</strong></p>
-<p><em>fix :</em> execute fsck commend the under replicated blocks</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">hdfs</span> fsck /user/hive/ -blocks</code></pre>
-<p>HDFS will automatically fix the under replicated blocks in the background.</p>
-<p>If you really want to speed things up, you can run hadoop <code>dfs -setrep</code> on the affected files to increase the replication factor and then decrease it back to the default.</p>
 <hr />
 <p><strong>problem : start HUE by runserver <code>Error: That port is already in use</code></strong></p>
 <p><em>fix :</em> <code>http://codeureka.blogspot.ie/2013/07/error-that-port-is-already-in-use.html</code></p>
@@ -126,6 +125,16 @@ img {
 <p>use impala query manager port:7180</p>
 </div>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1330094-8', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 </div>
 
