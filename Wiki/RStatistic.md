@@ -111,7 +111,6 @@ paste(x, sep="", collapse="")
 
 ```
 
-
 ## Common Factor operations ##
 ```R
 # Factor to Numeric vector
@@ -282,9 +281,24 @@ sort(sample(300, 30)) # sorted result
 # get replicable sample 
 set.seed(123) # sample results are same everytime for same seed
 sample(300, 30)
-
-
 ```
+
+## Data input/output
+
+
+``` r
+#---- scan lines from a file ----
+
+#  data in the example.dat file 
+#  10
+#  12
+#  13
+
+data <- scan(".../misc/example.dat", skip=1)
+
+data
+# [1] 60 43 67 50 
+``` 
 
 ## Plot  ##
 

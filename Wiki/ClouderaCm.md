@@ -1,9 +1,4 @@
 
----
-
----
-
-
 
 ## Trouble shooting
 
@@ -29,7 +24,7 @@ $ sudo netstat -lpn |grep :8000
 
 tcp        0      0 192.168.1.5:8000    0.0.0.0:*        LISTEN      10797/python   
 
-here 10797 is a process id running on port 8000.
+# here 10797 is a process id running on port 8000.
 ```
 
 2. Kill the process
