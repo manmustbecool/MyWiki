@@ -1,4 +1,6 @@
-# Introduction #
+
+
+> SOLR
 
 
 ## Top 10 performance tips apache solr ##
@@ -10,7 +12,7 @@ http://myjeeva.com/top-10-performance-tips-apache-solr.html
 http://wiki.apache.org/solr/UniqueKey
 
 in the schema.xml
-```
+```xml
 <fields>
     <field name="uuid" type="uuid" indexed="true" stored="true" required="true" />
 </fields>
@@ -25,7 +27,7 @@ in the schema.xml
 in the Solrconfig.xml
 
 updateRequestProcessorChain allows you to configure a processing chain that processes a document before indexing
-```
+```xml
 <requestHandler name="/dataimport"  class="org.apache.solr.handler.dataimport.DataImportHandler">  
     .........
     <lst name="defaults">
