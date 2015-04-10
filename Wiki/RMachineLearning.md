@@ -31,7 +31,7 @@ https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-log
 
 ## Support Vector Machine (SVM) ##
 
-  * package **e1071**
+  *  **e1071**
 
 tune
 http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:tune
