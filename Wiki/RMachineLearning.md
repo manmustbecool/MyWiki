@@ -238,3 +238,20 @@ lines(fitted(fit),col="blue")
 http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html
 
 
+## Multidimensional Scaling (MDS) ##
+
+```r
+#eurodist that gives the road distances (in km) between 21 cities in Europe. 
+euromat = as.matrix(eurodist) # convert eurodist to matrix
+
+# inspect first five elements
+euromat[1:5, 1:5]
+
+# MDS 'cmdscale'
+mds1 = cmdscale(eurodist, k = 2)
+
+# plot
+plot(mds1[,1], mds1[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
+     main = "cmdscale (stats)")
+text(mds1[,1], mds1[,2], labels(eurodist), cex = 0.9, xpd = TRUE)
+```

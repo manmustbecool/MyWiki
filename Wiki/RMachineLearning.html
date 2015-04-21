@@ -94,6 +94,7 @@ img {
 </ul></li>
 <li><a href="#recommender-system"><span class="toc-section-number">0.13</span> Recommender system</a></li>
 <li><a href="#feature-selection"><span class="toc-section-number">0.14</span> Feature selection</a></li>
+<li><a href="#multidimensional-scaling-mds"><span class="toc-section-number">0.15</span> Multidimensional Scaling (MDS)</a></li>
 </ul>
 </div>
 
@@ -307,6 +308,22 @@ t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04
 <li>caret</li>
 </ul>
 <p><a href="http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html" class="uri">http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html</a></p>
+</div>
+<div id="multidimensional-scaling-mds" class="section level2">
+<h2><span class="header-section-number">0.15</span> Multidimensional Scaling (MDS)</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#eurodist that gives the road distances (in km) between 21 cities in Europe. </span>
+euromat =<span class="st"> </span><span class="kw">as.matrix</span>(eurodist) <span class="co"># convert eurodist to matrix</span>
+
+<span class="co"># inspect first five elements</span>
+euromat[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">5</span>]
+
+<span class="co"># MDS 'cmdscale'</span>
+mds1 =<span class="st"> </span><span class="kw">cmdscale</span>(eurodist, <span class="dt">k =</span> <span class="dv">2</span>)
+
+<span class="co"># plot</span>
+<span class="kw">plot</span>(mds1[,<span class="dv">1</span>], mds1[,<span class="dv">2</span>], <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>,
+     <span class="dt">main =</span> <span class="st">&quot;cmdscale (stats)&quot;</span>)
+<span class="kw">text</span>(mds1[,<span class="dv">1</span>], mds1[,<span class="dv">2</span>], <span class="kw">labels</span>(eurodist), <span class="dt">cex =</span> <span class="fl">0.9</span>, <span class="dt">xpd =</span> <span class="ot">TRUE</span>)</code></pre>
 </div>
 
 .
