@@ -50,9 +50,14 @@ ar <- array(c(3,5), 5) # [3,5,3,5,3,5,3,5,3,5]
 mr <- matrix(ncol=50, nrow=50)
 
 # Initialize a dataframe
+options(stringsAsFactors = FALSE) # if want to avoid that R understands characters as factors
+df <- data.frame()
+
+# Initialize a df from a matrix 
 df <- data.frame(matrix(ncol=50, nrow=1))
 ...
 df <- df[-1,]
+
 
 # 
 prices <- c(1.1, 2.2, 3.3)

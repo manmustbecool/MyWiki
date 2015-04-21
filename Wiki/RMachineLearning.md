@@ -241,11 +241,12 @@ http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html
 ## Multidimensional Scaling (MDS) ##
 
 ```r
-#eurodist that gives the road distances (in km) between 21 cities in Europe. 
+#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. 
 euromat = as.matrix(eurodist) # convert eurodist to matrix
+euromat[1:5, 1:5] # inspect first five elements
 
-# inspect first five elements
-euromat[1:5, 1:5]
+as.dist(myMatrix) # convert to dist object from co matrix
+
 
 # MDS 'cmdscale'
 mds1 = cmdscale(eurodist, k = 2)

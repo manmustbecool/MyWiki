@@ -311,11 +311,12 @@ t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04
 </div>
 <div id="multidimensional-scaling-mds" class="section level2">
 <h2><span class="header-section-number">0.15</span> Multidimensional Scaling (MDS)</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#eurodist that gives the road distances (in km) between 21 cities in Europe. </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. </span>
 euromat =<span class="st"> </span><span class="kw">as.matrix</span>(eurodist) <span class="co"># convert eurodist to matrix</span>
+euromat[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">5</span>] <span class="co"># inspect first five elements</span>
 
-<span class="co"># inspect first five elements</span>
-euromat[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">5</span>]
+<span class="kw">as.dist</span>(myMatrix) <span class="co"># convert to dist object from co matrix</span>
+
 
 <span class="co"># MDS 'cmdscale'</span>
 mds1 =<span class="st"> </span><span class="kw">cmdscale</span>(eurodist, <span class="dt">k =</span> <span class="dv">2</span>)
