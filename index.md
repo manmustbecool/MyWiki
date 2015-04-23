@@ -29,6 +29,8 @@ output:
 
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
+ * <a href="Wiki/javaCollection.html"> java Collection</a>
+
  
  
 
