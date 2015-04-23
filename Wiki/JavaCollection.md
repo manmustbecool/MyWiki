@@ -1,8 +1,10 @@
-
+---
+title: "java Collection"
+---
 
 ## Collection ##
 
-![http://3.bp.blogspot.com/-ZUGEaGCAnM0/TnjKpNTq31I/AAAAAAAAAmA/cgl5u1D2jSQ/s1600/Picture1.jpg](http://3.bp.blogspot.com/-ZUGEaGCAnM0/TnjKpNTq31I/AAAAAAAAAmA/cgl5u1D2jSQ/s1600/Picture1.jpg)
+![images\Java-Collection-Framework.PNG](images\Java-Collection-Framework.PNG)
 
 ### List ###
 
