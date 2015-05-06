@@ -305,12 +305,14 @@ data
 # [1] 60 43 67 50 
 ``` 
 
+
 ## Plot  ##
 
 http://personality-project.org/r/r.plottingdates.html
 
 Producing Simple Graphs with R : 
 http://www.harding.edu/fmccown/r/
+
 
 ``` r
 # plot a line of a set of points without showing the points
@@ -324,6 +326,11 @@ bymedian <- with(InsectSprays, reorder(spray, -count, median))
 boxplot(count ~ bymedian, data = InsectSprays,
           xlab = "spray", ylab = "count", varwidth = TRUE,
           col = "lightgray")
+
+# multiple plots in one graph. e.g. 2 rows, 2 columns
+par(mfrow=c(2,2),
+     mar=c(3,1,3,1), oma=c(0,0,0,0)
+     )
 
 # plot with multiple Y scales
 par(oma=c(2,2,2,2)) # all sides have 2 lines of space margin
