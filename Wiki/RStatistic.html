@@ -220,6 +220,9 @@ m
 [<span class="dv">2</span>,]    <span class="dv">2</span>    <span class="dv">5</span>
 [<span class="dv">3</span>,]    <span class="dv">3</span>    <span class="dv">6</span>
 
+<span class="co"># Matrix Multiplication</span>
+x %*%<span class="st"> </span>y
+
 <span class="co"># Matrix Transpose</span>
 m &lt;-<span class="st"> </span><span class="kw">t</span>(m)</code></pre>
 </div>
@@ -372,12 +375,16 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 data &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;.../misc/example.dat&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)
 
 data
-<span class="co"># [1] 60 43 67 50 </span></code></pre>
+<span class="co"># [1] 60 43 67 50 </span>
+
+<span class="co"># read CSV</span>
+data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)
+</code></pre>
 </div>
 <div id="plot" class="section level2">
 <h2><span class="header-section-number">1.11</span> Plot</h2>
-<p><a href="http://personality-project.org/r/r.plottingdates.html" class="uri">http://personality-project.org/r/r.plottingdates.html</a></p>
 <p>Producing Simple Graphs with R : <a href="http://www.harding.edu/fmccown/r/" class="uri">http://www.harding.edu/fmccown/r/</a></p>
+<p><a href="http://personality-project.org/r/r.plottingdates.html" class="uri">http://personality-project.org/r/r.plottingdates.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a line of a set of points without showing the points</span>
 <span class="kw">points</span>(x, y,  <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">pch=</span><span class="dv">46</span>)
 

@@ -209,6 +209,23 @@ stockpricesTs
 # select a time range
 t1 <- stockpricesTs["2011-01-04T05:00/2011-01-05"]
 
+
+# read time stamp with format
+timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
+
+
+# auto arima
+require(forecast)
+fit <- auto.arima(ts)
+plot(forecast(fit,h=5))
+
+# the 5th value in 5 steps ahead
+forecast(fit,h=5)$mean[5]
+
+# plot model against the data
+plot(fit$x,col="black")
+lines(fitted(fit),col="red")
+
 ```
 
 ### Moving Averages 
@@ -221,9 +238,15 @@ http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
 ### Arima 
 
 ```r
+
+
+
 fit <- Arima(WWWusage,order=c(3,1,0))
 plot(fit$x,col="red")
 lines(fitted(fit),col="blue")
+
+
+
 ```
 
 ## Recommender system ##

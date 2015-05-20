@@ -59,10 +59,11 @@ df <- data.frame(matrix(ncol=50, nrow=1))
 df <- df[-1,]
 
 
-# 
+#  
 prices <- c(1.1, 2.2, 3.3)
 timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockpricesDf <- data.frame(prices, timestamps)
+
 
 ```
 
@@ -136,6 +137,9 @@ m
 [1,]    1    4
 [2,]    2    5
 [3,]    3    6
+
+# Matrix Multiplication
+x %*% y
 
 # Matrix Transpose
 m <- t(m)
@@ -303,15 +307,23 @@ data <- scan(".../misc/example.dat", skip=1)
 
 data
 # [1] 60 43 67 50 
+
+# read CSV
+data <- read.table(file, header = FALSE, sep = "", quote = "\"'")
+
+
 ``` 
+
+
+
 
 
 ## Plot  ##
 
-http://personality-project.org/r/r.plottingdates.html
-
 Producing Simple Graphs with R : 
 http://www.harding.edu/fmccown/r/
+
+http://personality-project.org/r/r.plottingdates.html
 
 
 ``` r

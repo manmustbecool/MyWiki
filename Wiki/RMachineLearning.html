@@ -281,7 +281,24 @@ stockpricesTs &lt;-<span class="st"> </span><span class="kw">xts</span>(stockpri
 stockpricesTs
 
 <span class="co"># select a time range</span>
-t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]</code></pre>
+t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]
+
+
+<span class="co"># read time stamp with format</span>
+timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(timestamps, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)
+
+
+<span class="co"># auto arima</span>
+<span class="kw">require</span>(forecast)
+fit &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(ts)
+<span class="kw">plot</span>(<span class="kw">forecast</span>(fit,<span class="dt">h=</span><span class="dv">5</span>))
+
+<span class="co"># the 5th value in 5 steps ahead</span>
+<span class="kw">forecast</span>(fit,<span class="dt">h=</span><span class="dv">5</span>)$mean[<span class="dv">5</span>]
+
+<span class="co"># plot model against the data</span>
+<span class="kw">plot</span>(fit$x,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
+<span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
 <div id="moving-averages" class="section level3">
 <h3><span class="header-section-number">0.12.1</span> Moving Averages</h3>
 <ul>
@@ -291,9 +308,14 @@ t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04
 </div>
 <div id="arima" class="section level3">
 <h3><span class="header-section-number">0.12.2</span> Arima</h3>
-<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
+<pre class="sourceCode r"><code class="sourceCode r">
+
+
+fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
 <span class="kw">plot</span>(fit$x,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
-<span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</code></pre>
+<span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
+
+</code></pre>
 </div>
 </div>
 <div id="recommender-system" class="section level2">
