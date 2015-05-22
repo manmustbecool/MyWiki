@@ -2,6 +2,8 @@
 
 > home page: http://manmustbecool.github.io/MyWiki/
 
+using above link for home page and html version
+
 
 ### R
  
