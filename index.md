@@ -43,7 +43,7 @@ div.non * {
 
 ### Recent Publications
 
-[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](papers//Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
+[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
 
 ...
 
