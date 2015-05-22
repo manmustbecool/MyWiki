@@ -93,7 +93,8 @@ img {
 <li><a href="#data-inputoutput"><span class="toc-section-number">1.10</span> Data input/output</a></li>
 <li><a href="#plot"><span class="toc-section-number">1.11</span> Plot</a></li>
 <li><a href="#parallel-r-in-windows"><span class="toc-section-number">1.12</span> Parallel R in Windows</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">1.13</span> SQL query</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">1.13</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">1.14</span> SQL query</a></li>
 </ul></li>
 <li><a href="#others"><span class="toc-section-number">2</span> Others</a><ul>
 <li><a href="#call-r-from-java"><span class="toc-section-number">2.1</span> Call R from Java</a></li>
@@ -150,10 +151,11 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 df &lt;-<span class="st"> </span>df[-<span class="dv">1</span>,]
 
 
-<span class="co"># </span>
+<span class="co">#  </span>
 prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
 timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
-stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)</code></pre>
+stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
+</code></pre>
 </div>
 <div id="common-vector-operations" class="section level2">
 <h2><span class="header-section-number">1.4</span> Common Vector operations</h2>
@@ -433,8 +435,22 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">system.time</span>(for(j in <span class="dv">1</span>:times ) x &lt;-<span class="st"> </span><span class="kw">check</span>(j))
 <span class="kw">stopCluster</span>(cl)</code></pre>
 </div>
+<div id="trycatch-exception-handling" class="section level2">
+<h2><span class="header-section-number">1.13</span> tryCatch exception handling</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>(
+  {
+      expr
+  }, <span class="dt">warning =</span> function(w) {
+      warning-handler-code
+  }, <span class="dt">error =</span> function(e) {
+      error-handler-code
+  }, <span class="dt">finally =</span> {
+      cleanup-code
+  }
+)</code></pre>
+</div>
 <div id="sql-query" class="section level2">
-<h2><span class="header-section-number">1.13</span> SQL query</h2>
+<h2><span class="header-section-number">1.14</span> SQL query</h2>
 <ul>
 <li><p>JDBC</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 

@@ -384,6 +384,21 @@ system.time(for(j in 1:times ) x <- check(j))
 stopCluster(cl)
 ```
 
+## tryCatch exception handling
+
+``` r
+tryCatch(
+  {
+      expr
+  }, warning = function(w) {
+      warning-handler-code
+  }, error = function(e) {
+      error-handler-code
+  }, finally = {
+      cleanup-code
+  }
+)
+```
 
 ## SQL query ##
 

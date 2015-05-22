@@ -227,29 +227,41 @@ http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
   * forecast
 
 ```r
+
 fit <- Arima(WWWusage,order=c(3,1,0))
 plot(fit$x,col="red")
 lines(fitted(fit),col="blue")
-
 
 # auto arima
 require(forecast)
 fit <- auto.arima(ts)
 plot(forecast(fit,h=5))
 
-# the 5th value in 5 steps ahead
+
+# extra the p, d, q
+p=fit$arma[1]
+d=tail(fit$arma, 1)
+q=fit$arma[2]
+
+
+# the 5th value in 5 stps ahead
 forecast(fit,h=5)$mean[5]
 
 # plot the model against the data
 plot(fit$x,col="black")
 lines(fitted(fit),col="red")
 
+
+
+
+
+
+
 ```
 
 ## Recommender system ##
 
   * recommenderlab
-
 
 ## Feature selection ##
 
