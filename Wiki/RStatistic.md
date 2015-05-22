@@ -29,6 +29,9 @@ substr(str, 1, 2) # == 'st'
 strsplit('0-0-1', '-') # Evaluates to list('0', '0', '1')
 paste('hello', 'world', sep = ' ') # == hello world
 
+# gsub for replace a part of string
+data$timestamp <- gsub("/", "-", data$timestamp)
+
 ```
 
 ## Data initialization ##
@@ -71,6 +74,11 @@ stockpricesDf <- data.frame(prices, timestamps)
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
 
 ```r
+
+# select top and buttom
+head(v, 5) # top 5
+tail(v, 2) # buttom 2
+
 # select a subset
 v <- c(1,2,3,4)
 y <- v[v<3]
