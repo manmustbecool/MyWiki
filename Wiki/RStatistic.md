@@ -340,7 +340,7 @@ http://www.harding.edu/fmccown/r/
 http://personality-project.org/r/r.plottingdates.html
 
 
-``` r
+```r
 # plot a line of a set of points without showing the points
 points(x, y,  type="o", pch=46)
 
@@ -379,7 +379,7 @@ http://stackoverflow.com/questions/15887212/heatmap-or-plot-for-a-correlation-ma
 
 ## Parallel R in Windows ##
 http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/
-``` r
+```r
 require(doSNOW)
 cl<-makeCluster(2) # I have two cores
 registerDoSNOW(cl)
@@ -400,7 +400,7 @@ stopCluster(cl)
 
 ## tryCatch exception handling
 
-``` r
+```r
 tryCatch(
   {
       expr

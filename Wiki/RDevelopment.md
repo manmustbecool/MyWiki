@@ -1,5 +1,10 @@
-# R Development
 
+---
+title: "R Development"
+---
+
+
+# R Development
 
 
 ## Call R from Java ##
@@ -23,7 +28,8 @@ Install rJava in R `install.packages("rJava")`
 JRI can be found be the R library directory `C:\Program Files\R\R-2.15.0\library\rJava\jri `
 
 Run example in the Windows CMD. (i386 for 32bit)
-``` bash
+
+```bash
 set R_HOME= C:\Program Files\R\R-2.15.0
 # The environment variable R_HOME has to be set globally for the system, not only for the current user (restart of the system!) 
 set path= %PATH%;C:\Program Files\R\R-2.15.0\bin\i386;C:\Program Files\R\R-2.15.0\library\rJava\jri
@@ -33,12 +39,12 @@ java -cp JRI.jar;examples rtest
 
 Development in Eclipse Java project
 
-``` bash
+```bash
  build path > add external class folder : C:\Program Files\R\R-2.15.0\library\rJava\jri
 ```
 
 In Linux,
-``` bash
+```bash
 # sudo R CMD javareconf
 
 sudo apt-get install r-cran-rjava
@@ -55,7 +61,7 @@ java -cp JRI.jar:examples rtest
 
 JRI sample:
 
-``` java
+```java
 import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
 public class RTest {
