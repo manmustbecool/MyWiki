@@ -14,6 +14,7 @@ output:
  
  * <a href="Wiki/RStatistic.html">R basic</a>
  * <a href="Wiki/RMachineLearning.html">R Machine Learning</a>
+ * <a href="Wiki/RDevelopment.html">R Development</a>
  
 ### Big Data
 
