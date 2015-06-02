@@ -1,5 +1,5 @@
 ---
-
+title: "Hadoop"
 ---
 
 # Setup quick guide #

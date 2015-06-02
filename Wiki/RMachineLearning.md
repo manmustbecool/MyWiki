@@ -1,4 +1,5 @@
 ---
+title: "R Machine Learning"
 ---
 
 ## Gradient descents 
@@ -371,4 +372,19 @@ mds1 = cmdscale(eurodist, k = 2)
 plot(mds1[,1], mds1[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
      main = "cmdscale (stats)")
 text(mds1[,1], mds1[,2], labels(eurodist), cex = 0.9, xpd = TRUE)
+
+#------------------ 
+
+data(iris)
+
+# calculate the distance matrix for first 4 columns
+irisDist <- dist(iris[,1:4])
+
+irisMds = cmdscale(irisDist, k = 2)
+
+# plot with color based on the 5th column 
+plot(irisMds)
+text(irisMds[,1], (irisMds[,2]+max(irisMds[,2])*0.05), labels=1:nrow(irisMds), cex = 0.6, xpd = TRUE)
+points(irisMds, col=c("red", "green", "blue")[as.numeric(iris$Species)],)
+
 ```

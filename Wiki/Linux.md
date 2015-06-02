@@ -1,6 +1,7 @@
 ---
-
+title: "Linux Basic"
 ---
+
 
 # cheat sheet #
 
@@ -41,6 +42,15 @@ ntpdate -u pool.ntp.org
 
 # install Linux / UNIX *.tar.gz tarball files
 http://www.cyberciti.biz/faq/install-tarballs/
+
+
+# ---- List Current Logged In Users ----
+
+# Shows information about the users currently on the machine, and their processes.
+w
+
+# Shows information about users who are currently logged in.
+who
 
 # ---- File Search ------
 
@@ -111,7 +121,6 @@ sudo ln -s -b /usr/lib/jvm/jdk1.6.0_43/jre/bin/java /usr/bin/java
 ```bash
 http://linuxdrops.com/install-jre-or-jdk-7-on-centos-rhel-fedora-ubuntu-debian/
 ```
-
 
 
 ## Install Leiningen ##
