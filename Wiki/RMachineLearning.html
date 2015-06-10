@@ -397,7 +397,7 @@ fit &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(ts)
 
 <span class="co"># extra the p, d, q</span>
 p=fit$arma[<span class="dv">1</span>]
-d=<span class="kw">tail</span>(fit$arma, <span class="dv">1</span>)
+d=p=fit$arma[<span class="dv">6</span>] <span class="co"># ?</span>
 q=fit$arma[<span class="dv">2</span>]
 
 

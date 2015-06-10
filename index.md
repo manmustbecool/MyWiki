@@ -7,7 +7,7 @@ output:
 ---
 
 
-> Project: <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki">https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki</a>
+> Home: http://manmustbecool.github.io/MyWiki/
 
 
 ### R
@@ -34,6 +34,7 @@ output:
 
 
 
+
 <style>
 div.non * {
  color: white !important;
@@ -51,7 +52,7 @@ div.non * {
 </div>
 
  
+Project: <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki">https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki</a>
 
 
 
-http://manmustbecool.github.io/MyWiki/

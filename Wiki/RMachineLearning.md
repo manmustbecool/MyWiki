@@ -327,7 +327,7 @@ plot(forecast(fit,h=5))
 
 # extra the p, d, q
 p=fit$arma[1]
-d=tail(fit$arma, 1)
+d=p=fit$arma[6] # ?
 q=fit$arma[2]
 
 
