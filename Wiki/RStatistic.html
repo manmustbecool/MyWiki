@@ -88,12 +88,15 @@ img {
 <li><a href="#common-matrix-operations"><span class="toc-section-number">1.5</span> Common Matrix operations</a></li>
 <li><a href="#common-data-frame-operations"><span class="toc-section-number">1.6</span> Common Data Frame operations</a></li>
 <li><a href="#common-list-operations"><span class="toc-section-number">1.7</span> Common List operations</a></li>
-<li><a href="#common-functions"><span class="toc-section-number">1.8</span> Common functions</a></li>
-<li><a href="#data-inputoutput"><span class="toc-section-number">1.9</span> Data input/output</a></li>
-<li><a href="#plot"><span class="toc-section-number">1.10</span> Plot</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">1.11</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">1.12</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">1.13</span> SQL query</a></li>
+<li><a href="#other-common-data-structures"><span class="toc-section-number">1.8</span> other common data structures</a><ul>
+<li><a href="#environment"><span class="toc-section-number">1.8.1</span> environment</a></li>
+</ul></li>
+<li><a href="#common-functions"><span class="toc-section-number">1.9</span> Common functions</a></li>
+<li><a href="#data-inputoutput"><span class="toc-section-number">1.10</span> Data input/output</a></li>
+<li><a href="#plot"><span class="toc-section-number">1.11</span> Plot</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">1.12</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">1.13</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">1.14</span> SQL query</a></li>
 </ul></li>
 </ul>
 </div>
@@ -131,9 +134,12 @@ data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span 
 </div>
 <div id="data-initialization" class="section level2">
 <h2><span class="header-section-number">1.2</span> Data initialization</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize a list</span>
-my_ls &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">'list'</span>, <span class="dv">50</span>) <span class="co"># vector(mode=&quot;list&quot;, length=50)</span>
-my_ls[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>) <span class="co"># assign a value</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize an empty vector</span>
+v &lt;-<span class="st"> </span><span class="kw">vector</span>()
+
+<span class="co"># initialize a list</span>
+ls &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">'list'</span>, <span class="dv">50</span>) <span class="co"># vector(mode=&quot;list&quot;, length=50)</span>
+ls[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>) <span class="co"># assign a value</span>
 
 <span class="co"># create an arithmetic sequence (numeric)</span>
 se =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># 8,7,6,5,4,3</span>
@@ -360,8 +366,24 @@ v &lt;-<span class="st"> </span>v[v&gt;<span class="dv">5</span>]
 l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, l2) <span class="co"># each elements of l2 will be an element of l1</span>
 l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class="kw">list</span>(l2)) <span class="co"># the l2 will be one element of l1</span></code></pre>
 </div>
+<div id="other-common-data-structures" class="section level2">
+<h2><span class="header-section-number">1.8</span> other common data structures</h2>
+<div id="environment" class="section level3">
+<h3><span class="header-section-number">1.8.1</span> environment</h3>
+<p>an environment is a bag of object references. <a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an enviroment</span>
+e &lt;-<span class="st"> </span><span class="kw">new.env</span>(<span class="dt">hash=</span><span class="ot">TRUE</span>)
+
+<span class="co"># create an object in the enviroment</span>
+e$a &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span>
+e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</span>
+
+<span class="co"># check if an object in the enviroment</span>
+<span class="kw">exists</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">envir=</span>e)</code></pre>
+</div>
+</div>
 <div id="common-functions" class="section level2">
-<h2><span class="header-section-number">1.8</span> Common functions</h2>
+<h2><span class="header-section-number">1.9</span> Common functions</h2>
 <pre class="sourceCode r"><code class="sourceCode r">--------<span class="st"> </span>apply --------
 http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</span>/<span class="dv">08</span>/<span class="dv">20</span>/a-brief-introduction-to-apply-in-r/
 
@@ -376,7 +398,7 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 <span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)</code></pre>
 </div>
 <div id="data-inputoutput" class="section level2">
-<h2><span class="header-section-number">1.9</span> Data input/output</h2>
+<h2><span class="header-section-number">1.10</span> Data input/output</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
 
 <span class="co">#  data in the example.dat file </span>
@@ -394,7 +416,7 @@ data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <spa
 </code></pre>
 </div>
 <div id="plot" class="section level2">
-<h2><span class="header-section-number">1.10</span> Plot</h2>
+<h2><span class="header-section-number">1.11</span> Plot</h2>
 <p>Producing Simple Graphs with R : <a href="http://www.harding.edu/fmccown/r/" class="uri">http://www.harding.edu/fmccown/r/</a></p>
 <p><a href="http://personality-project.org/r/r.plottingdates.html" class="uri">http://personality-project.org/r/r.plottingdates.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a line of a set of points without showing the points</span>
@@ -426,7 +448,7 @@ bymedian &lt;-<span class="st"> </span><span class="kw">with</span>(InsectSprays
 <p><em>heatmap-or-plot-for-a-correlation-matrix</em> <a href="http://stackoverflow.com/questions/15887212/heatmap-or-plot-for-a-correlation-matrix" class="uri">http://stackoverflow.com/questions/15887212/heatmap-or-plot-for-a-correlation-matrix</a></p>
 </div>
 <div id="parallel-r-in-windows" class="section level2">
-<h2><span class="header-section-number">1.11</span> Parallel R in Windows</h2>
+<h2><span class="header-section-number">1.12</span> Parallel R in Windows</h2>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -446,7 +468,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">stopCluster</span>(cl)</code></pre>
 </div>
 <div id="trycatch-exception-handling" class="section level2">
-<h2><span class="header-section-number">1.12</span> tryCatch exception handling</h2>
+<h2><span class="header-section-number">1.13</span> tryCatch exception handling</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>(
   {
       expr
@@ -460,7 +482,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 )</code></pre>
 </div>
 <div id="sql-query" class="section level2">
-<h2><span class="header-section-number">1.13</span> SQL query</h2>
+<h2><span class="header-section-number">1.14</span> SQL query</h2>
 <ul>
 <li><p>JDBC</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 

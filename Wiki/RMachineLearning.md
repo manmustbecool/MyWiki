@@ -278,6 +278,13 @@ http://www.statmethods.net/advstats/timeseries.html
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
 ```r
+t1 <- ts(c(2,3,2,3,4,5))
+
+frequency(t1) # get frequency
+frequency(t1) <- 2 # assign frequency
+
+# ------------- xts or zoo for data with time stamp
+
 prices <- c(1.1, 2.2, 3.3)
 timestamps <-  c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockprices <- data.frame(prices, timestamps)
@@ -290,12 +297,11 @@ stockprices
 # 3.3         2011-01-05 13:00
 
 require(xts)
-stockpricesTs <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
-stockpricesTs
+stockpricesXts <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
+stockpricesXts
 
 # select a time range
-t1 <- stockpricesTs["2011-01-04T05:00/2011-01-05"]
-
+t1 <- stockpricesXts["2011-01-04T05:00/2011-01-05"]
 
 # read time stamp with format
 timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
@@ -314,7 +320,6 @@ http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
   * forecast
 
 ```r
-
 fit <- Arima(WWWusage,order=c(3,1,0))
 plot(fit$x,col="red")
 lines(fitted(fit),col="blue")

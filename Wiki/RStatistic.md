@@ -43,9 +43,12 @@ data$timestamp <- gsub("/", "-", data$timestamp)
 ## Data initialization ##
 
 ```r
+# initialize an empty vector
+v <- vector()
+
 # initialize a list
-my_ls <- vector('list', 50) # vector(mode="list", length=50)
-my_ls[[3]] <- c(1,2,3) # assign a value
+ls <- vector('list', 50) # vector(mode="list", length=50)
+ls[[3]] <- c(1,2,3) # assign a value
 
 # create an arithmetic sequence (numeric)
 se = seq(8, 3) # 8,7,6,5,4,3
@@ -277,7 +280,7 @@ df <- df[,colSums(is.na(df))<nrow(df)]
 
 A List is an ordered collection of objects.
 
-``` r
+```r
 # convert a list to a data frame
 my_df <- as.data.frame(do.call(rbind, my_ls))
 
@@ -289,9 +292,28 @@ l1 <- append(l1, l2) # each elements of l2 will be an element of l1
 l1 <- append(l1, list(l2)) # the l2 will be one element of l1
 ```
 
+## other common data structures
+
+### environment
+
+an environment is a bag of object references.
+http://adv-r.had.co.nz/Environments.html
+
+```r
+# create an enviroment
+e <- new.env(hash=TRUE)
+
+# create an object in the enviroment
+e$a <- 1:3
+e$a <- 2:4
+
+# check if an object in the enviroment
+exists("a", envir=e)
+```
+
 
 ## Common functions ##
-``` r
+```r
 -------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 
@@ -309,7 +331,7 @@ sample(300, 30)
 ## Data input/output
 
 
-``` r
+```r
 #---- scan lines from a file ----
 
 #  data in the example.dat file 

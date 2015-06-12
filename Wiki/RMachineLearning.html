@@ -351,7 +351,14 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <h2><span class="header-section-number">0.11</span> Time Series</h2>
 <p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
 <p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
-<pre class="sourceCode r"><code class="sourceCode r">prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
+<pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>))
+
+<span class="kw">frequency</span>(t1) <span class="co"># get frequency</span>
+<span class="kw">frequency</span>(t1) &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># assign frequency</span>
+
+<span class="co"># ------------- xts or zoo for data with time stamp</span>
+
+prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
 timestamps &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
 stockprices &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
 
@@ -363,12 +370,11 @@ stockprices
 <span class="co"># 3.3         2011-01-05 13:00</span>
 
 <span class="kw">require</span>(xts)
-stockpricesTs &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">order.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
-stockpricesTs
+stockpricesXts &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">order.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
+stockpricesXts
 
 <span class="co"># select a time range</span>
-t1 &lt;-<span class="st"> </span>stockpricesTs[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]
-
+t1 &lt;-<span class="st"> </span>stockpricesXts[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]
 
 <span class="co"># read time stamp with format</span>
 timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(timestamps, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)</code></pre>
@@ -384,8 +390,7 @@ timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(times
 <ul>
 <li>forecast</li>
 </ul>
-<pre class="sourceCode r"><code class="sourceCode r">
-fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
+<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage,<span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
 <span class="kw">plot</span>(fit$x,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
 
