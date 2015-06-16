@@ -171,8 +171,7 @@ stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(p
 <div id="common-vector-operations" class="section level2">
 <h2><span class="header-section-number">1.3</span> Common Vector operations</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
-<pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># select top and buttom</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select top and buttom</span>
 <span class="kw">head</span>(v, <span class="dv">5</span>) <span class="co"># top 5</span>
 <span class="kw">tail</span>(v, <span class="dv">2</span>) <span class="co"># buttom 2</span>
 
@@ -200,12 +199,15 @@ v &lt;-<span class="st"> </span>v[!v %in%<span class="st"> </span><span class="k
 v[<span class="kw">duplicated</span>(v)] <span class="co"># or remove all duplicated, v[!duplicated(v)]</span>
 
 <span class="co"># find all unique entries</span>
-<span class="kw">unique</span>(x)
+<span class="kw">unique</span>(v)
+
+<span class="co"># find the index of the max/min value</span>
+<span class="kw">which.max</span>(v)
 
 <span class="co"># calculate frequency of occurrence </span>
-a =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">7</span>)
-<span class="kw">table</span>(a) <span class="co"># frequency table</span>
-<span class="kw">max</span>(<span class="kw">table</span>(a)) <span class="co"># highest frequency (not the actual value )</span>
+v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">7</span>)
+<span class="kw">table</span>(v) <span class="co"># frequency table</span>
+<span class="kw">max</span>(<span class="kw">table</span>(v)) <span class="co"># highest frequency (not the actual value )</span>
 
 <span class="co"># Set operations</span>
 <span class="kw">union</span>(x, y)

@@ -115,6 +115,97 @@ findAssocs(myDtm, 'r', 0.30)
 
 ## Decision Tree
 
+### Random forest tree
+
+ * randomForest
+
+```r
+library(randomForest)
+
+## Classification:
+##data(iris)
+
+iris[sample(nrow(iris), 5), ]
+#         Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+# 49           5.3         3.7          1.5         0.2     setosa
+# 133          6.4         2.8          5.6         2.2  virginica
+# 1            5.1         3.5          1.4         0.2     setosa
+# 99           5.1         2.5          3.0         1.1 versicolor
+# 69           6.2         2.2          4.5         1.5 versicolor
+
+
+#----------------------------------------------------------
+
+set.seed(1)
+iris.rf <- randomForest(Species ~ ., data=iris, proximity=TRUE, keep.forest=TRUE)
+
+# ntree: Number of trees to grow. 
+# importance: Should importance of predictors be assessed?
+# sampsize : for example, sampsize=c(20, 30, 20), stratified sampling: draw 20, 30, and 20 of the species to grow each tree.
+
+
+## --------- Plot of feature important 
+
+imp <- importance(iris.rf) # imp is a matrix
+plot(imp)
+lines(imp)
+text(imp, labels=rownames(imp), cex=1)
+
+
+## --------- more detailed variable importance information
+
+iris.rf <- randomForest(Species ~ ., data=iris, importance=TRUE, proximity=TRUE)
+print(iris.rf)
+
+# Look at variable importance:
+round(importance(iris.rf), 2)
+
+
+## --------- Multi-dimensional Scaling Plot of Proximity matrix from randomForest  -------------
+
+## The unsupervised clustering case:
+
+# MDSplot(rf, fac, ...)
+# rf= randomForest object. fac=a factor that was used as response to train rf.
+x<-MDSplot(iris.rf, iris$Species)
+
+#add legend
+legend("topleft", legend=levels(iris.rf$predicted), 
+       fill=brewer.pal(length(levels(iris.rf$predicted)), "Set1"))
+
+
+str(x)
+
+# need to identify points?
+# text(x$points, labels=attr(x$points,"dimnames")[[1]], cex=0.5)
+
+
+##--------------------   ------------
+
+## Do MDS on 1 - proximity:
+iris.mds <- cmdscale(1 - iris.rf$proximity, eig=TRUE)
+
+
+plot(iris.mds$points[,1], iris.mds$points[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
+     main = "cmdscale (stats)")
+
+
+
+op <- par(pty="s")
+x <- cbind(iris[,1:4], iris.mds$points)
+pairs(x, cex=0.6, gap=0,
+      col=c("red", "green", "blue")[as.numeric(iris$Species)],
+      main="Iris Data: Predictors and MDS of Proximity Based on RandomForest")
+par(op)
+
+
+#  "GOF" component of the result ("goodness of fit")
+print(iris.mds$GOF)
+
+```
+
+###Recursive Partitioning and Regression Trees
+
  * rpart
  
 http://www.statmethods.net/advstats/cart.html
@@ -153,99 +244,6 @@ plot(pfit, uniform=TRUE,
 text(pfit, use.n=TRUE, all=TRUE, cex=.8)
 post(pfit,  file = "",
      title = "Pruned Classification Tree for Kyphosis")
-```
-
-## Random forest tree
-
-
- * randomForest
-
-
-```r
-library(randomForest)
-
-## Classification:
-##data(iris)
-
-iris[sample(nrow(iris), 5), ]
-#         Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-# 49           5.3         3.7          1.5         0.2     setosa
-# 133          6.4         2.8          5.6         2.2  virginica
-# 1            5.1         3.5          1.4         0.2     setosa
-# 99           5.1         2.5          3.0         1.1 versicolor
-# 69           6.2         2.2          4.5         1.5 versicolor
-
-
-#----------------------------------------------------------
-
-set.seed(1)
-iris.rf <- randomForest(Species ~ ., data=iris, proximity=TRUE, keep.forest=TRUE)
-
-# ntree: Number of trees to grow. 
-# importance: Should importance of predictors be assessed?
-# sampsize : for example, sampsize=c(20, 30, 20), stratified sampling: draw 20, 30, and 20 of the species to grow each tree.
-
-
-## --------- Plot of feature important 
-
-imp <- importance(iris.rf) # imp is a matrix
-plot(imp)
-lines(imp)
-text(imp, labels=rownames(imp), cex=1)
-
-
-
-## --------- more detailed variable importance information
-
-iris.rf <- randomForest(Species ~ ., data=iris, importance=TRUE, proximity=TRUE)
-print(iris.rf)
-
-# Look at variable importance:
-round(importance(iris.rf), 2)
-
-
-## --------- Multi-dimensional Scaling Plot of Proximity matrix from randomForest  -------------
-
-## The unsupervised clustering case:
-
-# MDSplot(rf, fac, ...)
-# rf= randomForest object. fac=a factor that was used as response to train rf.
-x<-MDSplot(iris.rf, iris$Species)
-
-#add legend
-legend("topleft", legend=levels(iris.rf$predicted), 
-       fill=brewer.pal(length(levels(iris.rf$predicted)), "Set1"))
-
-
-str(x)
-
-# need to identify points?
-# text(x$points, labels=attr(x$points,"dimnames")[[1]], cex=0.5)
-
-
-##--------------------   ------------
-
-
-## Do MDS on 1 - proximity:
-iris.mds <- cmdscale(1 - iris.rf$proximity, eig=TRUE)
-
-
-plot(iris.mds$points[,1], iris.mds$points[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
-     main = "cmdscale (stats)")
-
-
-
-op <- par(pty="s")
-x <- cbind(iris[,1:4], iris.mds$points)
-pairs(x, cex=0.6, gap=0,
-      col=c("red", "green", "blue")[as.numeric(iris$Species)],
-      main="Iris Data: Predictors and MDS of Proximity Based on RandomForest")
-par(op)
-
-
-#  "GOF" component of the result ("goodness of fit")
-print(iris.mds$GOF)
-
 ```
 
 ## Association rule learning ##

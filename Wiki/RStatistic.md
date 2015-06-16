@@ -83,7 +83,6 @@ stockpricesDf <- data.frame(prices, timestamps)
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
 
 ```r
-
 # select top and buttom
 head(v, 5) # top 5
 tail(v, 2) # buttom 2
@@ -112,12 +111,15 @@ v <- v[!v %in% c("c", "d")]
 v[duplicated(v)] # or remove all duplicated, v[!duplicated(v)]
 
 # find all unique entries
-unique(x)
+unique(v)
+
+# find the index of the max/min value
+which.max(v)
 
 # calculate frequency of occurrence 
-a = c(1,1,1,1,1,2,3,4,5,5,5,5,,6,7,7,7,7)
-table(a) # frequency table
-max(table(a)) # highest frequency (not the actual value )
+v = c(1,1,1,1,1,2,3,4,5,5,5,5,6,7,7,7,7)
+table(v) # frequency table
+max(table(v)) # highest frequency (not the actual value )
 
 # Set operations
 union(x, y)
@@ -145,7 +147,7 @@ v <- as.numeric(as.character(f))
 ## Common Matrix operations ##
 A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.
 
-```R
+```r
 # Convert a vector to a matrix
 v <- seq(1, 6)
 m <- array(v, c(3,2)) # or m <- matrix(v, nrow=3, ncol=2)

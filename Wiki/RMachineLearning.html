@@ -87,18 +87,20 @@ img {
 <li><a href="#logistic-regression"><span class="toc-section-number">0.5</span> Logistic Regression</a></li>
 <li><a href="#support-vector-machine-svm"><span class="toc-section-number">0.6</span> Support Vector Machine (SVM)</a></li>
 <li><a href="#text-mining"><span class="toc-section-number">0.7</span> Text mining</a></li>
-<li><a href="#decision-tree"><span class="toc-section-number">0.8</span> Decision Tree</a></li>
-<li><a href="#random-forest-tree"><span class="toc-section-number">0.9</span> Random forest tree</a></li>
-<li><a href="#association-rule-learning"><span class="toc-section-number">0.10</span> Association rule learning</a></li>
-<li><a href="#time-series"><span class="toc-section-number">0.11</span> Time Series</a><ul>
-<li><a href="#moving-averages"><span class="toc-section-number">0.11.1</span> Moving Averages</a></li>
-<li><a href="#arima"><span class="toc-section-number">0.11.2</span> Arima</a></li>
+<li><a href="#decision-tree"><span class="toc-section-number">0.8</span> Decision Tree</a><ul>
+<li><a href="#random-forest-tree"><span class="toc-section-number">0.8.1</span> Random forest tree</a></li>
+<li><a href="#recursive-partitioning-and-regression-trees"><span class="toc-section-number">0.8.2</span> Recursive Partitioning and Regression Trees</a></li>
 </ul></li>
-<li><a href="#recommender-system"><span class="toc-section-number">0.12</span> Recommender system</a></li>
-<li><a href="#feature-selection"><span class="toc-section-number">0.13</span> Feature selection</a></li>
-<li><a href="#dimensionality-reduction"><span class="toc-section-number">0.14</span> Dimensionality Reduction</a><ul>
-<li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.14.1</span> Singular Value Decomposition (SVD)</a></li>
-<li><a href="#multidimensional-scaling-mds"><span class="toc-section-number">0.14.2</span> Multidimensional Scaling (MDS)</a></li>
+<li><a href="#association-rule-learning"><span class="toc-section-number">0.9</span> Association rule learning</a></li>
+<li><a href="#time-series"><span class="toc-section-number">0.10</span> Time Series</a><ul>
+<li><a href="#moving-averages"><span class="toc-section-number">0.10.1</span> Moving Averages</a></li>
+<li><a href="#arima"><span class="toc-section-number">0.10.2</span> Arima</a></li>
+</ul></li>
+<li><a href="#recommender-system"><span class="toc-section-number">0.11</span> Recommender system</a></li>
+<li><a href="#feature-selection"><span class="toc-section-number">0.12</span> Feature selection</a></li>
+<li><a href="#dimensionality-reduction"><span class="toc-section-number">0.13</span> Dimensionality Reduction</a><ul>
+<li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.13.1</span> Singular Value Decomposition (SVD)</a></li>
+<li><a href="#multidimensional-scaling-mds"><span class="toc-section-number">0.13.2</span> Multidimensional Scaling (MDS)</a></li>
 </ul></li>
 </ul>
 </div>
@@ -198,6 +200,95 @@ myDtm &lt;-<span class="st"> </span><span class="kw">TermDocumentMatrix</span>(m
 </div>
 <div id="decision-tree" class="section level2">
 <h2><span class="header-section-number">0.8</span> Decision Tree</h2>
+<div id="random-forest-tree" class="section level3">
+<h3><span class="header-section-number">0.8.1</span> Random forest tree</h3>
+<ul>
+<li>randomForest</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)
+
+## Classification:
+##data(iris)
+
+iris[<span class="kw">sample</span>(<span class="kw">nrow</span>(iris), <span class="dv">5</span>), ]
+<span class="co">#         Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span class="co"># 49           5.3         3.7          1.5         0.2     setosa</span>
+<span class="co"># 133          6.4         2.8          5.6         2.2  virginica</span>
+<span class="co"># 1            5.1         3.5          1.4         0.2     setosa</span>
+<span class="co"># 99           5.1         2.5          3.0         1.1 versicolor</span>
+<span class="co"># 69           6.2         2.2          4.5         1.5 versicolor</span>
+
+
+<span class="co">#----------------------------------------------------------</span>
+
+<span class="kw">set.seed</span>(<span class="dv">1</span>)
+iris.rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Species ~<span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">proximity=</span><span class="ot">TRUE</span>, <span class="dt">keep.forest=</span><span class="ot">TRUE</span>)
+
+<span class="co"># ntree: Number of trees to grow. </span>
+<span class="co"># importance: Should importance of predictors be assessed?</span>
+<span class="co"># sampsize : for example, sampsize=c(20, 30, 20), stratified sampling: draw 20, 30, and 20 of the species to grow each tree.</span>
+
+
+## --------- Plot of feature important 
+
+imp &lt;-<span class="st"> </span><span class="kw">importance</span>(iris.rf) <span class="co"># imp is a matrix</span>
+<span class="kw">plot</span>(imp)
+<span class="kw">lines</span>(imp)
+<span class="kw">text</span>(imp, <span class="dt">labels=</span><span class="kw">rownames</span>(imp), <span class="dt">cex=</span><span class="dv">1</span>)
+
+
+## --------- more detailed variable importance information
+
+iris.rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Species ~<span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">importance=</span><span class="ot">TRUE</span>, <span class="dt">proximity=</span><span class="ot">TRUE</span>)
+<span class="kw">print</span>(iris.rf)
+
+<span class="co"># Look at variable importance:</span>
+<span class="kw">round</span>(<span class="kw">importance</span>(iris.rf), <span class="dv">2</span>)
+
+
+## --------- Multi-dimensional Scaling Plot of Proximity matrix from randomForest  -------------
+
+## The unsupervised clustering case:
+
+<span class="co"># MDSplot(rf, fac, ...)</span>
+<span class="co"># rf= randomForest object. fac=a factor that was used as response to train rf.</span>
+x&lt;-<span class="kw">MDSplot</span>(iris.rf, iris$Species)
+
+<span class="co">#add legend</span>
+<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">levels</span>(iris.rf$predicted), 
+       <span class="dt">fill=</span><span class="kw">brewer.pal</span>(<span class="kw">length</span>(<span class="kw">levels</span>(iris.rf$predicted)), <span class="st">&quot;Set1&quot;</span>))
+
+
+<span class="kw">str</span>(x)
+
+<span class="co"># need to identify points?</span>
+<span class="co"># text(x$points, labels=attr(x$points,&quot;dimnames&quot;)[[1]], cex=0.5)</span>
+
+
+##--------------------   ------------
+
+## Do MDS on 1 - proximity:
+iris.mds &lt;-<span class="st"> </span><span class="kw">cmdscale</span>(<span class="dv">1</span> -<span class="st"> </span>iris.rf$proximity, <span class="dt">eig=</span><span class="ot">TRUE</span>)
+
+
+<span class="kw">plot</span>(iris.mds$points[,<span class="dv">1</span>], iris.mds$points[,<span class="dv">2</span>], <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>,
+     <span class="dt">main =</span> <span class="st">&quot;cmdscale (stats)&quot;</span>)
+
+
+
+op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">pty=</span><span class="st">&quot;s&quot;</span>)
+x &lt;-<span class="st"> </span><span class="kw">cbind</span>(iris[,<span class="dv">1</span>:<span class="dv">4</span>], iris.mds$points)
+<span class="kw">pairs</span>(x, <span class="dt">cex=</span><span class="fl">0.6</span>, <span class="dt">gap=</span><span class="dv">0</span>,
+      <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>)[<span class="kw">as.numeric</span>(iris$Species)],
+      <span class="dt">main=</span><span class="st">&quot;Iris Data: Predictors and MDS of Proximity Based on RandomForest&quot;</span>)
+<span class="kw">par</span>(op)
+
+
+<span class="co">#  &quot;GOF&quot; component of the result (&quot;goodness of fit&quot;)</span>
+<span class="kw">print</span>(iris.mds$GOF)</code></pre>
+</div>
+<div id="recursive-partitioning-and-regression-trees" class="section level3">
+<h3><span class="header-section-number">0.8.2</span> Recursive Partitioning and Regression Trees</h3>
 <ul>
 <li>rpart</li>
 </ul>
@@ -236,97 +327,9 @@ pfit&lt;-<span class="st"> </span><span class="kw">prune</span>(fit, <span class
 <span class="kw">post</span>(pfit,  <span class="dt">file =</span> <span class="st">&quot;&quot;</span>,
      <span class="dt">title =</span> <span class="st">&quot;Pruned Classification Tree for Kyphosis&quot;</span>)</code></pre>
 </div>
-<div id="random-forest-tree" class="section level2">
-<h2><span class="header-section-number">0.9</span> Random forest tree</h2>
-<ul>
-<li>randomForest</li>
-</ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(randomForest)
-
-## Classification:
-##data(iris)
-
-iris[<span class="kw">sample</span>(<span class="kw">nrow</span>(iris), <span class="dv">5</span>), ]
-<span class="co">#         Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
-<span class="co"># 49           5.3         3.7          1.5         0.2     setosa</span>
-<span class="co"># 133          6.4         2.8          5.6         2.2  virginica</span>
-<span class="co"># 1            5.1         3.5          1.4         0.2     setosa</span>
-<span class="co"># 99           5.1         2.5          3.0         1.1 versicolor</span>
-<span class="co"># 69           6.2         2.2          4.5         1.5 versicolor</span>
-
-
-<span class="co">#----------------------------------------------------------</span>
-
-<span class="kw">set.seed</span>(<span class="dv">1</span>)
-iris.rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Species ~<span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">proximity=</span><span class="ot">TRUE</span>, <span class="dt">keep.forest=</span><span class="ot">TRUE</span>)
-
-<span class="co"># ntree: Number of trees to grow. </span>
-<span class="co"># importance: Should importance of predictors be assessed?</span>
-<span class="co"># sampsize : for example, sampsize=c(20, 30, 20), stratified sampling: draw 20, 30, and 20 of the species to grow each tree.</span>
-
-
-## --------- Plot of feature important 
-
-imp &lt;-<span class="st"> </span><span class="kw">importance</span>(iris.rf) <span class="co"># imp is a matrix</span>
-<span class="kw">plot</span>(imp)
-<span class="kw">lines</span>(imp)
-<span class="kw">text</span>(imp, <span class="dt">labels=</span><span class="kw">rownames</span>(imp), <span class="dt">cex=</span><span class="dv">1</span>)
-
-
-
-## --------- more detailed variable importance information
-
-iris.rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(Species ~<span class="st"> </span>., <span class="dt">data=</span>iris, <span class="dt">importance=</span><span class="ot">TRUE</span>, <span class="dt">proximity=</span><span class="ot">TRUE</span>)
-<span class="kw">print</span>(iris.rf)
-
-<span class="co"># Look at variable importance:</span>
-<span class="kw">round</span>(<span class="kw">importance</span>(iris.rf), <span class="dv">2</span>)
-
-
-## --------- Multi-dimensional Scaling Plot of Proximity matrix from randomForest  -------------
-
-## The unsupervised clustering case:
-
-<span class="co"># MDSplot(rf, fac, ...)</span>
-<span class="co"># rf= randomForest object. fac=a factor that was used as response to train rf.</span>
-x&lt;-<span class="kw">MDSplot</span>(iris.rf, iris$Species)
-
-<span class="co">#add legend</span>
-<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">levels</span>(iris.rf$predicted), 
-       <span class="dt">fill=</span><span class="kw">brewer.pal</span>(<span class="kw">length</span>(<span class="kw">levels</span>(iris.rf$predicted)), <span class="st">&quot;Set1&quot;</span>))
-
-
-<span class="kw">str</span>(x)
-
-<span class="co"># need to identify points?</span>
-<span class="co"># text(x$points, labels=attr(x$points,&quot;dimnames&quot;)[[1]], cex=0.5)</span>
-
-
-##--------------------   ------------
-
-
-## Do MDS on 1 - proximity:
-iris.mds &lt;-<span class="st"> </span><span class="kw">cmdscale</span>(<span class="dv">1</span> -<span class="st"> </span>iris.rf$proximity, <span class="dt">eig=</span><span class="ot">TRUE</span>)
-
-
-<span class="kw">plot</span>(iris.mds$points[,<span class="dv">1</span>], iris.mds$points[,<span class="dv">2</span>], <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>,
-     <span class="dt">main =</span> <span class="st">&quot;cmdscale (stats)&quot;</span>)
-
-
-
-op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">pty=</span><span class="st">&quot;s&quot;</span>)
-x &lt;-<span class="st"> </span><span class="kw">cbind</span>(iris[,<span class="dv">1</span>:<span class="dv">4</span>], iris.mds$points)
-<span class="kw">pairs</span>(x, <span class="dt">cex=</span><span class="fl">0.6</span>, <span class="dt">gap=</span><span class="dv">0</span>,
-      <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>)[<span class="kw">as.numeric</span>(iris$Species)],
-      <span class="dt">main=</span><span class="st">&quot;Iris Data: Predictors and MDS of Proximity Based on RandomForest&quot;</span>)
-<span class="kw">par</span>(op)
-
-
-<span class="co">#  &quot;GOF&quot; component of the result (&quot;goodness of fit&quot;)</span>
-<span class="kw">print</span>(iris.mds$GOF)</code></pre>
 </div>
 <div id="association-rule-learning" class="section level2">
-<h2><span class="header-section-number">0.10</span> Association rule learning</h2>
+<h2><span class="header-section-number">0.9</span> Association rule learning</h2>
 <ul>
 <li>arulesSequences</li>
 </ul>
@@ -348,7 +351,7 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre>
 </div>
 <div id="time-series" class="section level2">
-<h2><span class="header-section-number">0.11</span> Time Series</h2>
+<h2><span class="header-section-number">0.10</span> Time Series</h2>
 <p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
 <p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
 <pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>))
@@ -379,14 +382,14 @@ t1 &lt;-<span class="st"> </span>stockpricesXts[<span class="st">&quot;2011-01-0
 <span class="co"># read time stamp with format</span>
 timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(timestamps, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)</code></pre>
 <div id="moving-averages" class="section level3">
-<h3><span class="header-section-number">0.11.1</span> Moving Averages</h3>
+<h3><span class="header-section-number">0.10.1</span> Moving Averages</h3>
 <ul>
 <li>TTR</li>
 </ul>
 <p><a href="http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html" class="uri">http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html</a></p>
 </div>
 <div id="arima" class="section level3">
-<h3><span class="header-section-number">0.11.2</span> Arima</h3>
+<h3><span class="header-section-number">0.10.2</span> Arima</h3>
 <ul>
 <li>forecast</li>
 </ul>
@@ -415,25 +418,25 @@ q=fit$arma[<span class="dv">2</span>]
 </div>
 </div>
 <div id="recommender-system" class="section level2">
-<h2><span class="header-section-number">0.12</span> Recommender system</h2>
+<h2><span class="header-section-number">0.11</span> Recommender system</h2>
 <ul>
 <li>recommenderlab</li>
 </ul>
 </div>
 <div id="feature-selection" class="section level2">
-<h2><span class="header-section-number">0.13</span> Feature selection</h2>
+<h2><span class="header-section-number">0.12</span> Feature selection</h2>
 <ul>
 <li>caret</li>
 </ul>
 <p><a href="http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html" class="uri">http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html</a></p>
 </div>
 <div id="dimensionality-reduction" class="section level2">
-<h2><span class="header-section-number">0.14</span> Dimensionality Reduction</h2>
+<h2><span class="header-section-number">0.13</span> Dimensionality Reduction</h2>
 <div id="singular-value-decomposition-svd" class="section level3">
-<h3><span class="header-section-number">0.14.1</span> Singular Value Decomposition (SVD)</h3>
+<h3><span class="header-section-number">0.13.1</span> Singular Value Decomposition (SVD)</h3>
 </div>
 <div id="multidimensional-scaling-mds" class="section level3">
-<h3><span class="header-section-number">0.14.2</span> Multidimensional Scaling (MDS)</h3>
+<h3><span class="header-section-number">0.13.2</span> Multidimensional Scaling (MDS)</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. </span>
 euromat =<span class="st"> </span><span class="kw">as.matrix</span>(eurodist) <span class="co"># convert eurodist to matrix</span>
 euromat[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">5</span>] <span class="co"># inspect first five elements</span>
