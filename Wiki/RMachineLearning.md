@@ -318,28 +318,24 @@ http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
   * forecast
 
 ```r
-fit <- Arima(WWWusage,order=c(3,1,0))
-plot(fit$x,col="red")
-lines(fitted(fit),col="blue")
-
-# auto arima
-require(forecast)
-fit <- auto.arima(ts)
-plot(forecast(fit,h=5))
-
-
-# extra the p, d, q
-p=fit$arma[1]
-d=p=fit$arma[6] # ?
-q=fit$arma[2]
-
-
-# the 5th value in 5 stps ahead
-forecast(fit,h=5)$mean[5]
+fit <- Arima(WWWusage, order=c(3,1,0))
 
 # plot the model against the data
 plot(fit$x,col="black")
 lines(fitted(fit),col="red")
+
+# auto arima
+require(forecast)
+fit <- auto.arima(ts)
+plot(forecast(fit, h=5)) # 5 stps ahead
+
+# the 5th value in 5 stps ahead
+forecast(fit,h=5)$mean[5]
+
+# extra the p, d, q
+p=fit$arma[1]   # AR order
+d=p=fit$arma[6] # ? the degree of differencing
+q=fit$arma[2]   # MA
 
 ```
 
