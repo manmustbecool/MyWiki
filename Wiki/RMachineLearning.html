@@ -359,7 +359,14 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <span class="kw">frequency</span>(t1) <span class="co"># get frequency</span>
 <span class="kw">frequency</span>(t1) &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># assign frequency</span>
 
-<span class="co"># ------------- xts or zoo for data with time stamp</span>
+<span class="co"># Extract Data </span>
+<span class="kw">window</span>(t2, <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">'2000-01-01'</span>), <span class="dt">end=</span><span class="kw">as.Date</span>(<span class="st">'2000-31-12'</span>)</code></pre>
+<ul>
+<li>xts and zoo objects</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ------------- xts or zoo for data with time stamp</span>
+
+<span class="co"># xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $&lt;-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.</span>
 
 prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
 timestamps &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
@@ -405,12 +412,11 @@ fit &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(ts)
 <span class="kw">plot</span>(<span class="kw">forecast</span>(fit, <span class="dt">h=</span><span class="dv">5</span>)) <span class="co"># 5 stps ahead</span>
 
 <span class="co"># the 5th value in 5 stps ahead</span>
-<span class="kw">forecast</span>(fit,<span class="dt">h=</span><span class="dv">5</span>)$mean[<span class="dv">5</span>]
+<span class="kw">forecast</span>(fit, <span class="dt">h=</span><span class="dv">5</span>)$mean[<span class="dv">5</span>]
 
-<span class="co"># extra the p, d, q</span>
-p=fit$arma[<span class="dv">1</span>]   <span class="co"># AR order</span>
-d=p=fit$arma[<span class="dv">6</span>] <span class="co"># ? the degree of differencing</span>
-q=fit$arma[<span class="dv">2</span>]   <span class="co"># MA</span></code></pre>
+<span class="co"># extract the (p, d, q) ; more info for arima.string() function</span>
+order &lt;-<span class="st"> </span><span class="kw">c</span>(fit$arma[<span class="dv">1</span>], fit$arma[<span class="dv">6</span>], fit$arma[<span class="dv">2</span>])
+</code></pre>
 </div>
 </div>
 <div id="recommender-system" class="section level2">

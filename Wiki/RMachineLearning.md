@@ -281,7 +281,16 @@ t1 <- ts(c(2,3,2,3,4,5))
 frequency(t1) # get frequency
 frequency(t1) <- 2 # assign frequency
 
+# Extract Data 
+window(t2, start = as.Date('2000-01-01'), end=as.Date('2000-31-12')
+
+```
+ * xts and zoo objects
+
+```r
 # ------------- xts or zoo for data with time stamp
+
+# xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $<-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.
 
 prices <- c(1.1, 2.2, 3.3)
 timestamps <-  c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
@@ -330,12 +339,11 @@ fit <- auto.arima(ts)
 plot(forecast(fit, h=5)) # 5 stps ahead
 
 # the 5th value in 5 stps ahead
-forecast(fit,h=5)$mean[5]
+forecast(fit, h=5)$mean[5]
 
-# extra the p, d, q
-p=fit$arma[1]   # AR order
-d=p=fit$arma[6] # ? the degree of differencing
-q=fit$arma[2]   # MA
+# extract the (p, d, q) ; more info for arima.string() function
+order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
+
 
 ```
 
