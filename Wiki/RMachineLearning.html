@@ -411,6 +411,10 @@ timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(times
 fit &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(ts)
 <span class="kw">plot</span>(<span class="kw">forecast</span>(fit, <span class="dt">h=</span><span class="dv">5</span>)) <span class="co"># 5 stps ahead</span>
 
+<span class="co"># Model Diagnostics for a Fitted ARIMA Model </span>
+<span class="co"># gof.lag = maximum lag used in ACF and Ljung-Box tests for the residuals</span>
+<span class="kw">tsdiag</span>(fit,<span class="dt">gof=</span><span class="dv">50</span>,<span class="dt">omit.initial=</span><span class="ot">FALSE</span>)
+
 <span class="co"># the 5th value in 5 stps ahead</span>
 <span class="kw">forecast</span>(fit, <span class="dt">h=</span><span class="dv">5</span>)$mean[<span class="dv">5</span>]
 

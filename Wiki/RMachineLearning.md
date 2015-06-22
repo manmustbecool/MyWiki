@@ -338,6 +338,10 @@ require(forecast)
 fit <- auto.arima(ts)
 plot(forecast(fit, h=5)) # 5 stps ahead
 
+# Model Diagnostics for a Fitted ARIMA Model 
+# gof.lag = maximum lag used in ACF and Ljung-Box tests for the residuals
+tsdiag(fit,gof=50,omit.initial=FALSE)
+
 # the 5th value in 5 stps ahead
 forecast(fit, h=5)$mean[5]
 
