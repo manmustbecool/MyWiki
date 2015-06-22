@@ -1,0 +1,11 @@
+html_document:
+  fig_caption: yes
+  highlight: zenburn
+  keep_md: yes
+  number_sections: yes
+  theme: united
+  toc: yes
+  date: "`r format(Sys.time(), '%d %B, %Y')`"
+  includes:
+    before_body: ..\includes\header.html
+    after_body: ..\includes\footer.html

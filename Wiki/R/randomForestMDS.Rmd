@@ -1,0 +1,69 @@
+---
+title: "MDS and random forest tree classification"
+output: html_document
+---
+
+```{r, warning=FALSE}
+library(randomForest)
+
+## Classification:
+
+data(iris)
+
+# ======================== MDS for 2D visualization
+
+# calculate the distance matrix for first 4 columns
+irisDist <- dist(iris[,1:4])
+irisMds = cmdscale(irisDist, k=2)
+
+#  plot MDS result and color data points based on the 5th column 
+plot(irisMds)
+text(irisMds[,1], (irisMds[,2]+max(irisMds[,2])*0.05), labels=1:nrow(irisMds), cex = 0.6, xpd = TRUE)
+points(irisMds, col=c("red", "green", "blue")[as.numeric(iris$Species)])
+
+
+# =========================  plot MDS and color data points based predication reslut (traing with origional dataset)
+
+
+# random select 50 training samples
+set.seed(1)
+samp <- iris[sample(nrow(iris), 50), ]
+iris.rf <- randomForest(Species ~ ., data=samp, proximity=TRUE, keep.forest=TRUE)
+
+predicted<- predict(iris.rf, iris[,1:4])
+
+
+plot(irisMds)
+text(irisMds[,1], (irisMds[,2]+max(irisMds[,2])*0.05), labels=1:nrow(irisMds), cex = 0.6, xpd = TRUE)
+points(irisMds, col=c("red", "green", "blue")[as.numeric(predicted)])
+
+
+# =========================  plot MDS and color data points based predication reslut (traing on dataset after MDS)
+
+
+irisMdsDf <- cbind(as.data.frame(irisMds), iris[,5])
+names(irisMdsDf) <- c("x", "y", "Species")
+samp <- irisMdsDf[sample(nrow(irisMdsDf), 50), ]
+
+iris.rf <- randomForest(Species ~ ., data=samp, proximity=TRUE, keep.forest=TRUE)
+predicted<- predict(iris.rf, irisMdsDf[,1:2])
+
+plot(irisMds)
+points(irisMdsDf[,1:2], col=c("red", "green", "blue")[as.numeric(predicted)])
+
+
+# =========================  plot MDS and classification boundry 
+
+# create dataset with all possible data points
+px <- seq(min(irisMdsDf$x), max(irisMdsDf$x), 0.02)
+py <- seq(min(irisMdsDf$y), max(irisMdsDf$y), 0.02)
+pgrid <-expand.grid (px, py) 
+names (pgrid) <- c ("x", "y")
+
+predicted<- predict(iris.rf, pgrid)
+z <- array (as.numeric(predicted), dim = c(length(px), length(py)))
+contour (px, py, z , col = "purple ", lwd=2, drawlabels=F)
+
+points(irisMdsDf[,1:2], col=c("red", "green", "blue")[as.numeric(irisMdsDf$Species)] )
+
+```
