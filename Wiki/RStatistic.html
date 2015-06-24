@@ -48,6 +48,7 @@ code > span.er { color: #c3bf9f; }
 </style>
 
 
+<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%7D%0A%0Abody%20%7B%0A%20%20%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -80,28 +81,27 @@ img {
 
 <div id="TOC">
 <ul>
-<li><a href="#basic"><span class="toc-section-number">1</span> Basic</a><ul>
-<li><a href="#data-types"><span class="toc-section-number">1.1</span> data types</a></li>
-<li><a href="#data-initialization"><span class="toc-section-number">1.2</span> Data initialization</a></li>
-<li><a href="#common-vector-operations"><span class="toc-section-number">1.3</span> Common Vector operations</a></li>
-<li><a href="#common-factor-operations"><span class="toc-section-number">1.4</span> Common Factor operations</a></li>
-<li><a href="#common-matrix-operations"><span class="toc-section-number">1.5</span> Common Matrix operations</a></li>
-<li><a href="#common-data-frame-operations"><span class="toc-section-number">1.6</span> Common Data Frame operations</a></li>
-<li><a href="#common-list-operations"><span class="toc-section-number">1.7</span> Common List operations</a></li>
-<li><a href="#other-common-data-structures"><span class="toc-section-number">1.8</span> other common data structures</a><ul>
-<li><a href="#environment"><span class="toc-section-number">1.8.1</span> environment</a></li>
+<li><a href="#basic"><span class="toc-section-number">0.1</span> Basic</a></li>
+<li><a href="#data-types"><span class="toc-section-number">0.2</span> data types</a></li>
+<li><a href="#data-initialization"><span class="toc-section-number">0.3</span> Data initialization</a></li>
+<li><a href="#vector-operations"><span class="toc-section-number">0.4</span> Vector operations</a></li>
+<li><a href="#factor-operations"><span class="toc-section-number">0.5</span> Factor operations</a></li>
+<li><a href="#matrix-operations"><span class="toc-section-number">0.6</span> Matrix operations</a></li>
+<li><a href="#data-frame-operations"><span class="toc-section-number">0.7</span> Data Frame operations</a></li>
+<li><a href="#list-operations"><span class="toc-section-number">0.8</span> List operations</a></li>
+<li><a href="#other-common-data-structures"><span class="toc-section-number">0.9</span> Other common data structures</a><ul>
+<li><a href="#environment"><span class="toc-section-number">0.9.1</span> environment</a></li>
 </ul></li>
-<li><a href="#common-functions"><span class="toc-section-number">1.9</span> Common functions</a></li>
-<li><a href="#data-inputoutput"><span class="toc-section-number">1.10</span> Data input/output</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">1.11</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">1.12</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">1.13</span> SQL query</a></li>
-</ul></li>
+<li><a href="#common-functions"><span class="toc-section-number">0.10</span> Common functions</a></li>
+<li><a href="#data-inputoutput"><span class="toc-section-number">0.11</span> Data input/output</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">0.12</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">0.13</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">0.14</span> SQL query</a></li>
 </ul>
 </div>
 
-<div id="basic" class="section level1">
-<h1><span class="header-section-number">1</span> Basic</h1>
+<div id="basic" class="section level2">
+<h2><span class="header-section-number">0.1</span> Basic</h2>
 <ul>
 <li>pakcages overview</li>
 </ul>
@@ -115,8 +115,9 @@ img {
 </ul>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
 <span class="kw">sudo</span> apt-get install r-base r-base-dev</code></pre>
+</div>
 <div id="data-types" class="section level2">
-<h2><span class="header-section-number">1.1</span> data types</h2>
+<h2><span class="header-section-number">0.2</span> data types</h2>
 <p>The atomic data types are “logical”, “integer”, “numeric” (synonym “double”), “complex”, “character” and “raw”.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Formatting Decimal</span>
 x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
@@ -132,7 +133,7 @@ str =<span class="st"> 'string'</span> <span class="co"># str[1] # This evaluate
 data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;/&quot;</span>, <span class="st">&quot;-&quot;</span>, data$timestamp)</code></pre>
 </div>
 <div id="data-initialization" class="section level2">
-<h2><span class="header-section-number">1.2</span> Data initialization</h2>
+<h2><span class="header-section-number">0.3</span> Data initialization</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize an empty vector</span>
 v &lt;-<span class="st"> </span><span class="kw">vector</span>()
 
@@ -167,8 +168,8 @@ timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
 stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
 </code></pre>
 </div>
-<div id="common-vector-operations" class="section level2">
-<h2><span class="header-section-number">1.3</span> Common Vector operations</h2>
+<div id="vector-operations" class="section level2">
+<h2><span class="header-section-number">0.4</span> Vector operations</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select top and buttom</span>
 <span class="kw">head</span>(v, <span class="dv">5</span>) <span class="co"># top 5</span>
@@ -221,14 +222,14 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 <span class="co"># convert one character vector into one string</span>
 <span class="kw">paste</span>(x, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;&quot;</span>) </code></pre>
 </div>
-<div id="common-factor-operations" class="section level2">
-<h2><span class="header-section-number">1.4</span> Common Factor operations</h2>
+<div id="factor-operations" class="section level2">
+<h2><span class="header-section-number">0.5</span> Factor operations</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Factor to Numeric vector</span>
 f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>))
 v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f))</code></pre>
 </div>
-<div id="common-matrix-operations" class="section level2">
-<h2><span class="header-section-number">1.5</span> Common Matrix operations</h2>
+<div id="matrix-operations" class="section level2">
+<h2><span class="header-section-number">0.6</span> Matrix operations</h2>
 <p>A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert a vector to a matrix</span>
 v &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">6</span>)
@@ -245,8 +246,8 @@ x %*%<span class="st"> </span>y
 <span class="co"># Matrix Transpose</span>
 m &lt;-<span class="st"> </span><span class="kw">t</span>(m)</code></pre>
 </div>
-<div id="common-data-frame-operations" class="section level2">
-<h2><span class="header-section-number">1.6</span> Common Data Frame operations</h2>
+<div id="data-frame-operations" class="section level2">
+<h2><span class="header-section-number">0.7</span> Data Frame operations</h2>
 <p>A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get and Set Row and Column Names for Data Frames</span>
 <span class="kw">rownames</span>(df)   
@@ -354,8 +355,8 @@ df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span clas
 <span class="co"># Remove columns where All values are NA</span>
 df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]</code></pre>
 </div>
-<div id="common-list-operations" class="section level2">
-<h2><span class="header-section-number">1.7</span> Common List operations</h2>
+<div id="list-operations" class="section level2">
+<h2><span class="header-section-number">0.8</span> List operations</h2>
 <p>A List is an ordered collection of objects.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert a list to a data frame</span>
 my_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">do.call</span>(rbind, my_ls))
@@ -368,9 +369,9 @@ l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, l2) <span cl
 l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class="kw">list</span>(l2)) <span class="co"># the l2 will be one element of l1</span></code></pre>
 </div>
 <div id="other-common-data-structures" class="section level2">
-<h2><span class="header-section-number">1.8</span> other common data structures</h2>
+<h2><span class="header-section-number">0.9</span> Other common data structures</h2>
 <div id="environment" class="section level3">
-<h3><span class="header-section-number">1.8.1</span> environment</h3>
+<h3><span class="header-section-number">0.9.1</span> environment</h3>
 <p>an environment is a bag of object references. <a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an enviroment</span>
 e &lt;-<span class="st"> </span><span class="kw">new.env</span>(<span class="dt">hash=</span><span class="ot">TRUE</span>)
@@ -384,7 +385,7 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 </div>
 </div>
 <div id="common-functions" class="section level2">
-<h2><span class="header-section-number">1.9</span> Common functions</h2>
+<h2><span class="header-section-number">0.10</span> Common functions</h2>
 <pre class="sourceCode r"><code class="sourceCode r">--------<span class="st"> </span>apply --------
 http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</span>/<span class="dv">08</span>/<span class="dv">20</span>/a-brief-introduction-to-apply-in-r/
 
@@ -399,7 +400,7 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 <span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)</code></pre>
 </div>
 <div id="data-inputoutput" class="section level2">
-<h2><span class="header-section-number">1.10</span> Data input/output</h2>
+<h2><span class="header-section-number">0.11</span> Data input/output</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
 
 <span class="co">#  data in the example.dat file </span>
@@ -417,7 +418,7 @@ data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <spa
 </code></pre>
 </div>
 <div id="parallel-r-in-windows" class="section level2">
-<h2><span class="header-section-number">1.11</span> Parallel R in Windows</h2>
+<h2><span class="header-section-number">0.12</span> Parallel R in Windows</h2>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -437,7 +438,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">stopCluster</span>(cl)</code></pre>
 </div>
 <div id="trycatch-exception-handling" class="section level2">
-<h2><span class="header-section-number">1.12</span> tryCatch exception handling</h2>
+<h2><span class="header-section-number">0.13</span> tryCatch exception handling</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>(
   {
       expr
@@ -451,7 +452,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 )</code></pre>
 </div>
 <div id="sql-query" class="section level2">
-<h2><span class="header-section-number">1.13</span> SQL query</h2>
+<h2><span class="header-section-number">0.14</span> SQL query</h2>
 <ul>
 <li><p>JDBC</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 
@@ -463,7 +464,6 @@ myDf &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(conn, <spa
 conn &lt;-<span class="st"> </span><span class="kw">odbcDriverConnect</span>(<span class="st">'Driver=SQL Server; Server=10.x.x.x</span><span class="ch">\\</span><span class="st">SQLEXPRESS; Database=xxx;'</span>)
 myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span class="st">&quot;select * from [xxx].[dbo].[myTable]&quot;</span>)</code></pre></li>
 </ul>
-</div>
 </div>
 
 .

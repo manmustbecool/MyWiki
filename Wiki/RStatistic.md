@@ -2,7 +2,7 @@
 title: "R basic"
 ---
 
-# Basic #
+## Basic 
 
  * pakcages overview
 
@@ -79,7 +79,7 @@ stockpricesDf <- data.frame(prices, timestamps)
 
 ```
 
-## Common Vector operations ##
+## Vector operations ##
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
 
 ```r
@@ -136,7 +136,7 @@ paste(x, sep="", collapse="")
 
 ```
 
-## Common Factor operations ##
+## Factor operations ##
 ```R
 # Factor to Numeric vector
 f <- factor(c("10", "11", "12"))
@@ -144,7 +144,7 @@ v <- as.numeric(as.character(f))
 ```
 
 
-## Common Matrix operations ##
+## Matrix operations ##
 A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.
 
 ```r
@@ -165,7 +165,7 @@ m <- t(m)
 ```
 
 
-## Common Data Frame operations ##
+## Data Frame operations ##
 
 A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
 
@@ -278,7 +278,7 @@ df <- df[,colSums(is.na(df))<nrow(df)]
 
 ```
 
-## Common List operations ##
+## List operations ##
 
 A List is an ordered collection of objects.
 
@@ -294,7 +294,7 @@ l1 <- append(l1, l2) # each elements of l2 will be an element of l1
 l1 <- append(l1, list(l2)) # the l2 will be one element of l1
 ```
 
-## other common data structures
+## Other common data structures
 
 ### environment
 
