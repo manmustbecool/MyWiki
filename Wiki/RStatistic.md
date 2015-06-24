@@ -353,54 +353,6 @@ data <- read.table(file, header = FALSE, sep = "", quote = "\"'")
 ``` 
 
 
-
-
-
-## Plot  ##
-
-Producing Simple Graphs with R : 
-http://www.harding.edu/fmccown/r/
-
-http://personality-project.org/r/r.plottingdates.html
-
-
-```r
-# plot a line of a set of points without showing the points
-points(x, y,  type="o", pch=46)
-
-# x is a vector that you wish to find the CDF for
-plot(ecdf(x))
-
-# Sorting a boxplot based on median value
-bymedian <- with(InsectSprays, reorder(spray, -count, median))
-boxplot(count ~ bymedian, data = InsectSprays,
-          xlab = "spray", ylab = "count", varwidth = TRUE,
-          col = "lightgray")
-
-# multiple plots in one graph. e.g. 2 rows, 2 columns
-par(mfrow=c(2,2),
-     mar=c(3,1,3,1), oma=c(0,0,0,0)
-     )
-
-# plot with multiple Y scales
-par(oma=c(2,2,2,2)) # all sides have 2 lines of space margin
-plot(y~x,data=t, ...) # first plot
-par(new=T) # tell R to draw over the first plot
-plot(y2~x,data=t, ...) # do second plot. 
-axis(4,pretty(range(t$y2)),ylab='y2') # draw second axis on the right
-mtext("second Y", side=4, line=2.3, adj=0.5, cex=1) # add test label on the right 
-
-```
-*Hmisc*
-http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf
-
-*Histograms in R*
-http://msenux.redwoods.edu/math/R/hist.php
-
-*heatmap-or-plot-for-a-correlation-matrix*
-http://stackoverflow.com/questions/15887212/heatmap-or-plot-for-a-correlation-matrix
-
-
 ## Parallel R in Windows ##
 http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/
 ```r

@@ -52,7 +52,7 @@ plot(irisMds)
 points(irisMdsDf[,1:2], col=c("red", "green", "blue")[as.numeric(predicted)])
 
 
-# =========================  plot MDS and classification boundry 
+# =========================  plot MDS and classification boundary 
 
 # create dataset with all possible data points
 px <- seq(min(irisMdsDf$x), max(irisMdsDf$x), 0.02)
@@ -61,9 +61,10 @@ pgrid <-expand.grid (px, py)
 names (pgrid) <- c ("x", "y")
 
 predicted<- predict(iris.rf, pgrid)
-z <- array (as.numeric(predicted), dim = c(length(px), length(py)))
-contour (px, py, z , col = "purple ", lwd=2, drawlabels=F)
+z <- matrix(as.numeric(predicted), length(px), length(py))
 
-points(irisMdsDf[,1:2], col=c("red", "green", "blue")[as.numeric(irisMdsDf$Species)] )
+
+plot(irisMdsDf[,1:2], col=c("red", "green", "blue")[as.numeric(irisMdsDf$Species)] )
+contour (px, py, z , col="purple", drawlabels=F, add=T)
 
 ```

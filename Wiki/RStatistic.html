@@ -93,10 +93,9 @@ img {
 </ul></li>
 <li><a href="#common-functions"><span class="toc-section-number">1.9</span> Common functions</a></li>
 <li><a href="#data-inputoutput"><span class="toc-section-number">1.10</span> Data input/output</a></li>
-<li><a href="#plot"><span class="toc-section-number">1.11</span> Plot</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">1.12</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">1.13</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">1.14</span> SQL query</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">1.11</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">1.12</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">1.13</span> SQL query</a></li>
 </ul></li>
 </ul>
 </div>
@@ -417,40 +416,8 @@ data
 data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)
 </code></pre>
 </div>
-<div id="plot" class="section level2">
-<h2><span class="header-section-number">1.11</span> Plot</h2>
-<p>Producing Simple Graphs with R : <a href="http://www.harding.edu/fmccown/r/" class="uri">http://www.harding.edu/fmccown/r/</a></p>
-<p><a href="http://personality-project.org/r/r.plottingdates.html" class="uri">http://personality-project.org/r/r.plottingdates.html</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a line of a set of points without showing the points</span>
-<span class="kw">points</span>(x, y,  <span class="dt">type=</span><span class="st">&quot;o&quot;</span>, <span class="dt">pch=</span><span class="dv">46</span>)
-
-<span class="co"># x is a vector that you wish to find the CDF for</span>
-<span class="kw">plot</span>(<span class="kw">ecdf</span>(x))
-
-<span class="co"># Sorting a boxplot based on median value</span>
-bymedian &lt;-<span class="st"> </span><span class="kw">with</span>(InsectSprays, <span class="kw">reorder</span>(spray, -count, median))
-<span class="kw">boxplot</span>(count ~<span class="st"> </span>bymedian, <span class="dt">data =</span> InsectSprays,
-          <span class="dt">xlab =</span> <span class="st">&quot;spray&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;count&quot;</span>, <span class="dt">varwidth =</span> <span class="ot">TRUE</span>,
-          <span class="dt">col =</span> <span class="st">&quot;lightgray&quot;</span>)
-
-<span class="co"># multiple plots in one graph. e.g. 2 rows, 2 columns</span>
-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),
-     <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>), <span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)
-     )
-
-<span class="co"># plot with multiple Y scales</span>
-<span class="kw">par</span>(<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># all sides have 2 lines of space margin</span>
-<span class="kw">plot</span>(y~x,<span class="dt">data=</span>t, ...) <span class="co"># first plot</span>
-<span class="kw">par</span>(<span class="dt">new=</span>T) <span class="co"># tell R to draw over the first plot</span>
-<span class="kw">plot</span>(y2~x,<span class="dt">data=</span>t, ...) <span class="co"># do second plot. </span>
-<span class="kw">axis</span>(<span class="dv">4</span>,<span class="kw">pretty</span>(<span class="kw">range</span>(t$y2)),<span class="dt">ylab=</span><span class="st">'y2'</span>) <span class="co"># draw second axis on the right</span>
-<span class="kw">mtext</span>(<span class="st">&quot;second Y&quot;</span>, <span class="dt">side=</span><span class="dv">4</span>, <span class="dt">line=</span><span class="fl">2.3</span>, <span class="dt">adj=</span><span class="fl">0.5</span>, <span class="dt">cex=</span><span class="dv">1</span>) <span class="co"># add test label on the right </span></code></pre>
-<p><em>Hmisc</em> <a href="http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf" class="uri">http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf</a></p>
-<p><em>Histograms in R</em> <a href="http://msenux.redwoods.edu/math/R/hist.php" class="uri">http://msenux.redwoods.edu/math/R/hist.php</a></p>
-<p><em>heatmap-or-plot-for-a-correlation-matrix</em> <a href="http://stackoverflow.com/questions/15887212/heatmap-or-plot-for-a-correlation-matrix" class="uri">http://stackoverflow.com/questions/15887212/heatmap-or-plot-for-a-correlation-matrix</a></p>
-</div>
 <div id="parallel-r-in-windows" class="section level2">
-<h2><span class="header-section-number">1.12</span> Parallel R in Windows</h2>
+<h2><span class="header-section-number">1.11</span> Parallel R in Windows</h2>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -470,7 +437,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">stopCluster</span>(cl)</code></pre>
 </div>
 <div id="trycatch-exception-handling" class="section level2">
-<h2><span class="header-section-number">1.13</span> tryCatch exception handling</h2>
+<h2><span class="header-section-number">1.12</span> tryCatch exception handling</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>(
   {
       expr
@@ -484,7 +451,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 )</code></pre>
 </div>
 <div id="sql-query" class="section level2">
-<h2><span class="header-section-number">1.14</span> SQL query</h2>
+<h2><span class="header-section-number">1.13</span> SQL query</h2>
 <ul>
 <li><p>JDBC</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 
