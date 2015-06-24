@@ -25,7 +25,7 @@ The atomic data types are "logical", "integer", "numeric" (synonym "double"), "c
 
 
 ```r
-# Formatting Decimal
+# Formatting decimal
 x <- 1.224554
 round(x, digits=2)
 
@@ -43,13 +43,6 @@ data$timestamp <- gsub("/", "-", data$timestamp)
 ## Data initialization ##
 
 ```r
-# initialize an empty vector
-v <- vector()
-
-# initialize a list
-ls <- vector('list', 50) # vector(mode="list", length=50)
-ls[[3]] <- c(1,2,3) # assign a value
-
 # create an arithmetic sequence (numeric)
 se = seq(8, 3) # 8,7,6,5,4,3
 se <- seq(3, 8, by=2) #  3, 5, 7
@@ -57,32 +50,15 @@ se <- seq(3, 8, by=2) #  3, 5, 7
 # create an array 
 ar <- array(3, 5) # [3,3,3,3,3]
 ar <- array(c(3,5), 5) # [3,5,3,5,3,5,3,5,3,5]
-
-# Initialize a matrix
-mr <- matrix(ncol=50, nrow=50)
-
-# Initialize a dataframe
-options(stringsAsFactors = FALSE) # if want to avoid that R understands characters as factors
-df <- data.frame()
-
-# Initialize a df from a matrix 
-df <- data.frame(matrix(ncol=50, nrow=1))
-...
-df <- df[-1,]
-
-
-#  
-prices <- c(1.1, 2.2, 3.3)
-timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
-stockpricesDf <- data.frame(prices, timestamps)
-
-
 ```
 
-## Vector operations ##
+## Vector ##
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
 
 ```r
+# initialize an empty vector
+v <- vector()
+
 # select top and buttom
 head(v, 5) # top 5
 tail(v, 2) # buttom 2
@@ -136,7 +112,7 @@ paste(x, sep="", collapse="")
 
 ```
 
-## Factor operations ##
+## Factor  ##
 ```R
 # Factor to Numeric vector
 f <- factor(c("10", "11", "12"))
@@ -144,10 +120,13 @@ v <- as.numeric(as.character(f))
 ```
 
 
-## Matrix operations ##
+## Matrix  ##
 A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.
 
 ```r
+# Initialize a matrix
+mr <- matrix(ncol=50, nrow=50)
+
 # Convert a vector to a matrix
 v <- seq(1, 6)
 m <- array(v, c(3,2)) # or m <- matrix(v, nrow=3, ncol=2)
@@ -165,11 +144,25 @@ m <- t(m)
 ```
 
 
-## Data Frame operations ##
+## Data Frame  ##
 
 A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
 
 ```r
+# Initialize a dataframe
+options(stringsAsFactors = FALSE) # if want to avoid that R understands characters as factors
+df <- data.frame()
+
+# Initialize a df from a matrix 
+df <- data.frame(matrix(ncol=50, nrow=1))
+...
+df <- df[-1,]
+
+#  
+prices <- c(1.1, 2.2, 3.3)
+timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
+stockpricesDf <- data.frame(prices, timestamps)
+
 # Get and Set Row and Column Names for Data Frames
 rownames(df)   
 colnames(df) 
@@ -278,11 +271,15 @@ df <- df[,colSums(is.na(df))<nrow(df)]
 
 ```
 
-## List operations ##
+## List  ##
 
 A List is an ordered collection of objects.
 
 ```r
+# initialize a list
+ls <- vector('list', 50) # vector(mode="list", length=50)
+ls[[3]] <- c(1,2,3) # assign a value
+
 # convert a list to a data frame
 my_df <- as.data.frame(do.call(rbind, my_ls))
 
@@ -313,6 +310,22 @@ e$a <- 2:4
 exists("a", envir=e)
 ```
 
+### array
+
+matrix is 2 dimensiona, An array  can have 3 dimensions, 4 dimensions, or as many dimensions as you please
+```r
+array(1:8, dim=c(2,2,2))
+
+, , 1
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+
+, , 2
+     [,1] [,2]
+[1,]    5    7
+[2,]    6    8
+```
 
 ## Common functions ##
 ```r
@@ -342,14 +355,11 @@ sample(300, 30)
 #  13
 
 data <- scan(".../misc/example.dat", skip=1)
-
 data
 # [1] 60 43 67 50 
 
 # read CSV
 data <- read.table(file, header = FALSE, sep = "", quote = "\"'")
-
-
 ``` 
 
 

@@ -5,11 +5,11 @@
   width: 200px;
   height: 100%;
   overflow:auto;
+  margin: auto auto auto -15px;
 }
 
 body {
-  
   margin: auto;
-  margin-left:210px;
+  margin-left:210px; 
   line-height: 20px;
 }

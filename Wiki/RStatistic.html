@@ -48,7 +48,7 @@ code > span.er { color: #c3bf9f; }
 </style>
 
 
-<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%7D%0A%0Abody%20%7B%0A%20%20%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%0Abody%20%7B%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%20%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -72,7 +72,7 @@ img {
 <div class="container-fluid main-container">
 
 <div>
-<p>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></p>
+<p><b></b>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></b></p>
 </div>
 
 <div id="header">
@@ -84,13 +84,14 @@ img {
 <li><a href="#basic"><span class="toc-section-number">0.1</span> Basic</a></li>
 <li><a href="#data-types"><span class="toc-section-number">0.2</span> data types</a></li>
 <li><a href="#data-initialization"><span class="toc-section-number">0.3</span> Data initialization</a></li>
-<li><a href="#vector-operations"><span class="toc-section-number">0.4</span> Vector operations</a></li>
-<li><a href="#factor-operations"><span class="toc-section-number">0.5</span> Factor operations</a></li>
-<li><a href="#matrix-operations"><span class="toc-section-number">0.6</span> Matrix operations</a></li>
-<li><a href="#data-frame-operations"><span class="toc-section-number">0.7</span> Data Frame operations</a></li>
-<li><a href="#list-operations"><span class="toc-section-number">0.8</span> List operations</a></li>
+<li><a href="#vector"><span class="toc-section-number">0.4</span> Vector</a></li>
+<li><a href="#factor"><span class="toc-section-number">0.5</span> Factor</a></li>
+<li><a href="#matrix"><span class="toc-section-number">0.6</span> Matrix</a></li>
+<li><a href="#data-frame"><span class="toc-section-number">0.7</span> Data Frame</a></li>
+<li><a href="#list"><span class="toc-section-number">0.8</span> List</a></li>
 <li><a href="#other-common-data-structures"><span class="toc-section-number">0.9</span> Other common data structures</a><ul>
 <li><a href="#environment"><span class="toc-section-number">0.9.1</span> environment</a></li>
+<li><a href="#array"><span class="toc-section-number">0.9.2</span> array</a></li>
 </ul></li>
 <li><a href="#common-functions"><span class="toc-section-number">0.10</span> Common functions</a></li>
 <li><a href="#data-inputoutput"><span class="toc-section-number">0.11</span> Data input/output</a></li>
@@ -119,7 +120,7 @@ img {
 <div id="data-types" class="section level2">
 <h2><span class="header-section-number">0.2</span> data types</h2>
 <p>The atomic data types are “logical”, “integer”, “numeric” (synonym “double”), “complex”, “character” and “raw”.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Formatting Decimal</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Formatting decimal</span>
 x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
 <span class="kw">round</span>(x, <span class="dt">digits=</span><span class="dv">2</span>)
 
@@ -134,44 +135,21 @@ data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span 
 </div>
 <div id="data-initialization" class="section level2">
 <h2><span class="header-section-number">0.3</span> Data initialization</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize an empty vector</span>
-v &lt;-<span class="st"> </span><span class="kw">vector</span>()
-
-<span class="co"># initialize a list</span>
-ls &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">'list'</span>, <span class="dv">50</span>) <span class="co"># vector(mode=&quot;list&quot;, length=50)</span>
-ls[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>) <span class="co"># assign a value</span>
-
-<span class="co"># create an arithmetic sequence (numeric)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an arithmetic sequence (numeric)</span>
 se =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># 8,7,6,5,4,3</span>
 se &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">3</span>, <span class="dv">8</span>, <span class="dt">by=</span><span class="dv">2</span>) <span class="co">#  3, 5, 7</span>
 
 <span class="co"># create an array </span>
 ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">3</span>, <span class="dv">5</span>) <span class="co"># [3,3,3,3,3]</span>
-ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>), <span class="dv">5</span>) <span class="co"># [3,5,3,5,3,5,3,5,3,5]</span>
-
-<span class="co"># Initialize a matrix</span>
-mr &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">50</span>)
-
-<span class="co"># Initialize a dataframe</span>
-<span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="co"># if want to avoid that R understands characters as factors</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
-
-<span class="co"># Initialize a df from a matrix </span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">1</span>))
-...
-df &lt;-<span class="st"> </span>df[-<span class="dv">1</span>,]
-
-
-<span class="co">#  </span>
-prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
-timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
-stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
-</code></pre>
+ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>), <span class="dv">5</span>) <span class="co"># [3,5,3,5,3,5,3,5,3,5]</span></code></pre>
 </div>
-<div id="vector-operations" class="section level2">
-<h2><span class="header-section-number">0.4</span> Vector operations</h2>
+<div id="vector" class="section level2">
+<h2><span class="header-section-number">0.4</span> Vector</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select top and buttom</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize an empty vector</span>
+v &lt;-<span class="st"> </span><span class="kw">vector</span>()
+
+<span class="co"># select top and buttom</span>
 <span class="kw">head</span>(v, <span class="dv">5</span>) <span class="co"># top 5</span>
 <span class="kw">tail</span>(v, <span class="dv">2</span>) <span class="co"># buttom 2</span>
 
@@ -222,16 +200,19 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 <span class="co"># convert one character vector into one string</span>
 <span class="kw">paste</span>(x, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;&quot;</span>) </code></pre>
 </div>
-<div id="factor-operations" class="section level2">
-<h2><span class="header-section-number">0.5</span> Factor operations</h2>
+<div id="factor" class="section level2">
+<h2><span class="header-section-number">0.5</span> Factor</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Factor to Numeric vector</span>
 f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>))
 v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f))</code></pre>
 </div>
-<div id="matrix-operations" class="section level2">
-<h2><span class="header-section-number">0.6</span> Matrix operations</h2>
+<div id="matrix" class="section level2">
+<h2><span class="header-section-number">0.6</span> Matrix</h2>
 <p>A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert a vector to a matrix</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a matrix</span>
+mr &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">50</span>)
+
+<span class="co"># Convert a vector to a matrix</span>
 v &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">6</span>)
 m &lt;-<span class="st"> </span><span class="kw">array</span>(v, <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>)) <span class="co"># or m &lt;- matrix(v, nrow=3, ncol=2)</span>
 m
@@ -246,10 +227,24 @@ x %*%<span class="st"> </span>y
 <span class="co"># Matrix Transpose</span>
 m &lt;-<span class="st"> </span><span class="kw">t</span>(m)</code></pre>
 </div>
-<div id="data-frame-operations" class="section level2">
-<h2><span class="header-section-number">0.7</span> Data Frame operations</h2>
+<div id="data-frame" class="section level2">
+<h2><span class="header-section-number">0.7</span> Data Frame</h2>
 <p>A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get and Set Row and Column Names for Data Frames</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a dataframe</span>
+<span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="co"># if want to avoid that R understands characters as factors</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
+
+<span class="co"># Initialize a df from a matrix </span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">1</span>))
+...
+df &lt;-<span class="st"> </span>df[-<span class="dv">1</span>,]
+
+<span class="co">#  </span>
+prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
+timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
+stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
+
+<span class="co"># Get and Set Row and Column Names for Data Frames</span>
 <span class="kw">rownames</span>(df)   
 <span class="kw">colnames</span>(df) 
 <span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>value
@@ -355,10 +350,14 @@ df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span clas
 <span class="co"># Remove columns where All values are NA</span>
 df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]</code></pre>
 </div>
-<div id="list-operations" class="section level2">
-<h2><span class="header-section-number">0.8</span> List operations</h2>
+<div id="list" class="section level2">
+<h2><span class="header-section-number">0.8</span> List</h2>
 <p>A List is an ordered collection of objects.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert a list to a data frame</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize a list</span>
+ls &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">'list'</span>, <span class="dv">50</span>) <span class="co"># vector(mode=&quot;list&quot;, length=50)</span>
+ls[[<span class="dv">3</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>) <span class="co"># assign a value</span>
+
+<span class="co"># convert a list to a data frame</span>
 my_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">do.call</span>(rbind, my_ls))
 
 <span class="co"># select a subset from a list</span>
@@ -382,6 +381,21 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 
 <span class="co"># check if an object in the enviroment</span>
 <span class="kw">exists</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">envir=</span>e)</code></pre>
+</div>
+<div id="array" class="section level3">
+<h3><span class="header-section-number">0.9.2</span> array</h3>
+<p>matrix is 2 dimensiona, An array can have 3 dimensions, 4 dimensions, or as many dimensions as you please</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">array</span>(<span class="dv">1</span>:<span class="dv">8</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))
+
+, , <span class="dv">1</span>
+     [,<span class="dv">1</span>] [,<span class="dv">2</span>]
+[<span class="dv">1</span>,]    <span class="dv">1</span>    <span class="dv">3</span>
+[<span class="dv">2</span>,]    <span class="dv">2</span>    <span class="dv">4</span>
+
+, , <span class="dv">2</span>
+     [,<span class="dv">1</span>] [,<span class="dv">2</span>]
+[<span class="dv">1</span>,]    <span class="dv">5</span>    <span class="dv">7</span>
+[<span class="dv">2</span>,]    <span class="dv">6</span>    <span class="dv">8</span></code></pre>
 </div>
 </div>
 <div id="common-functions" class="section level2">
@@ -409,13 +423,11 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 <span class="co">#  13</span>
 
 data &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st">&quot;.../misc/example.dat&quot;</span>, <span class="dt">skip=</span><span class="dv">1</span>)
-
 data
 <span class="co"># [1] 60 43 67 50 </span>
 
 <span class="co"># read CSV</span>
-data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)
-</code></pre>
+data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)</code></pre>
 </div>
 <div id="parallel-r-in-windows" class="section level2">
 <h2><span class="header-section-number">0.12</span> Parallel R in Windows</h2>
