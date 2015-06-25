@@ -12,7 +12,7 @@ output:
 
 ### R
  
- * <a href="Wiki/RStatistic.html">R basic</a>
+ * <a href="Wiki/R/RBasic.html">R basic</a>
  * <a href="Wiki/R/plot.html">R plot</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/RDevelopment.html">R Development</a>

@@ -49,6 +49,16 @@ boxplot(count ~ bymedian, data = InsectSprays,
           col = "lightgray")
 ```
 
+# Q-Q plot
+
+```{r}
+x <- rnorm(100)
+y <- rexp(100)
+qqplot(x, y)
+```
+
+
+
 
 # 
 Producing Simple Graphs with R : 
