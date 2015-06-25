@@ -36,8 +36,8 @@ mtext("y2", side=4, line=2.3, adj=0.5, cex=1) # add test label on the right
 ```{r}
 # Histogram with 5 breakpoints
 hist(iris$Sepal.Length, breaks=10)
-
 ```
+
 
 # Boxplot
 
@@ -47,6 +47,15 @@ bymedian <- with(InsectSprays, reorder(spray, -count, median))
 boxplot(count ~ bymedian, data = InsectSprays,
           xlab = "spray", ylab = "count", varwidth=TRUE,
           col = "lightgray")
+```
+
+# rug plot
+
+```{r}
+# both 'density' and rug plot
+x <- rexp(200)
+plot(density(x))
+rug(x)
 ```
 
 # Q-Q plot
