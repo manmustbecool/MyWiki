@@ -12,8 +12,8 @@ output:
 
 ### R
  
- * <a href="Wiki/R/RBasic.html">R basic</a>
- * <a href="Wiki/R/plot.html">R plot</a>
+ * <a href="Wiki/R/RBasic.html">R Basic</a>
+ * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/RDevelopment.html">R Development</a>
  * <a href="Wiki/R/randomForestMDS.html">Example: MDS and random forest tree classification</a>
