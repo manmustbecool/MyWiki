@@ -49,7 +49,7 @@ boxplot(count ~ bymedian, data = InsectSprays,
           col = "lightgray")
 ```
 
-# rug plot
+# Rug plot
 
 ```{r}
 # both 'density' and rug plot
