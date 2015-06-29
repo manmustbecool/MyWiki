@@ -16,7 +16,7 @@ output:
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/RDevelopment.html">R Development</a>
- * <a href="Wiki/R/Clustering.html">Clustering</a>
+ * <a href="Wiki/R/clustering.html">clustering</a>
  * <a href="Wiki/R/randomForestMDS.html">MDS and random forest tree classification</a>
  
 ### Big Data
