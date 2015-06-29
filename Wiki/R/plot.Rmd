@@ -1,0 +1,82 @@
+---
+title: "Plot"
+output: html_document
+---
+
+# Plot configuration
+
+## multiple plots in one graph
+```r
+# multiple plots in one graph. e.g. 2 rows, 2 columns
+par(mfrow=c(2,2),
+     mar=c(3,1,3,1), oma=c(0,0,0,0)
+     )
+```
+
+##  plot with multiple Y scales
+```{r}
+x<- 1:10
+y1 <- sample(seq(1:50), 10) 
+y2 <- sample(seq(100:200), 10) 
+
+# all sides have 2 lines of space margin to give space for axis on the right
+par(oma=c(2,2,2,2)) 
+# first plot
+plot(x=x, y=y1, type="l", col="red") 
+# tell R to draw over the first plot
+par(new=T) 
+# do second plot
+plot(x=x, y=y2, type ="l", ylab="", yaxt='n' )  
+axis(4, (range(y2)), ylab='y2') # draw second axis on the right
+mtext("y2", side=4, line=2.3, adj=0.5, cex=1) # add test label on the right
+```
+
+# Histogram
+
+```{r}
+# Histogram with 5 breakpoints
+hist(iris$Sepal.Length, breaks=10)
+```
+
+
+# Boxplot
+
+```{r}
+# Sorting a boxplot based on median value
+bymedian <- with(InsectSprays, reorder(spray, -count, median))
+boxplot(count ~ bymedian, data = InsectSprays,
+          xlab = "spray", ylab = "count", varwidth=TRUE,
+          col = "lightgray")
+```
+
+# Rug plot
+
+```{r}
+# both 'density' and rug plot
+x <- rexp(200)
+plot(density(x))
+rug(x)
+```
+
+# Q-Q plot
+
+```{r}
+x <- rnorm(100)
+y <- rexp(100)
+qqplot(x, y)
+```
+
+
+
+
+# 
+Producing Simple Graphs with R : 
+http://www.harding.edu/fmccown/r/
+
+http://personality-project.org/r/r.plottingdates.html
+
+*Hmisc*
+http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=Hmisc:Ecdf
+
+*heatmap-or-plot-for-a-correlation-matrix*
+http://stackoverflow.com/questions/15887212/heatmap-or-plot-for-a-correlation-matrix

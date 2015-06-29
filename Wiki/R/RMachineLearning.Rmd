@@ -1,4 +1,5 @@
 ---
+title: "R Machine Learning"
 ---
 
 ## Gradient descents 
@@ -114,6 +115,97 @@ findAssocs(myDtm, 'r', 0.30)
 
 ## Decision Tree
 
+### Random forest tree
+
+ * randomForest
+
+```r
+library(randomForest)
+
+## Classification:
+##data(iris)
+
+iris[sample(nrow(iris), 5), ]
+#         Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+# 49           5.3         3.7          1.5         0.2     setosa
+# 133          6.4         2.8          5.6         2.2  virginica
+# 1            5.1         3.5          1.4         0.2     setosa
+# 99           5.1         2.5          3.0         1.1 versicolor
+# 69           6.2         2.2          4.5         1.5 versicolor
+
+
+#----------------------------------------------------------
+
+set.seed(1)
+iris.rf <- randomForest(Species ~ ., data=iris, proximity=TRUE, keep.forest=TRUE)
+
+# ntree: Number of trees to grow. 
+# importance: Should importance of predictors be assessed?
+# sampsize : for example, sampsize=c(20, 30, 20), stratified sampling: draw 20, 30, and 20 of the species to grow each tree.
+
+
+## --------- Plot of feature important 
+
+imp <- importance(iris.rf) # imp is a matrix
+plot(imp)
+lines(imp)
+text(imp, labels=rownames(imp), cex=1)
+
+
+## --------- more detailed variable importance information
+
+iris.rf <- randomForest(Species ~ ., data=iris, importance=TRUE, proximity=TRUE)
+print(iris.rf)
+
+# Look at variable importance:
+round(importance(iris.rf), 2)
+
+
+## --------- Multi-dimensional Scaling Plot of Proximity matrix from randomForest  -------------
+
+## The unsupervised clustering case:
+
+# MDSplot(rf, fac, ...)
+# rf= randomForest object. fac=a factor that was used as response to train rf.
+x<-MDSplot(iris.rf, iris$Species)
+
+#add legend
+legend("topleft", legend=levels(iris.rf$predicted), 
+       fill=brewer.pal(length(levels(iris.rf$predicted)), "Set1"))
+
+
+str(x)
+
+# need to identify points?
+# text(x$points, labels=attr(x$points,"dimnames")[[1]], cex=0.5)
+
+
+##--------------------   ------------
+
+## Do MDS on 1 - proximity:
+iris.mds <- cmdscale(1 - iris.rf$proximity, eig=TRUE)
+
+
+plot(iris.mds$points[,1], iris.mds$points[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
+     main = "cmdscale (stats)")
+
+
+
+op <- par(pty="s")
+x <- cbind(iris[,1:4], iris.mds$points)
+pairs(x, cex=0.6, gap=0,
+      col=c("red", "green", "blue")[as.numeric(iris$Species)],
+      main="Iris Data: Predictors and MDS of Proximity Based on RandomForest")
+par(op)
+
+
+#  "GOF" component of the result ("goodness of fit")
+print(iris.mds$GOF)
+
+```
+
+###Recursive Partitioning and Regression Trees
+
  * rpart
  
 http://www.statmethods.net/advstats/cart.html
@@ -154,99 +246,6 @@ post(pfit,  file = "",
      title = "Pruned Classification Tree for Kyphosis")
 ```
 
-## Random forest tree
-
-
- * randomForest
-
-
-```r
-library(randomForest)
-
-## Classification:
-##data(iris)
-
-iris[sample(nrow(iris), 5), ]
-#         Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-# 49           5.3         3.7          1.5         0.2     setosa
-# 133          6.4         2.8          5.6         2.2  virginica
-# 1            5.1         3.5          1.4         0.2     setosa
-# 99           5.1         2.5          3.0         1.1 versicolor
-# 69           6.2         2.2          4.5         1.5 versicolor
-
-
-#----------------------------------------------------------
-
-set.seed(1)
-iris.rf <- randomForest(Species ~ ., data=iris, proximity=TRUE, keep.forest=TRUE)
-
-# ntree: Number of trees to grow. 
-# importance: Should importance of predictors be assessed?
-# sampsize : for example, sampsize=c(20, 30, 20), stratified sampling: draw 20, 30, and 20 of the species to grow each tree.
-
-
-## --------- Plot of feature important 
-
-imp <- importance(iris.rf) # imp is a matrix
-plot(imp)
-lines(imp)
-text(imp, labels=rownames(imp), cex=1)
-
-
-
-## --------- more detailed variable importance information
-
-iris.rf <- randomForest(Species ~ ., data=iris, importance=TRUE, proximity=TRUE)
-print(iris.rf)
-
-# Look at variable importance:
-round(importance(iris.rf), 2)
-
-
-## --------- Multi-dimensional Scaling Plot of Proximity matrix from randomForest  -------------
-
-## The unsupervised clustering case:
-
-# MDSplot(rf, fac, ...)
-# rf= randomForest object. fac=a factor that was used as response to train rf.
-x<-MDSplot(iris.rf, iris$Species)
-
-#add legend
-legend("topleft", legend=levels(iris.rf$predicted), 
-       fill=brewer.pal(length(levels(iris.rf$predicted)), "Set1"))
-
-
-str(x)
-
-# need to identify points?
-# text(x$points, labels=attr(x$points,"dimnames")[[1]], cex=0.5)
-
-
-##--------------------   ------------
-
-
-## Do MDS on 1 - proximity:
-iris.mds <- cmdscale(1 - iris.rf$proximity, eig=TRUE)
-
-
-plot(iris.mds$points[,1], iris.mds$points[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
-     main = "cmdscale (stats)")
-
-
-
-op <- par(pty="s")
-x <- cbind(iris[,1:4], iris.mds$points)
-pairs(x, cex=0.6, gap=0,
-      col=c("red", "green", "blue")[as.numeric(iris$Species)],
-      main="Iris Data: Predictors and MDS of Proximity Based on RandomForest")
-par(op)
-
-
-#  "GOF" component of the result ("goodness of fit")
-print(iris.mds$GOF)
-
-```
-
 ## Association rule learning ##
 
  * arulesSequences
@@ -277,6 +276,22 @@ http://www.statmethods.net/advstats/timeseries.html
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
 ```r
+t1 <- ts(c(2,3,2,3,4,5))
+
+frequency(t1) # get frequency
+frequency(t1) <- 2 # assign frequency
+
+# Extract Data 
+window(t2, start = as.Date('2000-01-01'), end=as.Date('2000-31-12')
+
+```
+ * xts and zoo objects
+
+```r
+# ------------- xts or zoo for data with time stamp
+
+# xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $<-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.
+
 prices <- c(1.1, 2.2, 3.3)
 timestamps <-  c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockprices <- data.frame(prices, timestamps)
@@ -289,12 +304,11 @@ stockprices
 # 3.3         2011-01-05 13:00
 
 require(xts)
-stockpricesTs <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
-stockpricesTs
+stockpricesXts <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
+stockpricesXts
 
 # select a time range
-t1 <- stockpricesTs["2011-01-04T05:00/2011-01-05"]
-
+t1 <- stockpricesXts["2011-01-04T05:00/2011-01-05"]
 
 # read time stamp with format
 timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
@@ -313,29 +327,27 @@ http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
   * forecast
 
 ```r
-
-fit <- Arima(WWWusage,order=c(3,1,0))
-plot(fit$x,col="red")
-lines(fitted(fit),col="blue")
-
-# auto arima
-require(forecast)
-fit <- auto.arima(ts)
-plot(forecast(fit,h=5))
-
-
-# extra the p, d, q
-p=fit$arma[1]
-d=tail(fit$arma, 1)
-q=fit$arma[2]
-
-
-# the 5th value in 5 stps ahead
-forecast(fit,h=5)$mean[5]
+fit <- Arima(WWWusage, order=c(3,1,0))
 
 # plot the model against the data
 plot(fit$x,col="black")
 lines(fitted(fit),col="red")
+
+# auto arima
+require(forecast)
+fit <- auto.arima(ts)
+plot(forecast(fit, h=5)) # 5 stps ahead
+
+# Model Diagnostics for a Fitted ARIMA Model 
+# gof.lag = maximum lag used in ACF and Ljung-Box tests for the residuals
+tsdiag(fit,gof=50,omit.initial=FALSE)
+
+# the 5th value in 5 stps ahead
+forecast(fit, h=5)$mean[5]
+
+# extract the (p, d, q) ; more info for arima.string() function
+order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
+
 
 ```
 
@@ -371,4 +383,19 @@ mds1 = cmdscale(eurodist, k = 2)
 plot(mds1[,1], mds1[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
      main = "cmdscale (stats)")
 text(mds1[,1], mds1[,2], labels(eurodist), cex = 0.9, xpd = TRUE)
+
+#------------------ 
+
+data(iris)
+
+# calculate the distance matrix for first 4 columns
+irisDist <- dist(iris[,1:4])
+
+irisMds = cmdscale(irisDist, k = 2)
+
+# plot with color based on the 5th column 
+plot(irisMds)
+text(irisMds[,1], (irisMds[,2]+max(irisMds[,2])*0.05), labels=1:nrow(irisMds), cex = 0.6, xpd = TRUE)
+points(irisMds, col=c("red", "green", "blue")[as.numeric(iris$Species)],)
+
 ```

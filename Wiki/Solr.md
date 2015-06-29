@@ -1,6 +1,6 @@
-
-
-> SOLR
+---
+title: "Solr"
+---
 
 
 ## Top 10 performance tips apache solr ##

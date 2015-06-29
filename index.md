@@ -7,13 +7,17 @@ output:
 ---
 
 
-> Project: <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki">https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki</a>
+> Home: http://manmustbecool.github.io/MyWiki/
 
 
 ### R
  
- * <a href="Wiki/RStatistic.html">R basic</a>
- * <a href="Wiki/RMachineLearning.html">R Machine Learning</a>
+ * <a href="Wiki/R/RBasic.html">R Basic</a>
+ * <a href="Wiki/R/plot.html">R Plot</a>
+ * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
+ * <a href="Wiki/RDevelopment.html">R Development</a>
+ * <a href="Wiki/R/randomForestMDS.html">Example: MDS and random forest tree classification</a>
+ 
  
 ### Big Data
 
@@ -30,6 +34,7 @@ output:
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/JavaCollection.html">Java Collection</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
+
 
 
 
@@ -50,7 +55,7 @@ div.non * {
 </div>
 
  
+Project: <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki">https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki</a>
 
 
 
-http://manmustbecool.github.io/MyWiki/

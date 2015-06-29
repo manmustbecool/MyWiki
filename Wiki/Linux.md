@@ -1,6 +1,7 @@
 ---
-
+title: "Linux Basic"
 ---
+
 
 # cheat sheet #
 
@@ -41,6 +42,15 @@ ntpdate -u pool.ntp.org
 
 # install Linux / UNIX *.tar.gz tarball files
 http://www.cyberciti.biz/faq/install-tarballs/
+
+
+# ---- List Current Logged In Users ----
+
+# Shows information about the users currently on the machine, and their processes.
+w
+
+# Shows information about users who are currently logged in.
+who
 
 # ---- File Search ------
 
@@ -113,7 +123,6 @@ http://linuxdrops.com/install-jre-or-jdk-7-on-centos-rhel-fedora-ubuntu-debian/
 ```
 
 
-
 ## Install Leiningen ##
 
 download the "lein.bat" in a path folder to start self-install
@@ -146,3 +155,9 @@ sudo chmod +x lein
 lein repl // To test, Crtl + Z to exit repl
 
 ```
+
+
+# Create bootable USB drives
+
+* Linux : UNetbootin http://unetbootin.sourceforge.net/
+* Linux & Windows : Rufus https://rufus.akeo.ie/
