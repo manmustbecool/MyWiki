@@ -23,7 +23,7 @@ more : http://www.mattpeeples.net/kmeans.html
 # Hierarchical Clustering
 
 ```{r}
-sampleiris <- iris[sample(1:150, 40),]
+sampleiris <- iris[sample(1:150, 30),]
 distance <- dist(sampleiris[,-5], method="euclidean")
 model <- hclust(distance, method="average")
 plot(model, hang=-1, label=sampleiris$Species)

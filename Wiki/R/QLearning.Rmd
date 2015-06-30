@@ -1,0 +1,100 @@
+---
+title: "Q Learning"
+output: html_document
+---
+
+
+```
+-------
+|A|B|C| 
+-------
+|D|E|F|
+-------
+
+States: A,B,C,D,E,F
+Paths: from A can go to B, D; from B can A, E, C; etc.
+Goal states: C
+
+
+The Q Learning finds best path for every state as policy
+
+```
+
+```{r}
+# initinal gamma
+gamma <- 0.9
+
+# initinal R matrix
+R <- matrix(nrow=6, ncol=6)
+
+rownames(R) <- colnames(R) <- c('A','B','C','D','E','F')
+
+R[1,] <- c(-1, 0,-1, 0,-1,-1)
+R[2,] <- c( 0,-1,10,-1, 0,-1)
+R[3,] <- c(-1,-1,-1,-1,-1,-1)
+R[4,] <- c( 0,-1,-1,-1, 0,-1)
+R[5,] <- c(-1, 0,-1, 0,-1, 0)
+R[6,] <- c(-1,-1,10,-1, 0,-1)
+
+# R matrix (state/action)
+# environment rewards in matrix R
+# matrix values: -1=no path, 0=path, 10=goal path
+R
+
+# Initialize matrix Q to zero
+Q <- R 
+Q[,] <- 0
+
+Q
+
+# -------- Training ----------
+
+# Each episode is equivalent to one training session.
+for ( i in 1:1000){ # 1000 episodes
+  
+  # Select a random initial state
+  state <- sample(rownames(R),1)
+  
+  while(state != "C") {
+    
+    # Random select one action from all possible actions for the current state
+    actions <- R[state,][R[state,]>=0]
+    action <- sample(names(actions), 1)
+    
+    # Consider going to the next state using the selected action
+    nextState <- action
+    
+    # Get maximum Q value for the next state 
+    # Q(state, action) = R(state, action) + Gamma * Max[Q(next state, all actions)]
+    Q[state, action] <- R[state, action] + gamma * max(Q[nextState,]) 
+    
+    # Set the next state as the current state
+    state <- nextState;
+  }
+}
+
+# -------- Training result ----------
+Q
+
+# -------- Print policy ----------
+
+for (state in rownames(Q)){ 
+  
+  if(state=="C"){
+    action <- state # stay in goal state
+  }else{
+    actions <- Q[state,][Q[state,]>=0]
+    action <- names(actions[order(-actions)][1]) # Find the action with the highest Q value
+  } 
+  
+  print(paste("from state",  state, ", should take action", action ) )
+}
+
+```
+
+
+
+
+
+
+

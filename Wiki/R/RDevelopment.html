@@ -48,6 +48,7 @@ code > span.er { color: #c3bf9f; }
 </style>
 
 
+<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%0Abody%20%7B%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%20%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -71,7 +72,7 @@ img {
 <div class="container-fluid main-container">
 
 <div>
-<p>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></p>
+<p><b></b>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></b></p>
 </div>
 
 <div id="header">
@@ -80,16 +81,17 @@ img {
 
 <div id="TOC">
 <ul>
-<li><a href="#r-development"><span class="toc-section-number">1</span> R Development</a><ul>
+<li><a href="#r-java-development"><span class="toc-section-number">1</span> R Java Development</a><ul>
 <li><a href="#call-r-from-java"><span class="toc-section-number">1.1</span> Call R from Java</a></li>
 <li><a href="#call-java-from-r"><span class="toc-section-number">1.2</span> Call Java from R</a></li>
-<li><a href="#other"><span class="toc-section-number">1.3</span> Other</a></li>
 </ul></li>
+<li><a href="#performance-optimization"><span class="toc-section-number">2</span> Performance optimization</a></li>
+<li><a href="#other"><span class="toc-section-number">3</span> Other</a></li>
 </ul>
 </div>
 
-<div id="r-development" class="section level1">
-<h1><span class="header-section-number">1</span> R Development</h1>
+<div id="r-java-development" class="section level1">
+<h1><span class="header-section-number">1</span> R Java Development</h1>
 <div id="call-r-from-java" class="section level2">
 <h2><span class="header-section-number">1.1</span> Call R from Java</h2>
 <ul>
@@ -152,13 +154,22 @@ img {
 </ul>
 <p><a href="http://www.rforge.net/rJava/" class="uri">http://www.rforge.net/rJava/</a></p>
 </div>
-<div id="other" class="section level2">
-<h2><span class="header-section-number">1.3</span> Other</h2>
+</div>
+<div id="performance-optimization" class="section level1">
+<h1><span class="header-section-number">2</span> Performance optimization</h1>
+<p>compilied R code can speed up functions by a factor or 3 or 4 in some cases.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(compiler)
+<span class="kw">enableJIT</span>(<span class="dv">3</span>) <span class="co"># compile nested functions nested within the function</span>
+f &lt;-<span class="st"> </span>function(n, x) for (i in <span class="dv">1</span>:n) x =<span class="st"> </span>(<span class="dv">1</span> +<span class="st"> </span>x)^(-<span class="dv">1</span>)
+compiled_f &lt;-<span class="st"> </span><span class="kw">cmpfun</span>(f)</code></pre>
+<p><a href="http://www.noamross.net/blog/2013/4/25/faster-talk.html" class="uri">http://www.noamross.net/blog/2013/4/25/faster-talk.html</a></p>
+</div>
+<div id="other" class="section level1">
+<h1><span class="header-section-number">3</span> Other</h1>
 <ul>
 <li>past project</li>
 </ul>
 <p><a href="../papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf">RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics</a></p>
-</div>
 </div>
 
 .

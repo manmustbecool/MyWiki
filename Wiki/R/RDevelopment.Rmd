@@ -4,7 +4,7 @@ title: "R Development"
 ---
 
 
-# R Development
+# R Java Development
 
 
 ## Call R from Java ##
@@ -87,7 +87,20 @@ public class RTest {
 http://www.rforge.net/rJava/
 
 
-## Other ##
+# Performance optimization
+
+compilied R code can speed up functions by a factor or 3 or 4 in some cases. 
+
+```r
+library(compiler)
+enableJIT(3) # compile nested functions nested within the function
+f <- function(n, x) for (i in 1:n) x = (1 + x)^(-1)
+compiled_f <- cmpfun(f)
+
+```
+http://www.noamross.net/blog/2013/4/25/faster-talk.html
+
+# Other 
 
  * past project
  
