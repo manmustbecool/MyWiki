@@ -100,6 +100,10 @@ compiled_f <- cmpfun(f)
 ```
 http://www.noamross.net/blog/2013/4/25/faster-talk.html
 
+# pass by values or references
+
+http://stackoverflow.com/questions/2603184/r-pass-by-reference
+
 # Other 
 
  * past project
