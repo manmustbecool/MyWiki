@@ -1,2 +1,5 @@
 /target/
 bin
+.Rproj.user/*
+.RData
+MyWiki.Rproj
