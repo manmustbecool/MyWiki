@@ -16,6 +16,9 @@ title: "R basic"
 sudo apt-get update
 sudo apt-get install r-base r-base-dev
 ```
+install R in linux
+http://www.jason-french.com/blog/2013/03/11/installing-r-in-linux/
+
 
 ## Atomic data types ##
 

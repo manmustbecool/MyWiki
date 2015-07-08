@@ -48,7 +48,7 @@ code > span.er { color: #c3bf9f; }
 </style>
 
 
-<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20%2D10px%3B%0A%7D%0A%0Abody%20%7B%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%20%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%0Abody%20%7B%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%20%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -178,7 +178,11 @@ img {
 <span class="co"># show all processes for all users. -x:all users</span>
 <span class="kw">ps</span> -aux
 <span class="co"># for root user</span>
-<span class="kw">ps</span> -auroot</code></pre>
+<span class="kw">ps</span> -auroot
+
+<span class="co"># kill the process by id</span>
+<span class="kw">kill</span> -9 process_id
+</code></pre>
 </div>
 <div id="others" class="section level1">
 <h1><span class="header-section-number">2</span> Others</h1>
