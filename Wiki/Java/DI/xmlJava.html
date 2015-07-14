@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Web service, BPEL, composition, autonomic, SOA, Dynamic Web service invocation " />
+
+<title>Java xml</title>
+<link href="dicss.css" rel="stylesheet" type="text/css" />
+<link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify/prettify.js"></script>
+</head>
+
+<body onload="prettyPrint()">
+
+<h1>Creating an DOM Document</h1>
+
+Creating an Empty DOM Document
+<pre class="prettyprint">
+public static Document createDomDocument() {
+    try {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = builder.newDocument();
+        return doc;
+    } catch (ParserConfigurationException e) {
+    }
+    return null;
+}
+
+</pre>
+
+<pre class="prettyprint">
+Document doc = createDomDocument();
+
+// Insert the root element node
+Element element = doc.createElement("root");
+doc.appendChild(element);
+
+// Insert a comment in front of the element node
+Comment comment = doc.createComment("a comment");
+doc.insertBefore(comment, element);
+
+// Add a text node to the element
+element.appendChild(doc.createTextNode("D"));
+</pre>
+
+
+<h1>Remove all namespace in a XML and put in another XML</h1>
+<p>
+XSLT Processing with Java<br />
+<a href="http://www.ling.helsinki.fi/kit/2004k/ctl257/JavaXSLT/Ch05.html">http://www.ling.helsinki.fi/kit/2004k/ctl257/JavaXSLT/Ch05.html</a>
+</p>
+
+first, load the xslt file.
+<pre class="prettyprint">
+	javax.xml.transform.Source xsltSource =
+                    new javax.xml.transform.stream.StreamSource(new File((Config.filePath + "RemoveAllNs.xsl")));
+
+	javax.xml.transform.TransformerFactory transFact =
+                    javax.xml.transform.TransformerFactory.newInstance();
+</pre>
+
+then, transform  the Node after marshaller.
+<pre class="prettyprint">
+javax.xml.transform.Transformer transformer = transFact.newTransformer(xsltSource);
+
+DOMResult domResult = new DOMResult();
+transformer.transform(new DOMSource(doc_wr), domResult);
+
+docRoot.appendChild(doc.importNode(domResult.getNode().getFirstChild(), true));    
+</pre>    
+
+The RemoveAllNs.xsl file.<br />
+<iframe src="RemoveAllNs.xsl" width="700px"></iframe>
+ 
+<hr />
+Following uses TransformerHander for marshaller, and ByteArrayOutputStream for result. It works, but is not necessary.
+<pre class="prettyprint">
+javax.xml.transform.sax.TransformerHandler handler = ((SAXTransformerFactory) transFact).newTransformerHandler(xsltSource);
+
+ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+handler.setResult(new StreamResult(outputStream));
+marshaller.marshal(wr_jaxb, handler);
+
+ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+Document doc_wr = builder.parse(inputStream);
+
+docRoot.appendChild(doc.importNode(doc_wr.getDocumentElement(), true));
+</pre>
+
+
+<a style="color:#FFF" href="http://www.computing.dcu.ie/~mwang/index.html" target="_blank">http://www.computing.dcu.ie/~mwang/index1.html</a>
+
+<!-- begin htmlcommentbox.com -->
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="http://www.htmlcommentbox.com/static/skins/simple/skin.css" />
+ <script type="text/javascript" language="javascript" id="hcb"> /*<!--*/ (function(){s=document.createElement("script");s.setAttribute("type","text/javascript");s.setAttribute("src", "http://www.htmlcommentbox.com/jread?page="+escape((typeof hcb_user !== "undefined" && hcb_user.PAGE)||(""+window.location)).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24iAHj6t0nM.oz/7A1tIKrt1"+"&opts=414&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end htmlcommentbox.com -->
+
+</body>
+</html>
