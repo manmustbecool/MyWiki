@@ -4,3 +4,5 @@ bin
 .RData
 .Rhistory
 MyWiki.Rproj
+/.classpath
+/.project
