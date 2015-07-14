@@ -1,5 +1,5 @@
 ---
-
+title: "Java"
 ---
 
 
@@ -29,7 +29,7 @@ UserActivity.INSTANCE.doStuff();
 
 ## Thread 
 
-code : https://github.com/manmustbecool/MyWiki/tree/gh-pages
+code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
 
  * extends <b>Thread</b>
 
@@ -37,11 +37,18 @@ code : https://github.com/manmustbecool/MyWiki/tree/gh-pages
  
  * implements <b>Callable</b>
 
-Similar to Runnable, but a Runnable does not return a result and cannot throw a checked exception.
+    * Similar to Runnable, but a Runnable does not return a result and cannot throw a checked exception.
 
 ## Volatile
 
 The value of this variable will never be cached thread-locally: all reads and writes will go straight to "main memory";
+
+## Atomic Variables
+
+All classes have get and set methods that work like reads and writes on volatile variables.
+```java
+private AtomicInteger c = new AtomicInteger(0);
+```
 
 ## Synchronized
 
@@ -79,7 +86,7 @@ input sorted array
   1. Else (x is smaller) recur for the left half.
 
 
-code : https://github.com/manmustbecool/MyWiki/tree/gh-pages
+code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
 
 
 # Sort #
@@ -92,14 +99,14 @@ http://bigocheatsheet.com/
   1. From both ends, swap elements and make all elements on the left less than the pivot and all elements on the right greater than the pivot
   1. Recursively sort left part and right part
   
-  code : https://github.com/manmustbecool/MyWiki/tree/gh-pages
+  code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
 
 ## Bubble Sort ##
 
   1. Compare each pair of adjacent elements from the beginning of an array and, if they are in reversed order, swap them.
   1. If at least one swap has been done, repeat step 1.
   
-  code : https://github.com/manmustbecool/MyWiki/tree/gh-pages
+  code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
 
 # java 8 #
 http://winterbe.com/posts/2014/03/16/java-8-tutorial/

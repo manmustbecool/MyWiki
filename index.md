@@ -34,7 +34,8 @@ output:
 ### Others
 
  * <a href="Wiki/Linux.html">Linux</a>
- * <a href="Wiki/JavaCollection.html">Java Collection</a>
+ * <a href="Wiki/Java/Java.html">Java notes</a>
+ * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
 
 

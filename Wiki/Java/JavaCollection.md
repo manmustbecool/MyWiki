@@ -133,7 +133,7 @@ Comparator
   * meant to be implemented by third party classes
   * both Comparable and Comparator are interfaces; they are appropriately put in different packages based on their purpose
 
-```
+```java
 class Order implements Comparable<Order> {
     private int orderId;
     private int amount;
@@ -165,7 +165,7 @@ class Order implements Comparable<Order> {
 
 Collection sort:
 
-```
+```java
 // use comparable
 Collections.sort(orders);
 Collections.sort(orders, Collections.reverseOrder());
@@ -186,7 +186,7 @@ String natural order:
 
 ### Collection and Array conversion ###
 
-```
+```java
 // Collection to Arrays
 String [] countries = list.toArray(new String[list.size()]);
 
@@ -215,7 +215,7 @@ List list1 = Arrays.asList(countries);
 SEARCH RULE --> SORT : SAME\_COMPARATOR : ASCENDING
 
 
-```
+```java
 int index = Collections.binarySearch(list, "John");
 
 int index = Collections.binarySearch(list, key, comparator) 
@@ -229,7 +229,7 @@ int index = Collections.binarySearch(list, key, comparator)
 
 Collection synchronized wrapper method
 return a a wrapped instance which has all get, put methods synchronized
-```
+```java
 Collections.synchronizedMap(hashMap)
 
 Collections.synchronizedList(list)
