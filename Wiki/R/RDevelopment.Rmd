@@ -98,6 +98,10 @@ public class RTest {
 }
 ```
 
+ * **Rsession** 
+
+multiple R sessions are allowed
+
  * **Renjin** 
  
  A new JVM-based R language interpreter.
