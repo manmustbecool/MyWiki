@@ -17,6 +17,29 @@ http://www.mhsatman.com/rcaller.php
  
 An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.
 
+in R:
+```r
+install.packages("Rserve")
+
+library(Rserve)
+Rserve()
+
+```
+
+in Java:
+```java
+import org.rosuda.REngine.*;
+import org.rosuda.REngine.Rserve.*;
+...
+
+try {
+  RConnection c = new RConnection();// a local connection on default port (6311)
+  double d[] = c.eval("rnorm(10)").asDoubles();
+  System.out.println(d);
+} catch (REngineException e) {}       
+
+```
+
  * **JRI**
  
 Java/R Interface

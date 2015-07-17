@@ -34,12 +34,12 @@ output:
 ### Java
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
- * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
- 
+
 ### Others
 
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
+ * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
 
 
 

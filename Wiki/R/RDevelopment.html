@@ -103,6 +103,21 @@ img {
 <li><strong>Rserve</strong></li>
 </ul>
 <p>An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.</p>
+<p>in R:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;Rserve&quot;</span>)
+
+<span class="kw">library</span>(Rserve)
+<span class="kw">Rserve</span>()</code></pre>
+<p>in Java:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import org.rosuda.REngine.*;</span>
+<span class="kw">import org.rosuda.REngine.Rserve.*;</span>
+...
+
+<span class="kw">try</span> {
+  RConnection c = <span class="kw">new</span> <span class="fu">RConnection</span>();<span class="co">// a local connection on default port (6311)</span>
+  <span class="dt">double</span> d[] = c.<span class="fu">eval</span>(<span class="st">&quot;rnorm(10)&quot;</span>).<span class="fu">asDoubles</span>();
+  System.<span class="fu">out</span>.<span class="fu">println</span>(d);
+} <span class="kw">catch</span> (REngineException e) {}       </code></pre>
 <ul>
 <li><strong>JRI</strong></li>
 </ul>

@@ -84,9 +84,12 @@ img {
 <li><a href="#singleton-using-enum"><span class="toc-section-number">1</span> Singleton using enum</a></li>
 <li><a href="#concurrency"><span class="toc-section-number">2</span> Concurrency</a><ul>
 <li><a href="#thread"><span class="toc-section-number">2.1</span> Thread</a></li>
-<li><a href="#volatile"><span class="toc-section-number">2.2</span> Volatile</a></li>
-<li><a href="#atomic-variables"><span class="toc-section-number">2.3</span> Atomic Variables</a></li>
-<li><a href="#synchronized"><span class="toc-section-number">2.4</span> Synchronized</a></li>
+<li><a href="#variables"><span class="toc-section-number">2.2</span> Variables</a><ul>
+<li><a href="#volatile"><span class="toc-section-number">2.2.1</span> Volatile</a></li>
+<li><a href="#atomic-variables"><span class="toc-section-number">2.2.2</span> Atomic Variables</a></li>
+<li><a href="#concurrenthashmap"><span class="toc-section-number">2.2.3</span> ConcurrentHashMap</a></li>
+</ul></li>
+<li><a href="#synchronized"><span class="toc-section-number">2.3</span> Synchronized</a></li>
 </ul></li>
 <li><a href="#search"><span class="toc-section-number">3</span> Search</a><ul>
 <li><a href="#binary-search"><span class="toc-section-number">3.1</span> Binary Search</a></li>
@@ -120,6 +123,7 @@ UserActivity.<span class="fu">INSTANCE</span>.<span class="fu">doStuff</span>();
 </div>
 <div id="concurrency" class="section level1">
 <h1><span class="header-section-number">2</span> Concurrency</h1>
+<p>Book : Java Concurrency in Practice <a href="http://jcip.net/" class="uri">http://jcip.net/</a></p>
 <div id="thread" class="section level2">
 <h2><span class="header-section-number">2.1</span> Thread</h2>
 <p>code : <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src" class="uri">https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src</a></p>
@@ -132,17 +136,25 @@ UserActivity.<span class="fu">INSTANCE</span>.<span class="fu">doStuff</span>();
 </ul></li>
 </ul>
 </div>
-<div id="volatile" class="section level2">
-<h2><span class="header-section-number">2.2</span> Volatile</h2>
+<div id="variables" class="section level2">
+<h2><span class="header-section-number">2.2</span> Variables</h2>
+<div id="volatile" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Volatile</h3>
 <p>The value of this variable will never be cached thread-locally: all reads and writes will go straight to “main memory”;</p>
 </div>
-<div id="atomic-variables" class="section level2">
-<h2><span class="header-section-number">2.3</span> Atomic Variables</h2>
+<div id="atomic-variables" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Atomic Variables</h3>
 <p>All classes have get and set methods that work like reads and writes on volatile variables.</p>
 <pre class="sourceCode java"><code class="sourceCode java"><span class="kw">private</span> AtomicInteger c = <span class="kw">new</span> AtomicInteger(<span class="dv">0</span>);</code></pre>
 </div>
+<div id="concurrenthashmap" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> ConcurrentHashMap</h3>
+<p>Hashtable is similar to Collections.synchronizedMap(Map) - only one thread can access the map at the same time.</p>
+<p>ConcurrentHashMap concurrent modification of the Map from several threads without the need to block them.</p>
+</div>
+</div>
 <div id="synchronized" class="section level2">
-<h2><span class="header-section-number">2.4</span> Synchronized</h2>
+<h2><span class="header-section-number">2.3</span> Synchronized</h2>
 <p>only a single thread can execute a block of code at the same time</p>
 <pre class="sourceCode java"><code class="sourceCode java"><span class="kw">synchronized</span> <span class="dt">void</span> <span class="fu">dostuff</span>(){
   ...

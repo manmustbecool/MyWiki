@@ -27,6 +27,9 @@ UserActivity.INSTANCE.doStuff();
 
 # Concurrency
 
+Book : Java Concurrency in Practice 
+http://jcip.net/
+
 ## Thread 
 
 code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
@@ -39,16 +42,24 @@ code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
 
     * Similar to Runnable, but a Runnable does not return a result and cannot throw a checked exception.
 
-## Volatile
+## Variables
+
+### Volatile
 
 The value of this variable will never be cached thread-locally: all reads and writes will go straight to "main memory";
 
-## Atomic Variables
+### Atomic Variables
 
 All classes have get and set methods that work like reads and writes on volatile variables.
 ```java
 private AtomicInteger c = new AtomicInteger(0);
 ```
+
+### ConcurrentHashMap
+
+Hashtable is similar to Collections.synchronizedMap(Map) -  only one thread can access the map at the same time. 
+
+ConcurrentHashMap  concurrent modification of the Map from several threads without the need to block them.
 
 ## Synchronized
 
