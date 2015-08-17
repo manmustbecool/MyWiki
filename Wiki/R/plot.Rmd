@@ -69,7 +69,7 @@ qqplot(x, y)
 
 
 
-# 
+# Other
 Producing Simple Graphs with R : 
 http://www.harding.edu/fmccown/r/
 
