@@ -15,8 +15,10 @@ output:
  * <a href="Wiki/R/RBasic.html">R Basic</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
- * <a href="Wiki/RDevelopment.html">R Development</a>
- * <a href="Wiki/R/randomForestMDS.html">Example: MDS and random forest tree classification</a>
+ * <a href="Wiki/R/RDevelopment.html">R Development</a>
+ * <a href="Wiki/R/clustering.html">Clustering techniques</a>
+ * <a href="Wiki/R/randomForestMDS.html">MDS and random forest tree classification</a>
+ * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  
  
 ### Big Data
@@ -29,12 +31,15 @@ output:
  * <a href="Wiki/Solr.html">Solr</a>
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
+### Java
+ * <a href="Wiki/Java/Java.html">Java notes</a>
+ * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
+
 ### Others
 
  * <a href="Wiki/Linux.html">Linux</a>
- * <a href="Wiki/JavaCollection.html">Java Collection</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
-
+ * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
 
 
 

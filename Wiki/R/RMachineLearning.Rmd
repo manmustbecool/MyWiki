@@ -4,7 +4,6 @@ title: "R Machine Learning"
 
 ## Gradient descents 
 
-
 Linear regression by gradient descents
 
 http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_70219%2Egde_70219_member_139405437
@@ -12,10 +11,6 @@ http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_7
 ## Neural networks ##
 
 http://www.ai-junkie.com/ann/evolved/nnt8.html
-
-## K-Means ##
-
-http://www.mattpeeples.net/kmeans.html
 
 
 ## Hidden Markov Models ##

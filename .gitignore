@@ -1,0 +1,8 @@
+/target/
+bin
+.Rproj.user/*
+.RData
+.Rhistory
+MyWiki.Rproj
+/.classpath
+/.project

@@ -93,6 +93,10 @@ ps -aux
 # for root user
 ps -auroot
 
+# kill the process by id
+kill -9 process_id
+
+
 ```
 # Others #
 

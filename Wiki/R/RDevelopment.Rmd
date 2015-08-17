@@ -4,7 +4,7 @@ title: "R Development"
 ---
 
 
-# R Development
+# R Java Development
 
 
 ## Call R from Java ##
@@ -16,6 +16,29 @@ http://www.mhsatman.com/rcaller.php
  * **Rserve** 
  
 An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.
+
+in R:
+```r
+install.packages("Rserve")
+
+library(Rserve)
+Rserve()
+
+```
+
+in Java:
+```java
+import org.rosuda.REngine.*;
+import org.rosuda.REngine.Rserve.*;
+...
+
+try {
+  RConnection c = new RConnection();// a local connection on default port (6311)
+  double d[] = c.eval("rnorm(10)").asDoubles();
+  System.out.println(d);
+} catch (REngineException e) {}       
+
+```
 
  * **JRI**
  
@@ -75,6 +98,10 @@ public class RTest {
 }
 ```
 
+ * **Rsession** 
+
+multiple R sessions are allowed
+
  * **Renjin** 
  
  A new JVM-based R language interpreter.
@@ -87,7 +114,24 @@ public class RTest {
 http://www.rforge.net/rJava/
 
 
-## Other ##
+# Performance optimization
+
+compilied R code can speed up functions by a factor or 3 or 4 in some cases. 
+
+```r
+library(compiler)
+enableJIT(3) # compile nested functions nested within the function
+f <- function(n, x) for (i in 1:n) x = (1 + x)^(-1)
+compiled_f <- cmpfun(f)
+
+```
+http://www.noamross.net/blog/2013/4/25/faster-talk.html
+
+# pass by values or references
+
+http://stackoverflow.com/questions/2603184/r-pass-by-reference
+
+# Other 
 
  * past project
  

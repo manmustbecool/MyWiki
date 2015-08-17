@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Web service, BPEL, composition, autonomic, SOA, Dynamic Web service invocation " />
+
+<title>Dynamic Web service invocation</title>
+<link href="dicss.css" rel="stylesheet" type="text/css" />
+<link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify/prettify.js"></script>
+</head>
+
+<body onload="prettyPrint()">
+
+<h1>Dynamic Web service invocations from WSDL endpoints</h1>
+<b>last updated 2010 </b>
+<p>Dynamically parse a WSDL and invoke it. </p>
+<p>This can be used to develop an abstract or wrapper service for concrete Web services for applications or BPEL.</p>
+<p> Step 1: <br />
+&nbsp;&nbsp;<a href="#WSDL parsing">WSDL parsing</a><br />
+Step 2: <br />
+&nbsp;&nbsp;<a href="#Dynamic client with JAX-WS">Dynamic client with JAX-WS</a><br />
+&nbsp;&nbsp;or<br />
+&nbsp;&nbsp;<a href="#Dynamic client with Axis2">Dynamic client with Axis2</a></p>
+
+<p>About other approaches: <br />
+Apache WSIF (Web Service Invocation Framework): It is based on Axis1. Last updated was on 2006, we recommend to ignore it. </p>
+<hr />
+<a name="WSDL parsing">
+<h2>WSDL parsing</h2>
+</a>
+  Excepting request input message, we need following service information from WSDL to enable dynamic invocation. 
+  <ul>
+  <li>serviceName</li>
+  <li>  portName</li>
+  <li>  endpointUrl</li>
+  <li>  operation SOAPAction (This apperas in .Net based web services )</li>
+</ul>
+
+
+ Real WSDL example from: <a href="http://www50.brinkster.com/vbfacileinpt/np.asmx?wsdl" target="_blank">http://www50.brinkster.com/vbfacileinpt/np.asmx?wsdl</a><br />
+<img src="wsdl.PNG"  alt="wsdl" />  
+<hr />
+  
+<a  name="Dynamic client with JAX-WS"><h2>Dynamic client with JAX-WS </h2>
+<h3>1. Dispatch client</h3>
+<p><strong>javax.xml.ws.Dispatch</strong> : Using Dispath API which works at the XML        message level.</p>
+</a>
+
+<a href="http://java.boot.by/scdjws5-guide/ch04s08.html" target="_blank">http://java.boot.by/scdjws5-guide/ch04s08.html</a>
+<br /> 
+The Dispatch client can send data in either MESSAGE or PAYLOAD mode.
+<ul>
+<li>When using the javax.xml.ws.Service.Mode.MESSAGE mode, the Dispatch client is responsible for providing the entire SOAP envelope including the soap:Envelope, soap:Header, and soap:Body elements.</li>
+
+<li>When using the javax.xml.ws.Service.Mode.PAYLOAD mode, the Dispatch client is only responsible for providing the contents of the soap:Body and JAX-WS includes the payload in a soap:Envelope element.</li>
+</ul> 
+
+<p><a href="http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.express.doc/info/exp/ae/twbs_jaxwsdynclient.html" target="_blank">http://publib.boulder.ibm.com/infocenter/wasinfo/v7r0/index.jsp?topic=/com.ibm.websphere.express.doc/info/exp/ae/twbs_jaxwsdynclient.html</a> 
+  <br />
+  Following code use JAX-WS dispatch API<br />
+  The SOAPACTION_URI_PROPERTY is set, is not in above reference. This is need for .Net based web services.
+  
+</p>
+<pre class="prettyprint">
+	public SOAPMessage invoke(QName serviceName, QName portName, String endpointUrl, String soapActionUri) throws Exception {
+        /** Create a service and add at least one port to it. **/
+        Service service = Service.create(serviceName);
+        service.addPort(portName, SOAPBinding.SOAP11HTTP_BINDING, endpointUrl);
+
+        /** Create a Dispatch instance from a service.**/
+        Dispatch dispatch = service.createDispatch(portName,
+                SOAPMessage.class, Service.Mode.MESSAGE);
+
+        // The soapActionUri is set here. otherwise we get a error on .net based services.
+        dispatch.getRequestContext().put(Dispatch.SOAPACTION_USE_PROPERTY, new Boolean(true));
+        dispatch.getRequestContext().put(Dispatch.SOAPACTION_URI_PROPERTY, soapActionUri);
+
+        /** Create SOAPMessage request. **/
+        // compose a request message
+        MessageFactory messageFactory = MessageFactory.newInstance();
+        SOAPMessage message = messageFactory.createMessage();
+
+        //Create objects for the message parts
+        SOAPPart soapPart = message.getSOAPPart();
+        SOAPEnvelope envelope = soapPart.getEnvelope();
+        SOAPBody body = envelope.getBody();
+
+        //Populate the Message.  In here, I populate the message from a xml file
+        StreamSource preppedMsgSrc = new StreamSource(new FileInputStream("req.xml"));
+        soapPart.setContent(preppedMsgSrc);
+
+        //Save the message
+        message.saveChanges();
+
+        System.out.println(message.getSOAPBody().getFirstChild().getTextContent());
+
+        SOAPMessage response = (SOAPMessage) dispatch.invoke(message);
+
+        return response;
+    }
+</pre>
+<p>Content of req.xml :<br />
+  <img src="reqxml.GIF" width="878" height="122" />
+</p>
+
+A test case with above WSDL example:<br />
+<pre class="prettyprint">
+public class Main {
+    public static void main(String[] args) {
+
+		//proxy setting, only if you need
+        System.setProperty("http.proxyHost", "proxy.dcu.ie");
+        System.setProperty("http.proxyPort", "8080");
+        System.setProperty("sun.net.client.defaultConnectTimeout", "" + 2000);
+        System.setProperty("sun.net.client.defaultReadTimeout", "" + 2000);
+
+        Main m = new Main();
+        String targetNameSpace = "http://microsoft.com/webservices/";
+        String endpointUrl = "http://www50.brinkster.com/vbfacileinpt/np.asmx";
+        QName serviceName = new QName(targetNameSpace, "PrimeNumbers");
+        QName portName = new QName(targetNameSpace, "PrimeNumbersSoap");
+        String SOAPAction = "http://microsoft.com/webservices/GetPrimeNumbers";
+
+        SOAPMessage response;
+        try {
+            response = m.invoke(serviceName, portName, endpointUrl, SOAPAction);
+            if (response.getSOAPBody().hasFault()) {
+                System.out.println(response.getSOAPBody().getFault());
+            } else {
+                System.out.println("ok");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public SOAPMessage invoke(QName serviceName, QName portName, String endpointUrl, String soapActionUri) throws Exception {
+        ... 
+    }
+}
+</pre>
+
+Source code in NetBeans project: <a href="JavaApplication10.zip">here</a>
+<hr />
+<a name="Dynamic client with Axis2"><h2>Dynamic client with Axis2</h2></a>
+
+<p>
+  <a href="http://today.java.net/pub/a/today/2006/12/13/invoking-web-services-using-apache-axis2.html" target="_blank">http://today.java.net/pub/a/today/2006/12/13/invoking-web-services-using-apache-axis2.html</a>
+<p>
+Two steps.  
+<pre class="prettyprint">
+// step 1. create a dynamicClient;
+ServiceClient dynamicClient = new ServiceClient(configContext, wsdlURL,wsdlServiceName, portName); 
+  
+// step 2. then send a payLoad and get a response.                                               
+OMElement res = dynamicClient.sendReceive(createPayLoad());
+System.out.println(res);
+</pre>
+Following is a function to create a payload 
+<pre class="prettyprint">
+public OMElement createPayLoad() {
+        OMFactory fac = OMAbstractFactory.getOMFactory();
+        OMNamespace omNs = fac.createOMNamespace(
+                      "http://ws.apache.org/axis2/xsd", "ns1");
+        OMElement method = fac.createOMElement("echo", omNs);
+        OMElement value = fac.createOMElement("value", omNs);
+        value.setText("Hello , my first service utilization");
+        method.addChild(value);
+        return method;
+}
+</pre>
+
+While, above does not work with wsdl has soapAction element for me. and cause following error
+<br />
+<pre class="com" >
+<strong>org.apache.axis2.AxisFault: Server did not recognize the value of HTTP Header SOAPAction: urn:anonOutInOp.
+        at org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(Utils.java:435)
+        ...</strong>
+</pre>
+
+Another way is using an Option Object, and set SOAPAction in the Option. This works without above error. <br />
+1. create an Options object, and set xxx properties.<br />
+2. create a ServiceClient, and set the Options object.<br />
+3. send the PayLoad and receive a response.<br />
+
+<pre class="prettyprint">
+ServiceClient serviceClient = new ServiceClient();
+    
+// create option object
+Options opts = new Options();
+opts.setProperty(HTTPConstants.CHUNKED, false);
+opts.setTo(new EndpointReference(endpointUrl));
+
+//  >> set the SOAPAction value here !! To fix above error !!
+opts.setAction("http://ws.fraudlabs.com/PostalCodeWorld_Mexico");
+    
+serviceClient.setOptions(opts);
+    
+OMElement res = serviceClient.sendReceive(createPayLoad());
+System.out.println(res);
+</pre>
+
+<p>&nbsp;</p>
+
+
+Following is additional information with <strong>OMElement</strong> for manipulating PayLoad
+
+<p>AXIOM stands for AXIs Object Model and is a based on StAX(Streaming API for XML) and was developed to improve performance in XML parsing mechanism. AXIOM uses light weight XML with smaller hierarchy of XML elements than traditional XML technologies. It was initially developed for Axis but is now an Apache Commons project. AXIOM uses a technology called pull           parsing where required parsing is done by the AXIOM engine rather than depending on externals parsers. Axiom comprises two layers</p>
+
+<ul>
+  <li>Object Model(OM) Layer which takes care of the XML processing</li>
+  <li>SOAP Layer sits over the Object Model layer and takes care of the  SOAP modeling.</li>
+</ul>
+
+
+Following includes two options for create OMElement. Only one is need.<br>
+option 1: create an OMElement from a java bean<br>
+option 2: create an OMElement from a xml file<br>
+
+<pre class="prettyprint">
+        OMFactory fac = OMAbstractFactory.getOMFactory();
+
+        // option 1: create a xmlstreamreader from a bean
+        XMLStreamReader reader = BeanUtil.getPullParser(new Person("wong"));
+
+        // option 2: create a xmlstreamreader from a file
+        FileInputStream inputStream = new FileInputStream("1.xml");
+        XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        XMLStreamReader reader = inputFactory.createXMLStreamReader(inputStream);
+
+        // Finally, create a OMElement from a xmlstreamreader
+        StreamWrapper parser = new StreamWrapper(reader);
+        StAXOMBuilder stAXOMBuilder = OMXMLBuilderFactory.createStAXOMBuilder(OMAbstractFactory.getOMFactory(), parser);
+        OMElement element = stAXOMBuilder.getDocumentElement();
+
+        System.out.println("element::" + element.toString());
+</pre>
+
+<!-- begin htmlcommentbox.com -->
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Box</a> is loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="//www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=(""+window.location).replace(/'/g,"%27") || hcb_user.PAGE, h="//www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end htmlcommentbox.com -->
+
+</body>
+</html>
