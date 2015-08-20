@@ -300,17 +300,16 @@ df[<span class="kw">sample</span>(<span class="kw">nrow</span>(df), <span class=
 <span class="kw">by</span>(df[, <span class="dv">1</span>:<span class="dv">2</span>], df[,<span class="dv">3</span>], summary)
 
 <span class="co"># add a row or column</span>
-row &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
-df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, row);
-
-column &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
-df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, column);
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, x); <span class="co"># add a row</span>
+df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span class="co"># add a column</span>
 
 <span class="co"># create a new column with merged values of two columns</span>
 df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)
 
-<span class="co"># delete rows</span>
-df &lt;-<span class="st"> </span>df[-<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>),] <span class="co"># deleting rows by index</span>
+<span class="co"># deleting rows/column by index</span>
+df &lt;-<span class="st"> </span>df[-<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>), ] <span class="co"># delete rows</span>
+df &lt;-<span class="st"> </span>df[, -<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>)] <span class="co"># delete columns</span>
 
 <span class="co"># delete columns by names </span>
 df &lt;-<span class="st"> </span>df[, !(<span class="kw">colnames</span>(df) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TotalDuration&quot;</span>) )]

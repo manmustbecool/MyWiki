@@ -217,17 +217,16 @@ df[sample(nrow(df), 3), ]
 by(df[, 1:2], df[,3], summary)
 
 # add a row or column
-row <- c(1,2,3)
-df <- rbind(df, row);
-
-column <- c(1,2,3)
-df <- cbind(df, column);
+x <- c(1,2,3)
+df <- rbind(df, x); # add a row
+df <- cbind(df, x); # add a column
 
 # create a new column with merged values of two columns
 df$new_column = paste(df$V1, df$V2, sep="_")
 
-# delete rows
-df <- df[-c(1:8),] # deleting rows by index
+# deleting rows/column by index
+df <- df[-c(1:8), ] # delete rows
+df <- df[, -c(1:8)] # delete columns
 
 # delete columns by names 
 df <- df[, !(colnames(df) %in% c("TotalDuration") )]
