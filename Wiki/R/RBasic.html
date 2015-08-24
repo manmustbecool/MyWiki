@@ -199,10 +199,15 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 </div>
 <div id="factor" class="section level2">
 <h2><span class="header-section-number">0.4</span> Factor</h2>
-<p>factor() transforms a vector into a factor.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Factor to Numeric vector</span>
+<p>A Factor is a categorical variable</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># factor() transforms a vector into a factor.</span>
 f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>))
-v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f))</code></pre>
+
+<span class="co"># factor origional values to numeric values</span>
+v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) 
+
+<span class="co"># get numeric coding of the factor, not the origional values</span>
+v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(f) </code></pre>
 </div>
 <div id="matrix" class="section level2">
 <h2><span class="header-section-number">0.5</span> Matrix</h2>

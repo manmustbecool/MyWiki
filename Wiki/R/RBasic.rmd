@@ -106,11 +106,16 @@ paste(x, sep="", collapse="")
 ```
 
 ## Factor  ##
-factor() transforms a vector into a factor.
-```R
-# Factor to Numeric vector
+A Factor is a categorical variable
+```r
+# factor() transforms a vector into a factor.
 f <- factor(c("10", "11", "12"))
-v <- as.numeric(as.character(f))
+
+# factor origional values to numeric values
+v <- as.numeric(as.character(f)) 
+
+# get numeric coding of the factor, not the origional values
+v <- as.numeric(f) 
 ```
 
 
