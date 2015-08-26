@@ -20,7 +20,7 @@ install R in linux
 http://www.jason-french.com/blog/2013/03/11/installing-r-in-linux/
 
 
-## Atomic data types ##
+## Atomic data types
 
 The atomic data types are "logical", "integer", "numeric" (synonym "double"), "complex", "character" and "raw".
 
@@ -41,7 +41,7 @@ data$timestamp <- gsub("/", "-", data$timestamp)
 
 ```
 
-## Vector ##
+## Vector 
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
 
 ```r
@@ -105,7 +105,7 @@ paste(x, sep="", collapse="")
 
 ```
 
-## Factor  ##
+## Factor  
 A Factor is a categorical variable
 ```r
 # factor() transforms a vector into a factor.
@@ -134,6 +134,12 @@ m
 [1,]    1    4
 [2,]    2    5
 [3,]    3    6
+
+# vectors to matrix columns
+A <- c(0,5,4,3)
+B <- c(8,0,6,5)
+C <- c(3,6,0,2)
+m <- matrix(c(A,B,C), nrow=length(A))
 
 # Matrix Multiplication
 x %*% y

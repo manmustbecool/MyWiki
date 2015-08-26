@@ -224,6 +224,12 @@ m
 [<span class="dv">2</span>,]    <span class="dv">2</span>    <span class="dv">5</span>
 [<span class="dv">3</span>,]    <span class="dv">3</span>    <span class="dv">6</span>
 
+<span class="co"># vectors to matrix columns</span>
+A &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>)
+B &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">5</span>)
+C &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">2</span>)
+m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(A,B,C), <span class="dt">nrow=</span><span class="kw">length</span>(A))
+
 <span class="co"># Matrix Multiplication</span>
 x %*%<span class="st"> </span>y
 

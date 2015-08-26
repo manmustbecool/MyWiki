@@ -19,7 +19,6 @@ sudo apt-get install sun-java6-jdk
 export http_proxy=http://<proxy>:<port>
 export https_proxy=http://<proxy>:<port>
 sudo -E apt-add-repository ppa:flexiondotorg/java
-
 ```
 
 Check if java is installed `java version`
