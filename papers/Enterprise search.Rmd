@@ -1,0 +1,33 @@
+---
+title: ""
+output: html_document
+---
+
+Search platforms are not majorly different from databases or data warehouse systems from a conceptual view. Search platforms are considered NoSQL data stores by many people. In databases, data is stored into structured tables, generally, and then queried from those tables. For search platforms, data is indexed as documents and then the documents are searched from the index. 
+
+We classify and present the search platform in the following layers from bottom to top; from the various data sources in the data layer that would like to be searched to allowing the user to submit a search query and displaying results in end user UI applications.  
+
+
+![alt text](solrStack.png)
+
+ * **Data** 
+     + Purpose: Represent various data types and sources
+ * **Document building**
+     + Purpose: Build document information for indexing 
+ * **Indexing and searching**
+     + Purpose: Build and query a document index
+ * **Logic enhancement**
+     + Purpose: Additional logic for processing search queries and results
+ * **Search platform service**
+     + Purpose: Add additional functionalities of search engine core to provide a service platform.
+ * **UI application**
+     + Purpose: End-user search interface or applications 
+
+
+**Full detail in paper**:
+
+http://manmustbecool.github.io/MyWiki/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf
+
+or 
+
+http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7207254&punumber%3D7194705%26filter%3DAND%28p_IS_Number%3A7207183%29%26pageNumber%3D3
