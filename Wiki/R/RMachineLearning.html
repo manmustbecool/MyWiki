@@ -92,15 +92,11 @@ img {
 <li><a href="#recursive-partitioning-and-regression-trees"><span class="toc-section-number">0.7.2</span> Recursive Partitioning and Regression Trees</a></li>
 </ul></li>
 <li><a href="#association-rule-learning"><span class="toc-section-number">0.8</span> Association rule learning</a></li>
-<li><a href="#time-series"><span class="toc-section-number">0.9</span> Time Series</a><ul>
-<li><a href="#moving-averages"><span class="toc-section-number">0.9.1</span> Moving Averages</a></li>
-<li><a href="#arima"><span class="toc-section-number">0.9.2</span> Arima</a></li>
-</ul></li>
-<li><a href="#recommender-system"><span class="toc-section-number">0.10</span> Recommender system</a></li>
-<li><a href="#feature-selection"><span class="toc-section-number">0.11</span> Feature selection</a></li>
-<li><a href="#dimensionality-reduction"><span class="toc-section-number">0.12</span> Dimensionality Reduction</a><ul>
-<li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.12.1</span> Singular Value Decomposition (SVD)</a></li>
-<li><a href="#multidimensional-scaling-mds"><span class="toc-section-number">0.12.2</span> Multidimensional Scaling (MDS)</a></li>
+<li><a href="#recommender-system"><span class="toc-section-number">0.9</span> Recommender system</a></li>
+<li><a href="#feature-selection"><span class="toc-section-number">0.10</span> Feature selection</a></li>
+<li><a href="#dimensionality-reduction"><span class="toc-section-number">0.11</span> Dimensionality Reduction</a><ul>
+<li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.11.1</span> Singular Value Decomposition (SVD)</a></li>
+<li><a href="#multidimensional-scaling-mds"><span class="toc-section-number">0.11.2</span> Multidimensional Scaling (MDS)</a></li>
 </ul></li>
 </ul>
 </div>
@@ -346,99 +342,26 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <span class="kw">summary</span>(s1)
 <span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre>
 </div>
-<div id="time-series" class="section level2">
-<h2><span class="header-section-number">0.9</span> Time Series</h2>
-<p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
-<p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
-<pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>))
-
-<span class="kw">frequency</span>(t1) <span class="co"># get frequency</span>
-<span class="kw">frequency</span>(t1) &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># assign frequency</span>
-
-<span class="co"># Extract Data </span>
-<span class="kw">window</span>(t2, <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">'2000-01-01'</span>), <span class="dt">end=</span><span class="kw">as.Date</span>(<span class="st">'2000-31-12'</span>)</code></pre>
-<ul>
-<li>xts and zoo objects</li>
-</ul>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ------------- xts or zoo for data with time stamp</span>
-
-<span class="co"># xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $&lt;-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.</span>
-
-prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
-timestamps &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
-stockprices &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
-
-<span class="co"># convert data.frame to time series</span>
-stockprices
-<span class="co"># prices(numeric)    timestamps(character)</span>
-<span class="co"># 1.1         2011-01-05 11:00</span>
-<span class="co"># 2.2         2011-01-05 12:00</span>
-<span class="co"># 3.3         2011-01-05 13:00</span>
-
-<span class="kw">require</span>(xts)
-stockpricesXts &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">order.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
-stockpricesXts
-
-<span class="co"># select a time range</span>
-t1 &lt;-<span class="st"> </span>stockpricesXts[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]
-
-<span class="co"># read time stamp with format</span>
-timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(timestamps, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)</code></pre>
-<div id="moving-averages" class="section level3">
-<h3><span class="header-section-number">0.9.1</span> Moving Averages</h3>
-<ul>
-<li>TTR</li>
-</ul>
-<p><a href="http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html" class="uri">http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html</a></p>
-</div>
-<div id="arima" class="section level3">
-<h3><span class="header-section-number">0.9.2</span> Arima</h3>
-<ul>
-<li>forecast</li>
-</ul>
-<pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">Arima</span>(WWWusage, <span class="dt">order=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>))
-
-<span class="co"># plot the model against the data</span>
-<span class="kw">plot</span>(fit$x,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)
-<span class="kw">lines</span>(<span class="kw">fitted</span>(fit),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
-
-<span class="co"># auto arima</span>
-<span class="kw">require</span>(forecast)
-fit &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(ts)
-<span class="kw">plot</span>(<span class="kw">forecast</span>(fit, <span class="dt">h=</span><span class="dv">5</span>)) <span class="co"># 5 stps ahead</span>
-
-<span class="co"># Model Diagnostics for a Fitted ARIMA Model </span>
-<span class="co"># gof.lag = maximum lag used in ACF and Ljung-Box tests for the residuals</span>
-<span class="kw">tsdiag</span>(fit,<span class="dt">gof=</span><span class="dv">50</span>,<span class="dt">omit.initial=</span><span class="ot">FALSE</span>)
-
-<span class="co"># the 5th value in 5 stps ahead</span>
-<span class="kw">forecast</span>(fit, <span class="dt">h=</span><span class="dv">5</span>)$mean[<span class="dv">5</span>]
-
-<span class="co"># extract the (p, d, q) ; more info for arima.string() function</span>
-order &lt;-<span class="st"> </span><span class="kw">c</span>(fit$arma[<span class="dv">1</span>], fit$arma[<span class="dv">6</span>], fit$arma[<span class="dv">2</span>])
-</code></pre>
-</div>
-</div>
 <div id="recommender-system" class="section level2">
-<h2><span class="header-section-number">0.10</span> Recommender system</h2>
+<h2><span class="header-section-number">0.9</span> Recommender system</h2>
 <ul>
 <li>recommenderlab</li>
 </ul>
 </div>
 <div id="feature-selection" class="section level2">
-<h2><span class="header-section-number">0.11</span> Feature selection</h2>
+<h2><span class="header-section-number">0.10</span> Feature selection</h2>
 <ul>
 <li>caret</li>
 </ul>
 <p><a href="http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html" class="uri">http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html</a></p>
 </div>
 <div id="dimensionality-reduction" class="section level2">
-<h2><span class="header-section-number">0.12</span> Dimensionality Reduction</h2>
+<h2><span class="header-section-number">0.11</span> Dimensionality Reduction</h2>
 <div id="singular-value-decomposition-svd" class="section level3">
-<h3><span class="header-section-number">0.12.1</span> Singular Value Decomposition (SVD)</h3>
+<h3><span class="header-section-number">0.11.1</span> Singular Value Decomposition (SVD)</h3>
 </div>
 <div id="multidimensional-scaling-mds" class="section level3">
-<h3><span class="header-section-number">0.12.2</span> Multidimensional Scaling (MDS)</h3>
+<h3><span class="header-section-number">0.11.2</span> Multidimensional Scaling (MDS)</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. </span>
 euromat =<span class="st"> </span><span class="kw">as.matrix</span>(eurodist) <span class="co"># convert eurodist to matrix</span>
 euromat[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">5</span>] <span class="co"># inspect first five elements</span>
