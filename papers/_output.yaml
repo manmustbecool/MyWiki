@@ -1,0 +1,12 @@
+html_document:
+  fig_caption: yes
+  highlight: zenburn
+  keep_md: no
+  number_sections: yes
+  theme: united
+  toc: yes
+  fig_width: 5
+  fig_height: 4
+  date: "`r format(Sys.time(), '%d %B, %Y')`"
+  includes:
+    after_body: ..\Wiki\includes\footer.html
