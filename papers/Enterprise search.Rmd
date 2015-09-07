@@ -1,6 +1,8 @@
 ---
 title: ""
-output: html_document
+output: 
+  html_document: 
+    theme: flatly
 ---
 
 
@@ -11,22 +13,25 @@ Search platforms are not majorly different from databases or data warehouse syst
 We classify and present the search platform in the following layers from bottom to top; from the various data sources in the data layer that would like to be searched to allowing the user to submit a search query and displaying results in end user UI applications.  
 
 
-![alt text](solrStack.png)
+![figure/solrStack.png](solrStack.png) Fig.1
 
- * **Data** 
+
+ *  **Data** 
      + Purpose: Represent various data types and sources
- * **Document building**
+ *  **Document building**
      + Purpose: Build document information for indexing 
- * **Indexing and searching**
+ *  **Indexing and searching**
      + Purpose: Build and query a document index
- * **Logic enhancement**
+ *  **Logic enhancement**
      + Purpose: Additional logic for processing search queries and results
- * **Search platform service**
+ *  **Search platform service**
      + Purpose: Add additional functionalities of search engine core to provide a service platform.
- * **UI application**
+ *  **UI application**
      + Purpose: End-user search interface or applications 
 
+In the following, we are going to detail each layer and the corresponding software frameworks or components (Fig.1). Since Solr was selected for our study, as discussed in the previous section, only some major software related to Solr will be covered in here. 
 
+......
 
 
 # Full detail in paper
