@@ -52,6 +52,10 @@ plot(df$Petal.Width, xaxt="n", xlab = "" )
 axis(1, at=1:nrow(df), labels=df$Species, las=2, cex.axis=0.7)
 ```
 
+## create a color pattern
+```{r}
+cl <- rainbow(5)
+```
 
 
 # Histogram

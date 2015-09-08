@@ -12,11 +12,13 @@ http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseri
 ```r
 ts1 <- ts(c(2,3,2,3,4,5))
 
+ts1 <- ts(1:10, frequency=4, start=c(1959, 2)) # 2nd Quarter of 1959
+
 frequency(t1) # get frequency
 frequency(t1) <- 2 # assign frequency
 
 # extract data 
-window(t2, start=as.Date('2000-01-01'), end=as.Date('2000-31-12')
+window(t2, start=as.Date('2000-01-01'), end=as.Date('2000-31-12') )
 ```
  * xts and zoo objects
 
@@ -47,8 +49,11 @@ t1 <- stockpricesXts["2011-01-04T05:00/2011-01-05"]
 timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
 
 
-# ------------- deal with inregular time series -------------------
+```
 
+Deal with inregular time series
+
+```r
 # get minimum at an hour granularity
 tMinHour <- trunc(min(time(ts)), units ='hour')
 # back off 30 minute of the current hour
@@ -65,7 +70,9 @@ newValue <- tapply(ts, cCut, mean)
 newTs <- xts(newValue, order.by=seq(tMinHour, tMax, by='60 min') )
 plot(newTs)
 
+
 # ------- fix NA value ------------
+
 # assign 0 to NA
 ts[is.na(ts)] <- 0 
 # na.locf (Last Observation Carried Forward) from package zoo

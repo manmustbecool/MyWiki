@@ -93,11 +93,13 @@ img {
 <p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
 <pre class="sourceCode r"><code class="sourceCode r">ts1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>))
 
+ts1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="dv">1</span>:<span class="dv">10</span>, <span class="dt">frequency=</span><span class="dv">4</span>, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">1959</span>, <span class="dv">2</span>)) <span class="co"># 2nd Quarter of 1959</span>
+
 <span class="kw">frequency</span>(t1) <span class="co"># get frequency</span>
 <span class="kw">frequency</span>(t1) &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># assign frequency</span>
 
 <span class="co"># extract data </span>
-<span class="kw">window</span>(t2, <span class="dt">start=</span><span class="kw">as.Date</span>(<span class="st">'2000-01-01'</span>), <span class="dt">end=</span><span class="kw">as.Date</span>(<span class="st">'2000-31-12'</span>)</code></pre>
+<span class="kw">window</span>(t2, <span class="dt">start=</span><span class="kw">as.Date</span>(<span class="st">'2000-01-01'</span>), <span class="dt">end=</span><span class="kw">as.Date</span>(<span class="st">'2000-31-12'</span>) )</code></pre>
 <ul>
 <li>xts and zoo objects</li>
 </ul>
@@ -125,11 +127,9 @@ t1 &lt;-<span class="st"> </span>stockpricesXts[<span class="st">&quot;2011-01-0
 
 <span class="co"># read time stamp with format</span>
 timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(timestamps, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)
-
-
-<span class="co"># ------------- deal with inregular time series -------------------</span>
-
-<span class="co"># get minimum at an hour granularity</span>
+</code></pre>
+<p>Deal with inregular time series</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get minimum at an hour granularity</span>
 tMinHour &lt;-<span class="st"> </span><span class="kw">trunc</span>(<span class="kw">min</span>(<span class="kw">time</span>(ts)), <span class="dt">units =</span><span class="st">'hour'</span>)
 <span class="co"># back off 30 minute of the current hour</span>
 tMin &lt;-<span class="st"> </span>tMinHour -<span class="st"> </span>(<span class="dv">30</span> *<span class="st"> </span><span class="dv">60</span>)
@@ -145,7 +145,9 @@ newValue &lt;-<span class="st"> </span><span class="kw">tapply</span>(ts, cCut, 
 newTs &lt;-<span class="st"> </span><span class="kw">xts</span>(newValue, <span class="dt">order.by=</span><span class="kw">seq</span>(tMinHour, tMax, <span class="dt">by=</span><span class="st">'60 min'</span>) )
 <span class="kw">plot</span>(newTs)
 
+
 <span class="co"># ------- fix NA value ------------</span>
+
 <span class="co"># assign 0 to NA</span>
 ts[<span class="kw">is.na</span>(ts)] &lt;-<span class="st"> </span><span class="dv">0</span> 
 <span class="co"># na.locf (Last Observation Carried Forward) from package zoo</span>
