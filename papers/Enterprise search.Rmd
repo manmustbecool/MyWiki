@@ -6,7 +6,24 @@ output:
 ---
 
 
-# Solr Search Platform stack
+#	SEARCH FUNDAMENTALS
+Search might be a kind of new technology for many software applications. Production teams and management generally require a fundamental understanding of the technology before it can be introduced into production systems. Based our own experience and questions we encountered, we will try to answer the following questions, to give an introduction to search, rather than explaining the complex indexing mechanism or other technical details.
+
+•	Why do we need search?
+o	Search and SQL
+•	How to give good search results?
+o	Ranking and navigation
+•	Can it scale out? 
+o	Big data search
+•	Is it production ready?
+o	Search software
+These questions will be answered in the following subsections
+
+
+....
+
+
+# SOLR SEARCH PLATFORM STACK
 
 Search platforms are not majorly different from databases or data warehouse systems from a conceptual view. Search platforms are considered NoSQL data stores by many people. In databases, data is stored into structured tables, generally, and then queried from those tables. For search platforms, data is indexed as documents and then the documents are searched from the index. 
 
