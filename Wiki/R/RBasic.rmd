@@ -96,6 +96,14 @@ intersect(x, y)
 setdiff(x, y) # (asymmetric!) difference, setdiff(y, x) for y difference to x
 setequal(x, y) 
 
+# compare 2 vector
+all(c(1,2,3)==c(1,2,3))
+# > TRUE
+all(c(1,2,3)==c(2,1,3))
+# > FALSE
+all(c(1,2,3)==c(1,2,NA))
+# > NA
+
 # Return the sum of all the values
 sum(v)
 sum(v==1) # count the number of value 1
