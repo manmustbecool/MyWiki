@@ -280,10 +280,9 @@ accuracy(fcast4, a10)
 
 ```
 
-## xreg/covariates object
+## regressor/covariate
 
 ```r
-#
 hour <- as.POSIXlt(time(xts1))$hour    # extract the hour of time stamp
 xreg <- model.matrix(~as.factor(hour)) # hourly 
 

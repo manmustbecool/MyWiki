@@ -88,7 +88,7 @@ img {
 <li><a href="#decomposition"><span class="toc-section-number">0.5</span> Decomposition</a></li>
 <li><a href="#finding-the-period"><span class="toc-section-number">0.6</span> Finding the period</a></li>
 <li><a href="#arima-1"><span class="toc-section-number">0.7</span> ARIMA</a></li>
-<li><a href="#xregcovariates-object"><span class="toc-section-number">0.8</span> xreg/covariates object</a></li>
+<li><a href="#regressorcovariate"><span class="toc-section-number">0.8</span> regressor/covariate</a></li>
 </ul>
 </div>
 
@@ -396,10 +396,9 @@ fcast4 &lt;-<span class="st"> </span><span class="kw">forecast</span>(fit4, <spa
 ## Training set -0.04940304        NA
 ## Test set      0.57701894  1.345497</code></pre>
 </div>
-<div id="xregcovariates-object" class="section level2">
-<h2><span class="header-section-number">0.8</span> xreg/covariates object</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
-hour &lt;-<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">time</span>(xts1))$hour    <span class="co"># extract the hour of time stamp</span>
+<div id="regressorcovariate" class="section level2">
+<h2><span class="header-section-number">0.8</span> regressor/covariate</h2>
+<pre class="sourceCode r"><code class="sourceCode r">hour &lt;-<span class="st"> </span><span class="kw">as.POSIXlt</span>(<span class="kw">time</span>(xts1))$hour    <span class="co"># extract the hour of time stamp</span>
 xreg &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(~<span class="kw">as.factor</span>(hour)) <span class="co"># hourly </span>
 
 
