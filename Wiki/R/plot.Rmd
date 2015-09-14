@@ -31,6 +31,33 @@ axis(4, (range(y2)), ylab='y2') # draw second axis on the right
 mtext("y2", side=4, line=2.3, adj=0.5, cex=1) # add test label on the right
 ```
 
+## rotating axis labels in R
+
+las:
+0: always parallel to the axis [default],
+1: always horizontal,
+2: always perpendicular to the axis,
+3: always vertical.
+
+```{r}
+plot(iris$Sepal.Length, las=2)
+```
+
+## label all factor in axis
+
+```{r}
+df <- iris[sample(nrow(iris), 30), ]
+
+plot(df$Petal.Width, xaxt="n", xlab = "" )
+axis(1, at=1:nrow(df), labels=df$Species, las=2, cex.axis=0.7)
+```
+
+## create a color pattern
+```{r}
+cl <- rainbow(5)
+```
+
+
 # Histogram
 
 ```{r}
@@ -67,6 +94,28 @@ qqplot(x, y)
 ```
 
 
+# Graph plot
+
+```{r, warning=F}
+library(igraph)
+
+df <- data.frame(
+  A=c("Dublin", "Cork", "Galway") , 
+  B=c("Cork", "Galway", "Dublin"))
+
+dfg <- graph.data.frame(d=df, directed=FALSE)
+
+V(dfg)$color="red" # set vertex color
+E(dfg)$color="blue" # set edge color
+
+# igraph_options(plot.layout=layout_as_tree) # tree graph
+plot(dfg, vertex.label=(dfg)$name)
+
+```
+
+tkplot(dfg)  # interactive plot
+
+rglplot(dfg) # 3D plot
 
 
 # Other

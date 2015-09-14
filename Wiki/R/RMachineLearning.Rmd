@@ -1,5 +1,6 @@
 ---
 title: "R Machine Learning"
+output: html_document
 ---
 
 ## Gradient descents 
@@ -262,88 +263,6 @@ s1 <- cspade(t, parameter=list(support = 0.4),
            control=list(verbose = TRUE))
 summary(s1)
 as(s1, "data.frame")
-```
-
-## Time Series
-
-http://www.statmethods.net/advstats/timeseries.html
-
-http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
-
-```r
-t1 <- ts(c(2,3,2,3,4,5))
-
-frequency(t1) # get frequency
-frequency(t1) <- 2 # assign frequency
-
-# Extract Data 
-window(t2, start = as.Date('2000-01-01'), end=as.Date('2000-31-12')
-
-```
- * xts and zoo objects
-
-```r
-# ------------- xts or zoo for data with time stamp
-
-# xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $<-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.
-
-prices <- c(1.1, 2.2, 3.3)
-timestamps <-  c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
-stockprices <- data.frame(prices, timestamps)
-
-# convert data.frame to time series
-stockprices
-# prices(numeric)    timestamps(character)
-# 1.1         2011-01-05 11:00
-# 2.2         2011-01-05 12:00
-# 3.3         2011-01-05 13:00
-
-require(xts)
-stockpricesXts <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
-stockpricesXts
-
-# select a time range
-t1 <- stockpricesXts["2011-01-04T05:00/2011-01-05"]
-
-# read time stamp with format
-timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
-
-```
-
-### Moving Averages 
-
-  * TTR
-
-http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
-
-
-### Arima 
-
-  * forecast
-
-```r
-fit <- Arima(WWWusage, order=c(3,1,0))
-
-# plot the model against the data
-plot(fit$x,col="black")
-lines(fitted(fit),col="red")
-
-# auto arima
-require(forecast)
-fit <- auto.arima(ts)
-plot(forecast(fit, h=5)) # 5 stps ahead
-
-# Model Diagnostics for a Fitted ARIMA Model 
-# gof.lag = maximum lag used in ACF and Ljung-Box tests for the residuals
-tsdiag(fit,gof=50,omit.initial=FALSE)
-
-# the 5th value in 5 stps ahead
-forecast(fit, h=5)$mean[5]
-
-# extract the (p, d, q) ; more info for arima.string() function
-order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
-
-
 ```
 
 ## Recommender system ##

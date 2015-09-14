@@ -48,7 +48,7 @@ code > span.er { color: #c3bf9f; }
 </style>
 
 
-<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%0Abody%20%7B%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%20%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%0A%23backTotop%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%2010px%3B%0A%20%20top%3A%2090%25%3B%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0A%0Abody%20%7B%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%20%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -71,7 +71,7 @@ img {
 </style>
 <div class="container-fluid main-container">
 
-<div>
+<div id="homeLink">
 <p><b></b>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></b></p>
 </div>
 
@@ -190,6 +190,14 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 <span class="kw">setdiff</span>(x, y) <span class="co"># (asymmetric!) difference, setdiff(y, x) for y difference to x</span>
 <span class="kw">setequal</span>(x, y) 
 
+<span class="co"># compare 2 vector</span>
+<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))
+<span class="co"># &gt; TRUE</span>
+<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>))
+<span class="co"># &gt; FALSE</span>
+<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="ot">NA</span>))
+<span class="co"># &gt; NA</span>
+
 <span class="co"># Return the sum of all the values</span>
 <span class="kw">sum</span>(v)
 <span class="kw">sum</span>(v==<span class="dv">1</span>) <span class="co"># count the number of value 1</span>
@@ -199,10 +207,15 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 </div>
 <div id="factor" class="section level2">
 <h2><span class="header-section-number">0.4</span> Factor</h2>
-<p>factor() transforms a vector into a factor.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Factor to Numeric vector</span>
+<p>A Factor is a categorical variable</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># factor() transforms a vector into a factor.</span>
 f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>))
-v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f))</code></pre>
+
+<span class="co"># factor origional values to numeric values</span>
+v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) 
+
+<span class="co"># get numeric coding of the factor, not the origional values</span>
+v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(f) </code></pre>
 </div>
 <div id="matrix" class="section level2">
 <h2><span class="header-section-number">0.5</span> Matrix</h2>
@@ -218,6 +231,12 @@ m
 [<span class="dv">1</span>,]    <span class="dv">1</span>    <span class="dv">4</span>
 [<span class="dv">2</span>,]    <span class="dv">2</span>    <span class="dv">5</span>
 [<span class="dv">3</span>,]    <span class="dv">3</span>    <span class="dv">6</span>
+
+<span class="co"># vectors to matrix columns</span>
+A &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>)
+B &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">6</span>,<span class="dv">5</span>)
+C &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">2</span>)
+m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(A,B,C), <span class="dt">nrow=</span><span class="kw">length</span>(A))
 
 <span class="co"># Matrix Multiplication</span>
 x %*%<span class="st"> </span>y
@@ -300,17 +319,16 @@ df[<span class="kw">sample</span>(<span class="kw">nrow</span>(df), <span class=
 <span class="kw">by</span>(df[, <span class="dv">1</span>:<span class="dv">2</span>], df[,<span class="dv">3</span>], summary)
 
 <span class="co"># add a row or column</span>
-row &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
-df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, row);
-
-column &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
-df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, column);
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, x); <span class="co"># add a row</span>
+df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span class="co"># add a column</span>
 
 <span class="co"># create a new column with merged values of two columns</span>
 df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)
 
-<span class="co"># delete rows</span>
-df &lt;-<span class="st"> </span>df[-<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>),] <span class="co"># deleting rows by index</span>
+<span class="co"># deleting rows/column by index</span>
+df &lt;-<span class="st"> </span>df[-<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>), ] <span class="co"># delete rows</span>
+df &lt;-<span class="st"> </span>df[, -<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>)] <span class="co"># delete columns</span>
 
 <span class="co"># delete columns by names </span>
 df &lt;-<span class="st"> </span>df[, !(<span class="kw">colnames</span>(df) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TotalDuration&quot;</span>) )]
@@ -493,6 +511,9 @@ myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span 
 </div>
 
 .
+
+<div id="backTotop"><a href="#homeLink">^Back to top^</a></div>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

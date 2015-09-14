@@ -1,0 +1,472 @@
+<html>
+
+<head>
+<title>Solr search</title>
+
+<style>
+
+h1 { color: #ff4411; font-size: 34px; font-family: 'Signika', sans-serif; padding-bottom: 10px; }
+
+p { font-family: 'Inder', sans-serif; line-height: 28px; margin-bottom: 15px; color: #666; }
+
+a { color: #ff4411; transition: .5s; -moz-transition: .5s; -webkit-transition: .5s; -o-transition: .5s; }
+
+a:hover { color: #a03c21 }
+
+
+.entry-content { border-bottom: 3px solid #666; padding: 0 0 15px 0; margin-bottom: 8px; }
+
+</style>
+
+</head>
+
+<body>
+
+
+<p>
+The followng is only two sections of a paper which mainly about Solr search. full paper is available at 
+</p>
+
+<a href="http://manmustbecool.github.io/MyWiki/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf">http://manmustbecool.github.io/MyWiki/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf</a>
+
+
+</br> or </br>
+
+
+<a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7207254&punumber%3D7194705%26filter%3DAND%28p_IS_Number%3A7207183%29%26pageNumber%3D3">http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7207254&punumber%3D7194705%26filter%3DAND%28p_IS_Number%3A7207183%29%26pageNumber%3D3</a>
+
+
+
+
+<h1>
+    I. Search fundamentals
+</h1>
+<p>
+    Search might be a kind of new technology for many software applications. Production teams and management generally require a fundamental understanding of
+    the technology before it can be introduced into production systems. Based our own experience and questions we encountered, we will try to answer the
+    following questions, to give an introduction to search, rather than explaining the complex indexing mechanism or other technical details.
+</p>
+<ul>
+    <li>
+        Why do we need search?
+    </li>
+    <ul>
+       <li>
+          Search and SQL
+      </li>
+    </ul>
+    
+    <li>
+        How to give good search results?
+    </li>
+    <ul>
+       <li>
+          Ranking and navigation
+      </li>
+    </ul>
+    
+     <li>
+        Can it scale out?
+    </li>
+    <ul>
+       <li>
+          Big data search
+      </li>
+    </ul>
+    
+     <li>
+        Is it production ready?
+    </li>
+    <ul>
+       <li>
+          Search software
+      </li>
+    </ul>
+</ul>
+
+<p>
+    These questions will be answered in the following subsections.
+</p>
+<h2>
+    A. Search and SQL
+</h2>
+<p>
+    With both SQL Relational (or NoSQL) database systems and search platforms such as Solr, data can be stored, indexed, and retrieved. Many databases also
+    have advanced full-text index and search capabilities, for example PostgreSQL and MySQL. Since, with most existing applications, such as network management
+    systems, data is stored in a traditional database, it is a common question to be asked, why should we use or migrate to a search platform for our use
+    cases.
+</p>
+<p>
+    There are overlapping functions between database systems and search platforms. However, the two types of systems have different focuses making them better
+    for different scenarios. Search engines focus on storing and querying indexes of data rather than the data itself. It is possible for data itself to either
+    be stored within the search engine or stored outside the search engine. Hence, search engines do not offer database features for storing data, such as
+    complex tables/schemas for data modelling, ACID (Atomicity, Consistency, Isolation, and Durability) properties for database transactions, etc. but do
+    provide advanced search features such as sophisticated ranking models, highlighting, etc.
+</p>
+<p>
+    Search engines can offer various advantages over SQL database in many use cases:
+</p>
+<ul>
+    <li>
+        Advanced search features
+    </li>
+</ul>
+<p>
+    Many advanced search features such as auto-suggestion and proximity search are not available in database systems due to the different focus of such
+    systems. In many cases, search engines are used as a secondary index of a database to enhance the search capability while also reducing full database
+    scans.
+</p>
+<ul>
+    <li>
+        Fast query speed
+    </li>
+</ul>
+<p>
+    Search engines are designed and optimized for finding relevant documents from built indexes for a search query. Unlike a database, it does not need to
+    perform a full table scan that would be required for a simple wildcard-based text SQL search. It does not have many of the constraints of database design,
+    such as how quickly an individual document can be updated or retrieved. This means that search engines generally have faster query response times compared
+    to databases.
+</p>
+<ul>
+    <li>
+        Data information centralization
+    </li>
+</ul>
+<p>
+    Enterprise data is normally stored in various data stores, such as SQL databases, content repositories and file systems. It is difficult for users to link
+    information between different data sources. A search engine has the ability to handle various data sources and types (structured and unstructured). This
+    makes it possible to provide an information portal with all the enterprise data in a single interface.
+</p>
+<ul>
+    <li>
+        Google like experience
+    </li>
+</ul>
+<p>
+    Both SQL and Solr queries have expressive syntaxes for complex data queries. A SQL query is designed for structured data and requires specified data tables
+    to match users’ data queries. In a search engine, data is de-normalized documents. A simple query can start with any terms or words just like Google
+    search. It is not necessary for users to know any query syntaxes or data schemas to start data discovery.
+</p>
+<h2>
+    B. Ranking and Navigation
+</h2>
+<p>
+    Search applications are not only able to retrieve matching information; the most important part is being able to find the ‘right’ information to answer the
+    users’ questions. There could be millions or billions of matching or relevant search results; there are only a very small amount of results that a typical
+    user is willing to browse. It can be like trying to find the right drop in an ocean for users. Two fundamental approaches to tackling this problem in
+    search application development are: ranking and navigation.
+</p>
+<ul>
+    <li>
+        Ranking
+    </li>
+</ul>
+<p>
+    Ranking can determine the most important (top-ranked) query results based on ranking algorithms. Search engines generally have one or more ranking
+    algorithms built in, such as the Vector Space Model (VSM) based algorithm in Lucene [<a href="#_ENREF_4" title="Grainger, 2014 #1127">4</a>]. These
+    algorithms are fairly complex and consider many factors to rank results, for example, how important a word is to a document over the whole document
+    collection. Different algorithms may be needed for better results for different application cases. For example, to measure importance of web pages,
+    (Google) PageRank is a link-based ranking algorithm that takes into account hyperlink information between web pages.
+</p>
+<p>
+    Ranking is one of the fundamental problems in information retrieval. Optimizing existing or developing new better ranking algorithms requires a huge amount
+    of scientific and domain knowledge, and could be a difficult task. In most cases, application developers probably just use the built-in ranking algorithms
+    with some offered customization functions. For example, a ‘boosting’ function can assign more weight to words in the title than the content of books.
+</p>
+<ul>
+    <li>
+        Navigation
+    </li>
+</ul>
+<p>
+    Navigation gives a UI interface (e.g. advanced search page) to allow navigation of search results. It, like a file manager or browser, has research results
+    organized in different ‘directories’ or ‘filters’. It is a very common UI feature in search engines, especially in e-commerce websites. For example,
+    clothes can be categorised by different sizes, price, etc. It helps users to quickly reduce the search scope through clicks. It makes it easy for untrained
+    users to find the specific data they are interested in. Two common techniques are available for developing search navigation: faceted navigation and
+    document clustering.
+</p>
+<p>
+    <em><u>Faceted Navigation:</u></em>
+    is based on faceted classification which classifies documents using multiple taxonomies (sets of attributes or facets). For example, a collection of books
+    might be classified using multiple attributes such as author, title, date, etc. Hence, allowing users to explore a collection of information by applying
+    multiple filters. Faceting is an available feature in Lucene and Solr for application developers to directly use in a search UI.
+</p>
+<p>
+    <em><u>Document clustering:</u></em>
+    is based on cluster analysis of document contents to allow automatically grouping of documents into different topics or subjects. For example, results of a
+    search for “Ireland” might be grouped into different topics such as sport, finance, food, etc. As a result, users can quickly select interesting topic
+    groups and filter out undesired ones. This feature is offered as a Solr search component.
+</p>
+<h2>
+    C. Big data search
+</h2>
+<p>
+    A critical challenge in a variety of industry sectors, such as telecoms, nowadays is that IT applications need to handle very large and complex data sets,
+    which are difficult for traditional data management or data processing systems to handle. This makes “Big data” one of the hottest topics in IT industry
+    today. The challenges include various data related tasks such as collection, storage, analysis and of course, search and discovery.
+</p>
+<p>
+    Scalability for big data problem does not exist for current common search platforms, Solr or Elasticsearch. Elasticsearch was initially developed for the
+    purpose of creating a scalable search solution. In the case of Solr, it offers SolrCloud for setting up a cluster of Solr servers to scale out and
+    ZooKeeper is used for cluster coordination and configuration, just as in the Hadoop cluster. As the result, Solr search is an available add-on feature of
+    many commercial Hadoop distributions, such as those from Cloudera and MapR. In these cases, Solr is one of distributed applications integrated into the
+    Hadoop platform and managed by Hadoop management component (YARN) to improve the cluster efficiency.
+</p>
+<p>
+    SolrCould distributes both the index process and the queries automatically. It uses ZooKeeper to automatically elect a new cluster leader when a leader
+    goes down. This avoids the single point of failure of a fixed master slave cluster. The main underlying concept of SolrCloud for data distribution is the
+    same as database systems, by having a large dataset split into multiple shards. Shards are the partitioning unit for the index data, so that search load
+    for that the dataset can be split across multiple servers and search results are merged across those shards.
+</p>
+<h2>
+    D. Search software
+</h2>
+<p>
+    In the market of search engines or platforms, there are plenty of commercial products which offer great features, such as Splunk. Nevertheless, we were
+    more interested in open-source projects for research prototype development, as it has the convenience of being able to study the internal technical details
+    and implement customized features. Moreover, many commercial search products are built on the open source projects. For instance, Lucidworks Fusion,
+    Cloudera Search, etc. are built on Apache Solr.
+</p>
+<p>
+    Search engines implement the various complex search-related operations, such as index building and querying. Search platforms use the search engine under
+    the hood and build additional functionalities around it, such as scalability, administration and filtering. There are dozens of open source search engines
+    and platforms [<a href="#_ENREF_5" title="Middleton, 2007 #1170">5</a>]. Apache Solr and Elasticsearch are the most popular open source search platforms
+    built on the Apache Lucene search engine [<a href="#_ENREF_6" title=",  #1171">6</a>] at the moment. Since both platforms use a same engine and are very
+    actively developed, it is hard to find any significant advantages of one over the other in their most recent versions. Nevertheless, they are backed by
+    different big data vendors making it much easier to pick if a commercial Hadoop distribution is already used in production. As a consequence, our paper is
+    mainly about a study with Solr.
+</p>
+<p>
+    We give a quick summary of the concern regarding technology maturity and commercial support for production development. Search software and vendors are
+    well developed. Open source search platforms Solr and Elasticsearch are proved production ready and with commercial support available. Solr is integrated
+    and offered in big data platforms of all three major Hadoop vendors (Cloudera, Hortonworks, MapR).
+</p>
+
+
+<h1>
+    II. Solr Search platform stack
+</h1>
+
+<p>Search platforms are not majorly different from databases or data warehouse systems from a conceptual view. Search platforms are considered NoSQL data stores by many people. In databases, data is stored into structured tables, generally, and then queried from those tables. For search platforms, data is indexed as documents and then the documents are searched from the index.</p>
+<p>We classify and present the search platform in the following layers from bottom to top; from the various data sources in the data layer that would like to be searched to allowing the user to submit a search query and displaying results in end user UI applications.</p>
+<ul>
+<li><span style="text-decoration: underline;">Data </span>
+<ul>
+<li>Purpose: Represent various data types and sources</li>
+</ul>
+</li>
+<li><span style="text-decoration: underline;">Document building</span>
+<ul>
+<li>Purpose: Build document information for indexing</li>
+</ul>
+</li>
+<li><span style="text-decoration: underline;">Indexing and searching</span>
+<ul>
+<li>Purpose: Build and query a document index</li>
+</ul>
+</li>
+<li><span style="text-decoration: underline;">Logic enhancement</span>
+<ul>
+<li>Purpose: Additional logic for processing search queries and results</li>
+</ul>
+</li>
+<li><span style="text-decoration: underline;">Search platform service</span>
+<ul>
+<li>Purpose: Add additional functionalities of search engine core to provide a service platform.</li>
+</ul>
+</li>
+<li><span style="text-decoration: underline;">UI application</span>
+<ul>
+<li>Purpose: End-user search interface or applications</li>
+</ul>
+</li>
+</ul>
+
+<img src="solrStack.png">
+
+<p>Figure 1: Solr search platform stack</p>
+
+
+<p>In the following, we are going to detail each layer and the corresponding software frameworks or components (Fig.1). Since Solr was selected for our study, as discussed in the previous section, only some major software related to Solr will be covered in here.</p>
+
+<h2>A.&nbsp;&nbsp;&nbsp; Data</h2>
+
+<p>One of main advantages of the search platform compared to a database is that it can handle both structured and unstructured data. This means the search platform has the capability to index and search data from existing database, file repository, etc. The data layer represents these various data types and sources.</p>
+
+<p>Since the data sources are external or not tightly coupled to search platforms and there are a huge number of data storage software solutions, we will not detail the software component for the data layer. However, search functions might be only able to retrieve search results to work with external data storage together if data itself is not stored inside the search engine. Depending on the design of the search application, the search engine could store only indexes of the data while the data itself can be stored separately outside the search engine with links to the indexes. Search results can be retrieved from the external data storage based on the link information. For example, web search engines normally do not save the full content of Web pages from external web servers but instead just store page indexes and the URL of pages. Search engines used as secondary index of databases such as Hbase, are similar examples.</p>
+
+<h2>B.&nbsp;&nbsp;&nbsp; Building documents</h2>
+<p>For common database systems, a Table is used as a data structure to store related information. It consists of fields (columns), and rows. Multiple tables can be formed for different topics in a logic database, such as employee (name, department, role&hellip;) table, customer (name, address, sex&hellip;) table.</p>
+<p>In the concept of a search engine, documents are the unit of indexing and search. A Document is a set of fields. Each field has a name and a textual value. It is just like a paper document, which has title, author, date, etc. Unlike databases, which can have multiple tables in a logical database, all data in a search engine must be de-normalized in to a single defined document schema in a logic document collection (Fig.2).</p>
+
+<img src="tablesDocuments.png"></img>
+<p>Figure 2: Tables in a Database (left) V.S. Documents in a Collection (right)</p>
+
+
+<p>Hence, for a piece of data, regardless of if it is structured or unstructured, all searchable information of the data must be extracted and converted to a document, so that it can be indexed and searched afterward. Due to the complexity and variety of data, additional software components to the Solr API, handler, etc. might be used to build documents, for example, for extracting information from audio files or web pages; or for language translations.</p>
+
+
+<p><strong><em>Nutch </em></strong></p>
+<p>Highly scalable web crawler</p>
+<ul>
+<li>An open source Apache project</li>
+<li>Tightly integrated with Solr</li>
+<li>Modular, extensible architecture that allows adding of plugins</li>
+<li>Distributed to provide scalability and reliability</li>
+<li>Supports different storage back-ends, such as Hadoop, Hbase, etc. (Hadoop was a spun out subproject from Nutch)</li>
+<li>Supports parsing with Tika</li>
+</ul>
+<p><strong><em>TIKA</em></strong></p>
+<p>Toolkit for detecting, parsing and extracting metadata and text content from files for indexing</p>
+<ul>
+<li>An open source Apache project</li>
+<li>Integrated into Solr via a plugin that comes, by default, with Solr.</li>
+<li>A simple unified interface for all parsers.</li>
+<li>Allow adding of new parsers as plug-ins.</li>
+<li>Support over a thousand different file types, such as HTML, PDF, XML, audio, video, etc.</li>
+<li>Able to detect the language of a document.</li>
+</ul>
+<p><strong><em>UIMA</em></strong></p>
+<p>UIMA stands for Unstructured Information Management Architecture. Framework for transforming unstructured information, such as text, audio and video into structured information</p>
+<ul>
+<li>Apache project, originally developed by IBM and used in the Watson project.</li>
+<li>Native support for distributed computation for scale out</li>
+<li>Define custom pipelines of Analysis Engines (annotators) which incrementally add metadata to the document via annotations.</li>
+</ul>
+<p><strong><em>OpenNLP</em></strong></p>
+<p>Machine learning based toolkit for the processing of natural language text</p>
+<ul>
+<li>Apache project, originally developed by IBM.</li>
+<li>Supporting many NLP tasks, such as tokenization, sentence segmentation, part-of-speech tagging, etc. with machine learning processes.</li>
+<li>Can be run under UIMA as a plugin</li>
+</ul>
+<p><strong><em>GATE</em></strong></p>
+<p>A suite of tools for text processing</p>
+<ul>
+<li>Open source project, originally developed by University of Sheffield</li>
+<li>Similar to UIMA, has a GATE-UIMA interoperability layer for combining GATE and UIMA</li>
+</ul>
+<p><strong><em>Kuromoji</em></strong></p>
+<p>A Japanese morphological analyser that provides the Japanese language support in Solr</p>
+<ul>
+<li>Apache project originally developed by Atilika</li>
+<li>Tokenisation of Japanese text</li>
+<li>Supports part-of-speech tagging</li>
+</ul>
+<p><strong><em>Smartcn</em></strong></p>
+<p>A library for analysing Chinese text that provides the Chinese language support in Solr</p>
+<ul>
+<li>Part of the Apache Stanbol project</li>
+<li>Tokenisation of Chinese text</li>
+</ul>
+<p><strong><em>Spatial4j</em></strong></p>
+<p>A geospatial Java library with Solr integration</p>
+<ul>
+<li>Open source library</li>
+<li>Provide common shapes that can work in Euclidean and geodesic (surface of sphere) world models</li>
+<li>Provide distance calculations and other geospatial mathematical functions</li>
+<li>Read shapes from WKT formatted strings</li>
+</ul>
+<p><strong><em>Lily HBase Indexer</em></strong></p>
+<p>A tool for indexing data stored in HBase</p>
+<ul>
+<li>An open source project developed by NGDATA and Cloudera</li>
+<li>Allows you to define indexing rules</li>
+<li>Designed to scale</li>
+<li>Indexes asynchronously so that HBase performance is not affected</li>
+</ul>
+<p><strong><em>Solandra</em></strong></p>
+<p>Integration of Solr and Cassandra</p>
+<ul>
+<li>An open source project developed by DataStax</li>
+<li>Uses Cassandra as storage to allow Solr to scale to huge numbers of documents</li>
+<li>Supports most Solr features</li>
+<li>Data is available as soon as the write succeeds</li>
+</ul>
+<p><strong><em>Morphlines</em></strong></p>
+<p>Framework for easily developing Hadoop processing applications for loading data into Solr, HBase, HDFS or other data warehouse.</p>
+<ul>
+<li>An open source project developed by Cloudera</li>
+<li>No need to code, just simple configuration</li>
+</ul>
+<h2>C.&nbsp;&nbsp;&nbsp; Indexing and searching</h2>
+<p>Indexing is the process of converting document fields into a format or index that facilitates rapid searching. A simple analogy is an index that you would find at the end of a book: That index points you to the location of topics that appear in the book. These functions are implemented by a search framework or library which is the core engine of a search platform.</p>
+<p><strong><em>Lucene</em></strong></p>
+<p>Java search engine library for indexing and searching</p>
+<ul>
+<li>Apache project.</li>
+<li>Supporting field-specific indexing and searching, sorting, highlighting, and wildcard searches, etc.</li>
+<li>With some state-of-the-art ranking algorithm implementations, such as Vector Space Model (VSM).</li>
+</ul>
+<h2>D.&nbsp;&nbsp;&nbsp; Logic ehancement</h2>
+<p>It is sometimes necessary to apply additional processing logic to search queries, search results, etc. in many application use cases. For example, making searches return the first paragraph of a text document field if the text content is too long. In addition to the Solr API, handler, etc., there are other Solr add-on components, which developers can use that allow them to specify processing logic.</p>
+<p><strong><em>Business Rules for Solr</em></strong></p>
+<p>A module for Solr that integrates with rules engines.</p>
+<ul>
+<li>The feature was not completed in Apache Solr, but a proprietary module is available from LucidWorks</li>
+<li>Allow modification of queries, search results or documents before they are indexed by business rules.</li>
+<li>Integrate with Drools and other rules engines</li>
+</ul>
+<p><strong><em>Carrot2 </em></strong></p>
+<p>Search results clustering engine</p>
+<ul>
+<li>An open source project included with Solr as a plugin</li>
+<li>automatically cluster small collections of documents,</li>
+<li>With specialized document clustering algorithms implementations</li>
+</ul>
+<h2>E.&nbsp;&nbsp;&nbsp; Search platform service</h2>
+<p>Beside core indexing and search functions provided by search engine library, i.e. Lucene, additional functionality like HTTP APIs, administration interface; scalability, content parsing, etc. are also commonly required for building search applications. As a consequence, applications, such as Solr, are built on top of the Lucene core engine to provide a search platform service.</p>
+<p><strong><em>Solr </em></strong></p>
+<p>The search engine interface to the Apache Lucene search library</p>
+<ul>
+<li>Apache project. Originally developed by CNET networks.</li>
+<li>Based on Lucene and backed by Lucid imagination</li>
+<li>Has a simple REST based query interface</li>
+<li>Includes plugins for many frameworks described, such as Tika, by default.</li>
+<li>Scalable using SolrCloud, which provides sharding and replication</li>
+</ul>
+<h2>F.&nbsp;&nbsp;&nbsp; UI application</h2>
+<p>An end user application requires a UI for submitting search queries and browsing search results, similar to a database browser.</p>
+<p><strong><em>Velocity UI</em></strong></p>
+<p>Built-in default Solr search UI</p>
+<ul>
+<li>Based on Apache Velocity project</li>
+<li>Simple customizable UI based on Velocity templating</li>
+</ul>
+<p><strong><em>Hue</em></strong></p>
+<p>Hadoop Web UI contains Search UI for Solr</p>
+<ul>
+<li>Open source project developed by Cloudera</li>
+<li>Dynamic search dashboards</li>
+<li>Many customizable search widgets, e.g. data table, bar chart, time lines, map etc.</li>
+</ul>
+<p><strong><em>Zoomdata</em></strong></p>
+<p>Visualization &amp; Analytics Platform</p>
+<ul>
+<li>Proprietary software</li>
+<li>Built-in Solr connector</li>
+<li>Advanced visualization &amp; analytics dashboard</li>
+</ul>
+<p><strong><em>VuFind</em></strong></p>
+<p>A library resource portal</p>
+<ul>
+<li>Open source project built on Solr</li>
+<li>Search and browse library's resources</li>
+</ul>
+<p><strong><em>Blacklight</em></strong></p>
+<p>Search interface for Solr</p>
+<ul>
+<li>An open source written in Ruby on Rails</li>
+<li>Customizable interface via the standard Rails (templating) mechanisms</li>
+</ul>
+<p><strong><em>AJAX Solr </em></strong></p>
+<p>A JavaScript library for creating user interfaces to Apache Solr.</p>
+<ul>
+<li>Open source project</li>
+<li>Some basic pager, tag cloud, map, etc. web widgets are available</li>
+</ul>
+<pre id="result-source" class="sh_html sh_sourceCode" contenteditable="true">&nbsp;</pre>
+
+
+</body>
+</html>
