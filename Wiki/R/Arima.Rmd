@@ -1,0 +1,174 @@
+---
+title: "Arima"
+output: html_document
+---
+
+# Arima
+
+ARIMA book: https://www.otexts.org/fpp
+
+ * Generally, seasonal versions of ARIMA and ETS models are designed for shorter periods such as 12 for monthly data or 4 for quarterly data.
+
+
+comparing results of applying transformation and seasonal configuration in arima
+
+
+  * forecast
+
+```r
+fit <- Arima(WWWusage, order=c(3,1,0))
+
+# plot the model against the data
+plot(fit$x,col="black")
+lines(fitted(fit),col="red")
+
+# auto arima
+require(forecast)
+fit <- auto.arima(ts)
+plot(forecast(fit, h=5)) # 5 stps ahead
+
+# Model Diagnostics for a Fitted ARIMA Model 
+# gof.lag = maximum lag used in ACF and Ljung-Box tests for the residuals
+tsdiag(fit,gof=50,omit.initial=FALSE)
+
+# the 5th value in 5 stps ahead
+forecast(fit, h=5)$mean[5]
+
+# extract the (p, d, q) ; more info for arima.string() function
+order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
+# or
+order <- arimaorder(fit)
+
+```
+
+# regressor/covariate
+
+```r
+hour <- as.POSIXlt(time(xts1))$hour    # extract the hour of time stamp
+xreg <- model.matrix(~as.factor(hour)) # hourly 
+
+
+week <- as.POSIXlt(time(xts1))$wday    # find the day of the week
+xreg <- model.matrix(~as.factor(week)) # week and weekend days
+
+# Remove intercept
+xreg <- xreg[,-1]
+
+# Rename columns
+# colnames(xreg) <- c("Mon","Tue","Wed","Thu","Fri","Sat")
+
+fit2 <- auto.arima(... , xreg=xreg)
+```
+
+```r
+
+tdata <- s
+
+tdata <- ts(tdata)
+
+fit1 <- auto.arima(tdata)
+fit1
+
+system.time(fit <- Arima(tdata, model=fit1 ))
+fcast <- forecast(fit, h=5)
+plot(fcast,include=50)
+lines(tdata, col="red")
+accuracy(fcast,tdata)
+
+
+order <- c(fit1$arma[1], fit1$arma[6], fit1$arma[2])
+system.time(fit <- arima(tdata, order=order) )
+fcast <- forecast(fit, h=5)
+plot(fcast,include=50)
+lines(tdata, col="red")
+
+
+accuracy(fcast,tdata)
+
+```
+
+
+# Arima config
+
+```{r, warning=F, }
+
+require(fpp) # for a10 dataset
+
+
+plot_fit <- function(fit){
+  fcast <- forecast(fit, h=50)
+  plot(fcast)
+  lines(a10, col="black")
+  accuracy(fcast, a10)
+}
+
+
+a10train <- window(a10, end=2004.99)
+# 
+# par(mfrow=c(5,1),
+#     mar=c(2,2,2,2), oma=c(0,0,0,0)
+# )
+
+plot(a10train)
+
+
+# ------ auto.arima only
+fit <- auto.arima(a10train)
+plot_fit(fit)
+
+# ------ auto.arima + transformation
+# check 
+if(Box.test(a10train)$p.value < 0.05){
+  print("transformation is unnecessary")
+}
+# force transformation
+lam <- BoxCox.lambda(a10train) # BoxCox transformation
+fit2 <- auto.arima(a10train, lambda=lam)
+plot_fit(fit2)
+
+# ------ Arima + transformation + order + seasonal 
+fit <- auto.arima(a10train)
+# fit <- auto.arima(a10train, lambda=lam) gives error
+order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
+seasonal <- list(order=c(fit$arma[3], fit$arma[7], fit$arma[4]), period=fit$arma[5])
+fit3 <- Arima(a10train, order=order, seasonal=seasonal, lambda=lam)
+plot_fit(fit3)
+
+
+# ------ Arima + order 
+fit <- auto.arima(a10train)
+fit4 <- Arima(a10train, order=arimaorder(fit)[1:3])
+plot_fit(fit4)
+
+# ------ Arima + order + transformation 
+fit <- auto.arima(a10train, lambda=lam)
+fit5 <- Arima(a10train, order=arimaorder(fit)[1:3], lambda=lam)
+plot_fit(fit5)
+
+# ------ Arima + order + xreg 
+# build xreg
+months <- array( seq(1:12), 162+50+6)
+months <- months[7:length(months)]
+xreg <- model.matrix(~as.factor(months))
+xreg <- xreg[, -1]
+# get order
+fit <- auto.arima(a10train, xreg=xreg[1:162,])
+fit6<- Arima(a10train, order=arimaorder(fit)[1:3], xreg=xreg[1:162,])
+fcast6 <- forecast(fit6, h=50, xreg=xreg[163:(162+50),])
+plot(fcast6)
+lines(a10, col="black")
+accuracy(fcast6, a10)
+
+# ------- Arima + drift 
+fit <- auto.arima(a10train)
+fit7 <- Arima(a10train, order=arimaorder(fit)[1:3], include.drift=T)
+fcast7 <- forecast(fit7, h=50)
+plot_fit(fit7)
+
+
+# ---------
+
+
+```
+
+

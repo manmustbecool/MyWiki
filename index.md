@@ -17,6 +17,7 @@ output:
  * <a href="Wiki/R/RDevelopment.html">R Development</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/timeSeries.html">Time series</a>
+ * <a href="Wiki/R/Arima.html">Arima</a>
  * <a href="Wiki/R/clustering.html">Clustering techniques</a>
  * <a href="Wiki/R/randomForestMDS.html">MDS and random forest tree classification</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
