@@ -27,27 +27,36 @@ window(t2, start=as.Date('2000-01-01'), end=as.Date('2000-31-12') )
 
 # xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $<-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.
 
+# convert a data frame to xts
 prices <- c(1.1, 2.2, 3.3)
 timestamps <-  c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockprices <- data.frame(prices, timestamps)
 
-# convert data.frame to time series
-stockprices
 # prices(numeric)    timestamps(character)
 # 1.1         2011-01-05 11:00
 # 2.2         2011-01-05 12:00
 # 3.3         2011-01-05 13:00
 
 require(xts)
-stockpricesXts <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
-stockpricesXts
+xts <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
+
+# convert a xts to a data frame
+data.frame(date=index(xts), coredata(xts))
 
 # select a time range
-t1 <- stockpricesXts["2011-01-04T05:00/2011-01-05"]
+t1 <- xts["2011-01-04T05:00/2011-01-05"]
 
 # read time stamp with format
 timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
 
+# merge operation on xts objects by time (index). 
+merge(x,y)
+merge(x,y, join='inner') # join=inner, left, or right
+
+
+# zero-width objects (only index values) can be used
+xi <- xts( , index(x))
+merge(y, xi)
 
 ```
 

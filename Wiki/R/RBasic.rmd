@@ -35,6 +35,8 @@ str = 'string' # str[1] # This evaluates to 'string'.
 substr(str, 1, 2) # == 'st'
 strsplit('0-0-1', '-') # Evaluates to list('0', '0', '1')
 paste('hello', 'world', sep = ' ') # == hello world
+# connect character vector to string
+paste(c('a','b','c'), collapse = "")  # "abc"
 
 # gsub for replace a part of string
 data$timestamp <- gsub("/", "-", data$timestamp)
@@ -302,6 +304,9 @@ df <- df[!(df[,1]==""),]
 
 # Remove columns where All values are NA
 df <- df[,colSums(is.na(df))<nrow(df)]
+
+# Remove rows where all data is NA
+df <- df[rowSums(is.na(df)) != ncol(df),]
 
 ```
 

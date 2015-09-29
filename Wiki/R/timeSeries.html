@@ -109,27 +109,36 @@ ts1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="dv">1<
 
 <span class="co"># xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $&lt;-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.</span>
 
+<span class="co"># convert a data frame to xts</span>
 prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
 timestamps &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
 stockprices &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
 
-<span class="co"># convert data.frame to time series</span>
-stockprices
 <span class="co"># prices(numeric)    timestamps(character)</span>
 <span class="co"># 1.1         2011-01-05 11:00</span>
 <span class="co"># 2.2         2011-01-05 12:00</span>
 <span class="co"># 3.3         2011-01-05 13:00</span>
 
 <span class="kw">require</span>(xts)
-stockpricesXts &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">order.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
-stockpricesXts
+xts &lt;-<span class="st"> </span><span class="kw">xts</span>(stockprices$prices, <span class="dt">order.by=</span><span class="kw">as.POSIXct</span>(stockprices$timestamps))
+
+<span class="co"># convert a xts to a data frame</span>
+<span class="kw">data.frame</span>(<span class="dt">date=</span><span class="kw">index</span>(xts), <span class="kw">coredata</span>(xts))
 
 <span class="co"># select a time range</span>
-t1 &lt;-<span class="st"> </span>stockpricesXts[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]
+t1 &lt;-<span class="st"> </span>xts[<span class="st">&quot;2011-01-04T05:00/2011-01-05&quot;</span>]
 
 <span class="co"># read time stamp with format</span>
 timestamps &lt;-<span class="st">  </span><span class="kw">strptime</span>(timestamps, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)
-</code></pre>
+
+<span class="co"># merge operation on xts objects by time (index). </span>
+<span class="kw">merge</span>(x,y)
+<span class="kw">merge</span>(x,y, <span class="dt">join=</span><span class="st">'inner'</span>) <span class="co"># join=inner, left, or right</span>
+
+
+<span class="co"># zero-width objects (only index values) can be used</span>
+xi &lt;-<span class="st"> </span><span class="kw">xts</span>( , <span class="kw">index</span>(x))
+<span class="kw">merge</span>(y, xi)</code></pre>
 <p>Deal with inregular time series</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get minimum at an hour granularity</span>
 tMinHour &lt;-<span class="st"> </span><span class="kw">trunc</span>(<span class="kw">min</span>(<span class="kw">time</span>(ts)), <span class="dt">units =</span><span class="st">'hour'</span>)
@@ -268,6 +277,7 @@ freq &lt;-<span class="st"> </span><span class="kw">print</span> (<span class="k
 .
 
 <div id="backTotop"><a href="#homeLink">^Back to top^</a></div>
+<div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Back to Home Page^</a></div>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

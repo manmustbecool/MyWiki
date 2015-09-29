@@ -132,6 +132,8 @@ str =<span class="st"> 'string'</span> <span class="co"># str[1] # This evaluate
 <span class="kw">substr</span>(str, <span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># == 'st'</span>
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">'-'</span>) <span class="co"># Evaluates to list('0', '0', '1')</span>
 <span class="kw">paste</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>, <span class="dt">sep =</span> <span class="st">' '</span>) <span class="co"># == hello world</span>
+<span class="co"># connect character vector to string</span>
+<span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)  <span class="co"># &quot;abc&quot;</span>
 
 <span class="co"># gsub for replace a part of string</span>
 data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;/&quot;</span>, <span class="st">&quot;-&quot;</span>, data$timestamp)</code></pre>
@@ -384,7 +386,10 @@ df &lt;-<span class="st"> </span>df[!<span class="kw">is.null</span>(df[,<span c
 df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span class="st">&quot;&quot;</span>),]
 
 <span class="co"># Remove columns where All values are NA</span>
-df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]</code></pre>
+df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]
+
+<span class="co"># Remove rows where all data is NA</span>
+df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df)) !=<span class="st"> </span><span class="kw">ncol</span>(df),]</code></pre>
 </div>
 <div id="list" class="section level2">
 <h2><span class="header-section-number">0.8</span> List</h2>
