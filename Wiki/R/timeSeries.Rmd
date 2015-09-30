@@ -10,6 +10,17 @@ http://www.statmethods.net/advstats/timeseries.html
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
 ```r
+# read time stamp with format, return "POSIXlt" "POSIXt" object
+timestamps <- strptime("21/05/2015 10:09", format="%d/%m/%Y %H:%M")
+
+# return "Date" object
+Sys.Date()+2:4
+[1] "2015-10-01" "2015-10-02" "2015-10-03"
+
+```
+
+
+```r
 ts1 <- ts(c(2,3,2,3,4,5))
 
 ts1 <- ts(1:10, frequency=4, start=c(1959, 2)) # 2nd Quarter of 1959
@@ -46,9 +57,6 @@ data.frame(date=index(xts), coredata(xts))
 # select a time range
 t1 <- xts["2011-01-04T05:00/2011-01-05"]
 
-# read time stamp with format
-timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
-
 # merge operation on xts objects by time (index). 
 merge(x,y)
 merge(x,y, join='inner') # join=inner, left, or right
@@ -58,27 +66,33 @@ merge(x,y, join='inner') # join=inner, left, or right
 xi <- xts( , index(x))
 merge(y, xi)
 
+# average in time series based on time and date
+
+aggregate(list(temperature = temp$temperature), 
+          list(hourofday = cut(temp$date_time, "1 hour")), 
+          mean)
+
+# or
+
+# endpoints : Extract index values of a given xts object corresponding to the last observations given a period specified by on
+ep <- endpoints(xts,'hours') 
+# period.apply: apply a specified function to data over a given interval, where the interval is taken to be the data from INDEX[k] to INDEX[k+1]
+period.apply(xts, ep, mean) 
+
 ```
 
 Deal with inregular time series
 
 ```r
-# get minimum at an hour granularity
-tMinHour <- trunc(min(time(ts)), units ='hour')
-# back off 30 minute of the current hour
-tMin <- tMinHour - (30 * 60)
-# get max 
-tMax <- max(time(ts)) + (30 * 60)
-# create sequence for 'cut'
-cSeq <- seq(tMin, tMax, by = '60 min')
-# converted to a factor by cutting, cCut is a factor
-cCut <- cut(time(ts), cSeq)
- # compute means , x is a array
-newValue <- tapply(ts, cCut, mean) 
+tMinHour <- trunc(min(time(ts)), units ='hour') # get minimum at an hour granularity
+tMin <- tMinHour - (30 * 60) # back off 30 minute of the current hour
+tMax <- max(time(ts)) + (30 * 60)  # get max  
+cSeq <- seq(tMin, tMax, by = '60 min') # create sequence for 'cut'
+cCut <- cut(time(ts), cSeq) # converted to a factor by cutting, cCut is a factor
+newValue <- tapply(ts, cCut, mean)  # compute means , x is a array
 
 newTs <- xts(newValue, order.by=seq(tMinHour, tMax, by='60 min') )
 plot(newTs)
-
 
 # ------- fix NA value ------------
 
@@ -128,7 +142,10 @@ sales<-c(39,  73,  41,  76,  75,  47,   4,  53,  40,  47,  31,  33,
 time.series <- ts(data=sales, frequency = 12, start=c(2000, 1), end=c(2002, 12))
 plot(time.series, xlab="Time", ylab="Sales (USD)")
 
+
 decomposed <- stl(time.series, s.window="periodic")
+
+# The two main parameters to be chosen when using STL are the trend window (t.window) and seasonal window (s.window). These control how rapidly the trend and seasonal components can change. Small values allow more rapid change. Setting the seasonal window to be infinite is equivalent to forcing the seasonal component to be periodic (i.e., identical across years).
 
 
 # origional_value - seasonal = trend + remainder
