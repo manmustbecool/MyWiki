@@ -17,6 +17,12 @@ timestamps <- strptime("21/05/2015 10:09", format="%d/%m/%Y %H:%M")
 Sys.Date()+2:4
 [1] "2015-10-01" "2015-10-02" "2015-10-03"
 
+
+# find weekends in xts time series object
+date <- as.Date(index(xts))
+date[ weekdays(date) %in% c("Saturday", "Sunday") ] <- NA
+weekends <- index(xts)[which(is.na(date))]
+
 ```
 
 

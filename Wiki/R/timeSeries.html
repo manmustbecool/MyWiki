@@ -98,7 +98,13 @@ timestamps &lt;-<span class="st"> </span><span class="kw">strptime</span>(<span 
 
 <span class="co"># return &quot;Date&quot; object</span>
 <span class="kw">Sys.Date</span>()+<span class="dv">2</span>:<span class="dv">4</span>
-[<span class="dv">1</span>] <span class="st">&quot;2015-10-01&quot;</span> <span class="st">&quot;2015-10-02&quot;</span> <span class="st">&quot;2015-10-03&quot;</span></code></pre>
+[<span class="dv">1</span>] <span class="st">&quot;2015-10-01&quot;</span> <span class="st">&quot;2015-10-02&quot;</span> <span class="st">&quot;2015-10-03&quot;</span>
+
+
+<span class="co"># find weekends in xts time series object</span>
+date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">index</span>(xts))
+date[ <span class="kw">weekdays</span>(date) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>) ] &lt;-<span class="st"> </span><span class="ot">NA</span>
+weekends &lt;-<span class="st"> </span><span class="kw">index</span>(xts)[<span class="kw">which</span>(<span class="kw">is.na</span>(date))]</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">ts1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>))
 
 ts1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="dv">1</span>:<span class="dv">10</span>, <span class="dt">frequency=</span><span class="dv">4</span>, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">1959</span>, <span class="dv">2</span>)) <span class="co"># 2nd Quarter of 1959</span>
