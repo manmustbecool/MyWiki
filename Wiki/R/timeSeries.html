@@ -144,16 +144,14 @@ t1 &lt;-<span class="st"> </span>xts[<span class="st">&quot;2011-01-04T05:00/201
 <span class="kw">merge</span>(x,y)
 <span class="kw">merge</span>(x,y, <span class="dt">join=</span><span class="st">'inner'</span>) <span class="co"># join=inner, left, or right</span>
 
-
 <span class="co"># zero-width objects (only index values) can be used</span>
 xi &lt;-<span class="st"> </span><span class="kw">xts</span>( , <span class="kw">index</span>(x))
 <span class="kw">merge</span>(y, xi)
 
 <span class="co"># average in time series based on time and date</span>
-
-<span class="kw">aggregate</span>(<span class="kw">list</span>(<span class="dt">temperature =</span> temp$temperature), 
-          <span class="kw">list</span>(<span class="dt">hourofday =</span> <span class="kw">cut</span>(temp$date_time, <span class="st">&quot;1 hour&quot;</span>)), 
-          mean)
+<span class="kw">aggregate</span>(<span class="kw">list</span>(<span class="dt">temperature =</span> temp$temperature)
+          , <span class="kw">list</span>(<span class="dt">hourofday =</span> <span class="kw">cut</span>(temp$date_time, <span class="st">&quot;1 hour&quot;</span>))
+          , mean)
 
 <span class="co"># or</span>
 
@@ -161,13 +159,13 @@ xi &lt;-<span class="st"> </span><span class="kw">xts</span>( , <span class="kw"
 ep &lt;-<span class="st"> </span><span class="kw">endpoints</span>(xts,<span class="st">'hours'</span>) 
 <span class="co"># period.apply: apply a specified function to data over a given interval, where the interval is taken to be the data from INDEX[k] to INDEX[k+1]</span>
 <span class="kw">period.apply</span>(xts, ep, mean) </code></pre>
-<p>Deal with inregular time series</p>
+<p>Deal with inregular time series, time internvals are not constant</p>
 <pre class="sourceCode r"><code class="sourceCode r">tMinHour &lt;-<span class="st"> </span><span class="kw">trunc</span>(<span class="kw">min</span>(<span class="kw">time</span>(ts)), <span class="dt">units =</span><span class="st">'hour'</span>) <span class="co"># get minimum at an hour granularity</span>
 tMin &lt;-<span class="st"> </span>tMinHour -<span class="st"> </span>(<span class="dv">30</span> *<span class="st"> </span><span class="dv">60</span>) <span class="co"># back off 30 minute of the current hour</span>
 tMax &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="kw">time</span>(ts)) +<span class="st"> </span>(<span class="dv">30</span> *<span class="st"> </span><span class="dv">60</span>)  <span class="co"># get max  </span>
 cSeq &lt;-<span class="st"> </span><span class="kw">seq</span>(tMin, tMax, <span class="dt">by =</span> <span class="st">'60 min'</span>) <span class="co"># create sequence for 'cut'</span>
 cCut &lt;-<span class="st"> </span><span class="kw">cut</span>(<span class="kw">time</span>(ts), cSeq) <span class="co"># converted to a factor by cutting, cCut is a factor</span>
-newValue &lt;-<span class="st"> </span><span class="kw">tapply</span>(ts, cCut, mean)  <span class="co"># compute means , x is a array</span>
+newValue &lt;-<span class="st"> </span><span class="kw">tapply</span>(ts, cCut, mean)  <span class="co"># compute means , newValue is a array</span>
 
 newTs &lt;-<span class="st"> </span><span class="kw">xts</span>(newValue, <span class="dt">order.by=</span><span class="kw">seq</span>(tMinHour, tMax, <span class="dt">by=</span><span class="st">'60 min'</span>) )
 <span class="kw">plot</span>(newTs)

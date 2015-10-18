@@ -67,16 +67,14 @@ t1 <- xts["2011-01-04T05:00/2011-01-05"]
 merge(x,y)
 merge(x,y, join='inner') # join=inner, left, or right
 
-
 # zero-width objects (only index values) can be used
 xi <- xts( , index(x))
 merge(y, xi)
 
 # average in time series based on time and date
-
-aggregate(list(temperature = temp$temperature), 
-          list(hourofday = cut(temp$date_time, "1 hour")), 
-          mean)
+aggregate(list(temperature = temp$temperature)
+          , list(hourofday = cut(temp$date_time, "1 hour"))
+          , mean)
 
 # or
 
@@ -87,7 +85,7 @@ period.apply(xts, ep, mean)
 
 ```
 
-Deal with inregular time series
+Deal with inregular time series, time internvals are not constant
 
 ```r
 tMinHour <- trunc(min(time(ts)), units ='hour') # get minimum at an hour granularity
@@ -95,7 +93,7 @@ tMin <- tMinHour - (30 * 60) # back off 30 minute of the current hour
 tMax <- max(time(ts)) + (30 * 60)  # get max  
 cSeq <- seq(tMin, tMax, by = '60 min') # create sequence for 'cut'
 cCut <- cut(time(ts), cSeq) # converted to a factor by cutting, cCut is a factor
-newValue <- tapply(ts, cCut, mean)  # compute means , x is a array
+newValue <- tapply(ts, cCut, mean)  # compute means , newValue is a array
 
 newTs <- xts(newValue, order.by=seq(tMinHour, tMax, by='60 min') )
 plot(newTs)
