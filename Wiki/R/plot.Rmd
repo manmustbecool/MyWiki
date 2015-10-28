@@ -19,12 +19,12 @@ output: html_document
 ```r
 # multiple plots in one graph. e.g. 2 rows, 2 columns
 par(mfrow=c(2,2),
-     mar=c(3,1,3,1), oma=c(0,0,0,0)
+     mar=c(3,1,3,1), oma=c(0,0,0,0) # margin: buttom left, top, right
      )
      
-# switch plot
+# switch between plots
 p <- par('mfg')) # get the plot 
-par(mfg = p)  # focuse the plot
+par(mfg = p)  # focus the plot
 ```
 
 ##  plot with multiple Y scales
@@ -81,16 +81,18 @@ lines(x2, y2)
 
 ```
 
-## create a color pattern
-```{r}
+## plot color
+```r
+# create a color pattern
 cl <- rainbow(5)
+
+# transparent color
+library(scales)
+col <- alpha("yellow", 0.4)
+
 ```
 
-## transparent color
-```r
-library(scales)
-col = alpha("yellow", 0.4)
-```
+
 
 
 ## use legend as text box
@@ -109,6 +111,16 @@ legend("topright", "(x,y)"
 hist(iris$Sepal.Length, breaks=10)
 ```
 
+
+# barplot
+
+```{r}
+m <- matrix( c(4,6,4,6,4,6), nrow=2 )
+#      [,1] [,2] [,3]
+# [1,]    4    4    4
+# [2,]    6    6    6
+barplot(m, legend=rownames(m), beside=TRUE)
+```
 
 # Boxplot
 
