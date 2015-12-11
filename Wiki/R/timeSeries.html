@@ -93,18 +93,30 @@ img {
 <h2><span class="header-section-number">0.1</span> Time Series</h2>
 <p><a href="http://www.statmethods.net/advstats/timeseries.html" class="uri">http://www.statmethods.net/advstats/timeseries.html</a></p>
 <p><a href="http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models" class="uri">http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models</a></p>
+<ul>
+<li>“POSIXlt” “POSIXt” object</li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># read time stamp with format, return &quot;POSIXlt&quot; &quot;POSIXt&quot; object</span>
-timestamps &lt;-<span class="st"> </span><span class="kw">strptime</span>(<span class="st">&quot;21/05/2015 10:09&quot;</span>, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)
+time &lt;-<span class="st"> </span><span class="kw">strptime</span>(<span class="st">&quot;21/05/2015 10:09&quot;</span>, <span class="dt">format=</span><span class="st">&quot;%d/%m/%Y %H:%M&quot;</span>)
 
-<span class="co"># return &quot;Date&quot; object</span>
+<span class="co"># POSIXct objects are a measure of seconds from an origin</span>
+time &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+<span class="co"># add 3 hours</span>
+time +<span class="st"> </span><span class="dv">3</span>*<span class="dv">60</span>*<span class="dv">60</span></code></pre>
+<ul>
+<li>Date object</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return &quot;Date&quot; object</span>
 <span class="kw">Sys.Date</span>()+<span class="dv">2</span>:<span class="dv">4</span>
 [<span class="dv">1</span>] <span class="st">&quot;2015-10-01&quot;</span> <span class="st">&quot;2015-10-02&quot;</span> <span class="st">&quot;2015-10-03&quot;</span>
-
 
 <span class="co"># find weekends in xts time series object</span>
 date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">index</span>(xts))
 date[ <span class="kw">weekdays</span>(date) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>) ] &lt;-<span class="st"> </span><span class="ot">NA</span>
 weekends &lt;-<span class="st"> </span><span class="kw">index</span>(xts)[<span class="kw">which</span>(<span class="kw">is.na</span>(date))]</code></pre>
+<ul>
+<li>ts object</li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r">ts1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>))
 
 ts1 &lt;-<span class="st"> </span><span class="kw">ts</span>(<span class="dv">1</span>:<span class="dv">10</span>, <span class="dt">frequency=</span><span class="dv">4</span>, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">1959</span>, <span class="dv">2</span>)) <span class="co"># 2nd Quarter of 1959</span>
@@ -158,7 +170,16 @@ xi &lt;-<span class="st"> </span><span class="kw">xts</span>( , <span class="kw"
 <span class="co"># endpoints : Extract index values of a given xts object corresponding to the last observations given a period specified by on</span>
 ep &lt;-<span class="st"> </span><span class="kw">endpoints</span>(xts,<span class="st">'hours'</span>) 
 <span class="co"># period.apply: apply a specified function to data over a given interval, where the interval is taken to be the data from INDEX[k] to INDEX[k+1]</span>
-<span class="kw">period.apply</span>(xts, ep, mean) </code></pre>
+<span class="kw">period.apply</span>(xts, ep, mean) 
+
+
+<span class="co"># sliding window</span>
+<span class="kw">require</span>(zoo)
+TS &lt;-<span class="st"> </span><span class="kw">zoo</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">8</span>))
+<span class="kw">rollapply</span>(TS, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">by =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> mean, <span class="dt">align =</span> <span class="st">&quot;left&quot;</span>)
+       <span class="dv">1</span>        <span class="dv">3</span> 
+<span class="fl">5.333333</span> <span class="fl">6.333333</span>
+</code></pre>
 <p>Deal with inregular time series, time internvals are not constant</p>
 <pre class="sourceCode r"><code class="sourceCode r">tMinHour &lt;-<span class="st"> </span><span class="kw">trunc</span>(<span class="kw">min</span>(<span class="kw">time</span>(ts)), <span class="dt">units =</span><span class="st">'hour'</span>) <span class="co"># get minimum at an hour granularity</span>
 tMin &lt;-<span class="st"> </span>tMinHour -<span class="st"> </span>(<span class="dv">30</span> *<span class="st"> </span><span class="dv">60</span>) <span class="co"># back off 30 minute of the current hour</span>

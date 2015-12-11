@@ -6,6 +6,12 @@ title: "Linux Basic"
 # cheat sheet #
 
 ```bash
+# modify permissions
+# -R – apply to the parent folder and the child objects within
+# ugo - User, Group, and Other
+# wrx -  read, write and execute
+sudo chmod -R ugo+rwx /DATA/SHARE
+
 # Add user to “sudo” group
 adduser <username>
 adduser <username> sudo

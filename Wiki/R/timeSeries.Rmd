@@ -9,23 +9,32 @@ http://www.statmethods.net/advstats/timeseries.html
 
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
+ * "POSIXlt" "POSIXt" object
+ 
 ```r
 # read time stamp with format, return "POSIXlt" "POSIXt" object
-timestamps <- strptime("21/05/2015 10:09", format="%d/%m/%Y %H:%M")
+time <- strptime("21/05/2015 10:09", format="%d/%m/%Y %H:%M")
 
+# POSIXct objects are a measure of seconds from an origin
+time <- Sys.time()
+# add 3 hours
+time + 3*60*60
+```
+ * Date object
+ 
+```r
 # return "Date" object
 Sys.Date()+2:4
 [1] "2015-10-01" "2015-10-02" "2015-10-03"
-
 
 # find weekends in xts time series object
 date <- as.Date(index(xts))
 date[ weekdays(date) %in% c("Saturday", "Sunday") ] <- NA
 weekends <- index(xts)[which(is.na(date))]
-
 ```
 
-
+ * ts object
+ 
 ```r
 ts1 <- ts(c(2,3,2,3,4,5))
 
@@ -37,6 +46,7 @@ frequency(t1) <- 2 # assign frequency
 # extract data 
 window(t2, start=as.Date('2000-01-01'), end=as.Date('2000-31-12') )
 ```
+
  * xts and zoo objects
 
 ```r
@@ -82,6 +92,15 @@ aggregate(list(temperature = temp$temperature)
 ep <- endpoints(xts,'hours') 
 # period.apply: apply a specified function to data over a given interval, where the interval is taken to be the data from INDEX[k] to INDEX[k+1]
 period.apply(xts, ep, mean) 
+
+
+# sliding window
+require(zoo)
+TS <- zoo(c(4, 5, 7, 3, 9, 8))
+rollapply(TS, width = 3, by = 2, FUN = mean, align = "left")
+       1        3 
+5.333333 6.333333
+
 
 ```
 
