@@ -133,6 +133,7 @@ str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This eval
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">'-'</span>) <span class="co"># Evaluates to list('0', '0', '1')</span>
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">''</span>)  <span class="co"># Evaluates to list('0', '-', '0', '-', '1')</span>
 <span class="kw">paste</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>, <span class="dt">sep =</span> <span class="st">' '</span>) <span class="co"># == hello world</span>
+<span class="kw">paste0</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>) <span class="co"># == helloworld</span>
 <span class="co"># connect character vector to string</span>
 <span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)  <span class="co"># &quot;abc&quot;</span>
 
@@ -287,6 +288,7 @@ prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">
 timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
 stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
 
+
 <span class="co"># Get and Set Row and Column Names for Data Frames</span>
 <span class="kw">rownames</span>(df)   
 <span class="kw">colnames</span>(df) 
@@ -328,6 +330,14 @@ df[<span class="kw">sample</span>(<span class="kw">nrow</span>(df), <span class=
 x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
 df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, x); <span class="co"># add a row</span>
 df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span class="co"># add a column</span>
+
+<span class="co"># </span>
+<span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+test &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
+test&lt;-<span class="kw">rbind</span>(test,<span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
+test&lt;-<span class="kw">rbind</span>(test,<span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
+
+
 
 <span class="co"># create a new column with merged values of two columns</span>
 df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)
@@ -444,10 +454,13 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 <pre class="sourceCode r"><code class="sourceCode r">--------<span class="st"> </span>apply --------
 http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</span>/<span class="dv">08</span>/<span class="dv">20</span>/a-brief-introduction-to-apply-in-r/
 
------<span class="st"> </span>Sample --------
+-----<span class="st"> </span>random number --------
 
-<span class="co"># Sample 30 from 1 to 300</span>
-<span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)
+<span class="kw">runif</span>(<span class="dv">10</span>)       <span class="co"># for uniform distribution</span>
+<span class="kw">rnorm</span>(<span class="dv">10</span>)       <span class="co"># for normal distribution</span>
+<span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">10</span>)    <span class="co"># for vector 1:10 in random order</span>
+<span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>) <span class="co"># Sample 30 from 1 to 300</span>
+
 <span class="kw">sort</span>(<span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)) <span class="co"># sorted result</span>
 
 <span class="co"># get replicable sample </span>
