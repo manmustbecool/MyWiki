@@ -144,8 +144,34 @@ compiled_f <- cmpfun(f)
   }
 + finalDf <- bind_rows(dfList)
 
+```
+
+performance profile
+
+```r
+funAgg = function(x) {
+  res = NULL
+  n = nrow(x)
+  for (i in 1:n) {
+    if (!any(is.na(x[i,]))) res = rbind(res, x[i,])
+  }
+  res
+}
+
+xx = matrix(rnorm(10000),10000,20)
+xx[xx>2] = NA
+
+# profiling of both time and memory
+tmp <- tempfile()
+Rprof(tmp, memory.profiling=T)
+y <- funAgg(xx)
+Rprof(NULL)
+summaryRprof(tmp, memory="both")
 
 ```
+
+
+
 http://www.noamross.net/blog/2013/4/25/faster-talk.html
 
 # pass by values or references

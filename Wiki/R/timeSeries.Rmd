@@ -31,6 +31,11 @@ Sys.Date()+2:4
 date <- as.Date(index(xts))
 date[ weekdays(date) %in% c("Saturday", "Sunday") ] <- NA
 weekends <- index(xts)[which(is.na(date))]
+
+# convert to character
+x <- as.Date("2010-11-04 00:00:00")
+as.character(x)                         # "2010-11-04" 
+format(x, format="%Y-%m-%d %H:%M:%S")   # "2010-11-04 00:00:00"
 ```
 
  * ts object
