@@ -69,6 +69,10 @@ tdata <- ts(tdata)
 fit1 <- auto.arima(tdata)
 fit1
 
+#plot arima fitted model with the original series
+plot(fit$x) # original
+lines(fitted(fit),col="blue")
+
 system.time(fit <- Arima(tdata, model=fit1 ))
 fcast <- forecast(fit, h=5)
 plot(fcast,include=50)
