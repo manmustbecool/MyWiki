@@ -3,24 +3,17 @@
 ---
   
 
-## Time Series
+## Dates, Times, Time Series objects
 
 http://www.statmethods.net/advstats/timeseries.html
 
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
- * "POSIXlt" "POSIXt" object
- 
-```r
-# read time stamp with format, return "POSIXlt" "POSIXt" object
-time <- strptime("21/05/2015 10:09", format="%d/%m/%Y %H:%M")
+http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html
 
-# POSIXct objects are a measure of seconds from an origin
-time <- Sys.time()
-# add 3 hours
-time + 3*60*60
-```
- * Date object
+### Date
+
+Date objects have only dates, but no times
  
 ```r
 # return "Date" object
@@ -38,7 +31,23 @@ as.character(x)                         # "2010-11-04"
 format(x, format="%Y-%m-%d %H:%M:%S")   # "2010-11-04 00:00:00"
 ```
 
- * ts object
+### POSIXct, POSIXlt
+
+POSIXct : “ct” stand for calender time 
+
+POSIXlt : “lt” stands for local time. POXIXlt objects are lists,  it enables easy extraction of specific componants of a time
+ 
+```r
+# read time stamp with format, return "POSIXlt" "POSIXt" object
+time <- strptime("21/05/2015 10:09", format="%d/%m/%Y %H:%M")
+
+# POSIXct objects are a measure of seconds from an origin
+time <- Sys.time()
+# add 3 hours
+time + 3*60*60
+```
+
+### ts 
  
 ```r
 ts1 <- ts(c(2,3,2,3,4,5))
@@ -52,7 +61,7 @@ frequency(t1) <- 2 # assign frequency
 window(t2, start=as.Date('2000-01-01'), end=as.Date('2000-31-12') )
 ```
 
- * xts and zoo objects
+### xts, zoo 
 
 ```r
 # ------------- xts or zoo for data with time stamp
