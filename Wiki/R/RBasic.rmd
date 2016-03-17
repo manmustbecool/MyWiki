@@ -376,6 +376,15 @@ e$a <- 2:4
 exists("a", envir=e)
 ```
 
+### formula
+
+creating a formula from a string
+
+```r
+as.formula("y ~ x1 + x2")
+#> y ~ x1 + x2
+```
+
 ## Common functions ##
 ```r
 -------- apply --------
