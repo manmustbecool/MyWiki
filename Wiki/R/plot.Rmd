@@ -3,14 +3,28 @@ title: "Plot"
 output: html_document
 ---
 
+# plot functions
+
+ * points
+ * lines
+ * abline
+ * rect : Draw One or More Rectangles
+ * box  : Draw a box around the current plot
+ * legend
+ * text
+
 # Plot configuration
 
 ## multiple plots in one graph
 ```r
 # multiple plots in one graph. e.g. 2 rows, 2 columns
 par(mfrow=c(2,2),
-     mar=c(3,1,3,1), oma=c(0,0,0,0)
+     mar=c(3,1,3,1), oma=c(0,0,0,0) # margin: buttom left, top, right
      )
+     
+# switch between plots
+p <- par('mfg')) # get the plot 
+par(mfg = p)  # focus the plot
 ```
 
 ##  plot with multiple Y scales
@@ -44,7 +58,6 @@ plot(iris$Sepal.Length, las=2)
 ```
 
 ## label all factor in axis
-
 ```{r}
 df <- iris[sample(nrow(iris), 30), ]
 
@@ -52,9 +65,42 @@ plot(df$Petal.Width, xaxt="n", xlab = "" )
 axis(1, at=1:nrow(df), labels=df$Species, las=2, cex.axis=0.7)
 ```
 
-## create a color pattern
+## fill a stair step function
 ```{r}
+y <- runif(10, 1, 5)
+x <- seq_along(y)
+y2 <- rep(y, each=2)[-(length(y)*2)]
+x2 <- rep(x, each=2)[-1]
+x3 <- c(min(x2), x2, max(x2))
+y3 <- c(0, y2, 0)
+
+plot(x, y, pch=16)
+
+polygon(x3, y3, border=NA, col="grey60")
+lines(x2, y2)
+
+```
+
+## plot color
+```r
+# create a color pattern
 cl <- rainbow(5)
+
+# transparent color
+library(scales)
+col <- alpha("yellow", 0.4)
+
+```
+
+
+
+
+## use legend as text box
+```r
+legend("topright", "(x,y)"
+     , "info text" , title = "title text" # add text
+     , lty=-1 , pch=NA # set lyt and pch to remove the legend symbols
+     )
 ```
 
 
@@ -65,6 +111,16 @@ cl <- rainbow(5)
 hist(iris$Sepal.Length, breaks=10)
 ```
 
+
+# barplot
+
+```{r}
+m <- matrix( c(4,6,4,6,4,6), nrow=2 )
+#      [,1] [,2] [,3]
+# [1,]    4    4    4
+# [2,]    6    6    6
+barplot(m, legend=rownames(m), beside=TRUE)
+```
 
 # Boxplot
 
@@ -116,6 +172,55 @@ plot(dfg, vertex.label=(dfg)$name)
 tkplot(dfg)  # interactive plot
 
 rglplot(dfg) # 3D plot
+
+
+# Shiny real time updating
+
+```r
+library(shiny)
+library(magrittr)
+
+ui <- shinyServer(fluidPage(
+  headerPanel("my shiny app !"),
+  br(),
+  plotOutput("my_plot")
+))
+
+server <- shinyServer(function(input, output, session){
+
+  # Function to get new observations
+  get_new_data <- function(){
+    data <- rnorm(5) %>% rbind %>% data.frame
+    return(data)
+  }
+
+  # Initialize my_data
+  my_data <<- get_new_data()
+
+  # Function to update my_data
+  update_data <- function(){
+    my_data <<- rbind(get_new_data(), my_data)
+  }
+
+  # Plot the 30 most recent values
+  output$my_plot <- renderPlot({
+    print("Render")
+    invalidateLater(2000, session) # update once 2 seconds  
+    # invalidation will not be tied to any session, and so it will still occur
+    # invalidateLater(60000,NULL) 
+    update_data()
+    print(my_data)
+    par(mfrow = c(2,2))
+    plot(X1 ~ 1, data=my_data[1:30,], ylim=c(-3, 3), las=1, type="l")
+    plot(X1 ~ 1, data=my_data[1:30,], ylim=c(-3, 3), las=1, type="p")
+    plot(X1 ~ 1, data=my_data[1:30,], ylim=c(-3, 3), las=1, type="b")
+    plot(X1 ~ 1, data=my_data[1:30,], ylim=c(-3, 3), las=1, type="l")
+  }
+  , height = 800, width = 1000 )
+})
+
+shinyApp(ui=ui,server=server)
+```
 
 
 # Other

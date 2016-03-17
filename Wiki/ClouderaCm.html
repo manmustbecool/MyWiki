@@ -48,6 +48,7 @@ code > span.er { color: #c3bf9f; }
 </style>
 
 
+<link href="data:text/css,%23TOC%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%200%3B%0A%20%20top%3A%200%3B%0A%20%20width%3A%20200px%3B%0A%20%20height%3A%20100%25%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%0A%23backTotop%20%7B%0A%20%20position%3A%20fixed%3B%0A%20%20left%3A%2010px%3B%0A%20%20top%3A%2090%25%3B%3B%0A%20%20overflow%3Aauto%3B%0A%20%20margin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0A%0Abody%20%7B%0A%20%20margin%3A%20auto%3B%0A%20%20margin%2Dleft%3A210px%3B%20%0A%20%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -70,15 +71,16 @@ img {
 </style>
 <div class="container-fluid main-container">
 
-<div>
-<p>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></p>
+<div id="homeLink">
+<p><b></b>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></b></p>
 </div>
 
 
 <div id="TOC">
 <ul>
 <li><a href="#trouble-shooting"><span class="toc-section-number">0.1</span> Trouble shooting</a></li>
-<li><a href="#impala-performance-tuning"><span class="toc-section-number">0.2</span> Impala performance tuning</a></li>
+<li><a href="#updating-cloudera-manager"><span class="toc-section-number">0.2</span> Updating Cloudera manager</a></li>
+<li><a href="#impala-performance-tuning"><span class="toc-section-number">0.3</span> Impala performance tuning</a></li>
 </ul>
 </div>
 
@@ -117,13 +119,96 @@ img {
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">kill</span> -9 <span class="dt">{{{&lt;RunJarprocessId&gt;}}}</span> command</code></pre>
 <hr />
 </div>
+<div id="updating-cloudera-manager" class="section level2">
+<h2><span class="header-section-number">0.2</span> Updating Cloudera manager</h2>
+<p>********* reset the cloudera manager password *****************</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># using the password found in:</span>
+<span class="kw">cat</span> /var/lib/cloudera-scm-server-db/data/generated_password.txt 
+
+<span class="co"># connect psql with root user - cloudera-scm</span>
+<span class="kw">psql</span> -U cloudera-scm -p 7432 -h localhost -d scm
+
+<span class="co"># for version before 4.8.2:</span>
+<span class="kw">update</span> USERS set password_hash=<span class="st">'ffa2eb4251b38e069e968890cb2bcdb6229982322f5ed2470bf96231fe4c39c8'</span>, password_salt=-4382599614486590865 WHERE user_name = <span class="st">'admin'</span><span class="kw">;</span>
+
+<span class="co"># for newer version:</span>
+<span class="kw">|</span> <span class="kw">USER_ID</span> <span class="kw">|</span> <span class="kw">USER_NAME</span> <span class="kw">|</span> <span class="kw">PASSWORD_HASH</span>                                                    <span class="kw">|</span> <span class="kw">PASSWORD_SALT</span>        <span class="kw">|</span> <span class="kw">PASSWORD_LOGIN</span> <span class="kw">|</span> <span class="kw">OPTIMISTIC_LOCK_VERSION</span> <span class="kw">|</span>
+<span class="kw">|</span>       <span class="kw">1</span> <span class="kw">|</span> <span class="kw">admin</span>     <span class="kw">|</span> <span class="kw">28b017aa508f8e526eeaa29cce2a909cbe7eb662d3d89a14d68cf4aabfeb159e</span> <span class="kw">|</span>  <span class="kw">7823478305617615357</span> <span class="kw">|</span>              <span class="kw">1</span> <span class="kw">|</span>                       <span class="kw">3</span> <span class="kw">|</span>
+
+
+<span class="co"># show database size:</span>
+<span class="kw">select</span> <span class="kw">t1.datname</span> AS db_name, pg_size_pretty(pg_database_size(t1.datname)) <span class="kw">as</span> db_size
+  <span class="kw">from</span> pg_database t1
+  <span class="kw">order</span> by pg_database_size(t1.datname) <span class="kw">desc;</span>
+
+    <span class="kw">db_name</span>  <span class="kw">|</span> <span class="kw">db_size</span>
+<span class="kw">-----------+---------</span>
+ <span class="kw">amon</span>      <span class="kw">|</span> <span class="kw">6897</span> MB
+ <span class="kw">smon</span>      <span class="kw">|</span> <span class="kw">5491</span> MB
+ <span class="kw">hmon</span>      <span class="kw">|</span> <span class="kw">2003</span> MB
+
+ <span class="kw">amon</span> -<span class="kw">&gt;</span> activity monitor
+ <span class="kw">smon</span> -<span class="kw">&gt;</span> serivce monitor
+ <span class="kw">hmon</span> -<span class="kw">&gt;</span> host monitor
+
+  
+<span class="co"># list all users:</span>
+\<span class="kw">du</span></code></pre>
+<p>******** stop the Hadoop cluster **************</p>
+<p>must stop all Hadoop services (Hive, impala, etc which are using the database) and must stop Cloudera Management Services monitor services</p>
+<p>if downgrade from 4.8 to 4.7. go back to delete impala service first</p>
+<p>********** stop all cloudera manager services ********************</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># list running cloudera services and stop them</span>
+$ <span class="kw">service</span> --status-all <span class="kw">2&gt;&amp;1</span> <span class="kw">|</span> <span class="kw">grep</span> cloudera
+
+<span class="kw">sudo</span> service cloudera-scm-server stop
+<span class="kw">sudo</span> service cloudera-scm-server-db stop
+<span class="kw">sudo</span> service cloudera-scm-agent stop
+
+<span class="kw">-----</span> 
+
+<span class="co"># debain list installed cloudera packages</span>
+$ <span class="kw">dpkg</span> -l <span class="kw">|</span> <span class="kw">grep</span> cloudera
+<span class="co"># redhat </span>
+$ <span class="kw">rpm</span> -qa <span class="kw">|</span> <span class="kw">grep</span> cloudera
+
+
+<span class="kw">sudo</span> apt-get install cloudera-manager-server cloudera-manager-agent cloudera-manager-daemons
+
+<span class="kw">sudo</span> apt-get install cloudera-manager-agent=4.7.2-1.cm472.p0.135~squeeze-cm4.7.2
+
+<span class="co"># check the versions in repo</span>
+$ <span class="kw">apt-cache</span> show cloudera-manager-agent
+
+
+<span class="kw">--</span> install from local file
+<span class="co"># for debain: </span>
+<span class="kw">sudo</span> dpkg -i cloudera-manager-agent_*
+<span class="kw">sudo</span> dpkg -i cloudera-manager-daemons_* 
+<span class="kw">sudo</span> dpkg -i cloudera-manager-server-db_*
+<span class="kw">sudo</span> dpkg -i cloudera-manager-server_*
+
+<span class="co"># for redhat</span>
+<span class="kw">Install</span> a package
+<span class="kw">rpm</span> –ivh packagename
+<span class="kw">upgrade</span> a package
+<span class="kw">rpm</span> –Uvh packagename </code></pre>
+<p>********** restart the services ***********</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> service cloudera-scm-server-db start
+<span class="kw">sudo</span> service cloudera-scm-server start
+<span class="kw">sudo</span> service cloudera-scm-agent start</code></pre>
+</div>
 <div id="impala-performance-tuning" class="section level2">
-<h2><span class="header-section-number">0.2</span> Impala performance tuning</h2>
+<h2><span class="header-section-number">0.3</span> Impala performance tuning</h2>
 <p><code>http://php.sabscape.com/blog/?p=598</code></p>
 <p>use impala query manager port:7180</p>
 </div>
 
 .
+
+<div id="backTotop"><a href="#homeLink">^Back to top^</a></div>
+<!-- <div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Home Page^</a></div> -->
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

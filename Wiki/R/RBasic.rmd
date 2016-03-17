@@ -31,10 +31,14 @@ x <- 1.224554
 round(x, digits=2)
 
 #  string is considered to be a character vector in R
-str = 'string' # str[1] # This evaluates to 'string'.
+str <- 'string' # str[1] # This evaluates to 'string'.
 substr(str, 1, 2) # == 'st'
 strsplit('0-0-1', '-') # Evaluates to list('0', '0', '1')
+strsplit('0-0-1', '')  # Evaluates to list('0', '-', '0', '-', '1')
 paste('hello', 'world', sep = ' ') # == hello world
+paste0('hello', 'world') # == helloworld
+# connect character vector to string
+paste(c('a','b','c'), collapse = "")  # "abc"
 
 # gsub for replace a part of string
 data$timestamp <- gsub("/", "-", data$timestamp)
@@ -49,7 +53,7 @@ A Vector is a sequence of data elements of atomic data types (Numeric, Integer, 
 v <- vector()
 
 # create an arithmetic sequence (numeric vector)
-se = seq(8, 3) # 8,7,6,5,4,3
+se <- seq(8, 3) # 8,7,6,5,4,3
 se <- seq(3, 8, by=2) #  3, 5, 7
 
 # select top and buttom
@@ -124,8 +128,11 @@ v <- as.numeric(as.character(f))
 
 # get numeric coding of the factor, not the origional values
 v <- as.numeric(f) 
-```
 
+# divides the range of x into intervals
+cut(c(1,2,3,4,5,2,3,4,5,6,7), 3)
+
+```
 
 ## Matrix  ##
 A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.
@@ -198,6 +205,7 @@ prices <- c(1.1, 2.2, 3.3)
 timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockpricesDf <- data.frame(prices, timestamps)
 
+
 # Get and Set Row and Column Names for Data Frames
 rownames(df)   
 colnames(df) 
@@ -239,6 +247,14 @@ by(df[, 1:2], df[,3], summary)
 x <- c(1,2,3)
 df <- rbind(df, x); # add a row
 df <- cbind(df, x); # add a column
+
+# 
+options(stringsAsFactors = FALSE)
+test <- data.frame()
+test<-rbind(test,c("hi","i","am","bob"))
+test<-rbind(test,c("hi","i","am","alice"))
+
+
 
 # create a new column with merged values of two columns
 df$new_column = paste(df$V1, df$V2, sep="_")
@@ -303,6 +319,9 @@ df <- df[!(df[,1]==""),]
 # Remove columns where All values are NA
 df <- df[,colSums(is.na(df))<nrow(df)]
 
+# Remove rows where all data is NA
+df <- df[rowSums(is.na(df)) != ncol(df),]
+
 ```
 
 ## List  ##
@@ -357,17 +376,18 @@ e$a <- 2:4
 exists("a", envir=e)
 ```
 
-
-
 ## Common functions ##
 ```r
 -------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 
------ Sample --------
+----- random number --------
 
-# Sample 30 from 1 to 300
-sample(300, 30)
+runif(10)       # for uniform distribution
+rnorm(10)       # for normal distribution
+sample(1:10)    # for vector 1:10 in random order
+sample(300, 30) # Sample 30 from 1 to 300
+
 sort(sample(300, 30)) # sorted result
 
 # get replicable sample 

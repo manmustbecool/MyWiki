@@ -3,12 +3,52 @@
 ---
   
 
-## Time Series
+## Dates, Times, Time Series objects
 
 http://www.statmethods.net/advstats/timeseries.html
 
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
+http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html
+
+### Date
+
+Date objects have only dates, but no times
+ 
+```r
+# return "Date" object
+Sys.Date()+2:4
+[1] "2015-10-01" "2015-10-02" "2015-10-03"
+
+# find weekends in xts time series object
+date <- as.Date(index(xts))
+date[ weekdays(date) %in% c("Saturday", "Sunday") ] <- NA
+weekends <- index(xts)[which(is.na(date))]
+
+# convert to character
+x <- as.Date("2010-11-04 00:00:00")
+as.character(x)                         # "2010-11-04" 
+format(x, format="%Y-%m-%d %H:%M:%S")   # "2010-11-04 00:00:00"
+```
+
+### POSIXct, POSIXlt
+
+POSIXct : “ct” stand for calender time 
+
+POSIXlt : “lt” stands for local time. POXIXlt objects are lists,  it enables easy extraction of specific componants of a time
+ 
+```r
+# read time stamp with format, return "POSIXlt" "POSIXt" object
+time <- strptime("21/05/2015 10:09", format="%d/%m/%Y %H:%M")
+
+# POSIXct objects are a measure of seconds from an origin
+time <- Sys.time()
+# add 3 hours
+time + 3*60*60
+```
+
+### ts 
+ 
 ```r
 ts1 <- ts(c(2,3,2,3,4,5))
 
@@ -20,56 +60,76 @@ frequency(t1) <- 2 # assign frequency
 # extract data 
 window(t2, start=as.Date('2000-01-01'), end=as.Date('2000-31-12') )
 ```
- * xts and zoo objects
+
+### xts, zoo 
 
 ```r
 # ------------- xts or zoo for data with time stamp
 
 # xts object is a subclass of zoo, which means zoo methods are called if an xts method doesn't exist for a generic function (e.g. $.zoo and $<-.zoo). Both zoo and xts objects are a matrix with an ordered index attribute. xts requires that the index be time-based.
 
+# convert a data frame to xts
 prices <- c(1.1, 2.2, 3.3)
 timestamps <-  c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockprices <- data.frame(prices, timestamps)
 
-# convert data.frame to time series
-stockprices
 # prices(numeric)    timestamps(character)
 # 1.1         2011-01-05 11:00
 # 2.2         2011-01-05 12:00
 # 3.3         2011-01-05 13:00
 
 require(xts)
-stockpricesXts <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
-stockpricesXts
+xts <- xts(stockprices$prices, order.by=as.POSIXct(stockprices$timestamps))
+
+# convert a xts to a data frame
+data.frame(date=index(xts), coredata(xts))
 
 # select a time range
-t1 <- stockpricesXts["2011-01-04T05:00/2011-01-05"]
+t1 <- xts["2011-01-04T05:00/2011-01-05"]
 
-# read time stamp with format
-timestamps <-  strptime(timestamps, format="%d/%m/%Y %H:%M")
+# merge operation on xts objects by time (index). 
+merge(x,y)
+merge(x,y, join='inner') # join=inner, left, or right
+
+# zero-width objects (only index values) can be used
+xi <- xts( , index(x))
+merge(y, xi)
+
+# average in time series based on time and date
+aggregate(list(temperature = temp$temperature)
+          , list(hourofday = cut(temp$date_time, "1 hour"))
+          , mean)
+
+# or
+
+# endpoints : Extract index values of a given xts object corresponding to the last observations given a period specified by on
+ep <- endpoints(xts,'hours') 
+# period.apply: apply a specified function to data over a given interval, where the interval is taken to be the data from INDEX[k] to INDEX[k+1]
+period.apply(xts, ep, mean) 
+
+
+# sliding window
+require(zoo)
+TS <- zoo(c(4, 5, 7, 3, 9, 8))
+rollapply(TS, width = 3, by = 2, FUN = mean, align = "left")
+       1        3 
+5.333333 6.333333
 
 
 ```
 
-Deal with inregular time series
+Deal with inregular time series, time internvals are not constant
 
 ```r
-# get minimum at an hour granularity
-tMinHour <- trunc(min(time(ts)), units ='hour')
-# back off 30 minute of the current hour
-tMin <- tMinHour - (30 * 60)
-# get max 
-tMax <- max(time(ts)) + (30 * 60)
-# create sequence for 'cut'
-cSeq <- seq(tMin, tMax, by = '60 min')
-# converted to a factor by cutting, cCut is a factor
-cCut <- cut(time(ts), cSeq)
- # compute means , x is a array
-newValue <- tapply(ts, cCut, mean) 
+tMinHour <- trunc(min(time(ts)), units ='hour') # get minimum at an hour granularity
+tMin <- tMinHour - (30 * 60) # back off 30 minute of the current hour
+tMax <- max(time(ts)) + (30 * 60)  # get max  
+cSeq <- seq(tMin, tMax, by = '60 min') # create sequence for 'cut'
+cCut <- cut(time(ts), cSeq) # converted to a factor by cutting, cCut is a factor
+newValue <- tapply(ts, cCut, mean)  # compute means , newValue is a array
 
 newTs <- xts(newValue, order.by=seq(tMinHour, tMax, by='60 min') )
 plot(newTs)
-
 
 # ------- fix NA value ------------
 
@@ -86,38 +146,6 @@ ts <- na.locf(ts)
   * TTR
 
 http://rss.acs.unt.edu/Rdoc/library/TTR/html/MovingAverages.html
-
-
-## Arima 
-
-  * forecast
-
-```r
-fit <- Arima(WWWusage, order=c(3,1,0))
-
-# plot the model against the data
-plot(fit$x,col="black")
-lines(fitted(fit),col="red")
-
-# auto arima
-require(forecast)
-fit <- auto.arima(ts)
-plot(forecast(fit, h=5)) # 5 stps ahead
-
-# Model Diagnostics for a Fitted ARIMA Model 
-# gof.lag = maximum lag used in ACF and Ljung-Box tests for the residuals
-tsdiag(fit,gof=50,omit.initial=FALSE)
-
-# the 5th value in 5 stps ahead
-forecast(fit, h=5)$mean[5]
-
-# extract the (p, d, q) ; more info for arima.string() function
-order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
-# or
-order <- arimaorder(fit)
-
-```
-
 
 ## ACF
 
@@ -151,7 +179,10 @@ sales<-c(39,  73,  41,  76,  75,  47,   4,  53,  40,  47,  31,  33,
 time.series <- ts(data=sales, frequency = 12, start=c(2000, 1), end=c(2002, 12))
 plot(time.series, xlab="Time", ylab="Sales (USD)")
 
+
 decomposed <- stl(time.series, s.window="periodic")
+
+# The two main parameters to be chosen when using STL are the trend window (t.window) and seasonal window (s.window). These control how rapidly the trend and seasonal components can change. Small values allow more rapid change. Setting the seasonal window to be infinite is equivalent to forcing the seasonal component to be periodic (i.e., identical across years).
 
 
 # origional_value - seasonal = trend + remainder
@@ -220,109 +251,5 @@ plot(decomposed)
 
 ```
 
-## ARIMA
 
-ARIMA book: https://www.otexts.org/fpp
-
- * Generally, seasonal versions of ARIMA and ETS models are designed for shorter periods such as 12 for monthly data or 4 for quarterly data.
-
-
-comparing results of applying transformation and seasonal configuration in arima
-
-```{r, warning=F}
-
-require(fpp) # for a10 dataset
-
-a10train <- window(a10, end=2004.99)
-
-par(mfrow=c(5,1),
-    mar=c(2,2,2,2), oma=c(0,0,0,0)
-)
-
-plot(a10train)
-
-lam <- BoxCox.lambda(a10train) # BoxCox transformation
-
-# ------ auto.arima only
-fit <- auto.arima(a10train)
-fcast <- forecast(fit, h=50)
-plot(fcast)
-lines(a10, col="black")
-
-
-# ------ auto.arima + transformation
-fit2 <- auto.arima(a10train, lambda=lam)
-fcast2 <- forecast(fit2, h=50)
-plot(fcast2)
-lines(a10, col="black")
-
-# ------ Arima + transformation + order + seasonal 
-order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
-seasonal=list(order=c(fit$arma[3], fit$arma[7], fit$arma[4]), period=fit$arma[5])
-fit3 <- Arima(a10train, lambda=lam, order=order, seasonal=seasonal)
-fcast3 <- forecast(fit3, h=50)
-plot(fcast3)
-lines(a10, col="black")
-
-# ------ Arima + order 
-order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
-fit4 <- Arima(a10train, order=order)
-fcast4 <- forecast(fit4, h=50)
-plot(fcast4)
-lines(a10, col="black")
-
-
-accuracy(fcast, a10)
-accuracy(fcast2, a10)
-accuracy(fcast3, a10)
-accuracy(fcast4, a10)
-
-
-```
-
-## regressor/covariate
-
-```r
-hour <- as.POSIXlt(time(xts1))$hour    # extract the hour of time stamp
-xreg <- model.matrix(~as.factor(hour)) # hourly 
-
-
-week <- as.POSIXlt(time(xts1))$wday    # find the day of the week
-xreg <- model.matrix(~as.factor(week)) # week and weekend days
-
-# Remove intercept
-xreg <- xreg[,-1]
-
-# Rename columns
-# colnames(xreg) <- c("Mon","Tue","Wed","Thu","Fri","Sat")
-
-fit2 <- auto.arima(... , xreg=xreg)
-```
-
-```r
-
-tdata <- s
-
-tdata <- ts(tdata)
-
-fit1 <- auto.arima(tdata)
-fit1
-
-system.time(fit <- Arima(tdata, model=fit1 ))
-fcast <- forecast(fit, h=5)
-plot(fcast,include=50)
-lines(tdata, col="red")
-accuracy(fcast,tdata)
-
-
-order <- c(fit1$arma[1], fit1$arma[6], fit1$arma[2])
-system.time(fit <- arima(tdata, order=order) )
-fcast <- forecast(fit, h=5)
-plot(fcast,include=50)
-lines(tdata, col="red")
-
-
-accuracy(fcast,tdata)
-
-```
 
