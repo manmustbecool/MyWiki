@@ -24,7 +24,6 @@ http://www.jason-french.com/blog/2013/03/11/installing-r-in-linux/
 
 The atomic data types are "logical", "integer", "numeric" (synonym "double"), "complex", "character" and "raw".
 
-
 ```r
 # Formatting decimal
 x <- 1.224554
@@ -67,7 +66,7 @@ y <- which(v<3)
 
 # select every (n+1)th element
 n=2
-v <- v[seq(1, length(a), n)]
+v <- v[seq(1, length(v), n)]
 
 # append a value
 v <- c(1, 2)
@@ -192,8 +191,8 @@ A Data Frame likes a table. It is a list of column vectors of equal length. Diff
 
 ```r
 # Initialize a dataframe
-options(stringsAsFactors = FALSE) # if want to avoid that R understands characters as factors
 df <- data.frame()
+df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters as factors
 
 # Initialize a df from a matrix 
 df <- data.frame(matrix(ncol=50, nrow=1))
@@ -359,7 +358,7 @@ object.size(objectX)
 
 ## Other common data structures
 
-### environment
+### environment ###
 
 an environment is a bag of object references.
 http://adv-r.had.co.nz/Environments.html
@@ -376,13 +375,11 @@ e$a <- 2:4
 exists("a", envir=e)
 ```
 
-### formula
+### formula ###
 
-creating a formula from a string
-
+Creating a formula from a string
 ```r
-as.formula("y ~ x1 + x2")
-#> y ~ x1 + x2
+as.formula("y ~ x1 + x2")  #> y ~ x1 + x2
 ```
 
 ## Common functions ##

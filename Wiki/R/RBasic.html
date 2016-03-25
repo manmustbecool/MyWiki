@@ -134,7 +134,7 @@ $(document).ready(function () {
 
 
 <div id="homeLink">
-<p><b></b>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></b></p>
+<p><b></b>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri" style="color:blue;">http://manmustbecool.github.io/MyWiki/</a></b></p>
 </div>
 
 <div class="fluid-row" id="header">
@@ -227,7 +227,7 @@ y &lt;-<span class="st"> </span><span class="kw">which</span>(v&lt;<span class="
 
 <span class="co"># select every (n+1)th element</span>
 n=<span class="dv">2</span>
-v &lt;-<span class="st"> </span>v[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">length</span>(a), n)]
+v &lt;-<span class="st"> </span>v[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">length</span>(v), n)]
 
 <span class="co"># append a value</span>
 v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)
@@ -341,8 +341,8 @@ ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">
 <h2><span class="header-section-number">0.7</span> Data Frame</h2>
 <p>A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a dataframe</span>
-<span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="co"># if want to avoid that R understands characters as factors</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) <span class="co"># Avoid that R understands characters as factors</span>
 
 <span class="co"># Initialize a df from a matrix </span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">1</span>))
@@ -516,9 +516,8 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 </div>
 <div id="formula" class="section level3">
 <h3><span class="header-section-number">0.10.2</span> formula</h3>
-<p>creating a formula from a string</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.formula</span>(<span class="st">&quot;y ~ x1 + x2&quot;</span>)
-<span class="co">#&gt; y ~ x1 + x2</span></code></pre></div>
+<p>Creating a formula from a string</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.formula</span>(<span class="st">&quot;y ~ x1 + x2&quot;</span>)  <span class="co">#&gt; y ~ x1 + x2</span></code></pre></div>
 </div>
 </div>
 <div id="common-functions" class="section level2">
@@ -606,8 +605,8 @@ myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span 
 
 .
 
-<div id="backTotop"><a href="#homeLink">^Back to top^</a></div>
-<!-- <div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Home Page^</a></div> -->
+<!-- <div id="backTotop"><a href="#homeLink">^Back to top^</a></div> -->
+<div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Home Page^</a></div>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
