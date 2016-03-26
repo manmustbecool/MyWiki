@@ -154,13 +154,11 @@ localhost
 
 **DFS Format** 
 
-The command for DFS format
-
 ```bash
-bin/hadoop namenode -format
+bin/hadoop namenode -format # DFS format command
 ```
 
-**Problem: Format aborted** 
+  *  **Problem: Format aborted** 
 
 ```bash
 Format aborted in /home/hduser/hadooptmp/dfs/name
@@ -170,9 +168,9 @@ SHUTDOWN_MSG: Shutting down NameNode at ubuntu/127.0.1.1
 ```
 If the name node is already shutdown, then go to the dfs directory and manually delete all files. After this, input the format command again.
 
-**Problem: safe mode** 
+  * **Problem: safe mode** 
 
-Name node stucks in safe mode
+Name node stucks in the safe mode
 `org.apache.hadoop.dfs.SafeModeException`
 Use the following command to turn off the safe mode.
 
@@ -187,7 +185,7 @@ bin/hadoop dfsadmin -safemode leave
 
 With many hadoop tutorials I had following problems with Hadoop Eclipse plugin.
 
-**Problem: failed on connection** 
+ *  **Problem: failed on connection** 
 
 The possible error messages:
 
@@ -205,7 +203,7 @@ _Fix_:
 Just install the **Cygwin**, then adding the cygwin path to the `Path` of Environment Variables: `;c:\cygwin\bin;c:\cygwin\usr\bin`. Restart the eclipse, the problem will be fixed.
 
 
-**Problem: Permission denied** 
+   * **Problem: Permission denied** 
 
 ```bash
 Permission denied: user=xxx\xxxxx, access=WRITE, inode="":hduser:supergroup:rwxr-xr-
@@ -214,7 +212,7 @@ Permission denied: user=xxx\xxxxx, access=WRITE, inode="":hduser:supergroup:rwxr
 _Fix_:
 
 Changing the permission. This Must be done in the dfs system
-```
+```bash
 hadoop fs -chmod -R ugo+rwx /user 
 ```
 
