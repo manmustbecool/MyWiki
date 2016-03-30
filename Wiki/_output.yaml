@@ -8,7 +8,7 @@ html_document:
   fig_width: 5
   fig_height: 4
   css: includes\custom.css
-  date: "`r format(Sys.time(), '%d %B, %Y')`"
   includes:
     before_body: includes\header.html
     after_body: includes\footer.html
+    

@@ -1,0 +1,279 @@
+---
+title: "Benchmark : Matrix data.frame data.table"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+Matrix data.frame data.table
+
+  * Row appending
+    * good performance : data.table(rbindlist) ; data.table(rbind) ; matrix(rbind)
+  * Row deletion
+    * good performance : matrix([,-1]) ; matrix(tail) ; data.table([,-1]) ; data.table(tail) ; 
+  * Row selection
+
+
+Summary : Matrix and data.table are very close in performance. data.frame should be avoid in data and operation intensive cases 
+
+
+# Row appending  
+
+```{r, warning=FALSE}
+library(microbenchmark) # for microbenchmark
+library(data.table)
+
+#----------
+
+mat0 <- matrix(ncol = 100, nrow = 1000)
+df0 <- data.frame(mat0)
+dt0 <- data.table(mat0)
+
+newRow <- 1:100
+loops <- 1:5000 # ranking result may different depending on the loop size
+
+# ---------
+
+# rbind
+mat_rbind <- function(){
+  mat <- mat0
+  for (i in loops) {
+    mat <- rbind(mat, newRow)
+  }
+}
+
+# rbind
+df_rbind <- function(){
+  df <- df0
+  for (i in loops) {
+    df <- rbind(df, newRow)
+  }
+}
+
+# insert
+df_insert <- function(){
+  df <- df0
+  for (i in loops) {
+    df[nrow(df)+1,] <- newRow
+  }
+}
+
+# rbind
+dt_rbind <- function(){
+  dt <- dt0
+  for (i in loops) {
+    dt <- rbind(dt, as.list(newRow))
+  }
+}
+
+# rbindlist
+dt_rbindlist <- function(){
+  dt <- dt0
+  for (i in loops) {
+    dt <- rbindlist(list(dt, as.list(newRow) ) )
+  }
+}
+
+```
+
+```{r, eval=FALSE}
+res <- microbenchmark(
+  mat_rbind()
+  , df_rbind()
+  , df_insert()
+  , dt_rbind()
+  , dt_rbindlist()
+  , times = 50
+)
+
+print(res)
+
+```
+
+```r
+Unit: seconds
+     expr      min       lq     mean   median       uq       max neval  cld
+   mat_rbind() 29.61510 29.91575 30.20403 30.08436 30.20831  35.67312    50  b  
+    df_rbind() 87.38882 88.11399 89.57409 88.34435 88.73782 112.14921    50    d
+   df_insert() 48.18800 48.56083 49.34227 48.84676 49.45061  58.04525    50   c 
+    dt_rbind() 25.22989 25.42573 25.73572 25.53962 25.71169  33.92170    50 a   
+dt_rbindlist() 24.56441 24.74358 25.47515 24.81044 25.02734  37.53949    50 a  
+```
+
+# Row deletion
+
+```{r}
+mat0 <- matrix(ncol = 100, nrow = 10000)
+df0 <- data.frame(mat0)
+dt0 <- data.table(mat0)
+
+loops <- 1:5000
+
+#-----------------------
+
+mat_delete <- function(){
+  mat <- mat0
+  for (i in loops) {
+    mat <- mat[-1, ]
+  }
+}
+
+mat_tail <- function(){
+  mat <- mat0
+  for (i in loops) {
+    mat <- tail(mat, nrow(mat)-1 )
+  }
+}
+
+df_delete <- function(){
+  df <- df0
+  for (i in loops) {
+    df <- df[-1, ]
+  }
+}
+
+df_tail <- function(){
+  df <- df0
+  for (i in loops) {
+    df <- tail(df, nrow(df)-1 )
+  }
+}
+
+dt_delete <- function(){
+  dt <- dt0
+  for (i in loops) {
+    dt <- dt[-1, ]
+  }
+}
+
+dt_tail <- function(){
+  dt <- dt0
+  for (i in loops) {
+    dt <- tail(dt, nrow(dt)-1 )
+  }
+}
+```
+
+
+```{r, eval=FALSE}
+res <- microbenchmark(
+  mat_delete()
+  , mat_tail()
+  , df_delete()
+  , df_tail()
+  , dt_delete()
+  , dt_tail()
+  , times = 50
+)
+
+print(res)
+```
+
+```r
+## Unit: seconds
+##          expr      min       lq     mean   median       uq      max neval 
+##  mat_delete() 34.70892 35.27614 35.58425 35.43062 35.67061 38.85541    50  a
+##    mat_tail() 38.09419 38.92384 39.26626 39.12545 39.33041 42.16310    50   b
+##   df_delete() 47.66720 47.85000 48.04832 47.99169 48.12198 49.68098    50
+##     df_tail() 74.40627 75.18312 75.42762 75.40833 75.54480 76.55802    50
+##   dt_delete() 40.48840 40.72822 40.85509 40.87139 40.90501 41.73669    50
+##     dt_tail() 41.30999 41.58012 41.68345 41.64761 41.75733 42.54702    50
+
+```
+
+#  Row selection
+
+```{r}
+mat0 <- matrix(ncol = 50, nrow = 10000)
+mat0[, 1] <- 1:10000 
+mat0[, 2] <- 1:10000 
+
+df0 <- data.frame(mat0)
+dt0 <- data.table(mat0)
+
+loops <- 1000:6000
+
+#----------------------
+
+mat_select <- function(){
+  sum <- 0
+  for (i in loops) {
+    sum <- sum(mat0[mat0[,1]>i & mat0[,1]<i+50, 2]) + sum
+  }
+  print(sum)
+}
+
+mat_subset <- function(){
+  sum <- 0
+  for (i in loops) {
+    sum <- sum(subset(mat0[,2], mat0[,1]>i & mat0[,1]<i+50)) + sum
+  }
+  print(sum)
+}
+
+df_select <- function(){
+  sum <- 0
+  for (i in loops) {
+    sum <- sum(df0[df0[,1]>i & df0[,1]<i+50, 2]) + sum
+  }
+  print(sum)
+}
+
+df_subset <- function(){
+  sum <- 0
+  for (i in loops) {
+    sum <- sum(subset(df0[,2], df0[,1]>i & df0[,1]<i+50)) + sum
+  }
+  print(sum)
+}
+
+dt_select <- function(){
+  sum <- 0
+  for (i in loops) {
+    sum <- sum(dt0[dt0$V1>i & dt0$V1<i+50, "V2", with=FALSE])+sum
+  }
+  print(sum)
+}
+
+dt_subset <- function(){
+  sum <- 0
+  for (i in loops) {
+    sum <- sum(subset(dt0$V2, dt0$V1>i & dt0$V1<i+50)) + sum
+  }
+  print(sum)
+}
+```
+
+```{r, eval=FALSE}
+res <- microbenchmark(
+  mat_select()
+  , mat_subset()
+  , df_select()
+  , df_subset()
+  , dt_select()
+  , dt_subset()
+  , times = 50
+)
+
+print(res)
+```
+
+```r
+## Unit: nanoseconds
+##          expr        min         lq         mean     median         uq
+##    mat_select          0          1 3.768200e+02        428        429
+##  mat_subset() 4276422959 4336275217 4.805567e+09 5021651896 5114309661
+##   df_select() 1872613721 1922426744 2.155157e+09 2233557692 2326910339
+##   df_subset() 3046043127 3129437574 3.525092e+09 3650319753 3734093072
+##   dt_select() 3703176576 3764355310 4.491682e+09 4733422992 4825856470
+##   dt_subset() 3015270310 3119553566 3.526231e+09 3629489957 3740920881
+##         max neval   cld
+##        1711    50 a    
+##  5530042228    50     e
+##  2659248458    50  b   
+##  4043180638    50   c  
+##  5091721065    50    d 
+##  3949492095    50   c
+```
+
+
+
+
