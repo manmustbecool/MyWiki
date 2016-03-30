@@ -1,5 +1,5 @@
 ---
-title: "Benchmark : Matrix data.frame data.table"
+title: "Benchmark : matrix; data.frame; data.table"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
