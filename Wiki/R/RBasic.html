@@ -67,7 +67,7 @@ code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
 </style>
 
 
-<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20210px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%200px%20auto%20%2D15px%3B%0A%7D%0A%23TOC%20ul%20li%20ul%7B%0Amargin%2Dleft%3A%20%2D20px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20210px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%200px%20auto%20%2D17px%3B%0A%7D%0A%23TOC%20ul%20li%20ul%7B%0Amargin%2Dleft%3A%20%2D22px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -141,7 +141,7 @@ $(document).ready(function () {
 
 
 <h1 class="title">R basic</h1>
-<h4 class="date"><em>30 March, 2016</em></h4>
+<h4 class="date"><em>31 March, 2016</em></h4>
 
 </div>
 
@@ -149,7 +149,7 @@ $(document).ready(function () {
 <ul>
 <li><a href="#basic-info"><span class="toc-section-number">1</span> Basic info</a></li>
 <li><a href="#atomic-data-types"><span class="toc-section-number">2</span> Atomic data types</a></li>
-<li><a href="#data-structures"><span class="toc-section-number">3</span> data structures</a><ul>
+<li><a href="#data-structures"><span class="toc-section-number">3</span> Data structures</a><ul>
 <li><a href="#vector"><span class="toc-section-number">3.1</span> vector</a></li>
 <li><a href="#factor"><span class="toc-section-number">3.2</span> factor</a></li>
 <li><a href="#matrix"><span class="toc-section-number">3.3</span> matrix</a></li>
@@ -210,7 +210,7 @@ str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This eval
 data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;/&quot;</span>, <span class="st">&quot;-&quot;</span>, data$timestamp)</code></pre></div>
 </div>
 <div id="data-structures" class="section level1">
-<h1><span class="header-section-number">3</span> data structures</h1>
+<h1><span class="header-section-number">3</span> Data structures</h1>
 <div id="vector" class="section level2">
 <h2><span class="header-section-number">3.1</span> vector</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
@@ -407,8 +407,6 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
 df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
 
-
-
 <span class="co"># create a new column with merged values of two columns</span>
 df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)
 
@@ -434,17 +432,6 @@ df[<span class="kw">match</span>(target, df$name),]
 <span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="ot">NULL</span>)                     <span class="co"># cross join</span>
 
 <span class="kw">merge</span>(df1, df2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;k1&quot;</span>,<span class="st">&quot;k2&quot;</span>)) 
-
-<span class="co"># ------ group by with data table</span>
-<span class="kw">library</span>(data.table)
-dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(df) <span class="co"># convert the data frame to data table</span>
-dt[, <span class="kw">list</span>(<span class="dt">mean=</span><span class="kw">mean</span>(age), <span class="dt">sd=</span><span class="kw">sd</span>(age)), by=company] <span class="co"># summarize</span>
-dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), by=company] <span class="co"># list</span>
-dt[, count:<span class="er">=</span>.N, by=<span class="kw">list</span>(a,b)] <span class="co"># row frequency count by group. .N will give you the number of number of rows in each group.</span>
-
-expr &lt;-<span class="st"> </span><span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">&quot;by=&quot;</span>, <span class="kw">colnames</span>(dt)<span class="dv">2</span>)) <span class="co"># dynamic column names</span>
-dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), <span class="kw">eval</span>(expr)]
-
 
 <span class="co">#  ------------ Handle NA, NaN, null, blank ---------------------</span>
 
@@ -474,6 +461,20 @@ df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class
 
 <span class="co"># Remove rows where all data is NA</span>
 df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df)) !=<span class="st"> </span><span class="kw">ncol</span>(df),]</code></pre></div>
+<p>use data.table for data.fame</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(df) <span class="co"># convert the data frame to data table</span>
+
+<span class="co"># select colum by names</span>
+dt &lt;-<span class="st"> </span>dt[ ,<span class="kw">c</span>(<span class="st">&quot;time&quot;</span>,<span class="st">&quot;count&quot;</span>), with=F] <span class="co"># need set with=F</span>
+
+<span class="co"># ------ group by with data.table</span>
+dt[, <span class="kw">list</span>(<span class="dt">mean=</span><span class="kw">mean</span>(age), <span class="dt">sd=</span><span class="kw">sd</span>(age)), by=company] <span class="co"># summarize</span>
+dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), by=company] <span class="co"># list</span>
+dt[, count:<span class="er">=</span>.N, by=<span class="kw">list</span>(a,b)] <span class="co"># row frequency count by group. .N will give you the number of number of rows in each group.</span>
+
+expr &lt;-<span class="st"> </span><span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">&quot;by=&quot;</span>, <span class="kw">colnames</span>(dt)<span class="dv">2</span>)) <span class="co"># dynamic column names with groupping</span>
+dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), <span class="kw">eval</span>(expr)]</code></pre></div>
 </div>
 <div id="list" class="section level2">
 <h2><span class="header-section-number">3.6</span> list</h2>

@@ -45,7 +45,7 @@ data$timestamp <- gsub("/", "-", data$timestamp)
 
 ```
 
-# data structures
+# Data structures
 
 ## vector 
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
@@ -255,8 +255,6 @@ df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters a
 df <- rbind(df, c("hi","i","am","bob"))
 df <- rbind(df, c("hi","i","am","alice"))
 
-
-
 # create a new column with merged values of two columns
 df$new_column = paste(df$V1, df$V2, sep="_")
 
@@ -282,17 +280,6 @@ merge(x=df1, y=df2, by="CustomerId", all.y=TRUE) # right (outer) join
 merge(x=df1, y=df2, by=NULL)                     # cross join
 
 merge(df1, df2, by = c("k1","k2")) 
-
-# ------ group by with data table
-library(data.table)
-dt <- data.table(df) # convert the data frame to data table
-dt[, list(mean=mean(age), sd=sd(age)), by=company] # summarize
-dt[, list(ages=list(age)), by=company] # list
-dt[, count:=.N, by=list(a,b)] # row frequency count by group. .N will give you the number of number of rows in each group.
-
-expr <- parse(text = paste("by=", colnames(dt)2)) # dynamic column names
-dt[, list(ages=list(age)), eval(expr)]
-
 
 #  ------------ Handle NA, NaN, null, blank ---------------------
 
@@ -322,6 +309,23 @@ df <- df[,colSums(is.na(df))<nrow(df)]
 
 # Remove rows where all data is NA
 df <- df[rowSums(is.na(df)) != ncol(df),]
+
+```
+use data.table for data.fame
+```r
+library(data.table)
+dt <- data.table(df) # convert the data frame to data table
+
+# select colum by names
+dt <- dt[ ,c("time","count"), with=F] # need set with=F
+
+# ------ group by with data.table
+dt[, list(mean=mean(age), sd=sd(age)), by=company] # summarize
+dt[, list(ages=list(age)), by=company] # list
+dt[, count:=.N, by=list(a,b)] # row frequency count by group. .N will give you the number of number of rows in each group.
+
+expr <- parse(text = paste("by=", colnames(dt)2)) # dynamic column names with groupping
+dt[, list(ages=list(age)), eval(expr)]
 
 ```
 
