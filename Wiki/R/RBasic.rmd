@@ -45,7 +45,7 @@ data$timestamp <- gsub("/", "-", data$timestamp)
 
 ```
 
-# Data structures
+# Common data structures
 
 ## vector 
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
@@ -349,6 +349,8 @@ l1 <- append(l1, l2) # each elements of l2 will be an element of l1
 l1 <- append(l1, list(l2)) # the l2 will be one element of l1
 ```
 
+# Other data structures
+
 ## object
 
 ```r
@@ -362,11 +364,7 @@ as.character(dQuote(objectX))
 object.size(objectX)
 ```
 
-## Other data structures
-
-Other common data structures
-
-### environment ###
+## environment ##
 
 an environment is a bag of object references.
 http://adv-r.had.co.nz/Environments.html
@@ -383,7 +381,7 @@ e$a <- 2:4
 exists("a", envir=e)
 ```
 
-### formula ###
+## formula ##
 
 Creating a formula from a string
 ```r

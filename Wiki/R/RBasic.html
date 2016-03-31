@@ -149,24 +149,24 @@ $(document).ready(function () {
 <ul>
 <li><a href="#basic-info"><span class="toc-section-number">1</span> Basic info</a></li>
 <li><a href="#atomic-data-types"><span class="toc-section-number">2</span> Atomic data types</a></li>
-<li><a href="#data-structures"><span class="toc-section-number">3</span> Data structures</a><ul>
+<li><a href="#common-data-structures"><span class="toc-section-number">3</span> Common data structures</a><ul>
 <li><a href="#vector"><span class="toc-section-number">3.1</span> vector</a></li>
 <li><a href="#factor"><span class="toc-section-number">3.2</span> factor</a></li>
 <li><a href="#matrix"><span class="toc-section-number">3.3</span> matrix</a></li>
 <li><a href="#array"><span class="toc-section-number">3.4</span> array</a></li>
 <li><a href="#data.frame"><span class="toc-section-number">3.5</span> data.frame</a></li>
 <li><a href="#list"><span class="toc-section-number">3.6</span> list</a></li>
-<li><a href="#object"><span class="toc-section-number">3.7</span> object</a></li>
-<li><a href="#other-data-structures"><span class="toc-section-number">3.8</span> Other data structures</a><ul>
-<li><a href="#environment"><span class="toc-section-number">3.8.1</span> environment</a></li>
-<li><a href="#formula"><span class="toc-section-number">3.8.2</span> formula</a></li>
 </ul></li>
+<li><a href="#other-data-structures"><span class="toc-section-number">4</span> Other data structures</a><ul>
+<li><a href="#object"><span class="toc-section-number">4.1</span> object</a></li>
+<li><a href="#environment"><span class="toc-section-number">4.2</span> environment</a></li>
+<li><a href="#formula"><span class="toc-section-number">4.3</span> formula</a></li>
 </ul></li>
-<li><a href="#common-functions"><span class="toc-section-number">4</span> Common functions</a></li>
-<li><a href="#data-inputoutput"><span class="toc-section-number">5</span> Data input/output</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">6</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">7</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">8</span> SQL query</a></li>
+<li><a href="#common-functions"><span class="toc-section-number">5</span> Common functions</a></li>
+<li><a href="#data-inputoutput"><span class="toc-section-number">6</span> Data input/output</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">7</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">8</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">9</span> SQL query</a></li>
 </ul>
 </div>
 
@@ -209,8 +209,8 @@ str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This eval
 <span class="co"># gsub for replace a part of string</span>
 data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;/&quot;</span>, <span class="st">&quot;-&quot;</span>, data$timestamp)</code></pre></div>
 </div>
-<div id="data-structures" class="section level1">
-<h1><span class="header-section-number">3</span> Data structures</h1>
+<div id="common-data-structures" class="section level1">
+<h1><span class="header-section-number">3</span> Common data structures</h1>
 <div id="vector" class="section level2">
 <h2><span class="header-section-number">3.1</span> vector</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
@@ -493,8 +493,11 @@ v &lt;-<span class="st"> </span>v[v&gt;<span class="dv">5</span>]
 l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, l2) <span class="co"># each elements of l2 will be an element of l1</span>
 l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class="kw">list</span>(l2)) <span class="co"># the l2 will be one element of l1</span></code></pre></div>
 </div>
+</div>
+<div id="other-data-structures" class="section level1">
+<h1><span class="header-section-number">4</span> Other data structures</h1>
 <div id="object" class="section level2">
-<h2><span class="header-section-number">3.7</span> object</h2>
+<h2><span class="header-section-number">4.1</span> object</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pass string name as object</span>
 <span class="kw">get</span>(<span class="st">&quot;objectX&quot;</span>)  
 
@@ -504,11 +507,8 @@ l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class=
 <span class="co"># object memory size</span>
 <span class="kw">object.size</span>(objectX)</code></pre></div>
 </div>
-<div id="other-data-structures" class="section level2">
-<h2><span class="header-section-number">3.8</span> Other data structures</h2>
-<p>Other common data structures</p>
-<div id="environment" class="section level3">
-<h3><span class="header-section-number">3.8.1</span> environment</h3>
+<div id="environment" class="section level2">
+<h2><span class="header-section-number">4.2</span> environment</h2>
 <p>an environment is a bag of object references. <a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an enviroment</span>
 e &lt;-<span class="st"> </span><span class="kw">new.env</span>(<span class="dt">hash=</span><span class="ot">TRUE</span>)
@@ -520,15 +520,14 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 <span class="co"># check if an object in the enviroment</span>
 <span class="kw">exists</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">envir=</span>e)</code></pre></div>
 </div>
-<div id="formula" class="section level3">
-<h3><span class="header-section-number">3.8.2</span> formula</h3>
+<div id="formula" class="section level2">
+<h2><span class="header-section-number">4.3</span> formula</h2>
 <p>Creating a formula from a string</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.formula</span>(<span class="st">&quot;y ~ x1 + x2&quot;</span>)  <span class="co">#&gt; y ~ x1 + x2</span></code></pre></div>
 </div>
 </div>
-</div>
 <div id="common-functions" class="section level1">
-<h1><span class="header-section-number">4</span> Common functions</h1>
+<h1><span class="header-section-number">5</span> Common functions</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">--------<span class="st"> </span>apply --------
 http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</span>/<span class="dv">08</span>/<span class="dv">20</span>/a-brief-introduction-to-apply-in-r/
 
@@ -546,7 +545,7 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 <span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)</code></pre></div>
 </div>
 <div id="data-inputoutput" class="section level1">
-<h1><span class="header-section-number">5</span> Data input/output</h1>
+<h1><span class="header-section-number">6</span> Data input/output</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
 
 <span class="co">#  data in the example.dat file </span>
@@ -562,7 +561,7 @@ data
 data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)</code></pre></div>
 </div>
 <div id="parallel-r-in-windows" class="section level1">
-<h1><span class="header-section-number">6</span> Parallel R in Windows</h1>
+<h1><span class="header-section-number">7</span> Parallel R in Windows</h1>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -582,7 +581,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">stopCluster</span>(cl)</code></pre></div>
 </div>
 <div id="trycatch-exception-handling" class="section level1">
-<h1><span class="header-section-number">7</span> tryCatch exception handling</h1>
+<h1><span class="header-section-number">8</span> tryCatch exception handling</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>(
   {
       expr
@@ -596,7 +595,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 )</code></pre></div>
 </div>
 <div id="sql-query" class="section level1">
-<h1><span class="header-section-number">8</span> SQL query</h1>
+<h1><span class="header-section-number">9</span> SQL query</h1>
 <ul>
 <li><p>JDBC</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 
