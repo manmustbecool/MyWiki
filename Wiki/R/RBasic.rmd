@@ -3,7 +3,7 @@ title: "R basic"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-## Basic 
+# Basic info
 
  * pakcages overview
       + http://cran.r-project.org/web/views/
@@ -21,7 +21,7 @@ install R in linux
 http://www.jason-french.com/blog/2013/03/11/installing-r-in-linux/
 
 
-## Atomic data types
+# Atomic data types
 
 The atomic data types are "logical", "integer", "numeric" (synonym "double"), "complex", "character" and "raw".
 
@@ -45,7 +45,9 @@ data$timestamp <- gsub("/", "-", data$timestamp)
 
 ```
 
-## Vector 
+# data structures
+
+## vector 
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
 
 ```r
@@ -117,7 +119,7 @@ paste(x, sep="", collapse="")
 
 ```
 
-## Factor  
+## factor  
 A Factor is a categorical variable
 ```r
 # factor() transforms a vector into a factor.
@@ -134,7 +136,7 @@ cut(c(1,2,3,4,5,2,3,4,5,6,7), 3)
 
 ```
 
-## Matrix  ##
+## matrix  ##
 A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.
 
 ```r
@@ -163,7 +165,7 @@ x %*% y
 m <- t(m)
 ```
 
-## Array
+## array
 An array is composed of n dimensions where each dimension is a vector of R objects of the same type
 
 Arrays are similar to matrices but can have more than 2 dimensions. 
@@ -186,9 +188,9 @@ array(1:8, dim=c(2,2,2))
 ```
 
 
-## Data Frame  ##
+## data.frame  ##
 
-A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
+A data.frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
 
 ```r
 # Initialize a dataframe
@@ -249,10 +251,9 @@ df <- rbind(df, x); # add a row
 df <- cbind(df, x); # add a column
 
 # 
-options(stringsAsFactors = FALSE)
-test <- data.frame()
-test<-rbind(test,c("hi","i","am","bob"))
-test<-rbind(test,c("hi","i","am","alice"))
+df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters as factors
+df <- rbind(df, c("hi","i","am","bob"))
+df <- rbind(df, c("hi","i","am","alice"))
 
 
 
@@ -324,7 +325,7 @@ df <- df[rowSums(is.na(df)) != ncol(df),]
 
 ```
 
-## List  ##
+## list  ##
 
 A List is an ordered collection of R objects.
 
@@ -344,7 +345,7 @@ l1 <- append(l1, l2) # each elements of l2 will be an element of l1
 l1 <- append(l1, list(l2)) # the l2 will be one element of l1
 ```
 
-## Object
+## object
 
 ```r
 # pass string name as object
@@ -357,7 +358,9 @@ as.character(dQuote(objectX))
 object.size(objectX)
 ```
 
-## Other common data structures
+## Other data structures
+
+Other common data structures
 
 ### environment ###
 
@@ -383,7 +386,7 @@ Creating a formula from a string
 as.formula("y ~ x1 + x2")  #> y ~ x1 + x2
 ```
 
-## Common functions ##
+# Common functions ##
 ```r
 -------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
@@ -402,7 +405,7 @@ set.seed(123) # sample results are same everytime for same seed
 sample(300, 30)
 ```
 
-## Data input/output
+# Data input/output
 
 
 ```r
@@ -422,7 +425,7 @@ data <- read.table(file, header = FALSE, sep = "", quote = "\"'")
 ``` 
 
 
-## Parallel R in Windows ##
+# Parallel R in Windows ##
 http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/
 ```r
 require(doSNOW)
@@ -443,7 +446,7 @@ system.time(for(j in 1:times ) x <- check(j))
 stopCluster(cl)
 ```
 
-## tryCatch exception handling
+# tryCatch exception handling
 
 ```r
 tryCatch(
@@ -459,7 +462,7 @@ tryCatch(
 )
 ```
 
-## SQL query ##
+# SQL query ##
 
  * JDBC
 ```r

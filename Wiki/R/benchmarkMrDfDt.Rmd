@@ -3,19 +3,22 @@ title: "Benchmark : matrix; data.frame; data.table"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-Matrix data.frame data.table
+matrix data.frame data.table
 
   * Row appending
-    * good performance : data.table(rbindlist) ; data.table(rbind) ; matrix(rbind)
+    * Good performance : data.table(rbindlist) ; data.table(rbind) ; matrix(rbind)
   * Row deletion
-    * good performance : matrix([,-1]) ; matrix(tail) ; data.table([,-1]) ; data.table(tail) ; 
+    * Good performance : matrix([,-1]) ; matrix(tail) ; data.table([,-1]) ; data.table(tail) ; 
   * Row selection
-
+    * Good performance : data.frame([,]) ; matrix([,]) ; data.table(subset)
+    
+ 
 
 Summary : Matrix and data.table are very close in performance. data.frame should be avoid in data and operation intensive cases 
 
+# Benchmark
 
-# Row appending  
+## Row appending  
 
 ```{r, warning=FALSE}
 library(microbenchmark) # for microbenchmark
@@ -98,7 +101,7 @@ Unit: seconds
 dt_rbindlist() 24.56441 24.74358 25.47515 24.81044 25.02734  37.53949    50 a  
 ```
 
-# Row deletion
+## Row deletion
 
 ```{r}
 mat0 <- matrix(ncol = 100, nrow = 10000)
@@ -179,7 +182,7 @@ print(res)
 
 ```
 
-#  Row selection
+##  Row selection
 
 ```{r}
 mat0 <- matrix(ncol = 50, nrow = 10000)
@@ -189,8 +192,7 @@ mat0[, 2] <- 1:10000
 df0 <- data.frame(mat0)
 dt0 <- data.table(mat0)
 
-loops <- 1000:6000
-
+loops <- 1000:6000 # loop 5k times
 #----------------------
 
 mat_select <- function(){
@@ -242,7 +244,7 @@ dt_subset <- function(){
 }
 ```
 
-```{r, eval=FALSE}
+```{r, eval=F}
 res <- microbenchmark(
   mat_select()
   , mat_subset()
@@ -257,21 +259,22 @@ print(res)
 ```
 
 ```r
-## Unit: nanoseconds
-##          expr        min         lq         mean     median         uq
-##    mat_select          0          1 3.768200e+02        428        429
-##  mat_subset() 4276422959 4336275217 4.805567e+09 5021651896 5114309661
-##   df_select() 1872613721 1922426744 2.155157e+09 2233557692 2326910339
-##   df_subset() 3046043127 3129437574 3.525092e+09 3650319753 3734093072
-##   dt_select() 3703176576 3764355310 4.491682e+09 4733422992 4825856470
-##   dt_subset() 3015270310 3119553566 3.526231e+09 3629489957 3740920881
-##         max neval   cld
-##        1711    50 a    
-##  5530042228    50     e
-##  2659248458    50  b   
-##  4043180638    50   c  
-##  5091721065    50    d 
-##  3949492095    50   c
+## Unit: seconds
+##          expr      min       lq     mean   median       uq      max neval
+##  mat_select() 2.651344 2.684528 2.705679 2.697216 2.709088 2.808091    50
+##  mat_subset() 4.506899 4.537437 4.591004 4.563015 4.608267 4.892726    50
+##   df_select() 1.943527 1.994755 2.015304 2.011318 2.040349 2.116544    50
+##   df_subset() 3.183609 3.245042 3.290002 3.263126 3.299738 3.546379    50
+##   dt_select() 3.937172 4.019212 4.072775 4.048270 4.090016 4.553862    50
+##   dt_subset() 3.164424 3.220253 3.278391 3.259319 3.311617 3.694738    50
+##    cld
+##   b   
+##      e
+##  a    
+##    c  
+##     d 
+##    c
+
 ```
 
 

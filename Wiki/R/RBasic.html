@@ -67,7 +67,7 @@ code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
 </style>
 
 
-<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20200px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20210px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%200px%20auto%20%2D15px%3B%0A%7D%0A%23TOC%20ul%20li%20ul%7B%0Amargin%2Dleft%3A%20%2D20px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -147,29 +147,31 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#basic"><span class="toc-section-number">0.1</span> Basic</a></li>
-<li><a href="#atomic-data-types"><span class="toc-section-number">0.2</span> Atomic data types</a></li>
-<li><a href="#vector"><span class="toc-section-number">0.3</span> Vector</a></li>
-<li><a href="#factor"><span class="toc-section-number">0.4</span> Factor</a></li>
-<li><a href="#matrix"><span class="toc-section-number">0.5</span> Matrix</a></li>
-<li><a href="#array"><span class="toc-section-number">0.6</span> Array</a></li>
-<li><a href="#data-frame"><span class="toc-section-number">0.7</span> Data Frame</a></li>
-<li><a href="#list"><span class="toc-section-number">0.8</span> List</a></li>
-<li><a href="#object"><span class="toc-section-number">0.9</span> Object</a></li>
-<li><a href="#other-common-data-structures"><span class="toc-section-number">0.10</span> Other common data structures</a><ul>
-<li><a href="#environment"><span class="toc-section-number">0.10.1</span> environment</a></li>
-<li><a href="#formula"><span class="toc-section-number">0.10.2</span> formula</a></li>
+<li><a href="#basic-info"><span class="toc-section-number">1</span> Basic info</a></li>
+<li><a href="#atomic-data-types"><span class="toc-section-number">2</span> Atomic data types</a></li>
+<li><a href="#data-structures"><span class="toc-section-number">3</span> data structures</a><ul>
+<li><a href="#vector"><span class="toc-section-number">3.1</span> vector</a></li>
+<li><a href="#factor"><span class="toc-section-number">3.2</span> factor</a></li>
+<li><a href="#matrix"><span class="toc-section-number">3.3</span> matrix</a></li>
+<li><a href="#array"><span class="toc-section-number">3.4</span> array</a></li>
+<li><a href="#data.frame"><span class="toc-section-number">3.5</span> data.frame</a></li>
+<li><a href="#list"><span class="toc-section-number">3.6</span> list</a></li>
+<li><a href="#object"><span class="toc-section-number">3.7</span> object</a></li>
+<li><a href="#other-data-structures"><span class="toc-section-number">3.8</span> Other data structures</a><ul>
+<li><a href="#environment"><span class="toc-section-number">3.8.1</span> environment</a></li>
+<li><a href="#formula"><span class="toc-section-number">3.8.2</span> formula</a></li>
 </ul></li>
-<li><a href="#common-functions"><span class="toc-section-number">0.11</span> Common functions</a></li>
-<li><a href="#data-inputoutput"><span class="toc-section-number">0.12</span> Data input/output</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">0.13</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">0.14</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">0.15</span> SQL query</a></li>
+</ul></li>
+<li><a href="#common-functions"><span class="toc-section-number">4</span> Common functions</a></li>
+<li><a href="#data-inputoutput"><span class="toc-section-number">5</span> Data input/output</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">6</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">7</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">8</span> SQL query</a></li>
 </ul>
 </div>
 
-<div id="basic" class="section level2">
-<h2><span class="header-section-number">0.1</span> Basic</h2>
+<div id="basic-info" class="section level1">
+<h1><span class="header-section-number">1</span> Basic info</h1>
 <ul>
 <li>pakcages overview
 <ul>
@@ -187,8 +189,8 @@ install R in linux <a href="http://www.jason-french.com/blog/2013/03/11/installi
 </ul></li>
 </ul>
 </div>
-<div id="atomic-data-types" class="section level2">
-<h2><span class="header-section-number">0.2</span> Atomic data types</h2>
+<div id="atomic-data-types" class="section level1">
+<h1><span class="header-section-number">2</span> Atomic data types</h1>
 <p>The atomic data types are “logical”, “integer”, “numeric” (synonym “double”), “complex”, “character” and “raw”.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Formatting decimal</span>
 x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
@@ -207,8 +209,10 @@ str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This eval
 <span class="co"># gsub for replace a part of string</span>
 data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;/&quot;</span>, <span class="st">&quot;-&quot;</span>, data$timestamp)</code></pre></div>
 </div>
+<div id="data-structures" class="section level1">
+<h1><span class="header-section-number">3</span> data structures</h1>
 <div id="vector" class="section level2">
-<h2><span class="header-section-number">0.3</span> Vector</h2>
+<h2><span class="header-section-number">3.1</span> vector</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize an empty vector</span>
 v &lt;-<span class="st"> </span><span class="kw">vector</span>()
@@ -277,7 +281,7 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 <span class="kw">paste</span>(x, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;&quot;</span>) </code></pre></div>
 </div>
 <div id="factor" class="section level2">
-<h2><span class="header-section-number">0.4</span> Factor</h2>
+<h2><span class="header-section-number">3.2</span> factor</h2>
 <p>A Factor is a categorical variable</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># factor() transforms a vector into a factor.</span>
 f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>))
@@ -292,7 +296,7 @@ v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(f)
 <span class="kw">cut</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>), <span class="dv">3</span>)</code></pre></div>
 </div>
 <div id="matrix" class="section level2">
-<h2><span class="header-section-number">0.5</span> Matrix</h2>
+<h2><span class="header-section-number">3.3</span> matrix</h2>
 <p>A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a matrix</span>
 mr &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">50</span>)
@@ -319,7 +323,7 @@ x %*%<span class="st"> </span>y
 m &lt;-<span class="st"> </span><span class="kw">t</span>(m)</code></pre></div>
 </div>
 <div id="array" class="section level2">
-<h2><span class="header-section-number">0.6</span> Array</h2>
+<h2><span class="header-section-number">3.4</span> array</h2>
 <p>An array is composed of n dimensions where each dimension is a vector of R objects of the same type</p>
 <p>Arrays are similar to matrices but can have more than 2 dimensions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an one dimension array </span>
@@ -338,9 +342,9 @@ ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">
 [<span class="dv">1</span>,]    <span class="dv">5</span>    <span class="dv">7</span>
 [<span class="dv">2</span>,]    <span class="dv">6</span>    <span class="dv">8</span></code></pre></div>
 </div>
-<div id="data-frame" class="section level2">
-<h2><span class="header-section-number">0.7</span> Data Frame</h2>
-<p>A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
+<div id="data.frame" class="section level2">
+<h2><span class="header-section-number">3.5</span> data.frame</h2>
+<p>A data.frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a dataframe</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) <span class="co"># Avoid that R understands characters as factors</span>
@@ -399,10 +403,9 @@ df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, x); <span cla
 df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span class="co"># add a column</span>
 
 <span class="co"># </span>
-<span class="kw">options</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
-test &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
-test&lt;-<span class="kw">rbind</span>(test,<span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
-test&lt;-<span class="kw">rbind</span>(test,<span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) <span class="co"># Avoid that R understands characters as factors</span>
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
 
 
 
@@ -473,7 +476,7 @@ df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class
 df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df)) !=<span class="st"> </span><span class="kw">ncol</span>(df),]</code></pre></div>
 </div>
 <div id="list" class="section level2">
-<h2><span class="header-section-number">0.8</span> List</h2>
+<h2><span class="header-section-number">3.6</span> list</h2>
 <p>A List is an ordered collection of R objects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize a list</span>
 ls &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">'list'</span>, <span class="dv">50</span>) <span class="co"># vector(mode=&quot;list&quot;, length=50)</span>
@@ -490,7 +493,7 @@ l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, l2) <span cl
 l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class="kw">list</span>(l2)) <span class="co"># the l2 will be one element of l1</span></code></pre></div>
 </div>
 <div id="object" class="section level2">
-<h2><span class="header-section-number">0.9</span> Object</h2>
+<h2><span class="header-section-number">3.7</span> object</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pass string name as object</span>
 <span class="kw">get</span>(<span class="st">&quot;objectX&quot;</span>)  
 
@@ -500,10 +503,11 @@ l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class=
 <span class="co"># object memory size</span>
 <span class="kw">object.size</span>(objectX)</code></pre></div>
 </div>
-<div id="other-common-data-structures" class="section level2">
-<h2><span class="header-section-number">0.10</span> Other common data structures</h2>
+<div id="other-data-structures" class="section level2">
+<h2><span class="header-section-number">3.8</span> Other data structures</h2>
+<p>Other common data structures</p>
 <div id="environment" class="section level3">
-<h3><span class="header-section-number">0.10.1</span> environment</h3>
+<h3><span class="header-section-number">3.8.1</span> environment</h3>
 <p>an environment is a bag of object references. <a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an enviroment</span>
 e &lt;-<span class="st"> </span><span class="kw">new.env</span>(<span class="dt">hash=</span><span class="ot">TRUE</span>)
@@ -516,13 +520,14 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 <span class="kw">exists</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">envir=</span>e)</code></pre></div>
 </div>
 <div id="formula" class="section level3">
-<h3><span class="header-section-number">0.10.2</span> formula</h3>
+<h3><span class="header-section-number">3.8.2</span> formula</h3>
 <p>Creating a formula from a string</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.formula</span>(<span class="st">&quot;y ~ x1 + x2&quot;</span>)  <span class="co">#&gt; y ~ x1 + x2</span></code></pre></div>
 </div>
 </div>
-<div id="common-functions" class="section level2">
-<h2><span class="header-section-number">0.11</span> Common functions</h2>
+</div>
+<div id="common-functions" class="section level1">
+<h1><span class="header-section-number">4</span> Common functions</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">--------<span class="st"> </span>apply --------
 http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</span>/<span class="dv">08</span>/<span class="dv">20</span>/a-brief-introduction-to-apply-in-r/
 
@@ -539,8 +544,8 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 <span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># sample results are same everytime for same seed</span>
 <span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)</code></pre></div>
 </div>
-<div id="data-inputoutput" class="section level2">
-<h2><span class="header-section-number">0.12</span> Data input/output</h2>
+<div id="data-inputoutput" class="section level1">
+<h1><span class="header-section-number">5</span> Data input/output</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
 
 <span class="co">#  data in the example.dat file </span>
@@ -555,8 +560,8 @@ data
 <span class="co"># read CSV</span>
 data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)</code></pre></div>
 </div>
-<div id="parallel-r-in-windows" class="section level2">
-<h2><span class="header-section-number">0.13</span> Parallel R in Windows</h2>
+<div id="parallel-r-in-windows" class="section level1">
+<h1><span class="header-section-number">6</span> Parallel R in Windows</h1>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -575,8 +580,8 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">system.time</span>(for(j in <span class="dv">1</span>:times ) x &lt;-<span class="st"> </span><span class="kw">check</span>(j))
 <span class="kw">stopCluster</span>(cl)</code></pre></div>
 </div>
-<div id="trycatch-exception-handling" class="section level2">
-<h2><span class="header-section-number">0.14</span> tryCatch exception handling</h2>
+<div id="trycatch-exception-handling" class="section level1">
+<h1><span class="header-section-number">7</span> tryCatch exception handling</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>(
   {
       expr
@@ -589,8 +594,8 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
   }
 )</code></pre></div>
 </div>
-<div id="sql-query" class="section level2">
-<h2><span class="header-section-number">0.15</span> SQL query</h2>
+<div id="sql-query" class="section level1">
+<h1><span class="header-section-number">8</span> SQL query</h1>
 <ul>
 <li><p>JDBC</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 
@@ -604,6 +609,7 @@ myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span 
 </ul>
 </div>
 
+.
 
 <!-- <div id="backTotop"><a href="#homeLink">^Back to top^</a></div> -->
 <div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Home Page^</a></div>
