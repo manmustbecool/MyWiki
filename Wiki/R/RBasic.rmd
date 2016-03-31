@@ -1,8 +1,9 @@
 ---
 title: "R basic"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-## Basic 
+# Basic info
 
  * pakcages overview
       + http://cran.r-project.org/web/views/
@@ -20,10 +21,9 @@ install R in linux
 http://www.jason-french.com/blog/2013/03/11/installing-r-in-linux/
 
 
-## Atomic data types
+# Atomic data types
 
 The atomic data types are "logical", "integer", "numeric" (synonym "double"), "complex", "character" and "raw".
-
 
 ```r
 # Formatting decimal
@@ -45,7 +45,9 @@ data$timestamp <- gsub("/", "-", data$timestamp)
 
 ```
 
-## Vector 
+# Common data structures
+
+## vector 
 A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).
 
 ```r
@@ -67,7 +69,7 @@ y <- which(v<3)
 
 # select every (n+1)th element
 n=2
-v <- v[seq(1, length(a), n)]
+v <- v[seq(1, length(v), n)]
 
 # append a value
 v <- c(1, 2)
@@ -117,7 +119,7 @@ paste(x, sep="", collapse="")
 
 ```
 
-## Factor  
+## factor  
 A Factor is a categorical variable
 ```r
 # factor() transforms a vector into a factor.
@@ -134,7 +136,7 @@ cut(c(1,2,3,4,5,2,3,4,5,6,7), 3)
 
 ```
 
-## Matrix  ##
+## matrix  ##
 A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.
 
 ```r
@@ -163,7 +165,7 @@ x %*% y
 m <- t(m)
 ```
 
-## Array
+## array
 An array is composed of n dimensions where each dimension is a vector of R objects of the same type
 
 Arrays are similar to matrices but can have more than 2 dimensions. 
@@ -186,14 +188,14 @@ array(1:8, dim=c(2,2,2))
 ```
 
 
-## Data Frame  ##
+## data.frame  ##
 
-A Data Frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
+A data.frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
 
 ```r
 # Initialize a dataframe
-options(stringsAsFactors = FALSE) # if want to avoid that R understands characters as factors
 df <- data.frame()
+df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters as factors
 
 # Initialize a df from a matrix 
 df <- data.frame(matrix(ncol=50, nrow=1))
@@ -249,12 +251,9 @@ df <- rbind(df, x); # add a row
 df <- cbind(df, x); # add a column
 
 # 
-options(stringsAsFactors = FALSE)
-test <- data.frame()
-test<-rbind(test,c("hi","i","am","bob"))
-test<-rbind(test,c("hi","i","am","alice"))
-
-
+df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters as factors
+df <- rbind(df, c("hi","i","am","bob"))
+df <- rbind(df, c("hi","i","am","alice"))
 
 # create a new column with merged values of two columns
 df$new_column = paste(df$V1, df$V2, sep="_")
@@ -281,17 +280,6 @@ merge(x=df1, y=df2, by="CustomerId", all.y=TRUE) # right (outer) join
 merge(x=df1, y=df2, by=NULL)                     # cross join
 
 merge(df1, df2, by = c("k1","k2")) 
-
-# ------ group by with data table
-library(data.table)
-dt <- data.table(df) # convert the data frame to data table
-dt[, list(mean=mean(age), sd=sd(age)), by=company] # summarize
-dt[, list(ages=list(age)), by=company] # list
-dt[, count:=.N, by=list(a,b)] # row frequency count by group. .N will give you the number of number of rows in each group.
-
-expr <- parse(text = paste("by=", colnames(dt)2)) # dynamic column names
-dt[, list(ages=list(age)), eval(expr)]
-
 
 #  ------------ Handle NA, NaN, null, blank ---------------------
 
@@ -323,8 +311,25 @@ df <- df[,colSums(is.na(df))<nrow(df)]
 df <- df[rowSums(is.na(df)) != ncol(df),]
 
 ```
+use data.table for data.fame
+```r
+library(data.table)
+dt <- data.table(df) # convert the data frame to data table
 
-## List  ##
+# select colum by names
+dt <- dt[ ,c("time","count"), with=F] # need set with=F
+
+# ------ group by with data.table
+dt[, list(mean=mean(age), sd=sd(age)), by=company] # summarize
+dt[, list(ages=list(age)), by=company] # list
+dt[, count:=.N, by=list(a,b)] # row frequency count by group. .N will give you the number of number of rows in each group.
+
+expr <- parse(text = paste("by=", colnames(dt)2)) # dynamic column names with groupping
+dt[, list(ages=list(age)), eval(expr)]
+
+```
+
+## list  ##
 
 A List is an ordered collection of R objects.
 
@@ -344,7 +349,9 @@ l1 <- append(l1, l2) # each elements of l2 will be an element of l1
 l1 <- append(l1, list(l2)) # the l2 will be one element of l1
 ```
 
-## Object
+# Other data structures
+
+## object
 
 ```r
 # pass string name as object
@@ -357,9 +364,7 @@ as.character(dQuote(objectX))
 object.size(objectX)
 ```
 
-## Other common data structures
-
-### environment
+## environment ##
 
 an environment is a bag of object references.
 http://adv-r.had.co.nz/Environments.html
@@ -376,7 +381,14 @@ e$a <- 2:4
 exists("a", envir=e)
 ```
 
-## Common functions ##
+## formula ##
+
+Creating a formula from a string
+```r
+as.formula("y ~ x1 + x2")  #> y ~ x1 + x2
+```
+
+# Common functions ##
 ```r
 -------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
@@ -395,7 +407,7 @@ set.seed(123) # sample results are same everytime for same seed
 sample(300, 30)
 ```
 
-## Data input/output
+# Data input/output
 
 
 ```r
@@ -415,7 +427,7 @@ data <- read.table(file, header = FALSE, sep = "", quote = "\"'")
 ``` 
 
 
-## Parallel R in Windows ##
+# Parallel R in Windows ##
 http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/
 ```r
 require(doSNOW)
@@ -436,7 +448,7 @@ system.time(for(j in 1:times ) x <- check(j))
 stopCluster(cl)
 ```
 
-## tryCatch exception handling
+# tryCatch exception handling
 
 ```r
 tryCatch(
@@ -452,7 +464,7 @@ tryCatch(
 )
 ```
 
-## SQL query ##
+# SQL query ##
 
  * JDBC
 ```r

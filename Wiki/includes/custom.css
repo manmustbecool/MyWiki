@@ -2,11 +2,16 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 200px;
+  width: 210px;
   height: 100%;
   overflow:auto;
-  margin: auto auto auto -15px;
+  margin: auto 0px auto -17px;
 }
+
+#TOC ul li ul{
+  margin-left: -22px;
+}
+
 
 #backTotop {
   position: fixed;

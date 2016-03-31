@@ -17,6 +17,11 @@ http://www.mhsatman.com/rcaller.php
  
 An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.
 
+ * TCP/IP based, with no failure handling (e.g. if the R server fails, you need special Java code to handle it - reestablish a new connection to a new server, load your models, etc.
+ * Not thread safe! Each thread needs its own connection
+ * Stateful - each connection needs to be initialized before it is used (e.g. if you are predicting using a model, you will need to define/train your model for each connection before using it)
+
+
 in R:
 ```r
 install.packages("Rserve")
@@ -174,7 +179,7 @@ summaryRprof(tmp, memory="both")
 
 http://www.noamross.net/blog/2013/4/25/faster-talk.html
 
-# pass by values or references
+# Pass by values or references
 
 http://stackoverflow.com/questions/2603184/r-pass-by-reference
 
