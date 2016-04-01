@@ -2,6 +2,9 @@
 title: "Solr"
 ---
 
+## Enterprise Search and Solr
+
+http://manmustbecool.github.io/MyWiki/papers/Enterprise_search.html
 
 ## Top 10 performance tips apache solr ##
 

@@ -141,7 +141,7 @@ $(document).ready(function () {
 
 
 <h1 class="title">R basic</h1>
-<h4 class="date"><em>31 March, 2016</em></h4>
+<h4 class="date"><em>01 April, 2016</em></h4>
 
 </div>
 
@@ -475,6 +475,38 @@ dt[, count:<span class="er">=</span>.N, by=<span class="kw">list</span>(a,b)] <s
 
 expr &lt;-<span class="st"> </span><span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">&quot;by=&quot;</span>, <span class="kw">colnames</span>(dt)<span class="dv">2</span>)) <span class="co"># dynamic column names with groupping</span>
 dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), <span class="kw">eval</span>(expr)]</code></pre></div>
+<p>Reshape data with tidyr</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">month=</span><span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">3</span>,<span class="dv">2</span>),
+                 <span class="dt">student=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;Bob&quot;</span>), <span class="dt">each=</span><span class="dv">3</span>),
+                 <span class="dt">score=</span><span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">9</span>))
+                 
+<span class="co">#     month student score</span>
+<span class="co"># 1     1     Amy     9</span>
+<span class="co"># 2     2     Amy     7</span>
+<span class="co"># 3     3     Amy     6</span>
+<span class="co"># 4     1     Bob     8</span>
+<span class="co"># 5     2     Bob     6</span>
+<span class="co"># 6     3     Bob     9</span>
+
+<span class="co"># ---- Reshaping wide format to long format</span>
+df_w &lt;-<span class="st"> </span><span class="kw">spread</span>(df, student, score)  <span class="co"># args (data, key, value, ...)</span>
+
+<span class="co">#    month Amy Bob</span>
+<span class="co"># 1     1   9   8</span>
+<span class="co"># 2     2   7   6</span>
+<span class="co"># 3     3   6   9</span>
+
+<span class="co"># ----- Reshaping long format to wide format</span>
+<span class="kw">gather</span>(df_w, student, score, Amy:Bob  )  <span class="co"># args (data, key, value, ...)</span>
+
+<span class="co">#     month student score</span>
+<span class="co"># 1     1     Amy     9</span>
+<span class="co"># 2     2     Amy     7</span>
+<span class="co"># 3     3     Amy     6</span>
+<span class="co"># 4     1     Bob     8</span>
+<span class="co"># 5     2     Bob     6</span>
+<span class="co"># 6     3     Bob     9</span></code></pre></div>
 </div>
 <div id="list" class="section level2">
 <h2><span class="header-section-number">3.6</span> list</h2>
