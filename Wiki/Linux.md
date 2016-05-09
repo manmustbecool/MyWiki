@@ -5,6 +5,8 @@ title: "Linux Basic"
 
 # cheat sheet #
 
+## user and permission
+
 ```bash
 # modify permissions
 # -R – apply to the parent folder and the child objects within
@@ -26,11 +28,38 @@ groups <username>
 sudo apt-get install members
 members <groupname>
 
-# rename a folder name
-mv <oldname> <newname>
-
 # reset root password 
 http://askubuntu.com/questions/24006/how-do-i-reset-a-lost-administrative-password
+
+# list Current Logged In Users 
+w # Shows information about the users currently on the machine, and their processes.
+who # Shows information about users who are currently logged in.
+```
+## manage processes
+
+```bash
+# top processes
+top
+# or
+sudo apt-get install htop
+htop
+
+# -e: select all processes; -f: does full listing
+ps -ef | grep java
+
+# show all processes for all users. -x:all users
+ps -aux
+# for root user
+ps -auroot
+
+# kill the process by id
+kill -9 process_id
+```
+
+
+```bash
+# rename a folder name
+mv <oldname> <newname>
 
 #  unzip 
 sudo apt-get install unzip
@@ -49,14 +78,8 @@ ntpdate -u pool.ntp.org
 # install Linux / UNIX *.tar.gz tarball files
 http://www.cyberciti.biz/faq/install-tarballs/
 
-
-# ---- List Current Logged In Users ----
-
-# Shows information about the users currently on the machine, and their processes.
-w
-
-# Shows information about users who are currently logged in.
-who
+# find out what version of Linux
+cat /etc/*-release
 
 # ---- File Search ------
 
@@ -82,27 +105,6 @@ ls -lah
 
 # disk space usage
 df -k
-
-# ---- Manage Processes -------
-
-# top processes
-top
-# or
-sudo apt-get install htop
-htop
-
-# -e: select all processes; -f: does full listing
-ps -ef | grep java
-
-# show all processes for all users. -x:all users
-ps -aux
-# for root user
-ps -auroot
-
-# kill the process by id
-kill -9 process_id
-
-
 ```
 # Others #
 

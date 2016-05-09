@@ -65,6 +65,8 @@ library(tm)
 # ---- build a corpus
 myCorpus <- Corpus(VectorSource(df$text)) # VectorSource specifies the text source
 
+myCorpus[[3]]$content # show text in the 3rd document
+
 # ---- Transforming Text
 
 myCorpus <- tm_map(myCorpus, content_transformer(tolower)) #  to lower case

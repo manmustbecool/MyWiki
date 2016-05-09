@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 
 
@@ -67,26 +67,7 @@ code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
 </style>
 
 
-<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20200px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
-
-</head>
-
-<body>
-
 <style type="text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
 h1 {
   font-size: 34px;
 }
@@ -107,6 +88,31 @@ h5 {
 }
 h6 {
   font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20210px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%200px%20auto%20%2D17px%3B%0A%7D%0A%23TOC%20ul%20li%20ul%7B%0Amargin%2Dleft%3A%20%2D22px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -140,7 +146,8 @@ $(document).ready(function () {
 <div class="fluid-row" id="header">
 
 
-<h1 class="title">R Machine Learning</h1>
+
+<h1 class="title toc-ignore">R Machine Learning</h1>
 
 </div>
 
@@ -208,6 +215,8 @@ df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span cla
 <span class="kw">library</span>(tm)
 <span class="co"># ---- build a corpus</span>
 myCorpus &lt;-<span class="st"> </span><span class="kw">Corpus</span>(<span class="kw">VectorSource</span>(df$text)) <span class="co"># VectorSource specifies the text source</span>
+
+myCorpus[[<span class="dv">3</span>]]$content <span class="co"># show text in the 3rd document</span>
 
 <span class="co"># ---- Transforming Text</span>
 

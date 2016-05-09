@@ -35,13 +35,19 @@ str <- 'string' # str[1] # This evaluates to 'string'.
 substr(str, 1, 2) # == 'st'
 strsplit('0-0-1', '-') # Evaluates to list('0', '0', '1')
 strsplit('0-0-1', '')  # Evaluates to list('0', '-', '0', '-', '1')
-paste('hello', 'world', sep = ' ') # == hello world
-paste0('hello', 'world') # == helloworld
-# connect character vector to string
-paste(c('a','b','c'), collapse = "")  # "abc"
+paste('hello', 'world', sep = ' ') # 'hello world'
+paste0('hello', 'world') # 'helloworld'
+paste(c('a','b','c'), collapse = "")  # 'abc' , connect character vector to string
 
-# gsub for replace a part of string
-data$timestamp <- gsub("/", "-", data$timestamp)
+# ------ regular expression match -----------
+# x is a string
+pos = regexpr('pattern', x) # Returns position of 1st match in a string
+pos = gregexpr('pattern', x) # Returns positions of every match in a string
+# x is a vector
+pos = grep('pattern', x) #  returns the index of the matching string in the vector
+
+sub('pattern', replacement, input) # Changes only the 1st pattern match per string
+gsub('pattern', replacement, input) # Changes every occurrence of a pattern match
 
 ```
 
@@ -234,6 +240,10 @@ df[!duplicated(df[,c('firstname')]),]
 
 # find unique rows
 unique(df)
+
+# remove row or colum has a same value
+df <- df[apply(df, 1, function(row) length(unique(row)) > 1), ]
+df <- df[, apply(df, 2, function(col) length(unique(col)) > 1)]
 
 # row frequency count
 # http://rwiki.sciviews.org/doku.php?id=tips:data-frames:count_and_extract_unique_rows
