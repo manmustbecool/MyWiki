@@ -30,6 +30,7 @@ The atomic data types are "logical", "integer", "numeric" (synonym "double"), "c
 x <- 1.224554
 round(x, digits=2)
 
+# -------------- string --------------------------
 #  string is considered to be a character vector in R
 str <- 'string' # str[1] # This evaluates to 'string'.
 substr(str, 1, 2) # == 'st'
@@ -39,7 +40,7 @@ paste('hello', 'world', sep = ' ') # 'hello world'
 paste0('hello', 'world') # 'helloworld'
 paste(c('a','b','c'), collapse = "")  # 'abc' , connect character vector to string
 
-# ------ regular expression match -----------
+# ----- regular expression match 
 # x is a string
 pos = regexpr('pattern', x) # Returns position of 1st match in a string
 pos = gregexpr('pattern', x) # Returns positions of every match in a string
@@ -48,6 +49,9 @@ pos = grep('pattern', x) #  returns the index of the matching string in the vect
 
 sub('pattern', replacement, input) # Changes only the 1st pattern match per string
 gsub('pattern', replacement, input) # Changes every occurrence of a pattern match
+
+# insert a string
+gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
 
 ```
 

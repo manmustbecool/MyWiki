@@ -148,7 +148,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>09 May, 2016</em></h4>
+<h4 class="date"><em>11 May, 2016</em></h4>
 
 </div>
 
@@ -203,6 +203,7 @@ install R in linux <a href="http://www.jason-french.com/blog/2013/03/11/installi
 x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
 <span class="kw">round</span>(x, <span class="dt">digits=</span><span class="dv">2</span>)
 
+<span class="co"># -------------- string --------------------------</span>
 <span class="co">#  string is considered to be a character vector in R</span>
 str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This evaluates to 'string'.</span>
 <span class="kw">substr</span>(str, <span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># == 'st'</span>
@@ -212,7 +213,7 @@ str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This eval
 <span class="kw">paste0</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>) <span class="co"># 'helloworld'</span>
 <span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)  <span class="co"># 'abc' , connect character vector to string</span>
 
-<span class="co"># ------ regular expression match -----------</span>
+<span class="co"># ----- regular expression match </span>
 <span class="co"># x is a string</span>
 pos =<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns position of 1st match in a string</span>
 pos =<span class="st"> </span><span class="kw">gregexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns positions of every match in a string</span>
@@ -220,7 +221,10 @@ pos =<span class="st"> </span><span class="kw">gregexpr</span>(<span class="st">
 pos =<span class="st"> </span><span class="kw">grep</span>(<span class="st">'pattern'</span>, x) <span class="co">#  returns the index of the matching string in the vector</span>
 
 <span class="kw">sub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes only the 1st pattern match per string</span>
-<span class="kw">gsub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes every occurrence of a pattern match</span></code></pre></div>
+<span class="kw">gsub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes every occurrence of a pattern match</span>
+
+<span class="co"># insert a string</span>
+<span class="kw">gsub</span>(<span class="st">'^([a-z]{2})([a-z]+)$'</span>, <span class="st">'</span><span class="ch">\\</span><span class="st">1cc</span><span class="ch">\\</span><span class="st">2'</span>, <span class="st">&quot;aabb&quot;</span>) <span class="co"># aabb -&gt; aaccbb</span></code></pre></div>
 </div>
 <div id="common-data-structures" class="section level1">
 <h1><span class="header-section-number">3</span> Common data structures</h1>
