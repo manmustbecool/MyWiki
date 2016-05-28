@@ -74,8 +74,7 @@ as(s1, "data.frame")
 
   * caret
 
-http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html
-
+http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/
 
 ## Dimensionality Reduction
 

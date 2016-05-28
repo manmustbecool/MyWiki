@@ -141,6 +141,12 @@ ts <- na.locf(ts)
 
 ```
 
+Identify and replace outliers and missing values in a time series 
+
+```r
+tsclean(x, replace.missing = TRUE, lambda = NULL)
+```
+
 ## Moving Averages 
 
   * TTR
@@ -199,6 +205,27 @@ decomposed <- decompose(time.series)
 plot(decomposed)
 
 ```
+
+## Seasonal Subseries Plot
+
+For each season (or other category), a time series is plotted. 
+
+```{r}
+
+require(graphics)
+
+## The CO2 data
+fit <- stl(log(co2), s.window = 20, t.window = 20)
+plot(fit)
+op <- par(mfrow = c(2,2), mar=c(2,2,2,2), oma=c(0,0,0,0))
+monthplot(co2, ylab = "data", cex.axis = 0.8)
+monthplot(fit, choice = "seasonal", cex.axis = 0.8)
+monthplot(fit, choice = "trend", cex.axis = 0.8)
+monthplot(fit, choice = "remainder", type = "h", cex.axis = 0.8)
+par(op)
+
+```
+
 
 
 ## Finding the period 
