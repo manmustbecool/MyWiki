@@ -1,5 +1,6 @@
 ---
-  title: "Time series"
+title: "Time series"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
   
 

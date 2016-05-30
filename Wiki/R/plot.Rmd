@@ -1,6 +1,6 @@
 ---
 title: "Plot"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 # Basic plot functions

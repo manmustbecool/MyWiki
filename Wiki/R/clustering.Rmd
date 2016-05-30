@@ -1,6 +1,6 @@
 ---
 title: "Clustering"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 
@@ -99,17 +99,17 @@ model <- dbscan(iris[,1:4], eps=0.6, MinPts=4)
 # plot(model, sampleiris)
 # Notice points in cluster 0 are unassigned outliers
 plot(iris[,c(1,2)], col=model$cluster)
-
 ```
 
 # Multi-Gaussian with Expectation-Maximization
 
-```{r, warning=F}
+```{r, warning=F, message=F}
 library(mclust)
 model <- Mclust(iris[,1:4], 3)
-plot(iris[,c(1,2)], col=model$classification)
-plot(model, iris[, 1:4], what=c('classification'), dimens=c(3,4))
+# plot(iris[,c(1,2)], col=model$classification)
+plot(model, iris[, 1:4], what=c('classification'), dimens=c(1,2))
 ```
+
 
 ----------
 
