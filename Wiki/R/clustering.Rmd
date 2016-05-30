@@ -11,7 +11,7 @@ iris[1:3,]
 
 model <- kmeans(iris[,1:4], 3)
 # plot with first two attributes: Sepal.Length Sepal.Width 
-plot(iris[,1], iris[,2], col=model$cluster)
+plot(iris[,c(1,2)], col=model$cluster)
 # point center of first two attributes
 points(model$centers[, c(1,2)], col=1:3, pch=8, cex=2)
 
@@ -69,7 +69,6 @@ points(model$centers[, c(1,2)], col=1:k, pch=8, cex=2)
 ```
 
 
-
 more : http://www.mattpeeples.net/kmeans.html
 
 # Hierarchical Clustering
@@ -85,8 +84,8 @@ plot(model, hang=-1, label=sampleiris$Species)
 
 ```{r, warning=F}
 library(e1071)
-model <- cmeans(iris[,-5], 3, 100, m=2, method="cmeans")
-plot(iris[,1], iris[,2], col=model$cluster)
+model <- cmeans(iris[,1:4], 3, 100, m=2, method="cmeans")
+plot(iris[,c(1,2)], col=model$cluster)
 points(model$centers[,c(1,2)], col=1:3, pch=8, cex=2)
 
 ```
@@ -94,13 +93,12 @@ points(model$centers[,c(1,2)], col=1:3, pch=8, cex=2)
 # Density-based Cluster
 
 ```{r, warning=F}
-sampleiris <- iris[sample(1:150, 40),]
 library(fpc)
-# eps is radius of neighborhood, MinPts is no of neighbors within eps
-model <- dbscan(sampleiris[,-5], eps=0.6, MinPts=4)
+# eps is radius of neighborhood, MinPts is number of neighbors within eps
+model <- dbscan(iris[,1:4], eps=0.6, MinPts=4)
 # plot(model, sampleiris)
 # Notice points in cluster 0 are unassigned outliers
-plot(model, sampleiris[,c(1,4)])
+plot(iris[,c(1,2)], col=model$cluster)
 
 ```
 
@@ -109,6 +107,7 @@ plot(model, sampleiris[,c(1,4)])
 ```{r, warning=F}
 library(mclust)
 model <- Mclust(iris[,1:4], 3)
+plot(iris[,c(1,2)], col=model$classification)
 plot(model, iris[, 1:4], what=c('classification'), dimens=c(3,4))
 ```
 
