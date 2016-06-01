@@ -9,6 +9,7 @@ output:
 
 > Home: http://manmustbecool.github.io/MyWiki/
 
+My cheat sheet
 
 ### R
  

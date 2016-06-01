@@ -53,6 +53,16 @@ gsub('pattern', replacement, input) # Changes every occurrence of a pattern matc
 # insert a string
 gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
 
+#------ NULL, NA, NaN -----------
+# NULL is an Object meaning the variable contains no object.
+# is.null()
+
+# NA is a Value meaning missing data
+# is.na() returns TRUE for both NA and NaN
+
+# NaN means not a number
+# is.nan() returns False for NA and Ture for NaN
+
 ```
 
 # Common data structures
@@ -263,11 +273,14 @@ by(df[, 1:2], df[,3], summary)
 x <- c(1,2,3)
 df <- rbind(df, x); # add a row
 df <- cbind(df, x); # add a column
-
 # 
 df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters as factors
 df <- rbind(df, c("hi","i","am","bob"))
 df <- rbind(df, c("hi","i","am","alice"))
+# 
+temp <- list();
+for(i in 1:100) temp<- append(temp, list(c(1, i)) )
+df <- as.data.frame(do.call(rbind, temp))
 
 # create a new column with merged values of two columns
 df$new_column = paste(df$V1, df$V2, sep="_")
@@ -287,43 +300,38 @@ target <- c("b", "c", "a", "d")
 df[match(target, df$name),]
 
 # ----- join two data frames
-merge(x=df1, y=df2, by="CustomerId")             # default all=FALSE. natural join, a special case of an inner join
-merge(x=df1, y=df2, by="CustomerId", all = TRUE) # (full) outer join
-merge(x=df1, y=df2, by="CustomerId", all.x=TRUE) # left (outer) join
-merge(x=df1, y=df2, by="CustomerId", all.y=TRUE) # right (outer) join
-merge(x=df1, y=df2, by=NULL)                     # cross join
+merge(x=df1, y=df2, by="CustomerId")          # default all=FALSE. natural join, a special case of an inner join
+merge(x=df1, y=df2, by="CustomerId", all = T) # (full) outer join
+merge(x=df1, y=df2, by="CustomerId", all.x=T) # left (outer) join
+merge(x=df1, y=df2, by="CustomerId", all.y=T) # right (outer) join
+merge(x=df1, y=df2, by=NULL)                  # cross join
 
 merge(df1, df2, by = c("k1","k2")) 
 
-#  ------------ Handle NA, NaN, null, blank ---------------------
+# ----- compare two data frames
+a1 <- data.frame(a = 1:5, b=letters[1:5])
+a2 <- data.frame(a = 1:3, b=letters[1:3])
 
-# NULL is an Object meaning the variable contains no object.
+require(sqldf)
+a1Ina2 <- sqldf('SELECT * FROM a1 INTERSECT SELECT * FROM a2') # for rows  are in both data frames
+a1NotIna2 <- sqldf('SELECT * FROM a1 EXCEPT SELECT * FROM a2')
 
-# NA is a Value meaning missing data
-# is.na() returns TRUE for both NA and NaN
+require(dplyr)
+semi_join(a1,a2) # for rows  are in both data frames
+anti_join(a1,a2)
 
-# NaN means not a number
-# is.nan() returns False for NA and Ture for NaN
-
-# Convert all Na's in data frames to other values
-df[is.na(df)] <- value
+#  ------------ Handle na, nan, null, blank ---------------------
+df[is.na(df)] <- value  # Convert all Na's in data frames to other values
 
 # Remove rows with NAs in data frames
-df[complete.cases(df),]   # remove all rows containing NAs
+df[complete.cases(df),]       # remove all rows containing NAs
 df[complete.cases(df[,2:3]),] # remove rows based on some columns
 
-# Remove rows with null value in a specific column
-df <- df[!is.null(df[,1]),]
+df <- df[!is.null(df[,1]),] # Remove rows with null value in a specific column
+df <- df[!(df[,1]==""),]    # Remove rows with Blank value in a specific column
 
-# Remove rows with Blank value in a specific column
-df <- df[!(df[,1]==""),]
-
-# Remove columns where All values are NA
-df <- df[,colSums(is.na(df))<nrow(df)]
-
-# Remove rows where all data is NA
-df <- df[rowSums(is.na(df)) != ncol(df),]
-
+df <- df[rowSums(is.na(df))!= ncol(df),] # Remove rows where all data is NA
+df <- df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are NA
 ```
 use data.table for data.fame
 ```r
@@ -379,7 +387,7 @@ gather(df_w, student, score, Amy:Bob  )  # args (data, key, value, ...)
 # 6     3     Bob     9
 ```
 
-## list  ##
+## list 
 
 A List is an ordered collection of R objects.
 
