@@ -9,6 +9,7 @@ output:
 
 > Home: http://manmustbecool.github.io/MyWiki/
 
+My cheat sheet
 
 ### R
  
@@ -18,9 +19,10 @@ output:
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/timeSeries.html">Time series</a>
  * <a href="Wiki/R/Arima.html">Arima</a>
+ * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/clustering.html">Clustering techniques</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
- * <a href="Wiki/R/randomForestMDS.html">MDS and random forest tree classification</a>
+ * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  
@@ -43,6 +45,7 @@ output:
 
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
+ * <a href="Wiki/Latex.html">Latex</a>
  * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
 
 

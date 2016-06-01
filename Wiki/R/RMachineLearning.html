@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 
 
@@ -67,26 +67,7 @@ code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
 </style>
 
 
-<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20200px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20%2D15px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
-
-</head>
-
-<body>
-
 <style type="text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
 h1 {
   font-size: 34px;
 }
@@ -107,6 +88,31 @@ h5 {
 }
 h6 {
   font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20210px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%200px%20auto%20%2D17px%3B%0A%7D%0A%23TOC%20ul%20li%20ul%7B%0Amargin%2Dleft%3A%20%2D22px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -140,7 +146,8 @@ $(document).ready(function () {
 <div class="fluid-row" id="header">
 
 
-<h1 class="title">R Machine Learning</h1>
+
+<h1 class="title toc-ignore">R Machine Learning</h1>
 
 </div>
 
@@ -151,13 +158,12 @@ $(document).ready(function () {
 <li><a href="#hidden-markov-models"><span class="toc-section-number">0.3</span> Hidden Markov Models</a></li>
 <li><a href="#logistic-regression"><span class="toc-section-number">0.4</span> Logistic Regression</a></li>
 <li><a href="#support-vector-machine-svm"><span class="toc-section-number">0.5</span> Support Vector Machine (SVM)</a></li>
-<li><a href="#text-mining"><span class="toc-section-number">0.6</span> Text mining</a></li>
-<li><a href="#association-rule-learning"><span class="toc-section-number">0.7</span> Association rule learning</a></li>
-<li><a href="#recommender-system"><span class="toc-section-number">0.8</span> Recommender system</a></li>
-<li><a href="#feature-selection"><span class="toc-section-number">0.9</span> Feature selection</a></li>
-<li><a href="#dimensionality-reduction"><span class="toc-section-number">0.10</span> Dimensionality Reduction</a><ul>
-<li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.10.1</span> Singular Value Decomposition (SVD)</a></li>
-<li><a href="#multidimensional-scaling-mds"><span class="toc-section-number">0.10.2</span> Multidimensional Scaling (MDS)</a></li>
+<li><a href="#association-rule-learning"><span class="toc-section-number">0.6</span> Association rule learning</a></li>
+<li><a href="#recommender-system"><span class="toc-section-number">0.7</span> Recommender system</a></li>
+<li><a href="#feature-selection"><span class="toc-section-number">0.8</span> Feature selection</a></li>
+<li><a href="#dimensionality-reduction"><span class="toc-section-number">0.9</span> Dimensionality Reduction</a><ul>
+<li><a href="#singular-value-decomposition-svd"><span class="toc-section-number">0.9.1</span> Singular Value Decomposition (SVD)</a></li>
+<li><a href="#multidimensional-scaling-mds"><span class="toc-section-number">0.9.2</span> Multidimensional Scaling (MDS)</a></li>
 </ul></li>
 </ul>
 </div>
@@ -191,68 +197,8 @@ $(document).ready(function () {
 <p>Recursive Feature Extraction (SVM-RFE)</p>
 <p><a href="http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selection" class="uri">http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selection</a></p>
 </div>
-<div id="text-mining" class="section level2">
-<h2><span class="header-section-number">0.6</span> Text mining</h2>
-<p><a href="http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/" class="uri">http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rdmTweets &lt;-<span class="st"> </span><span class="kw">list</span>(
-<span class="st">&quot;Text Mining Tutorial http://t.co/jPHHLEGm&quot;</span>,
-<span class="st">&quot;He likes dogs r Singapore http://t.co/GPA0TyG5&quot;</span>,
-<span class="st">&quot;RDataMining: Easier Parallel Computing in R with snowfall and sfCluster http://t.co/BPcinvzK&quot;</span>,
-<span class="st">&quot;RDataMining: Tutorial: Parallel computing using R package snowfall http://t.co/CHBCyr76&quot;</span>,
-<span class="st">&quot;handling big data: Interacting with Data using the filehash Package for R http://t.co/7RB3sChx&quot;</span>
-)
-
-df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">do.call</span>(rbind, rdmTweets))
-<span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'text'</span>)
-
-<span class="kw">library</span>(tm)
-<span class="co"># ---- build a corpus</span>
-myCorpus &lt;-<span class="st"> </span><span class="kw">Corpus</span>(<span class="kw">VectorSource</span>(df$text)) <span class="co"># VectorSource specifies the text source</span>
-
-<span class="co"># ---- Transforming Text</span>
-
-myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(tolower)) <span class="co">#  to lower case</span>
-myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removePunctuation) <span class="co"># remove punctuation</span>
-myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removeNumbers) <span class="co"># remove numbers</span>
-myStopwords &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">stopwords</span>(<span class="st">'english'</span>), <span class="st">&quot;available&quot;</span>, <span class="st">&quot;dogs&quot;</span>) <span class="co"># add two additional stopwords</span>
-myStopwords &lt;-<span class="st"> </span><span class="kw">setdiff</span>(myStopwords, <span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;big&quot;</span>)) <span class="co"># remove 'r' and 'big' from stopwords</span>
-myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removeWords, myStopwords) <span class="co"># remove stopwords</span>
-
-<span class="co"># ---- Stemming Words</span>
-
-dictCorpus &lt;-<span class="st"> </span>myCorpus <span class="co"># keep a copy as a dictionary for stem completion</span>
-<span class="co">#library(&quot;SnowballC&quot;) # for stemDocument</span>
-myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, stemDocument) <span class="co"># stem words</span>
-<span class="kw">inspect</span>(myCorpus)
-<span class="co"># myCorpus &lt;- tm_map(myCorpus, stemCompletion, dictionary=dictCorpus) # stem completion</span>
-<span class="co"># the following stem completion works in tm v0.6 </span>
-<span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(function(x, d)
-  <span class="kw">paste</span>(<span class="kw">stemCompletion</span>(<span class="kw">strsplit</span>(<span class="kw">stemDocument</span>(x), <span class="st">' '</span>)[[<span class="dv">1</span>]], d), <span class="dt">collapse =</span> <span class="st">' '</span>)), dictCorpus)
-<span class="kw">inspect</span>(myCorpus)
-<span class="kw">inspect</span>(dictCorpus)
-
-<span class="co"># ---- Building a Document-Term Matrix</span>
-
-myDtm &lt;-<span class="st"> </span><span class="kw">TermDocumentMatrix</span>(myCorpus, <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">wordLengths =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">Inf</span>)))
-<span class="kw">inspect</span>(myDtm)
-<span class="co">#                  Docs</span>
-<span class="co"># Terms             1 2 3 4 5</span>
-<span class="co">#   big             0 0 0 0 1</span>
-<span class="co">#   comput          0 0 1 1 0</span>
-<span class="co">#   data            0 0 0 0 2  </span>
-<span class="co">#   ...</span>
-
-<span class="co"># Based on the above matrix, many data mining tasks can be done, for example, clustering, classification and association analysis.</span>
-
-<span class="co"># ----- Frequent Terms and Associations</span>
-
-<span class="kw">findFreqTerms</span>(myDtm, <span class="dt">lowfreq=</span><span class="dv">2</span>)
-
-<span class="co"># which words are associated with &quot;r&quot;?</span>
-<span class="kw">findAssocs</span>(myDtm, <span class="st">'r'</span>, <span class="fl">0.30</span>)</code></pre></div>
-</div>
 <div id="association-rule-learning" class="section level2">
-<h2><span class="header-section-number">0.7</span> Association rule learning</h2>
+<h2><span class="header-section-number">0.6</span> Association rule learning</h2>
 <ul>
 <li>arulesSequences</li>
 </ul>
@@ -274,25 +220,25 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 <span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
 </div>
 <div id="recommender-system" class="section level2">
-<h2><span class="header-section-number">0.8</span> Recommender system</h2>
+<h2><span class="header-section-number">0.7</span> Recommender system</h2>
 <ul>
 <li>recommenderlab</li>
 </ul>
 </div>
 <div id="feature-selection" class="section level2">
-<h2><span class="header-section-number">0.9</span> Feature selection</h2>
+<h2><span class="header-section-number">0.8</span> Feature selection</h2>
 <ul>
 <li>caret</li>
 </ul>
-<p><a href="http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html" class="uri">http://www.cybaea.net/Blogs/Data/Feature-selection-Using-the-caret-package.html</a></p>
+<p><a href="http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/" class="uri">http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/</a></p>
 </div>
 <div id="dimensionality-reduction" class="section level2">
-<h2><span class="header-section-number">0.10</span> Dimensionality Reduction</h2>
+<h2><span class="header-section-number">0.9</span> Dimensionality Reduction</h2>
 <div id="singular-value-decomposition-svd" class="section level3">
-<h3><span class="header-section-number">0.10.1</span> Singular Value Decomposition (SVD)</h3>
+<h3><span class="header-section-number">0.9.1</span> Singular Value Decomposition (SVD)</h3>
 </div>
 <div id="multidimensional-scaling-mds" class="section level3">
-<h3><span class="header-section-number">0.10.2</span> Multidimensional Scaling (MDS)</h3>
+<h3><span class="header-section-number">0.9.2</span> Multidimensional Scaling (MDS)</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. </span>
 euromat =<span class="st"> </span><span class="kw">as.matrix</span>(eurodist) <span class="co"># convert eurodist to matrix</span>
 euromat[<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">1</span>:<span class="dv">5</span>] <span class="co"># inspect first five elements</span>

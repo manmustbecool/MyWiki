@@ -1,6 +1,6 @@
 ---
 title: "Clustering"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 
@@ -11,9 +11,60 @@ iris[1:3,]
 
 model <- kmeans(iris[,1:4], 3)
 # plot with first two attributes: Sepal.Length Sepal.Width 
-plot(iris[,1], iris[,2], col=model$cluster)
+plot(iris[,c(1,2)], col=model$cluster)
 # point center of first two attributes
 points(model$centers[, c(1,2)], col=1:3, pch=8, cex=2)
+
+```
+
+
+# K-Means++
+
+```{r, warning=F}
+set.seed(1984)
+x1 <- sample(seq(0.0, 0.5, by=0.01), 50, replace = T)
+x2 <- sample(seq(0.3, 0.4, by=0.01), 300, replace = T)
+x3 <- sample(seq(0.8, 1.0, by=0.01), 300, replace = T)
+xx <- c(x1, x2, x3)
+yy <- runif(length(xx))
+zz <- cbind(xx, yy)
+
+k=2
+
+# kmean
+model <- kmeans(zz, centers = k)
+plot(zz, col = model$cluster, pch = 19)
+points(model$centers[, c(1,2)], col=1:k, pch=8, cex=2)
+
+
+# kmean++
+library(LICORS) # kmeanspp
+model <- kmeanspp(zz, k = k, start = "random")
+plot(zz, col = model$cluster, pch = 19)
+points(model$centers[, c(1,2)], col=1:k, pch=8, cex=2)
+
+
+# kmean++
+# the result may different to kmeanspp as there is no nstart paramater
+kmpp <- function(data, k) {
+  n <- nrow(data)
+  center_ids <- numeric(k)
+  center_ids[1:2]<- sample(1:n, 1)
+  
+  for (i in 2:k) {
+     # Computes the distance between rows of two matrices.
+      dists <- apply(data[center_ids, ], 1, 
+                       function(center) {rowSums((data - center)^2)})
+      probs <- apply(dists, 1, min)
+      probs[center_ids] <- 0
+      center_ids[i] <- sample.int(n, 1, prob = probs)
+  }
+  kmeans(data, centers = data[center_ids, ])
+}
+
+model <- kmpp(zz, k)
+plot(zz, col = model$cluster, pch = 19)
+points(model$centers[, c(1,2)], col=1:k, pch=8, cex=2)
 
 ```
 
@@ -33,8 +84,8 @@ plot(model, hang=-1, label=sampleiris$Species)
 
 ```{r, warning=F}
 library(e1071)
-model <- cmeans(iris[,-5], 3, 100, m=2, method="cmeans")
-plot(iris[,1], iris[,2], col=model$cluster)
+model <- cmeans(iris[,1:4], 3, 100, m=2, method="cmeans")
+plot(iris[,c(1,2)], col=model$cluster)
 points(model$centers[,c(1,2)], col=1:3, pch=8, cex=2)
 
 ```
@@ -42,23 +93,23 @@ points(model$centers[,c(1,2)], col=1:3, pch=8, cex=2)
 # Density-based Cluster
 
 ```{r, warning=F}
-sampleiris <- iris[sample(1:150, 40),]
 library(fpc)
-# eps is radius of neighborhood, MinPts is no of neighbors within eps
-model <- dbscan(sampleiris[,-5], eps=0.6, MinPts=4)
+# eps is radius of neighborhood, MinPts is number of neighbors within eps
+model <- dbscan(iris[,1:4], eps=0.6, MinPts=4)
 # plot(model, sampleiris)
 # Notice points in cluster 0 are unassigned outliers
-plot(model, sampleiris[,c(1,4)])
-
+plot(iris[,c(1,2)], col=model$cluster)
 ```
 
 # Multi-Gaussian with Expectation-Maximization
 
-```{r, warning=F}
+```{r, warning=F, message=F}
 library(mclust)
 model <- Mclust(iris[,1:4], 3)
-plot(model, iris[, 1:4], what=c('classification'), dimens=c(3,4))
+# plot(iris[,c(1,2)], col=model$classification)
+plot(model, iris[, 1:4], what=c('classification'), dimens=c(1,2))
 ```
+
 
 ----------
 

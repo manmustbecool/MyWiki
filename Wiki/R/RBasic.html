@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 
 
@@ -67,26 +67,7 @@ code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
 </style>
 
 
-<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20210px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%200px%20auto%20%2D17px%3B%0A%7D%0A%23TOC%20ul%20li%20ul%7B%0Amargin%2Dleft%3A%20%2D22px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
-
-</head>
-
-<body>
-
 <style type="text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
 h1 {
   font-size: 34px;
 }
@@ -107,6 +88,31 @@ h5 {
 }
 h6 {
   font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link href="data:text/css;charset=utf-8,%23TOC%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%200%3B%0Atop%3A%200%3B%0Awidth%3A%20210px%3B%0Aheight%3A%20100%25%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%200px%20auto%20%2D17px%3B%0A%7D%0A%23TOC%20ul%20li%20ul%7B%0Amargin%2Dleft%3A%20%2D22px%3B%0A%7D%0A%23backTotop%20%7B%0Aposition%3A%20fixed%3B%0Aleft%3A%2010px%3B%0Atop%3A%2090%25%3B%3B%0Aoverflow%3Aauto%3B%0Amargin%3A%20auto%20auto%20auto%20auto%3B%0A%7D%0Abody%20%7B%0Amargin%3A%20auto%3B%0Amargin%2Dleft%3A210px%3B%20line%2Dheight%3A%2020px%3B%0A%7D" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -140,8 +146,9 @@ $(document).ready(function () {
 <div class="fluid-row" id="header">
 
 
-<h1 class="title">R basic</h1>
-<h4 class="date"><em>31 March, 2016</em></h4>
+
+<h1 class="title toc-ignore">R basic</h1>
+<h4 class="date"><em>Updated: 01 June, 2016</em></h4>
 
 </div>
 
@@ -196,18 +203,38 @@ install R in linux <a href="http://www.jason-french.com/blog/2013/03/11/installi
 x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
 <span class="kw">round</span>(x, <span class="dt">digits=</span><span class="dv">2</span>)
 
+<span class="co"># -------------- string --------------------------</span>
 <span class="co">#  string is considered to be a character vector in R</span>
 str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This evaluates to 'string'.</span>
 <span class="kw">substr</span>(str, <span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># == 'st'</span>
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">'-'</span>) <span class="co"># Evaluates to list('0', '0', '1')</span>
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">''</span>)  <span class="co"># Evaluates to list('0', '-', '0', '-', '1')</span>
-<span class="kw">paste</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>, <span class="dt">sep =</span> <span class="st">' '</span>) <span class="co"># == hello world</span>
-<span class="kw">paste0</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>) <span class="co"># == helloworld</span>
-<span class="co"># connect character vector to string</span>
-<span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)  <span class="co"># &quot;abc&quot;</span>
+<span class="kw">paste</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>, <span class="dt">sep =</span> <span class="st">' '</span>) <span class="co"># 'hello world'</span>
+<span class="kw">paste0</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>) <span class="co"># 'helloworld'</span>
+<span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)  <span class="co"># 'abc' , connect character vector to string</span>
 
-<span class="co"># gsub for replace a part of string</span>
-data$timestamp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;/&quot;</span>, <span class="st">&quot;-&quot;</span>, data$timestamp)</code></pre></div>
+<span class="co"># ----- regular expression match </span>
+<span class="co"># x is a string</span>
+pos =<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns position of 1st match in a string</span>
+pos =<span class="st"> </span><span class="kw">gregexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns positions of every match in a string</span>
+<span class="co"># x is a vector</span>
+pos =<span class="st"> </span><span class="kw">grep</span>(<span class="st">'pattern'</span>, x) <span class="co">#  returns the index of the matching string in the vector</span>
+
+<span class="kw">sub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes only the 1st pattern match per string</span>
+<span class="kw">gsub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes every occurrence of a pattern match</span>
+
+<span class="co"># insert a string</span>
+<span class="kw">gsub</span>(<span class="st">'^([a-z]{2})([a-z]+)$'</span>, <span class="st">'</span><span class="ch">\\</span><span class="st">1cc</span><span class="ch">\\</span><span class="st">2'</span>, <span class="st">&quot;aabb&quot;</span>) <span class="co"># aabb -&gt; aaccbb</span>
+
+<span class="co">#------ NULL, NA, NaN -----------</span>
+<span class="co"># NULL is an Object meaning the variable contains no object.</span>
+<span class="co"># is.null()</span>
+
+<span class="co"># NA is a Value meaning missing data</span>
+<span class="co"># is.na() returns TRUE for both NA and NaN</span>
+
+<span class="co"># NaN means not a number</span>
+<span class="co"># is.nan() returns False for NA and Ture for NaN</span></code></pre></div>
 </div>
 <div id="common-data-structures" class="section level1">
 <h1><span class="header-section-number">3</span> Common data structures</h1>
@@ -387,6 +414,10 @@ df[!<span class="kw">duplicated</span>(df[,<span class="kw">c</span>(<span class
 <span class="co"># find unique rows</span>
 <span class="kw">unique</span>(df)
 
+<span class="co"># remove row or colum has a same value</span>
+df &lt;-<span class="st"> </span>df[<span class="kw">apply</span>(df, <span class="dv">1</span>, function(row) <span class="kw">length</span>(<span class="kw">unique</span>(row)) &gt;<span class="st"> </span><span class="dv">1</span>), ]
+df &lt;-<span class="st"> </span>df[, <span class="kw">apply</span>(df, <span class="dv">2</span>, function(col) <span class="kw">length</span>(<span class="kw">unique</span>(col)) &gt;<span class="st"> </span><span class="dv">1</span>)]
+
 <span class="co"># row frequency count</span>
 <span class="co"># http://rwiki.sciviews.org/doku.php?id=tips:data-frames:count_and_extract_unique_rows</span>
 <span class="kw">aggregate</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(df)), <span class="dt">by=</span><span class="kw">as.list</span>(df), <span class="dt">FUN=</span>sum)
@@ -401,11 +432,14 @@ df[<span class="kw">sample</span>(<span class="kw">nrow</span>(df), <span class=
 x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
 df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, x); <span class="co"># add a row</span>
 df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span class="co"># add a column</span>
-
 <span class="co"># </span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) <span class="co"># Avoid that R understands characters as factors</span>
 df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
 df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
+<span class="co"># </span>
+temp &lt;-<span class="st"> </span><span class="kw">list</span>();
+for(i in <span class="dv">1</span>:<span class="dv">100</span>) temp&lt;-<span class="st"> </span><span class="kw">append</span>(temp, <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>, i)) )
+df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">do.call</span>(rbind, temp))
 
 <span class="co"># create a new column with merged values of two columns</span>
 df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)
@@ -425,42 +459,38 @@ target &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">
 df[<span class="kw">match</span>(target, df$name),]
 
 <span class="co"># ----- join two data frames</span>
-<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>)             <span class="co"># default all=FALSE. natural join, a special case of an inner join</span>
-<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all =</span> <span class="ot">TRUE</span>) <span class="co"># (full) outer join</span>
-<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all.x=</span><span class="ot">TRUE</span>) <span class="co"># left (outer) join</span>
-<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all.y=</span><span class="ot">TRUE</span>) <span class="co"># right (outer) join</span>
-<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="ot">NULL</span>)                     <span class="co"># cross join</span>
+<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>)          <span class="co"># default all=FALSE. natural join, a special case of an inner join</span>
+<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all =</span> T) <span class="co"># (full) outer join</span>
+<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all.x=</span>T) <span class="co"># left (outer) join</span>
+<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all.y=</span>T) <span class="co"># right (outer) join</span>
+<span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="ot">NULL</span>)                  <span class="co"># cross join</span>
 
 <span class="kw">merge</span>(df1, df2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;k1&quot;</span>,<span class="st">&quot;k2&quot;</span>)) 
 
-<span class="co">#  ------------ Handle NA, NaN, null, blank ---------------------</span>
+<span class="co"># ----- compare two data frames</span>
+a1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">5</span>, <span class="dt">b=</span>letters[<span class="dv">1</span>:<span class="dv">5</span>])
+a2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">b=</span>letters[<span class="dv">1</span>:<span class="dv">3</span>])
 
-<span class="co"># NULL is an Object meaning the variable contains no object.</span>
+<span class="kw">require</span>(sqldf)
+a1Ina2 &lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">'SELECT * FROM a1 INTERSECT SELECT * FROM a2'</span>) <span class="co"># for rows  are in both data frames</span>
+a1NotIna2 &lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">'SELECT * FROM a1 EXCEPT SELECT * FROM a2'</span>)
 
-<span class="co"># NA is a Value meaning missing data</span>
-<span class="co"># is.na() returns TRUE for both NA and NaN</span>
+<span class="kw">require</span>(dplyr)
+<span class="kw">semi_join</span>(a1,a2) <span class="co"># for rows  are in both data frames</span>
+<span class="kw">anti_join</span>(a1,a2)
 
-<span class="co"># NaN means not a number</span>
-<span class="co"># is.nan() returns False for NA and Ture for NaN</span>
-
-<span class="co"># Convert all Na's in data frames to other values</span>
-df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value
+<span class="co">#  ------------ Handle na, nan, null, blank ---------------------</span>
+df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value  <span class="co"># Convert all Na's in data frames to other values</span>
 
 <span class="co"># Remove rows with NAs in data frames</span>
-df[<span class="kw">complete.cases</span>(df),]   <span class="co"># remove all rows containing NAs</span>
+df[<span class="kw">complete.cases</span>(df),]       <span class="co"># remove all rows containing NAs</span>
 df[<span class="kw">complete.cases</span>(df[,<span class="dv">2</span>:<span class="dv">3</span>]),] <span class="co"># remove rows based on some columns</span>
 
-<span class="co"># Remove rows with null value in a specific column</span>
-df &lt;-<span class="st"> </span>df[!<span class="kw">is.null</span>(df[,<span class="dv">1</span>]),]
+df &lt;-<span class="st"> </span>df[!<span class="kw">is.null</span>(df[,<span class="dv">1</span>]),] <span class="co"># Remove rows with null value in a specific column</span>
+df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span class="st">&quot;&quot;</span>),]    <span class="co"># Remove rows with Blank value in a specific column</span>
 
-<span class="co"># Remove rows with Blank value in a specific column</span>
-df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span class="st">&quot;&quot;</span>),]
-
-<span class="co"># Remove columns where All values are NA</span>
-df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]
-
-<span class="co"># Remove rows where all data is NA</span>
-df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df)) !=<span class="st"> </span><span class="kw">ncol</span>(df),]</code></pre></div>
+df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df))!=<span class="st"> </span><span class="kw">ncol</span>(df),] <span class="co"># Remove rows where all data is NA</span>
+df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]   <span class="co"># Remove columns where All values are NA</span></code></pre></div>
 <p>use data.table for data.fame</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
 dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(df) <span class="co"># convert the data frame to data table</span>
@@ -475,6 +505,38 @@ dt[, count:<span class="er">=</span>.N, by=<span class="kw">list</span>(a,b)] <s
 
 expr &lt;-<span class="st"> </span><span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">&quot;by=&quot;</span>, <span class="kw">colnames</span>(dt)<span class="dv">2</span>)) <span class="co"># dynamic column names with groupping</span>
 dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), <span class="kw">eval</span>(expr)]</code></pre></div>
+<p>Reshape data with tidyr</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">month=</span><span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">3</span>,<span class="dv">2</span>),
+                 <span class="dt">student=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;Bob&quot;</span>), <span class="dt">each=</span><span class="dv">3</span>),
+                 <span class="dt">score=</span><span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">9</span>))
+                 
+<span class="co">#     month student score</span>
+<span class="co"># 1     1     Amy     9</span>
+<span class="co"># 2     2     Amy     7</span>
+<span class="co"># 3     3     Amy     6</span>
+<span class="co"># 4     1     Bob     8</span>
+<span class="co"># 5     2     Bob     6</span>
+<span class="co"># 6     3     Bob     9</span>
+
+<span class="co"># ---- Reshaping wide format to long format</span>
+df_w &lt;-<span class="st"> </span><span class="kw">spread</span>(df, student, score)  <span class="co"># args (data, key, value, ...)</span>
+
+<span class="co">#    month Amy Bob</span>
+<span class="co"># 1     1   9   8</span>
+<span class="co"># 2     2   7   6</span>
+<span class="co"># 3     3   6   9</span>
+
+<span class="co"># ----- Reshaping long format to wide format</span>
+<span class="kw">gather</span>(df_w, student, score, Amy:Bob  )  <span class="co"># args (data, key, value, ...)</span>
+
+<span class="co">#     month student score</span>
+<span class="co"># 1     1     Amy     9</span>
+<span class="co"># 2     2     Amy     7</span>
+<span class="co"># 3     3     Amy     6</span>
+<span class="co"># 4     1     Bob     8</span>
+<span class="co"># 5     2     Bob     6</span>
+<span class="co"># 6     3     Bob     9</span></code></pre></div>
 </div>
 <div id="list" class="section level2">
 <h2><span class="header-section-number">3.6</span> list</h2>

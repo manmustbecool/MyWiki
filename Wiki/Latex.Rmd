@@ -1,0 +1,36 @@
+---
+title: "Latex"
+output: html_document
+---
+
+
+## Convert to a image from latex algorithm 
+
+```latex
+%\documentclass{article}
+\documentclass[convert={density=300, size=600*600, outext=.png}
+              % border= left, buttom, right, top
+              , border={-17pt -3pt -20pt -3pt}]{standalone}
+              
+\usepackage[]{algorithm2e}
+\begin{document}
+
+\begin{algorithm}[H]
+\SetKwRepeat{Do}{do}{while}%
+Initialize engine cache: $A, B$\;
+\Do{shutting down the engine}{
+  $A$ = engine input: a new KPI value\;
+  // calculate a value\\
+  \If{$A==null$}{
+       $A = B-A$\;
+  }
+ engine output: [$A, B$]\\
+}
+\end{algorithm}
+
+\end{document}
+```
+
+
+![images\alg_latex.png](images\alg_latex.png)
+
