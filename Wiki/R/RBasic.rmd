@@ -33,6 +33,7 @@ round(x, digits=2)
 # -------------- string --------------------------
 #  string is considered to be a character vector in R
 str <- 'string' # str[1] # This evaluates to 'string'.
+nchar(str) # Count the Number of Characters 
 substr(str, 1, 2) # == 'st'
 strsplit('0-0-1', '-') # Evaluates to list('0', '0', '1')
 strsplit('0-0-1', '')  # Evaluates to list('0', '-', '0', '-', '1')
@@ -55,14 +56,13 @@ gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
 
 #------ NULL, NA, NaN -----------
 # NULL is an Object meaning the variable contains no object.
-# is.null()
+is.null()
 
 # NA is a Value meaning missing data
-# is.na() returns TRUE for both NA and NaN
+is.na() # returns TRUE for both NA and NaN
 
 # NaN means not a number
-# is.nan() returns False for NA and Ture for NaN
-
+is.nan() # returns False for NA and Ture for NaN
 ```
 
 # Common data structures
@@ -448,11 +448,10 @@ as.formula("y ~ x1 + x2")  #> y ~ x1 + x2
 
 # Common functions ##
 ```r
--------- apply --------
+# -------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 
------ random number --------
-
+# ----- random number --------
 runif(10)       # for uniform distribution
 rnorm(10)       # for normal distribution
 sample(1:10)    # for vector 1:10 in random order
@@ -463,14 +462,16 @@ sort(sample(300, 30)) # sorted result
 # get replicable sample 
 set.seed(123) # sample results are same everytime for same seed
 sample(300, 30)
+
+# pipe operator
+library(dplyr)
+`%>%`
 ```
 
 # Data input/output
 
-
 ```r
 #---- scan lines from a file ----
-
 #  data in the example.dat file 
 #  10
 #  12
@@ -481,7 +482,7 @@ data
 # [1] 60 43 67 50 
 
 # read CSV
-data <- read.table(file, header = FALSE, sep = "", quote = "\"'")
+data <- read.table(file, header=F, sep="", quote ="\"'")
 ``` 
 
 
@@ -509,15 +510,14 @@ stopCluster(cl)
 # tryCatch exception handling
 
 ```r
-tryCatch(
-  {
-      expr
+tryCatch({
+    expr
   }, warning = function(w) {
-      warning-handler-code
+    warning-handler-code
   }, error = function(e) {
-      error-handler-code
+    error-handler-code
   }, finally = {
-      cleanup-code
+    cleanup-code
   }
 )
 ```

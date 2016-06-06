@@ -76,6 +76,10 @@ as(s1, "data.frame")
 
 http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/
 
+## deep learning
+
+http://www.teglor.com/b/deep-learning-libraries-language-cm569/
+
 ## Dimensionality Reduction
 
 ### Singular Value Decomposition (SVD) ##

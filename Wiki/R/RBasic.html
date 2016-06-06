@@ -148,7 +148,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 01 June, 2016</em></h4>
+<h4 class="date"><em>Updated: 04 June, 2016</em></h4>
 
 </div>
 
@@ -206,6 +206,7 @@ x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
 <span class="co"># -------------- string --------------------------</span>
 <span class="co">#  string is considered to be a character vector in R</span>
 str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This evaluates to 'string'.</span>
+<span class="kw">nchar</span>(str) <span class="co"># Count the Number of Characters </span>
 <span class="kw">substr</span>(str, <span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># == 'st'</span>
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">'-'</span>) <span class="co"># Evaluates to list('0', '0', '1')</span>
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">''</span>)  <span class="co"># Evaluates to list('0', '-', '0', '-', '1')</span>
@@ -228,13 +229,13 @@ pos =<span class="st"> </span><span class="kw">grep</span>(<span class="st">'pat
 
 <span class="co">#------ NULL, NA, NaN -----------</span>
 <span class="co"># NULL is an Object meaning the variable contains no object.</span>
-<span class="co"># is.null()</span>
+<span class="kw">is.null</span>()
 
 <span class="co"># NA is a Value meaning missing data</span>
-<span class="co"># is.na() returns TRUE for both NA and NaN</span>
+<span class="kw">is.na</span>() <span class="co"># returns TRUE for both NA and NaN</span>
 
 <span class="co"># NaN means not a number</span>
-<span class="co"># is.nan() returns False for NA and Ture for NaN</span></code></pre></div>
+<span class="kw">is.nan</span>() <span class="co"># returns False for NA and Ture for NaN</span></code></pre></div>
 </div>
 <div id="common-data-structures" class="section level1">
 <h1><span class="header-section-number">3</span> Common data structures</h1>
@@ -590,11 +591,10 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 </div>
 <div id="common-functions" class="section level1">
 <h1><span class="header-section-number">5</span> Common functions</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">--------<span class="st"> </span>apply --------
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># -------- apply --------</span>
 http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</span>/<span class="dv">08</span>/<span class="dv">20</span>/a-brief-introduction-to-apply-in-r/
 
------<span class="st"> </span>random number --------
-
+<span class="co"># ----- random number --------</span>
 <span class="kw">runif</span>(<span class="dv">10</span>)       <span class="co"># for uniform distribution</span>
 <span class="kw">rnorm</span>(<span class="dv">10</span>)       <span class="co"># for normal distribution</span>
 <span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">10</span>)    <span class="co"># for vector 1:10 in random order</span>
@@ -604,12 +604,15 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 
 <span class="co"># get replicable sample </span>
 <span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># sample results are same everytime for same seed</span>
-<span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)</code></pre></div>
+<span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)
+
+<span class="co"># pipe operator</span>
+<span class="kw">library</span>(dplyr)
+<span class="st">`</span><span class="dt">%&gt;%</span><span class="st">`</span></code></pre></div>
 </div>
 <div id="data-inputoutput" class="section level1">
 <h1><span class="header-section-number">6</span> Data input/output</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
-
 <span class="co">#  data in the example.dat file </span>
 <span class="co">#  10</span>
 <span class="co">#  12</span>
@@ -620,7 +623,7 @@ data
 <span class="co"># [1] 60 43 67 50 </span>
 
 <span class="co"># read CSV</span>
-data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)</code></pre></div>
+data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header=</span>F, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">quote =</span><span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)</code></pre></div>
 </div>
 <div id="parallel-r-in-windows" class="section level1">
 <h1><span class="header-section-number">7</span> Parallel R in Windows</h1>
@@ -644,15 +647,14 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 </div>
 <div id="trycatch-exception-handling" class="section level1">
 <h1><span class="header-section-number">8</span> tryCatch exception handling</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>(
-  {
-      expr
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>({
+    expr
   }, <span class="dt">warning =</span> function(w) {
-      warning-handler-code
+    warning-handler-code
   }, <span class="dt">error =</span> function(e) {
-      error-handler-code
+    error-handler-code
   }, <span class="dt">finally =</span> {
-      cleanup-code
+    cleanup-code
   }
 )</code></pre></div>
 </div>
