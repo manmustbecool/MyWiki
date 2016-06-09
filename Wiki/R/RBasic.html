@@ -148,32 +148,33 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 04 June, 2016</em></h4>
+<h4 class="date"><em>Updated: 09 June, 2016</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#basic-info"><span class="toc-section-number">1</span> Basic info</a></li>
-<li><a href="#atomic-data-types"><span class="toc-section-number">2</span> Atomic data types</a></li>
-<li><a href="#common-data-structures"><span class="toc-section-number">3</span> Common data structures</a><ul>
-<li><a href="#vector"><span class="toc-section-number">3.1</span> vector</a></li>
-<li><a href="#factor"><span class="toc-section-number">3.2</span> factor</a></li>
-<li><a href="#matrix"><span class="toc-section-number">3.3</span> matrix</a></li>
-<li><a href="#array"><span class="toc-section-number">3.4</span> array</a></li>
-<li><a href="#data.frame"><span class="toc-section-number">3.5</span> data.frame</a></li>
-<li><a href="#list"><span class="toc-section-number">3.6</span> list</a></li>
+<li><a href="#special-constants"><span class="toc-section-number">2</span> Special constants</a></li>
+<li><a href="#atomic-data-types"><span class="toc-section-number">3</span> Atomic data types</a></li>
+<li><a href="#common-data-structures"><span class="toc-section-number">4</span> Common data structures</a><ul>
+<li><a href="#vector"><span class="toc-section-number">4.1</span> vector</a></li>
+<li><a href="#factor"><span class="toc-section-number">4.2</span> factor</a></li>
+<li><a href="#matrix"><span class="toc-section-number">4.3</span> matrix</a></li>
+<li><a href="#array"><span class="toc-section-number">4.4</span> array</a></li>
+<li><a href="#data.frame"><span class="toc-section-number">4.5</span> data.frame</a></li>
+<li><a href="#list"><span class="toc-section-number">4.6</span> list</a></li>
 </ul></li>
-<li><a href="#other-data-structures"><span class="toc-section-number">4</span> Other data structures</a><ul>
-<li><a href="#object"><span class="toc-section-number">4.1</span> object</a></li>
-<li><a href="#environment"><span class="toc-section-number">4.2</span> environment</a></li>
-<li><a href="#formula"><span class="toc-section-number">4.3</span> formula</a></li>
+<li><a href="#other-data-structures"><span class="toc-section-number">5</span> Other data structures</a><ul>
+<li><a href="#object"><span class="toc-section-number">5.1</span> object</a></li>
+<li><a href="#environment"><span class="toc-section-number">5.2</span> environment</a></li>
+<li><a href="#formula"><span class="toc-section-number">5.3</span> formula</a></li>
 </ul></li>
-<li><a href="#common-functions"><span class="toc-section-number">5</span> Common functions</a></li>
-<li><a href="#data-inputoutput"><span class="toc-section-number">6</span> Data input/output</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">7</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">8</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">9</span> SQL query</a></li>
+<li><a href="#common-functions"><span class="toc-section-number">6</span> Common functions</a></li>
+<li><a href="#data-inputoutput"><span class="toc-section-number">7</span> Data input/output</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">8</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">9</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">10</span> SQL query</a></li>
 </ul>
 </div>
 
@@ -196,8 +197,23 @@ install R in linux <a href="http://www.jason-french.com/blog/2013/03/11/installi
 </ul></li>
 </ul>
 </div>
+<div id="special-constants" class="section level1">
+<h1><span class="header-section-number">2</span> Special constants</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#------ NULL, NA, NaN, Inf and -Inf -----------</span>
+<span class="co"># NULL is an Object meaning the variable contains no object.</span>
+<span class="kw">is.null</span>() <span class="co"># check is NULL</span>
+
+<span class="co"># NA is a Value meaning missing data</span>
+<span class="kw">is.na</span>() <span class="co"># returns TRUE for both NA and NaN</span>
+<span class="kw">na.omit</span>() <span class="co"># remove NA value</span>
+
+<span class="co"># NaN means not a number</span>
+<span class="kw">is.nan</span>() <span class="co"># returns False for NA and Ture for NaN</span>
+
+<span class="co"># Inf and -Inf for positive and negative infinity</span></code></pre></div>
+</div>
 <div id="atomic-data-types" class="section level1">
-<h1><span class="header-section-number">2</span> Atomic data types</h1>
+<h1><span class="header-section-number">3</span> Atomic data types</h1>
 <p>The atomic data types are “logical”, “integer”, “numeric” (synonym “double”), “complex”, “character” and “raw”.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Formatting decimal</span>
 x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
@@ -225,22 +241,12 @@ pos =<span class="st"> </span><span class="kw">grep</span>(<span class="st">'pat
 <span class="kw">gsub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes every occurrence of a pattern match</span>
 
 <span class="co"># insert a string</span>
-<span class="kw">gsub</span>(<span class="st">'^([a-z]{2})([a-z]+)$'</span>, <span class="st">'</span><span class="ch">\\</span><span class="st">1cc</span><span class="ch">\\</span><span class="st">2'</span>, <span class="st">&quot;aabb&quot;</span>) <span class="co"># aabb -&gt; aaccbb</span>
-
-<span class="co">#------ NULL, NA, NaN -----------</span>
-<span class="co"># NULL is an Object meaning the variable contains no object.</span>
-<span class="kw">is.null</span>()
-
-<span class="co"># NA is a Value meaning missing data</span>
-<span class="kw">is.na</span>() <span class="co"># returns TRUE for both NA and NaN</span>
-
-<span class="co"># NaN means not a number</span>
-<span class="kw">is.nan</span>() <span class="co"># returns False for NA and Ture for NaN</span></code></pre></div>
+<span class="kw">gsub</span>(<span class="st">'^([a-z]{2})([a-z]+)$'</span>, <span class="st">'</span><span class="ch">\\</span><span class="st">1cc</span><span class="ch">\\</span><span class="st">2'</span>, <span class="st">&quot;aabb&quot;</span>) <span class="co"># aabb -&gt; aaccbb</span></code></pre></div>
 </div>
 <div id="common-data-structures" class="section level1">
-<h1><span class="header-section-number">3</span> Common data structures</h1>
+<h1><span class="header-section-number">4</span> Common data structures</h1>
 <div id="vector" class="section level2">
-<h2><span class="header-section-number">3.1</span> vector</h2>
+<h2><span class="header-section-number">4.1</span> vector</h2>
 <p>A Vector is a sequence of data elements of atomic data types (Numeric, Integer, etc.).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize an empty vector</span>
 v &lt;-<span class="st"> </span><span class="kw">vector</span>()
@@ -294,12 +300,9 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 <span class="kw">setequal</span>(x, y) 
 
 <span class="co"># compare 2 vector</span>
-<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))
-<span class="co"># &gt; TRUE</span>
-<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>))
-<span class="co"># &gt; FALSE</span>
-<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="ot">NA</span>))
-<span class="co"># &gt; NA</span>
+<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)) <span class="co"># &gt; TRUE</span>
+<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>)) <span class="co"># &gt; FALSE</span>
+<span class="kw">all</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)==<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="ot">NA</span>)) <span class="co"># &gt; NA</span>
 
 <span class="co"># Return the sum of all the values</span>
 <span class="kw">sum</span>(v)
@@ -309,7 +312,7 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 <span class="kw">paste</span>(x, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;&quot;</span>) </code></pre></div>
 </div>
 <div id="factor" class="section level2">
-<h2><span class="header-section-number">3.2</span> factor</h2>
+<h2><span class="header-section-number">4.2</span> factor</h2>
 <p>A Factor is a categorical variable</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># factor() transforms a vector into a factor.</span>
 f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;10&quot;</span>, <span class="st">&quot;11&quot;</span>, <span class="st">&quot;12&quot;</span>))
@@ -324,7 +327,7 @@ v &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(f)
 <span class="kw">cut</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>), <span class="dv">3</span>)</code></pre></div>
 </div>
 <div id="matrix" class="section level2">
-<h2><span class="header-section-number">3.3</span> matrix</h2>
+<h2><span class="header-section-number">4.3</span> matrix</h2>
 <p>A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a matrix</span>
 mr &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">50</span>)
@@ -344,14 +347,12 @@ B &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">8</sp
 C &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">2</span>)
 m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(A,B,C), <span class="dt">nrow=</span><span class="kw">length</span>(A))
 
-<span class="co"># Matrix Multiplication</span>
-x %*%<span class="st"> </span>y
-
-<span class="co"># Matrix Transpose</span>
-m &lt;-<span class="st"> </span><span class="kw">t</span>(m)</code></pre></div>
+<span class="co"># Matrix operation</span>
+x %*%<span class="st"> </span>y    <span class="co"># Multiplication</span>
+m &lt;-<span class="st"> </span><span class="kw">t</span>(m)  <span class="co"># Transpose</span></code></pre></div>
 </div>
 <div id="array" class="section level2">
-<h2><span class="header-section-number">3.4</span> array</h2>
+<h2><span class="header-section-number">4.4</span> array</h2>
 <p>An array is composed of n dimensions where each dimension is a vector of R objects of the same type</p>
 <p>Arrays are similar to matrices but can have more than 2 dimensions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an one dimension array </span>
@@ -371,7 +372,7 @@ ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">
 [<span class="dv">2</span>,]    <span class="dv">6</span>    <span class="dv">8</span></code></pre></div>
 </div>
 <div id="data.frame" class="section level2">
-<h2><span class="header-section-number">3.5</span> data.frame</h2>
+<h2><span class="header-section-number">4.5</span> data.frame</h2>
 <p>A data.frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a dataframe</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
@@ -402,6 +403,7 @@ sub_df &lt;-<span class="st"> </span>df[<span class="kw">c</span>(<span class="d
 sub_df &lt;-<span class="st"> </span>df[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>)] <span class="co"># select by column indexes</span>
 
 sub_df &lt;-<span class="st"> </span>df[<span class="kw">rownames</span>(df)==<span class="st">'user1'</span>, ] <span class="co"># select by row names</span>
+sub_df &lt;-<span class="st"> </span>df[<span class="kw">rownames</span>(df)==<span class="st">'user1'</span>, drop=<span class="ot">FALSE</span>] <span class="co"># passed on to the indexing method to keep df and matrix format</span>
 sub_df &lt;-<span class="st"> </span>df[, <span class="kw">c</span>(<span class="st">'start'</span>,<span class="st">'end'</span>)] <span class="co"># select by column names</span>
 
 sub_df &lt;-<span class="st"> </span>df[df$age&gt;<span class="dv">40</span>, ] <span class="co"># filter rows by values</span>
@@ -540,7 +542,7 @@ df_w &lt;-<span class="st"> </span><span class="kw">spread</span>(df, student, s
 <span class="co"># 6     3     Bob     9</span></code></pre></div>
 </div>
 <div id="list" class="section level2">
-<h2><span class="header-section-number">3.6</span> list</h2>
+<h2><span class="header-section-number">4.6</span> list</h2>
 <p>A List is an ordered collection of R objects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initialize a list</span>
 ls &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">'list'</span>, <span class="dv">50</span>) <span class="co"># vector(mode=&quot;list&quot;, length=50)</span>
@@ -558,9 +560,9 @@ l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class=
 </div>
 </div>
 <div id="other-data-structures" class="section level1">
-<h1><span class="header-section-number">4</span> Other data structures</h1>
+<h1><span class="header-section-number">5</span> Other data structures</h1>
 <div id="object" class="section level2">
-<h2><span class="header-section-number">4.1</span> object</h2>
+<h2><span class="header-section-number">5.1</span> object</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pass string name as object</span>
 <span class="kw">get</span>(<span class="st">&quot;objectX&quot;</span>)  
 
@@ -571,7 +573,7 @@ l1 &lt;-<span class="st"> </span><span class="kw">append</span>(l1, <span class=
 <span class="kw">object.size</span>(objectX)</code></pre></div>
 </div>
 <div id="environment" class="section level2">
-<h2><span class="header-section-number">4.2</span> environment</h2>
+<h2><span class="header-section-number">5.2</span> environment</h2>
 <p>an environment is a bag of object references. <a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an enviroment</span>
 e &lt;-<span class="st"> </span><span class="kw">new.env</span>(<span class="dt">hash=</span><span class="ot">TRUE</span>)
@@ -584,13 +586,13 @@ e$a &lt;-<span class="st"> </span><span class="dv">2</span>:<span class="dv">4</
 <span class="kw">exists</span>(<span class="st">&quot;a&quot;</span>, <span class="dt">envir=</span>e)</code></pre></div>
 </div>
 <div id="formula" class="section level2">
-<h2><span class="header-section-number">4.3</span> formula</h2>
+<h2><span class="header-section-number">5.3</span> formula</h2>
 <p>Creating a formula from a string</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.formula</span>(<span class="st">&quot;y ~ x1 + x2&quot;</span>)  <span class="co">#&gt; y ~ x1 + x2</span></code></pre></div>
 </div>
 </div>
 <div id="common-functions" class="section level1">
-<h1><span class="header-section-number">5</span> Common functions</h1>
+<h1><span class="header-section-number">6</span> Common functions</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># -------- apply --------</span>
 http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</span>/<span class="dv">08</span>/<span class="dv">20</span>/a-brief-introduction-to-apply-in-r/
 
@@ -606,12 +608,12 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 <span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># sample results are same everytime for same seed</span>
 <span class="kw">sample</span>(<span class="dv">300</span>, <span class="dv">30</span>)
 
-<span class="co"># pipe operator</span>
+<span class="co"># ----- pipe operator -----</span>
 <span class="kw">library</span>(dplyr)
 <span class="st">`</span><span class="dt">%&gt;%</span><span class="st">`</span></code></pre></div>
 </div>
 <div id="data-inputoutput" class="section level1">
-<h1><span class="header-section-number">6</span> Data input/output</h1>
+<h1><span class="header-section-number">7</span> Data input/output</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
 <span class="co">#  data in the example.dat file </span>
 <span class="co">#  10</span>
@@ -626,7 +628,7 @@ data
 data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header=</span>F, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">quote =</span><span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)</code></pre></div>
 </div>
 <div id="parallel-r-in-windows" class="section level1">
-<h1><span class="header-section-number">7</span> Parallel R in Windows</h1>
+<h1><span class="header-section-number">8</span> Parallel R in Windows</h1>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -646,7 +648,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">stopCluster</span>(cl)</code></pre></div>
 </div>
 <div id="trycatch-exception-handling" class="section level1">
-<h1><span class="header-section-number">8</span> tryCatch exception handling</h1>
+<h1><span class="header-section-number">9</span> tryCatch exception handling</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>({
     expr
   }, <span class="dt">warning =</span> function(w) {
@@ -659,7 +661,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 )</code></pre></div>
 </div>
 <div id="sql-query" class="section level1">
-<h1><span class="header-section-number">9</span> SQL query</h1>
+<h1><span class="header-section-number">10</span> SQL query</h1>
 <ul>
 <li><p>JDBC</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 

@@ -20,6 +20,22 @@ sudo apt-get install r-base r-base-dev
 install R in linux
 http://www.jason-french.com/blog/2013/03/11/installing-r-in-linux/
 
+# Special constants
+
+```r
+#------ NULL, NA, NaN, Inf and -Inf -----------
+# NULL is an Object meaning the variable contains no object.
+is.null() # check is NULL
+
+# NA is a Value meaning missing data
+is.na() # returns TRUE for both NA and NaN
+na.omit() # remove NA value
+
+# NaN means not a number
+is.nan() # returns False for NA and Ture for NaN
+
+# Inf and -Inf for positive and negative infinity
+```
 
 # Atomic data types
 
@@ -53,16 +69,6 @@ gsub('pattern', replacement, input) # Changes every occurrence of a pattern matc
 
 # insert a string
 gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
-
-#------ NULL, NA, NaN -----------
-# NULL is an Object meaning the variable contains no object.
-is.null()
-
-# NA is a Value meaning missing data
-is.na() # returns TRUE for both NA and NaN
-
-# NaN means not a number
-is.nan() # returns False for NA and Ture for NaN
 ```
 
 # Common data structures
@@ -123,12 +129,9 @@ setdiff(x, y) # (asymmetric!) difference, setdiff(y, x) for y difference to x
 setequal(x, y) 
 
 # compare 2 vector
-all(c(1,2,3)==c(1,2,3))
-# > TRUE
-all(c(1,2,3)==c(2,1,3))
-# > FALSE
-all(c(1,2,3)==c(1,2,NA))
-# > NA
+all(c(1,2,3)==c(1,2,3)) # > TRUE
+all(c(1,2,3)==c(2,1,3)) # > FALSE
+all(c(1,2,3)==c(1,2,NA)) # > NA
 
 # Return the sum of all the values
 sum(v)
@@ -178,11 +181,9 @@ B <- c(8,0,6,5)
 C <- c(3,6,0,2)
 m <- matrix(c(A,B,C), nrow=length(A))
 
-# Matrix Multiplication
-x %*% y
-
-# Matrix Transpose
-m <- t(m)
+# Matrix operation
+x %*% y    # Multiplication
+m <- t(m)  # Transpose
 ```
 
 ## array
@@ -242,6 +243,7 @@ sub_df <- df[c(1,2,5), ] # select by row indexes
 sub_df <- df[, c(1,2,5)] # select by column indexes
 
 sub_df <- df[rownames(df)=='user1', ] # select by row names
+sub_df <- df[rownames(df)=='user1', drop=FALSE] # passed on to the indexing method to keep df and matrix format
 sub_df <- df[, c('start','end')] # select by column names
 
 sub_df <- df[df$age>40, ] # filter rows by values
@@ -463,7 +465,7 @@ sort(sample(300, 30)) # sorted result
 set.seed(123) # sample results are same everytime for same seed
 sample(300, 30)
 
-# pipe operator
+# ----- pipe operator -----
 library(dplyr)
 `%>%`
 ```
