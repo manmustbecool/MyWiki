@@ -136,10 +136,6 @@ all(c(1,2,3)==c(1,2,NA)) # > NA
 # Return the sum of all the values
 sum(v)
 sum(v==1) # count the number of value 1
-
-# convert one character vector into one string
-paste(x, sep="", collapse="") 
-
 ```
 
 ## factor  
@@ -227,7 +223,6 @@ df <- df[-1,]
 prices <- c(1.1, 2.2, 3.3)
 timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockpricesDf <- data.frame(prices, timestamps)
-
 
 # Get and Set Row and Column Names for Data Frames
 rownames(df)   
@@ -467,7 +462,8 @@ sample(300, 30)
 
 # ----- pipe operator -----
 library(dplyr)
-`%>%`
+data %>% func # = func(mdata)
+data %>% func(arg=value) # = func(data, arg=value)
 ```
 
 # Data input/output
@@ -527,6 +523,7 @@ tryCatch({
 # SQL query ##
 
  * JDBC
+ 
 ```r
 library(RJDBC) 
 postgres <- JDBC( "org.postgresql.Driver", "C:/.../postgresql-8.4-703.jdbc4.jar")
@@ -534,6 +531,7 @@ conn <- dbConnect(postgres, "jdbc:postgresql://*.*.*.*:5432/xxdb", user="postgre
 myDf <- dbGetQuery(conn, "select * from tableX")
 ```
  * ODBC
+ 
 ```r
 library(RODBC)
 conn <- odbcDriverConnect('Driver=SQL Server; Server=10.x.x.x\\SQLEXPRESS; Database=xxx;')

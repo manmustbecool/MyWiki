@@ -22,6 +22,29 @@ g <- delete.vertices(g, which(degree(g)<1) )
 shortest.paths()
 
 ```
+# Clique
+Find cliques (complete subgraphs of an undirected graph)
+```{r}
+library(igraph)
+g <- graph.famous("bull")
+cliques(g) # list of cliques       
+sapply(cliques(g), length) # clique sizes
+largest_cliques(g) # cliques with max number of 
+
+# plot cliques
+vcol <- rep("grey80", vcount(g))
+vcol[unlist(largest_cliques(g))] <- "gold"
+plot(as.undirected(g), vertex.label=V(g)$name, vertex.color=vcol)
+```
+
+# Community detection
+```{r}
+g <- graph.famous("Walther")
+ceb <- cluster_edge_betweenness(g) 
+dendPlot(ceb, mode="hclust")
+plot(ceb, g) 
+```
+
 
 # Plot
 
@@ -29,7 +52,6 @@ shortest.paths()
 
 ```{r, warning=F, message=F}
 library(igraph)
-
 df <- data.frame(
   A=c("Dublin", "Cork", "Galway") , 
   B=c("Cork", "Galway", "Dublin"))
@@ -59,6 +81,7 @@ V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 plot(make_ego_graph(g, 2, V(g)[V(g)$name=="b"])[[1]])
 
 ```
+
 
 ## visNetwork
 

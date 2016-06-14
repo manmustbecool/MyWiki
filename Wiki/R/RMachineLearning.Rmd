@@ -69,6 +69,8 @@ as(s1, "data.frame")
 ## Recommender system ##
 
   * recommenderlab
+  
+http://bigdata-doctor.com/recommender-systems-101-practical-example-in-r/
 
 ## Feature selection ##
 

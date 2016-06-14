@@ -148,7 +148,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 09 June, 2016</em></h4>
+<h4 class="date"><em>Updated: 10 June, 2016</em></h4>
 
 </div>
 
@@ -306,10 +306,7 @@ v =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 
 <span class="co"># Return the sum of all the values</span>
 <span class="kw">sum</span>(v)
-<span class="kw">sum</span>(v==<span class="dv">1</span>) <span class="co"># count the number of value 1</span>
-
-<span class="co"># convert one character vector into one string</span>
-<span class="kw">paste</span>(x, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;&quot;</span>) </code></pre></div>
+<span class="kw">sum</span>(v==<span class="dv">1</span>) <span class="co"># count the number of value 1</span></code></pre></div>
 </div>
 <div id="factor" class="section level2">
 <h2><span class="header-section-number">4.2</span> factor</h2>
@@ -387,7 +384,6 @@ df &lt;-<span class="st"> </span>df[-<span class="dv">1</span>,]
 prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
 timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
 stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
-
 
 <span class="co"># Get and Set Row and Column Names for Data Frames</span>
 <span class="kw">rownames</span>(df)   
@@ -610,7 +606,8 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 
 <span class="co"># ----- pipe operator -----</span>
 <span class="kw">library</span>(dplyr)
-<span class="st">`</span><span class="dt">%&gt;%</span><span class="st">`</span></code></pre></div>
+data %&gt;%<span class="st"> </span>func <span class="co"># = func(mdata)</span>
+data %&gt;%<span class="st"> </span><span class="kw">func</span>(<span class="dt">arg=</span>value) <span class="co"># = func(data, arg=value)</span></code></pre></div>
 </div>
 <div id="data-inputoutput" class="section level1">
 <h1><span class="header-section-number">7</span> Data input/output</h1>
@@ -663,16 +660,18 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <div id="sql-query" class="section level1">
 <h1><span class="header-section-number">10</span> SQL query</h1>
 <ul>
-<li><p>JDBC</p>
+<li>JDBC</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RJDBC) 
 postgres &lt;-<span class="st"> </span><span class="kw">JDBC</span>( <span class="st">&quot;org.postgresql.Driver&quot;</span>, <span class="st">&quot;C:/.../postgresql-8.4-703.jdbc4.jar&quot;</span>)
 conn &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(postgres, <span class="st">&quot;jdbc:postgresql://*.*.*.*:5432/xxdb&quot;</span>, <span class="dt">user=</span><span class="st">&quot;postgres&quot;</span>, <span class="dt">password=</span><span class="st">&quot;postgres&quot;</span>)
-myDf &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(conn, <span class="st">&quot;select * from tableX&quot;</span>)</code></pre></div></li>
-<li><p>ODBC</p>
+myDf &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(conn, <span class="st">&quot;select * from tableX&quot;</span>)</code></pre></div>
+<ul>
+<li>ODBC</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RODBC)
 conn &lt;-<span class="st"> </span><span class="kw">odbcDriverConnect</span>(<span class="st">'Driver=SQL Server; Server=10.x.x.x</span><span class="ch">\\</span><span class="st">SQLEXPRESS; Database=xxx;'</span>)
-myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span class="st">&quot;select * from [xxx].[dbo].[myTable]&quot;</span>)</code></pre></div></li>
-</ul>
+myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span class="st">&quot;select * from [xxx].[dbo].[myTable]&quot;</span>)</code></pre></div>
 </div>
 
 .
