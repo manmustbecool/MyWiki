@@ -39,7 +39,7 @@ is.dag(g2) # False
 
 # Clique
 Find cliques (complete subgraphs of an undirected graph)
-```{r}
+```{r, warning=F}
 library(igraph)
 g <- graph.famous("bull")
 cliques(g) # list of cliques       
