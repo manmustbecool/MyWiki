@@ -18,10 +18,25 @@ get.edgelist(g)  # all edges from to
 g <- delete.edges(g, which(E(g)$weight<=0.1) ) 
 g <- delete.vertices(g, which(degree(g)<1) )
 
+# keep specified vertices and all the edges between
+g2 <- induced_subgraph(g, 1:7)
+
 # calculates the length of all the shortest paths from or to the vertices
 shortest.paths()
 
 ```
+
+# DAG
+```{r, warning=F, message=F}
+library(igraph)
+g <- graph.tree(10)
+plot(g)
+is.dag(g) # Ture
+g2 <- g + edge(5,1)
+plot(g2)
+is.dag(g2) # False
+```
+
 # Clique
 Find cliques (complete subgraphs of an undirected graph)
 ```{r}
@@ -35,6 +50,19 @@ largest_cliques(g) # cliques with max number of
 vcol <- rep("grey80", vcount(g))
 vcol[unlist(largest_cliques(g))] <- "gold"
 plot(as.undirected(g), vertex.label=V(g)$name, vertex.color=vcol)
+```
+
+# Centrality 
+```r
+g2 <- make_star(10)
+V(g2)$label <- 1:10
+g2 <- g2 - edge(6)
+g2 <- as.undirected(g2)
+E(g2)$weight <- 1:8 
+E(g2)$label <- 1:8
+plot(g2)
+closeness(g2) # Inverse of the average length of the shortest paths to/from all the other vertices; more weight less closeness
+1/closeness(g2,7)/9 # the auto assigned weight of disconnected node (7) to the rest of 9 nodes
 ```
 
 # Community detection
