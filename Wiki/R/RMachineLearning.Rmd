@@ -1,6 +1,6 @@
 ---
 title: "R Machine Learning"
-output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 ## Gradient descents 

@@ -462,7 +462,7 @@ sample(300, 30)
 
 # ----- pipe operator -----
 library(dplyr)
-data %>% func # = func(mdata)
+data %>% func # = func(data)
 data %>% func(arg=value) # = func(data, arg=value)
 ```
 

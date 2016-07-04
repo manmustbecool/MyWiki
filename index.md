@@ -9,7 +9,7 @@ output:
 
 > Home: http://manmustbecool.github.io/MyWiki/
 
-My cheat sheet
+My cheat sheets
 
 ### R
  
@@ -21,6 +21,7 @@ My cheat sheet
  * <a href="Wiki/R/Arima.html">Arima</a>
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/clustering.html">Clustering techniques</a>
+ * <a href="Wiki/R/clusteringComparison.html">Clustering comparison</a>
  * <a href="Wiki/R/graph.html">Graph</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
