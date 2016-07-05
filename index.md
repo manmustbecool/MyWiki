@@ -6,7 +6,6 @@ output:
       after_body: wiki\includes\footer.html
 ---
 
-
 > Home: http://manmustbecool.github.io/MyWiki/
 
 My cheat sheets
