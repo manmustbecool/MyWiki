@@ -41,9 +41,11 @@ My cheat sheets
 ### Java
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
+ 
 
 ### Others
 
+ * <a href="Wiki/Python.html">Python</a>
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>

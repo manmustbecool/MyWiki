@@ -1,0 +1,28 @@
+---
+title: "Python"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Basic
+
+## Data types
+
+  * Tuples
+Tuples are immutable sequences
+
+
+
+Install package
+
+```
+# in cmd comand window
+pip install py2exe
+conda install --channel https://conda.anaconda.org/manmadescience py2exe
+```
+
+
