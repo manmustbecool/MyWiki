@@ -45,7 +45,7 @@ My cheat sheets
 
 ### Others
 
- * <a href="Wiki/Python.html">Python</a>
+ * <a href="Wiki/python.html">Python</a>
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
