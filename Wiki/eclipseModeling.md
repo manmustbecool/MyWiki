@@ -1,12 +1,10 @@
 
 
+## Eclipse Modeling
 
-[![](http://code.google.com/images/code_sm.png)](http://code.google.com/)
+![Eclipse Modeling](eclipseModeling.jpg)
 
-
-# Xtext #
-
-## Introduction ##
+# Xtext 
 
 http://www.openarchitectureware.org/pub/documentation/4.3/html/contents/xtext_tutorial.html#xtext_dsl_grammar
 

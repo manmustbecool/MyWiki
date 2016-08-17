@@ -49,6 +49,7 @@ My cheat sheets
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
+ * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
  * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
 
 
