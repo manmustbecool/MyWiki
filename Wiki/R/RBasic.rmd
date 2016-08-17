@@ -20,6 +20,22 @@ sudo apt-get install r-base r-base-dev
 install R in linux
 http://www.jason-french.com/blog/2013/03/11/installing-r-in-linux/
 
+# Special constants
+
+```r
+#------ NULL, NA, NaN, Inf and -Inf -----------
+# NULL is an Object meaning the variable contains no object.
+is.null() # check is NULL
+
+# NA is a Value meaning missing data
+is.na() # returns TRUE for both NA and NaN
+na.omit() # remove NA value
+
+# NaN means not a number
+is.nan() # returns False for NA and Ture for NaN
+
+# Inf and -Inf for positive and negative infinity
+```
 
 # Atomic data types
 
@@ -33,6 +49,7 @@ round(x, digits=2)
 # -------------- string --------------------------
 #  string is considered to be a character vector in R
 str <- 'string' # str[1] # This evaluates to 'string'.
+nchar(str) # Count the Number of Characters 
 substr(str, 1, 2) # == 'st'
 strsplit('0-0-1', '-') # Evaluates to list('0', '0', '1')
 strsplit('0-0-1', '')  # Evaluates to list('0', '-', '0', '-', '1')
@@ -52,17 +69,6 @@ gsub('pattern', replacement, input) # Changes every occurrence of a pattern matc
 
 # insert a string
 gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
-
-#------ NULL, NA, NaN -----------
-# NULL is an Object meaning the variable contains no object.
-# is.null()
-
-# NA is a Value meaning missing data
-# is.na() returns TRUE for both NA and NaN
-
-# NaN means not a number
-# is.nan() returns False for NA and Ture for NaN
-
 ```
 
 # Common data structures
@@ -123,20 +129,13 @@ setdiff(x, y) # (asymmetric!) difference, setdiff(y, x) for y difference to x
 setequal(x, y) 
 
 # compare 2 vector
-all(c(1,2,3)==c(1,2,3))
-# > TRUE
-all(c(1,2,3)==c(2,1,3))
-# > FALSE
-all(c(1,2,3)==c(1,2,NA))
-# > NA
+all(c(1,2,3)==c(1,2,3)) # > TRUE
+all(c(1,2,3)==c(2,1,3)) # > FALSE
+all(c(1,2,3)==c(1,2,NA)) # > NA
 
 # Return the sum of all the values
 sum(v)
 sum(v==1) # count the number of value 1
-
-# convert one character vector into one string
-paste(x, sep="", collapse="") 
-
 ```
 
 ## factor  
@@ -178,11 +177,9 @@ B <- c(8,0,6,5)
 C <- c(3,6,0,2)
 m <- matrix(c(A,B,C), nrow=length(A))
 
-# Matrix Multiplication
-x %*% y
-
-# Matrix Transpose
-m <- t(m)
+# Matrix operation
+x %*% y    # Multiplication
+m <- t(m)  # Transpose
 ```
 
 ## array
@@ -227,7 +224,6 @@ prices <- c(1.1, 2.2, 3.3)
 timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 stockpricesDf <- data.frame(prices, timestamps)
 
-
 # Get and Set Row and Column Names for Data Frames
 rownames(df)   
 colnames(df) 
@@ -242,6 +238,7 @@ sub_df <- df[c(1,2,5), ] # select by row indexes
 sub_df <- df[, c(1,2,5)] # select by column indexes
 
 sub_df <- df[rownames(df)=='user1', ] # select by row names
+sub_df <- df[rownames(df)=='user1', drop=FALSE] # passed on to the indexing method to keep df and matrix format
 sub_df <- df[, c('start','end')] # select by column names
 
 sub_df <- df[df$age>40, ] # filter rows by values
@@ -448,11 +445,10 @@ as.formula("y ~ x1 + x2")  #> y ~ x1 + x2
 
 # Common functions ##
 ```r
--------- apply --------
+# -------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 
------ random number --------
-
+# ----- random number --------
 runif(10)       # for uniform distribution
 rnorm(10)       # for normal distribution
 sample(1:10)    # for vector 1:10 in random order
@@ -463,14 +459,17 @@ sort(sample(300, 30)) # sorted result
 # get replicable sample 
 set.seed(123) # sample results are same everytime for same seed
 sample(300, 30)
+
+# ----- pipe operator -----
+library(dplyr)
+data %>% func # = func(data)
+data %>% func(arg=value) # = func(data, arg=value)
 ```
 
 # Data input/output
 
-
 ```r
 #---- scan lines from a file ----
-
 #  data in the example.dat file 
 #  10
 #  12
@@ -481,7 +480,10 @@ data
 # [1] 60 43 67 50 
 
 # read CSV
-data <- read.table(file, header = FALSE, sep = "", quote = "\"'")
+data <- read.table(file, header=F, sep="", quote ="\"'")
+
+library(data.table)
+data <- fread(file, header=F) # for better performance
 ``` 
 
 
@@ -509,15 +511,14 @@ stopCluster(cl)
 # tryCatch exception handling
 
 ```r
-tryCatch(
-  {
-      expr
+tryCatch({
+    expr
   }, warning = function(w) {
-      warning-handler-code
+    warning-handler-code
   }, error = function(e) {
-      error-handler-code
+    error-handler-code
   }, finally = {
-      cleanup-code
+    cleanup-code
   }
 )
 ```
@@ -525,6 +526,7 @@ tryCatch(
 # SQL query ##
 
  * JDBC
+ 
 ```r
 library(RJDBC) 
 postgres <- JDBC( "org.postgresql.Driver", "C:/.../postgresql-8.4-703.jdbc4.jar")
@@ -532,6 +534,7 @@ conn <- dbConnect(postgres, "jdbc:postgresql://*.*.*.*:5432/xxdb", user="postgre
 myDf <- dbGetQuery(conn, "select * from tableX")
 ```
  * ODBC
+ 
 ```r
 library(RODBC)
 conn <- odbcDriverConnect('Driver=SQL Server; Server=10.x.x.x\\SQLEXPRESS; Database=xxx;')

@@ -1,6 +1,6 @@
 ---
 title: "R Machine Learning"
-output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 ## Gradient descents 
@@ -69,12 +69,18 @@ as(s1, "data.frame")
 ## Recommender system ##
 
   * recommenderlab
+  
+http://bigdata-doctor.com/recommender-systems-101-practical-example-in-r/
 
 ## Feature selection ##
 
   * caret
 
 http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/
+
+## deep learning
+
+http://www.teglor.com/b/deep-learning-libraries-language-cm569/
 
 ## Dimensionality Reduction
 
