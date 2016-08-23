@@ -104,30 +104,55 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 21 July, 2016</em></h4>
+<h4 class="date"><em>Updated: 23 August, 2016</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#basic"><span class="toc-section-number">1</span> Basic</a><ul>
-<li><a href="#data-types"><span class="toc-section-number">1.1</span> Data types</a></li>
-</ul></li>
+<li><a href="#basic"><span class="toc-section-number">1</span> Basic</a></li>
+<li><a href="#data-types"><span class="toc-section-number">2</span> Data types</a></li>
+<li><a href="#install-package"><span class="toc-section-number">3</span> Install package</a></li>
 </ul>
 </div>
 
 <div id="basic" class="section level1">
 <h1><span class="header-section-number">1</span> Basic</h1>
-<div id="data-types" class="section level2">
-<h2><span class="header-section-number">1.1</span> Data types</h2>
+<p>Install anaconda</p>
+</div>
+<div id="data-types" class="section level1">
+<h1><span class="header-section-number">2</span> Data types</h1>
 <ul>
-<li>Tuples Tuples are immutable sequences</li>
+<li>List</li>
 </ul>
-<p>Install package</p>
+<p>Lists are mutable</p>
+<pre><code>l = [3, 4, 5]
+l[0]
+
+matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], ] # nested list</code></pre>
+<ul>
+<li>Tuples</li>
+</ul>
+<p>Tuples are immutable sequences</p>
+<pre><code>t = 12345, 54321, 'hello!'
+t[0]</code></pre>
+<ul>
+<li>Set</li>
+</ul>
+<p>A set is an unordered collection with no duplicate elements</p>
+<pre><code>basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}</code></pre>
+</div>
+<div id="install-package" class="section level1">
+<h1><span class="header-section-number">3</span> Install package</h1>
 <pre><code># in cmd comand window
 pip install py2exe
 conda install --channel https://conda.anaconda.org/manmadescience py2exe</code></pre>
-</div>
+<p>NTLM support for Python3</p>
+<p>No working package for Pthon3 at the moment</p>
+<ul>
+<li>Install NTLM package for 2.x first</li>
+<li>Download NTLM package for 3.x files and replace installed file</li>
+</ul>
 </div>
 
 .

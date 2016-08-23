@@ -4,20 +4,40 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Basic
 
-## Data types
+Install anaconda
+
+# Data types
+
+  * List
+  
+Lists are mutable
+```
+l = [3, 4, 5]
+l[0]
+
+matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], ] # nested list
+```
 
   * Tuples
+  
 Tuples are immutable sequences
+```
+t = 12345, 54321, 'hello!'
+t[0]
+```
+
+  * Set
+  
+A set is an unordered collection with no duplicate elements
+```
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+```
 
 
 
-Install package
+# Install package
 
 ```
 # in cmd comand window
@@ -25,4 +45,9 @@ pip install py2exe
 conda install --channel https://conda.anaconda.org/manmadescience py2exe
 ```
 
+  NTLM support for Python3
+   
+No working package for Pthon3 at the moment
 
+  * Install NTLM package for 2.x first
+  * Download NTLM package for 3.x files and replace installed file

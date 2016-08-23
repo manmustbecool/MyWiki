@@ -14,6 +14,9 @@ V(g) # vertices
 
 get.edgelist(g)  # all edges from to
 
+# select vertice by name
+V(g)[V(g)$name=="node1"]
+
 # delete 
 g <- delete.edges(g, which(E(g)$weight<=0.1) ) 
 g <- delete.vertices(g, which(degree(g)<1) )
@@ -21,8 +24,12 @@ g <- delete.vertices(g, which(degree(g)<1) )
 # keep specified vertices and all the edges between
 g2 <- induced_subgraph(g, 1:7)
 
-# calculates the length of all the shortest paths from or to the vertices
+# Calculates the length of all the shortest paths from or to the vertices
 shortest.paths()
+
+# Convert matrix containg edges and vertices
+get.data.frame(xg, what=c("edges"))
+
 
 ```
 

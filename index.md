@@ -11,7 +11,6 @@ output:
 My cheat sheets
 
 ### R
- 
  * <a href="Wiki/R/RBasic.html">R Basic</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/RDevelopment.html">R Development</a>
@@ -27,9 +26,14 @@ My cheat sheets
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  
+### Java
+ * <a href="Wiki/Java/Java.html">Java notes</a>
+ * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
+ 
+### Python
+ * <a href="Wiki/python.html">Python</a>
  
 ### Big Data
-
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
  * <a href="Wiki/Pig.html">Pig</a> 
  * <a href="Wiki/Hive.html">Hive</a> 
@@ -38,20 +42,15 @@ My cheat sheets
  * <a href="Wiki/Solr.html">Solr</a>
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
-### Java
- * <a href="Wiki/Java/Java.html">Java notes</a>
- * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
- 
 
 ### Others
-
  * <a href="Wiki/python.html">Python</a>
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
  * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
  * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
-
+ * <a href="Wiki/SoftwareDevelopment.html">Software Development </a>
 
 
 <style>
