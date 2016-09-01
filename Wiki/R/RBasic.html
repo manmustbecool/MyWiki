@@ -148,7 +148,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 21 July, 2016</em></h4>
+<h4 class="date"><em>Updated: 30 August, 2016</em></h4>
 
 </div>
 
@@ -346,7 +346,24 @@ m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">
 
 <span class="co"># Matrix operation</span>
 x %*%<span class="st"> </span>y    <span class="co"># Multiplication</span>
-m &lt;-<span class="st"> </span><span class="kw">t</span>(m)  <span class="co"># Transpose</span></code></pre></div>
+m &lt;-<span class="st"> </span><span class="kw">t</span>(m)  <span class="co"># Transpose</span>
+
+<span class="co"># ----- simple triplet matrix  --------</span>
+<span class="co"># simple triplet matrix is very efficient representation of a large sparse matrix. Cell with unassigned values are assumed to be zero.</span>
+
+<span class="kw">library</span>(slam)
+i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)   <span class="co"># row index</span>
+j &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)   <span class="co"># column index</span>
+v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>)   <span class="co"># value</span>
+m &lt;-<span class="st"> </span><span class="kw">simple_triplet_matrix</span>(i,j,v)
+
+<span class="kw">as.matrix</span>(m)
+     [,<span class="dv">1</span>] [,<span class="dv">2</span>]
+[<span class="dv">1</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
+[<span class="dv">2</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
+[<span class="dv">3</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
+[<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">6</span>
+[<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">6</span></code></pre></div>
 </div>
 <div id="array" class="section level2">
 <h2><span class="header-section-number">4.4</span> array</h2>

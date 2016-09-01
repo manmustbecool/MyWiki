@@ -31,8 +31,9 @@ My cheat sheets
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
  
 ### Python
- * <a href="Wiki/python.html">Python</a>
- 
+ * <a href="Wiki/python/python.html">Python</a>
+ * <a href="Wiki/python/pythonRdm.html">Python R markdown</a>
+  
 ### Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
  * <a href="Wiki/Pig.html">Pig</a> 

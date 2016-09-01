@@ -180,6 +180,24 @@ m <- matrix(c(A,B,C), nrow=length(A))
 # Matrix operation
 x %*% y    # Multiplication
 m <- t(m)  # Transpose
+
+# ----- simple triplet matrix  --------
+# simple triplet matrix is very efficient representation of a large sparse matrix. Cell with unassigned values are assumed to be zero.
+
+library(slam)
+i <- c(1,2,3,4,5)   # row index
+j <- c(1,1,1,2,2)   # column index
+v <- c(5,5,5,6,6)   # value
+m <- simple_triplet_matrix(i,j,v)
+
+as.matrix(m)
+     [,1] [,2]
+[1,]    5    0
+[2,]    5    0
+[3,]    5    0
+[4,]    0    6
+[5,]    0    6
+
 ```
 
 ## array
