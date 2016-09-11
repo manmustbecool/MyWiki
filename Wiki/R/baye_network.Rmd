@@ -1,0 +1,111 @@
+
+---
+title: "Bayesian Networks"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+
+http://www.bnlearn.com/examples/
+
+
+http://hameddaily.blogspot.ie/2015/02/bayesian-network-in-r-introduction.html
+
+
+install bnlearn package
+```r
+source("https://bioconductor.org/biocLite.R")
+biocLite("Rgraphviz")
+```
+# Example
+
+ 
+```{r, warning=F}
+library(bnlearn)
+
+# coronary all columns are factors
+#   P. Work (strenuous physical work): a two-level factor with levels no and yes.
+#   Pressure (systolic blood pressure): a two-level factor with levels <140 and >140.
+coronary[1:5,]
+
+# ---- Learn structure --------
+
+bn_df <- data.frame(coronary[1:700,])
+
+# constraint-based (gs, iamb, fast.iamb and inter.iamb) and score-based (hc) algorithms
+par(mfrow = c(1,2), omi = rep(0, 4), mar = c(1, 1, 1, 1))
+res <- gs(bn_df) # onstraint-based algorithms
+plot(res)
+res <- hc(bn_df) # Score-based algorithms:
+plot(res)
+
+
+# it does not make sense to have Family as a variable condition on M.Work. 
+# Therefore, we need to modify the derived structure. 
+# remove the link between M.Work and Family.
+res$arcs <- res$arcs[-which((res$arcs[,'from'] == "M..Work" & res$arcs[,'to'] == "Family")),]
+plot(res)
+
+
+# After learning the structure, we need to find out the conditional probability tables (CPTs) at each node. The bn.fit function runs the EM algorithm to learn CPT for different nodes in the above graph.
+fittedbn <- bn.fit(res, data = bn_df)
+
+
+print(fittedbn$Proteins)
+
+# ------ Inference ----------
+# Perform conditional probability queries (CPQs)
+cpquery(fittedbn, event=(Proteins=="<3"), evidence=(Smoking=="no"))
+
+cpquery(fittedbn, event=(Proteins=="<3"), evidence=(Smoking=="no"&Pressure==">140"))
+
+cpquery(fittedbn, event=(Proteins=="<3"), evidence=(Pressure==">140"))
+
+cpquery(fittedbn, event=(Smoking=="no"&Pressure==">140"), evidence=(Proteins=="<3"))
+
+str <- "Proteins=='<3'"
+cpquery(fittedbn, eval(parse(text = str)), evidence=(Smoking=="no"))
+```
+
+
+```{r}
+library(gRain)
+yn   <- c("yes","no")
+ynm  <- c("yes","no","maybe")
+a    <- cptable( ~ asia, values=c(1,99), levels=yn)
+t.a  <- cptable( ~ tub : asia, values=c(5,95,1,99,1,999),  levels=ynm)
+d.a  <- cptable( ~ dia : asia, values=c(5,5,1,99,100,999), levels=ynm)
+cptlist <- compileCPT(list(a,t.a,d.a))
+grain(cptlist)
+
+
+dat <- read.table(text="A B 
+1 2
+1 3
+1 4
+2 5
+3 7", header=TRUE)
+
+x <- table(dat)
+x %*% t(x)
+
+
+
+library(gRain)
+data(chestSim1000, package="gRbase")
+head(chestSim1000)
+s <- xtabs(~smoke, chestSim1000)
+d.b <- xtabs(~dysp+bronc, chestSim1000)
+
+chestSim1000 <- chestSim1000[,c("smoke", "bronc", "dysp")]
+
+s <- xtabs(~smoke, chestSim1000)
+s <- as.parray(s, normalize="first")
+b <- xtabs(~bronc+., chestSim1000)
+b <- as.parray(b, normalize="first")
+d <- xtabs(~dysp+., chestSim1000)
+d <- as.parray(d, normalize="first")
+# cpt.list <- compileCPT(list(s, b, d))
+# cpt.list
+
+```
+

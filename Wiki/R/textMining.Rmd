@@ -49,6 +49,8 @@ inspect(myCorpus)
 # the following stem completion works in tm v0.6 
 tm_map(myCorpus, content_transformer(function(x, d)
   paste(stemCompletion(strsplit(stemDocument(x), ' ')[[1]], d), collapse = ' ')), dictCorpus)
+# fix up 1) differences between us and aussie english 2) general errors
+myCorpus <- tm_map(myCorpus, content_transformer(gsub), pattern = “organiz”, replacement = “organ”)
 inspect(myCorpus)
 inspect(dictCorpus)
 
@@ -62,6 +64,9 @@ inspect(myDtm)
 #   comput          0 0 1 1 0
 #   data            0 0 0 0 2  
 #   ...
+
+# get tf-idf weighting 
+myDtm <- TermDocumentMatrix(myCorpus, control = list(wordLengths = c(1, Inf), weighting = function(x) weightTfIdf(x, normalize = FALSE)))
 
 # Based on the above matrix, many data mining tasks can be done, for example, clustering, classification and association analysis.
 

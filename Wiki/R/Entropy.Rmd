@@ -1,0 +1,26 @@
+---
+title: "Entropy"
+output: html_document
+---
+
+```{r}
+
+X <- c("no", "no", "yes", "yes", "yes", "no", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no")
+myEntropy <- function(X){
+  freqs <- table(X)/length(X)
+  -sum(freqs * log2(freqs))
+}
+myEntropy(X)
+
+
+Y <-  c("yes", "yes", "no", "yes", "no", "yes", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no")
+U<-data.frame(Y,X)
+U <- U[U[,1]=="yes",][, 2]
+
+Hyx<-myEntropy(U) 
+Hx<-myEntropy(X)
+Hy<-myEntropy(Y)
+Hx+Hy-Hyx
+
+```
+

@@ -22,8 +22,10 @@ My cheat sheets
  * <a href="Wiki/R/clusteringComparison.html">Clustering comparison</a>
  * <a href="Wiki/R/graph.html">Graph</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
+ * <a href="Wiki/R/baye_network.html">Baye network</a>
  * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
+ * <a href="Wiki/R/Entropy.html">Entropy</a>
  * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  
 ### Java
