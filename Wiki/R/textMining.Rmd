@@ -36,6 +36,8 @@ myCorpus <- tm_map(myCorpus, removeNumbers) # remove numbers
 myStopwords <- c(stopwords('english'), "available", "dogs") # add two additional stopwords
 myStopwords <- setdiff(myStopwords, c("r", "big")) # remove 'r' and 'big' from stopwords
 myCorpus <- tm_map(myCorpus, removeWords, myStopwords) # remove stopwords
+#fix up 1) differences between us and aussie english 2) general errors
+myCorpus <- tm_map(myCorpus, content_transformer(gsub), pattern = “organiz”, replacement = “organ”)
 
 # ---- Stemming Words
 

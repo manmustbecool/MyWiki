@@ -75,11 +75,20 @@ closeness(g2) # Inverse of the average length of the shortest paths to/from all 
 # Community detection
 ```{r}
 g <- graph.famous("Walther")
+
 ceb <- cluster_edge_betweenness(g) 
+modularity(ceb) # # modularity measure
 dendPlot(ceb, mode="hclust")
+
 plot(ceb, g) 
+
+ceb <- cluster_fast_greedy(g)
+plot(ceb, g)
 ```
 
+
+# Interactive visualizations
+http://kateto.net/network-visualization
 
 # Plot
 

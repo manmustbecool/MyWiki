@@ -148,7 +148,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Text Mining</h1>
-<h4 class="date"><em>Updated: 30 May, 2016</em></h4>
+<h4 class="date"><em>Updated: 11 September, 2016</em></h4>
 
 </div>
 
@@ -186,6 +186,8 @@ myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, 
 myStopwords &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">stopwords</span>(<span class="st">'english'</span>), <span class="st">&quot;available&quot;</span>, <span class="st">&quot;dogs&quot;</span>) <span class="co"># add two additional stopwords</span>
 myStopwords &lt;-<span class="st"> </span><span class="kw">setdiff</span>(myStopwords, <span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;big&quot;</span>)) <span class="co"># remove 'r' and 'big' from stopwords</span>
 myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removeWords, myStopwords) <span class="co"># remove stopwords</span>
+<span class="co">#fix up 1) differences between us and aussie english 2) general errors</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(gsub), <span class="dt">pattern =</span> “organiz”, <span class="dt">replacement =</span> “organ”)
 
 <span class="co"># ---- Stemming Words</span>
 

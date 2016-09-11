@@ -281,6 +281,13 @@ aggregate(rep(1, nrow(df)), by=as.list(df), FUN=sum)
 # sample rows 
 df[sample(nrow(df), 3), ]
 
+# calculate row sum and product in data.frame
+transform(df, sum=rowSums(df), prod=x*y*z)
+ #  x y z sum prod
+ #1 1 2 3   6    6
+ #2 2 3 4   9   24
+ #3 5 1 2   8   10
+
 # apply a Function to a Data Frame Split by Factors
 by(df[, 1:2], df[,3], summary)
 
@@ -350,6 +357,9 @@ df <- df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are N
 ```
 use data.table for data.fame
 ```r
+# convert a table to a data frame 
+as.data.frame.matrix(mytable) 
+
 library(data.table)
 dt <- data.table(df) # convert the data frame to data table
 
