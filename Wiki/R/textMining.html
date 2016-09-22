@@ -148,13 +148,15 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Text Mining</h1>
-<h4 class="date"><em>Updated: 12 September, 2016</em></h4>
+<h4 class="date"><em>Updated: 14 September, 2016</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#text-mining"><span class="toc-section-number">0.1</span> Text mining</a></li>
+<li><a href="#word-cloud"><span class="toc-section-number">1</span> word cloud</a></li>
+<li><a href="#social-network-analysis"><span class="toc-section-number">2</span> Social Network Analysis</a></li>
 </ul>
 </div>
 
@@ -226,7 +228,18 @@ myDtm &lt;-<span class="st"> </span><span class="kw">TermDocumentMatrix</span>(m
 
 <span class="co"># which words are associated with &quot;r&quot;?</span>
 <span class="kw">findAssocs</span>(myDtm, <span class="st">'r'</span>, <span class="fl">0.30</span>)</code></pre></div>
-<p>Social Network Analysis</p>
+</div>
+<div id="word-cloud" class="section level1">
+<h1><span class="header-section-number">1</span> word cloud</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wordcloud)
+<span class="kw">wordcloud</span>(corpus, <span class="dt">scale=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="fl">0.5</span>), 
+    <span class="dt">max.words=</span><span class="dv">30</span>, <span class="dt">random.order=</span><span class="ot">FALSE</span>
+    <span class="co">#, rot.per=0.35, use.r.layout=FALSE</span>
+    ,<span class="dt">colors=</span><span class="kw">brewer.pal</span>(<span class="dv">10</span>, <span class="st">&quot;Dark2&quot;</span>)
+)</code></pre></div>
+</div>
+<div id="social-network-analysis" class="section level1">
+<h1><span class="header-section-number">2</span> Social Network Analysis</h1>
 <p><a href="http://www.rdatamining.com/examples/social-network-analysis" class="uri">http://www.rdatamining.com/examples/social-network-analysis</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tm)</code></pre></div>
 <pre><code>## Loading required package: NLP</code></pre>

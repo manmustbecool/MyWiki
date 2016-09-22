@@ -73,7 +73,39 @@ corrplot(cor(mtcars), type="lower")
 ## Dendrograms 
 
 https://rpubs.com/gaston/dendrograms
+
 http://www.sigmath.es.osaka-u.ac.jp/shimo-lab/prog/pvclust/
+
+
+```{r, warning=F}
+hc <- hclust(dist(USArrests[1:7,]), "ave")
+
+#--------- plot 
+suppressMessages(library(dendextend))
+dend1 <- as.dendrogram(hc)
+cutree(dend1,h=70) # it now works on a dendrogram with dendextend library
+dend1 <- color_branches(dend1, k = 4)
+dend1 <- color_labels(dend1, k = 5)
+plot(dend1)
+
+#--------- plot 
+clus5 = cutree(hc, 5)
+plot(hc, xlab = ""
+     , hang = -1 # set label height
+)
+
+rect.hclust(hc, h=70, border="blue")
+rect.hclust(hc, h=30, border="red")
+
+legend("topright", "(x,y)"
+        , c("Strong relation - red", "Good relation - blue") # add text
+        , text.col=c("red", "blue")
+        , lty=-1 , pch=NA # set lyt and pch to remove the legend symbols
+)
+
+```
+
+
 
 # Plot configuration
 
@@ -213,6 +245,38 @@ server <- shinyServer(function(input, output, session){
 
 shinyApp(ui,server)
 ```
+## reactive programming
+
+https://shinydata.wordpress.com/2015/02/02/a-few-things-i-learned-about-shiny-and-reactive-programming/
+
+```r
+shinyServer(function(input, output, session){
+
+ # Get Lengths from user input   
+ a <- eventReactive(input$do, {
+       subset(dd, Wafer %in% input$wafer, select = Length) 
+ })
+
+ #Observe and update first set of radiobuttons based on a(). Does render   
+  observe({ 
+    z <- a()
+    updateRadioButtons(session, "length", choices = unique(z$Length), inline=TRUE)
+  })
+
+  output$l <- renderDataTable({ a() })
+})
+
+shinyUI(fluidPage(
+
+  actionButton("do", "Search wafer"),
+  radioButtons("length", label="Length", choices=""),
+
+  dataTableOutput(outputId="l")
+  )
+)
+
+```
+
 
 ## Styling Cells, Rows, and Tables
 http://rstudio.github.io/DT/010-style.html

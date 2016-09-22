@@ -78,8 +78,18 @@ findFreqTerms(myDtm, lowfreq=2)
 findAssocs(myDtm, 'r', 0.30)
 ```
 
+# word cloud
 
-Social Network Analysis
+```r
+library(wordcloud)
+wordcloud(corpus, scale=c(5,0.5), 
+    max.words=30, random.order=FALSE
+    #, rot.per=0.35, use.r.layout=FALSE
+    ,colors=brewer.pal(10, "Dark2")
+)
+```
+
+# Social Network Analysis
 
 http://www.rdatamining.com/examples/social-network-analysis
 
