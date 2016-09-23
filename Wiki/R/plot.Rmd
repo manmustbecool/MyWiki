@@ -184,9 +184,11 @@ cl <- rainbow(5)
 library(scales)
 col <- alpha("yellow", 0.4)
 
+# use RColorBrewer library
+# http://moderndata.plot.ly/create-colorful-graphs-in-r-with-rcolorbrewer-and-plotly/
+RColorBrewer::brewer.pal(3, "Set2")
+
 ```
-
-
 
 ## use legend as text box
 ```r
@@ -245,7 +247,7 @@ server <- shinyServer(function(input, output, session){
 
 shinyApp(ui,server)
 ```
-## reactive programming
+## Reactive programming
 
 https://shinydata.wordpress.com/2015/02/02/a-few-things-i-learned-about-shiny-and-reactive-programming/
 
@@ -277,6 +279,49 @@ shinyUI(fluidPage(
 
 ```
 
+## Dynamic plot 
+```r
+max_plots <- 5
+
+server <- shinyServer(function(input, output) {
+  
+  # Insert the right number of plot output objects into the web page
+  output$plots <- renderUI({
+    plot_output_list <- lapply(1:input$n, function(i) {
+      plotname <- paste0("plot", i)
+      dygraphOutput(plotname, width = "100%", height = "300px")
+    })
+    
+    # Convert the list to a tagList - this is necessary for the list of items
+    # to display properly.
+    do.call(tagList, plot_output_list)
+  })
+  
+  # Call renderPlot for each one. Plots are only actually generated when they
+  # are visible on the web page.
+  for (i in 1:max_plots) {
+    # Need local so that each item gets its own number. Without it, the value
+    # of i in the renderPlot() will be the same across all instances, because
+    # of when the expression is evaluated.
+    local({
+      plotname <- paste0("plot", i)
+      output[[plotname]] <- renderDygraph({
+        dygraph(mdeaths, group = "all-one")
+      })
+    })
+  }
+})
+
+ui <- shinyUI(
+  wellPanel(
+    sliderInput("n", "Number of plots", value=1, min=1, max=5),
+    # This is the dynamic UI for the plots
+    uiOutput("plots")
+    )
+)
+
+shinyApp(ui,server)
+```
 
 ## Styling Cells, Rows, and Tables
 http://rstudio.github.io/DT/010-style.html
@@ -343,6 +388,7 @@ server=function(input,output,session)({
 
 shinyApp(ui, server)
 ```
+
 
 
 # Other
