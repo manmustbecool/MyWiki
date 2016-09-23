@@ -148,7 +148,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 21 July, 2016</em></h4>
+<h4 class="date"><em>Updated: 11 September, 2016</em></h4>
 
 </div>
 
@@ -346,7 +346,24 @@ m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">
 
 <span class="co"># Matrix operation</span>
 x %*%<span class="st"> </span>y    <span class="co"># Multiplication</span>
-m &lt;-<span class="st"> </span><span class="kw">t</span>(m)  <span class="co"># Transpose</span></code></pre></div>
+m &lt;-<span class="st"> </span><span class="kw">t</span>(m)  <span class="co"># Transpose</span>
+
+<span class="co"># ----- simple triplet matrix  --------</span>
+<span class="co"># simple triplet matrix is very efficient representation of a large sparse matrix. Cell with unassigned values are assumed to be zero.</span>
+
+<span class="kw">library</span>(slam)
+i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)   <span class="co"># row index</span>
+j &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)   <span class="co"># column index</span>
+v &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>)   <span class="co"># value</span>
+m &lt;-<span class="st"> </span><span class="kw">simple_triplet_matrix</span>(i,j,v)
+
+<span class="kw">as.matrix</span>(m)
+     [,<span class="dv">1</span>] [,<span class="dv">2</span>]
+[<span class="dv">1</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
+[<span class="dv">2</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
+[<span class="dv">3</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
+[<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">6</span>
+[<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">6</span></code></pre></div>
 </div>
 <div id="array" class="section level2">
 <h2><span class="header-section-number">4.4</span> array</h2>
@@ -424,6 +441,13 @@ df &lt;-<span class="st"> </span>df[, <span class="kw">apply</span>(df, <span cl
 <span class="co"># sample rows </span>
 df[<span class="kw">sample</span>(<span class="kw">nrow</span>(df), <span class="dv">3</span>), ]
 
+<span class="co"># calculate row sum and product in data.frame</span>
+<span class="kw">transform</span>(df, <span class="dt">sum=</span><span class="kw">rowSums</span>(df), <span class="dt">prod=</span>x*y*z)
+ <span class="co">#  x y z sum prod</span>
+ <span class="co">#1 1 2 3   6    6</span>
+ <span class="co">#2 2 3 4   9   24</span>
+ <span class="co">#3 5 1 2   8   10</span>
+
 <span class="co"># apply a Function to a Data Frame Split by Factors</span>
 <span class="kw">by</span>(df[, <span class="dv">1</span>:<span class="dv">2</span>], df[,<span class="dv">3</span>], summary)
 
@@ -491,7 +515,10 @@ df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span clas
 df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df))!=<span class="st"> </span><span class="kw">ncol</span>(df),] <span class="co"># Remove rows where all data is NA</span>
 df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]   <span class="co"># Remove columns where All values are NA</span></code></pre></div>
 <p>use data.table for data.fame</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert a table to a data frame </span>
+<span class="kw">as.data.frame.matrix</span>(mytable) 
+
+<span class="kw">library</span>(data.table)
 dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(df) <span class="co"># convert the data frame to data table</span>
 
 <span class="co"># select colum by names</span>

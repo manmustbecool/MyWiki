@@ -1,0 +1,8 @@
+---
+title: "Magento"
+output: html_document
+---
+
+# check magento version
+http://magentoversion.com/
+ 

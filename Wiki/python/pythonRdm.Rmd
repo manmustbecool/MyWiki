@@ -1,0 +1,25 @@
+---
+title: "python RMD example"
+output: html_document
+---
+
+
+### Call python code example
+
+```{r, engine='python'}
+import matplotlib.pyplot as plt
+import numpy as np
+
+t = np.arange(0.0, 2.0, 0.01)
+s = np.sin(2*np.pi*t)
+plt.plot(t, s)
+
+plt.xlabel('time (s)')
+plt.ylabel('voltage (mV)')
+plt.title('About as simple as it gets, folks')
+plt.grid(True)
+plt.savefig("test.png")
+
+```
+Output image:
+![output](test.png)

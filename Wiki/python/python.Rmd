@@ -1,0 +1,64 @@
+---
+title: "Python"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Basic
+
+Install anaconda
+
+# Data types
+
+  * List
+  
+Lists are mutable
+```python
+l = [3, 4, 5]
+l[0]
+
+matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], ] # nested list
+```
+
+  * Tuples
+  
+Tuples are immutable sequences
+```python
+t = 12345, 54321, 'hello!'
+t[0]
+```
+
+  * Set
+  
+A set is an unordered collection with no duplicate elements
+```python
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+```
+
+# read head lines of a large text file
+
+```python
+file_name = "C:\\Users\\emiewag\\Desktop\\2014101709-12.txt"
+
+with open(file_name) as myfile:
+    head = [next(myfile) for x in range(20)]
+print (head)
+
+```
+
+# Install package
+
+```python
+# in cmd comand window
+pip install py2exe
+conda install --channel https://conda.anaconda.org/manmadescience py2exe
+```
+
+  NTLM support for Python3
+   
+No working package for Pthon3 at the moment
+
+  * Install NTLM package for 2.x first
+  * Download NTLM package for 3.x files and replace installed file
+  
+

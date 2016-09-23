@@ -1,0 +1,7 @@
+---
+title: "Management"
+output: html_document
+---
+
+
+<https://medium.com/@billjordan1/the-quiet-crisis-unfolding-in-software-development-cffbdafbf450#.51idm38tr>

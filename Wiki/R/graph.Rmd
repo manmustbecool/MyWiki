@@ -14,6 +14,9 @@ V(g) # vertices
 
 get.edgelist(g)  # all edges from to
 
+# select vertice by name
+V(g)[V(g)$name=="node1"]
+
 # delete 
 g <- delete.edges(g, which(E(g)$weight<=0.1) ) 
 g <- delete.vertices(g, which(degree(g)<1) )
@@ -21,8 +24,12 @@ g <- delete.vertices(g, which(degree(g)<1) )
 # keep specified vertices and all the edges between
 g2 <- induced_subgraph(g, 1:7)
 
-# calculates the length of all the shortest paths from or to the vertices
+# Calculates the length of all the shortest paths from or to the vertices
 shortest.paths()
+
+# Convert matrix containg edges and vertices
+get.data.frame(xg, what=c("edges"))
+
 
 ```
 
@@ -65,14 +72,59 @@ closeness(g2) # Inverse of the average length of the shortest paths to/from all 
 1/closeness(g2,7)/9 # the auto assigned weight of disconnected node (7) to the rest of 9 nodes
 ```
 
+# shortest paths
+```{r}
+library(igraph)
+g <- graph.ring(10)
+shortest.paths(g)
+get.shortest.paths(g, 5)
+get.all.shortest.paths(g, 1, 6:8)
+average.path.length(g)
+## Weighted shortest paths
+el <- matrix(nc=3, byrow=TRUE,
+             c(1,2,0, 1,3,2, 1,4,1, 2,3,0, 2,5,5, 2,6,2, 3,2,1, 3,4,1,
+               3,7,1, 4,3,0, 4,7,2, 5,6,2, 5,8,8, 6,3,2, 6,7,1, 6,9,1,
+               6,10,3, 8,6,1, 8,9,1, 9,10,4) )
+g2 <- add.edges(graph.empty(10), t(el[,1:2]), weight=el[,3])
+shortest.paths(g2, mode="out")
+
+
+all_simple_paths(g2, 1, 5)
+
+g <- make_ring(10)
+g <- g + edge(2,4) + edge(3,5)
+plot(g)
+all_simple_paths(g, 1, 6)
+
+
+adjm <- matrix(sample(0:1, 100, replace=TRUE), nc=10)
+adjm <- adjm*0.05
+g1 <- graph.adjacency(adjm, weighted=T )
+plot(g1)
+E(g1)$weight
+E(g1)$weight <- -log(E(g1)$weight)
+E(g1)$weight 
+shortest.paths(g1, v=V(g1)[1], to=V(g1)[4])
+
+```
+
 # Community detection
 ```{r}
 g <- graph.famous("Walther")
+
 ceb <- cluster_edge_betweenness(g) 
+modularity(ceb) # # modularity measure
 dendPlot(ceb, mode="hclust")
+
 plot(ceb, g) 
+
+ceb <- cluster_fast_greedy(g)
+plot(ceb, g)
 ```
 
+
+# Interactive visualizations
+http://kateto.net/network-visualization
 
 # Plot
 

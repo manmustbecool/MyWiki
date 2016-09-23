@@ -148,13 +148,15 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Text Mining</h1>
-<h4 class="date"><em>Updated: 30 May, 2016</em></h4>
+<h4 class="date"><em>Updated: 14 September, 2016</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#text-mining"><span class="toc-section-number">0.1</span> Text mining</a></li>
+<li><a href="#word-cloud"><span class="toc-section-number">1</span> word cloud</a></li>
+<li><a href="#social-network-analysis"><span class="toc-section-number">2</span> Social Network Analysis</a></li>
 </ul>
 </div>
 
@@ -186,6 +188,8 @@ myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, 
 myStopwords &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">stopwords</span>(<span class="st">'english'</span>), <span class="st">&quot;available&quot;</span>, <span class="st">&quot;dogs&quot;</span>) <span class="co"># add two additional stopwords</span>
 myStopwords &lt;-<span class="st"> </span><span class="kw">setdiff</span>(myStopwords, <span class="kw">c</span>(<span class="st">&quot;r&quot;</span>, <span class="st">&quot;big&quot;</span>)) <span class="co"># remove 'r' and 'big' from stopwords</span>
 myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, removeWords, myStopwords) <span class="co"># remove stopwords</span>
+<span class="co">#fix up 1) differences between us and aussie english 2) general errors</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(gsub), <span class="dt">pattern =</span> “organiz”, <span class="dt">replacement =</span> “organ”)
 
 <span class="co"># ---- Stemming Words</span>
 
@@ -197,6 +201,8 @@ myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, 
 <span class="co"># the following stem completion works in tm v0.6 </span>
 <span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(function(x, d)
   <span class="kw">paste</span>(<span class="kw">stemCompletion</span>(<span class="kw">strsplit</span>(<span class="kw">stemDocument</span>(x), <span class="st">' '</span>)[[<span class="dv">1</span>]], d), <span class="dt">collapse =</span> <span class="st">' '</span>)), dictCorpus)
+<span class="co"># fix up 1) differences between us and aussie english 2) general errors</span>
+myCorpus &lt;-<span class="st"> </span><span class="kw">tm_map</span>(myCorpus, <span class="kw">content_transformer</span>(gsub), <span class="dt">pattern =</span> “organiz”, <span class="dt">replacement =</span> “organ”)
 <span class="kw">inspect</span>(myCorpus)
 <span class="kw">inspect</span>(dictCorpus)
 
@@ -211,6 +217,9 @@ myDtm &lt;-<span class="st"> </span><span class="kw">TermDocumentMatrix</span>(m
 <span class="co">#   data            0 0 0 0 2  </span>
 <span class="co">#   ...</span>
 
+<span class="co"># get tf-idf weighting </span>
+myDtm &lt;-<span class="st"> </span><span class="kw">TermDocumentMatrix</span>(myCorpus, <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">wordLengths =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">Inf</span>), <span class="dt">weighting =</span> function(x) <span class="kw">weightTfIdf</span>(x, <span class="dt">normalize =</span> <span class="ot">FALSE</span>)))
+
 <span class="co"># Based on the above matrix, many data mining tasks can be done, for example, clustering, classification and association analysis.</span>
 
 <span class="co"># ----- Frequent Terms and Associations</span>
@@ -219,7 +228,18 @@ myDtm &lt;-<span class="st"> </span><span class="kw">TermDocumentMatrix</span>(m
 
 <span class="co"># which words are associated with &quot;r&quot;?</span>
 <span class="kw">findAssocs</span>(myDtm, <span class="st">'r'</span>, <span class="fl">0.30</span>)</code></pre></div>
-<p>Social Network Analysis</p>
+</div>
+<div id="word-cloud" class="section level1">
+<h1><span class="header-section-number">1</span> word cloud</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wordcloud)
+<span class="kw">wordcloud</span>(corpus, <span class="dt">scale=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="fl">0.5</span>), 
+    <span class="dt">max.words=</span><span class="dv">30</span>, <span class="dt">random.order=</span><span class="ot">FALSE</span>
+    <span class="co">#, rot.per=0.35, use.r.layout=FALSE</span>
+    ,<span class="dt">colors=</span><span class="kw">brewer.pal</span>(<span class="dv">10</span>, <span class="st">&quot;Dark2&quot;</span>)
+)</code></pre></div>
+</div>
+<div id="social-network-analysis" class="section level1">
+<h1><span class="header-section-number">2</span> Social Network Analysis</h1>
 <p><a href="http://www.rdatamining.com/examples/social-network-analysis" class="uri">http://www.rdatamining.com/examples/social-network-analysis</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tm)</code></pre></div>
 <pre><code>## Loading required package: NLP</code></pre>
