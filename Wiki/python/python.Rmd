@@ -48,10 +48,16 @@ print (head)
 
 # Install package
 
+in cmd comand window
 ```python
-# in cmd comand window
+# PyPI
 pip install py2exe
+#conda
 conda install --channel https://conda.anaconda.org/manmadescience py2exe
+
+
+conda install pandas
+pip install pandas
 ```
 
   NTLM support for Python3
