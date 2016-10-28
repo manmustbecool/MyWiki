@@ -209,6 +209,9 @@ Arrays are similar to matrices but can have more than 2 dimensions.
 ar <- array(3, 5) # [3,3,3,3,3]
 ar <- array(c(3,5), 5) # [3,5,3,5,3,5,3,5,3,5]
 
+# get dimantion of array
+dim(ar)
+
 array(1:8, dim=c(2,2,2))
 
 , , 1

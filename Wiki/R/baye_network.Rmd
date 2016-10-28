@@ -11,13 +11,19 @@ http://www.bnlearn.com/examples/
 http://hameddaily.blogspot.ie/2015/02/bayesian-network-in-r-introduction.html
 
 
-install bnlearn package
+install bnlearn or gRain package
 ```r
-source("https://bioconductor.org/biocLite.R")
-biocLite("Rgraphviz")
+source("http://bioconductor.org/biocLite.R")
+biocLite(c("graph", "RBGL", "Rgraphviz"))
+# Then install the packages from CRAN in the usual way:
+install.packages("gRain", dependencies=TRUE)
 ```
 # Example
 
+## bnlearn package
+
+* learning sturcture
+* inference
  
 ```{r, warning=F}
 library(bnlearn)
@@ -66,16 +72,52 @@ str <- "Proteins=='<3'"
 cpquery(fittedbn, eval(parse(text = str)), evidence=(Smoking=="no"))
 ```
 
+## gRain package
 
 ```{r}
 library(gRain)
 yn   <- c("yes","no")
 ynm  <- c("yes","no","maybe")
+# To specify P(a|b,c) one may write ~a|b:c, ~a:b:c, ~a|b+c, ~a+b+c or c("a","b","c").
+# for a, yes:1, No:99
 a    <- cptable( ~ asia, values=c(1,99), levels=yn)
-t.a  <- cptable( ~ tub : asia, values=c(5,95,1,99,1,999),  levels=ynm)
-d.a  <- cptable( ~ dia : asia, values=c(5,5,1,99,100,999), levels=ynm)
-cptlist <- compileCPT(list(a,t.a,d.a))
-grain(cptlist)
+# for tub, yes:5, no:95, maybe 1. 
+# for asia, yes:1, no:99, maybe 999
+t.a  <- cptable( ~ tub : asia, values=c(5, 95, 1, 99, 1, 999),  levels=ynm)
+d.a  <- cptable( ~ dia : asia, values=c(5, 5, 1, 99, 100, 999), levels=ynm)
+cptlist <- compileCPT(list(a, t.a, d.a))
+grn <- grain(cptlist)
+## Bayesian Network
+summary (grn)
+plot (grn)
+
+q1 <- setEvidence(grn, c("asia"), c("yes"))
+querygrain(q1)
+
+q2 <- setEvidence(grn, c("asia"), c("no"))
+querygrain(q2, nodes="tub")$tub
+
+
+```
+
+
+
+```{r}
+library(gRain)
+## Example: Specifying conditional probabilities as a matrix
+bayes.levels  <- c('Enzyme', 'Keratine', 'unknown')
+root.node     <- cptable( ~R, values=c( 1, 1, 1 ), levels=bayes.levels)
+cond.prob.tbl <- t(matrix( c( 1, 0, 0, 0, 1, 0, 0.5, 0.5, 0 ),
+   nrow=3, ncol=3, byrow=TRUE, dimnames=list(bayes.levels, bayes.levels)))
+cond.prob.tbl
+## Notice above: Columns represent parent states; rows represent child states
+query.node    <- cptable( ~ Q | R, values=cond.prob.tbl, levels=bayes.levels )
+sister.node   <- cptable( ~ S | R, values=cond.prob.tbl, levels=bayes.levels )
+## Testing 
+compile(grain(compileCPT(list( root.node, query.node, sister.node ))), propagate=TRUE)
+
+
+
 
 
 dat <- read.table(text="A B 

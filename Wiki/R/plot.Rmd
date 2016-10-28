@@ -12,6 +12,15 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
  * box  : Draw a box around the current plot
  * legend
  * text
+ 
+# cheat sheet
+
+```
+![margin cheatsheet](images/plot_margin.PNG)
+<img src="images/plot_margin.PNG"/>
+```
+
+reference: www.r-graph-gallery.com
 
 # Graphic
 

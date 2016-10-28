@@ -34,6 +34,7 @@ My cheat sheets
  
 ### Python
  * <a href="Wiki/python/python.html">Python</a>
+ * <a href="Wiki/python/pythonML.html">Python ML</a>
  * <a href="Wiki/python/pythonRdm.html">Python R markdown</a>
   
 ### Big Data
