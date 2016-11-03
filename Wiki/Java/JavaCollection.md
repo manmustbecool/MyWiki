@@ -1,5 +1,8 @@
 ---
 title: "java Collection"
+output: 
+  html_document:
+    self_contained: no
 ---
 
 ## Collection ##

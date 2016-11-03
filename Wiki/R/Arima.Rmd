@@ -94,10 +94,11 @@ accuracy(fcast,tdata)
 
 # Arima config
 
-```{r, warning=F, }
+Comparing different configurations with Arima forecasting
 
-require(fpp) # for a10 dataset
+```{r, warning=F }
 
+library(fpp) # for a10 dataset
 
 plot_fit <- function(fit){
   fcast <- forecast(fit, h=50)
@@ -116,11 +117,12 @@ a10train <- window(a10, end=2004.99)
 plot(a10train)
 
 
-# ------ auto.arima only
+# ------ auto.arima only -------------
 fit <- auto.arima(a10train)
+fit1 <- fit
 plot_fit(fit)
 
-# ------ auto.arima + transformation
+# ------ auto.arima + transformation  ------------------
 # check 
 if(Box.test(a10train)$p.value < 0.05){
   print("transformation is unnecessary")
@@ -130,7 +132,7 @@ lam <- BoxCox.lambda(a10train) # BoxCox transformation
 fit2 <- auto.arima(a10train, lambda=lam)
 plot_fit(fit2)
 
-# ------ Arima + transformation + order + seasonal 
+# ------ Arima + transformation + order + seasonal ---------------------
 fit <- auto.arima(a10train)
 # fit <- auto.arima(a10train, lambda=lam) gives error
 order <- c(fit$arma[1], fit$arma[6], fit$arma[2])
@@ -139,17 +141,17 @@ fit3 <- Arima(a10train, order=order, seasonal=seasonal, lambda=lam)
 plot_fit(fit3)
 
 
-# ------ Arima + order 
+# ------ Arima + order ---------------------
 fit <- auto.arima(a10train)
 fit4 <- Arima(a10train, order=arimaorder(fit)[1:3])
 plot_fit(fit4)
 
-# ------ Arima + order + transformation 
+# ------ Arima + order + transformation ---------------------
 fit <- auto.arima(a10train, lambda=lam)
 fit5 <- Arima(a10train, order=arimaorder(fit)[1:3], lambda=lam)
 plot_fit(fit5)
 
-# ------ Arima + order + xreg 
+# ------ Arima + order + xreg ---------------------
 # build xreg
 months <- array( seq(1:12), 162+50+6)
 months <- months[7:length(months)]
@@ -163,14 +165,16 @@ plot(fcast6)
 lines(a10, col="black")
 accuracy(fcast6, a10)
 
-# ------- Arima + drift 
+# ------- Arima + drift ---------------------
 fit <- auto.arima(a10train)
 fit7 <- Arima(a10train, order=arimaorder(fit)[1:3], include.drift=T)
 fcast7 <- forecast(fit7, h=50)
 plot_fit(fit7)
 
+# ------------------------------
 
-# ---------
+
+
 
 
 ```
