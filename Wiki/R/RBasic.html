@@ -123,6 +123,7 @@ button.code-folding-btn:focus {
 </style>
 
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
@@ -148,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 11 September, 2016</em></h4>
+<h4 class="date"><em>Updated: 22 November, 2016</em></h4>
 
 </div>
 
@@ -181,7 +182,7 @@ $(document).ready(function () {
 <div id="basic-info" class="section level1">
 <h1><span class="header-section-number">1</span> Basic info</h1>
 <ul>
-<li>pakcages overview
+<li>Pakcages overview
 <ul>
 <li><a href="http://cran.r-project.org/web/views/" class="uri">http://cran.r-project.org/web/views/</a></li>
 </ul></li>
@@ -364,6 +365,16 @@ m &lt;-<span class="st"> </span><span class="kw">simple_triplet_matrix</span>(i,
 [<span class="dv">3</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
 [<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">6</span>
 [<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">6</span></code></pre></div>
+<p>Sparse Matrix</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Matrix)
+ 
+m1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1000</span>)
+m2 &lt;-<span class="st"> </span><span class="kw">Matrix</span>(m1, <span class="dt">sparse =</span> <span class="ot">TRUE</span>)
+ 
+<span class="kw">object.size</span>(m1)
+<span class="co"># 8000200 bytes</span>
+<span class="kw">object.size</span>(m2)
+<span class="co"># 5032 bytes</span></code></pre></div>
 </div>
 <div id="array" class="section level2">
 <h2><span class="header-section-number">4.4</span> array</h2>
@@ -372,6 +383,9 @@ m &lt;-<span class="st"> </span><span class="kw">simple_triplet_matrix</span>(i,
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create an one dimension array </span>
 ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="dv">3</span>, <span class="dv">5</span>) <span class="co"># [3,3,3,3,3]</span>
 ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>), <span class="dv">5</span>) <span class="co"># [3,5,3,5,3,5,3,5,3,5]</span>
+
+<span class="co"># get dimantion of array</span>
+<span class="kw">dim</span>(ar)
 
 <span class="kw">array</span>(<span class="dv">1</span>:<span class="dv">8</span>, <span class="dt">dim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))
 
@@ -388,40 +402,92 @@ ar &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">
 <div id="data.frame" class="section level2">
 <h2><span class="header-section-number">4.5</span> data.frame</h2>
 <p>A data.frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a dataframe</span>
+<p>Initialize data frame</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Initialize a df</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) <span class="co"># Avoid that R understands characters as factors</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span>F) <span class="co"># Avoid that R understands characters as factors</span>
 
 <span class="co"># Initialize a df from a matrix </span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">50</span>, <span class="dt">nrow=</span><span class="dv">1</span>))
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">ncol=</span><span class="dv">10</span>, <span class="dt">nrow=</span><span class="dv">5</span>))
 ...
 df &lt;-<span class="st"> </span>df[-<span class="dv">1</span>,]
 
-<span class="co">#  </span>
-prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
+<span class="co"># Initialize from value</span>
 timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'2011-01-05 11:00'</span>, <span class="st">'2011-01-05 12:00'</span>, <span class="st">'2011-01-05 13:00'</span>)
-stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(prices, timestamps)
+prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
+stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(timestamps, prices)
 
-<span class="co"># Get and Set Row and Column Names for Data Frames</span>
+<span class="co"># Get/Set row and column names </span>
 <span class="kw">rownames</span>(df)   
 <span class="kw">colnames</span>(df) 
 <span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>value
 
 <span class="co"># Get number of rows and columns</span>
 <span class="kw">nrow</span>(df)
-<span class="kw">ncol</span>(df)
+<span class="kw">ncol</span>(df)</code></pre></div>
+<p>Subset data frame</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sub_df &lt;-<span class="st"> </span>df[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>), ] <span class="co"># Subset by row indexes</span>
+sub_df &lt;-<span class="st"> </span>df[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>)] <span class="co"># Subset by column indexes</span>
 
-<span class="co"># Select a subset of the data frame</span>
-sub_df &lt;-<span class="st"> </span>df[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>), ] <span class="co"># select by row indexes</span>
-sub_df &lt;-<span class="st"> </span>df[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>)] <span class="co"># select by column indexes</span>
+sub_df &lt;-<span class="st"> </span>df[<span class="kw">rownames</span>(df)==<span class="st">'user1'</span>, ] <span class="co"># Subset by row names</span>
+sub_df &lt;-<span class="st"> </span>df[<span class="kw">rownames</span>(df)==<span class="st">'user1'</span>, drop=<span class="ot">FALSE</span>] <span class="co"># passed on to the indexing method to keep data.frame and matrix format</span>
+sub_df &lt;-<span class="st"> </span>df[, <span class="kw">c</span>(<span class="st">'start'</span>,<span class="st">'end'</span>)] <span class="co"># Subset by column names</span>
 
-sub_df &lt;-<span class="st"> </span>df[<span class="kw">rownames</span>(df)==<span class="st">'user1'</span>, ] <span class="co"># select by row names</span>
-sub_df &lt;-<span class="st"> </span>df[<span class="kw">rownames</span>(df)==<span class="st">'user1'</span>, drop=<span class="ot">FALSE</span>] <span class="co"># passed on to the indexing method to keep df and matrix format</span>
-sub_df &lt;-<span class="st"> </span>df[, <span class="kw">c</span>(<span class="st">'start'</span>,<span class="st">'end'</span>)] <span class="co"># select by column names</span>
+<span class="co"># filter rows with condition</span>
+sub_df &lt;-<span class="st"> </span>df[df$age&gt;<span class="dv">40</span>, ]
 
-sub_df &lt;-<span class="st"> </span>df[df$age&gt;<span class="dv">40</span>, ] <span class="co"># filter rows by values</span>
+<span class="co"># sample rows </span>
+sub_df &lt;-<span class="st"> </span>df[<span class="kw">sample</span>(<span class="kw">nrow</span>(df), <span class="dv">3</span>), ]
 
-<span class="co"># find duplicated rows</span>
+<span class="co"># delete rows/column by index</span>
+sub_df &lt;-<span class="st"> </span>df[-<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>), ] <span class="co"># delete rows</span>
+sub_df &lt;-<span class="st"> </span>df[, -<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>)] <span class="co"># delete columns</span>
+
+<span class="co"># delete columns by names </span>
+sub_df &lt;-<span class="st"> </span>df[, !(<span class="kw">colnames</span>(df) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TotalDuration&quot;</span>) )]</code></pre></div>
+<p>Append data frame</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add a row or column</span>
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, x); <span class="co"># add a row</span>
+df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span class="co"># add a column</span>
+
+<span class="co"># Avoid that R understands characters as factors</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span>F) 
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
+
+temp &lt;-<span class="st"> </span><span class="kw">list</span>();
+for(i in <span class="dv">1</span>:<span class="dv">100</span>) temp &lt;-<span class="st"> </span><span class="kw">append</span>(temp, <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>, i)) )
+df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">do.call</span>(rbind, temp))
+
+<span class="co"># create a new column with merged values of two columns</span>
+df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)</code></pre></div>
+<p>Sort</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sort by column index</span>
+df[<span class="kw">order</span>(-df[,<span class="dv">4</span>], df[,<span class="dv">1</span>]), ]
+
+<span class="co"># sort according a specified order or vector</span>
+target &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;d&quot;</span>)
+df[<span class="kw">match</span>(target, df$name),]</code></pre></div>
+<p>Summarize data frame</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate row sum and product in data.frame</span>
+<span class="kw">transform</span>(df, <span class="dt">sum=</span><span class="kw">rowSums</span>(df), <span class="dt">prod=</span>x*y*z)
+ <span class="co">#  x y z sum prod</span>
+ <span class="co">#1 1 2 3   6    6</span>
+ <span class="co">#2 2 3 4   9   24</span>
+ <span class="co">#3 5 1 2   8   10</span>
+ 
+<span class="co"># apply a function for each row</span>
+<span class="kw">apply</span>(df, <span class="dv">1</span>, function(u) sum)
+ 
+<span class="co"># apply a function to a data frame Split by Factors</span>
+<span class="kw">by</span>(df[, <span class="dv">1</span>:<span class="dv">2</span>], df[,<span class="dv">3</span>], summary)
+
+<span class="co"># row frequency count</span>
+<span class="co"># http://rwiki.sciviews.org/doku.php?id=tips:data-frames:count_and_extract_unique_rows</span>
+<span class="kw">aggregate</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(df)), <span class="dt">by=</span><span class="kw">as.list</span>(df), <span class="dt">FUN=</span>sum)</code></pre></div>
+<p>Handle duplication</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find/remove duplicated rows</span>
 df[<span class="kw">duplicated</span>(df),] <span class="co"># or remove, df[!duplicated(df),]</span>
 
 <span class="co"># remove duplicated rows by a column</span>
@@ -430,58 +496,24 @@ df[!<span class="kw">duplicated</span>(df[,<span class="kw">c</span>(<span class
 <span class="co"># find unique rows</span>
 <span class="kw">unique</span>(df)
 
-<span class="co"># remove row or colum has a same value</span>
+<span class="co"># remove rows or colums have same values</span>
 df &lt;-<span class="st"> </span>df[<span class="kw">apply</span>(df, <span class="dv">1</span>, function(row) <span class="kw">length</span>(<span class="kw">unique</span>(row)) &gt;<span class="st"> </span><span class="dv">1</span>), ]
-df &lt;-<span class="st"> </span>df[, <span class="kw">apply</span>(df, <span class="dv">2</span>, function(col) <span class="kw">length</span>(<span class="kw">unique</span>(col)) &gt;<span class="st"> </span><span class="dv">1</span>)]
+df &lt;-<span class="st"> </span>df[, <span class="kw">apply</span>(df, <span class="dv">2</span>, function(col) <span class="kw">length</span>(<span class="kw">unique</span>(col)) &gt;<span class="st"> </span><span class="dv">1</span>)]</code></pre></div>
+<p>Handle na, nan, null, blank</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value  <span class="co"># Convert all Na's in data frames to other values</span>
 
-<span class="co"># row frequency count</span>
-<span class="co"># http://rwiki.sciviews.org/doku.php?id=tips:data-frames:count_and_extract_unique_rows</span>
-<span class="kw">aggregate</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(df)), <span class="dt">by=</span><span class="kw">as.list</span>(df), <span class="dt">FUN=</span>sum)
+<span class="co"># Remove rows with NAs in data frames</span>
+df[<span class="kw">complete.cases</span>(df),]       <span class="co"># remove all rows containing NAs</span>
+df[<span class="kw">complete.cases</span>(df[,<span class="dv">2</span>:<span class="dv">3</span>]),] <span class="co"># remove rows based on some columns</span>
 
-<span class="co"># sample rows </span>
-df[<span class="kw">sample</span>(<span class="kw">nrow</span>(df), <span class="dv">3</span>), ]
+df[!<span class="kw">is.null</span>(df[,<span class="dv">1</span>]),] <span class="co"># Remove rows with null value in a specific column</span>
+df[!(df[,<span class="dv">1</span>]==<span class="st">&quot;&quot;</span>),]    <span class="co"># Remove rows with Blank value in a specific column</span>
 
-<span class="co"># calculate row sum and product in data.frame</span>
-<span class="kw">transform</span>(df, <span class="dt">sum=</span><span class="kw">rowSums</span>(df), <span class="dt">prod=</span>x*y*z)
- <span class="co">#  x y z sum prod</span>
- <span class="co">#1 1 2 3   6    6</span>
- <span class="co">#2 2 3 4   9   24</span>
- <span class="co">#3 5 1 2   8   10</span>
-
-<span class="co"># apply a Function to a Data Frame Split by Factors</span>
-<span class="kw">by</span>(df[, <span class="dv">1</span>:<span class="dv">2</span>], df[,<span class="dv">3</span>], summary)
-
-<span class="co"># add a row or column</span>
-x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)
-df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, x); <span class="co"># add a row</span>
-df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span class="co"># add a column</span>
-<span class="co"># </span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) <span class="co"># Avoid that R understands characters as factors</span>
-df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
-df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
-<span class="co"># </span>
-temp &lt;-<span class="st"> </span><span class="kw">list</span>();
-for(i in <span class="dv">1</span>:<span class="dv">100</span>) temp&lt;-<span class="st"> </span><span class="kw">append</span>(temp, <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>, i)) )
-df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">do.call</span>(rbind, temp))
-
-<span class="co"># create a new column with merged values of two columns</span>
-df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)
-
-<span class="co"># deleting rows/column by index</span>
-df &lt;-<span class="st"> </span>df[-<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>), ] <span class="co"># delete rows</span>
-df &lt;-<span class="st"> </span>df[, -<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">8</span>)] <span class="co"># delete columns</span>
-
-<span class="co"># delete columns by names </span>
-df &lt;-<span class="st"> </span>df[, !(<span class="kw">colnames</span>(df) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TotalDuration&quot;</span>) )]
-
-<span class="co"># sort by column index</span>
-df[<span class="kw">order</span>(-df[,<span class="dv">4</span>], df[,<span class="dv">1</span>]), ]
-
-<span class="co"># sort according a specified order or vector</span>
-target &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;d&quot;</span>)
-df[<span class="kw">match</span>(target, df$name),]
-
-<span class="co"># ----- join two data frames</span>
+df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df))!=<span class="st"> </span><span class="kw">ncol</span>(df),] <span class="co"># Remove rows where all data is NA</span>
+df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]   <span class="co"># Remove columns where All values are NA</span></code></pre></div>
+<p>Multiple data frames</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ----- join two data frames</span>
 <span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>)          <span class="co"># default all=FALSE. natural join, a special case of an inner join</span>
 <span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all =</span> T) <span class="co"># (full) outer join</span>
 <span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>, <span class="dt">all.x=</span>T) <span class="co"># left (outer) join</span>
@@ -500,26 +532,15 @@ a1NotIna2 &lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span clas
 
 <span class="kw">require</span>(dplyr)
 <span class="kw">semi_join</span>(a1,a2) <span class="co"># for rows  are in both data frames</span>
-<span class="kw">anti_join</span>(a1,a2)
+<span class="kw">anti_join</span>(a1,a2)</code></pre></div>
+<p>Use data.table for data.fame</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
 
-<span class="co">#  ------------ Handle na, nan, null, blank ---------------------</span>
-df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value  <span class="co"># Convert all Na's in data frames to other values</span>
+<span class="co"># convert the data frame to data table</span>
+dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(df) 
 
-<span class="co"># Remove rows with NAs in data frames</span>
-df[<span class="kw">complete.cases</span>(df),]       <span class="co"># remove all rows containing NAs</span>
-df[<span class="kw">complete.cases</span>(df[,<span class="dv">2</span>:<span class="dv">3</span>]),] <span class="co"># remove rows based on some columns</span>
-
-df &lt;-<span class="st"> </span>df[!<span class="kw">is.null</span>(df[,<span class="dv">1</span>]),] <span class="co"># Remove rows with null value in a specific column</span>
-df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span class="st">&quot;&quot;</span>),]    <span class="co"># Remove rows with Blank value in a specific column</span>
-
-df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df))!=<span class="st"> </span><span class="kw">ncol</span>(df),] <span class="co"># Remove rows where all data is NA</span>
-df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]   <span class="co"># Remove columns where All values are NA</span></code></pre></div>
-<p>use data.table for data.fame</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># convert a table to a data frame </span>
-<span class="kw">as.data.frame.matrix</span>(mytable) 
-
-<span class="kw">library</span>(data.table)
-dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(df) <span class="co"># convert the data frame to data table</span>
+<span class="co"># convert a table to a data frame </span>
+df &lt;-<span class="st"> </span><span class="kw">as.data.frame.matrix</span>(dt) 
 
 <span class="co"># select colum by names</span>
 dt &lt;-<span class="st"> </span>dt[ ,<span class="kw">c</span>(<span class="st">&quot;time&quot;</span>,<span class="st">&quot;count&quot;</span>), with=F] <span class="co"># need set with=F</span>
@@ -531,7 +552,7 @@ dt[, count:<span class="er">=</span>.N, by=<span class="kw">list</span>(a,b)] <s
 
 expr &lt;-<span class="st"> </span><span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">&quot;by=&quot;</span>, <span class="kw">colnames</span>(dt)<span class="dv">2</span>)) <span class="co"># dynamic column names with groupping</span>
 dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), <span class="kw">eval</span>(expr)]</code></pre></div>
-<p>Reshape data with tidyr</p>
+<p>Reshape data frame with tidyr</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">month=</span><span class="kw">rep</span>(<span class="dv">1</span>:<span class="dv">3</span>,<span class="dv">2</span>),
                  <span class="dt">student=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;Bob&quot;</span>), <span class="dt">each=</span><span class="dv">3</span>),
@@ -730,6 +751,7 @@ myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span 
 $(document).ready(function () {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 });
+
 
 </script>
 

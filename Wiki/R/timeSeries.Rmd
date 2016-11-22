@@ -2,7 +2,7 @@
 title: "Time series"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
-  
+
 
 ## Dates, Times, Time Series objects
 
@@ -11,6 +11,10 @@ http://www.statmethods.net/advstats/timeseries.html
 http://a-little-book-of-r-for-time-series.readthedocs.org/en/latest/src/timeseries.html#arima-models
 
 http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html
+
+## Time series analysis in R
+
+https://cran.r-project.org/web/views/TimeSeries.html
 
 ### Date
 
@@ -231,6 +235,23 @@ par(op)
 ```
 
 
+## time series cluster
+
+R package TSclust
+
+https://cran.r-project.org/web/packages/TSclust/
+
+
+## DTW
+
+```{r}
+library(dtw)
+idx <- seq(0,2*pi, len=100)
+a <- sin(idx)+ runif(100)/10
+b <- cos(idx)
+align <- dtw(a,b, step=asymmetricP1, keep=T)
+dtwPlotTwoWay(align)
+```
 
 ## Finding the period 
 
@@ -278,9 +299,8 @@ spec <- spec.ar(c(na.contiguous(temp)),plot=T)
 
 decomposed  <- stl(ts(temp, frequency=freq), s.window="periodic")
 plot(decomposed)
-
-
 ```
+
 
 
 

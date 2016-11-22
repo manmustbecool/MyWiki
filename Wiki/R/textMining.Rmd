@@ -5,7 +5,6 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 
-
 ## Text mining
 
 http://chengjun.github.io/en/2014/04/sentiment-analysis-with-machine-learning-in-R/
@@ -77,7 +76,21 @@ findFreqTerms(myDtm, lowfreq=2)
 # which words are associated with "r"?
 findAssocs(myDtm, 'r', 0.30)
 ```
+# Term frequency/inverse document frequency (TF/IDF)
 
+```r
+#read 1000 txt articles from directory data/txt
+corpus  <-Corpus(DirSource("data/txt"), readerControl = list(blank.lines.skip=TRUE));
+#some preprocessing
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, stripWhitespace)
+corpus <- tm_map(corpus, stemDocument, language="english")
+#creating term matrix with TF-IDF weighting
+terms <-DocumentTermMatrix(corpus,control = list(weighting = function(x) weightTfIdf(x, normalize = FALSE)))
+
+#or compute cosine distance among documents
+dissimilarity(tdm, method = "cosine")
+```
 # word cloud
 
 ```r

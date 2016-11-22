@@ -1,11 +1,12 @@
 ---
 title: "R basic"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+# output: html_notebook
 ---
 
 # Basic info
 
- * pakcages overview
+ * Pakcages overview
       + http://cran.r-project.org/web/views/
 
  * QuickR
@@ -155,7 +156,7 @@ cut(c(1,2,3,4,5,2,3,4,5,6,7), 3)
 
 ```
 
-## matrix  ##
+## matrix 
 A Matrix is a collection of elements with same data types in a two-dimensional rectangular layout.
 
 ```r
@@ -199,6 +200,19 @@ as.matrix(m)
 [5,]    0    6
 
 ```
+Sparse Matrix
+
+```r
+library(Matrix)
+ 
+m1 <- matrix(0, nrow = 1000, ncol = 1000)
+m2 <- Matrix(m1, sparse = TRUE)
+ 
+object.size(m1)
+# 8000200 bytes
+object.size(m2)
+# 5032 bytes
+```
 
 ## array
 An array is composed of n dimensions where each dimension is a vector of R objects of the same type
@@ -208,6 +222,9 @@ Arrays are similar to matrices but can have more than 2 dimensions.
 # create an one dimension array 
 ar <- array(3, 5) # [3,3,3,3,3]
 ar <- array(c(3,5), 5) # [3,5,3,5,3,5,3,5,3,5]
+
+# get dimantion of array
+dim(ar)
 
 array(1:8, dim=c(2,2,2))
 
@@ -223,26 +240,27 @@ array(1:8, dim=c(2,2,2))
 ```
 
 
-## data.frame  ##
+## data.frame 
 
 A data.frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
 
+Initialize data frame
 ```r
-# Initialize a dataframe
+# Initialize a df
 df <- data.frame()
-df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters as factors
+df <- data.frame(stringsAsFactors=F) # Avoid that R understands characters as factors
 
 # Initialize a df from a matrix 
-df <- data.frame(matrix(ncol=50, nrow=1))
+df <- data.frame(matrix(ncol=10, nrow=5))
 ...
 df <- df[-1,]
 
-#  
-prices <- c(1.1, 2.2, 3.3)
+# Initialize from value
 timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
-stockpricesDf <- data.frame(prices, timestamps)
+prices <- c(1.1, 2.2, 3.3)
+stockpricesDf <- data.frame(timestamps, prices)
 
-# Get and Set Row and Column Names for Data Frames
+# Get/Set row and column names 
 rownames(df)   
 colnames(df) 
 rownames(df) <- value
@@ -250,18 +268,84 @@ rownames(df) <- value
 # Get number of rows and columns
 nrow(df)
 ncol(df)
+```
 
-# Select a subset of the data frame
-sub_df <- df[c(1,2,5), ] # select by row indexes
-sub_df <- df[, c(1,2,5)] # select by column indexes
+Subset data frame
+```r
+sub_df <- df[c(1,2,5), ] # Subset by row indexes
+sub_df <- df[, c(1,2,5)] # Subset by column indexes
 
-sub_df <- df[rownames(df)=='user1', ] # select by row names
-sub_df <- df[rownames(df)=='user1', drop=FALSE] # passed on to the indexing method to keep df and matrix format
-sub_df <- df[, c('start','end')] # select by column names
+sub_df <- df[rownames(df)=='user1', ] # Subset by row names
+sub_df <- df[rownames(df)=='user1', drop=FALSE] # passed on to the indexing method to keep data.frame and matrix format
+sub_df <- df[, c('start','end')] # Subset by column names
 
-sub_df <- df[df$age>40, ] # filter rows by values
+# filter rows with condition
+sub_df <- df[df$age>40, ]
 
-# find duplicated rows
+# sample rows 
+sub_df <- df[sample(nrow(df), 3), ]
+
+# delete rows/column by index
+sub_df <- df[-c(1:8), ] # delete rows
+sub_df <- df[, -c(1:8)] # delete columns
+
+# delete columns by names 
+sub_df <- df[, !(colnames(df) %in% c("TotalDuration") )]
+```
+
+Append data frame
+```r
+# add a row or column
+x <- c(1,2,3)
+df <- rbind(df, x); # add a row
+df <- cbind(df, x); # add a column
+
+# Avoid that R understands characters as factors
+df <- data.frame(stringsAsFactors=F) 
+df <- rbind(df, c("hi","i","am","bob"))
+df <- rbind(df, c("hi","i","am","alice"))
+
+temp <- list();
+for(i in 1:100) temp <- append(temp, list(c(1, i)) )
+df <- as.data.frame(do.call(rbind, temp))
+
+# create a new column with merged values of two columns
+df$new_column = paste(df$V1, df$V2, sep="_")
+
+```
+Sort
+```r
+# sort by column index
+df[order(-df[,4], df[,1]), ]
+
+# sort according a specified order or vector
+target <- c("b", "c", "a", "d")
+df[match(target, df$name),]
+```
+
+Summarize data frame
+```r
+# calculate row sum and product in data.frame
+transform(df, sum=rowSums(df), prod=x*y*z)
+ #  x y z sum prod
+ #1 1 2 3   6    6
+ #2 2 3 4   9   24
+ #3 5 1 2   8   10
+ 
+# apply a function for each row
+apply(df, 1, function(u) sum)
+ 
+# apply a function to a data frame Split by Factors
+by(df[, 1:2], df[,3], summary)
+
+# row frequency count
+# http://rwiki.sciviews.org/doku.php?id=tips:data-frames:count_and_extract_unique_rows
+aggregate(rep(1, nrow(df)), by=as.list(df), FUN=sum)
+```
+
+Handle duplication
+```r
+# find/remove duplicated rows
 df[duplicated(df),] # or remove, df[!duplicated(df),]
 
 # remove duplicated rows by a column
@@ -270,57 +354,29 @@ df[!duplicated(df[,c('firstname')]),]
 # find unique rows
 unique(df)
 
-# remove row or colum has a same value
+# remove rows or colums have same values
 df <- df[apply(df, 1, function(row) length(unique(row)) > 1), ]
 df <- df[, apply(df, 2, function(col) length(unique(col)) > 1)]
+```
 
-# row frequency count
-# http://rwiki.sciviews.org/doku.php?id=tips:data-frames:count_and_extract_unique_rows
-aggregate(rep(1, nrow(df)), by=as.list(df), FUN=sum)
+Handle na, nan, null, blank 
+```r
 
-# sample rows 
-df[sample(nrow(df), 3), ]
+df[is.na(df)] <- value  # Convert all Na's in data frames to other values
 
-# calculate row sum and product in data.frame
-transform(df, sum=rowSums(df), prod=x*y*z)
- #  x y z sum prod
- #1 1 2 3   6    6
- #2 2 3 4   9   24
- #3 5 1 2   8   10
+# Remove rows with NAs in data frames
+df[complete.cases(df),]       # remove all rows containing NAs
+df[complete.cases(df[,2:3]),] # remove rows based on some columns
 
-# apply a Function to a Data Frame Split by Factors
-by(df[, 1:2], df[,3], summary)
+df[!is.null(df[,1]),] # Remove rows with null value in a specific column
+df[!(df[,1]==""),]    # Remove rows with Blank value in a specific column
 
-# add a row or column
-x <- c(1,2,3)
-df <- rbind(df, x); # add a row
-df <- cbind(df, x); # add a column
-# 
-df <- data.frame(stringsAsFactors=FALSE) # Avoid that R understands characters as factors
-df <- rbind(df, c("hi","i","am","bob"))
-df <- rbind(df, c("hi","i","am","alice"))
-# 
-temp <- list();
-for(i in 1:100) temp<- append(temp, list(c(1, i)) )
-df <- as.data.frame(do.call(rbind, temp))
+df[rowSums(is.na(df))!= ncol(df),] # Remove rows where all data is NA
+df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are NA
+```
 
-# create a new column with merged values of two columns
-df$new_column = paste(df$V1, df$V2, sep="_")
-
-# deleting rows/column by index
-df <- df[-c(1:8), ] # delete rows
-df <- df[, -c(1:8)] # delete columns
-
-# delete columns by names 
-df <- df[, !(colnames(df) %in% c("TotalDuration") )]
-
-# sort by column index
-df[order(-df[,4], df[,1]), ]
-
-# sort according a specified order or vector
-target <- c("b", "c", "a", "d")
-df[match(target, df$name),]
-
+Multiple data frames
+```r
 # ----- join two data frames
 merge(x=df1, y=df2, by="CustomerId")          # default all=FALSE. natural join, a special case of an inner join
 merge(x=df1, y=df2, by="CustomerId", all = T) # (full) outer join
@@ -341,27 +397,17 @@ a1NotIna2 <- sqldf('SELECT * FROM a1 EXCEPT SELECT * FROM a2')
 require(dplyr)
 semi_join(a1,a2) # for rows  are in both data frames
 anti_join(a1,a2)
-
-#  ------------ Handle na, nan, null, blank ---------------------
-df[is.na(df)] <- value  # Convert all Na's in data frames to other values
-
-# Remove rows with NAs in data frames
-df[complete.cases(df),]       # remove all rows containing NAs
-df[complete.cases(df[,2:3]),] # remove rows based on some columns
-
-df <- df[!is.null(df[,1]),] # Remove rows with null value in a specific column
-df <- df[!(df[,1]==""),]    # Remove rows with Blank value in a specific column
-
-df <- df[rowSums(is.na(df))!= ncol(df),] # Remove rows where all data is NA
-df <- df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are NA
 ```
-use data.table for data.fame
-```r
-# convert a table to a data frame 
-as.data.frame.matrix(mytable) 
 
+Use data.table for data.fame
+```r
 library(data.table)
-dt <- data.table(df) # convert the data frame to data table
+
+# convert the data frame to data table
+dt <- data.table(df) 
+
+# convert a table to a data frame 
+df <- as.data.frame.matrix(dt) 
 
 # select colum by names
 dt <- dt[ ,c("time","count"), with=F] # need set with=F
@@ -376,7 +422,7 @@ dt[, list(ages=list(age)), eval(expr)]
 
 ```
 
-Reshape data with tidyr
+Reshape data frame with tidyr
 
 ```r
 library(tidyr)
@@ -464,14 +510,14 @@ e$a <- 2:4
 exists("a", envir=e)
 ```
 
-## formula ##
+## formula
 
 Creating a formula from a string
 ```r
 as.formula("y ~ x1 + x2")  #> y ~ x1 + x2
 ```
 
-# Common functions ##
+# Common functions
 ```r
 # -------- apply --------
 http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/

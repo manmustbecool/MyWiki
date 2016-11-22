@@ -46,12 +46,37 @@ print (head)
 
 ```
 
-# Install package
+# real time plot with python
 
 ```python
-# in cmd comand window
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.axis([0, 10, 0, 1])
+plt.ion()
+
+for i in range(100):
+    y = np.random.random()
+    plt.scatter(i, y)
+    plt.pause(0.5)
+
+while True:
+    plt.pause(0.5)
+```
+
+
+# Install package
+
+in cmd comand window
+```python
+# PyPI
 pip install py2exe
+#conda
 conda install --channel https://conda.anaconda.org/manmadescience py2exe
+
+
+conda install pandas
+pip install pandas
 ```
 
   NTLM support for Python3
