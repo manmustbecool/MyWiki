@@ -241,6 +241,18 @@ R package TSclust
 
 https://cran.r-project.org/web/packages/TSclust/
 
+
+## DTW
+
+```{r}
+library(dtw)
+idx <- seq(0,2*pi, len=100)
+a <- sin(idx)+ runif(100)/10
+b <- cos(idx)
+align <- dtw(a,b, step=asymmetricP1, keep=T)
+dtwPlotTwoWay(align)
+```
+
 ## Finding the period 
 
 http://robjhyndman.com/hyndsight/tscharacteristics/
@@ -287,9 +299,8 @@ spec <- spec.ar(c(na.contiguous(temp)),plot=T)
 
 decomposed  <- stl(ts(temp, frequency=freq), s.window="periodic")
 plot(decomposed)
-
-
 ```
+
 
 
 

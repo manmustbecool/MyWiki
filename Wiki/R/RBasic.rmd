@@ -200,6 +200,19 @@ as.matrix(m)
 [5,]    0    6
 
 ```
+Sparse Matrix
+
+```r
+library(Matrix)
+ 
+m1 <- matrix(0, nrow = 1000, ncol = 1000)
+m2 <- Matrix(m1, sparse = TRUE)
+ 
+object.size(m1)
+# 8000200 bytes
+object.size(m2)
+# 5032 bytes
+```
 
 ## array
 An array is composed of n dimensions where each dimension is a vector of R objects of the same type
@@ -319,7 +332,10 @@ transform(df, sum=rowSums(df), prod=x*y*z)
  #2 2 3 4   9   24
  #3 5 1 2   8   10
  
-# apply a function to a Data Frame Split by Factors
+# apply a function for each row
+apply(df, 1, function(u) sum)
+ 
+# apply a function to a data frame Split by Factors
 by(df[, 1:2], df[,3], summary)
 
 # row frequency count
@@ -338,7 +354,7 @@ df[!duplicated(df[,c('firstname')]),]
 # find unique rows
 unique(df)
 
-# remove row or colum has a same value
+# remove rows or colums have same values
 df <- df[apply(df, 1, function(row) length(unique(row)) > 1), ]
 df <- df[, apply(df, 2, function(col) length(unique(col)) > 1)]
 ```
@@ -352,11 +368,11 @@ df[is.na(df)] <- value  # Convert all Na's in data frames to other values
 df[complete.cases(df),]       # remove all rows containing NAs
 df[complete.cases(df[,2:3]),] # remove rows based on some columns
 
-df <- df[!is.null(df[,1]),] # Remove rows with null value in a specific column
-df <- df[!(df[,1]==""),]    # Remove rows with Blank value in a specific column
+df[!is.null(df[,1]),] # Remove rows with null value in a specific column
+df[!(df[,1]==""),]    # Remove rows with Blank value in a specific column
 
-df <- df[rowSums(is.na(df))!= ncol(df),] # Remove rows where all data is NA
-df <- df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are NA
+df[rowSums(is.na(df))!= ncol(df),] # Remove rows where all data is NA
+df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are NA
 ```
 
 Multiple data frames
@@ -391,7 +407,7 @@ library(data.table)
 dt <- data.table(df) 
 
 # convert a table to a data frame 
-as.data.frame.matrix(dt) 
+df <- as.data.frame.matrix(dt) 
 
 # select colum by names
 dt <- dt[ ,c("time","count"), with=F] # need set with=F

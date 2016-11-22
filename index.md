@@ -13,6 +13,7 @@ My cheat sheets
 ### R
  * <a href="Wiki/R/RBasic.html">R Basic</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
+ * <a href="Wiki/R/Shiny.html">Shiny</a>
  * <a href="Wiki/R/RDevelopment.html">R Development</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/timeSeries.html">Time series</a>

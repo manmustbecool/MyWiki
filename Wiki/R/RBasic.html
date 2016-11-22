@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 03 November, 2016</em></h4>
+<h4 class="date"><em>Updated: 22 November, 2016</em></h4>
 
 </div>
 
@@ -365,6 +365,16 @@ m &lt;-<span class="st"> </span><span class="kw">simple_triplet_matrix</span>(i,
 [<span class="dv">3</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
 [<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">6</span>
 [<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">6</span></code></pre></div>
+<p>Sparse Matrix</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Matrix)
+ 
+m1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1000</span>)
+m2 &lt;-<span class="st"> </span><span class="kw">Matrix</span>(m1, <span class="dt">sparse =</span> <span class="ot">TRUE</span>)
+ 
+<span class="kw">object.size</span>(m1)
+<span class="co"># 8000200 bytes</span>
+<span class="kw">object.size</span>(m2)
+<span class="co"># 5032 bytes</span></code></pre></div>
 </div>
 <div id="array" class="section level2">
 <h2><span class="header-section-number">4.4</span> array</h2>
@@ -467,7 +477,10 @@ df[<span class="kw">match</span>(target, df$name),]</code></pre></div>
  <span class="co">#2 2 3 4   9   24</span>
  <span class="co">#3 5 1 2   8   10</span>
  
-<span class="co"># apply a function to a Data Frame Split by Factors</span>
+<span class="co"># apply a function for each row</span>
+<span class="kw">apply</span>(df, <span class="dv">1</span>, function(u) sum)
+ 
+<span class="co"># apply a function to a data frame Split by Factors</span>
 <span class="kw">by</span>(df[, <span class="dv">1</span>:<span class="dv">2</span>], df[,<span class="dv">3</span>], summary)
 
 <span class="co"># row frequency count</span>
@@ -483,7 +496,7 @@ df[!<span class="kw">duplicated</span>(df[,<span class="kw">c</span>(<span class
 <span class="co"># find unique rows</span>
 <span class="kw">unique</span>(df)
 
-<span class="co"># remove row or colum has a same value</span>
+<span class="co"># remove rows or colums have same values</span>
 df &lt;-<span class="st"> </span>df[<span class="kw">apply</span>(df, <span class="dv">1</span>, function(row) <span class="kw">length</span>(<span class="kw">unique</span>(row)) &gt;<span class="st"> </span><span class="dv">1</span>), ]
 df &lt;-<span class="st"> </span>df[, <span class="kw">apply</span>(df, <span class="dv">2</span>, function(col) <span class="kw">length</span>(<span class="kw">unique</span>(col)) &gt;<span class="st"> </span><span class="dv">1</span>)]</code></pre></div>
 <p>Handle na, nan, null, blank</p>
@@ -494,11 +507,11 @@ df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value  <span
 df[<span class="kw">complete.cases</span>(df),]       <span class="co"># remove all rows containing NAs</span>
 df[<span class="kw">complete.cases</span>(df[,<span class="dv">2</span>:<span class="dv">3</span>]),] <span class="co"># remove rows based on some columns</span>
 
-df &lt;-<span class="st"> </span>df[!<span class="kw">is.null</span>(df[,<span class="dv">1</span>]),] <span class="co"># Remove rows with null value in a specific column</span>
-df &lt;-<span class="st"> </span>df[!(df[,<span class="dv">1</span>]==<span class="st">&quot;&quot;</span>),]    <span class="co"># Remove rows with Blank value in a specific column</span>
+df[!<span class="kw">is.null</span>(df[,<span class="dv">1</span>]),] <span class="co"># Remove rows with null value in a specific column</span>
+df[!(df[,<span class="dv">1</span>]==<span class="st">&quot;&quot;</span>),]    <span class="co"># Remove rows with Blank value in a specific column</span>
 
-df &lt;-<span class="st"> </span>df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df))!=<span class="st"> </span><span class="kw">ncol</span>(df),] <span class="co"># Remove rows where all data is NA</span>
-df &lt;-<span class="st"> </span>df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]   <span class="co"># Remove columns where All values are NA</span></code></pre></div>
+df[<span class="kw">rowSums</span>(<span class="kw">is.na</span>(df))!=<span class="st"> </span><span class="kw">ncol</span>(df),] <span class="co"># Remove rows where all data is NA</span>
+df[,<span class="kw">colSums</span>(<span class="kw">is.na</span>(df))&lt;<span class="kw">nrow</span>(df)]   <span class="co"># Remove columns where All values are NA</span></code></pre></div>
 <p>Multiple data frames</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ----- join two data frames</span>
 <span class="kw">merge</span>(<span class="dt">x=</span>df1, <span class="dt">y=</span>df2, <span class="dt">by=</span><span class="st">&quot;CustomerId&quot;</span>)          <span class="co"># default all=FALSE. natural join, a special case of an inner join</span>
@@ -527,7 +540,7 @@ a1NotIna2 &lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span clas
 dt &lt;-<span class="st"> </span><span class="kw">data.table</span>(df) 
 
 <span class="co"># convert a table to a data frame </span>
-<span class="kw">as.data.frame.matrix</span>(dt) 
+df &lt;-<span class="st"> </span><span class="kw">as.data.frame.matrix</span>(dt) 
 
 <span class="co"># select colum by names</span>
 dt &lt;-<span class="st"> </span>dt[ ,<span class="kw">c</span>(<span class="st">&quot;time&quot;</span>,<span class="st">&quot;count&quot;</span>), with=F] <span class="co"># need set with=F</span>
