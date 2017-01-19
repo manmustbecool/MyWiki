@@ -149,14 +149,21 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 06 December, 2016</em></h4>
+<h4 class="date"><em>Updated: 19 January, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#basic"><span class="toc-section-number">1</span> Basic</a></li>
-<li><a href="#data-types"><span class="toc-section-number">2</span> Data types</a></li>
+<li><a href="#data-types"><span class="toc-section-number">2</span> Data types</a><ul>
+<li><a href="#atomic-data-types"><span class="toc-section-number">2.1</span> Atomic data types</a></li>
+<li><a href="#complex-data-types"><span class="toc-section-number">2.2</span> Complex data types</a><ul>
+<li><a href="#list"><span class="toc-section-number">2.2.1</span> List</a></li>
+<li><a href="#tuples"><span class="toc-section-number">2.2.2</span> Tuples</a></li>
+<li><a href="#set"><span class="toc-section-number">2.2.3</span> Set</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#numpy"><span class="toc-section-number">3</span> Numpy</a></li>
 <li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">4</span> read head lines of a large text file</a></li>
 <li><a href="#real-time-plot-with-python"><span class="toc-section-number">5</span> real time plot with python</a></li>
@@ -170,14 +177,17 @@ $(document).ready(function () {
 </div>
 <div id="data-types" class="section level1">
 <h1><span class="header-section-number">2</span> Data types</h1>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
-<span class="bu">str</span>() <span class="co"># convert variable to string</span>
+<div id="atomic-data-types" class="section level2">
+<h2><span class="header-section-number">2.1</span> Atomic data types</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">str</span>() <span class="co"># convert variable to string</span>
 <span class="bu">int</span>() 
 <span class="bu">float</span>()
 <span class="bu">bool</span>()</code></pre></div>
-<ul>
-<li>List</li>
-</ul>
+</div>
+<div id="complex-data-types" class="section level2">
+<h2><span class="header-section-number">2.2</span> Complex data types</h2>
+<div id="list" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> List</h3>
 <p>Lists can contain any data types. mutable</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">li <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
 
@@ -197,17 +207,19 @@ li2 <span class="op">=</span> li[:] <span class="co"># or li2 = list(li)</span>
 <span class="bu">len</span>(li) <span class="co"># length of list</span>
 
 matrix <span class="op">=</span> [ [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>], ] <span class="co"># nested list</span></code></pre></div>
-<ul>
-<li>Tuples</li>
-</ul>
+</div>
+<div id="tuples" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Tuples</h3>
 <p>Tuples are immutable sequences</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> <span class="dv">12345</span>, <span class="dv">54321</span>, <span class="st">'hello!'</span>
 t[<span class="dv">0</span>]</code></pre></div>
-<ul>
-<li>Set</li>
-</ul>
+</div>
+<div id="set" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Set</h3>
 <p>A set is an unordered collection with no duplicate elements</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">basket <span class="op">=</span> {<span class="st">'apple'</span>, <span class="st">'orange'</span>, <span class="st">'apple'</span>, <span class="st">'pear'</span>, <span class="st">'orange'</span>, <span class="st">'banana'</span>}</code></pre></div>
+</div>
+</div>
 </div>
 <div id="numpy" class="section level1">
 <h1><span class="header-section-number">3</span> Numpy</h1>

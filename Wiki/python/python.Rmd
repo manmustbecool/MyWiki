@@ -10,9 +10,9 @@ Install anaconda
 
 # Data types
 
+## Atomic data types
 
-```{python}
-
+```python
 str() # convert variable to string
 int() 
 float()
@@ -20,8 +20,9 @@ bool()
 
 ```
 
+## Complex data types
 
-  * List
+### List
   
 Lists can contain any data types. mutable
 ```python
@@ -45,7 +46,7 @@ len(li) # length of list
 matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], ] # nested list
 ```
 
-  * Tuples
+### Tuples
   
 Tuples are immutable sequences
 ```python
@@ -53,7 +54,7 @@ t = 12345, 54321, 'hello!'
 t[0]
 ```
 
-  * Set
+### Set
   
 A set is an unordered collection with no duplicate elements
 ```python

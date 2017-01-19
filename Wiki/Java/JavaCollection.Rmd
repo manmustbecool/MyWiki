@@ -1,13 +1,13 @@
 ---
-title: "java Collection"
-output: 
-  html_document:
-    self_contained: no
+title: java Collection
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+
 ---
 
 ## Collection ##
 
-![images\Java-Collection-Framework.PNG](images\Java-Collection-Framework.PNG)
+![images\Java-Collection-Framework.PNG](..\images\Java-Collection-Framework.PNG)
 
 ### List ###
 
