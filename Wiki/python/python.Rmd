@@ -10,12 +10,37 @@ Install anaconda
 
 # Data types
 
+
+```{python}
+
+str() # convert variable to string
+int() 
+float()
+bool()
+
+```
+
+
   * List
   
-Lists are mutable
+Lists can contain any data types. mutable
 ```python
-l = [3, 4, 5]
-l[0]
+li = [3, 4, 5]
+
+# sub list
+li[0] # 3
+li[0:2] # [incluse, excluse] 3,4
+
+# add or remove element
+li = li + [6]
+li = del(li[5])
+
+# copy: reference only
+li2 = li
+# copy: explicit copy 
+li2 = li[:] # or li2 = list(li)
+
+len(li) # length of list
 
 matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], ] # nested list
 ```
@@ -34,6 +59,18 @@ A set is an unordered collection with no duplicate elements
 ```python
 basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
 ```
+
+# Numpy
+Array can only cotain one type
+
+```python
+li = [3, 4, 5]
+np_array = np.array(li)
+
+# shape of array
+np_array.shape
+```
+
 
 # read head lines of a large text file
 

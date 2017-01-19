@@ -56,6 +56,8 @@ My cheat sheets
  * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
  * <a href="Wiki/SoftwareDevelopment.html">Software Development </a>
  * <a href="Wiki/Magento.html">Magento</a>
+ * <a href="Wiki/telecom.html">Telecom</a>
+ 
 
 
 <style>
