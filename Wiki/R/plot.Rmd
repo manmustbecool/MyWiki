@@ -211,12 +211,13 @@ legend("topright", "(x,y)"
 
 ## highcharter
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 library(highcharter)
 library(magrittr)
 library(xts)
 
-ts <- ts(1:100)
+x <- rnorm(100, mean=0)
+ts <- ts(x)
 fXts <- as.xts(ts)
 
 highchart() %>% 
@@ -226,6 +227,18 @@ highchart() %>%
 highchart() %>% 
   hc_xAxis(categories = as.character(index(fXts))) %>% 
   hc_add_series(name = "sss", data = as.numeric(fXts))
+```
+
+## plotly
+
+```{r warning=FALSE, message=FALSE}
+library(plotly)
+x <- c(1:100)
+random_y <- rnorm(100, mean=0)
+data <- data.frame(x, random_y)
+
+plot_ly(data, x = ~x, y = ~random_y, type='scatter', mode='lines')
+
 ```
 
 # Other

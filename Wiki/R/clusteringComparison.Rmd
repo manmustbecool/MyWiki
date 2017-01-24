@@ -111,7 +111,8 @@ clustering_evaluation <- function(cluster_result) {
 
 library(plotly) #3D plotting
 plot_ly(data = iris, x=iris$Sepal.Length, y=iris$Sepal.Width, z=iris$Petal.Length, 
-        color=model, type="scatter3d", mode="markers", marker=list(size=5)) 
+        color=model, type="scatter3d", mode="markers", marker=list(size=3)
+        ) 
 
 ```
 
