@@ -24,7 +24,7 @@ bool()
 
 ### List
   
-Lists can contain any data types. mutable
+Lists can contain any data types (including list). mutable
 ```python
 li = [3, 4, 5]
 
