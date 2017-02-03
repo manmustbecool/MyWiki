@@ -57,6 +57,7 @@ My cheat sheets
  * <a href="Wiki/SoftwareDevelopment.html">Software Development </a>
  * <a href="Wiki/Magento.html">Magento</a>
  * <a href="Wiki/telecom.html">Telecom</a>
+* <a href="Wiki/Patent.html">Patent</a>
  
 
 

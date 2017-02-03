@@ -1,0 +1,15 @@
+---
+title: "Patent"
+output: html_document
+---
+
+# Explain
+
+## Patent Code
+
+http://www.hawkip.com/advice/how-do-you-tell-the-difference-between-a-granted-patent-and-patent-application
+
+## PCT 
+
+http://www.bios.net/daisy/cambialabs/115.html
+
