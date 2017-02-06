@@ -27,6 +27,7 @@ My cheat sheets
  * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/Entropy.html">Entropy</a>
+ * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  
 ### Java
@@ -57,7 +58,8 @@ My cheat sheets
  * <a href="Wiki/SoftwareDevelopment.html">Software Development </a>
  * <a href="Wiki/Magento.html">Magento</a>
  * <a href="Wiki/telecom.html">Telecom</a>
-* <a href="Wiki/Patent.html">Patent</a>
+ * <a href="Wiki/Patent.html">Patent</a>
+ * <a href="Wiki/SQL.html">SQL</a>
  
 
 

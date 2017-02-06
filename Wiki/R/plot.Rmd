@@ -24,6 +24,10 @@ reference: www.r-graph-gallery.com
 
 # Graphic
 
+## Colour
+
+http://www.endmemo.com/program/R/color.php
+
 ## Histogram
 
 ```{r}

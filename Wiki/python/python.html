@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 24 January, 2017</em></h4>
+<h4 class="date"><em>Updated: 05 February, 2017</em></h4>
 
 </div>
 
@@ -165,9 +165,10 @@ $(document).ready(function () {
 </ul></li>
 </ul></li>
 <li><a href="#numpy"><span class="toc-section-number">3</span> Numpy</a></li>
-<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">4</span> read head lines of a large text file</a></li>
-<li><a href="#real-time-plot-with-python"><span class="toc-section-number">5</span> real time plot with python</a></li>
-<li><a href="#install-package"><span class="toc-section-number">6</span> Install package</a></li>
+<li><a href="#panda"><span class="toc-section-number">4</span> Panda</a></li>
+<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">5</span> Read head lines of a large text file</a></li>
+<li><a href="#real-time-plot-with-python"><span class="toc-section-number">6</span> Real time plot with python</a></li>
+<li><a href="#install-package"><span class="toc-section-number">7</span> Install package</a></li>
 </ul>
 </div>
 
@@ -230,16 +231,25 @@ np_array <span class="op">=</span> np.array(li)
 <span class="co"># shape of array</span>
 np_array.shape</code></pre></div>
 </div>
+<div id="panda" class="section level1">
+<h1><span class="header-section-number">4</span> Panda</h1>
+<p>cheetsheet: <a href="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PandasPythonForDataScience+(1).pdf" class="uri">https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PandasPythonForDataScience+(1).pdf</a></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])
+<span class="bu">print</span>(df)
+<span class="co">#     [[1 2 3]</span>
+<span class="co">#     [1 2 3]</span>
+<span class="co">#     [1 2 3]]</span></code></pre></div>
+</div>
 <div id="read-head-lines-of-a-large-text-file" class="section level1">
-<h1><span class="header-section-number">4</span> read head lines of a large text file</h1>
+<h1><span class="header-section-number">5</span> Read head lines of a large text file</h1>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">file_name <span class="op">=</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">emiewag</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">2014101709-12.txt&quot;</span>
 
 <span class="cf">with</span> <span class="bu">open</span>(file_name) <span class="im">as</span> myfile:
     head <span class="op">=</span> [<span class="bu">next</span>(myfile) <span class="cf">for</span> x <span class="op">in</span> <span class="bu">range</span>(<span class="dv">20</span>)]
-<span class="bu">print</span> (head)</code></pre></div>
+<span class="bu">print</span>(head)</code></pre></div>
 </div>
 <div id="real-time-plot-with-python" class="section level1">
-<h1><span class="header-section-number">5</span> real time plot with python</h1>
+<h1><span class="header-section-number">6</span> Real time plot with python</h1>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
 <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
 
@@ -255,7 +265,7 @@ plt.ion()
     plt.pause(<span class="fl">0.5</span>)</code></pre></div>
 </div>
 <div id="install-package" class="section level1">
-<h1><span class="header-section-number">6</span> Install package</h1>
+<h1><span class="header-section-number">7</span> Install package</h1>
 <p>in cmd comand window</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># PyPI</span>
 pip install py2exe
