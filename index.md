@@ -21,6 +21,7 @@ My cheat sheets
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/clustering.html">Clustering techniques</a>
  * <a href="Wiki/R/clusteringComparison.html">Clustering comparison</a>
+ * <a href="Wiki/R/associationRule.html">Association Rule</a>
  * <a href="Wiki/R/graph.html">Graph</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/baye_network.html">Baye network</a>

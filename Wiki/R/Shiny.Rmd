@@ -6,11 +6,14 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 ## Widget
 
+http://gallery.htmlwidgets.org/
+
   * Table
      * rhandsontable 
      * DT 
   * Chart
      * ramchart
+     * qtlchart http://kbroman.org/qtlcharts/
      
   
 ## Real time updating
@@ -207,13 +210,12 @@ library(shiny)
 
 ui <- shinyUI(pageWithSidebar(
   headerPanel("Example"),
-  sidebarPanel(   
-    
-  ),
+  sidebarPanel(),
   mainPanel(
-    tabsetPanel(tabPanel("Main",plotOutput("temp", height = 1000, width = 1000))
-    )#tabsetPanel  
-  )#mainPane;
+    tabsetPanel(
+      tabPanel("Main", plotOutput("temp", height=1000, width=1000))
+    ) #tabsetPanel  
+  ) #mainPane;
   
 ))
 

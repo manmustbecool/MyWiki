@@ -507,7 +507,7 @@ as.character(dQuote(objectX))
 object.size(objectX)
 ```
 
-## environment ##
+## environment
 
 an environment is a bag of object references.
 http://adv-r.had.co.nz/Environments.html
@@ -573,7 +573,40 @@ data <- read.table(file, header=F, sep="", quote ="\"'")
 library(data.table)
 data <- fread(file, header=F) # for better performance
 ``` 
+# import zipped file
 
+```r
+# file structure
+#  zipdata.zip
+#     |--- csvdata
+#         |---- 1.csv
+#         |---- 2.csv
+#         |---- 3.csv
+
+filePath <- "zipdata.zip"
+
+# ---  Read one file ------------
+data <- read.table(unz(filePath, "csvdata/1.csv"),
+                   nrows=10, header=T, quote="\"", sep=";", stringsAsFactors=F)
+
+# ---  Read multiple files ------------
+# unzip files in a temp directory
+temp_dir <- "unzip_temp"
+dir.create(temp_dir)
+unzip(filePath, exdir=temp_dir)
+
+# list files in the temp dir
+fileList <- list.files(paste0(temp_dir, "/csvdata/"), pattern=".csv")
+fileList <- paste0(temp_dir, "/csvdata/", fileList)
+
+# combin the files
+myfiles <- do.call(rbind, 
+                  lapply(fileList, 
+                         function(x) read.table(x, sep=";", stringsAsFactors=F, header=T) ))
+
+# delete the temp dir
+unlink(temp_dir, recursive=T)
+```
 
 # Parallel R in Windows ##
 http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/
