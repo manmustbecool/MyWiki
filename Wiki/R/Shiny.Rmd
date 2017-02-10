@@ -1,8 +1,21 @@
 ---
 title: "Shiny"
 output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+## Widget
+
+http://gallery.htmlwidgets.org/
+
+  * Table
+     * rhandsontable 
+     * DT 
+  * Chart
+     * ramchart
+     * qtlchart http://kbroman.org/qtlcharts/
+     
+  
 ## Real time updating
 
 ```r
@@ -124,10 +137,10 @@ ui <- shinyUI(
 shinyApp(ui,server)
 ```
 
-## Styling Cells, Rows, and Tables
+## DT: Styling Cells, Rows, and Tables
 http://rstudio.github.io/DT/010-style.html
 
-## Table with hyperlinls
+## Table with hyperlinks
 ```r
 library(shiny)
 
@@ -151,7 +164,7 @@ server <- function(input, output) {
 
 shinyApp(ui, server)
 ```
-## Plot table with rhandsontable
+## rhandsontable: Plot table
 ```r
 library(shiny)
 library(rhandsontable)
@@ -197,13 +210,12 @@ library(shiny)
 
 ui <- shinyUI(pageWithSidebar(
   headerPanel("Example"),
-  sidebarPanel(   
-    
-  ),
+  sidebarPanel(),
   mainPanel(
-    tabsetPanel(tabPanel("Main",plotOutput("temp", height = 1000, width = 1000))
-    )#tabsetPanel  
-  )#mainPane;
+    tabsetPanel(
+      tabPanel("Main", plotOutput("temp", height=1000, width=1000))
+    ) #tabsetPanel  
+  ) #mainPane;
   
 ))
 
@@ -220,3 +232,6 @@ server <- shinyServer(function(input, output) {
 shinyApp(ui, server)
 ```
 
+## Deploying Desktop Apps with R
+
+https://www.r-bloggers.com/deploying-desktop-apps-with-r/

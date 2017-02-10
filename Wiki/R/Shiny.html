@@ -149,23 +149,42 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Shiny</h1>
+<h4 class="date"><em>Updated: 07 February, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#real-time-updating"><span class="toc-section-number">0.1</span> Real time updating</a></li>
-<li><a href="#reactive-programming"><span class="toc-section-number">0.2</span> Reactive programming</a></li>
-<li><a href="#dynamic-plot"><span class="toc-section-number">0.3</span> Dynamic plot</a></li>
-<li><a href="#styling-cells-rows-and-tables"><span class="toc-section-number">0.4</span> Styling Cells, Rows, and Tables</a></li>
-<li><a href="#table-with-hyperlinls"><span class="toc-section-number">0.5</span> Table with hyperlinls</a></li>
-<li><a href="#plot-table-with-rhandsontable"><span class="toc-section-number">0.6</span> Plot table with rhandsontable</a></li>
-<li><a href="#mutiple-plots-in-one-render-function"><span class="toc-section-number">0.7</span> Mutiple plots in one render function</a></li>
+<li><a href="#widget"><span class="toc-section-number">0.1</span> Widget</a></li>
+<li><a href="#real-time-updating"><span class="toc-section-number">0.2</span> Real time updating</a></li>
+<li><a href="#reactive-programming"><span class="toc-section-number">0.3</span> Reactive programming</a></li>
+<li><a href="#dynamic-plot"><span class="toc-section-number">0.4</span> Dynamic plot</a></li>
+<li><a href="#dt-styling-cells-rows-and-tables"><span class="toc-section-number">0.5</span> DT: Styling Cells, Rows, and Tables</a></li>
+<li><a href="#table-with-hyperlinks"><span class="toc-section-number">0.6</span> Table with hyperlinks</a></li>
+<li><a href="#rhandsontable-plot-table"><span class="toc-section-number">0.7</span> rhandsontable: Plot table</a></li>
+<li><a href="#mutiple-plots-in-one-render-function"><span class="toc-section-number">0.8</span> Mutiple plots in one render function</a></li>
+<li><a href="#deploying-desktop-apps-with-r"><span class="toc-section-number">0.9</span> Deploying Desktop Apps with R</a></li>
 </ul>
 </div>
 
+<div id="widget" class="section level2">
+<h2><span class="header-section-number">0.1</span> Widget</h2>
+<p><a href="http://gallery.htmlwidgets.org/" class="uri">http://gallery.htmlwidgets.org/</a></p>
+<ul>
+<li>Table
+<ul>
+<li>rhandsontable</li>
+<li>DT</li>
+</ul></li>
+<li>Chart
+<ul>
+<li>ramchart</li>
+<li>qtlchart <a href="http://kbroman.org/qtlcharts/" class="uri">http://kbroman.org/qtlcharts/</a></li>
+</ul></li>
+</ul>
+</div>
 <div id="real-time-updating" class="section level2">
-<h2><span class="header-section-number">0.1</span> Real time updating</h2>
+<h2><span class="header-section-number">0.2</span> Real time updating</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(magrittr)
 
@@ -209,7 +228,7 @@ server &lt;-<span class="st"> </span><span class="kw">shinyServer</span>(functio
 <span class="kw">shinyApp</span>(ui,server)</code></pre></div>
 </div>
 <div id="reactive-programming" class="section level2">
-<h2><span class="header-section-number">0.2</span> Reactive programming</h2>
+<h2><span class="header-section-number">0.3</span> Reactive programming</h2>
 <p><a href="https://shinydata.wordpress.com/2015/02/02/a-few-things-i-learned-about-shiny-and-reactive-programming/" class="uri">https://shinydata.wordpress.com/2015/02/02/a-few-things-i-learned-about-shiny-and-reactive-programming/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shinyServer</span>(function(input, output, session){
 
@@ -237,7 +256,7 @@ server &lt;-<span class="st"> </span><span class="kw">shinyServer</span>(functio
 )</code></pre></div>
 </div>
 <div id="dynamic-plot" class="section level2">
-<h2><span class="header-section-number">0.3</span> Dynamic plot</h2>
+<h2><span class="header-section-number">0.4</span> Dynamic plot</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">max_plots &lt;-<span class="st"> </span><span class="dv">5</span>
 
 server &lt;-<span class="st"> </span><span class="kw">shinyServer</span>(function(input, output) {
@@ -279,12 +298,12 @@ ui &lt;-<span class="st"> </span><span class="kw">shinyUI</span>(
 
 <span class="kw">shinyApp</span>(ui,server)</code></pre></div>
 </div>
-<div id="styling-cells-rows-and-tables" class="section level2">
-<h2><span class="header-section-number">0.4</span> Styling Cells, Rows, and Tables</h2>
+<div id="dt-styling-cells-rows-and-tables" class="section level2">
+<h2><span class="header-section-number">0.5</span> DT: Styling Cells, Rows, and Tables</h2>
 <p><a href="http://rstudio.github.io/DT/010-style.html" class="uri">http://rstudio.github.io/DT/010-style.html</a></p>
 </div>
-<div id="table-with-hyperlinls" class="section level2">
-<h2><span class="header-section-number">0.5</span> Table with hyperlinls</h2>
+<div id="table-with-hyperlinks" class="section level2">
+<h2><span class="header-section-number">0.6</span> Table with hyperlinks</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 
 createLink &lt;-<span class="st"> </span>function(val) {
@@ -307,8 +326,8 @@ server &lt;-<span class="st"> </span>function(input, output) {
 
 <span class="kw">shinyApp</span>(ui, server)</code></pre></div>
 </div>
-<div id="plot-table-with-rhandsontable" class="section level2">
-<h2><span class="header-section-number">0.6</span> Plot table with rhandsontable</h2>
+<div id="rhandsontable-plot-table" class="section level2">
+<h2><span class="header-section-number">0.7</span> rhandsontable: Plot table</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 <span class="kw">library</span>(rhandsontable)
 
@@ -346,18 +365,17 @@ server=function(input,output,session)({
 <span class="kw">shinyApp</span>(ui, server)</code></pre></div>
 </div>
 <div id="mutiple-plots-in-one-render-function" class="section level2">
-<h2><span class="header-section-number">0.7</span> Mutiple plots in one render function</h2>
+<h2><span class="header-section-number">0.8</span> Mutiple plots in one render function</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
 
 ui &lt;-<span class="st"> </span><span class="kw">shinyUI</span>(<span class="kw">pageWithSidebar</span>(
   <span class="kw">headerPanel</span>(<span class="st">&quot;Example&quot;</span>),
-  <span class="kw">sidebarPanel</span>(   
-    
-  ),
+  <span class="kw">sidebarPanel</span>(),
   <span class="kw">mainPanel</span>(
-    <span class="kw">tabsetPanel</span>(<span class="kw">tabPanel</span>(<span class="st">&quot;Main&quot;</span>,<span class="kw">plotOutput</span>(<span class="st">&quot;temp&quot;</span>, <span class="dt">height =</span> <span class="dv">1000</span>, <span class="dt">width =</span> <span class="dv">1000</span>))
-    )<span class="co">#tabsetPanel  </span>
-  )<span class="co">#mainPane;</span>
+    <span class="kw">tabsetPanel</span>(
+      <span class="kw">tabPanel</span>(<span class="st">&quot;Main&quot;</span>, <span class="kw">plotOutput</span>(<span class="st">&quot;temp&quot;</span>, <span class="dt">height=</span><span class="dv">1000</span>, <span class="dt">width=</span><span class="dv">1000</span>))
+    ) <span class="co">#tabsetPanel  </span>
+  ) <span class="co">#mainPane;</span>
   
 ))
 
@@ -372,6 +390,10 @@ server &lt;-<span class="st"> </span><span class="kw">shinyServer</span>(functio
 })
 
 <span class="kw">shinyApp</span>(ui, server)</code></pre></div>
+</div>
+<div id="deploying-desktop-apps-with-r" class="section level2">
+<h2><span class="header-section-number">0.9</span> Deploying Desktop Apps with R</h2>
+<p><a href="https://www.r-bloggers.com/deploying-desktop-apps-with-r/" class="uri">https://www.r-bloggers.com/deploying-desktop-apps-with-r/</a></p>
 </div>
 
 .

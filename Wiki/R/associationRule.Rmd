@@ -1,0 +1,88 @@
+---
+title: "Association Rule"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+## cspade with arulesSequences
+
+```r
+library(arulesSequences)
+
+# -- sample data
+# $ cat /usr/local/lib/R/site-library/arulesSequences/misc/zaki.txt
+# 1 10 2 C D
+# 1 15 3 A B C
+# 1 20 3 A B F
+# 1 25 4 A C D F
+
+
+# convert data to transactions
+# A sequence α is an ordered list of events. An event is a non-empty unordered set of items. 
+t <- read_baskets(con=system.file("misc", "zaki.txt", package="arulesSequences"),
+		  info = c("sequenceID","eventID","SIZE"))
+	
+# show transaction
+inspect(t)
+##        items sequenceID eventID SIZE
+## 1      {C,D}          1      10    2
+## 2    {A,B,C}          1      15    3
+## 3    {A,B,F}          1      20    3
+## 4  {A,C,D,F}          1      25    4
+## 5    {A,B,F}          2      15    3
+
+# convert transaction as data frame
+as(t, "data.frame")
+
+# get transactionInfo
+transactionInfo(t)
+##    sequenceID eventID SIZE
+## 1           1      10    2
+## 2           1      15    3
+## 3           1      20    3
+
+# mining frequent sequences
+# set the support parameter to 0.4, and also have instructed the algorithm to show a verbose output.
+s1 <- cspade(t, parameter=list(support = 0.3), control=list(verbose = TRUE))
+
+summary(s1)
+
+as(s1, "data.frame")
+##           sequence support
+## 1            <{A}>    1.00
+## 2            <{B}>    1.00
+## 3            <{D}>    0.50
+## 4            <{F}>    1.00
+## 5          <{A,F}>    0.75
+## ...
+
+```
+
+## apriori with arules
+
+```r
+library(arules)
+
+
+rules <- apriori(t, parameter=list(support=0.2, confidence=0.5))
+
+inspect(rules)
+##     lhs      rhs support confidence lift    
+##[1]  {}    => {B} 0.5     0.5000000  1.000000
+##[2]  {}    => {F} 0.5     0.5000000  1.000000
+##[3]  {}    => {A} 0.6     0.6000000  1.000000
+##[4]  {G}   => {H} 0.2     1.0000000  5.000000
+
+
+# sort rules
+inspect(head(sort(rules, by="lift"), 10))
+
+as(rules, "data.frame")
+
+# rule to data frame with lhs an rhs in different column
+source_url('https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R')
+
+```
+
+
+

@@ -71,20 +71,30 @@ np_array = np.array(li)
 # shape of array
 np_array.shape
 ```
+# Panda
 
+cheetsheet: https://s3.amazonaws.com/assets.datacamp.com/blog_assets/PandasPythonForDataScience+(1).pdf
 
-# read head lines of a large text file
+```python
+df = np.array([[1,2,3], [1,2,3], [1,2,3]])
+print(df)
+#     [[1 2 3]
+#     [1 2 3]
+#     [1 2 3]]
+```
+
+# Read head lines of a large text file
 
 ```python
 file_name = "C:\\Users\\emiewag\\Desktop\\2014101709-12.txt"
 
 with open(file_name) as myfile:
     head = [next(myfile) for x in range(20)]
-print (head)
+print(head)
 
 ```
 
-# real time plot with python
+# Real time plot with python
 
 ```python
 import numpy as np

@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 24 January, 2017</em></h4>
+<h4 class="date"><em>Updated: 08 February, 2017</em></h4>
 
 </div>
 
@@ -173,9 +173,10 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#common-functions"><span class="toc-section-number">6</span> Common functions</a></li>
 <li><a href="#data-inputoutput"><span class="toc-section-number">7</span> Data input/output</a></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">8</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">9</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">10</span> SQL query</a></li>
+<li><a href="#import-zipped-file"><span class="toc-section-number">8</span> import zipped file</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">9</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">10</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">11</span> SQL query</a></li>
 </ul>
 </div>
 
@@ -687,8 +688,41 @@ data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <spa
 <span class="kw">library</span>(data.table)
 data &lt;-<span class="st"> </span><span class="kw">fread</span>(file, <span class="dt">header=</span>F) <span class="co"># for better performance</span></code></pre></div>
 </div>
+<div id="import-zipped-file" class="section level1">
+<h1><span class="header-section-number">8</span> import zipped file</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># file structure</span>
+<span class="co">#  zipdata.zip</span>
+<span class="co">#     |--- csvdata</span>
+<span class="co">#         |---- 1.csv</span>
+<span class="co">#         |---- 2.csv</span>
+<span class="co">#         |---- 3.csv</span>
+
+filePath &lt;-<span class="st"> &quot;zipdata.zip&quot;</span>
+
+<span class="co"># ---  Read one file ------------</span>
+data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="kw">unz</span>(filePath, <span class="st">&quot;csvdata/1.csv&quot;</span>),
+                   <span class="dt">nrows=</span><span class="dv">10</span>, <span class="dt">header=</span>T, <span class="dt">quote=</span><span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>, <span class="dt">stringsAsFactors=</span>F)
+
+<span class="co"># ---  Read multiple files ------------</span>
+<span class="co"># unzip files in a temp directory</span>
+temp_dir &lt;-<span class="st"> &quot;unzip_temp&quot;</span>
+<span class="kw">dir.create</span>(temp_dir)
+<span class="kw">unzip</span>(filePath, <span class="dt">exdir=</span>temp_dir)
+
+<span class="co"># list files in the temp dir</span>
+fileList &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="kw">paste0</span>(temp_dir, <span class="st">&quot;/csvdata/&quot;</span>), <span class="dt">pattern=</span><span class="st">&quot;.csv&quot;</span>)
+fileList &lt;-<span class="st"> </span><span class="kw">paste0</span>(temp_dir, <span class="st">&quot;/csvdata/&quot;</span>, fileList)
+
+<span class="co"># combin the files</span>
+myfiles &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, 
+                  <span class="kw">lapply</span>(fileList, 
+                         function(x) <span class="kw">read.table</span>(x, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>, <span class="dt">stringsAsFactors=</span>F, <span class="dt">header=</span>T) ))
+
+<span class="co"># delete the temp dir</span>
+<span class="kw">unlink</span>(temp_dir, <span class="dt">recursive=</span>T)</code></pre></div>
+</div>
 <div id="parallel-r-in-windows" class="section level1">
-<h1><span class="header-section-number">8</span> Parallel R in Windows</h1>
+<h1><span class="header-section-number">9</span> Parallel R in Windows</h1>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -708,7 +742,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">stopCluster</span>(cl)</code></pre></div>
 </div>
 <div id="trycatch-exception-handling" class="section level1">
-<h1><span class="header-section-number">9</span> tryCatch exception handling</h1>
+<h1><span class="header-section-number">10</span> tryCatch exception handling</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>({
     expr
   }, <span class="dt">warning =</span> function(w) {
@@ -730,7 +764,7 @@ x
 )</code></pre></div>
 </div>
 <div id="sql-query" class="section level1">
-<h1><span class="header-section-number">10</span> SQL query</h1>
+<h1><span class="header-section-number">11</span> SQL query</h1>
 <ul>
 <li>JDBC</li>
 </ul>

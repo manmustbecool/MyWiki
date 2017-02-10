@@ -1,0 +1,9 @@
+---
+title: "SQL"
+output: html_document
+---
+
+
+## SQL
+
+https://blog.jooq.org/2017/01/12/a-probably-incomplete-comprehensive-guide-to-the-many-different-ways-to-join-tables-in-sql/?imm_mid=0ec94e&cmp=em-data-na-na-newsltr_20170125

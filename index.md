@@ -21,12 +21,14 @@ My cheat sheets
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/clustering.html">Clustering techniques</a>
  * <a href="Wiki/R/clusteringComparison.html">Clustering comparison</a>
+ * <a href="Wiki/R/associationRule.html">Association Rule</a>
  * <a href="Wiki/R/graph.html">Graph</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/baye_network.html">Baye network</a>
  * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/Entropy.html">Entropy</a>
+ * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  
 ### Java
@@ -57,6 +59,8 @@ My cheat sheets
  * <a href="Wiki/SoftwareDevelopment.html">Software Development </a>
  * <a href="Wiki/Magento.html">Magento</a>
  * <a href="Wiki/telecom.html">Telecom</a>
+ * <a href="Wiki/Patent.html">Patent</a>
+ * <a href="Wiki/SQL.html">SQL</a>
  
 
 
