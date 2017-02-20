@@ -4,7 +4,81 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-## cspade with arulesSequences
+
+## arules::apriori
+
+```r
+library(arules)
+
+rules <- apriori(t, parameter=list(support=0.2, confidence=0.5))
+
+inspect(rules)
+##     lhs      rhs support confidence lift    
+##[1]  {}    => {B} 0.5     0.5000000  1.000000
+##[2]  {}    => {F} 0.5     0.5000000  1.000000
+##[3]  {}    => {A} 0.6     0.6000000  1.000000
+##[4]  {G}   => {H} 0.2     1.0000000  5.000000
+
+
+# sort rules
+inspect(head(sort(rules, by="lift"), 10))
+
+as(rules, "data.frame")
+
+# rule to data frame with lhs an rhs in different column
+source_url('https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R')
+
+```
+
+
+## arulesSequences::cspade
+
+Frequent sequence mining
+
+```{r}
+library(arulesSequences, quietly=T )
+
+# sequence dataset
+# {a}, {b}
+# {a}, {c}
+# {a}, {a,b}
+
+# build sequence dataset as a data frame
+df <- data.frame(sequenceID = c(1,1,2,2,3,3),
+                 eventID = c(1,2,1,2,1,2),
+                 Size = c(1,1,1,1,2,2),
+                 items = c("a","b","a","c","a", "a,b")
+                 )
+
+df <- data.frame(lapply(df, as.factor))
+
+write.table(df, file="myTemp.csv", sep = ",", row.names = F, col.names = F, quote=F)
+
+# "sequenceID" (sequence or customer identifier) and "eventID" (time or event identifier)
+t <- read_baskets("myTemp.csv", sep=",", info = c("sequenceID","eventID" , "SIZE"))
+
+# convert transaction as data frame
+as(t, "data.frame")
+
+inspect(t)
+
+# get transactionInfo
+transactionInfo(t)
+
+# Mining Frequent Sequence
+# set the support parameter to 0.3, and also have instructed the algorithm to show a verbose output.
+s1 <- cspade(t, parameter=list(support = 0.3), control=list(verbose = TRUE))
+
+as(s1, "data.frame")
+
+#  default value for confidence of 0.8
+s2 <- ruleInduction(s1, confidence = 0)
+
+as(s2, "data.frame")
+
+```
+
+
 
 ```r
 library(arulesSequences)
@@ -31,58 +105,7 @@ inspect(t)
 ## 4  {A,C,D,F}          1      25    4
 ## 5    {A,B,F}          2      15    3
 
-# convert transaction as data frame
-as(t, "data.frame")
 
-# get transactionInfo
-transactionInfo(t)
-##    sequenceID eventID SIZE
-## 1           1      10    2
-## 2           1      15    3
-## 3           1      20    3
-
-# mining frequent sequences
-# set the support parameter to 0.4, and also have instructed the algorithm to show a verbose output.
-s1 <- cspade(t, parameter=list(support = 0.3), control=list(verbose = TRUE))
-
-summary(s1)
-
-as(s1, "data.frame")
-##           sequence support
-## 1            <{A}>    1.00
-## 2            <{B}>    1.00
-## 3            <{D}>    0.50
-## 4            <{F}>    1.00
-## 5          <{A,F}>    0.75
-## ...
 
 ```
-
-## apriori with arules
-
-```r
-library(arules)
-
-
-rules <- apriori(t, parameter=list(support=0.2, confidence=0.5))
-
-inspect(rules)
-##     lhs      rhs support confidence lift    
-##[1]  {}    => {B} 0.5     0.5000000  1.000000
-##[2]  {}    => {F} 0.5     0.5000000  1.000000
-##[3]  {}    => {A} 0.6     0.6000000  1.000000
-##[4]  {G}   => {H} 0.2     1.0000000  5.000000
-
-
-# sort rules
-inspect(head(sort(rules, by="lift"), 10))
-
-as(rules, "data.frame")
-
-# rule to data frame with lhs an rhs in different column
-source_url('https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R')
-
-```
-
-
 

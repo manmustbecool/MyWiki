@@ -149,19 +149,133 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Association Rule</h1>
-<h4 class="date"><em>Updated: 10 February, 2017</em></h4>
+<h4 class="date"><em>Updated: 20 February, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#cspade-with-arulessequences"><span class="toc-section-number">0.1</span> cspade with arulesSequences</a></li>
-<li><a href="#apriori-with-arules"><span class="toc-section-number">0.2</span> apriori with arules</a></li>
+<li><a href="#arulesapriori"><span class="toc-section-number">0.1</span> arules::apriori</a></li>
+<li><a href="#arulessequencescspade"><span class="toc-section-number">0.2</span> arulesSequences::cspade</a></li>
 </ul>
 </div>
 
-<div id="cspade-with-arulessequences" class="section level2">
-<h2><span class="header-section-number">0.1</span> cspade with arulesSequences</h2>
+<div id="arulesapriori" class="section level2">
+<h2><span class="header-section-number">0.1</span> arules::apriori</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arules)
+
+rules &lt;-<span class="st"> </span><span class="kw">apriori</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support=</span><span class="fl">0.2</span>, <span class="dt">confidence=</span><span class="fl">0.5</span>))
+
+<span class="kw">inspect</span>(rules)
+##     lhs      rhs support confidence lift    
+##[1]  {}    =&gt; {B} 0.5     0.5000000  1.000000
+##[2]  {}    =&gt; {F} 0.5     0.5000000  1.000000
+##[3]  {}    =&gt; {A} 0.6     0.6000000  1.000000
+##[4]  {G}   =&gt; {H} 0.2     1.0000000  5.000000
+
+
+<span class="co"># sort rules</span>
+<span class="kw">inspect</span>(<span class="kw">head</span>(<span class="kw">sort</span>(rules, <span class="dt">by=</span><span class="st">&quot;lift&quot;</span>), <span class="dv">10</span>))
+
+<span class="kw">as</span>(rules, <span class="st">&quot;data.frame&quot;</span>)
+
+<span class="co"># rule to data frame with lhs an rhs in different column</span>
+<span class="kw">source_url</span>(<span class="st">'https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R'</span>)</code></pre></div>
+</div>
+<div id="arulessequencescspade" class="section level2">
+<h2><span class="header-section-number">0.2</span> arulesSequences::cspade</h2>
+<p>Frequent sequence mining</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesSequences, <span class="dt">quietly=</span>T )</code></pre></div>
+<pre><code>## Warning: package 'arulesSequences' was built under R version 3.3.2</code></pre>
+<pre><code>## 
+## Attaching package: 'arules'</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     abbreviate, write</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sequence dataset</span>
+<span class="co"># {a}, {b}</span>
+<span class="co"># {a}, {c}</span>
+<span class="co"># {a}, {a,b}</span>
+
+<span class="co"># build sequence dataset as a data frame</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sequenceID =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>),
+                 <span class="dt">eventID =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>),
+                 <span class="dt">Size =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>),
+                 <span class="dt">items =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a,b&quot;</span>)
+                 )
+
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">lapply</span>(df, as.factor))
+
+<span class="kw">write.table</span>(df, <span class="dt">file=</span><span class="st">&quot;myTemp.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">row.names =</span> F, <span class="dt">col.names =</span> F, <span class="dt">quote=</span>F)
+
+<span class="co"># &quot;sequenceID&quot; (sequence or customer identifier) and &quot;eventID&quot; (time or event identifier)</span>
+t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class="st">&quot;myTemp.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">info =</span> <span class="kw">c</span>(<span class="st">&quot;sequenceID&quot;</span>,<span class="st">&quot;eventID&quot;</span> , <span class="st">&quot;SIZE&quot;</span>))
+
+<span class="co"># convert transaction as data frame</span>
+<span class="kw">as</span>(t, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##   items sequenceID eventID SIZE
+## 1   {a}          1       1    1
+## 2   {b}          1       2    1
+## 3   {a}          2       1    1
+## 4   {c}          2       2    1
+## 5   {a}          3       1    2
+## 6 {a,b}          3       2    2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">inspect</span>(t)</code></pre></div>
+<pre><code>##     items sequenceID eventID SIZE
+## [1] {a}   1          1       1   
+## [2] {b}   1          2       1   
+## [3] {a}   2          1       1   
+## [4] {c}   2          2       1   
+## [5] {a}   3          1       2   
+## [6] {a,b} 3          2       2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get transactionInfo</span>
+<span class="kw">transactionInfo</span>(t)</code></pre></div>
+<pre><code>##   sequenceID eventID SIZE
+## 1          1       1    1
+## 2          1       2    1
+## 3          2       1    1
+## 4          2       2    1
+## 5          3       1    2
+## 6          3       2    2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mining Frequent Sequence</span>
+<span class="co"># set the support parameter to 0.3, and also have instructed the algorithm to show a verbose output.</span>
+s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.3</span>), <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## 
+## parameter specification:
+## support : 0.3
+## maxsize :  10
+## maxlen  :  10
+## 
+## algorithmic control:
+## bfstype  : FALSE
+## verbose  :  TRUE
+## summary  : FALSE
+## tidLists : FALSE
+## 
+## preprocessing ... 1 partition(s), 0 MB [0.12s]
+## mining transactions ... 0 MB [0.11s]
+## reading sequences ... [0.14s]
+## 
+## total elapsed time: 0.37s</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##      sequence   support
+## 1       &lt;{a}&gt; 1.0000000
+## 2       &lt;{b}&gt; 0.6666667
+## 3       &lt;{c}&gt; 0.3333333
+## 4   &lt;{a},{c}&gt; 0.3333333
+## 5   &lt;{a},{b}&gt; 0.6666667
+## 6     &lt;{a,b}&gt; 0.3333333
+## 7 &lt;{a},{a,b}&gt; 0.3333333
+## 8   &lt;{a},{a}&gt; 0.3333333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  default value for confidence of 0.8</span>
+s2 &lt;-<span class="st"> </span><span class="kw">ruleInduction</span>(s1, <span class="dt">confidence =</span> <span class="dv">0</span>)
+
+<span class="kw">as</span>(s2, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##               rule   support confidence      lift
+## 1   &lt;{a}&gt; =&gt; &lt;{c}&gt; 0.3333333  0.3333333 1.0000000
+## 2   &lt;{a}&gt; =&gt; &lt;{b}&gt; 0.6666667  0.6666667 1.0000000
+## 3 &lt;{a}&gt; =&gt; &lt;{a,b}&gt; 0.3333333  0.3333333 1.0000000
+## 4   &lt;{a}&gt; =&gt; &lt;{a}&gt; 0.3333333  0.3333333 0.3333333</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesSequences)
 
 <span class="co"># -- sample data</span>
@@ -186,53 +300,7 @@ t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class
 ## 4  {A,C,D,F}          1      25    4
 ## 5    {A,B,F}          2      15    3
 
-<span class="co"># convert transaction as data frame</span>
-<span class="kw">as</span>(t, <span class="st">&quot;data.frame&quot;</span>)
-
-<span class="co"># get transactionInfo</span>
-<span class="kw">transactionInfo</span>(t)
-##    sequenceID eventID SIZE
-## 1           1      10    2
-## 2           1      15    3
-## 3           1      20    3
-
-<span class="co"># mining frequent sequences</span>
-<span class="co"># set the support parameter to 0.4, and also have instructed the algorithm to show a verbose output.</span>
-s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.3</span>), <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))
-
-<span class="kw">summary</span>(s1)
-
-<span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)
-##           sequence support
-## 1            &lt;{A}&gt;    1.00
-## 2            &lt;{B}&gt;    1.00
-## 3            &lt;{D}&gt;    0.50
-## 4            &lt;{F}&gt;    1.00
-## 5          &lt;{A,F}&gt;    0.75
-## ...</code></pre></div>
-</div>
-<div id="apriori-with-arules" class="section level2">
-<h2><span class="header-section-number">0.2</span> apriori with arules</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arules)
-
-
-rules &lt;-<span class="st"> </span><span class="kw">apriori</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support=</span><span class="fl">0.2</span>, <span class="dt">confidence=</span><span class="fl">0.5</span>))
-
-<span class="kw">inspect</span>(rules)
-##     lhs      rhs support confidence lift    
-##[1]  {}    =&gt; {B} 0.5     0.5000000  1.000000
-##[2]  {}    =&gt; {F} 0.5     0.5000000  1.000000
-##[3]  {}    =&gt; {A} 0.6     0.6000000  1.000000
-##[4]  {G}   =&gt; {H} 0.2     1.0000000  5.000000
-
-
-<span class="co"># sort rules</span>
-<span class="kw">inspect</span>(<span class="kw">head</span>(<span class="kw">sort</span>(rules, <span class="dt">by=</span><span class="st">&quot;lift&quot;</span>), <span class="dv">10</span>))
-
-<span class="kw">as</span>(rules, <span class="st">&quot;data.frame&quot;</span>)
-
-<span class="co"># rule to data frame with lhs an rhs in different column</span>
-<span class="kw">source_url</span>(<span class="st">'https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R'</span>)</code></pre></div>
+</code></pre></div>
 </div>
 
 .

@@ -61,6 +61,7 @@ My cheat sheets
  * <a href="Wiki/telecom.html">Telecom</a>
  * <a href="Wiki/Patent.html">Patent</a>
  * <a href="Wiki/SQL.html">SQL</a>
+ * <a href="Wiki/commonSoftware.html">Common Software</a>
  
 
 

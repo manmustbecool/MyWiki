@@ -1,0 +1,16 @@
+---
+title: "common software"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+
+
+cobian backup
+
+http://www.cobiansoft.com/cobianbackup.htm
+
+
+Fences 1.01 (not free since Fences 2.0)
+
+http://www.stardock.com/products/fences/
