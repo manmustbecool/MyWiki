@@ -36,9 +36,9 @@ My cheat sheets
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
  
 ### Python
- * <a href="Wiki/python/python.html">Python</a>
- * <a href="Wiki/python/pythonML.html">Python ML</a>
- * <a href="Wiki/python/pythonRdm.html">Python R markdown</a>
+ * <a href="Wiki/Python/python.html">Python</a>
+ * <a href="Wiki/Python/pythonML.html">Python ML</a>
+ * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
   
 ### Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
@@ -62,6 +62,7 @@ My cheat sheets
  * <a href="Wiki/Patent.html">Patent</a>
  * <a href="Wiki/SQL.html">SQL</a>
  * <a href="Wiki/commonSoftware.html">Common Software</a>
+ * <a href="Wiki/smartphone.html">smartphone</a>
  
 
 

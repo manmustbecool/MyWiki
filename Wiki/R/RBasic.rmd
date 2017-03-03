@@ -245,7 +245,7 @@ array(1:8, dim=c(2,2,2))
 
 A data.frame likes a table. It is a list of column vectors of equal length. Different columns can be of various types. . I.e., one column might be a numerical variable, another might be a factor.
 
-Initialize data frame
+**Initialize data frame**
 ```r
 # Initialize a df
 df <- data.frame()
