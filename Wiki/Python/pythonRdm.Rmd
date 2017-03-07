@@ -1,12 +1,14 @@
 ---
 title: "python RMD example"
 output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 
 ### Call python code example
 
 ```{r, engine='python'}
+# ```{r, engine='python'}
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -18,8 +20,8 @@ plt.xlabel('time (s)')
 plt.ylabel('voltage (mV)')
 plt.title('About as simple as it gets, folks')
 plt.grid(True)
-plt.savefig("test.png")
-
+plt.savefig("test.png") # images have to be saved, then show in R markdown
+#```
 ```
 Output image:
 ![output](test.png)

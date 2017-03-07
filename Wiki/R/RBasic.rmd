@@ -573,7 +573,7 @@ data <- read.table(file, header=F, sep="", quote ="\"'")
 library(data.table)
 data <- fread(file, header=F) # for better performance
 ``` 
-# import zipped file
+## Import zipped file
 
 ```r
 # file structure

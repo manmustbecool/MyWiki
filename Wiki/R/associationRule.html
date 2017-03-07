@@ -149,42 +149,20 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Association Rule</h1>
-<h4 class="date"><em>Updated: 20 February, 2017</em></h4>
+<h4 class="date"><em>Updated: 07 March, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#arulesapriori"><span class="toc-section-number">0.1</span> arules::apriori</a></li>
-<li><a href="#arulessequencescspade"><span class="toc-section-number">0.2</span> arulesSequences::cspade</a></li>
+<li><a href="#read-transaction-data"><span class="toc-section-number">0.1</span> Read transaction data</a></li>
+<li><a href="#arules-apriori"><span class="toc-section-number">0.2</span> arules apriori</a></li>
+<li><a href="#arulessequences-cspade"><span class="toc-section-number">0.3</span> arulesSequences cspade</a></li>
 </ul>
 </div>
 
-<div id="arulesapriori" class="section level2">
-<h2><span class="header-section-number">0.1</span> arules::apriori</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arules)
-
-rules &lt;-<span class="st"> </span><span class="kw">apriori</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support=</span><span class="fl">0.2</span>, <span class="dt">confidence=</span><span class="fl">0.5</span>))
-
-<span class="kw">inspect</span>(rules)
-##     lhs      rhs support confidence lift    
-##[1]  {}    =&gt; {B} 0.5     0.5000000  1.000000
-##[2]  {}    =&gt; {F} 0.5     0.5000000  1.000000
-##[3]  {}    =&gt; {A} 0.6     0.6000000  1.000000
-##[4]  {G}   =&gt; {H} 0.2     1.0000000  5.000000
-
-
-<span class="co"># sort rules</span>
-<span class="kw">inspect</span>(<span class="kw">head</span>(<span class="kw">sort</span>(rules, <span class="dt">by=</span><span class="st">&quot;lift&quot;</span>), <span class="dv">10</span>))
-
-<span class="kw">as</span>(rules, <span class="st">&quot;data.frame&quot;</span>)
-
-<span class="co"># rule to data frame with lhs an rhs in different column</span>
-<span class="kw">source_url</span>(<span class="st">'https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R'</span>)</code></pre></div>
-</div>
-<div id="arulessequencescspade" class="section level2">
-<h2><span class="header-section-number">0.2</span> arulesSequences::cspade</h2>
-<p>Frequent sequence mining</p>
+<div id="read-transaction-data" class="section level2">
+<h2><span class="header-section-number">0.1</span> Read transaction data</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesSequences, <span class="dt">quietly=</span>T )</code></pre></div>
 <pre><code>## Warning: package 'arulesSequences' was built under R version 3.3.2</code></pre>
 <pre><code>## 
@@ -237,6 +215,70 @@ t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class
 ## 4          2       2    1
 ## 5          3       1    2
 ## 6          3       2    2</code></pre>
+</div>
+<div id="arules-apriori" class="section level2">
+<h2><span class="header-section-number">0.2</span> arules apriori</h2>
+<p><a href="http://www.salemmarafi.com/code/market-basket-analysis-with-r/" class="uri">http://www.salemmarafi.com/code/market-basket-analysis-with-r/</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arules, <span class="dt">quietly =</span> T)
+
+rules &lt;-<span class="st"> </span><span class="kw">apriori</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support=</span><span class="fl">0.1</span>, <span class="dt">confidence=</span><span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Apriori
+## 
+## Parameter specification:
+##  confidence minval smax arem  aval originalSupport maxtime support minlen
+##         0.5    0.1    1 none FALSE            TRUE       5     0.1      1
+##  maxlen target   ext
+##      10  rules FALSE
+## 
+## Algorithmic control:
+##  filter tree heap memopt load sort verbose
+##     0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+## 
+## Absolute minimum support count: 0 
+## 
+## set item appearances ...[0 item(s)] done [0.00s].
+## set transactions ...[3 item(s), 6 transaction(s)] done [0.00s].
+## sorting and recoding items ... [3 item(s)] done [0.00s].
+## creating transaction tree ... done [0.00s].
+## checking subsets of size 1 2 done [0.00s].
+## writing ... [2 rule(s)] done [0.00s].
+## creating S4 object  ... done [0.00s].</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">inspect</span>(rules)</code></pre></div>
+<pre><code>##     lhs    rhs support   confidence lift
+## [1] {}  =&gt; {a} 0.6666667 0.6666667  1.00
+## [2] {b} =&gt; {a} 0.1666667 0.5000000  0.75</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##     lhs    rhs support   confidence lift
+## [1] {}  =&gt; {a} 0.6666667 0.6666667  1.00
+## [2] {b} =&gt; {a} 0.1666667 0.5000000  0.75
+
+
+<span class="co"># sort rules</span>
+<span class="kw">inspect</span>(<span class="kw">head</span>(<span class="kw">sort</span>(rules, <span class="dt">by=</span><span class="st">&quot;lift&quot;</span>), <span class="dv">10</span>))</code></pre></div>
+<pre><code>##     lhs    rhs support   confidence lift
+## [1] {}  =&gt; {a} 0.6666667 0.6666667  1.00
+## [2] {b} =&gt; {a} 0.1666667 0.5000000  0.75</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as</span>(rules, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##        rules   support confidence lift
+## 1  {} =&gt; {a} 0.6666667  0.6666667 1.00
+## 2 {b} =&gt; {a} 0.1666667  0.5000000 0.75</code></pre>
+<p>rule to data frame with lhs an rhs in different column</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source_url</span>(<span class="st">'https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R'</span>)</code></pre></div>
+<p>Visualization</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesViz)</code></pre></div>
+<pre><code>## Warning: package 'arulesViz' was built under R version 3.3.2</code></pre>
+<pre><code>## Loading required package: grid</code></pre>
+<pre><code>## Warning: failed to assign NativeSymbolInfo for lhs since lhs is already
+## defined in the 'lazyeval' namespace</code></pre>
+<pre><code>## Warning: failed to assign NativeSymbolInfo for rhs since rhs is already
+## defined in the 'lazyeval' namespace</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(rules, <span class="dt">method=</span><span class="st">&quot;graph&quot;</span>
+     <span class="co">#, interactive=TRUE</span>
+     , <span class="dt">shading=</span><span class="ot">NA</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" width="480" /></p>
+</div>
+<div id="arulessequences-cspade" class="section level2">
+<h2><span class="header-section-number">0.3</span> arulesSequences cspade</h2>
+<p>Frequent sequence mining</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mining Frequent Sequence</span>
 <span class="co"># set the support parameter to 0.3, and also have instructed the algorithm to show a verbose output.</span>
 s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.3</span>), <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))</code></pre></div>
@@ -252,11 +294,11 @@ s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="
 ## summary  : FALSE
 ## tidLists : FALSE
 ## 
-## preprocessing ... 1 partition(s), 0 MB [0.12s]
-## mining transactions ... 0 MB [0.11s]
-## reading sequences ... [0.14s]
+## preprocessing ... 1 partition(s), 0 MB [0.11s]
+## mining transactions ... 0 MB [0.13s]
+## reading sequences ... [0.03s]
 ## 
-## total elapsed time: 0.37s</code></pre>
+## total elapsed time: 0.27s</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
 <pre><code>##      sequence   support
 ## 1       &lt;{a}&gt; 1.0000000
@@ -276,6 +318,7 @@ s2 &lt;-<span class="st"> </span><span class="kw">ruleInduction</span>(s1, <span
 ## 2   &lt;{a}&gt; =&gt; &lt;{b}&gt; 0.6666667  0.6666667 1.0000000
 ## 3 &lt;{a}&gt; =&gt; &lt;{a,b}&gt; 0.3333333  0.3333333 1.0000000
 ## 4   &lt;{a}&gt; =&gt; &lt;{a}&gt; 0.3333333  0.3333333 0.3333333</code></pre>
+<p>built in data from arulesSequences package</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesSequences)
 
 <span class="co"># -- sample data</span>
@@ -298,9 +341,7 @@ t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class
 ## 2    {A,B,C}          1      15    3
 ## 3    {A,B,F}          1      20    3
 ## 4  {A,C,D,F}          1      25    4
-## 5    {A,B,F}          2      15    3
-
-</code></pre></div>
+## 5    {A,B,F}          2      15    3</code></pre></div>
 </div>
 
 .

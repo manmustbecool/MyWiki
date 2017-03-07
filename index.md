@@ -4,6 +4,7 @@ output:
     theme: united
     includes:
       after_body: wiki\includes\footer.html
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 > Home: http://manmustbecool.github.io/MyWiki/

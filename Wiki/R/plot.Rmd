@@ -82,6 +82,9 @@ library(corrplot)
 corrplot(cor(mtcars), type="lower")
 ```
 
+plot with missing value: 
+http://stackoverflow.com/questions/22000630/corrplot-machinedouble-eps-missing-value
+
 
 ## Dendrograms 
 
