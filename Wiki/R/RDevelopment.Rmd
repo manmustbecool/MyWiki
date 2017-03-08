@@ -1,6 +1,6 @@
-
 ---
 title: "R Development"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 

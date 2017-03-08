@@ -20,9 +20,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, warning=F, message=F}
 # set plot layout 
-par(mfrow=c(3,2),
-     mar=c(2,2,2,1), oma=c(0,0,0,0) # margin: buttom left, top, right
-     )
+# par(mfrow=c(3,2),
+#      mar=c(2,2,2,1), oma=c(0,0,0,0) # margin: buttom left, top, right
+#      )
 
 # training data
 trainingData <- iris[,1:4]
@@ -81,11 +81,17 @@ plot(plotData, col=model, main="Self-Organising Maps")
 # ---------- Spectral  
 
 library(kernlab)
-model <- specc(trainingData, centers=3)
+model <- specc(as.matrix(trainingData), centers=3) # only take matrix as input
 plot(plotData, col=model, main="Spectral") 
 
 
-#---------------------
+```
+
+# cluster evaluation
+
+
+```{r}
+#----------- cluster evaluation function ------
 
 library("fpc")
 clustering_evaluation <- function(cluster_result) {
@@ -100,19 +106,19 @@ clustering_evaluation <- function(cluster_result) {
   clust_stats <- cluster.stats(d = dist(trainingData), species, cluster_result) 
   # Corrected Rand index
   print("Rand index: ", clust_stats$corrected.rand)
-  
 }
-
 ```
 
+
+# 3D plot
 
 
 ```{r, warning=F, message=F}
 
 library(plotly) #3D plotting
 plot_ly(data = iris, x=iris$Sepal.Length, y=iris$Sepal.Width, z=iris$Petal.Length, 
-        color=model, type="scatter3d", mode="markers", marker=list(size=3)
-        ) 
+         color=model, type="scatter3d", mode="markers", marker=list(size=3)
+         ) 
 
 ```
 

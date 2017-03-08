@@ -3,7 +3,7 @@ title: "Benchmark : matrix; data.frame; data.table"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-matrix data.frame data.table
+matrix vs data.frame vs data.table
 
   * Row appending
     * Good performance : data.table(rbindlist) ; data.table(rbind) ; matrix(rbind)
@@ -31,7 +31,7 @@ df0 <- data.frame(mat0)
 dt0 <- data.table(mat0)
 
 newRow <- 1:100
-loops <- 1:5000 # ranking result may different depending on the loop size
+loops <- 1:5000 # ranking results may different depending on the loop size
 
 # ---------
 
@@ -92,6 +92,7 @@ print(res)
 ```
 
 ```r
+# screen shot of result
 Unit: seconds
      expr      min       lq     mean   median       uq       max neval  cld
    mat_rbind() 29.61510 29.91575 30.20403 30.08436 30.20831  35.67312    50  b  
