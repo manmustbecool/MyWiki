@@ -48,6 +48,7 @@ My cheat sheets
  * <a href="Wiki/Hbase.html">Hbase</a>
  * <a href="Wiki/Mahout.html">Mahout</a> 
  * <a href="Wiki/Solr.html">Solr</a>
+ * <a href="Wiki/Flink.html">Flink</a> 
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
 
@@ -84,6 +85,9 @@ div.non * {
 
 
 [RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
+
+
+[A distributed architecture for policy-customisable multi-tenant Processes-as-a-Service](https://github.com/manmustbecool/MyWiki/blob/master/papers/A%20distributed%20architecture%20for%20policy-customisable%20multi-tenant%20Processes-as-a-Service.pdf)
 
 ...
 

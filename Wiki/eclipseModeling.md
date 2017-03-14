@@ -1,6 +1,9 @@
+---
+title: "Eclipse Modeling"
+output: html_document
+---
 
-
-## Eclipse Modeling
+# Eclipse Modeling
 
 ![Eclipse Modeling](eclipseModeling.jpg)
 

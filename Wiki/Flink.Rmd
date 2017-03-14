@@ -1,0 +1,13 @@
+---
+title: "Flink"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Flink 
+
+http://data-flair.training/blogs/create-run-first-apache-flink-application-java-eclipse/
