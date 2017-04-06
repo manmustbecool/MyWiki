@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 07 March, 2017</em></h4>
+<h4 class="date"><em>Updated: 03 April, 2017</em></h4>
 
 </div>
 
@@ -172,12 +172,13 @@ $(document).ready(function () {
 <li><a href="#formula"><span class="toc-section-number">5.3</span> formula</a></li>
 </ul></li>
 <li><a href="#common-functions"><span class="toc-section-number">6</span> Common functions</a></li>
-<li><a href="#data-inputoutput"><span class="toc-section-number">7</span> Data input/output</a><ul>
-<li><a href="#import-zipped-file"><span class="toc-section-number">7.1</span> Import zipped file</a></li>
+<li><a href="#regular-expression"><span class="toc-section-number">7</span> Regular expression</a></li>
+<li><a href="#data-inputoutput"><span class="toc-section-number">8</span> Data input/output</a><ul>
+<li><a href="#import-zipped-file"><span class="toc-section-number">8.1</span> Import zipped file</a></li>
 </ul></li>
-<li><a href="#parallel-r-in-windows"><span class="toc-section-number">8</span> Parallel R in Windows</a></li>
-<li><a href="#trycatch-exception-handling"><span class="toc-section-number">9</span> tryCatch exception handling</a></li>
-<li><a href="#sql-query"><span class="toc-section-number">10</span> SQL query</a></li>
+<li><a href="#parallel-r-in-windows"><span class="toc-section-number">9</span> Parallel R in Windows</a></li>
+<li><a href="#trycatch-exception-handling"><span class="toc-section-number">10</span> tryCatch exception handling</a></li>
+<li><a href="#sql-query"><span class="toc-section-number">11</span> SQL query</a></li>
 </ul>
 </div>
 
@@ -219,10 +220,9 @@ install R in linux <a href="http://www.jason-french.com/blog/2013/03/11/installi
 <h1><span class="header-section-number">3</span> Atomic data types</h1>
 <p>The atomic data types are “logical”, “integer”, “numeric” (synonym “double”), “complex”, “character” and “raw”.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Formatting decimal</span>
-x &lt;-<span class="st"> </span><span class="fl">1.224554</span>
-<span class="kw">round</span>(x, <span class="dt">digits=</span><span class="dv">2</span>)
+<span class="kw">round</span>(<span class="fl">1.221554</span>, <span class="dt">digits=</span><span class="dv">2</span>)
 
-<span class="co"># -------------- string --------------------------</span>
+<span class="co"># --------- string ---------</span>
 <span class="co">#  string is considered to be a character vector in R</span>
 str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This evaluates to 'string'.</span>
 <span class="kw">nchar</span>(str) <span class="co"># Count the Number of Characters </span>
@@ -231,20 +231,7 @@ str &lt;-<span class="st"> 'string'</span> <span class="co"># str[1] # This eval
 <span class="kw">strsplit</span>(<span class="st">'0-0-1'</span>, <span class="st">''</span>)  <span class="co"># Evaluates to list('0', '-', '0', '-', '1')</span>
 <span class="kw">paste</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>, <span class="dt">sep =</span> <span class="st">' '</span>) <span class="co"># 'hello world'</span>
 <span class="kw">paste0</span>(<span class="st">'hello'</span>, <span class="st">'world'</span>) <span class="co"># 'helloworld'</span>
-<span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)  <span class="co"># 'abc' , connect character vector to string</span>
-
-<span class="co"># ----- regular expression match </span>
-<span class="co"># x is a string</span>
-pos =<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns position of 1st match in a string</span>
-pos =<span class="st"> </span><span class="kw">gregexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns positions of every match in a string</span>
-<span class="co"># x is a vector</span>
-pos =<span class="st"> </span><span class="kw">grep</span>(<span class="st">'pattern'</span>, x) <span class="co">#  returns the index of the matching string in the vector</span>
-
-<span class="kw">sub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes only the 1st pattern match per string</span>
-<span class="kw">gsub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes every occurrence of a pattern match</span>
-
-<span class="co"># insert a string</span>
-<span class="kw">gsub</span>(<span class="st">'^([a-z]{2})([a-z]+)$'</span>, <span class="st">'</span><span class="ch">\\</span><span class="st">1cc</span><span class="ch">\\</span><span class="st">2'</span>, <span class="st">&quot;aabb&quot;</span>) <span class="co"># aabb -&gt; aaccbb</span></code></pre></div>
+<span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">'a'</span>,<span class="st">'b'</span>,<span class="st">'c'</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)  <span class="co"># 'abc' , connect character vector to string</span></code></pre></div>
 </div>
 <div id="common-data-structures" class="section level1">
 <h1><span class="header-section-number">4</span> Common data structures</h1>
@@ -455,8 +442,8 @@ df &lt;-<span class="st"> </span><span class="kw">cbind</span>(df, x); <span cla
 
 <span class="co"># Avoid that R understands characters as factors</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stringsAsFactors=</span>F) 
-df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>))
-df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>))
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;bob&quot;</span>), <span class="dt">stringsAsFactors=</span>F)
+df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, <span class="kw">c</span>(<span class="st">&quot;hi&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;am&quot;</span>,<span class="st">&quot;alice&quot;</span>), <span class="dt">stringsAsFactors=</span>F)
 
 temp &lt;-<span class="st"> </span><span class="kw">list</span>();
 for(i in <span class="dv">1</span>:<span class="dv">100</span>) temp &lt;-<span class="st"> </span><span class="kw">append</span>(temp, <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>, i)) )
@@ -671,8 +658,28 @@ http:<span class="er">//</span>nsaunders.wordpress.com/<span class="dv">2010</sp
 data %&gt;%<span class="st"> </span>func <span class="co"># = func(data)</span>
 data %&gt;%<span class="st"> </span><span class="kw">func</span>(<span class="dt">arg=</span>value) <span class="co"># = func(data, arg=value)</span></code></pre></div>
 </div>
+<div id="regular-expression" class="section level1">
+<h1><span class="header-section-number">7</span> Regular expression</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ----- return position --------</span>
+<span class="co"># x is a string</span>
+pos =<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns position of 1st match in a string</span>
+pos =<span class="st"> </span><span class="kw">gregexpr</span>(<span class="st">'pattern'</span>, x) <span class="co"># Returns positions of every match in a string</span>
+<span class="co"># x is a vector</span>
+pos =<span class="st"> </span><span class="kw">grep</span>(<span class="st">'pattern'</span>, x) <span class="co">#  returns the index of the matching string in the vector</span>
+
+<span class="co">#------ replace ---------</span>
+<span class="kw">sub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes only the 1st pattern match per string</span>
+<span class="kw">gsub</span>(<span class="st">'pattern'</span>, replacement, input) <span class="co"># Changes every occurrence of a pattern match</span>
+
+<span class="co"># ------ extact ----------</span>
+<span class="kw">library</span>(stringr)
+<span class="kw">str_extract</span>(x, <span class="st">'pattern'</span>)
+
+<span class="co"># ------- insert a string -------</span>
+<span class="kw">gsub</span>(<span class="st">'^([a-z]{2})([a-z]+)$'</span>, <span class="st">'</span><span class="ch">\\</span><span class="st">1cc</span><span class="ch">\\</span><span class="st">2'</span>, <span class="st">&quot;aabb&quot;</span>) <span class="co"># aabb -&gt; aaccbb</span></code></pre></div>
+</div>
 <div id="data-inputoutput" class="section level1">
-<h1><span class="header-section-number">7</span> Data input/output</h1>
+<h1><span class="header-section-number">8</span> Data input/output</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
 <span class="co">#  data in the example.dat file </span>
 <span class="co">#  10</span>
@@ -683,13 +690,15 @@ data &lt;-<span class="st"> </span><span class="kw">scan</span>(<span class="st"
 data
 <span class="co"># [1] 60 43 67 50 </span>
 
-<span class="co"># read CSV</span>
+<span class="co"># ----- read CSV --------</span>
+<span class="co"># for small size dataset</span>
 data &lt;-<span class="st"> </span><span class="kw">read.table</span>(file, <span class="dt">header=</span>F, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>, <span class="dt">quote =</span><span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">'&quot;</span>)
 
+<span class="co"># for large size dataset</span>
 <span class="kw">library</span>(data.table)
 data &lt;-<span class="st"> </span><span class="kw">fread</span>(file, <span class="dt">header=</span>F) <span class="co"># for better performance</span></code></pre></div>
 <div id="import-zipped-file" class="section level2">
-<h2><span class="header-section-number">7.1</span> Import zipped file</h2>
+<h2><span class="header-section-number">8.1</span> Import zipped file</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># file structure</span>
 <span class="co">#  zipdata.zip</span>
 <span class="co">#     |--- csvdata</span>
@@ -723,7 +732,7 @@ myfiles &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind,
 </div>
 </div>
 <div id="parallel-r-in-windows" class="section level1">
-<h1><span class="header-section-number">8</span> Parallel R in Windows</h1>
+<h1><span class="header-section-number">9</span> Parallel R in Windows</h1>
 <p><a href="http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/" class="uri">http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(doSNOW)
 cl&lt;-<span class="kw">makeCluster</span>(<span class="dv">2</span>) <span class="co"># I have two cores</span>
@@ -743,7 +752,7 @@ times &lt;-<span class="st"> </span><span class="dv">10</span>   <span class="co
 <span class="kw">stopCluster</span>(cl)</code></pre></div>
 </div>
 <div id="trycatch-exception-handling" class="section level1">
-<h1><span class="header-section-number">9</span> tryCatch exception handling</h1>
+<h1><span class="header-section-number">10</span> tryCatch exception handling</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tryCatch</span>({
     expr
   }, <span class="dt">warning =</span> function(w) {
@@ -765,7 +774,7 @@ x
 )</code></pre></div>
 </div>
 <div id="sql-query" class="section level1">
-<h1><span class="header-section-number">10</span> SQL query</h1>
+<h1><span class="header-section-number">11</span> SQL query</h1>
 <ul>
 <li>JDBC</li>
 </ul>
@@ -781,7 +790,6 @@ conn &lt;-<span class="st"> </span><span class="kw">odbcDriverConnect</span>(<sp
 myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span class="st">&quot;select * from [xxx].[dbo].[myTable]&quot;</span>)</code></pre></div>
 </div>
 
-.
 
 <!-- <div id="backTotop"><a href="#homeLink">^Back to top^</a></div> -->
 <div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Home Page^</a></div>
@@ -789,7 +797,6 @@ myDF &lt;-<span class="st"> </span><span class="kw">sqlQuery</span>(conn, <span 
 
 <div id="disqus_thread"></div>
 <script>
-
 /**
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/

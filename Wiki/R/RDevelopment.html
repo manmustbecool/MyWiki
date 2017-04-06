@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R Development</h1>
-<h4 class="date"><em>08 March, 2017</em></h4>
+<h4 class="date"><em>03 April, 2017</em></h4>
 
 </div>
 
@@ -270,10 +270,8 @@ compiled_f &lt;-<span class="st"> </span><span class="kw">cmpfun</span>(f)
 +<span class="st"> </span>data &lt;-<span class="st"> </span>data %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">datetime =</span> <span class="kw">fast_strptime</span>(time, <span class="st">&quot;%Y-%m-%dT%H:%M:%OSZ&quot;</span>, <span class="dt">tz=</span><span class="st">&quot;UTC&quot;</span>))
 
 <span class="co"># -------- filter for subset</span>
-
-
-
 df &lt;-<span class="st"> </span>data[data$id&gt;<span class="dv">6</span>, ]
+
 <span class="co"># -------- combine data frame</span>
 for (i in <span class="dv">1</span>:<span class="dv">100</span>){
  finalDf &lt;-<span class="st"> </span><span class="kw">rbind</span>(finalDf, cellDf)

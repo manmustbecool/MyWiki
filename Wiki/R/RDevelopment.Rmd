@@ -137,10 +137,8 @@ compiled_f <- cmpfun(f)
 + data <- data %>% mutate(datetime = fast_strptime(time, "%Y-%m-%dT%H:%M:%OSZ", tz="UTC"))
 
 # -------- filter for subset
-
-
-
 df <- data[data$id>6, ]
+
 # -------- combine data frame
 for (i in 1:100){
  finalDf <- rbind(finalDf, cellDf)

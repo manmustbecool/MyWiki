@@ -45,10 +45,9 @@ The atomic data types are "logical", "integer", "numeric" (synonym "double"), "c
 
 ```r
 # Formatting decimal
-x <- 1.224554
-round(x, digits=2)
+round(1.221554, digits=2)
 
-# -------------- string --------------------------
+# --------- string ---------
 #  string is considered to be a character vector in R
 str <- 'string' # str[1] # This evaluates to 'string'.
 nchar(str) # Count the Number of Characters 
@@ -58,19 +57,6 @@ strsplit('0-0-1', '')  # Evaluates to list('0', '-', '0', '-', '1')
 paste('hello', 'world', sep = ' ') # 'hello world'
 paste0('hello', 'world') # 'helloworld'
 paste(c('a','b','c'), collapse = "")  # 'abc' , connect character vector to string
-
-# ----- regular expression match 
-# x is a string
-pos = regexpr('pattern', x) # Returns position of 1st match in a string
-pos = gregexpr('pattern', x) # Returns positions of every match in a string
-# x is a vector
-pos = grep('pattern', x) #  returns the index of the matching string in the vector
-
-sub('pattern', replacement, input) # Changes only the 1st pattern match per string
-gsub('pattern', replacement, input) # Changes every occurrence of a pattern match
-
-# insert a string
-gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
 ```
 
 # Common data structures
@@ -303,8 +289,8 @@ df <- cbind(df, x); # add a column
 
 # Avoid that R understands characters as factors
 df <- data.frame(stringsAsFactors=F) 
-df <- rbind(df, c("hi","i","am","bob"))
-df <- rbind(df, c("hi","i","am","alice"))
+df <- rbind(df, c("hi","i","am","bob"), stringsAsFactors=F)
+df <- rbind(df, c("hi","i","am","alice"), stringsAsFactors=F)
 
 temp <- list();
 for(i in 1:100) temp <- append(temp, list(c(1, i)) )
@@ -554,6 +540,27 @@ data %>% func # = func(data)
 data %>% func(arg=value) # = func(data, arg=value)
 ```
 
+# Regular expression
+```r
+# ----- return position --------
+# x is a string
+pos = regexpr('pattern', x) # Returns position of 1st match in a string
+pos = gregexpr('pattern', x) # Returns positions of every match in a string
+# x is a vector
+pos = grep('pattern', x) #  returns the index of the matching string in the vector
+
+#------ replace ---------
+sub('pattern', replacement, input) # Changes only the 1st pattern match per string
+gsub('pattern', replacement, input) # Changes every occurrence of a pattern match
+
+# ------ extact ----------
+library(stringr)
+str_extract(x, 'pattern')
+
+# ------- insert a string -------
+gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
+```
+
 # Data input/output
 
 ```r
@@ -567,9 +574,11 @@ data <- scan(".../misc/example.dat", skip=1)
 data
 # [1] 60 43 67 50 
 
-# read CSV
+# ----- read CSV --------
+# for small size dataset
 data <- read.table(file, header=F, sep="", quote ="\"'")
 
+# for large size dataset
 library(data.table)
 data <- fread(file, header=F) # for better performance
 ``` 
