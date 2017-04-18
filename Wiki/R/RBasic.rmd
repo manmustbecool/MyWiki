@@ -577,7 +577,7 @@ str_extract(x, 'pattern')
 gsub('^([a-z]{2})([a-z]+)$', '\\1cc\\2', "aabb") # aabb -> aaccbb
 ```
 
-# Data input/output
+# CSV input/output
 
 ```r
 #---- scan lines from a file ----
@@ -602,7 +602,7 @@ data <- fread(file, header=F) # for better performance
 write.table(MyData, file = "MyData.csv", row.names=FALSE, na="", col.names=FALSE, sep=",")
 
 ``` 
-## Import zipped file
+**Import zipped CSV file**
 
 ```r
 # file structure

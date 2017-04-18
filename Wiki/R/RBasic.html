@@ -173,9 +173,7 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#common-functions"><span class="toc-section-number">6</span> Common functions</a></li>
 <li><a href="#regular-expression"><span class="toc-section-number">7</span> Regular expression</a></li>
-<li><a href="#data-inputoutput"><span class="toc-section-number">8</span> Data input/output</a><ul>
-<li><a href="#import-zipped-file"><span class="toc-section-number">8.1</span> Import zipped file</a></li>
-</ul></li>
+<li><a href="#csv-inputoutput"><span class="toc-section-number">8</span> CSV input/output</a></li>
 <li><a href="#parallel-r-in-windows"><span class="toc-section-number">9</span> Parallel R in Windows</a></li>
 <li><a href="#trycatch-exception-handling"><span class="toc-section-number">10</span> tryCatch exception handling</a></li>
 <li><a href="#sql-query"><span class="toc-section-number">11</span> SQL query</a></li>
@@ -690,8 +688,8 @@ pos =<span class="st"> </span><span class="kw">grep</span>(<span class="st">'pat
 <span class="co"># ------- insert a string -------</span>
 <span class="kw">gsub</span>(<span class="st">'^([a-z]{2})([a-z]+)$'</span>, <span class="st">'</span><span class="ch">\\</span><span class="st">1cc</span><span class="ch">\\</span><span class="st">2'</span>, <span class="st">&quot;aabb&quot;</span>) <span class="co"># aabb -&gt; aaccbb</span></code></pre></div>
 </div>
-<div id="data-inputoutput" class="section level1">
-<h1><span class="header-section-number">8</span> Data input/output</h1>
+<div id="csv-inputoutput" class="section level1">
+<h1><span class="header-section-number">8</span> CSV input/output</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- scan lines from a file ----</span>
 <span class="co">#  data in the example.dat file </span>
 <span class="co">#  10</span>
@@ -712,8 +710,7 @@ data &lt;-<span class="st"> </span><span class="kw">fread</span>(file, <span cla
 
 <span class="co"># ---- write CSV ------</span>
 <span class="kw">write.table</span>(MyData, <span class="dt">file =</span> <span class="st">&quot;MyData.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">na=</span><span class="st">&quot;&quot;</span>, <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</code></pre></div>
-<div id="import-zipped-file" class="section level2">
-<h2><span class="header-section-number">8.1</span> Import zipped file</h2>
+<p><strong>Import zipped CSV file</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># file structure</span>
 <span class="co">#  zipdata.zip</span>
 <span class="co">#     |--- csvdata</span>
@@ -744,7 +741,6 @@ myfiles &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind,
 
 <span class="co"># delete the temp dir</span>
 <span class="kw">unlink</span>(temp_dir, <span class="dt">recursive=</span>T)</code></pre></div>
-</div>
 </div>
 <div id="parallel-r-in-windows" class="section level1">
 <h1><span class="header-section-number">9</span> Parallel R in Windows</h1>
