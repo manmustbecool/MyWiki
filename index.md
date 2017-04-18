@@ -49,6 +49,7 @@ My cheat sheets
  * <a href="Wiki/Mahout.html">Mahout</a> 
  * <a href="Wiki/Solr.html">Solr</a>
  * <a href="Wiki/Flink.html">Flink</a> 
+ * <a href="Wiki/Kafaka.html">Kafaka</a> 
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
 

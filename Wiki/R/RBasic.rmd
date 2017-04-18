@@ -257,7 +257,7 @@ nrow(df)
 ncol(df)
 ```
 
-Subset data frame
+**Subset data frame**
 ```r
 sub_df <- df[c(1,2,5), ] # Subset by row indexes
 sub_df <- df[, c(1,2,5)] # Subset by column indexes
@@ -280,7 +280,7 @@ sub_df <- df[, -c(1:8)] # delete columns
 sub_df <- df[, !(colnames(df) %in% c("TotalDuration") )]
 ```
 
-Append data frame
+**Append data frame**
 ```r
 # add a row or column
 x <- c(1,2,3)
@@ -300,7 +300,23 @@ df <- as.data.frame(do.call(rbind, temp))
 df$new_column = paste(df$V1, df$V2, sep="_")
 
 ```
-Sort
+
+**combine data frames**
+```r
+# build a list of data frames
+dfList <- list()
+for(i in 1:10){ dfList[[i]] <- data.frame(a=c("a1","a2"), b=c("b1","b2")) }
+
+
+# do.call approach
+finalDf <- do.call(rbind, dfList)
+
+# an efficient implementation of do.call(rbind, ...);
+library(dplyr) # for bind_rows
+finalDf <- bind_rows(dfList)
+```
+
+**Sort**
 ```r
 # sort by column index
 df[order(-df[,4], df[,1]), ]
@@ -310,7 +326,7 @@ target <- c("b", "c", "a", "d")
 df[match(target, df$name),]
 ```
 
-Summarize data frame
+**Summarize data frame**
 ```r
 # calculate row sum and product in data.frame
 transform(df, sum=rowSums(df), prod=x*y*z)
@@ -330,7 +346,7 @@ by(df[, 1:2], df[,3], summary)
 aggregate(rep(1, nrow(df)), by=as.list(df), FUN=sum)
 ```
 
-Handle duplication
+**Handle duplication**
 ```r
 # find/remove duplicated rows
 df[duplicated(df),] # or remove, df[!duplicated(df),]
@@ -346,7 +362,7 @@ df <- df[apply(df, 1, function(row) length(unique(row)) > 1), ]
 df <- df[, apply(df, 2, function(col) length(unique(col)) > 1)]
 ```
 
-Handle na, nan, null, blank 
+**Handle na, nan, null, blank**
 ```r
 
 df[is.na(df)] <- value  # Convert all Na's in data frames to other values
@@ -362,7 +378,7 @@ df[rowSums(is.na(df))!= ncol(df),] # Remove rows where all data is NA
 df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are NA
 ```
 
-Multiple data frames
+**Multiple data frames**
 ```r
 # ----- join two data frames
 merge(x=df1, y=df2, by="CustomerId")          # default all=FALSE. natural join, a special case of an inner join
@@ -386,7 +402,7 @@ semi_join(a1,a2) # for rows  are in both data frames
 anti_join(a1,a2)
 ```
 
-Use data.table for data.fame
+**Use data.table for data.fame**
 ```r
 library(data.table)
 
@@ -408,7 +424,7 @@ expr <- parse(text = paste("by=", colnames(dt)2)) # dynamic column names with gr
 dt[, list(ages=list(age)), eval(expr)]
 
 ```
-Stack columns
+**Stack columns**
 ```r
 df <- data.frame(a=c(1,1), b=c(2,2), c=c(3,3))
 # Stack the data:
@@ -423,7 +439,7 @@ sdf <- stack(df)
 # 6      3   c
 ```
 
-Reshape data frame with tidyr
+**Reshape data frame with tidyr**
 ```r
 library(tidyr)
 df <- data.frame(month=rep(1:3,2),
@@ -581,6 +597,10 @@ data <- read.table(file, header=F, sep="", quote ="\"'")
 # for large size dataset
 library(data.table)
 data <- fread(file, header=F) # for better performance
+
+# ---- write CSV ------
+write.table(MyData, file = "MyData.csv", row.names=FALSE, na="", col.names=FALSE, sep=",")
+
 ``` 
 ## Import zipped file
 

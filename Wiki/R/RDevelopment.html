@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R Development</h1>
-<h4 class="date"><em>03 April, 2017</em></h4>
+<h4 class="date"><em>18 April, 2017</em></h4>
 
 </div>
 
@@ -269,23 +269,13 @@ compiled_f &lt;-<span class="st"> </span><span class="kw">cmpfun</span>(f)
 -<span class="st"> </span>data$datetime &lt;-<span class="st"> </span><span class="kw">strptime</span>(data$time, <span class="st">&quot;%Y-%m-%dT%H:%M:%OSZ&quot;</span>, <span class="dt">tz=</span><span class="st">&quot;UTC&quot;</span>)
 +<span class="st"> </span>data &lt;-<span class="st"> </span>data %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">datetime =</span> <span class="kw">fast_strptime</span>(time, <span class="st">&quot;%Y-%m-%dT%H:%M:%OSZ&quot;</span>, <span class="dt">tz=</span><span class="st">&quot;UTC&quot;</span>))
 
+
+
 <span class="co"># -------- filter for subset</span>
 df &lt;-<span class="st"> </span>data[data$id&gt;<span class="dv">6</span>, ]
 
-<span class="co"># -------- combine data frame</span>
-for (i in <span class="dv">1</span>:<span class="dv">100</span>){
- finalDf &lt;-<span class="st"> </span><span class="kw">rbind</span>(finalDf, cellDf)
-}
-
-
 <span class="kw">library</span>(dlpyr)
-df &lt;-<span class="st"> </span>data %&gt;%<span class="st"> </span><span class="kw">filter</span>(id&gt;<span class="dv">6</span>)
-
-dfList &lt;-<span class="st"> </span><span class="kw">list</span>()
-for (i in <span class="dv">1</span>:<span class="dv">100</span>){
- dfList[[cell]] &lt;-<span class="st"> </span>cellDf
-}
-finalDf &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(dfList)</code></pre></div>
+df &lt;-<span class="st"> </span>data %&gt;%<span class="st"> </span><span class="kw">filter</span>(id&gt;<span class="dv">6</span>)</code></pre></div>
 <p>performance profile</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">funAgg =<span class="st"> </span>function(x) {
   res =<span class="st"> </span><span class="ot">NULL</span>

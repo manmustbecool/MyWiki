@@ -1,0 +1,56 @@
+---
+title: "kafaka"
+output: html_document
+---
+
+# Basic
+
+
+  * topic > partitions -> kafka <- consumer < consumer group
+
+
+one topic contains many partitions, one partition is on one machine
+
+one consume group contains many consumers
+
+replication factor: number of replication for each partitions in a topic
+
+
+# Install
+
+## install oracle java 8
+
+```bash
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+
+// set java 8 to default
+sudo apt install oracle-java8-set-default
+
+// check java version 
+java -version
+```
+
+## install zookeeper
+
+```bash
+sudo apt install zookeeperd
+
+// check if it is running
+// ruok is a zookeeper command: Tests if server is running in a non-error state. The server will respond with imok if it is running. Otherwise it will not respond at all.
+service zookeeper status
+
+telnet localhost 2181
+ruok
+
+// or
+echo ruok | nc 127.0.0.1 2181
+
+```
+## install kafka
+
+// Create a kafka user, set the user password, and add the kafka user to the sudo group to allow it to sudo as root
+useradd kafka -m
+passwd kafka
+adduser kafka sudo
