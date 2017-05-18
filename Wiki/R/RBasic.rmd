@@ -615,7 +615,7 @@ write.table(MyData, file = "MyData.csv", row.names=FALSE, na="", col.names=FALSE
 filePath <- "zipdata.zip"
 
 # ---  Read one file ------------
-data <- read.table(unz(filePath, "csvdata/1.csv"),
+data <- read.table(unzip(filePath, "csvdata/1.csv"),
                    nrows=10, header=T, quote="\"", sep=";", stringsAsFactors=F)
 
 # ---  Read multiple files ------------

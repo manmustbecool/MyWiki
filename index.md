@@ -22,11 +22,12 @@ My cheat sheets
  * <a href="Wiki/R/graph.html">Graph</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/baye_network.html">Baye network</a>
- * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/Entropy.html">Entropy</a>
  * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
+ * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
+ * <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
  * Time Serie
     + <a href="Wiki/R/timeSeries.html">Time series</a>
     + <a href="Wiki/R/Arima.html">Arima</a>
