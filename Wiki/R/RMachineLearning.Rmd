@@ -3,6 +3,11 @@ title: "R Machine Learning"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+
+## Machine learing dataset
+
+http://archive.ics.uci.edu/ml/
+
 ## Gradient descents 
 
 Linear regression by gradient descents

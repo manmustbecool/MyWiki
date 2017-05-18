@@ -167,9 +167,3 @@ sudo chmod +x lein
 lein repl // To test, Crtl + Z to exit repl
 
 ```
-
-
-# Create bootable USB drives
-
-* Linux : UNetbootin http://unetbootin.sourceforge.net/
-* Linux & Windows : Rufus https://rufus.akeo.ie/

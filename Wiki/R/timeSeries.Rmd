@@ -41,6 +41,8 @@ format(x, format="%Y-%m-%d %H:%M:%S")   # "2010-11-04 00:00:00"
 POSIXct : “ct” stand for calender time 
 
 POSIXlt : “lt” stands for local time. POXIXlt objects are lists,  it enables easy extraction of specific componants of a time
+
+date format: https://jeffkayser.com/projects/date-format-string-composer/index.html
  
 ```r
 # read time stamp with format, return "POSIXlt" "POSIXt" object

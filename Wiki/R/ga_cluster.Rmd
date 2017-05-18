@@ -1,0 +1,154 @@
+---
+title: "Genetic algorithm based clustering"
+output: html_document
+---
+
+# Genetic algorithm based clustering
+
+```{r}
+
+trainingData <- iris[,1:4]
+plotData <- iris[,c(1,4)]
+
+euc.dist <- function(x1, x2) sqrt(sum((x1 - x2) ^ 2))
+
+k_cluster <- 3
+
+#------------- start the algorithm ------------
+
+chromosomes <- list()
+for(i in 1:k_cluster){
+  chromosomes[[i]] <- trainingData[i,]
+}
+
+
+solution_cluster_number <- vector()
+best_distance <- Inf
+
+for(loop in 1:30){
+  
+  cat("loop: ", loop, "\n")
+  
+  # assign each data point to the cluster
+  cluster_number <- vector()
+  for(trainingData_index in 1:nrow(trainingData)){
+    trainingData_distances <- vector()
+    for(chromosome_index in 1:length(chromosomes)){
+      distance <- euc.dist(chromosomes[[chromosome_index]], trainingData[trainingData_index,])
+      trainingData_distances <- c(trainingData_distances, distance)
+    }
+    names(trainingData_distances) <- 1:length(trainingData_distances)
+    trainingData_distances <- sort(trainingData_distances)
+    cluster_number <- c(cluster_number, as.numeric(names(trainingData_distances)[1]))
+  }
+  
+  # ------ fitness calcaluation --------------
+  chromosomes_distances <- vector()
+  for(chromosome_index in 1:length(chromosomes)){
+    total_distance <- 0;
+    
+    trainingData_cluster <- trainingData[which(cluster_number==chromosome_index), ]
+    
+    # if no data for this cluster then total_distance is Inf
+    if(nrow(trainingData_cluster)==0){
+      total_distance <- Inf
+    }else{
+      
+      # recalculate centers of the cluster as chromosomes 
+      for(i in 1:ncol(trainingData_cluster)){
+        chromosomes[[chromosome_index]][,i] <- sum(trainingData_cluster[, i])/nrow(trainingData_cluster)
+      }
+
+      for(i in 1:nrow(trainingData_cluster)){
+        total_distance <- total_distance + euc.dist(chromosomes[[chromosome_index]], trainingData_cluster[i,])
+      }
+    }
+    
+    print(total_distance)
+    chromosomes_distances <- c(chromosomes_distances, total_distance)
+  }
+  names(chromosomes_distances) <- 1:length(chromosomes)
+  chromosomes_distances <- sort(chromosomes_distances)
+  
+  
+  if(mean(chromosomes_distances)<best_distance){
+    
+    best_distance <- mean(chromosomes_distances)
+    solution_cluster_number <- cluster_number
+    # solution_cluster_number[solution_cluster_number==4] <- 3
+    plot(plotData, col=solution_cluster_number, main=paste0("GA-Cluster, generation ", loop) )
+    solution_center <- as.data.frame(do.call(rbind, chromosomes))
+    # points(solution_center[, c(1,3)], col=1:length(chromosomes), pch=8, cex=2)
+    
+  }
+   
+
+  chromosomes_new <- list()
+  
+  # ------------ selection -------------
+  # select top 2 as parents
+  for(i in 1:2){
+    chromosomes_new[[i]] <- chromosomes[[as.numeric(names(chromosomes_distances)[i])]] 
+  }
+  
+  # ---------- crossover ----------------
+  # make two children
+  chromosomes_new[[3]] <- cbind(chromosomes_new[[1]][,1:2], chromosomes_new[[2]][,3:4])  
+  chromosomes_new[[4]] <- cbind(chromosomes_new[[2]][,1:2], chromosomes_new[[1]][,3:4])  
+  
+  # --------- mutation ------------------
+  mutationChance <- 0.2
+  
+  # don't mutate the best
+  for(chromosomes_new_index in 2:length(chromosomes_new)){
+    
+    # cat(as.character(chromosomes_new[[chromosomes_new_index]]), "\n")
+    
+    x <- chromosomes_new[[chromosomes_new_index]] 
+    
+    for(i in 1:ncol(x)){
+      v <- x[,i]
+      if (runif(1) <= mutationChance) { # ok, do mutation
+        if(v!=0){
+          if(runif(1) <= 0.5){
+            v <- v + 2*runif(1)*v
+          }else{
+            v <- v - 2*runif(1)*v
+          }
+        }else{ # v==0
+          if(runif(1) <= 0.5){
+            v <- v + 2*runif(1)
+          }else{
+            v <- v - 2*runif(1)
+          }
+        }
+      }
+      x[,i] <- v
+    }
+    
+    chromosomes_new[[chromosomes_new_index]] <- x
+    
+    # cat(as.character(chromosomes_new[[chromosomes_new_index]]), "\n")
+  }
+  
+  # take top 3 for new population
+  chromosomes <- chromosomes_new[1:3]
+  
+}
+
+
+plot(plotData, col=solution_cluster_number, main="Final result of GA-Cluster")
+
+```
+
+
+
+
+
+
+
+The implementation is based on: 
+
+Genetic algorithm-based clustering technique, U Maulik, S Bandyopadhyay, Pattern recognition 33 (9), 1455-1465
+
+

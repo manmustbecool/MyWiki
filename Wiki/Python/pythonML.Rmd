@@ -1,0 +1,41 @@
+---
+title: "Python ML"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Time Series Forecast 
+
+https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/
+
+
+# SciKit-Learn
+
+```python
+from sklearn.datasets import load_breast_cancer
+cancer = load_breast_cancer()
+cancer.keys()
+// dict_keys(['DESCR', 'data', 'feature_names', 'target_names', 'target'])
+
+cancer['data'].shape
+X = cancer['data']
+y = cancer['target']
+
+# Train Test Split
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+# Fit only to the training data
+scaler.fit(X_train)
+```
+
+# Keras
+
+http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/
+
+https://keras.io/

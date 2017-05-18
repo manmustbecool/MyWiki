@@ -1,0 +1,40 @@
+---
+title: "Dimension reduction"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# PCA
+*prcomp* or *princomp*
+
+prcomp is preferred according to:
+https://stats.stackexchange.com/questions/20101/what-is-the-difference-between-r-functions-prcomp-and-princomp
+
+```{r}
+#------------ generate data ----------
+N <- 500
+factor1 <- rnorm(N)
+factor2 <- rnorm(N) 
+x1 <- rnorm(N) + factor1
+x2 <- rnorm(N) + factor1
+x3 <- rnorm(N) + factor2 
+x4 <- rnorm(N) + factor2
+mydat <- data.frame(x1,x2,x3,x4)
+
+# ---------- use prcomp ------------
+pca <- prcomp(mydat)
+names(pca)
+plot(pca) # plot the eigenvalues
+biplot(pca) # A two dimensional plot
+
+# --------- use princomp ------------
+
+pca2 <- princomp(mydat)
+pca2 <- princomp(~ x1 + x2 + x3 + x4, data = mydat) # princomp with a formula syntax
+biplot(pca2)
+
+
+```

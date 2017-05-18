@@ -149,19 +149,176 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Association Rule</h1>
-<h4 class="date"><em>Updated: 10 February, 2017</em></h4>
+<h4 class="date"><em>Updated: 08 March, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#cspade-with-arulessequences"><span class="toc-section-number">0.1</span> cspade with arulesSequences</a></li>
-<li><a href="#apriori-with-arules"><span class="toc-section-number">0.2</span> apriori with arules</a></li>
+<li><a href="#read-transaction-data"><span class="toc-section-number">0.1</span> Read transaction data</a></li>
+<li><a href="#arules-apriori"><span class="toc-section-number">0.2</span> arules apriori</a></li>
+<li><a href="#arulessequences-cspade"><span class="toc-section-number">0.3</span> arulesSequences cspade</a></li>
 </ul>
 </div>
 
-<div id="cspade-with-arulessequences" class="section level2">
-<h2><span class="header-section-number">0.1</span> cspade with arulesSequences</h2>
+<div id="read-transaction-data" class="section level2">
+<h2><span class="header-section-number">0.1</span> Read transaction data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesSequences, <span class="dt">quietly=</span>T )</code></pre></div>
+<pre><code>## Warning: package 'arulesSequences' was built under R version 3.3.2</code></pre>
+<pre><code>## 
+## Attaching package: 'arules'</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     abbreviate, write</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sequence dataset</span>
+<span class="co"># {a}, {b}</span>
+<span class="co"># {a}, {c}</span>
+<span class="co"># {a}, {a,b}</span>
+
+<span class="co"># build sequence dataset as a data frame</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sequenceID =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>),
+                 <span class="dt">eventID =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>),
+                 <span class="dt">Size =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>),
+                 <span class="dt">items =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a,b&quot;</span>)
+                 )
+
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">lapply</span>(df, as.factor))
+
+<span class="kw">write.table</span>(df, <span class="dt">file=</span><span class="st">&quot;myTemp.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">row.names =</span> F, <span class="dt">col.names =</span> F, <span class="dt">quote=</span>F)
+
+<span class="co"># &quot;sequenceID&quot; (sequence or customer identifier) and &quot;eventID&quot; (time or event identifier)</span>
+t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class="st">&quot;myTemp.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">info =</span> <span class="kw">c</span>(<span class="st">&quot;sequenceID&quot;</span>,<span class="st">&quot;eventID&quot;</span> , <span class="st">&quot;SIZE&quot;</span>))
+
+<span class="co"># convert transaction as data frame</span>
+<span class="kw">as</span>(t, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##   items sequenceID eventID SIZE
+## 1   {a}          1       1    1
+## 2   {b}          1       2    1
+## 3   {a}          2       1    1
+## 4   {c}          2       2    1
+## 5   {a}          3       1    2
+## 6 {a,b}          3       2    2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">inspect</span>(t)</code></pre></div>
+<pre><code>##     items sequenceID eventID SIZE
+## [1] {a}   1          1       1   
+## [2] {b}   1          2       1   
+## [3] {a}   2          1       1   
+## [4] {c}   2          2       1   
+## [5] {a}   3          1       2   
+## [6] {a,b} 3          2       2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get transactionInfo</span>
+<span class="kw">transactionInfo</span>(t)</code></pre></div>
+<pre><code>##   sequenceID eventID SIZE
+## 1          1       1    1
+## 2          1       2    1
+## 3          2       1    1
+## 4          2       2    1
+## 5          3       1    2
+## 6          3       2    2</code></pre>
+</div>
+<div id="arules-apriori" class="section level2">
+<h2><span class="header-section-number">0.2</span> arules apriori</h2>
+<p><a href="http://www.salemmarafi.com/code/market-basket-analysis-with-r/" class="uri">http://www.salemmarafi.com/code/market-basket-analysis-with-r/</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arules, <span class="dt">quietly =</span> T)
+
+rules &lt;-<span class="st"> </span><span class="kw">apriori</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support=</span><span class="fl">0.1</span>, <span class="dt">confidence=</span><span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Apriori
+## 
+## Parameter specification:
+##  confidence minval smax arem  aval originalSupport maxtime support minlen
+##         0.5    0.1    1 none FALSE            TRUE       5     0.1      1
+##  maxlen target   ext
+##      10  rules FALSE
+## 
+## Algorithmic control:
+##  filter tree heap memopt load sort verbose
+##     0.1 TRUE TRUE  FALSE TRUE    2    TRUE
+## 
+## Absolute minimum support count: 0 
+## 
+## set item appearances ...[0 item(s)] done [0.00s].
+## set transactions ...[3 item(s), 6 transaction(s)] done [0.00s].
+## sorting and recoding items ... [3 item(s)] done [0.00s].
+## creating transaction tree ... done [0.00s].
+## checking subsets of size 1 2 done [0.00s].
+## writing ... [2 rule(s)] done [0.00s].
+## creating S4 object  ... done [0.00s].</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">inspect</span>(rules)</code></pre></div>
+<pre><code>##     lhs    rhs support   confidence lift
+## [1] {}  =&gt; {a} 0.6666667 0.6666667  1.00
+## [2] {b} =&gt; {a} 0.1666667 0.5000000  0.75</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##     lhs    rhs support   confidence lift
+## [1] {}  =&gt; {a} 0.6666667 0.6666667  1.00
+## [2] {b} =&gt; {a} 0.1666667 0.5000000  0.75
+
+
+<span class="co"># sort rules</span>
+<span class="kw">inspect</span>(<span class="kw">head</span>(<span class="kw">sort</span>(rules, <span class="dt">by=</span><span class="st">&quot;lift&quot;</span>), <span class="dv">10</span>))</code></pre></div>
+<pre><code>##     lhs    rhs support   confidence lift
+## [1] {}  =&gt; {a} 0.6666667 0.6666667  1.00
+## [2] {b} =&gt; {a} 0.1666667 0.5000000  0.75</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as</span>(rules, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##        rules   support confidence lift
+## 1  {} =&gt; {a} 0.6666667  0.6666667 1.00
+## 2 {b} =&gt; {a} 0.1666667  0.5000000 0.75</code></pre>
+<p>rule to data frame with lhs an rhs in different column</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source_url</span>(<span class="st">'https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R'</span>)</code></pre></div>
+<p>Visualization</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesViz)</code></pre></div>
+<pre><code>## Warning: package 'arulesViz' was built under R version 3.3.2</code></pre>
+<pre><code>## Loading required package: grid</code></pre>
+<pre><code>## Warning: failed to assign NativeSymbolInfo for lhs since lhs is already
+## defined in the 'lazyeval' namespace</code></pre>
+<pre><code>## Warning: failed to assign NativeSymbolInfo for rhs since rhs is already
+## defined in the 'lazyeval' namespace</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(rules, <span class="dt">method=</span><span class="st">&quot;graph&quot;</span>
+     <span class="co">#, interactive=TRUE</span>
+     , <span class="dt">shading=</span><span class="ot">NA</span>)</code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA8AAAAMACAMAAADc4P4dAAAAtFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrY6AAA6Ojo6OpA6kNtMTExMTHVMTJRMdbFMlJRMlMxmAABmOgBmZgBmZjpmZmZmtrZmtv91TEx1scx1seaQOgCQZgCQkGaQ2/+UTEyUzP+xdUyx5v+2ZgC2tv+225C2/9u2///AwMDJycnMlEzM///bkDrb29vb/9vb///msXXm///2y8v/tmb/zJT/25D/5rH//7b//8z//9v//+b///91YjtmAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAaqElEQVR4nO3dCXvzWHmA4dCWof0ClCm0H4WWLV2SIS4DmWGA/P//1diydtmWbS3nPbrv62KIE+tEk9ETHS12Ht6BsB7WXgHgdgKGwAQMgQkYAhMwBCZgCEzAEJiAITABQ2AChsAEDIEJGAITMAQmYAhMwBCYgCEwAUNgAobABAyBCRgCEzAEJmAITMAQmIAhMAFDYAKGwAQMgQkYAhMwBCZgCEzAEJiAITABQ2AChsAEDIEJGAITMAQmYAhMwBCYgCEwAUNgAobABAyBCRgCEzAEJmAITMAQmIAhMAFDYAKGwAQMgQkYAhMwBCZgCEzAEJiAITABQ2AChsAEDIEJGAITMAQmYAhMwBCYgKf13ZcPhb/732kGfNsP9v0/XHjWa/FNP9/2PY4rfccqH0b43q9uXp5bCXhKx46OPk0x5JiAv/3B8TteDP3s0nckKOC1CHg6jRKm2wuPCLja6z98ccM3aP/SuWcfLuAVCHgybw89ExQ8IuD6G9+wz+/81rkxQgGvRcBTeWtF9HTHnLY/7PlhXu8o76+/rHa8rzfvxAW8HgFP5DiP/dR5fOOUtDY24Bt/VRQ74M/1OLdNGgS8FgFP5Kk7hy3SuHsXPHPAb41oD2t8W4UCXouAp1Hk2pp/Nma2r0Xcr43Gy3NHn1pP/1x+odpzlwEXc93+BLd55F1+9TgvbuxMB1ag8YVj/MWkoTNn6CzZfH7xbT5Xi9YBd6cj9U9ouutrHAh4GgPHoR9b7BfNr346HhfXx5uthIuAqx7L7fwY8FPn2ZV+wEOXhXorMGRwN9pZckzA9Vnx+hdO81yZhCck4EkU2/LJaexhs//HevMdul58+Ny/1p895lAE/B/15zv59QIevBbdXYFBb0Nf7Sw5IuDWee3jU9vnuhU8HQFPotjpnDyD29nhdi7dFNtzO7zq072LU53fEt2Au8//NLQCg4Z/CXWWvBxwY/9b/UyOc/r2J5mCgCdRJHnyMmyjgv1W/lT2WWzsjePk4kHzEPKtrrn57N7orePYw6JvD73Bh5c/KqbJ3fl1Z8nLAdfD1B/V+/ZiGae7JiPgSbQD7u3vXls7nsbW3riKUzynaKPYzA9b/Fvj081rPg3NqJ4afTSmBe0VGPTU+EbdwR/aR/PnAm5Opl/LJV/r9d4vpN/pCHgSowKu4/jYiosiGid+W2ef61TfHtob/8B+vhFVMV75jLeq5u4K9D2d2D13lrwY8Fv3N1V9zG/iPAMBT2JUwANnf7sBl6d36lTrCMcE3D4PVT//5AqUTp6g7ix5MeCnxioenrD/7F03e3KOgCcxJuCBiWMzm/btGFUHrSSfBhtoLNm5p+Op3PFdutvy6WRenSUvBdw9XVU8ofVZ56CnJOBJDJ2FbkQ9cJPia3sTbxwwHlTpte7EGhfwF+2vVAGfLKfsa2gP3VnyhoA/vXfPuzsGno6Ap/HU3s73ugE3jkA713oWCvjUIfAxuuGsOkveGHDn8wqejICnMXCQeTrg8raq7/+hewx8Ygp9XcCnptAnAu7feHli8O7Dxsp3Ah480m3+1rr/VVoUBDyNYmNubZcnA26clxp5Emt0wEMnsT6/nw/4xPWj/uDdh0MBn1jF9vdyHDwdAU/k9aG75TY+c2LveuEyUn1ZZnTAZy8jDTd64RJPZ8nmb4jGFa464BPf6dsflNPm5ml17ibgiRxvgapCKA/6+gE3Z5mNal8bu6bGXY3XBXz2Ro7BgAdeRnVy8PdWtI33AmgE3Dwf/3b8oHWK7/AEe+CpCHgq5YnWxiZ7LuDGzYbNgJtngupbKccHfFyLwVspBwOuXuZUGno5Yb1kMX7jfs8Tt1LWt2Xvl23cDTJwrMEdBDyZgffEehg8QdV72cKnwc82jmrHB9wb5nP/KU29N+K7EHD/LHM34O6In9+bv8+Gvwk3E/B0+jGUW367gubm/Pf7ZepZ7j/8S/WV1ssJxwd85uWEQwH3fm1cCLj5a+p7PxsKuPOL7NPQj8b9WJMR8JQ6O+H2u21056GHrb+6Xfj4nP8r93CdF/QXD8YEfPoF/QMBD984dWbwxr/j935Vv0bh1Av6q9Fa38j+dzoCnthTtXk3Pnmigk/vjSbL53Temer6gE++pc5AwL257eWAGyfKTgRcDds+1/w08IPhXgJOxdmbpWCYgFMhYG4g4FQImBsIOBUC5gYCToWAuYGAUyFgbiDgVGw94O++XPkC03f/1Xn8ZeNeuIGbxd/qC3rfVrfjNK93n/2POThqPc7ZUb/7sl5QwKkQ8LoBP3WvgD817+3uv/ziuy+rgBtPGRvw4KjtT54Z9a1eVwHD+6HHdsBv1S3qxVvxd3Lc36tyDPjpcHNK5ymvZ+9YGRy1Pc65Uf/6y6p8AcN7P+BjI+V+9iOk/tutVPd5H7701kz245NnbvgeHLU9zvlR36qJtoDhvR/wa/lqzmpC2zxgfTq87qR8TXf1bvyfGk84N4EeHLU9zvlR//rLMmsBs6LGm9YejoEbB3uNN/kqtuCPr7WiaCxbBlFUuH/3j8Pd2OUesvWwPeh3X/7d/9Tfs66pLKRK5rV5vLrfE5ZltQorvZ1/xcbQqO1xLo36Wq6rgFlNlet+YxwKuHytRflnlRoBt5btBfyfjeU6D9uDfgT80/3HP+0E/FZ8r+pPaHSmsv/0hyqx3sFzb1WH/r37o7bHuTTqtz84li9gVvNavu1X8Q4fjUJey3cmOb73Rz+H1rLdgKu/B7FfrvPwOOjx7NDxXNSuW8xTd/dav6nXUfml/RcOv00aU+wLO+DBUdvjXBr142vFxwJmNa3jymbAb+Xfhareu7PXw1N70+4EXDwsTgR1HpaDFo8+lqj+SlXje5R91NeKTgb88b3/u3gFdv2E80fAw6O2x7k4avnvL2BW89Q8rmwEfDzZWs80X/s3UrSW7QVcXeD5ovewKv/wQdVSdwZb/eqoUuv8EqkDrt7IrFyj3nM7Bkdtj3Nx1PIkl4BZzVt9MqkZcLlXrJt66+/RWsv2T2IVn38t3iGh+bCevr4WNzUdv0c74HKZUXvg+ptXI59/180Te+DmOBdHLf+VBcx6mn98uAq4OlfTfLuQfhHNZbsB1+9H9PFR+2Hzt8LH508EXA444hj47aH1G+G9OXN4L5ct1vVzZ9FuwI1xLo4qYFJQv/dtFXA1OT4fcHPZOQP+ov2ZSn0Sq1zwtf7F055BDwTcH7U9zsVRBUwi9p0eJrPlW1g3ptKX3v7uuOxb56zVZFPo5hXbziy+fxmpfEqv9Z6hUdvjXBxVwCTjuC8s/5RMf6Z5adn2meV671WexGo+7J3EGgq4mg6cuBOrsXb17rR8Sq/14ZXujNoe5+KoTmKxtirQRsCte4ir0zb9JNrLlo0+PRwDLndardcDlNeMO5eRhgKuLrOeuhe6tQadi1291nsGR22Pc2lUl5FY3Wuxty2iPQRcXZY9+HhU/sXD3ly6s+wh9aeHMuDDw7fiFFfnYe9GjnapR0/1FazhVyPVAR+v9FTn3sZMHIZGbY9zYVQ3crC+6nbIIqWPrhp/KKL595fKy8JDt1LWfwLu4eHfystIP2t8rfOweyvlMYTObU/1havmi3Sbq1AX1Rpw1KH78Kjtcc6P6lZKUtD6C6X9gFt/Nbl7g3Fj2fJ+yfo6cHn/5HvvYTlo9/6N4/mwo/rlPs33zhgOuHdBe8yfnhgctTXO2VG9mIFsdS7Z9q7gjjJw81dCvJyQfE0ScONNLxLkBf3ka5KAm+9ZlxxvqUPGpgm4fFO7FDV+uQiY3EwUcPm2sunxtrKQCQFDYAKGwAQMgQkYAhMwBCZgCEzAEJiAITABQ2AChsAEDIEJGAITMAQmYAhMwBCYgCEwAUNgAobABAyBCRgCEzAEJmAITMAQmIAhMAFDYAKGwAQMgQkYAhMwBCZgCEzAEJiAITABQ2AChsAEDIEJGAITMAQmYAhMwBCYgCEwAUNgAobABAyBCRgCEzAEJmAITMAQmIAhMAFDYAKGwAQMgQkYAhMwBCZgCEzAEJiAITABQ2AChsAEDIEJGAITMAQmYAhMwBCYgCEwAUNgAobABAyBCRgCEzAEJmAITMBk6s8/f/zJ2uswPwGTKQFDYAKGwAQMgQkYAhMwBHYI+C+/fnzMumMBk6l9wB//2/vh79ZemdkImEx9xPvPv358zLxgAZOpw973x398f/8m51m0gMnUPuCflB9luwsWMJlqZPvV4+Mv1l2Z2QiYTH0EvJ9A732T7xxawGSqcR0440vCAiZT7YDLnXFuBEym7IEhMMfAENhHwD/6ffHhV4+Pv1l3ZWYjYDJVXwf+2AGXKWdHwGTqcCfWvuCv3YkF4TTvhc52ByxgctV4NVK+/QqYXNWvB871Nso9AUNgAiYvu93aa7AoAZOVnYAhrK31K2Bysrl+BUxGttevgMnHBvsVMNnYYr8CJhO7TfYrYPKw0X4FTA62mq+AycF2+xUw8W03XwET35b7FTDRbbpfARPctvsVMLFtvF8BE9rW+xUwkW2+XwETmH4FTFz6FTBx6fddwISl3z0BE9KGb39uETAR6fdIwAQk35KAiUe/FQETjn5rAiYa/TYImFicvmoRMKHot03ARCLfDgETiH67BEwYps99AiYK/Q4QMEHId4iAiUG/gwRMCPodJmAi0O8JAiYA/Z4iYNKn35METPL0e5qASZ1+zxAwidPvOQImaW6/Ok/ApEy/FwiYhMn3EgGTLv1eJGCSpd/LBEyq9DuCgEmT01ejCJgk6XccAZMi+Y4kYBKk37EETHr0O5qASY5+xxMwqdHvFQRMYvR7DQGTFv1eRcAkRb/XETAp0e+VBEw63H51NQGTDP1eT8CkQr43EDBpsPu9iYBJgn5vI2BSIN8bCZgE6PdWAmZ9+r2ZgFmdfm8nYNam3zsImJXp9x4CZlUuH91HwKxJv3cSMCuS770EzHr0ezcBsxr93k/ArMTh7xQEzDr0OwkBswr5TkPArEG/ExEwK9DvVATM4hz+TkfALE2/ExIwC5PvlATMsvQ7KQGzKP1OS8AsSb8TEzAL0u/UBMxy9Ds5AbMY/U5PwCxFvzMQMAvR7xwEzDL0OwsBswj9zkPALEG/MxEw8/PyhdkImNnpdz4CZm7ynZGAmZl+5yRg5qXfWQmYWel3XgJmTvqdmYCZkX7nJmBm4/LR/ATMXPS7AAEzE/kuQcDMQ7+LEDCz0O8yBMwc9LsQATMD/S5FwEzO6eflCJip6XdBAmYaVbXyXZKAmcbupQhXv4sSMNPYvRwK1u+yBMwk9jvgl53D36UJmEkc6n150e/CBMwkioCfX9Zej60RMFM4zKBfPgK2B16WgJnA/vj3o9/9PxS8KAEzgaLfXXEYvPbKbIqAuV+zXwEvSsDc7TB7Lg6CXUdamIC51273fDz8Ve/iBMydin4P+a69KhskYO5U9CvfdQiY+5T9rr0eGyVg7rJ7fn6W73oEzE0eCvpdmYC5xUPp+Vm+axIwN/go9097+32wftckYG5w7Hdf8NqrsnF+/lyv6lfBa/Pj53oCToYfP1dr9Cvglfnxcz174GT48XM9ASfDj58bOAudCj9/btC4Drz2qmycnz+3qO7EWntFts5/AK5UvHBQv2nwX4DreNuNpAiYq8g3LQLmGvpNjIC5gn5TI2DG029yBMxo+k2PgBlLvwkSMCPpN0UCZhz9JknAjKLfNAmYMfSbKAEzgn5TJWAu02+yBMwlXr6QMAFzgX5TJmDOk2/SBMxZ+k2bgDlHv4kTMGfoN3UC5jT9Jk/AnKTf9AmYE1w+ikDADNNvCAJmkHxjEDBD9BuEgBmg3ygETJ9+wxAwPfqNQ8B06TcQAdPm8lEoAqZFv7EImCb5BiNgGvQbjYCp6TccAVPRbzwCpqTfgATMkX4jEjAHLh/FJGD29BuUgHk3fY5LwOg3MAGj38AEjH4DE/Dm6TcyAW+dfkMT8MbpNzYBb5t+gxPwpuk3OgFvmX7DE/CG6Tc+AW+XfjMg4K3y8oUsCHij9JsHAW+TfDMh4E3Sby4EvEX6zYaAN0i/+RDw5jh9lRMBb41+syLgjZFvXgS8LfrNjIA3Rb+5EfCW6Dc7At4Q/eZHwNuh3wwJeDP0myMBb4V+syTgjdBvngS8CW6/ypWAt0C/2RLwBsg3XwLOn34zJuD86TdjAs6eHXDOBJw556/yJuC86TdzAs6afHMn4JzpN3sCzph+8yfgbDn83QIB50q/myDgTMl3GwScJ/1uhICzpN+tEHCO9LsZAs6QfrdDwPnR74YIODv63RIB50a/myLgzOh3WwScFbdfbY2Ac6LfzRFwRuS7PQLOh343SMDZ0O8WCTgX+t0kAWdCv9sk4Cw4/bxVAs6BfjdLwBmQ73YJOD79bpiAw9Pvlgk4Ov1umoCD0++2CTg2/W6cgEPT79YJODL9bp6AA9MvAo5Lvwg4Lv0i4LDc/syegGPSLwcCDkm+FAQckX45EnA8ps9UBByOfqkJOBr50iDgYPRLk4Bj0S8tAg5Fv7QJOBL90iHgQPRLl4Dj0C89Ag5Dv/QJOAr9MkDAQeiXIQKOQb8MEnAI+mWYgNNVV6tfThBwunYvRbdefsRJAk7X7uVQsH45TcDJ2u+AX3by5RwBJ+tQ78uLfjlDwMkqAn5+WXs9SJmAU3XcAT+/2ANzmoBT9RHwy4f9JHrtVSFdAk5U2e9OwZwh4ESV+e7/X8CcIuA0Hfs9Rrz22pAsASdpt3t+eVYvFwk4SR/1PruHg8sEnKKX5+dn8TKCgBP00a8bsBhFwOl5ebH7ZSQBJ2enX0YTcGr0yxUEnJqd+zYYT8AQmIAhMAFDYAKGwAQMgQl4ZV897v3wd2uvBzEJeFVfP5Z+/Me114WIBLymut/Hx1+svTJEJOAV/eXXx273H9gFcwMBr+ibx8efFB/9+eePP/r9uitDSAJOwscuWMDcQMAJ+NtvP46BBcwNBLyub6qTWALmBgJe08ehr4C5h4BXtD/5XLTrGJjbCHhFX1f7XQFzGwGv52+/rW6h/MYUmpsIeD11wPu5tIC5gYBX9NUx26+9noEbCXhF3zRuhRYwtxDwmr4q6/333z4+/mbttSEgAa+quBD8i+Zt0XAFAUNgAobABAyBCRgCEzAEJuBVvLysvQbkQcBreHkWMJMQ8PJ2+mUqAl7cR7/P/oIo0xDw0nY7/TIZAS9Mv0xJwIva7Y9/BcxkBLygj3z1y6QEvJh9vh+edwJmMgJeyr7fQ8P6ZToCXsSuyHf/DwEzIQEvYj933hX7XwEzIQEvop4/65cpCXgZxzNYOwEzKQEv5XAHpYCZloAX82IGzeQEvJTdrjgSXns9yIqAF7Lb379hBs3EBLyM3fH+K7dhMSkBL0O4zELAi9Av8xDwEnYCZh4CXoB+mYuA56dfZiPg+emX2Qh4dvplPgKemwk0MxLwzPTLnAQ8L/0yKwHPS7/MSsCz0i/zEvCcTKCZmYBnpF/mJuD56JfZCXg2+mV+Ap6LflmAgOeiXxYg4JnolyUIeB4m0CxCwLPQL8sQ8Bz0y0IEPAP9shQBT0+/LEbA09MvixHw5PTLcgQ8NRNoFiTgiemXJQl4YvplSQKeln5ZlIAnZQLNsgQ8Jf2yMAFPSL8sTcDT0S+LE/Bk9MvyBDwZ/bI8AU9Fv6xAwBMxgWYNAp6GflmFgCehX9Yh4Enol3UIeAr6ZSUCnoAJNGsR8P30y2oEfD/9shoB302/rEfA9zKBZkUCvpN+WZOA76NfViXg++iXVQn4LvplXQK+hwk0KxPwHfTL2gR8O/2yOgHfTL+sT8C30i8JEPCt9EsCBHwj/ZICAd/GBJokCPgm+iUNAr6FfkmEgG+gX1Ih4Bvol1QI+Hr6JRkCvpoJNOkQ8LX0S0IEfCX9khIBX0m/pETA19EvSRHwVUygSYuAr6FfEiPgK+iX1Ah4PP2SHAGPp1+SI+DR9Et6BDyWCTQJEvBI+iVFAh5Jv6RIwOPolyQJeBQTaNIk4DH0S6IEPIZ+SZSAR9AvqRLwZSbQJEvAF+mXdAn4Ev2SMAFfol8SJuAL9EvKBHyeCTRJE/BZ+iVtAj5HvyROwGfol9QJ+DT9kjwBn6Rf0ifgk/RL+gR8in4JQMAnmEATgYCH6ZcQBDxIv8Qg4CH6JQgBD9AvUQi4T7+EIeA+/RKGgHv0SxwC7jKBJhABd+iXSATcpl9CEXCLfolFwC36JRYBN+mXYATcYAJNNAKu6ZdwBFzRL/EIuKJf4hFwSb8EJOAjE2giEnBBv4Qk4AP9EpOAD/RLTALe0y9BCfjdBJq4BKxfAhOwCTSBCVi/BCZgE2gC23zA+iWyrQesX0LbeMD6JbZtB6xfgtt6wGuvAdxl0wHrl+i2HLAJNOFtOGD9Et92A9YvGdhswPolBxsOeO01gPttNWD9koWNBmwCTR62GbB+ycRWA157DWASmwxYv+RiiwGbQJONDQasX/KRacAPLa0v6ZeM5Bjww4Dqi/olJ/kFXAT7p4ZmwvolK9kF3K23bvjwZf2SlcwCHs63Tli/5CWvgE/329gJQz5y2qbP5SthspTRFn2pXwWTn3w26Iv5HhNeez1hQvlsz2P63Re89nrChLLZnsf1q2DyksvmPGoCbRJNbnLZmsf2axdMVjLZmsf3q2ByksfGPHoCbRJNXvLYlq/p1y6YjGSxLV/Xr4LJRxabsoDZqiw2ZQGzVTlsytf2q2CykcOWLGA2K4ctWcBsVg5bsoDZrBy2ZAGzWTlsyQJms3LYkgXMZuWwJQuYzcphSxYwm5XDlixgNiuHLVnAbFYOW7KA2awctmQBs1k5bMkCZrOy2JK9nJCtymJTFjBblcWmLGC2Ko9N2ZvasVF5bMveVpaNymRb9sbubFMuG7M/rcIm5bI1++NmbFI2W7M/L8oW5bM5+wPfbFA+2/OoSbQJNHnJaHt+uJjwg37JTE4b9KWC9Ut28tqizyUsXzKU2TZ9umD9kqPsNurhhOVLnvLbrB8eug0Xn1l7vWAGOW7XDwPWXieYRaZbtnrZBhs3BCZgCEzAEJiAITABQ2AChsAEDIEJGAITMAQmYAhMwBCYgCEwAUNgAobABAyBCRgCEzAEJmAITMAQmIAhMAFDYAKGwAQMgf0/Y+FjWDd2N2gAAAAASUVORK5CYII=" width="480" /></p>
+</div>
+<div id="arulessequences-cspade" class="section level2">
+<h2><span class="header-section-number">0.3</span> arulesSequences cspade</h2>
+<p>Frequent sequence mining</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Mining Frequent Sequence</span>
+<span class="co"># set the support parameter to 0.3, and also have instructed the algorithm to show a verbose output.</span>
+s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.3</span>), <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## 
+## parameter specification:
+## support : 0.3
+## maxsize :  10
+## maxlen  :  10
+## 
+## algorithmic control:
+## bfstype  : FALSE
+## verbose  :  TRUE
+## summary  : FALSE
+## tidLists : FALSE
+## 
+## preprocessing ... 1 partition(s), 0 MB [0.12s]
+## mining transactions ... 0 MB [0.13s]
+## reading sequences ... [0.03s]
+## 
+## total elapsed time: 0.28s</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##      sequence   support
+## 1       &lt;{a}&gt; 1.0000000
+## 2       &lt;{b}&gt; 0.6666667
+## 3       &lt;{c}&gt; 0.3333333
+## 4   &lt;{a},{c}&gt; 0.3333333
+## 5   &lt;{a},{b}&gt; 0.6666667
+## 6     &lt;{a,b}&gt; 0.3333333
+## 7 &lt;{a},{a,b}&gt; 0.3333333
+## 8   &lt;{a},{a}&gt; 0.3333333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#  default value for confidence of 0.8</span>
+s2 &lt;-<span class="st"> </span><span class="kw">ruleInduction</span>(s1, <span class="dt">confidence =</span> <span class="dv">0</span>)
+
+<span class="kw">as</span>(s2, <span class="st">&quot;data.frame&quot;</span>)</code></pre></div>
+<pre><code>##               rule   support confidence      lift
+## 1   &lt;{a}&gt; =&gt; &lt;{c}&gt; 0.3333333  0.3333333 1.0000000
+## 2   &lt;{a}&gt; =&gt; &lt;{b}&gt; 0.6666667  0.6666667 1.0000000
+## 3 &lt;{a}&gt; =&gt; &lt;{a,b}&gt; 0.3333333  0.3333333 1.0000000
+## 4   &lt;{a}&gt; =&gt; &lt;{a}&gt; 0.3333333  0.3333333 0.3333333</code></pre>
+<p>built in data from arulesSequences package</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arulesSequences)
 
 <span class="co"># -- sample data</span>
@@ -184,61 +341,34 @@ t &lt;-<span class="st"> </span><span class="kw">read_baskets</span>(<span class
 ## 2    {A,B,C}          1      15    3
 ## 3    {A,B,F}          1      20    3
 ## 4  {A,C,D,F}          1      25    4
-## 5    {A,B,F}          2      15    3
-
-<span class="co"># convert transaction as data frame</span>
-<span class="kw">as</span>(t, <span class="st">&quot;data.frame&quot;</span>)
-
-<span class="co"># get transactionInfo</span>
-<span class="kw">transactionInfo</span>(t)
-##    sequenceID eventID SIZE
-## 1           1      10    2
-## 2           1      15    3
-## 3           1      20    3
-
-<span class="co"># mining frequent sequences</span>
-<span class="co"># set the support parameter to 0.4, and also have instructed the algorithm to show a verbose output.</span>
-s1 &lt;-<span class="st"> </span><span class="kw">cspade</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support =</span> <span class="fl">0.3</span>), <span class="dt">control=</span><span class="kw">list</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>))
-
-<span class="kw">summary</span>(s1)
-
-<span class="kw">as</span>(s1, <span class="st">&quot;data.frame&quot;</span>)
-##           sequence support
-## 1            &lt;{A}&gt;    1.00
-## 2            &lt;{B}&gt;    1.00
-## 3            &lt;{D}&gt;    0.50
-## 4            &lt;{F}&gt;    1.00
-## 5          &lt;{A,F}&gt;    0.75
-## ...</code></pre></div>
-</div>
-<div id="apriori-with-arules" class="section level2">
-<h2><span class="header-section-number">0.2</span> apriori with arules</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(arules)
-
-
-rules &lt;-<span class="st"> </span><span class="kw">apriori</span>(t, <span class="dt">parameter=</span><span class="kw">list</span>(<span class="dt">support=</span><span class="fl">0.2</span>, <span class="dt">confidence=</span><span class="fl">0.5</span>))
-
-<span class="kw">inspect</span>(rules)
-##     lhs      rhs support confidence lift    
-##[1]  {}    =&gt; {B} 0.5     0.5000000  1.000000
-##[2]  {}    =&gt; {F} 0.5     0.5000000  1.000000
-##[3]  {}    =&gt; {A} 0.6     0.6000000  1.000000
-##[4]  {G}   =&gt; {H} 0.2     1.0000000  5.000000
-
-
-<span class="co"># sort rules</span>
-<span class="kw">inspect</span>(<span class="kw">head</span>(<span class="kw">sort</span>(rules, <span class="dt">by=</span><span class="st">&quot;lift&quot;</span>), <span class="dv">10</span>))
-
-<span class="kw">as</span>(rules, <span class="st">&quot;data.frame&quot;</span>)
-
-<span class="co"># rule to data frame with lhs an rhs in different column</span>
-<span class="kw">source_url</span>(<span class="st">'https://raw.githubusercontent.com/brooksandrew/Rsenal/master/R/rules2df.R'</span>)</code></pre></div>
+## 5    {A,B,F}          2      15    3</code></pre></div>
 </div>
 
-.
 
 <!-- <div id="backTotop"><a href="#homeLink">^Back to top^</a></div> -->
 <div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Home Page^</a></div>
+
+
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://http-manmustbecool-github-io-mywiki.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
