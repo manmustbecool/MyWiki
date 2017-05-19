@@ -48,6 +48,7 @@ lines(density(glu), col='black')
 From the density of "glu" conditional on diabetes, we can obtain the probability of diabetes conditional on "glu" via Bayes' rule. 
 
 p.d.given.glu function is for
+
 $$
 p(diabetes=1|glu)=
 \frac{p(glu|diabetes=1)*p(diabetes=1)}
@@ -55,9 +56,6 @@ p(diabetes=1|glu)=
 $$
 
 ```{r}
-
-# denstiy estimation
-
 base.rate.d1 <- sum(d1) / (sum(d1) + sum(d0))
 
 # approxfun - linear (or constant) interpolation Functions

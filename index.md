@@ -29,8 +29,8 @@ My cheat sheets
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  * Dimension Reduction
-    + <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
     + <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
+    + <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * Time Serie
     + <a href="Wiki/R/timeSeries.html">Time series</a>
     + <a href="Wiki/R/Arima.html">Arima</a>

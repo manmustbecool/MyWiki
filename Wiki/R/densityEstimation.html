@@ -198,14 +198,13 @@ glu.d1.density &lt;-<span class="st"> </span><span class="kw">density</span> (gl
 <div id="estimate-probability-of-diabete-based-on-glu-variable" class="section level1">
 <h1><span class="header-section-number">2</span> estimate probability of diabete based on glu variable</h1>
 <p>From the density of “glu” conditional on diabetes, we can obtain the probability of diabetes conditional on “glu” via Bayes’ rule.</p>
-<p>p.d.given.glu function is for <span class="math display">\[
+<p>p.d.given.glu function is for</p>
+<p><span class="math display">\[
 p(diabetes=1|glu)=
 \frac{p(glu|diabetes=1)*p(diabetes=1)}
 {p(glu|diabetes=1)p(diabetes=1)+p(glu|diabetes=0)p(diabetes=0)}
 \]</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># denstiy estimation</span>
-
-base.rate.d1 &lt;-<span class="st"> </span><span class="kw">sum</span>(d1) /<span class="st"> </span>(<span class="kw">sum</span>(d1) +<span class="st"> </span><span class="kw">sum</span>(d0))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.rate.d1 &lt;-<span class="st"> </span><span class="kw">sum</span>(d1) /<span class="st"> </span>(<span class="kw">sum</span>(d1) +<span class="st"> </span><span class="kw">sum</span>(d0))
 
 <span class="co"># approxfun - linear (or constant) interpolation Functions</span>
 <span class="kw">approxfun</span>(glu.d0.density$x, glu.d0.density$y) -&gt;<span class="st"> </span>glu.d0.f
