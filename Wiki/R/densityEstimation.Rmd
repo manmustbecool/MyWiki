@@ -1,5 +1,5 @@
 ---
-title: "Denstity estimation"
+title: "Densitty estimation"
 output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# density estimation
+# denisty estimation
 
 http://www.wikiwand.com/en/Density_estimation#/Example_of_density_estimation
 
