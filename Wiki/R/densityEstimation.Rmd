@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# denisty estimation
+# Denisty estimation
 
 http://www.wikiwand.com/en/Density_estimation#/Example_of_density_estimation
 
@@ -43,7 +43,7 @@ lines(density(glu), col='black')
 ```
 
 
-# estimate probability of diabete based on glu variable
+# estimate probability of diabete conditional on glu 
 
 From the density of "glu" conditional on diabetes, we can obtain the probability of diabetes conditional on "glu" via Bayes' rule. 
 
