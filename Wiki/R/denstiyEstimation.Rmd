@@ -1,0 +1,82 @@
+---
+title: "Denstity estimation"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# density estimation
+
+http://www.wikiwand.com/en/Density_estimation#/Example_of_density_estimation
+
+```{r}
+
+library(MASS)
+data(Pima.tr)
+data(Pima.te)
+
+Pima <- rbind (Pima.tr, Pima.te)
+glu  <- Pima[, 'glu']
+
+# data example
+Pima [1:7, c('glu','type')]
+
+
+d0 <- Pima[, 'type'] == 'No'
+d1 <- Pima[, 'type'] == 'Yes'
+
+glu.density    <- density (glu)
+glu.d0.density <- density (glu[d0])
+glu.d1.density <- density (glu[d1])
+
+
+# plot denstiy function
+plot(density(glu[d0]), col='blue', xlab='glu'
+       , main='estimate p(glu|not diabetes) blue, p(glu|diabetes) red, p(glu) black')
+lines(density(glu[d1]), col='red')
+lines(density(glu), col='black')
+
+```
+
+
+# estimate probability of diabete based on glu variable
+
+From the density of "glu" conditional on diabetes, we can obtain the probability of diabetes conditional on "glu" via Bayes' rule. 
+
+p.d.given.glu function is for
+$$
+p(diabetes=1|glu)=
+\frac{p(glu|diabetes=1)*p(diabetes=1)}
+{p(glu|diabetes=1)p(diabetes=1)+p(glu|diabetes=0)p(diabetes=0)}
+$$
+
+```{r}
+
+# denstiy estimation
+
+base.rate.d1 <- sum(d1) / (sum(d1) + sum(d0))
+
+# approxfun - linear (or constant) interpolation Functions
+approxfun(glu.d0.density$x, glu.d0.density$y) -> glu.d0.f
+approxfun(glu.d1.density$x, glu.d1.density$y) -> glu.d1.f
+
+p.d.given.glu <- function(glu, base.rate.d1)
+{
+  p1 <- glu.d1.f(glu) * base.rate.d1
+  p0 <- glu.d0.f(glu) * (1 - base.rate.d1)
+  p1 / (p0 + p1)
+}
+
+x <- 1:250
+y <- p.d.given.glu (x, base.rate.d1)
+plot(x, y, type='l', col='red', xlab='glu', ylab='estimated p(diabetes|glu)')
+
+```
+
+figure shows the estimated posterior probability p(diabetes=1 | glu). From these data, it appears that an increased level of "glu" is associated with diabetes.
+
+

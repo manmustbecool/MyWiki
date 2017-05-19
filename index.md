@@ -15,7 +15,6 @@ My cheat sheets
  * <a href="Wiki/R/RBasic.html">R Basic</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/Shiny.html">Shiny</a>
- * <a href="Wiki/R/RDevelopment.html">R Development</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/associationRule.html">Association Rule</a>
@@ -25,9 +24,13 @@ My cheat sheets
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/Entropy.html">Entropy</a>
  * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
- * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
- * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
- * <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
+ * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
+ * Development 
+    + <a href="Wiki/R/RDevelopment.html">R Development</a>
+    + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
+ * Dimension Reduction
+    + <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
+    + <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
  * Time Serie
     + <a href="Wiki/R/timeSeries.html">Time series</a>
     + <a href="Wiki/R/Arima.html">Arima</a>
