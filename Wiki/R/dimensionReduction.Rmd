@@ -101,6 +101,42 @@ golfSVD$u[,1:2] %*% diag(golfSVD$d[1:2]) %*% t(golfSVD$v[ ,1:2])
 
 
 
+#MDS#
+
+Multidimensional Scaling
+
+```{r}
+#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. 
+euromat = as.matrix(eurodist) # convert eurodist to matrix
+euromat[1:5, 1:5] # inspect first five elements
+
+# as.dist(myMatrix) # convert to dist object from co matrix
+
+# MDS 'cmdscale'
+mds1 = cmdscale(eurodist, k = 2)
+
+# plot
+plot(mds1[,1], mds1[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
+     main = "cmdscale (stats)")
+text(mds1[,1], mds1[,2], labels(eurodist), cex = 0.9, xpd = TRUE)
+
+#------------------ 
+
+data(iris)
+
+irisDist <- dist(iris[,1:4]) # calculate the distance matrix for first 4 columns
+
+irisMds = cmdscale(irisDist, k = 2)
+
+# plot with color based on the 5th column 
+plot(irisMds)
+text(irisMds[,1], (irisMds[,2]+max(irisMds[,2])*0.05), labels=1:nrow(irisMds), cex = 0.6, xpd = TRUE)
+points(irisMds, col=c("red", "green", "blue")[as.numeric(iris$Species)])
+
+```
+
+
+
 
 
 
