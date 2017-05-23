@@ -63,6 +63,7 @@ My cheat sheets
 
 ### Others
  * <a href="Wiki/Linux.html">Linux</a>
+ * <a href="Wiki/Maven.html">Maven</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
  * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
