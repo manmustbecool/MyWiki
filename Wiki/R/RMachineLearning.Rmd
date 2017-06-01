@@ -31,21 +31,16 @@ http://yunus.hacettepe.edu.tr/~iozkan/eco742/hmm.html
 https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/
 
 
-## Support Vector Machine (SVM) ##
 
-  *  **e1071**
+## Loess 
 
-tune
-http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:tune
-
-svm
-http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:svm
-
-http://stackoverflow.com/questions/7390173/svm-equations-from-e1071-r-package
-
-Recursive Feature Extraction (SVM-RFE)
-
-http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selection
+```{r}
+x <- 1:10
+y <- c(2,4,6,8,7,12,14,16,18,20)
+lo <- loess(y~x)
+plot(x,y)
+lines(predict(lo), col='red', lwd=2)
+```
 
 
 ## Recommender system ##

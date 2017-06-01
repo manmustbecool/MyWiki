@@ -87,8 +87,13 @@ plot(plotData, col=model, main="Spectral")
 
 ```
 
-# cluster evaluation
+# plot with cluster package
+```{r}
+library(cluster)
+clusplot(x = iris[,c(1,3)], model, color=T, shade=F, labels=4, lines=0, plotchar=T)
+```
 
+# cluster evaluation
 
 ```{r}
 #----------- cluster evaluation function ------
@@ -121,4 +126,7 @@ plot_ly(data = iris, x=iris$Sepal.Length, y=iris$Sepal.Width, z=iris$Petal.Lengt
          ) 
 
 ```
+
+
+
 
