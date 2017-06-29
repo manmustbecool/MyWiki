@@ -1,6 +1,7 @@
 ---
 title: "Decision Tree"
 output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 http://www.statmethods.net/advstats/cart.html
@@ -9,15 +10,11 @@ http://www.statmethods.net/advstats/cart.html
 
  * rpart
 
-```r
+```{r}
 # Classification Tree with rpart
 library(rpart)
 
 kyphosis[1:3,]
-#   Kyphosis Age Number Start
-# 1   absent  71      3     5
-# 2   absent 158      3    14
-# 3  present 128      4     5
 
 #------------ build tree --------------
 
@@ -25,13 +22,13 @@ kyphosis[1:3,]
 fit <- rpart(Kyphosis ~ Age+Number+Start, method="class", data=kyphosis) # classfication tree
 
 # prune the tree
-pfit<- prune(fit, cp=fit$cptable[which.min(fit$cptable[,"xerror"]),"CP"])
+pfit <- prune(fit, cp=fit$cptable[which.min(fit$cptable[,"xerror"]),"CP"])
 
 #----- model diagnostic -----------
 
 printcp(fit) # display the results
 plotcp(fit) # visualize cross-validation results
-summary(fit) # detailed summary of splits
+# summary(fit) # detailed summary of splits
 
 # ---------- plot tree -----------
 
@@ -40,13 +37,10 @@ text(fit, use.n=TRUE, all=TRUE, cex=.8)
 
 library(rpart.plot)
 rpart.plot(fit, under=TRUE)
+rpart.plot(pfit, under=TRUE) # plot the pruned tree
 
 # create attractive postscript plot of tree
-post(fit, file = "")
-
-# plot the pruned tree
-rpart.plot(pfit, under=TRUE)
-
+# post(fit, file = "")
 ```
 
 
