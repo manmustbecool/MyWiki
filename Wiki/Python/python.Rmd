@@ -46,7 +46,7 @@ len(li) # length of list
 matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], ] # nested list
 ```
 
-### Tuples
+### Tuple
   
 Tuples are immutable sequences
 ```python
@@ -59,6 +59,26 @@ t[0]
 A set is an unordered collection with no duplicate elements
 ```python
 basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+```
+
+### Dictionary
+
+Dictionaries store key-value pairs, kind of like JSON objects.
+```python
+# create a dictionary
+person = {
+            "name": "Amos",
+            "age": 23,
+            "hobbies": ["Travelling", "Swimming", "Coding", "Music"]
+        }
+
+# iterate through the dict and print the keys
+for key in person:
+    print(key)
+
+# iterate through the dict's keys and print their values
+for key in person:
+    print(person[key])
 ```
 
 # Numpy
@@ -141,4 +161,3 @@ No working package for Pthon3 at the moment
   * Install NTLM package for 2.x first
   * Download NTLM package for 3.x files and replace installed file
   
-

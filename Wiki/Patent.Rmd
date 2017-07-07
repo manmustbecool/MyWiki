@@ -1,6 +1,7 @@
 ---
 title: "Patent"
 output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 # Explain
@@ -13,3 +14,6 @@ http://www.hawkip.com/advice/how-do-you-tell-the-difference-between-a-granted-pa
 
 http://www.bios.net/daisy/cambialabs/115.html
 
+## Legal status codes
+
+https://images.webofknowledge.com/WOK48B5/help/TCT/lsc_wo.htm
