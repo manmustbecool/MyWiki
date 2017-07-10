@@ -331,3 +331,58 @@ urlpatterns = [
 ]
 # (?P<pk>\d+) means Django will take all digits that you place here and transfer it to a view as a variable called pk
 ```
+
+## base.html
+```bash
+<html>
+    {% xxy %}
+    <head>
+      <meta charset="utf-8">
+	    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+    {% block content %}
+    {% endblock %}
+    </body>
+</html>
+```
+
+## post_new.html
+```bash
+{% extends 'base.html' %}
+{% block content %}
+  <a href="{% url 'post_new' %}">post new</a>
+{% endblock %}
+```
+
+
+## post_detail.html
+```bash
+{% extends 'base.html' %}
+{% block content %}
+	<div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <a href="{% url 'post_edit' pk=post.pk %}">edit</a>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+  </div>
+{% endblock %}
+```
+
+## post_edit.html
+```bash
+{% extends 'base.html' %}
+{% block content %}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
+```
+reference: https://tutorial.djangogirls.org/en/django_models/
