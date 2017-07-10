@@ -333,7 +333,8 @@ urlpatterns = [
 ```
 
 ## base.html
-```bash
+```html
+{% raw %}
 <html>
     {% xxy %}
     <head>
@@ -346,6 +347,7 @@ urlpatterns = [
     {% endblock %}
     </body>
 </html>
+{% endraw %}
 ```
 
 ## post_new.html
