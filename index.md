@@ -11,7 +11,7 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 My cheat sheets
 
-### R
+## R
  * <a href="Wiki/R/RBasic.html">R Basic</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/Shiny.html">Shiny</a>
@@ -41,17 +41,17 @@ My cheat sheets
     + <a href="Wiki/R/ga_cluster.html">Genetic algorithm based clustering</a>
     
  
-### Java
+## Java
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
  
-### Python
+## Python
  * <a href="Wiki/Python/python.html">Python</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
  * <a href="Wiki/Python/Django.html">Django</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
   
-### Big Data
+## Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
  * <a href="Wiki/Pig.html">Pig</a> 
  * <a href="Wiki/Hive.html">Hive</a> 

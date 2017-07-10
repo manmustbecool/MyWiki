@@ -4,7 +4,7 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-# HelloWorld Django
+# HelloWorld 
 
 ## create a python enviroment (helloenv)
 
@@ -37,7 +37,7 @@ source env/bin/activate
 
 ```
 
-## create a web project (helloweb)
+## create a Django project (helloweb)
 
 ```python
 # install django
@@ -89,9 +89,11 @@ INSTALLED_APPS = [
 python manage.py runserver
 
 # migrate the initial database schema to our SQLite database using the management script
-# change our database schema (model) without having to lose any data
+# it changes our database schema (model) without having to lose any data
 python manage.py migrate # need to stop server first
 
+Create an administrative user for the project if it is needed
+python manage.py createsuperuser
 ```
 
 ## create an web page in howdy
@@ -215,6 +217,7 @@ reference : https://scotch.io/tutorials/build-your-first-python-and-django-appli
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
+
 ```bash
 Examples:
 Function views
@@ -226,5 +229,158 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
 ```
+
+# Build a blog post web app
+
+## models.py
+
+```python
+from django.utils import timezone
+
+class Post(models.Model):  # Post inheritance from Model
+    author = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title	
+# create a form for our Post model.        
+# with Django forms,  we can either define one from scratch or create a ModelForm which will save the result of the form to the model.
+```
+
+## forms.py
+```python
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm): # create a Form class from a Django model.
+    class Meta:                  #model should be used to create this form (model = Post).
+        model = Post
+        fields = ('title', 'text',)
+```
+
+add new model to database
+
+```python
+python manage.py makemigrations
+python manage.py migrate
+```
+
+
+## views.py
+```python
+	
+from .form import PostForm
+from django.utils import timezone
+from django.shortcuts import redirect
+
+def post_new(request):
+    if request.method == "POST":
+        # construct the PostForm with data from the form
+        form = PostForm(request.POST) 
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'post_edit.html', {'form': form})
+	
+from .models import Post	
+from django.shortcuts import render, get_object_or_404
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'post_detail.html', {'post': post})	
+
+
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'post_edit.html', {'form': form})
+```
+
+## urls.py
+```python
+from django.conf.urls import url
+from howdy import views
+from django.conf.urls import include
+
+urlpatterns = [
+	url(r'^post/new/$', views.post_new, name='post_new'),
+	url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
+	url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
+]
+# (?P<pk>\d+) means Django will take all digits that you place here and transfer it to a view as a variable called pk
+```
+
+## base.html
+```python
+<html>
+    <head>
+      <meta charset="utf-8">
+	    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+    {% block content %}{% endblock %}
+    </body>
+</html>
+```
+
+## post_new.html
+```python
+{% extends 'base.html' %}
+{% block content %}
+  <a href="{% url 'post_new' %}">post new</a>
+{% endblock %}
+```
+
+
+## post_detail.html
+```python
+{% extends 'base.html' %}
+{% block content %}
+	<div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <a href="{% url 'post_edit' pk=post.pk %}">edit</a>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+  </div>
+{% endblock %}
+```
+
+## post_edit.html
+```python
+{% extends 'base.html' %}
+{% block content %}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
+```
+reference: https://tutorial.djangogirls.org/en/django_models/

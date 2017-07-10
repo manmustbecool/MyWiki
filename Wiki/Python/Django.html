@@ -149,25 +149,35 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Django</h1>
-<h4 class="date"><em>Updated: 07 July, 2017</em></h4>
+<h4 class="date"><em>Updated: 10 July, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#helloworld-django"><span class="toc-section-number">1</span> HelloWorld Django</a><ul>
+<li><a href="#helloworld"><span class="toc-section-number">1</span> HelloWorld</a><ul>
 <li><a href="#create-a-python-enviroment-helloenv"><span class="toc-section-number">1.1</span> create a python enviroment (helloenv)</a></li>
-<li><a href="#create-a-web-project-helloweb"><span class="toc-section-number">1.2</span> create a web project (helloweb)</a></li>
+<li><a href="#create-a-django-project-helloweb"><span class="toc-section-number">1.2</span> create a Django project (helloweb)</a></li>
 <li><a href="#create-an-app-howdy"><span class="toc-section-number">1.3</span> create an app (howdy)</a></li>
 <li><a href="#create-an-web-page-in-howdy"><span class="toc-section-number">1.4</span> create an web page in howdy</a></li>
 <li><a href="#create-another-web-page-in-howdy"><span class="toc-section-number">1.5</span> create another web page in howdy</a></li>
 </ul></li>
 <li><a href="#urlpatterns"><span class="toc-section-number">2</span> urlpatterns</a></li>
+<li><a href="#build-a-blog-post-web-app"><span class="toc-section-number">3</span> Build a blog post web app</a><ul>
+<li><a href="#models.py"><span class="toc-section-number">3.1</span> models.py</a></li>
+<li><a href="#forms.py"><span class="toc-section-number">3.2</span> forms.py</a></li>
+<li><a href="#views.py"><span class="toc-section-number">3.3</span> views.py</a></li>
+<li><a href="#urls.py"><span class="toc-section-number">3.4</span> urls.py</a></li>
+<li><a href="#base.html"><span class="toc-section-number">3.5</span> base.html</a></li>
+<li><a href="#post_new.html"><span class="toc-section-number">3.6</span> post_new.html</a></li>
+<li><a href="#post_detail.html"><span class="toc-section-number">3.7</span> post_detail.html</a></li>
+<li><a href="#post_edit.html"><span class="toc-section-number">3.8</span> post_edit.html</a></li>
+</ul></li>
 </ul>
 </div>
 
-<div id="helloworld-django" class="section level1">
-<h1><span class="header-section-number">1</span> HelloWorld Django</h1>
+<div id="helloworld" class="section level1">
+<h1><span class="header-section-number">1</span> HelloWorld</h1>
 <div id="create-a-python-enviroment-helloenv" class="section level2">
 <h2><span class="header-section-number">1.1</span> create a python enviroment (helloenv)</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># use a virtual environment to store our packages to avoid polluting our global scope with unecessary packages </span>
@@ -196,8 +206,8 @@ source env<span class="op">/</span><span class="bu">bin</span><span class="op">/
 <span class="co"># will see a prompt with the environment name</span>
 (env)</code></pre></div>
 </div>
-<div id="create-a-web-project-helloweb" class="section level2">
-<h2><span class="header-section-number">1.2</span> create a web project (helloweb)</h2>
+<div id="create-a-django-project-helloweb" class="section level2">
+<h2><span class="header-section-number">1.2</span> create a Django project (helloweb)</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># install django</span>
 pip install django
  
@@ -244,8 +254,11 @@ INSTALLED_APPS <span class="op">=</span> [
 python manage.py runserver
 
 <span class="co"># migrate the initial database schema to our SQLite database using the management script</span>
-<span class="co"># change our database schema (model) without having to lose any data</span>
-python manage.py migrate <span class="co"># need to stop server first</span></code></pre></div>
+<span class="co"># it changes our database schema (model) without having to lose any data</span>
+python manage.py migrate <span class="co"># need to stop server first</span>
+
+Create an administrative user <span class="cf">for</span> the project <span class="cf">if</span> it <span class="op">is</span> needed
+python manage.py createsuperuser</code></pre></div>
 </div>
 <div id="create-an-web-page-in-howdy" class="section level2">
 <h2><span class="header-section-number">1.4</span> create an web page in howdy</h2>
@@ -352,8 +365,147 @@ urlpatterns <span class="op">=</span> [
     <span class="kw">2.</span> Add a URL to urlpatterns:  url(r<span class="st">'^$'</span>, Home.as_view(), <span class="ot">name=</span><span class="st">'home'</span>)
 <span class="kw">Including</span> another URLconf
     <span class="kw">1.</span> Import the include() <span class="kw">function</span>: <span class="kw">from</span> django.conf.urls import url, include
-    <span class="kw">2.</span> Add a URL to urlpatterns:  url(r<span class="st">'^blog/'</span>, include(<span class="st">'blog.urls'</span>))
-<span class="st">&quot;&quot;&quot;</span></code></pre></div>
+    <span class="kw">2.</span> Add a URL to urlpatterns:  url(r<span class="st">'^blog/'</span>, include(<span class="st">'blog.urls'</span>))</code></pre></div>
+</div>
+<div id="build-a-blog-post-web-app" class="section level1">
+<h1><span class="header-section-number">3</span> Build a blog post web app</h1>
+<div id="models.py" class="section level2">
+<h2><span class="header-section-number">3.1</span> models.py</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> django.utils <span class="im">import</span> timezone
+
+<span class="kw">class</span> Post(models.Model):  <span class="co"># Post inheritance from Model</span>
+    author <span class="op">=</span> models.ForeignKey(<span class="st">'auth.User'</span>)
+    title <span class="op">=</span> models.CharField(max_length<span class="op">=</span><span class="dv">200</span>)
+    text <span class="op">=</span> models.TextField()
+    created_date <span class="op">=</span> models.DateTimeField(default<span class="op">=</span>timezone.now)
+    published_date <span class="op">=</span> models.DateTimeField(blank<span class="op">=</span><span class="va">True</span>, null<span class="op">=</span><span class="va">True</span>)
+
+    <span class="kw">def</span> publish(<span class="va">self</span>):
+        <span class="va">self</span>.published_date <span class="op">=</span> timezone.now()
+        <span class="va">self</span>.save()
+
+    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):
+        <span class="cf">return</span> <span class="va">self</span>.title   
+<span class="co"># create a form for our Post model.        </span>
+<span class="co"># with Django forms,  we can either define one from scratch or create a ModelForm which will save the result of the form to the model.</span></code></pre></div>
+</div>
+<div id="forms.py" class="section level2">
+<h2><span class="header-section-number">3.2</span> forms.py</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> django <span class="im">import</span> forms
+<span class="im">from</span> .models <span class="im">import</span> Post
+
+<span class="kw">class</span> PostForm(forms.ModelForm): <span class="co"># create a Form class from a Django model.</span>
+    <span class="kw">class</span> Meta:                  <span class="co">#model should be used to create this form (model = Post).</span>
+        model <span class="op">=</span> Post
+        fields <span class="op">=</span> (<span class="st">'title'</span>, <span class="st">'text'</span>,)</code></pre></div>
+<p>add new model to database</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">python manage.py makemigrations
+python manage.py migrate</code></pre></div>
+</div>
+<div id="views.py" class="section level2">
+<h2><span class="header-section-number">3.3</span> views.py</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    
+<span class="im">from</span> .form <span class="im">import</span> PostForm
+<span class="im">from</span> django.utils <span class="im">import</span> timezone
+<span class="im">from</span> django.shortcuts <span class="im">import</span> redirect
+
+<span class="kw">def</span> post_new(request):
+    <span class="cf">if</span> request.method <span class="op">==</span> <span class="st">&quot;POST&quot;</span>:
+        <span class="co"># construct the PostForm with data from the form</span>
+        form <span class="op">=</span> PostForm(request.POST) 
+        <span class="cf">if</span> form.is_valid():
+            post <span class="op">=</span> form.save(commit<span class="op">=</span><span class="va">False</span>)
+            post.author <span class="op">=</span> request.user
+            post.published_date <span class="op">=</span> timezone.now()
+            post.save()
+            <span class="cf">return</span> redirect(<span class="st">'post_detail'</span>, pk<span class="op">=</span>post.pk)
+    <span class="cf">else</span>:
+        form <span class="op">=</span> PostForm()
+    <span class="cf">return</span> render(request, <span class="st">'post_edit.html'</span>, {<span class="st">'form'</span>: form})
+    
+<span class="im">from</span> .models <span class="im">import</span> Post    
+<span class="im">from</span> django.shortcuts <span class="im">import</span> render, get_object_or_404
+
+<span class="kw">def</span> post_detail(request, pk):
+    post <span class="op">=</span> get_object_or_404(Post, pk<span class="op">=</span>pk)
+    <span class="cf">return</span> render(request, <span class="st">'post_detail.html'</span>, {<span class="st">'post'</span>: post})  
+
+
+<span class="kw">def</span> post_edit(request, pk):
+    post <span class="op">=</span> get_object_or_404(Post, pk<span class="op">=</span>pk)
+    <span class="cf">if</span> request.method <span class="op">==</span> <span class="st">&quot;POST&quot;</span>:
+        form <span class="op">=</span> PostForm(request.POST, instance<span class="op">=</span>post)
+        <span class="cf">if</span> form.is_valid():
+            post <span class="op">=</span> form.save(commit<span class="op">=</span><span class="va">False</span>)
+            post.author <span class="op">=</span> request.user
+            post.published_date <span class="op">=</span> timezone.now()
+            post.save()
+            <span class="cf">return</span> redirect(<span class="st">'post_detail'</span>, pk<span class="op">=</span>post.pk)
+    <span class="cf">else</span>:
+        form <span class="op">=</span> PostForm(instance<span class="op">=</span>post)
+    <span class="cf">return</span> render(request, <span class="st">'post_edit.html'</span>, {<span class="st">'form'</span>: form})</code></pre></div>
+</div>
+<div id="urls.py" class="section level2">
+<h2><span class="header-section-number">3.4</span> urls.py</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> django.conf.urls <span class="im">import</span> url
+<span class="im">from</span> howdy <span class="im">import</span> views
+<span class="im">from</span> django.conf.urls <span class="im">import</span> include
+
+urlpatterns <span class="op">=</span> [
+    url(<span class="vs">r'^post/new/$'</span>, views.post_new, name<span class="op">=</span><span class="st">'post_new'</span>),
+    url(<span class="vs">r'^post/(?P&lt;pk&gt;\d+)/edit/$'</span>, views.post_edit, name<span class="op">=</span><span class="st">'post_edit'</span>),
+    url(<span class="vs">r'^post/(?P&lt;pk&gt;\d+)/$'</span>, views.post_detail, name<span class="op">=</span><span class="st">'post_detail'</span>),
+]
+<span class="co"># (?P&lt;pk&gt;\d+) means Django will take all digits that you place here and transfer it to a view as a variable called pk</span></code></pre></div>
+</div>
+<div id="base.html" class="section level2">
+<h2><span class="header-section-number">3.5</span> base.html</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&lt;</span>html<span class="op">&gt;</span>
+    <span class="op">&lt;</span>head<span class="op">&gt;</span>
+      <span class="op">&lt;</span>meta charset<span class="op">=</span><span class="st">&quot;utf-8&quot;</span><span class="op">&gt;</span>
+        <span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;stylesheet&quot;</span> href<span class="op">=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span class="op">&gt;</span>
+      <span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;stylesheet&quot;</span> href<span class="op">=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;</span><span class="op">&gt;</span>
+    <span class="op">&lt;/</span>head<span class="op">&gt;</span>
+    <span class="op">&lt;</span>body<span class="op">&gt;</span>
+    {<span class="op">%</span> block content <span class="op">%</span>}{<span class="op">%</span> endblock <span class="op">%</span>}
+    <span class="op">&lt;/</span>body<span class="op">&gt;</span>
+<span class="op">&lt;/</span>html<span class="op">&gt;</span></code></pre></div>
+</div>
+<div id="post_new.html" class="section level2">
+<h2><span class="header-section-number">3.6</span> post_new.html</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{<span class="op">%</span> extends <span class="st">'base.html'</span> <span class="op">%</span>}
+{<span class="op">%</span> block content <span class="op">%</span>}
+  <span class="op">&lt;</span>a href<span class="op">=</span><span class="st">&quot;{</span><span class="sc">% u</span><span class="st">rl 'post_new' %}&quot;</span><span class="op">&gt;</span>post new<span class="op">&lt;/</span>a<span class="op">&gt;</span>
+{<span class="op">%</span> endblock <span class="op">%</span>}</code></pre></div>
+</div>
+<div id="post_detail.html" class="section level2">
+<h2><span class="header-section-number">3.7</span> post_detail.html</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{<span class="op">%</span> extends <span class="st">'base.html'</span> <span class="op">%</span>}
+{<span class="op">%</span> block content <span class="op">%</span>}
+    <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">&quot;post&quot;</span><span class="op">&gt;</span>
+        {<span class="op">%</span> <span class="cf">if</span> post.published_date <span class="op">%</span>}
+            <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">&quot;date&quot;</span><span class="op">&gt;</span>
+                {{ post.published_date }}
+            <span class="op">&lt;/</span>div<span class="op">&gt;</span>
+        {<span class="op">%</span> endif <span class="op">%</span>}
+        <span class="op">&lt;</span>a href<span class="op">=</span><span class="st">&quot;{</span><span class="sc">% u</span><span class="st">rl 'post_edit' pk=post.pk %}&quot;</span><span class="op">&gt;</span>edit<span class="op">&lt;/</span>a<span class="op">&gt;</span>
+        <span class="op">&lt;</span>h1<span class="op">&gt;</span>{{ post.title }}<span class="op">&lt;/</span>h1<span class="op">&gt;</span>
+        <span class="op">&lt;</span>p<span class="op">&gt;</span>{{ post.text<span class="op">|</span>linebreaksbr }}<span class="op">&lt;/</span>p<span class="op">&gt;</span>
+  <span class="op">&lt;/</span>div<span class="op">&gt;</span>
+{<span class="op">%</span> endblock <span class="op">%</span>}</code></pre></div>
+</div>
+<div id="post_edit.html" class="section level2">
+<h2><span class="header-section-number">3.8</span> post_edit.html</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{<span class="op">%</span> extends <span class="st">'base.html'</span> <span class="op">%</span>}
+{<span class="op">%</span> block content <span class="op">%</span>}
+    <span class="op">&lt;</span>h1<span class="op">&gt;</span>New post<span class="op">&lt;/</span>h1<span class="op">&gt;</span>
+    <span class="op">&lt;</span>form method<span class="op">=</span><span class="st">&quot;POST&quot;</span> <span class="kw">class</span><span class="op">=</span><span class="st">&quot;post-form&quot;</span><span class="op">&gt;</span>{<span class="op">%</span> csrf_token <span class="op">%</span>}
+        {{ form.as_p }}
+        <span class="op">&lt;</span>button <span class="bu">type</span><span class="op">=</span><span class="st">&quot;submit&quot;</span> <span class="kw">class</span><span class="op">=</span><span class="st">&quot;save btn btn-default&quot;</span><span class="op">&gt;</span>Save<span class="op">&lt;/</span>button<span class="op">&gt;</span>
+    <span class="op">&lt;/</span>form<span class="op">&gt;</span>
+{<span class="op">%</span> endblock <span class="op">%</span>}</code></pre></div>
+<p>reference: <a href="https://tutorial.djangogirls.org/en/django_models/" class="uri">https://tutorial.djangogirls.org/en/django_models/</a></p>
+</div>
 </div>
 
 
