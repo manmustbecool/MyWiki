@@ -233,6 +233,8 @@ Including another URLconf
 
 # Build a blog post web app
 
+{% raw %} this is to avoid {% %} tags causing github build failure
+
 ## models.py
 
 ```python
@@ -334,7 +336,6 @@ urlpatterns = [
 
 ## base.html
 ```html
-{% raw %}
 <html>
     {% xxy %}
     <head>
@@ -347,10 +348,9 @@ urlpatterns = [
     {% endblock %}
     </body>
 </html>
-{% endraw %}
 ```
 ## post_new.html
-{% raw %}
+
 ```bash
 {% extends 'base.html' %}
 {% block content %}

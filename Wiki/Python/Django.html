@@ -369,6 +369,7 @@ urlpatterns <span class="op">=</span> [
 </div>
 <div id="build-a-blog-post-web-app" class="section level1">
 <h1><span class="header-section-number">3</span> Build a blog post web app</h1>
+<p>{% raw %} this is to avoid {% %} tags causing github build failure</p>
 <div id="models.py" class="section level2">
 <h2><span class="header-section-number">3.1</span> models.py</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> django.utils <span class="im">import</span> timezone
@@ -460,8 +461,7 @@ urlpatterns <span class="op">=</span> [
 </div>
 <div id="base.html" class="section level2">
 <h2><span class="header-section-number">3.5</span> base.html</h2>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">{% raw %}
-<span class="kw">&lt;html&gt;</span>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;html&gt;</span>
     {% xxy %}
     <span class="kw">&lt;head&gt;</span>
       <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span>
@@ -472,12 +472,10 @@ urlpatterns <span class="op">=</span> [
     {% block content %}
     {% endblock %}
     <span class="kw">&lt;/body&gt;</span>
-<span class="kw">&lt;/html&gt;</span>
-{% endraw %}</code></pre></div>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
 </div>
 <div id="post_new.html" class="section level2">
 <h2><span class="header-section-number">3.6</span> post_new.html</h2>
-<p>{% raw %}</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="kw">%</span> extends <span class="st">'base.html'</span> %}
 {<span class="kw">%</span> block content %}
   <span class="kw">&lt;a</span> href=<span class="st">&quot;{% url 'post_new' %}&quot;</span><span class="kw">&gt;</span>post new<span class="kw">&lt;</span>/a<span class="kw">&gt;</span>
