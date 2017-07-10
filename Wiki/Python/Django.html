@@ -460,16 +460,17 @@ urlpatterns <span class="op">=</span> [
 </div>
 <div id="base.html" class="section level2">
 <h2><span class="header-section-number">3.5</span> base.html</h2>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&lt;</span>html<span class="op">&gt;</span>
-    <span class="op">&lt;</span>head<span class="op">&gt;</span>
-      <span class="op">&lt;</span>meta charset<span class="op">=</span><span class="st">&quot;utf-8&quot;</span><span class="op">&gt;</span>
-        <span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;stylesheet&quot;</span> href<span class="op">=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span class="op">&gt;</span>
-      <span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;stylesheet&quot;</span> href<span class="op">=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;</span><span class="op">&gt;</span>
-    <span class="op">&lt;/</span>head<span class="op">&gt;</span>
-    <span class="op">&lt;</span>body<span class="op">&gt;</span>
-    {<span class="op">%</span> block content <span class="op">%</span>}{<span class="op">%</span> endblock <span class="op">%</span>}
-    <span class="op">&lt;/</span>body<span class="op">&gt;</span>
-<span class="op">&lt;/</span>html<span class="op">&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+      <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+    {% block content %}
+    {% endblock %}
+    <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
 </div>
 <div id="post_new.html" class="section level2">
 <h2><span class="header-section-number">3.6</span> post_new.html</h2>
