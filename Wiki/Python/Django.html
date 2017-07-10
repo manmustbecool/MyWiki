@@ -168,10 +168,6 @@ $(document).ready(function () {
 <li><a href="#forms.py"><span class="toc-section-number">3.2</span> forms.py</a></li>
 <li><a href="#views.py"><span class="toc-section-number">3.3</span> views.py</a></li>
 <li><a href="#urls.py"><span class="toc-section-number">3.4</span> urls.py</a></li>
-<li><a href="#base.html"><span class="toc-section-number">3.5</span> base.html</a></li>
-<li><a href="#post_new.html"><span class="toc-section-number">3.6</span> post_new.html</a></li>
-<li><a href="#post_detail.html"><span class="toc-section-number">3.7</span> post_detail.html</a></li>
-<li><a href="#post_edit.html"><span class="toc-section-number">3.8</span> post_edit.html</a></li>
 </ul></li>
 </ul>
 </div>
@@ -457,55 +453,6 @@ urlpatterns <span class="op">=</span> [
     url(<span class="vs">r'^post/(?P&lt;pk&gt;\d+)/$'</span>, views.post_detail, name<span class="op">=</span><span class="st">'post_detail'</span>),
 ]
 <span class="co"># (?P&lt;pk&gt;\d+) means Django will take all digits that you place here and transfer it to a view as a variable called pk</span></code></pre></div>
-</div>
-<div id="base.html" class="section level2">
-<h2><span class="header-section-number">3.5</span> base.html</h2>
-<pre><code>&lt;html&gt;
-    &lt;head&gt;
-      &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;link rel=&quot;stylesheet&quot; href=&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;&gt;
-      &lt;link rel=&quot;stylesheet&quot; href=&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-    {% block content %}
-    {% endblock %}
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
-<div id="post_new.html" class="section level2">
-<h2><span class="header-section-number">3.6</span> post_new.html</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="kw">%</span> extends <span class="st">'base.html'</span> %}
-{<span class="kw">%</span> block content %}
-  <span class="kw">&lt;a</span> href=<span class="st">&quot;{% url 'post_new' %}&quot;</span><span class="kw">&gt;</span>post new<span class="kw">&lt;</span>/a<span class="kw">&gt;</span>
-{<span class="kw">%</span> endblock %}</code></pre></div>
-</div>
-<div id="post_detail.html" class="section level2">
-<h2><span class="header-section-number">3.7</span> post_detail.html</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="kw">%</span> extends <span class="st">'base.html'</span> %}
-{<span class="kw">%</span> block content %}
-    <span class="kw">&lt;div</span> class=<span class="st">&quot;post&quot;</span><span class="kw">&gt;</span>
-        {<span class="kw">%</span> if post.published_date %}
-            <span class="kw">&lt;div</span> class=<span class="st">&quot;date&quot;</span><span class="kw">&gt;</span>
-                {<span class="kw">{</span> <span class="kw">post.published_date</span> <span class="kw">}</span>}
-            <span class="kw">&lt;</span>/<span class="kw">div&gt;</span>
-        {<span class="kw">%</span> endif %}
-        <span class="kw">&lt;a</span> href=<span class="st">&quot;{% url 'post_edit' pk=post.pk %}&quot;</span><span class="kw">&gt;</span>edit<span class="kw">&lt;</span>/a<span class="kw">&gt;</span>
-        <span class="kw">&lt;h1&gt;</span>{{ post.title }}<span class="kw">&lt;</span>/<span class="kw">h1&gt;</span>
-        <span class="kw">&lt;p&gt;</span>{{ post.text<span class="kw">|linebreaksbr</span> }}<span class="kw">&lt;</span>/<span class="kw">p&gt;</span>
-  <span class="kw">&lt;</span>/<span class="kw">div&gt;</span>
-{<span class="kw">%</span> endblock %}</code></pre></div>
-</div>
-<div id="post_edit.html" class="section level2">
-<h2><span class="header-section-number">3.8</span> post_edit.html</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="kw">%</span> extends <span class="st">'base.html'</span> %}
-{<span class="kw">%</span> block content %}
-    <span class="kw">&lt;h1&gt;</span>New post<span class="kw">&lt;</span>/h<span class="kw">1&gt;</span>
-    <span class="kw">&lt;form</span> method=<span class="st">&quot;POST&quot;</span> class=<span class="st">&quot;post-form&quot;</span><span class="kw">&gt;</span>{% csrf_token %}
-        {<span class="kw">{</span> <span class="kw">form.as_p</span> <span class="kw">}</span>}
-        <span class="kw">&lt;button</span> type=<span class="st">&quot;submit&quot;</span> class=<span class="st">&quot;save btn btn-default&quot;</span><span class="kw">&gt;</span>Save<span class="kw">&lt;</span>/button<span class="kw">&gt;</span>
-    <span class="kw">&lt;</span>/<span class="kw">form&gt;</span>
-{<span class="kw">%</span> endblock %}</code></pre></div>
-<p>reference: <a href="https://tutorial.djangogirls.org/en/django_models/" class="uri">https://tutorial.djangogirls.org/en/django_models/</a></p>
 </div>
 </div>
 
