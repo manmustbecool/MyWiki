@@ -477,6 +477,7 @@ urlpatterns <span class="op">=</span> [
 </div>
 <div id="post_new.html" class="section level2">
 <h2><span class="header-section-number">3.6</span> post_new.html</h2>
+<p>{% raw %}</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="kw">%</span> extends <span class="st">'base.html'</span> %}
 {<span class="kw">%</span> block content %}
   <span class="kw">&lt;a</span> href=<span class="st">&quot;{% url 'post_new' %}&quot;</span><span class="kw">&gt;</span>post new<span class="kw">&lt;</span>/a<span class="kw">&gt;</span>
@@ -508,6 +509,7 @@ urlpatterns <span class="op">=</span> [
         <span class="kw">&lt;button</span> type=<span class="st">&quot;submit&quot;</span> class=<span class="st">&quot;save btn btn-default&quot;</span><span class="kw">&gt;</span>Save<span class="kw">&lt;</span>/button<span class="kw">&gt;</span>
     <span class="kw">&lt;</span>/<span class="kw">form&gt;</span>
 {<span class="kw">%</span> endblock %}</code></pre></div>
+<p>{% endraw %}</p>
 <p>reference: <a href="https://tutorial.djangogirls.org/en/django_models/" class="uri">https://tutorial.djangogirls.org/en/django_models/</a></p>
 </div>
 </div>

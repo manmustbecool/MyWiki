@@ -349,8 +349,8 @@ urlpatterns = [
 </html>
 {% endraw %}
 ```
-
 ## post_new.html
+{% raw %}
 ```bash
 {% extends 'base.html' %}
 {% block content %}
@@ -387,4 +387,6 @@ urlpatterns = [
     </form>
 {% endblock %}
 ```
+{% endraw %}
+
 reference: https://tutorial.djangogirls.org/en/django_models/
