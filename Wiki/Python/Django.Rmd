@@ -357,7 +357,7 @@ urlpatterns = [
 
 
 ## post_detail.html
-```html
+```bash
 {% extends 'base.html' %}
 {% block content %}
 	<div class="post">
@@ -374,7 +374,7 @@ urlpatterns = [
 ```
 
 ## post_edit.html
-```html
+```bash
 {% extends 'base.html' %}
 {% block content %}
     <h1>New post</h1>
