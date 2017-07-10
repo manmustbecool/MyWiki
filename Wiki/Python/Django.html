@@ -460,51 +460,51 @@ urlpatterns <span class="op">=</span> [
 </div>
 <div id="base.html" class="section level2">
 <h2><span class="header-section-number">3.5</span> base.html</h2>
-<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;html&gt;</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">&lt;html&gt;</span>
     <span class="kw">&lt;head&gt;</span>
-      <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span>
-        <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span class="kw">&gt;</span>
-      <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;</span><span class="kw">&gt;</span>
-    <span class="kw">&lt;/head&gt;</span>
+      <span class="kw">&lt;meta</span> charset=<span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;link</span> rel=<span class="st">&quot;stylesheet&quot;</span> href=<span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;link</span> rel=<span class="st">&quot;stylesheet&quot;</span> href=<span class="st">&quot;//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;</span>/<span class="kw">head&gt;</span>
     <span class="kw">&lt;body&gt;</span>
-    {% block content %}
-    {% endblock %}
-    <span class="kw">&lt;/body&gt;</span>
-<span class="kw">&lt;/html&gt;</span></code></pre></div>
+    {<span class="kw">%</span> block content %}
+    {<span class="kw">%</span> endblock %}
+    <span class="kw">&lt;</span>/<span class="kw">body&gt;</span>
+<span class="kw">&lt;</span>/<span class="kw">html&gt;</span></code></pre></div>
 </div>
 <div id="post_new.html" class="section level2">
 <h2><span class="header-section-number">3.6</span> post_new.html</h2>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{<span class="op">%</span> extends <span class="st">'base.html'</span> <span class="op">%</span>}
-{<span class="op">%</span> block content <span class="op">%</span>}
-  <span class="op">&lt;</span>a href<span class="op">=</span><span class="st">&quot;{</span><span class="sc">% u</span><span class="st">rl 'post_new' %}&quot;</span><span class="op">&gt;</span>post new<span class="op">&lt;/</span>a<span class="op">&gt;</span>
-{<span class="op">%</span> endblock <span class="op">%</span>}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">{<span class="kw">%</span> extends <span class="st">'base.html'</span> %}
+{<span class="kw">%</span> block content %}
+  <span class="kw">&lt;a</span> href=<span class="st">&quot;{% url 'post_new' %}&quot;</span><span class="kw">&gt;</span>post new<span class="kw">&lt;</span>/a<span class="kw">&gt;</span>
+{<span class="kw">%</span> endblock %}</code></pre></div>
 </div>
 <div id="post_detail.html" class="section level2">
 <h2><span class="header-section-number">3.7</span> post_detail.html</h2>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{<span class="op">%</span> extends <span class="st">'base.html'</span> <span class="op">%</span>}
-{<span class="op">%</span> block content <span class="op">%</span>}
-    <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">&quot;post&quot;</span><span class="op">&gt;</span>
-        {<span class="op">%</span> <span class="cf">if</span> post.published_date <span class="op">%</span>}
-            <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">&quot;date&quot;</span><span class="op">&gt;</span>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">{% extends 'base.html' %}
+{% block content %}
+    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;post&quot;</span><span class="kw">&gt;</span>
+        {% if post.published_date %}
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;date&quot;</span><span class="kw">&gt;</span>
                 {{ post.published_date }}
-            <span class="op">&lt;/</span>div<span class="op">&gt;</span>
-        {<span class="op">%</span> endif <span class="op">%</span>}
-        <span class="op">&lt;</span>a href<span class="op">=</span><span class="st">&quot;{</span><span class="sc">% u</span><span class="st">rl 'post_edit' pk=post.pk %}&quot;</span><span class="op">&gt;</span>edit<span class="op">&lt;/</span>a<span class="op">&gt;</span>
-        <span class="op">&lt;</span>h1<span class="op">&gt;</span>{{ post.title }}<span class="op">&lt;/</span>h1<span class="op">&gt;</span>
-        <span class="op">&lt;</span>p<span class="op">&gt;</span>{{ post.text<span class="op">|</span>linebreaksbr }}<span class="op">&lt;/</span>p<span class="op">&gt;</span>
-  <span class="op">&lt;/</span>div<span class="op">&gt;</span>
-{<span class="op">%</span> endblock <span class="op">%</span>}</code></pre></div>
+            <span class="kw">&lt;/div&gt;</span>
+        {% endif %}
+        <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;{% url 'post_edit' pk=post.pk %}&quot;</span><span class="kw">&gt;</span>edit<span class="kw">&lt;/a&gt;</span>
+        <span class="kw">&lt;h1&gt;</span>{{ post.title }}<span class="kw">&lt;/h1&gt;</span>
+        <span class="kw">&lt;p&gt;</span>{{ post.text|linebreaksbr }}<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;/div&gt;</span>
+{% endblock %}</code></pre></div>
 </div>
 <div id="post_edit.html" class="section level2">
 <h2><span class="header-section-number">3.8</span> post_edit.html</h2>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">{<span class="op">%</span> extends <span class="st">'base.html'</span> <span class="op">%</span>}
-{<span class="op">%</span> block content <span class="op">%</span>}
-    <span class="op">&lt;</span>h1<span class="op">&gt;</span>New post<span class="op">&lt;/</span>h1<span class="op">&gt;</span>
-    <span class="op">&lt;</span>form method<span class="op">=</span><span class="st">&quot;POST&quot;</span> <span class="kw">class</span><span class="op">=</span><span class="st">&quot;post-form&quot;</span><span class="op">&gt;</span>{<span class="op">%</span> csrf_token <span class="op">%</span>}
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">{% extends 'base.html' %}
+{% block content %}
+    <span class="kw">&lt;h1&gt;</span>New post<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&quot;POST&quot;</span><span class="ot"> class=</span><span class="st">&quot;post-form&quot;</span><span class="kw">&gt;</span>{% csrf_token %}
         {{ form.as_p }}
-        <span class="op">&lt;</span>button <span class="bu">type</span><span class="op">=</span><span class="st">&quot;submit&quot;</span> <span class="kw">class</span><span class="op">=</span><span class="st">&quot;save btn btn-default&quot;</span><span class="op">&gt;</span>Save<span class="op">&lt;/</span>button<span class="op">&gt;</span>
-    <span class="op">&lt;/</span>form<span class="op">&gt;</span>
-{<span class="op">%</span> endblock <span class="op">%</span>}</code></pre></div>
+        <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> class=</span><span class="st">&quot;save btn btn-default&quot;</span><span class="kw">&gt;</span>Save<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;/form&gt;</span>
+{% endblock %}</code></pre></div>
 <p>reference: <a href="https://tutorial.djangogirls.org/en/django_models/" class="uri">https://tutorial.djangogirls.org/en/django_models/</a></p>
 </div>
 </div>
