@@ -149,20 +149,20 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Django</h1>
-<h4 class="date"><em>Updated: 10 July, 2017</em></h4>
+<h4 class="date"><em>Updated: 13 July, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#helloworld"><span class="toc-section-number">1</span> HelloWorld</a><ul>
-<li><a href="#create-a-python-enviroment-helloenv"><span class="toc-section-number">1.1</span> create a python enviroment (helloenv)</a></li>
-<li><a href="#create-a-django-project-helloweb"><span class="toc-section-number">1.2</span> create a Django project (helloweb)</a></li>
+<li><a href="#create-a-enviroment-helloenv"><span class="toc-section-number">1.1</span> create a enviroment (helloenv)</a></li>
+<li><a href="#create-a-project-helloweb"><span class="toc-section-number">1.2</span> create a project (helloweb)</a></li>
 <li><a href="#create-an-app-howdy"><span class="toc-section-number">1.3</span> create an app (howdy)</a></li>
 <li><a href="#create-an-web-page-in-howdy"><span class="toc-section-number">1.4</span> create an web page in howdy</a></li>
 <li><a href="#create-another-web-page-in-howdy"><span class="toc-section-number">1.5</span> create another web page in howdy</a></li>
 </ul></li>
-<li><a href="#urlpatterns"><span class="toc-section-number">2</span> urlpatterns</a></li>
+<li><a href="#convert-an-existing-django-project-to-eclipse-project"><span class="toc-section-number">2</span> Convert An Existing Django Project To Eclipse Project</a></li>
 <li><a href="#build-a-blog-post-web-app"><span class="toc-section-number">3</span> Build a blog post web app</a><ul>
 <li><a href="#models.py"><span class="toc-section-number">3.1</span> models.py</a></li>
 <li><a href="#forms.py"><span class="toc-section-number">3.2</span> forms.py</a></li>
@@ -173,30 +173,28 @@ $(document).ready(function () {
 <li><a href="#post_detail.html"><span class="toc-section-number">3.7</span> post_detail.html</a></li>
 <li><a href="#post_edit.html"><span class="toc-section-number">3.8</span> post_edit.html</a></li>
 </ul></li>
+<li><a href="#other"><span class="toc-section-number">4</span> other</a></li>
 </ul>
 </div>
 
 <div id="helloworld" class="section level1">
 <h1><span class="header-section-number">1</span> HelloWorld</h1>
-<div id="create-a-python-enviroment-helloenv" class="section level2">
-<h2><span class="header-section-number">1.1</span> create a python enviroment (helloenv)</h2>
+<div id="create-a-enviroment-helloenv" class="section level2">
+<h2><span class="header-section-number">1.1</span> create a enviroment (helloenv)</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># use a virtual environment to store our packages to avoid polluting our global scope with unecessary packages </span>
 pip install virtualenv
 
-mkdir projects
-cd projects
 mkdir helloenv
 cd helloenv
 
-<span class="co"># create the environment</span>
+<span class="co"># for Linux: create the environment </span>
 virtualenv <span class="op">-</span>p <span class="op">/</span>usr<span class="op">/</span>local<span class="op">/</span><span class="bu">bin</span><span class="op">/</span>python3 env 
 <span class="co"># for windows anaconda python installation path</span>
 <span class="co"># virtualenv -p C:/ProgramData/Anaconda3/python.exe env</span>
 
 <span class="co"># folder structure</span>
-projects
-├─helloenv
-│   ├── env
+helloenv
+ ├── env
 
 <span class="co"># activate enviroment</span>
 source env<span class="op">/</span><span class="bu">bin</span><span class="op">/</span>activate
@@ -206,8 +204,8 @@ source env<span class="op">/</span><span class="bu">bin</span><span class="op">/
 <span class="co"># will see a prompt with the environment name</span>
 (env)</code></pre></div>
 </div>
-<div id="create-a-django-project-helloweb" class="section level2">
-<h2><span class="header-section-number">1.2</span> create a Django project (helloweb)</h2>
+<div id="create-a-project-helloweb" class="section level2">
+<h2><span class="header-section-number">1.2</span> create a project (helloweb)</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># install django</span>
 pip install django
  
@@ -221,15 +219,13 @@ helloweb
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-└── manage.py
-</code></pre></div>
+└── manage.py</code></pre></div>
 </div>
 <div id="create-an-app-howdy" class="section level2">
 <h2><span class="header-section-number">1.3</span> create an app (howdy)</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># create a Django app howdy</span>
 cd helloweb
 python manage.py startapp howdy
-
 
 helloweb
 ├── helloweb
@@ -239,7 +235,7 @@ helloweb
 └── manage.py
 
 <span class="co"># add the Django app into web project by change setting.py</span>
-<span class="co"># helloapp/settings.py</span>
+<span class="co"># helloweb/settings.py</span>
 INSTALLED_APPS <span class="op">=</span> [
     <span class="st">'django.contrib.admin'</span>,
     <span class="co">'django.contrib.auth'</span>,
@@ -257,13 +253,14 @@ python manage.py runserver
 <span class="co"># it changes our database schema (model) without having to lose any data</span>
 python manage.py migrate <span class="co"># need to stop server first</span>
 
-Create an administrative user <span class="cf">for</span> the project <span class="cf">if</span> it <span class="op">is</span> needed
+<span class="co"># Create an administrative user for the project if it is needed </span>
+<span class="co"># after run python manage.py migrate</span>
 python manage.py createsuperuser</code></pre></div>
 </div>
 <div id="create-an-web-page-in-howdy" class="section level2">
 <h2><span class="header-section-number">1.4</span> create an web page in howdy</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># access our howdy app when someone goes to the home page URL by updating urls.py</span>
-<span class="co"># helloapp/urls.py</span>
+<span class="co"># helloweb/urls.py</span>
 <span class="im">from</span> django.conf.urls <span class="im">import</span> include
 urlpatterns <span class="op">=</span> [
     url(<span class="vs">r'^admin/'</span>, admin.site.urls),
@@ -353,19 +350,46 @@ urlpatterns <span class="op">=</span> [
 <p>reference : <a href="https://scotch.io/tutorials/build-your-first-python-and-django-application#comments-section" class="uri">https://scotch.io/tutorials/build-your-first-python-and-django-application#comments-section</a></p>
 </div>
 </div>
-<div id="urlpatterns" class="section level1">
-<h1><span class="header-section-number">2</span> urlpatterns</h1>
-<p>The <code>urlpatterns</code> list routes URLs to views. For more information please see: <a href="https://docs.djangoproject.com/en/1.11/topics/http/urls/" class="uri">https://docs.djangoproject.com/en/1.11/topics/http/urls/</a></p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">Examples</span>:
-<span class="kw">Function</span> views
-    <span class="kw">1.</span> Add an import:  from my_app import views
-    <span class="kw">2.</span> Add a URL to urlpatterns:  url(r<span class="st">'^$'</span>, views.home, name=<span class="st">'home'</span>)
-<span class="kw">Class-based</span> views
-    <span class="kw">1.</span> Add an import:  from other_app.views import Home
-    <span class="kw">2.</span> Add a URL to urlpatterns:  url(r<span class="st">'^$'</span>, Home.as_view(), <span class="ot">name=</span><span class="st">'home'</span>)
-<span class="kw">Including</span> another URLconf
-    <span class="kw">1.</span> Import the include() <span class="kw">function</span>: <span class="kw">from</span> django.conf.urls import url, include
-    <span class="kw">2.</span> Add a URL to urlpatterns:  url(r<span class="st">'^blog/'</span>, include(<span class="st">'blog.urls'</span>))</code></pre></div>
+<div id="convert-an-existing-django-project-to-eclipse-project" class="section level1">
+<h1><span class="header-section-number">2</span> Convert An Existing Django Project To Eclipse Project</h1>
+<p>Django project named “mysite”. This is the main folder which contains manage.py, settings.py, etc. create two files</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">cd</span> /path/to/mysite
+$ <span class="kw">vi</span> .project
+$ <span class="kw">vi</span> .pydevproject</code></pre></div>
+<p>inside .project file</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;projectDescription&gt;</span>
+    <span class="kw">&lt;name&gt;</span>mysite<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;comment&gt;&lt;/comment&gt;</span>
+    <span class="kw">&lt;projects&gt;</span>
+    <span class="kw">&lt;/projects&gt;</span>
+    <span class="kw">&lt;buildSpec&gt;</span>
+        <span class="kw">&lt;buildCommand&gt;</span>
+            <span class="kw">&lt;name&gt;</span>org.python.pydev.PyDevBuilder<span class="kw">&lt;/name&gt;</span>
+            <span class="kw">&lt;arguments&gt;</span>
+            <span class="kw">&lt;/arguments&gt;</span>
+        <span class="kw">&lt;/buildCommand&gt;</span>
+    <span class="kw">&lt;/buildSpec&gt;</span>
+    <span class="kw">&lt;natures&gt;</span>
+        <span class="kw">&lt;nature&gt;</span>org.python.pydev.pythonNature<span class="kw">&lt;/nature&gt;</span>
+        <span class="kw">&lt;nature&gt;</span>org.python.pydev.django.djangoNature<span class="kw">&lt;/nature&gt;</span>
+    <span class="kw">&lt;/natures&gt;</span>
+<span class="kw">&lt;/projectDescription&gt;</span></code></pre></div>
+<p>inside .pydevproject file</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;?eclipse-pydev</span> version=&quot;1.0&quot;<span class="kw">?&gt;&lt;pydev_project&gt;</span>
+<span class="kw">&lt;pydev_property</span><span class="ot"> name=</span><span class="st">&quot;org.python.pydev.PYTHON_PROJECT_INTERPRETER&quot;</span><span class="kw">&gt;</span>Default<span class="kw">&lt;/pydev_property&gt;</span>
+<span class="kw">&lt;pydev_property</span><span class="ot"> name=</span><span class="st">&quot;org.python.pydev.PYTHON_PROJECT_VERSION&quot;</span><span class="kw">&gt;</span>python 3.6<span class="kw">&lt;/pydev_property&gt;</span>
+
+<span class="kw">&lt;pydev_variables_property</span><span class="ot"> name=</span><span class="st">&quot;org.python.pydev.PROJECT_VARIABLE_SUBSTITUTION&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;key&gt;</span>DJANGO_MANAGE_LOCATION<span class="kw">&lt;/key&gt;</span>
+<span class="kw">&lt;value&gt;</span>mysite/manage.py<span class="kw">&lt;/value&gt;</span>
+<span class="kw">&lt;/pydev_variables_property&gt;</span>
+
+<span class="kw">&lt;/pydev_project&gt;</span></code></pre></div>
+<p>Now open Eclipse and choose “File &gt; Import”. Navigate to “mysite” and choose that as your location</p>
+<p>reference: <a href="https://prateekvjoshi.com/2013/04/01/how-to-convert-an-existing-django-project-to-eclipse-project/" class="uri">https://prateekvjoshi.com/2013/04/01/how-to-convert-an-existing-django-project-to-eclipse-project/</a></p>
+<p>include new dependencies from virtual environment for Pydev Window &gt; preference &gt; Pydev &gt; interpreter python &gt; include the site-packages folder of virtualenv folder in system PYTHONPATH (buttom of GUI)</p>
 </div>
 <div id="build-a-blog-post-web-app" class="section level1">
 <h1><span class="header-section-number">3</span> Build a blog post web app</h1>
@@ -510,6 +534,10 @@ urlpatterns <span class="op">=</span> [
 <p>{% endraw %}</p>
 <p>reference: <a href="https://tutorial.djangogirls.org/en/django_models/" class="uri">https://tutorial.djangogirls.org/en/django_models/</a></p>
 </div>
+</div>
+<div id="other" class="section level1">
+<h1><span class="header-section-number">4</span> other</h1>
+<p><a href="http://engineroom.trackmaven.com/blog/getting-started-drf-angularjs-part-5/" class="uri">http://engineroom.trackmaven.com/blog/getting-started-drf-angularjs-part-5/</a></p>
 </div>
 
 

@@ -73,6 +73,7 @@ plot(rules, method="graph"
      , shading=NA)
 ```
 
+http://mhahsler.github.io/arulesViz/reference/plot.html
 
 ## arulesSequences cspade
 

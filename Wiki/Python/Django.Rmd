@@ -6,26 +6,23 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 # HelloWorld 
 
-## create a python enviroment (helloenv)
+## create a enviroment (helloenv)
 
 ```python
 # use a virtual environment to store our packages to avoid polluting our global scope with unecessary packages 
 pip install virtualenv
 
-mkdir projects
-cd projects
 mkdir helloenv
 cd helloenv
 
-# create the environment
+# for Linux: create the environment 
 virtualenv -p /usr/local/bin/python3 env 
 # for windows anaconda python installation path
 # virtualenv -p C:/ProgramData/Anaconda3/python.exe env
 
 # folder structure
-projects
-├─helloenv
-│   ├── env
+helloenv
+ ├── env
 
 # activate enviroment
 source env/bin/activate
@@ -37,7 +34,7 @@ source env/bin/activate
 
 ```
 
-## create a Django project (helloweb)
+## create a project (helloweb)
 
 ```python
 # install django
@@ -54,8 +51,6 @@ helloweb
 │   ├── urls.py
 │   └── wsgi.py
 └── manage.py
-
-
 ```
 
 ## create an app (howdy)
@@ -65,7 +60,6 @@ helloweb
 cd helloweb
 python manage.py startapp howdy
 
-
 helloweb
 ├── helloweb
 │        ├── ...
@@ -74,7 +68,7 @@ helloweb
 └── manage.py
 
 # add the Django app into web project by change setting.py
-# helloapp/settings.py
+# helloweb/settings.py
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -92,7 +86,8 @@ python manage.py runserver
 # it changes our database schema (model) without having to lose any data
 python manage.py migrate # need to stop server first
 
-Create an administrative user for the project if it is needed
+# Create an administrative user for the project if it is needed 
+# after run python manage.py migrate
 python manage.py createsuperuser
 ```
 
@@ -100,7 +95,7 @@ python manage.py createsuperuser
 
 ```python
 # access our howdy app when someone goes to the home page URL by updating urls.py
-# helloapp/urls.py
+# helloweb/urls.py
 from django.conf.urls import include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -213,23 +208,58 @@ class AboutPageView(TemplateView):
 reference : https://scotch.io/tutorials/build-your-first-python-and-django-application#comments-section
 
 
-# urlpatterns
+# Convert An Existing Django Project To Eclipse Project
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-
+Django project named “mysite”. This is the main folder which contains manage.py, settings.py, etc.
+create two files
 ```bash
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+$ cd /path/to/mysite
+$ vi .project
+$ vi .pydevproject
 ```
+inside .project file
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+    <name>mysite</name>
+    <comment></comment>
+    <projects>
+    </projects>
+    <buildSpec>
+        <buildCommand>
+            <name>org.python.pydev.PyDevBuilder</name>
+            <arguments>
+            </arguments>
+        </buildCommand>
+    </buildSpec>
+    <natures>
+        <nature>org.python.pydev.pythonNature</nature>
+        <nature>org.python.pydev.django.djangoNature</nature>
+    </natures>
+</projectDescription>
+```
+inside .pydevproject file
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse-pydev version="1.0"?><pydev_project>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 3.6</pydev_property>
+
+<pydev_variables_property name="org.python.pydev.PROJECT_VARIABLE_SUBSTITUTION">
+<key>DJANGO_MANAGE_LOCATION</key>
+<value>mysite/manage.py</value>
+</pydev_variables_property>
+
+</pydev_project>
+```
+Now open Eclipse and choose “File > Import”. Navigate to “mysite” and choose that as your location
+
+reference: https://prateekvjoshi.com/2013/04/01/how-to-convert-an-existing-django-project-to-eclipse-project/
+
+include new dependencies from virtual environment for Pydev
+Window > preference > Pydev > interpreter python > include the site-packages folder of virtualenv folder in system PYTHONPATH (buttom of GUI)
+
+
 
 # Build a blog post web app
 
@@ -390,3 +420,8 @@ urlpatterns = [
 {% endraw %}
 
 reference: https://tutorial.djangogirls.org/en/django_models/
+
+
+# other
+
+http://engineroom.trackmaven.com/blog/getting-started-drf-angularjs-part-5/
