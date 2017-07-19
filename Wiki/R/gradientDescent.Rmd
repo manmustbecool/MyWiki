@@ -4,75 +4,145 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-# Gradient Descent in R
 
 ```{r}
 # load the data
-Data1 <- read.table("gradientDescent\\ex2data1.txt", header=F, sep=",", quote ="\"'")
-colnames(Data1) = c("exam1","exam2","admit")
-
+data <- read.table("gradientDescent\\ex2data1.txt", header=F, sep=",", quote ="\"'")
+colnames(data) = c("exam1","exam2","admit")
+  
 # plot the data
-with(Data1,plot(exam1[admit==1],exam2[admit==1]))
-with(Data1,points(exam1[admit==0],exam2[admit==0],col="red"))
+with(data,plot(exam1[admit==1],exam2[admit==1]))
+with(data,points(exam1[admit==0],exam2[admit==0],col="red"))
 
-# ------- sigmoid --------
+```
+
+## logistic regression 
+
+
+### logistic/sigmoid function
+
+$$
+g(z)=\frac{1}{1+e^{-z}}
+$$
+
+```{r}
 sigmoid = function(z){
   1 / (1 + exp(-z))
 }
 
-#--------- cost function -----------------
-cost = function(X, y, theta){
-  m = nrow(X)
-  hx = sigmoid(X %*% theta)
-  (1/m) * (((-t(y) %*% log(hx)) - t(1-y) %*% log(1 - hx)))
+```
+
+### classification hypothesis function
+
+$$
+h_{\theta}(x) = g(\theta^{T}x) = \frac{1}{1+e^{-\theta^{T}x}}
+$$
+Note from the Linear regression : 
+$$
+y = \theta_0+\theta_1x_1+...+\theta_nx_n =\sum_{i=1}^{n}\theta_ix_i = \theta^{T}x
+$$
+
+
+```{r}
+hypothesis = function(x, theta){
+  sigmoid(x %*% theta)
 }
 
-# --------- gradient -----------------
-grad = function(X, y, theta){
-  m = nrow(X)
-  hx = sigmoid(X %*% theta)
-  (1/m) * (t(X) %*% (hx - y))
+```
+
+
+
+### cost function 
+
+$$
+J(\theta)=\frac{1}{m}\sum_{i=1}^{m}cost(h_\theta(x),y)
+$$
+$$
+cost(h_\theta(x),y)=-y\log(h_\theta(x)) - (1-y)\log(1-h_\theta(x))
+$$
+$$
+J(\theta)=\frac{1}{m}\sum_{i=1}^{m}[-y^i\log(h_\theta(x^i)) - (1-y^i)\log(1- h_\theta(x^i))]
+$$
+
+```{r}
+cost = function(x, y, theta){
+  hx = hypothesis(x, theta)
+  m = nrow(x)
+  # (1/m) * (((-t(y) %*% log(hx)) - t(1-y) %*% log(1 - hx)))
+  (1/m) * sum( -y*log(hx) - (1-y)*log(1-hx) )
 }
 
-# ----------- gradient descent --------------------
+```
+
+### (batch) gradient descent
+
+minimize $J(\theta)$
+
+$$
+\theta := \theta - \alpha \sum_{i=1}^{n}(y_i - h_\theta(x_i))x_i
+$$
+
+```{r}
+
+gradient <- function(x, y, theta) {
+  hx = hypothesis(x, theta)
+  m = nrow(x)
+  # (1/m) * ( t(hx - y) %*% x )
+  (1/m) * (t(x) %*% (hx - y))
+}
+
+```
+
+
+```{r}
+
 alpha = 0.001
-maxinteration = 600
-#lm(y ~ X)
-theta = matrix(c(-1.3,0.01,0.01),nrow=3) # initialize coefficients
+max_interation = 600
 
-m = nrow(Data1)
-y = as.matrix(Data1[,3])
-X = as.matrix(Data1[,c(1,2)])
-X = cbind(1,X)
+# initialize coefficients
+#-1.3,0.01,0.01
+theta = matrix(c(0,0,0),nrow=3)
 
 
-cost_history <- double(maxinteration) # keep history
-theta_history <- list(maxinteration)
-for (i in 1:maxinteration){
-  theta = theta - alpha * grad(X, y, theta)
+m = nrow(data)
+y = as.matrix(data[,3])
+x = as.matrix(data[,c(1,2)])
+x = cbind(1,x)
+
+
+# keep history
+cost_history <- double(max_interation)
+theta_history <- list(max_interation)
+
+
+for (i in 1:max_interation){
+  theta = theta - alpha * gradient(x, y, theta)
   
-  cost_history[i] <- cost(X, y, theta)
+  cost_history[i] <- cost(x, y, theta) # for plot
   theta_history[[i]] <- theta
+  
 }
 
+# -------- compare with lm function implementation--------------
+print(theta)
 
+res <- lm(admit ~ exam1 + exam2, data=data)
+print(res)
 
+```
+
+```{r}
 plot(cost_history)
 # plot(theta_history)
 
-# -------- compare with R implementation--------------
-print(theta)
-
-res <- lm( admit ~ exam1 + exam2 , data=Data1)
-print(res)
 
 #---------- test accuracy -----------------------------------
-m <- nrow(Data1)
-test_data <- matrix(c(rep(1, m), Data1$exam1, Data1$exam2), nrow = m)
+m <- nrow(data)
+test_data <- matrix(c(rep(1, m), data$exam1, data$exam2), nrow = m)
 
-Data1$predict <- sigmoid(test_data %*% theta)
+data$predict <- sigmoid(test_data %*% theta)
 
-accuracy <- with(Data1, mean(ifelse(round(predict) == admit, 1, 0)))
+accuracy <- with(data, mean(ifelse(round(predict) == admit, 1, 0)))
 accuracy
 
 ```
@@ -80,7 +150,7 @@ accuracy
 https://dernk.wordpress.com/2013/06/
 
 
-# Other reference
+## Other reference
 
 Linear regression by gradient descents
 
