@@ -1,0 +1,208 @@
+---
+title: "svm"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Support Vector Machine (SVM) ##
+
+  *  **e1071**
+
+tune
+http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:tune
+
+svm
+http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:svm
+
+http://stackoverflow.com/questions/7390173/svm-equations-from-e1071-r-package
+
+Recursive Feature Extraction (SVM-RFE)
+
+http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selection
+
+
+## SVM example 1
+
+```{r warning=F}
+library(e1071)
+
+day = c(0,1,2,3,4,5,6)
+weather = c(1,0,0,0,0,0,0)
+happy = factor(c(T,F,F,F,F,F,F))
+d = data.frame(day=day, weather=weather, happy=happy)
+d <- rbind(d, d)
+
+model = svm(happy ~ day + weather, data = d)
+plot(model, d)
+
+
+# tune the paramaters 
+tuned <- tune.svm( happy ~ ., data = d, 
+                    gamma = 10^(-2:0), cost = 10^(0:2), kernel = 'radial')
+summary(tuned)
+
+model <- svm(happy ~ ., data = d, kernel= 'radial', 
+                   gamma = tuned$best.parameters$gamma, 
+                   cost= tuned$best.parameters$cost,
+                   scale=FALSE, cross = 10)
+print(model)
+plot(model, d)
+  
+# support vector
+SV <- d[c(model$index),]
+SV
+
+```
+
+
+## SVM example 2
+
+
+```{r}
+# install.packages('kernlab')
+# install.packages('ROCR')
+
+## Generate data ##
+##---------------##
+
+# number of data points
+n <- 150
+# dimension
+p <- 2
+
+sigma <- 2  # variance of the distribution
+meanpos <- 0 # centre of the distribution of positive examples
+meanneg <- 3 # centre of the distribution of negative examples
+npos <- round(n/2) # number of positive examples
+nneg <- n-npos # number of negative examples
+
+# Generate the positive and negative examples
+xpos <- matrix(rnorm(npos*p,mean=meanpos,sd=sigma),npos,p)
+xneg <- matrix(rnorm(nneg*p,mean=meanneg,sd=sigma),npos,p)
+x <- rbind(xpos,xneg)
+
+# Generate the labels
+y <- matrix(c(rep(1,npos),rep(-1,nneg)))
+
+# Visualize the data
+plot(x,col=ifelse(y>0,1,2))
+legend("topleft",c('Positive','Negative'),col=seq(2),pch=1,text.col=seq(2))
+
+## Prepare a training and a test set ##
+ntrain <- round(n*0.8) # number of training examples
+tindex <- sample(n,ntrain) # indices of training samples
+xtrain <- x[tindex,]
+xtest <- x[-tindex,]
+ytrain <- y[tindex]
+ytest <- y[-tindex]
+istrain=rep(0,n)
+istrain[tindex]=1
+
+# Visualize
+plot(x,col=ifelse(y>0,1,2),pch=ifelse(istrain==1,1,2))
+legend("topleft",c('Positive Train','Positive Test','Negative Train','Negative Test'),col=c(1,1,2,2),pch=c(1,2,1,2),text.col=c(1,1,2,2))
+
+
+## Train a linear SVM with C=1 ##
+##-----------------------------##
+
+# load the kernlab package
+
+library(kernlab)
+
+# train the SVM
+svp <- ksvm(xtrain,ytrain,type="C-svc",kernel='vanilladot',C=1,scaled=c())
+
+# General summary
+svp
+
+# Attributes that you can access
+attributes(svp)
+
+# For example, the support vectors
+alpha(svp)
+alphaindex(svp)
+b(svp)
+
+# Use the built-in function to pretty-plot the classifier
+plot(svp,data=xtrain)
+
+
+# Predict labels on test
+ypred = predict(svp,xtest)
+# Confusion table
+table(ytest,ypred)
+
+# Compute accuracy
+sum(ypred==ytest)/length(ytest)
+
+# Compute at the prediction scores
+ypredscore = predict(svp,xtest,type="decision")
+
+# Check that the predicted labels are the signs of the scores
+table(ypredscore > 0,ypred)
+
+# Package to compute ROC curve, precision-recall etc...
+library(ROCR)
+
+pred <- prediction(ypredscore,ytest)
+
+# Plot ROC curve
+perf <- performance(pred, measure = "tpr", x.measure = "fpr") 
+plot(perf)
+
+# Plot precision/recall curve
+perf <- performance(pred, measure = "prec", x.measure = "rec") 
+plot(perf)
+
+# Plot accuracy as function of threshold
+perf <- performance(pred, measure = "acc") 
+plot(perf)
+
+## Use cross-validation ##
+
+cv.folds <-
+function(n, folds = 10)
+{
+	split(sample(1:n), rep(1:folds, length = n))
+}
+
+cvpred.ksvm <- function(x,y,folds=3,predtype="response",...)
+## Return a vector of predictions by cross-validation
+## 'predtype' should be one of response (by default), decision or probabilities, depending the prediction we want (SVM label, score or probability, see predict.ksvm())
+## Additional parameters are passed to ksvm() to train the SVM
+{
+   n <- length(y)
+ 	ypred <- numeric(n)
+ 	s <- cv.folds(n,folds)
+ 	for (i in seq(folds)) {
+ 		m <- ksvm(x[-s[[i]],],y[-s[[i]]],...)
+ 		ypred[s[[i]]] <- predict(m,x[s[[i]],],type=predtype)
+ 		}
+ 	invisible(ypred)
+ }
+
+##----------------------##
+
+# We compute the prediction vector by cross-validation
+k=5  
+ypredscorecv <- cvpred.ksvm(x,y,folds=k, type="C-svc", kernel='vanilladot', C=1, scaled=c(), predtype="decision")
+
+# Check the performance
+print(table(ypredscorecv > 0,y))
+pred <- prediction(ypredscorecv,y)
+perf <- performance(pred, measure = "tpr", x.measure = "fpr") 
+plot(perf)
+
+# Estimate the CV error with ksvm directly, and compare
+svp <- ksvm(x,y,type="C-svc",kernel='vanilladot',C=1,scaled=c(),cross=5)
+print(cross(svp))
+print(1-sum((ypredscorecv>0)==(y==1))/n)
+
+```
+
+code is from WWW.
