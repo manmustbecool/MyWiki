@@ -113,7 +113,7 @@ https://github.com/RubensZimbres/Repo-2017/blob/master/Probabilistic%20Neural%20
 # Read head lines of a large text file
 
 ```python
-file_name = "C:\\Users\\emiewag\\Desktop\\2014101709-12.txt"
+file_name = "C:\\Users\\xxxxx\\Desktop\\2014101709-12.txt"
 
 with open(file_name) as myfile:
     head = [next(myfile) for x in range(20)]

@@ -1,0 +1,89 @@
+---
+title: "GradientDescent"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Gradient Descent in R
+
+```{r}
+# load the data
+Data1 <- read.table("gradientDescent\\ex2data1.txt", header=F, sep=",", quote ="\"'")
+colnames(Data1) = c("exam1","exam2","admit")
+
+# plot the data
+with(Data1,plot(exam1[admit==1],exam2[admit==1]))
+with(Data1,points(exam1[admit==0],exam2[admit==0],col="red"))
+
+# ------- sigmoid --------
+sigmoid = function(z){
+  1 / (1 + exp(-z))
+}
+
+#--------- cost function -----------------
+cost = function(X, y, theta){
+  m = nrow(X)
+  hx = sigmoid(X %*% theta)
+  (1/m) * (((-t(y) %*% log(hx)) - t(1-y) %*% log(1 - hx)))
+}
+
+# --------- gradient -----------------
+grad = function(X, y, theta){
+  m = nrow(X)
+  hx = sigmoid(X %*% theta)
+  (1/m) * (t(X) %*% (hx - y))
+}
+
+# ----------- gradient descent --------------------
+alpha = 0.001
+maxinteration = 600
+#lm(y ~ X)
+theta = matrix(c(-1.3,0.01,0.01),nrow=3) # initialize coefficients
+
+m = nrow(Data1)
+y = as.matrix(Data1[,3])
+X = as.matrix(Data1[,c(1,2)])
+X = cbind(1,X)
+
+
+cost_history <- double(maxinteration) # keep history
+theta_history <- list(maxinteration)
+for (i in 1:maxinteration){
+  theta = theta - alpha * grad(X, y, theta)
+  
+  cost_history[i] <- cost(X, y, theta)
+  theta_history[[i]] <- theta
+}
+
+
+
+plot(cost_history)
+# plot(theta_history)
+
+# -------- compare with R implementation--------------
+print(theta)
+
+res <- lm( admit ~ exam1 + exam2 , data=Data1)
+print(res)
+
+#---------- test accuracy -----------------------------------
+m <- nrow(Data1)
+test_data <- matrix(c(rep(1, m), Data1$exam1, Data1$exam2), nrow = m)
+
+Data1$predict <- sigmoid(test_data %*% theta)
+
+accuracy <- with(Data1, mean(ifelse(round(predict) == admit, 1, 0)))
+accuracy
+
+```
+
+https://dernk.wordpress.com/2013/06/
+
+
+# Other reference
+
+Linear regression by gradient descents
+
+http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_70219%2Egde_70219_member_139405437
+
+
