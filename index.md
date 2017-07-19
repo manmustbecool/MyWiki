@@ -26,7 +26,7 @@ My cheat sheets
  * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
  * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
- * <a href="Wiki/R/GradientDescent.html">Gradient Descent.html</a>
+ * <a href="Wiki/R/gradientDescent.html">Gradient Descent</a>
  * Development 
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
