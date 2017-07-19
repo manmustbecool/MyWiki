@@ -3,16 +3,13 @@ title: "Maven"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-# Maven
+# Can not find repository
 
 Eclipse -> preferences > Maven -> User setting 
 
-Update User Setting file location to 
-```
+Update User Setting file location  
+```bash
 C:\Users\xxxxwag\.m2\repository
 ```
 

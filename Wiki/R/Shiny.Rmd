@@ -4,7 +4,7 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-## Widget
+# Widget
 
 http://gallery.htmlwidgets.org/
 
@@ -15,9 +15,42 @@ http://gallery.htmlwidgets.org/
      * ramchart
      * qtlchart http://kbroman.org/qtlcharts/
      
-  
-## Real time updating
 
+# Reactive programming
+
+https://shinydata.wordpress.com/2015/02/02/a-few-things-i-learned-about-shiny-and-reactive-programming/
+
+```r
+shinyServer(function(input, output, session){
+
+ # Get Lengths from user input   
+ a <- eventReactive(input$do, {
+       subset(dd, Wafer %in% input$wafer, select = Length) 
+ })
+
+ #Observe and update first set of radiobuttons based on a(). Does render   
+  observe({ 
+    z <- a()
+    updateRadioButtons(session, "length", choices = unique(z$Length), inline=TRUE)
+  })
+
+  output$l <- renderDataTable({ a() })
+})
+
+shinyUI(fluidPage(
+
+  actionButton("do", "Search wafer"),
+  radioButtons("length", label="Length", choices=""),
+
+  dataTableOutput(outputId="l")
+  )
+)
+
+```
+
+# Real time updating
+
+## re-plot every updating
 ```r
 library(shiny)
 library(magrittr)
@@ -61,39 +94,16 @@ server <- shinyServer(function(input, output, session){
 
 shinyApp(ui,server)
 ```
-## Reactive programming
 
-https://shinydata.wordpress.com/2015/02/02/a-few-things-i-learned-about-shiny-and-reactive-programming/
+## Updating without re-ploting using highcharts 
 
-```r
-shinyServer(function(input, output, session){
+[real_time_updating_with_highcharts.R](Shiny/real_time_updating_with_highcharts.R)
+[charts.js](Shiny/charts.js)
 
- # Get Lengths from user input   
- a <- eventReactive(input$do, {
-       subset(dd, Wafer %in% input$wafer, select = Length) 
- })
 
- #Observe and update first set of radiobuttons based on a(). Does render   
-  observe({ 
-    z <- a()
-    updateRadioButtons(session, "length", choices = unique(z$Length), inline=TRUE)
-  })
+# Dynamic plot
 
-  output$l <- renderDataTable({ a() })
-})
-
-shinyUI(fluidPage(
-
-  actionButton("do", "Search wafer"),
-  radioButtons("length", label="Length", choices=""),
-
-  dataTableOutput(outputId="l")
-  )
-)
-
-```
-
-## Dynamic plot 
+## Dynamic on number of plots 
 ```r
 max_plots <- 5
 
@@ -136,11 +146,41 @@ ui <- shinyUI(
 
 shinyApp(ui,server)
 ```
+## Mutiple plots in one render function
+
+```r
+library(shiny)
+
+ui <- shinyUI(pageWithSidebar(
+  headerPanel("Example"),
+  sidebarPanel(),
+  mainPanel(
+    tabsetPanel(
+      tabPanel("Main", plotOutput("temp", height=1000, width=1000))
+    ) #tabsetPanel  
+  ) #mainPane;
+  
+))
+
+server <- shinyServer(function(input, output) {
+  output$temp <-renderPlot({
+    par(mfrow=c(2,2))
+    plot(1:10)
+    plot(rnorm(10))
+    plot(rnorm(10))
+    plot(rnorm(10))
+  })
+})
+
+shinyApp(ui, server)
+```
+
+# DataTable
 
 ## DT: Styling Cells, Rows, and Tables
 http://rstudio.github.io/DT/010-style.html
 
-## Table with hyperlinks
+## DataTable with hyperlinks
 ```r
 library(shiny)
 
@@ -203,35 +243,6 @@ server=function(input,output,session)({
 shinyApp(ui, server)
 ```
 
-## Mutiple plots in one render function
-
-```r
-library(shiny)
-
-ui <- shinyUI(pageWithSidebar(
-  headerPanel("Example"),
-  sidebarPanel(),
-  mainPanel(
-    tabsetPanel(
-      tabPanel("Main", plotOutput("temp", height=1000, width=1000))
-    ) #tabsetPanel  
-  ) #mainPane;
-  
-))
-
-server <- shinyServer(function(input, output) {
-  output$temp <-renderPlot({
-    par(mfrow=c(2,2))
-    plot(1:10)
-    plot(rnorm(10))
-    plot(rnorm(10))
-    plot(rnorm(10))
-  })
-})
-
-shinyApp(ui, server)
-```
-
-## Deploying Desktop Apps with R
+# Deploying Desktop Shiny Apps with R
 
 https://www.r-bloggers.com/deploying-desktop-apps-with-r/

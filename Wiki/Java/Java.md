@@ -1,5 +1,6 @@
 ---
 title: "Java"
+output: html_document
 ---
 
 
@@ -22,7 +23,6 @@ public enum UserActivity {
 
 // use it as ...
 UserActivity.INSTANCE.doStuff();
-
 ```
 
 # Concurrency
@@ -34,11 +34,11 @@ http://jcip.net/
 
 code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
 
- * extends <b>Thread</b>
+ * extends **Thread**
 
- * implements <b>Runnable</b>
- 
- * implements <b>Callable</b>
+ * implements **Runnable**
+
+ * implements **Callable**
 
     * Similar to Runnable, but a Runnable does not return a result and cannot throw a checked exception.
 
@@ -119,7 +119,8 @@ http://bigocheatsheet.com/
   
   code : https://github.com/manmustbecool/MyWiki/tree/gh-pages/myWikiCode/src
 
-# java 8 #
+# java 8 
+
 http://winterbe.com/posts/2014/03/16/java-8-tutorial/
 
 
