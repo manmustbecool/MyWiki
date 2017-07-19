@@ -1,8 +1,11 @@
 ---
 title: "Solr"
+output: html_document
 ---
 
 # Enterprise Search and Solr framework
+
+Paper: Enterprise Search with Development for Network Management System
 
 [PDF paper](http://manmustbecool.github.io/MyWiki/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf) 
 or 

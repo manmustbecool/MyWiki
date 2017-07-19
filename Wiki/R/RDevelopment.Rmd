@@ -9,11 +9,11 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 
 ## Call R from Java ##
 
- * **RCaller** 
+### **RCaller** 
  
 http://www.mhsatman.com/rcaller.php
 
- * **Rserve** 
+### **Rserve** 
  
 An R server listens and processes incoming requests of clients. It passes commands to R which were sent by clients.
 
@@ -24,13 +24,10 @@ An R server listens and processes incoming requests of clients. It passes comman
 
 in R:
 ```r
-install.packages("Rserve")
-
-library(Rserve)
+library(Rserve) # install.packages("Rserve")
 Rserve()
 
 ```
-
 in Java:
 ```java
 import org.rosuda.REngine.*;
@@ -45,7 +42,7 @@ try {
 
 ```
 
- * **JRI**
+### **JRI**
  
 Java/R Interface
 
@@ -53,7 +50,7 @@ It use uses the JNI and is part of rJava. http://www.rforge.net/JRI/
 
 Install rJava in R `install.packages("rJava")`
 
-JRI can be found be the R library directory `C:\Program Files\R\R-2.15.0\library\rJava\jri `
+JRI can be found be the R library directory: `C:\Program Files\R\R-2.15.0\library\rJava\jri `
 
 Run example in the Windows CMD. (i386 for 32bit)
 
@@ -87,8 +84,7 @@ java -cp JRI.jar:examples rtest
 # sudo cp /usr/lib/R/site-library/rJava/jri libjri.so  /usr/lib
 ```
 
-JRI sample:
-
+JRI example:
 ```java
 import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.Rengine;
@@ -103,40 +99,37 @@ public class RTest {
 }
 ```
 
- * **Rsession** 
+### **Rsession** 
 
-multiple R sessions are allowed
+multiple R sessions are allowed for Rserve
+https://github.com/yannrichet/rsession
 
- * **Renjin** 
+### **Renjin** 
  
  A new JVM-based R language interpreter.
  http://code.google.com/p/renjin/ http://stdioe.blogspot.ie/2011/09/embedding-r-in-java-applications-using.html
 
 
 ## Call Java from R ##
-  * **rJava**
+### **rJava**
   
 http://www.rforge.net/rJava/
 
 
 # Performance optimization
 
-compilied R code can speed up functions by a factor or 3 or 4 in some cases. 
-
 ```r
-
+# ------- use compiler
+# compilied R code can speed up functions by a factor or 3 or 4 in some cases. not sure if they are turned on by default since R 3.41 or higher
 library(compiler)
 enableJIT(3) # compile nested functions nested within the function
 f <- function(n, x) for (i in 1:n) x = (1 + x)^(-1)
 compiled_f <- cmpfun(f)
 
-
-# ------- fast strptime
+# ------- use fast_strptime
 + require(lubridate)
 - data$datetime <- strptime(data$time, "%Y-%m-%dT%H:%M:%OSZ", tz="UTC")
 + data <- data %>% mutate(datetime = fast_strptime(time, "%Y-%m-%dT%H:%M:%OSZ", tz="UTC"))
-
-
 
 # -------- filter for subset
 df <- data[data$id>6, ]
@@ -169,8 +162,6 @@ Rprof(NULL)
 summaryRprof(tmp, memory="both")
 
 ```
-
-
 
 http://www.noamross.net/blog/2013/4/25/faster-talk.html
 

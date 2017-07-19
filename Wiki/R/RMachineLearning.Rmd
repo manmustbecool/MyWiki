@@ -8,16 +8,11 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 http://archive.ics.uci.edu/ml/
 
-## Gradient descents 
-
-Linear regression by gradient descents
-
-http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_70219%2Egde_70219_member_139405437
-
 ## Neural networks ##
 
 http://www.ai-junkie.com/ann/evolved/nnt8.html
 
+https://www.r-bloggers.com/fitting-a-neural-network-in-r-neuralnet-package/
 
 ## Hidden Markov Models ##
 
@@ -25,27 +20,20 @@ http://web.stanford.edu/class/stats366/hmmR2.html
 
 http://yunus.hacettepe.edu.tr/~iozkan/eco742/hmm.html
 
-
 ## Logistic Regression ##
 
 https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/
 
 
-## Support Vector Machine (SVM) ##
+## Loess 
 
-  *  **e1071**
-
-tune
-http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:tune
-
-svm
-http://rgm2.lab.nig.ac.jp/RGM2/func.php?rd_id=e1071:svm
-
-http://stackoverflow.com/questions/7390173/svm-equations-from-e1071-r-package
-
-Recursive Feature Extraction (SVM-RFE)
-
-http://stats.stackexchange.com/questions/10676/using-an-svm-for-feature-selection
+```{r}
+x <- 1:10
+y <- c(2,4,6,8,7,12,14,16,18,20)
+lo <- loess(y~x)
+plot(x,y)
+lines(predict(lo), col='red', lwd=2)
+```
 
 
 ## Recommender system ##
@@ -64,40 +52,3 @@ http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/
 
 http://www.teglor.com/b/deep-learning-libraries-language-cm569/
 
-## Dimensionality Reduction
-
-### Singular Value Decomposition (SVD) ##
-
-### Multidimensional Scaling (MDS) ##
-
-```r
-#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. 
-euromat = as.matrix(eurodist) # convert eurodist to matrix
-euromat[1:5, 1:5] # inspect first five elements
-
-as.dist(myMatrix) # convert to dist object from co matrix
-
-
-# MDS 'cmdscale'
-mds1 = cmdscale(eurodist, k = 2)
-
-# plot
-plot(mds1[,1], mds1[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
-     main = "cmdscale (stats)")
-text(mds1[,1], mds1[,2], labels(eurodist), cex = 0.9, xpd = TRUE)
-
-#------------------ 
-
-data(iris)
-
-# calculate the distance matrix for first 4 columns
-irisDist <- dist(iris[,1:4])
-
-irisMds = cmdscale(irisDist, k = 2)
-
-# plot with color based on the 5th column 
-plot(irisMds)
-text(irisMds[,1], (irisMds[,2]+max(irisMds[,2])*0.05), labels=1:nrow(irisMds), cex = 0.6, xpd = TRUE)
-points(irisMds, col=c("red", "green", "blue")[as.numeric(iris$Species)],)
-
-```

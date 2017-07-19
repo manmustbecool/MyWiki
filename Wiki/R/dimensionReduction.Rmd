@@ -1,6 +1,7 @@
 ---
 title: "Dimension reduction"
 output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 ```{r setup, include=FALSE}
@@ -38,3 +39,106 @@ biplot(pca2)
 
 
 ```
+
+# SVD
+
+---
+title: "SVD"
+output: html_document
+---
+
+
+```{r}
+# sequence 1 to 240 with gap 2
+dat <- seq(1,120, 2)
+# dat
+
+X <- matrix(dat,ncol=6)
+X
+
+s <- svd(X)
+
+# diag() : constructs a diagonal matrix
+# contract a diagonal matrix from a vector s$d
+D <- diag(s$d)
+
+# X = U D V'
+# where U and V are orthogonal, V' means V transposed, and D is a diagonal matrix with the singular values D[i,i]. 
+s$u %*% D %*% t(s$v) 
+
+```
+
+## Golf example
+
+http://datascientistinsights.com/2013/02/17/single-value-decomposition-a-golfers-tutotial/
+
+```{r, echo=FALSE}
+# build the matrix
+scores <- c(4,4,3,4,4,3,4,2,5,4,5,3,5,4,5,4,4,5,5,5,2,4,4,4,3,4,5)
+golfMatrix <- matrix(scores,nrow=9)
+rownames(golfMatrix) <-c("Hole 1", "Hole 2", "Hole 3", "Hole 4", "Hole 5", 
+                         "Hole 6", "Hole 7", "Hole 8", "Hole 9")
+colnames(golfMatrix)<- c("Phil", "Tiger", "Vijay")
+golfMatrix
+
+
+golfSVD <- svd(golfMatrix, nu=nrow(golfMatrix), nv=ncol(golfMatrix))
+
+# the singular values ($d)
+# left and right singular vectors ($u, $v)
+golfSVD 
+
+#  first left and right singular values ($u, $v)
+approxGolf <- golfSVD$u[,1] %*% t(golfSVD$v[ ,1]) * golfSVD$d[1]
+
+approxGolf
+
+#  first two singlar values ??
+golfSVD$u[,1:2] %*% diag(golfSVD$d[1:2]) %*% t(golfSVD$v[ ,1:2])
+
+```
+
+
+
+
+#MDS#
+
+Multidimensional Scaling
+
+```{r}
+#eurodist (dist object) that gives the road distances (in km) between 21 cities in Europe. 
+euromat = as.matrix(eurodist) # convert eurodist to matrix
+euromat[1:5, 1:5] # inspect first five elements
+
+# as.dist(myMatrix) # convert to dist object from co matrix
+
+# MDS 'cmdscale'
+mds1 = cmdscale(eurodist, k = 2)
+
+# plot
+plot(mds1[,1], mds1[,2], type = "n", xlab = "", ylab = "", axes = FALSE,
+     main = "cmdscale (stats)")
+text(mds1[,1], mds1[,2], labels(eurodist), cex = 0.9, xpd = TRUE)
+
+#------------------ 
+
+data(iris)
+
+irisDist <- dist(iris[,1:4]) # calculate the distance matrix for first 4 columns
+
+irisMds = cmdscale(irisDist, k = 2)
+
+# plot with color based on the 5th column 
+plot(irisMds)
+text(irisMds[,1], (irisMds[,2]+max(irisMds[,2])*0.05), labels=1:nrow(irisMds), cex = 0.6, xpd = TRUE)
+points(irisMds, col=c("red", "green", "blue")[as.numeric(iris$Species)])
+
+```
+
+
+
+
+
+
+
+

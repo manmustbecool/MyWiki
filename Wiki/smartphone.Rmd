@@ -5,12 +5,12 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 
-bootloader
+# bootloader
 
 It is usually locked to prevent people from changing the system files, or ROM/operating system itself.
 unlock the bootloader it allows you to flash a custom recovery (like TWRP), which in turn allows you to flash custom ROMs such as CM rom. 
 
-root
+# root
 
 It basically tweaks the system files and grants you super user rights which allows you to grant apps root access.
 The easiest way of rooting usually requires the bootloader to be unlocked so you can flash the root file via recovery. There are other root methods which can work with a locked bootloader but requires a massive effort from a willing developer.

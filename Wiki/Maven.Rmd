@@ -1,0 +1,17 @@
+---
+title: "Maven"
+output: html_document
+---
+
+
+# Can not find repository
+
+Eclipse -> preferences > Maven -> User setting 
+
+Update User Setting file location  
+```bash
+C:\Users\xxxxwag\.m2\repository
+```
+
+
+

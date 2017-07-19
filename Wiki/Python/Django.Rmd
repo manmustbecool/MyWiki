@@ -1,0 +1,427 @@
+---
+title: "Django"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# HelloWorld 
+
+## create a enviroment (helloenv)
+
+```python
+# use a virtual environment to store our packages to avoid polluting our global scope with unecessary packages 
+pip install virtualenv
+
+mkdir helloenv
+cd helloenv
+
+# for Linux: create the environment 
+virtualenv -p /usr/local/bin/python3 env 
+# for windows anaconda python installation path
+# virtualenv -p C:/ProgramData/Anaconda3/python.exe env
+
+# folder structure
+helloenv
+ ├── env
+
+# activate enviroment
+source env/bin/activate
+# for windows
+# env\\Scripts\\activate 
+
+# will see a prompt with the environment name
+(env)
+
+```
+
+## create a project (helloweb)
+
+```python
+# install django
+pip install django
+ 
+# create skeleton web project
+django-admin startproject helloweb
+
+# folder structure
+helloweb
+├─helloweb
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── manage.py
+```
+
+## create an app (howdy)
+
+```python
+# create a Django app howdy
+cd helloweb
+python manage.py startapp howdy
+
+helloweb
+├── helloweb
+│        ├── ...
+├── howdy
+│        ├── ...
+└── manage.py
+
+# add the Django app into web project by change setting.py
+# helloweb/settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'howdy'
+]
+
+# run server then Go to your browser and access http://127.0.0.1:8000/
+python manage.py runserver
+
+# migrate the initial database schema to our SQLite database using the management script
+# it changes our database schema (model) without having to lose any data
+python manage.py migrate # need to stop server first
+
+# Create an administrative user for the project if it is needed 
+# after run python manage.py migrate
+python manage.py createsuperuser
+```
+
+## create an web page in howdy
+
+```python
+# access our howdy app when someone goes to the home page URL by updating urls.py
+# helloweb/urls.py
+from django.conf.urls import include
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include('howdy.urls')),
+]
+```
+fixes the missing url definitions in the howdy app
+```python
+# create new urls.py file inside the howdy app
+# howdy/urls.py
+from django.conf.urls import url
+from howdy import views
+
+urlpatterns = [
+    url(r'^$', views.HomePageView.as_view()), # expects a view called HomePageView to be defined. 
+]
+```
+
+define `HomePageView` inside the views.py
+```python
+# howdy/views.py
+from django.shortcuts import render
+from django.views.generic import TemplateView
+# Create your views here.
+class HomePageView(TemplateView):
+    def get(self, request, **kwargs):
+        return render(request, 'index.html', context=None)
+        
+# This file defines a view called HomePageView. Django views take in a request and return a response. In our case, the method get expects a HTTP GET request to the url defined in our urls.py file. On a side note, we could rename our method to post to handle HTTP POST requests.
+```
+
+create index.html inside the templates
+```bash
+cd howdy
+mkdir templates
+```
+```bash
+<!-- howdy/templates/index.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Howdy!</title>
+    </head>
+    <body>
+        <h1>Howdy! I am Learning Django!</h1>
+    </body>
+</html>
+```
+## create another web page in howdy
+
+create about.html inside the templates
+```bash
+<!-- howdy/templates/about.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Howdy!</title>
+    </head>
+    <body>
+        <h1>Welcome to the about page</h1>
+    <p>... </p>
+    <a href="/">Go back home</a>
+    </body>
+</html>
+```
+
+edit index.html to link to the about.html
+```bash
+<!-- howdy/templates/index.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Howdy!</title>
+    </head>
+    <body>
+        <h1>Howdy! I am Learning Django!</h1>
+		<a href="/about/">About Me</a>
+    </body>
+</html>
+```
+
+Clicking on the About me link won't work quite yet because our app doesn't have a /about/ url defined. 
+edit the urls.py file in our howdy app to add it.
+```python
+from howdy import views
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include('howdy.urls')),
+    url(r'^about/$', views.AboutPageView.as_view()), # Add this /about/ route
+]
+```
+
+updating views.py
+```python
+class HomePageView(TemplateView):
+    def get(self, request, **kwargs):
+        return render(request, 'index.html', context=None)
+
+# Add this view
+class AboutPageView(TemplateView):
+    template_name = "about.html"
+
+# Notice that the second view did not define a get method. This is just another way of using the TemplateView class. If you set the template_name attribute, a get request to that view will automatically use the defined template. 
+```
+
+reference : https://scotch.io/tutorials/build-your-first-python-and-django-application#comments-section
+
+
+# Convert An Existing Django Project To Eclipse Project
+
+Django project named “mysite”. This is the main folder which contains manage.py, settings.py, etc.
+create two files
+```bash
+$ cd /path/to/mysite
+$ vi .project
+$ vi .pydevproject
+```
+inside .project file
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+    <name>mysite</name>
+    <comment></comment>
+    <projects>
+    </projects>
+    <buildSpec>
+        <buildCommand>
+            <name>org.python.pydev.PyDevBuilder</name>
+            <arguments>
+            </arguments>
+        </buildCommand>
+    </buildSpec>
+    <natures>
+        <nature>org.python.pydev.pythonNature</nature>
+        <nature>org.python.pydev.django.djangoNature</nature>
+    </natures>
+</projectDescription>
+```
+inside .pydevproject file
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse-pydev version="1.0"?><pydev_project>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 3.6</pydev_property>
+
+<pydev_variables_property name="org.python.pydev.PROJECT_VARIABLE_SUBSTITUTION">
+<key>DJANGO_MANAGE_LOCATION</key>
+<value>mysite/manage.py</value>
+</pydev_variables_property>
+
+</pydev_project>
+```
+Now open Eclipse and choose “File > Import”. Navigate to “mysite” and choose that as your location
+
+reference: https://prateekvjoshi.com/2013/04/01/how-to-convert-an-existing-django-project-to-eclipse-project/
+
+include new dependencies from virtual environment for Pydev
+Window > preference > Pydev > interpreter python > include the site-packages folder of virtualenv folder in system PYTHONPATH (buttom of GUI)
+
+
+
+# Build a blog post web app
+
+{% raw %} this is to avoid {% %} tags causing github build failure
+
+## models.py
+
+```python
+from django.utils import timezone
+
+class Post(models.Model):  # Post inheritance from Model
+    author = models.ForeignKey('auth.User')
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title	
+# create a form for our Post model.        
+# with Django forms,  we can either define one from scratch or create a ModelForm which will save the result of the form to the model.
+```
+
+## forms.py
+```python
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm): # create a Form class from a Django model.
+    class Meta:                  #model should be used to create this form (model = Post).
+        model = Post
+        fields = ('title', 'text',)
+```
+
+add new model to database
+
+```python
+python manage.py makemigrations
+python manage.py migrate
+```
+
+
+## views.py
+```python
+	
+from .form import PostForm
+from django.utils import timezone
+from django.shortcuts import redirect
+
+def post_new(request):
+    if request.method == "POST":
+        # construct the PostForm with data from the form
+        form = PostForm(request.POST) 
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'post_edit.html', {'form': form})
+	
+from .models import Post	
+from django.shortcuts import render, get_object_or_404
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'post_detail.html', {'post': post})	
+
+
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'post_edit.html', {'form': form})
+```
+
+## urls.py
+```python
+from django.conf.urls import url
+from howdy import views
+from django.conf.urls import include
+
+urlpatterns = [
+	url(r'^post/new/$', views.post_new, name='post_new'),
+	url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
+	url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
+]
+# (?P<pk>\d+) means Django will take all digits that you place here and transfer it to a view as a variable called pk
+```
+
+## base.html
+```html
+<html>
+    {% xxy %}
+    <head>
+      <meta charset="utf-8">
+	    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+    {% block content %}
+    {% endblock %}
+    </body>
+</html>
+```
+## post_new.html
+
+```bash
+{% extends 'base.html' %}
+{% block content %}
+  <a href="{% url 'post_new' %}">post new</a>
+{% endblock %}
+```
+
+
+## post_detail.html
+```bash
+{% extends 'base.html' %}
+{% block content %}
+	<div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <a href="{% url 'post_edit' pk=post.pk %}">edit</a>
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+  </div>
+{% endblock %}
+```
+
+## post_edit.html
+```bash
+{% extends 'base.html' %}
+{% block content %}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
+```
+{% endraw %}
+
+reference: https://tutorial.djangogirls.org/en/django_models/
+
+
+# other
+
+http://engineroom.trackmaven.com/blog/getting-started-drf-angularjs-part-5/

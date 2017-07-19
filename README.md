@@ -1,8 +1,9 @@
 # My Notes
 
-> for Website: http://manmustbecool.github.io/MyWiki/
+> Website URL: http://manmustbecool.github.io/MyWiki/
 
-This website is collection of some my notes
+This website is a collection of some my notes 
+
 
 
 

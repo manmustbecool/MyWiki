@@ -123,13 +123,12 @@ $(document).ready(function () {
 <p>Home: <a href="http://manmustbecool.github.io/MyWiki/" class="uri">http://manmustbecool.github.io/MyWiki/</a></p>
 </blockquote>
 <p>My cheat sheets</p>
-<div id="r" class="section level3">
-<h3>R</h3>
+<div id="r" class="section level2">
+<h2>R</h2>
 <ul>
 <li><a href="Wiki/R/RBasic.html">R Basic</a></li>
 <li><a href="Wiki/R/plot.html">R Plot</a></li>
 <li><a href="Wiki/R/Shiny.html">Shiny</a></li>
-<li><a href="Wiki/R/RDevelopment.html">R Development</a></li>
 <li><a href="Wiki/R/RMachineLearning.html">R Machine Learning</a></li>
 <li><a href="Wiki/R/textMining.html">Text Mining</a></li>
 <li><a href="Wiki/R/associationRule.html">Association Rule</a></li>
@@ -139,9 +138,19 @@ $(document).ready(function () {
 <li><a href="Wiki/R/QLearning.html">Q-Learning</a></li>
 <li><a href="Wiki/R/Entropy.html">Entropy</a></li>
 <li><a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a></li>
+<li><a href="Wiki/R/densityEstimation.html">Density Estimation</a></li>
+<li><a href="Wiki/R/svm.html">SVM (support vector machine)</a></li>
+<li><a href="Wiki/R/GradientDescent.html">Gradient Descent.html</a></li>
+<li>Development
+<ul>
+<li><a href="Wiki/R/RDevelopment.html">R Development</a></li>
 <li><a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a></li>
-<li><a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a></li>
+</ul></li>
+<li>Dimension Reduction
+<ul>
 <li><a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a></li>
+<li><a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a></li>
+</ul></li>
 <li>Time Serie
 <ul>
 <li><a href="Wiki/R/timeSeries.html">Time series</a></li>
@@ -155,23 +164,24 @@ $(document).ready(function () {
 </ul></li>
 </ul>
 </div>
-<div id="java" class="section level3">
-<h3>Java</h3>
+<div id="java" class="section level2">
+<h2>Java</h2>
 <ul>
 <li><a href="Wiki/Java/Java.html">Java notes</a></li>
 <li><a href="Wiki/Java/JavaCollection.html">Java Collection</a></li>
 </ul>
 </div>
-<div id="python" class="section level3">
-<h3>Python</h3>
+<div id="python" class="section level2">
+<h2>Python</h2>
 <ul>
 <li><a href="Wiki/Python/python.html">Python</a></li>
 <li><a href="Wiki/Python/pythonML.html">Python ML</a></li>
+<li><a href="Wiki/Python/Django.html">Django</a></li>
 <li><a href="Wiki/Python/pythonRdm.html">Python R markdown</a></li>
 </ul>
 </div>
-<div id="big-data" class="section level3">
-<h3>Big Data</h3>
+<div id="big-data" class="section level2">
+<h2>Big Data</h2>
 <ul>
 <li><a href="Wiki/Hadoop.html">Hadoop</a></li>
 <li><a href="Wiki/Pig.html">Pig</a></li>
@@ -183,11 +193,11 @@ $(document).ready(function () {
 <li><a href="Wiki/Kafka.html">Kafka</a></li>
 <li><a href="Wiki/ClouderaCm.html">Cloudera manager</a></li>
 </ul>
-</div>
 <div id="others" class="section level3">
 <h3>Others</h3>
 <ul>
 <li><a href="Wiki/Linux.html">Linux</a></li>
+<li><a href="Wiki/Maven.html">Maven</a></li>
 <li><a href="Wiki/VirtualMachine.html">Virtual Machine</a></li>
 <li><a href="Wiki/Latex.html">Latex</a></li>
 <li><a href="Wiki/eclipseModeling.html">Eclipse Modeling</a></li>
@@ -215,10 +225,13 @@ div.non * {
 </div>
 <p>Project: <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki">https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki</a></p>
 </div>
+</div>
 
 
 <!-- <div id="backTotop"><a href="#homeLink">^Back to top^</a></div> -->
-<div id="backTotop"><a href="http://manmustbecool.github.io/MyWiki/">^Home Page^</a></div>
+<div id="backTotop">
+  <a href="http://manmustbecool.github.io/MyWiki/">Home Page</a>
+</div>
 
 
 <div id="disqus_thread"></div>
@@ -275,7 +288,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

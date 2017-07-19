@@ -24,7 +24,9 @@ reference: www.r-graph-gallery.com
 
 # Graphic
 
-## Colour
+##  Symbols and Color
+
+http://vis.supstat.com/2013/04/plotting-symbols-and-color-palettes/
 
 http://www.endmemo.com/program/R/color.php
 

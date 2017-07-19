@@ -11,11 +11,10 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 My cheat sheets
 
-### R
+## R
  * <a href="Wiki/R/RBasic.html">R Basic</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/Shiny.html">Shiny</a>
- * <a href="Wiki/R/RDevelopment.html">R Development</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/associationRule.html">Association Rule</a>
@@ -25,9 +24,15 @@ My cheat sheets
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/Entropy.html">Entropy</a>
  * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
- * <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
- * <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
- * <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
+ * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
+ * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
+ * <a href="Wiki/R/GradientDescent.html">Gradient Descent.html</a>
+ * Development 
+    + <a href="Wiki/R/RDevelopment.html">R Development</a>
+    + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
+ * Dimension Reduction
+    + <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
+    + <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * Time Serie
     + <a href="Wiki/R/timeSeries.html">Time series</a>
     + <a href="Wiki/R/Arima.html">Arima</a>
@@ -37,16 +42,17 @@ My cheat sheets
     + <a href="Wiki/R/ga_cluster.html">Genetic algorithm based clustering</a>
     
  
-### Java
+## Java
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
  
-### Python
+## Python
  * <a href="Wiki/Python/python.html">Python</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
+ * <a href="Wiki/Python/Django.html">Django</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
   
-### Big Data
+## Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
  * <a href="Wiki/Pig.html">Pig</a> 
  * <a href="Wiki/Hive.html">Hive</a> 
@@ -60,6 +66,7 @@ My cheat sheets
 
 ### Others
  * <a href="Wiki/Linux.html">Linux</a>
+ * <a href="Wiki/Maven.html">Maven</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
  * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
