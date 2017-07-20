@@ -19,6 +19,7 @@ My cheat sheets
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/associationRule.html">Association Rule</a>
  * <a href="Wiki/R/graph.html">Graph</a>
+ * <a href="Wiki/R/gradientDescent.html">Logistic regression with Gradient Descent</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/baye_network.html">Baye network</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
@@ -26,7 +27,6 @@ My cheat sheets
  * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
  * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
- * <a href="Wiki/R/gradientDescent.html">Gradient Descent</a>
  * Development 
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
@@ -40,8 +40,8 @@ My cheat sheets
     + <a href="Wiki/R/clustering.html">Clustering techniques</a>
     + <a href="Wiki/R/clusteringComparison.html">Clustering comparison</a>
     + <a href="Wiki/R/ga_cluster.html">Genetic algorithm based clustering</a>
-    
  
+
 ## Java
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>

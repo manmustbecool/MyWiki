@@ -1,9 +1,8 @@
 ---
-title: "GradientDescent"
+title: "Logistic Regression with Gradient Descent"
 output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
-
 
 ```{r}
 # load the data
@@ -16,8 +15,7 @@ with(data,points(exam1[admit==0],exam2[admit==0],col="red"))
 
 ```
 
-## logistic regression 
-
+# logistic regression 
 
 ### logistic/sigmoid function
 
@@ -95,8 +93,7 @@ gradient <- function(x, y, theta) {
 
 
 ```{r}
-
-alpha = 0.001
+alpha = 0.001 # learning rate
 max_interation = 600
 
 # initialize coefficients
@@ -150,7 +147,30 @@ accuracy
 https://dernk.wordpress.com/2013/06/
 
 
-## Other reference
+# Parallel Logistic regression
+
+Since the logistic hypothesis function is depending on the theta value, 
+$$
+h_{\theta}(x) = g(\theta^{T}x) = \frac{1}{1+e^{-\theta^{T}x}}
+$$
+
+We use the batch gradient descent to calculate the theta for each subset of data in parallel in different nodes
+$$
+\theta := \theta - \alpha \sum_{i=1}^{n}(y_i - h_\theta(x_i))x_i
+$$
+
+Then get the optimized value by average collected results
+$$
+\theta = \frac{1}{n}\sum_{i=1}^{n}(\theta_i)
+$$
+So, we can put the final theta back the hypothesis function for the prediction.
+
+The above just implemented a basic version. We can use the stochastic gradient descent and weighted average on the final value, etc. to improve the efficiency and accuracy as described in the Yahoo’s paper
+
+reference: Parallelized Stochastic Gradient Descent
+http://martin.zinkevich.org/publications/nips2010.pdf
+
+# Other reference
 
 Linear regression by gradient descents
 
