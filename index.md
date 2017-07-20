@@ -88,7 +88,7 @@ div.non * {
 
 <div class="non">
 
-### Recent Publications
+## Recent Publications
 
 [A Streaming Data Anomaly Detection Analytic Engine for Mobile Network Management](https://github.com/manmustbecool/MyWiki/blob/gh-pages/papers/A%20Streaming%20Data%20Anomaly%20Detection%20Analytic%20Engine%20for%20Mobile%20Network%20Management.pdf)
 
@@ -96,7 +96,7 @@ div.non * {
 [Enterprise search with development for network management system](https://github.com/manmustbecool/MyWiki/blob/gh-pages/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf)
 
 
-[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
+[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](/blob/gh-pages/papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
 
 
 [A distributed architecture for policy-customisable multi-tenant Processes-as-a-Service](https://github.com/manmustbecool/MyWiki/blob/master/papers/A%20distributed%20architecture%20for%20policy-customisable%20multi-tenant%20Processes-as-a-Service.pdf)
