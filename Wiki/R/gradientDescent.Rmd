@@ -42,7 +42,7 @@ $$
 
 
 ```{r}
-hypothesis = function(x, theta){
+hypothesis <- function(x, theta){
   sigmoid(x %*% theta)
 }
 
@@ -52,68 +52,87 @@ hypothesis = function(x, theta){
 
 ### cost function 
 
+cost function shows the error of prediction: cost(predicted_value, actural_value)
+
+Average error of n prediction:
 $$
-J(\theta)=\frac{1}{m}\sum_{i=1}^{m}cost(h_\theta(x),y)
+J(\theta)=\frac{1}{n}\sum_{i=1}^{n}cost(h_\theta(x),y)
 $$
 $$
 cost(h_\theta(x),y)=-y\log(h_\theta(x)) - (1-y)\log(1-h_\theta(x))
 $$
 $$
-J(\theta)=\frac{1}{m}\sum_{i=1}^{m}[-y^i\log(h_\theta(x^i)) - (1-y^i)\log(1- h_\theta(x^i))]
+J(\theta)=\frac{1}{n}\sum_{i=1}^{n}[-y^i\log(h_\theta(x^i)) - (1-y^i)\log(1- h_\theta(x^i))]
 $$
 
 ```{r}
-cost = function(x, y, theta){
-  hx = hypothesis(x, theta)
-  m = nrow(x)
-  # (1/m) * (((-t(y) %*% log(hx)) - t(1-y) %*% log(1 - hx)))
-  (1/m) * sum( -y*log(hx) - (1-y)*log(1-hx) )
+cost <- function(x, y, theta){
+  hx <- hypothesis(x, theta)
+  n <- nrow(x)
+  # (1/n) * (((-t(y) %*% log(hx)) - t(1-y) %*% log(1 - hx)))
+  (1/n) * sum( -y*log(hx) - (1-y)*log(1-hx) )
 }
 
 ```
 
+
+Alternatively, mean squared error 
+
+```{r}
+cost <- function(x, y, theta) {
+  hx <- hypothesis(x, theta)
+  n <- nrow(x)
+  (1/n) * sum((hx - y)^2) 
+}
+```
+
+
+
 ### (batch) gradient descent
+
+theta is the coefficient or weight to being optimized. 
+
+theta = theta - alpha * gradient
+
+gradient =  average of (prediction_error * input_x)
 
 minimize $J(\theta)$
 
 $$
-\theta := \theta - \alpha \sum_{i=1}^{n}(y_i - h_\theta(x_i))x_i
+\theta := \theta - \alpha \frac{1}{n} \sum_{i=1}^{n}(h_\theta(x_i)-y_i)x_i
 $$
 
 ```{r}
 
 gradient <- function(x, y, theta) {
-  hx = hypothesis(x, theta)
-  m = nrow(x)
-  # (1/m) * ( t(hx - y) %*% x )
-  (1/m) * (t(x) %*% (hx - y))
+  hx <- hypothesis(x, theta)
+  n <- nrow(x)
+  # (1/n) * ( t(hx - y) %*% x )
+  (1/n) * (t(x) %*% (hx - y))
 }
 
 ```
 
 
 ```{r}
-alpha = 0.001 # learning rate
-max_interation = 2000
+alpha <- 0.001 # learning rate
+max_interation = 6000
 
 # initialize coefficients
 #-1.3,0.01,0.01
-theta = matrix(c(0,0,0),nrow=3)
+theta <- matrix(c(0,0,0), nrow=3)
 
-
-m = nrow(data)
-y = as.matrix(data[,3])
-x = as.matrix(data[,c(1,2)])
-x = cbind(1,x)
-
+y <- as.matrix(data[,3])
+x <- as.matrix(data[,c(1,2)])
+x <- cbind(1,x)
 
 # keep history
 cost_history <- double(max_interation)
 theta_history <- list(max_interation)
 
 
-for (i in 1:max_interation){
-  theta = theta - alpha * gradient(x, y, theta)
+for(i in 1:max_interation){
+  theta <- theta - alpha * gradient(x, y, theta)
   
   cost_history[i] <- cost(x, y, theta) # for plot
   theta_history[[i]] <- theta

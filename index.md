@@ -12,7 +12,7 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 My cheat sheets
 
 ## R
- * <a href="Wiki/R/RBasic.html">R Basic</a>
+ * <a href="Wiki/R/RBasic.html">R Basic (R cheet sheet)</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/Shiny.html">Shiny</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
@@ -83,6 +83,7 @@ My cheat sheets
 <style>
 div.non * {
  color: white !important;
+ font-size: 70%;
 }
 </style>
 
@@ -96,7 +97,7 @@ div.non * {
 [Enterprise search with development for network management system](https://github.com/manmustbecool/MyWiki/blob/gh-pages/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf)
 
 
-[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](MyWiki/blob/gh-pages/papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
+[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](https://github.com/manmustbecool/MyWiki/blob/gh-pages/papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
 
 
 [A distributed architecture for policy-customisable multi-tenant Processes-as-a-Service](https://github.com/manmustbecool/MyWiki/blob/master/papers/A%20distributed%20architecture%20for%20policy-customisable%20multi-tenant%20Processes-as-a-Service.pdf)
