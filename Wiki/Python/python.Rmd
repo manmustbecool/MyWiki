@@ -105,10 +105,6 @@ print(df)
 #     [1 2 3]]
 ```
 
-# machine learing
-
-https://github.com/RubensZimbres/Repo-2017/blob/master/Probabilistic%20Neural%20Network
-
 
 # Read head lines of a large text file
 

@@ -149,43 +149,52 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R Machine Learning</h1>
-<h4 class="date"><em>Updated: 19 July, 2017</em></h4>
+<h4 class="date"><em>Updated: 21 July, 2017</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#machine-learing-dataset"><span class="toc-section-number">0.1</span> Machine learing dataset</a></li>
-<li><a href="#neural-networks"><span class="toc-section-number">0.2</span> Neural networks</a></li>
-<li><a href="#hidden-markov-models"><span class="toc-section-number">0.3</span> Hidden Markov Models</a></li>
-<li><a href="#logistic-regression"><span class="toc-section-number">0.4</span> Logistic Regression</a></li>
-<li><a href="#loess"><span class="toc-section-number">0.5</span> Loess</a></li>
-<li><a href="#recommender-system"><span class="toc-section-number">0.6</span> Recommender system</a></li>
-<li><a href="#feature-selection"><span class="toc-section-number">0.7</span> Feature selection</a></li>
-<li><a href="#deep-learning"><span class="toc-section-number">0.8</span> deep learning</a></li>
+<li><a href="#machine-learning"><span class="toc-section-number">1</span> Machine learning</a><ul>
+<li><a href="#course"><span class="toc-section-number">1.1</span> course</a></li>
+<li><a href="#dataset"><span class="toc-section-number">1.2</span> dataset</a></li>
+</ul></li>
+<li><a href="#r-machine-learning"><span class="toc-section-number">2</span> R Machine learning</a><ul>
+<li><a href="#neural-networks"><span class="toc-section-number">2.1</span> Neural networks</a></li>
+<li><a href="#hidden-markov-models"><span class="toc-section-number">2.2</span> Hidden Markov Models</a></li>
+<li><a href="#loess"><span class="toc-section-number">2.3</span> Loess</a></li>
+<li><a href="#recommender-system"><span class="toc-section-number">2.4</span> Recommender system</a></li>
+<li><a href="#feature-selection"><span class="toc-section-number">2.5</span> Feature selection</a></li>
+<li><a href="#deep-learning"><span class="toc-section-number">2.6</span> deep learning</a></li>
+</ul></li>
 </ul>
 </div>
 
-<div id="machine-learing-dataset" class="section level2">
-<h2><span class="header-section-number">0.1</span> Machine learing dataset</h2>
+<div id="machine-learning" class="section level1">
+<h1><span class="header-section-number">1</span> Machine learning</h1>
+<div id="course" class="section level2">
+<h2><span class="header-section-number">1.1</span> course</h2>
+<p><a href="http://www.cs.toronto.edu/~rsalakhu/STA4273_2015/" class="uri">http://www.cs.toronto.edu/~rsalakhu/STA4273_2015/</a></p>
+</div>
+<div id="dataset" class="section level2">
+<h2><span class="header-section-number">1.2</span> dataset</h2>
 <p><a href="http://archive.ics.uci.edu/ml/" class="uri">http://archive.ics.uci.edu/ml/</a></p>
 </div>
+</div>
+<div id="r-machine-learning" class="section level1">
+<h1><span class="header-section-number">2</span> R Machine learning</h1>
 <div id="neural-networks" class="section level2">
-<h2><span class="header-section-number">0.2</span> Neural networks</h2>
+<h2><span class="header-section-number">2.1</span> Neural networks</h2>
 <p><a href="http://www.ai-junkie.com/ann/evolved/nnt8.html" class="uri">http://www.ai-junkie.com/ann/evolved/nnt8.html</a></p>
 <p><a href="https://www.r-bloggers.com/fitting-a-neural-network-in-r-neuralnet-package/" class="uri">https://www.r-bloggers.com/fitting-a-neural-network-in-r-neuralnet-package/</a></p>
 </div>
 <div id="hidden-markov-models" class="section level2">
-<h2><span class="header-section-number">0.3</span> Hidden Markov Models</h2>
+<h2><span class="header-section-number">2.2</span> Hidden Markov Models</h2>
 <p><a href="http://web.stanford.edu/class/stats366/hmmR2.html" class="uri">http://web.stanford.edu/class/stats366/hmmR2.html</a></p>
 <p><a href="http://yunus.hacettepe.edu.tr/~iozkan/eco742/hmm.html" class="uri">http://yunus.hacettepe.edu.tr/~iozkan/eco742/hmm.html</a></p>
 </div>
-<div id="logistic-regression" class="section level2">
-<h2><span class="header-section-number">0.4</span> Logistic Regression</h2>
-<p><a href="https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/" class="uri">https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/</a></p>
-</div>
 <div id="loess" class="section level2">
-<h2><span class="header-section-number">0.5</span> Loess</h2>
+<h2><span class="header-section-number">2.3</span> Loess</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span>
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>)
 lo &lt;-<span class="st"> </span><span class="kw">loess</span>(y~x)
@@ -194,22 +203,23 @@ lo &lt;-<span class="st"> </span><span class="kw">loess</span>(y~x)
 <p><img src="data:image/png;base64,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" width="480" /></p>
 </div>
 <div id="recommender-system" class="section level2">
-<h2><span class="header-section-number">0.6</span> Recommender system</h2>
+<h2><span class="header-section-number">2.4</span> Recommender system</h2>
 <ul>
 <li>recommenderlab</li>
 </ul>
 <p><a href="http://bigdata-doctor.com/recommender-systems-101-practical-example-in-r/" class="uri">http://bigdata-doctor.com/recommender-systems-101-practical-example-in-r/</a></p>
 </div>
 <div id="feature-selection" class="section level2">
-<h2><span class="header-section-number">0.7</span> Feature selection</h2>
+<h2><span class="header-section-number">2.5</span> Feature selection</h2>
 <ul>
 <li>caret</li>
 </ul>
 <p><a href="http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/" class="uri">http://machinelearningmastery.com/feature-selection-with-the-caret-r-package/</a></p>
 </div>
 <div id="deep-learning" class="section level2">
-<h2><span class="header-section-number">0.8</span> deep learning</h2>
+<h2><span class="header-section-number">2.6</span> deep learning</h2>
 <p><a href="http://www.teglor.com/b/deep-learning-libraries-language-cm569/" class="uri">http://www.teglor.com/b/deep-learning-libraries-language-cm569/</a></p>
+</div>
 </div>
 
 

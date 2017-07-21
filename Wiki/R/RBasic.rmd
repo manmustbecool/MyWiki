@@ -33,7 +33,7 @@ na.omit() # remove NA value
 # NaN means not a number
 is.nan() # returns False for NA and Ture for NaN
 
-# Inf and -Inf for positive and negative infinity
+Inf -Inf # for positive and negative infinity
 ```
 
 # Atomic data types

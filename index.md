@@ -12,14 +12,14 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 My cheat sheets
 
 ## R
- * <a href="Wiki/R/RBasic.html">R Basic (R cheat sheet)</a>
+ * <a href="Wiki/R/RBasic.html">R Basic - R cheat sheet</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/Shiny.html">Shiny</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/associationRule.html">Association Rule</a>
  * <a href="Wiki/R/graph.html">Graph</a>
- * <a href="Wiki/R/gradientDescent.html">Logistic regression with Gradient Descent</a>
+ * <a href="Wiki/R/LogisticRegression.html">Logistic regression with Gradient Descent</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/baye_network.html">Baye network</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>

@@ -165,6 +165,8 @@ accuracy
 
 https://dernk.wordpress.com/2013/06/
 
+https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/
+
 
 # Parallel Logistic regression
 

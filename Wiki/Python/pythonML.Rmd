@@ -7,6 +7,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+# machine learing
+
+https://github.com/RubensZimbres/Repo-2017/blob/master/Probabilistic%20Neural%20Network
+
+
 # Time Series Forecast 
 
 https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/
