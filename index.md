@@ -12,7 +12,7 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 My cheat sheets
 
 ## R
- * <a href="Wiki/R/RBasic.html">R Basic (R cheet sheet)</a>
+ * <a href="Wiki/R/RBasic.html">R Basic (R cheat sheet)</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/Shiny.html">Shiny</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
