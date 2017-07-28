@@ -1,7 +1,9 @@
 ---
-title: "Management"
+title: "Software development"
 output: html_document
 ---
 
+
+# Management 
 
 <https://medium.com/@billjordan1/the-quiet-crisis-unfolding-in-software-development-cffbdafbf450#.51idm38tr>

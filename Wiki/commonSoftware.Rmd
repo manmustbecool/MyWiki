@@ -12,7 +12,6 @@ http://www.cobiansoft.com/cobianbackup.htm
 
 
 
-
 Fences 1.01 (not free since Fences 2.0)
 
 http://www.stardock.com/products/fences/
@@ -20,7 +19,13 @@ http://www.stardock.com/products/fences/
 
 
 
-
 rufus (Create USB installation drive from an ISO, or create of Linux bootable USB drive)
 
 https://rufus.akeo.ie/
+
+
+
+disk encryption software
+
+https://www.veracrypt.fr
+
