@@ -1,6 +1,5 @@
 ---
 title: "Python"
-output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
