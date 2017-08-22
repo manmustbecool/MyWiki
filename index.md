@@ -9,7 +9,7 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 > Home: http://manmustbecool.github.io/MyWiki/
 
-My cheat sheets
+My notes
 
 ## R
  * <a href="Wiki/R/RBasic.html">R Basic - R cheat sheet</a>
@@ -27,6 +27,7 @@ My cheat sheets
  * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
  * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
+  * <a href="Wiki/R/MCMC.html">MCMC (Markov chain Monte Carlo)</a>
  * Development 
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
@@ -69,6 +70,7 @@ My cheat sheets
  * <a href="Wiki/Maven.html">Maven</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
+ * <a href="Wiki/frontend.html">front end development</a>
  * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
  * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
  * <a href="Wiki/SoftwareDevelopment.html">Software Development </a>
@@ -83,7 +85,7 @@ My cheat sheets
 <style>
 div.non * {
  color: white !important;
- font-size: 70%;
+ font-size: 60%;
 }
 </style>
 
@@ -107,7 +109,6 @@ div.non * {
 </div>
 
 
-Project: <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki">https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki</a>
+Project: https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki
 
-
-
+Contact: https://github.com/manmustbecool

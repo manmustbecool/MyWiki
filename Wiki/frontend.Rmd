@@ -1,0 +1,10 @@
+---
+title: "frontend"
+output: html_document
+---
+
+# bootstrap
+
+https://getbootstrap.com/docs/3.3/examples/theme/
+
+https://www.w3schools.com/bootstrap/default.asp
