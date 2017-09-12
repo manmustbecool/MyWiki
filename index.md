@@ -48,6 +48,7 @@ My notes
  
 ## Python
  * <a href="Wiki/Python/python.html">Python</a>
+ * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
  * <a href="Wiki/Python/Django.html">Django</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
@@ -64,7 +65,7 @@ My notes
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
 
-### Others
+## Others
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/Maven.html">Maven</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
@@ -110,4 +111,4 @@ div.non * {
 
 Project: https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki
 
-Contact: https://github.com/manmustbecool
+Contact: manmustcool[.at.]yahoo[.dot.]com

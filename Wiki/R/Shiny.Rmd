@@ -243,6 +243,32 @@ server=function(input,output,session)({
 shinyApp(ui, server)
 ```
 
+# Time series
+
+## dygraphs plots a data frame as multiple series
+
+```{r}
+library("dygraphs")
+hw <- HoltWinters(ldeaths)
+predicted <- predict(hw, n.ahead = 72, prediction.interval = TRUE)
+
+library("xts") # for index() function
+index <- index(predicted)
+predicted <- as.data.frame(predicted)
+predicted$index <- index
+
+# dygraph will use first column as x axis
+predicted  <- predicted[, c("index", "lwr", "fit", "upr")]
+predicted[1:3,]
+
+dygraph(predicted, main = "Predicted Lung Deaths (UK)") %>%
+  dyAxis("x", drawGrid = FALSE) %>%
+  dySeries(c("lwr", "fit", "upr"), label = "Deaths") %>%
+  dyOptions(colors = RColorBrewer::brewer.pal(3, "Set1"))
+```
+
+
+
 # Deploying Desktop Shiny Apps with R
 
 https://www.r-bloggers.com/deploying-desktop-apps-with-r/
