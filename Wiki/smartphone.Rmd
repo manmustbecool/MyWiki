@@ -4,16 +4,25 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+# Basic
 
-# bootloader
+## bootloader
 
 It is usually locked to prevent people from changing the system files, or ROM/operating system itself.
 unlock the bootloader it allows you to flash a custom recovery (like TWRP), which in turn allows you to flash custom ROMs such as CM rom. 
 
-# root
+## root
 
 It basically tweaks the system files and grants you super user rights which allows you to grant apps root access.
 The easiest way of rooting usually requires the bootloader to be unlocked so you can flash the root file via recovery. There are other root methods which can work with a locked bootloader but requires a massive effort from a willing developer.
 Majority of custom ROMs will come prerooted, meaning they already have the root files present.
  
- 
+## EFS partition
+
+EFS partition on modern Android phones houses the unique IMEI for your device, which is essentially an identification number that lets you connect to mobile networks. But sometimes, when you're flashing ROMs or restoring backups in custom recovery, the EFS partition can become corrupted, which will prevent your phone from connecting to any type of mobile network.
+
+
+
+
+
+

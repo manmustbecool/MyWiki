@@ -22,14 +22,14 @@ Networking mode Overview:
 
 
 
-### Bridged mode ###
+## Bridged mode 
 
 * Disadvantages:
     1. Having troubles with accessing the network at all if your VM is not added to the domain.
     2. A generated mac address of the virtual machine is recognized by the company firewall
 
 
-### NAT mode ###
+## NAT mode 
 
 #### VMware: Port forward with NAT setup ####
 http://geekswithblogs.net/NewThingsILearned/archive/2009/11/13/connect-to-vmware-virtual-machines-using-remote-desktop.aspx
@@ -82,7 +82,7 @@ $ VBoxManage setextradata "GuestVMName" "VBoxInternal/Devices/e1000/0/LUN#0/Atta
 
     Updating will be refected on the VM XML. ` <ExtraDataItem name="VBoxInternal/D ... ` will be added.
 
-### Host-only mode 
+## Host-only mode 
 
 #### VirtualBox: Add hotst-only network ####
 

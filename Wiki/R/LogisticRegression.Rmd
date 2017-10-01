@@ -1,0 +1,200 @@
+---
+title: "Logistic Regression with Gradient Descent"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r}
+# load the data
+data <- read.table("gradientDescent\\ex2data1.txt", header=F, sep=",", quote ="\"'")
+colnames(data) = c("exam1","exam2","admit")
+  
+# plot the data
+with(data,plot(exam1[admit==1],exam2[admit==1]))
+with(data,points(exam1[admit==0],exam2[admit==0],col="red"))
+
+```
+
+# logistic regression 
+
+### logistic/sigmoid function
+
+$$
+g(z)=\frac{1}{1+e^{-z}}
+$$
+
+```{r}
+sigmoid = function(z){
+  1 / (1 + exp(-z))
+}
+
+```
+
+### classification hypothesis function
+
+$$
+h_{\theta}(x) = g(\theta^{T}x) = \frac{1}{1+e^{-\theta^{T}x}}
+$$
+Note from the Linear regression : 
+$$
+y = \theta_0+\theta_1x_1+...+\theta_nx_n =\sum_{i=1}^{n}\theta_ix_i = \theta^{T}x
+$$
+
+
+```{r}
+hypothesis <- function(x, theta){
+  sigmoid(x %*% theta)
+}
+
+```
+
+
+
+### cost function 
+
+cost function shows the error of prediction: cost(predicted_value, actural_value)
+
+Average error of n prediction:
+$$
+J(\theta)=\frac{1}{n}\sum_{i=1}^{n}cost(h_\theta(x),y)
+$$
+$$
+cost(h_\theta(x),y)=-y\log(h_\theta(x)) - (1-y)\log(1-h_\theta(x))
+$$
+$$
+J(\theta)=\frac{1}{n}\sum_{i=1}^{n}[-y^i\log(h_\theta(x^i)) - (1-y^i)\log(1- h_\theta(x^i))]
+$$
+
+```{r}
+cost <- function(x, y, theta){
+  hx <- hypothesis(x, theta)
+  n <- nrow(x)
+  # (1/n) * (((-t(y) %*% log(hx)) - t(1-y) %*% log(1 - hx)))
+  (1/n) * sum( -y*log(hx) - (1-y)*log(1-hx) )
+}
+
+```
+
+
+Alternatively, mean squared error 
+
+```{r}
+cost <- function(x, y, theta) {
+  hx <- hypothesis(x, theta)
+  n <- nrow(x)
+  (1/n) * sum((hx - y)^2) 
+}
+```
+
+
+
+### (batch) gradient descent
+
+theta is the coefficient or weight to being optimized. 
+
+theta = theta - alpha * gradient
+
+gradient =  average of (prediction_error * input_x)
+
+minimize $J(\theta)$
+
+$$
+\theta := \theta - \alpha \frac{1}{n} \sum_{i=1}^{n}(h_\theta(x_i)-y_i)x_i
+$$
+
+```{r}
+
+gradient <- function(x, y, theta) {
+  hx <- hypothesis(x, theta)
+  n <- nrow(x)
+  # (1/n) * ( t(hx - y) %*% x )
+  (1/n) * (t(x) %*% (hx - y))
+}
+
+```
+
+
+```{r}
+alpha <- 0.001 # learning rate
+max_interation = 6000
+
+# initialize coefficients
+#-1.3,0.01,0.01
+theta <- matrix(c(0,0,0), nrow=3)
+
+y <- as.matrix(data[,3])
+x <- as.matrix(data[,c(1,2)])
+x <- cbind(1,x)
+
+# keep history
+cost_history <- double(max_interation)
+theta_history <- list(max_interation)
+
+
+for(i in 1:max_interation){
+  theta <- theta - alpha * gradient(x, y, theta)
+  
+  cost_history[i] <- cost(x, y, theta) # for plot
+  theta_history[[i]] <- theta
+  
+}
+
+# -------- compare with lm function implementation--------------
+print(theta)
+
+res <- lm(admit ~ exam1 + exam2, data=data)
+print(res)
+
+```
+
+```{r}
+plot(cost_history)
+# plot(theta_history)
+
+
+#---------- test accuracy -----------------------------------
+m <- nrow(data)
+test_data <- matrix(c(rep(1, m), data$exam1, data$exam2), nrow = m)
+
+data$predict <- sigmoid(test_data %*% theta)
+
+accuracy <- with(data, mean(ifelse(round(predict) == admit, 1, 0)))
+accuracy
+
+```
+
+https://dernk.wordpress.com/2013/06/
+
+https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/
+
+
+# Parallel Logistic regression
+
+Since the logistic hypothesis function is depending on the theta value, 
+$$
+h_{\theta}(x) = g(\theta^{T}x) = \frac{1}{1+e^{-\theta^{T}x}}
+$$
+
+We use the batch gradient descent to calculate the theta for each subset of data in parallel in different nodes
+$$
+\theta := \theta - \alpha \sum_{i=1}^{n}(y_i - h_\theta(x_i))x_i
+$$
+
+Then get the optimized value by average collected results
+$$
+\theta = \frac{1}{n}\sum_{i=1}^{n}(\theta_i)
+$$
+So, we can put the final theta back the hypothesis function for the prediction.
+
+The above just implemented a basic version. We can use the stochastic gradient descent and weighted average on the final value, etc. to improve the efficiency and accuracy as described in the Yahoo’s paper
+
+reference: Parallelized Stochastic Gradient Descent
+http://martin.zinkevich.org/publications/nips2010.pdf
+
+# Other reference
+
+Linear regression by gradient descents
+
+http://www.r-bloggers.com/linear-regression-by-gradient-descent/?goback=%2Egmp_70219%2Egde_70219_member_139405437
+
+

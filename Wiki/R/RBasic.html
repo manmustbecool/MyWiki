@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R basic</h1>
-<h4 class="date"><em>Updated: 18 July, 2017</em></h4>
+<h4 class="date"><em>Updated: 21 July, 2017</em></h4>
 
 </div>
 
@@ -187,10 +187,6 @@ $(document).ready(function () {
 <ul>
 <li><a href="http://cran.r-project.org/web/views/" class="uri">http://cran.r-project.org/web/views/</a></li>
 </ul></li>
-<li>QuickR
-<ul>
-<li><a href="http://www.statmethods.net/index.html" class="uri">http://www.statmethods.net/index.html</a></li>
-</ul></li>
 <li>Installing R in Ubuntu
 <ul>
 <li><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get update
@@ -212,7 +208,7 @@ install R in linux <a href="http://www.jason-french.com/blog/2013/03/11/installi
 <span class="co"># NaN means not a number</span>
 <span class="kw">is.nan</span>() <span class="co"># returns False for NA and Ture for NaN</span>
 
-<span class="co"># Inf and -Inf for positive and negative infinity</span></code></pre></div>
+<span class="ot">Inf</span> -<span class="ot">Inf</span> <span class="co"># for positive and negative infinity</span></code></pre></div>
 </div>
 <div id="atomic-data-types" class="section level1">
 <h1><span class="header-section-number">3</span> Atomic data types</h1>
@@ -334,10 +330,10 @@ m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">
 
 <span class="co"># Matrix operation</span>
 x %*%<span class="st"> </span>y    <span class="co"># Multiplication</span>
-m &lt;-<span class="st"> </span><span class="kw">t</span>(m)  <span class="co"># Transpose</span>
-
-<span class="co"># ----- simple triplet matrix  --------</span>
-<span class="co"># simple triplet matrix is very efficient representation of a large sparse matrix. Cell with unassigned values are assumed to be zero.</span>
+m &lt;-<span class="st"> </span><span class="kw">t</span>(m)  <span class="co"># Transpose</span></code></pre></div>
+<p>Sparse Matrix is a matrix in which most of the elements are zero.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---- slam package------------</span>
+<span class="co"># simple triplet matrix from slam package is very efficient representation of a large sparse matrix. Cell with unassigned values are assumed to be zero.</span>
 
 <span class="kw">library</span>(slam)
 i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)   <span class="co"># row index</span>
@@ -351,9 +347,10 @@ m &lt;-<span class="st"> </span><span class="kw">simple_triplet_matrix</span>(i,
 [<span class="dv">2</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
 [<span class="dv">3</span>,]    <span class="dv">5</span>    <span class="dv">0</span>
 [<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">6</span>
-[<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">6</span></code></pre></div>
-<p>Sparse Matrix</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Matrix)
+[<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">6</span>
+
+<span class="co">#----- Matrix package ------</span>
+<span class="kw">library</span>(Matrix)
  
 m1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">1000</span>, <span class="dt">ncol =</span> <span class="dv">1000</span>)
 m2 &lt;-<span class="st"> </span><span class="kw">Matrix</span>(m1, <span class="dt">sparse =</span> <span class="ot">TRUE</span>)
@@ -404,12 +401,12 @@ timestamps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="
 prices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)
 stockpricesDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(timestamps, prices)
 
-<span class="co"># Get/Set row and column names </span>
+<span class="co"># Get/Set row/column names </span>
 <span class="kw">rownames</span>(df)   
 <span class="kw">colnames</span>(df) 
 <span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>value
 
-<span class="co"># Get number of rows and columns</span>
+<span class="co"># Get number of rows/columns</span>
 <span class="kw">nrow</span>(df)
 <span class="kw">ncol</span>(df)</code></pre></div>
 <p><strong>Subset data frame</strong></p>
@@ -449,11 +446,10 @@ df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span cla
 
 <span class="co"># create a new column with merged values of two columns</span>
 df$new_column =<span class="st"> </span><span class="kw">paste</span>(df$V1, df$V2, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)</code></pre></div>
-<p><strong>combine data frames</strong></p>
+<p><strong>Combine data frames</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># build a list of data frames</span>
 dfList &lt;-<span class="st"> </span><span class="kw">list</span>()
 for(i in <span class="dv">1</span>:<span class="dv">10</span>){ dfList[[i]] &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="st">&quot;a1&quot;</span>,<span class="st">&quot;a2&quot;</span>), <span class="dt">b=</span><span class="kw">c</span>(<span class="st">&quot;b1&quot;</span>,<span class="st">&quot;b2&quot;</span>)) }
-
 
 <span class="co"># do.call approach</span>
 finalDf &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, dfList)
@@ -499,8 +495,7 @@ df[!<span class="kw">duplicated</span>(df[,<span class="kw">c</span>(<span class
 df &lt;-<span class="st"> </span>df[<span class="kw">apply</span>(df, <span class="dv">1</span>, function(row) <span class="kw">length</span>(<span class="kw">unique</span>(row)) &gt;<span class="st"> </span><span class="dv">1</span>), ]
 df &lt;-<span class="st"> </span>df[, <span class="kw">apply</span>(df, <span class="dv">2</span>, function(col) <span class="kw">length</span>(<span class="kw">unique</span>(col)) &gt;<span class="st"> </span><span class="dv">1</span>)]</code></pre></div>
 <p><strong>Handle na, nan, null, blank</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value  <span class="co"># Convert all Na's in data frames to other values</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="kw">is.na</span>(df)] &lt;-<span class="st"> </span>value  <span class="co"># Convert all Na's in data frames to other values</span>
 
 <span class="co"># Remove rows with NAs in data frames</span>
 df[<span class="kw">complete.cases</span>(df),]       <span class="co"># remove all rows containing NAs</span>

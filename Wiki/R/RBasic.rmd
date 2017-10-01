@@ -10,9 +10,6 @@ output: html_document
  * Pakcages overview
       + http://cran.r-project.org/web/views/
 
- * QuickR
-      + http://www.statmethods.net/index.html
-
  * Installing R in Ubuntu
       +
 ```bash
@@ -36,7 +33,7 @@ na.omit() # remove NA value
 # NaN means not a number
 is.nan() # returns False for NA and Ture for NaN
 
-# Inf and -Inf for positive and negative infinity
+Inf -Inf # for positive and negative infinity
 ```
 
 # Atomic data types
@@ -169,8 +166,12 @@ m <- matrix(c(A,B,C), nrow=length(A))
 x %*% y    # Multiplication
 m <- t(m)  # Transpose
 
-# ----- simple triplet matrix  --------
-# simple triplet matrix is very efficient representation of a large sparse matrix. Cell with unassigned values are assumed to be zero.
+```
+Sparse Matrix is a matrix in which most of the elements are zero.
+
+```r
+#---- slam package------------
+# simple triplet matrix from slam package is very efficient representation of a large sparse matrix. Cell with unassigned values are assumed to be zero.
 
 library(slam)
 i <- c(1,2,3,4,5)   # row index
@@ -186,10 +187,7 @@ as.matrix(m)
 [4,]    0    6
 [5,]    0    6
 
-```
-Sparse Matrix
-
-```r
+#----- Matrix package ------
 library(Matrix)
  
 m1 <- matrix(0, nrow = 1000, ncol = 1000)
@@ -247,12 +245,12 @@ timestamps <- c('2011-01-05 11:00', '2011-01-05 12:00', '2011-01-05 13:00')
 prices <- c(1.1, 2.2, 3.3)
 stockpricesDf <- data.frame(timestamps, prices)
 
-# Get/Set row and column names 
+# Get/Set row/column names 
 rownames(df)   
 colnames(df) 
 rownames(df) <- value
 
-# Get number of rows and columns
+# Get number of rows/columns
 nrow(df)
 ncol(df)
 ```
@@ -301,12 +299,11 @@ df$new_column = paste(df$V1, df$V2, sep="_")
 
 ```
 
-**combine data frames**
+**Combine data frames**
 ```r
 # build a list of data frames
 dfList <- list()
 for(i in 1:10){ dfList[[i]] <- data.frame(a=c("a1","a2"), b=c("b1","b2")) }
-
 
 # do.call approach
 finalDf <- do.call(rbind, dfList)
@@ -364,7 +361,6 @@ df <- df[, apply(df, 2, function(col) length(unique(col)) > 1)]
 
 **Handle na, nan, null, blank**
 ```r
-
 df[is.na(df)] <- value  # Convert all Na's in data frames to other values
 
 # Remove rows with NAs in data frames

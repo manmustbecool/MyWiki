@@ -3,10 +3,19 @@ title: "R Machine Learning"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+# Machine learning
 
-## Machine learing dataset
+## course
+
+http://www.cs.toronto.edu/~rsalakhu/STA4273_2015/
+
+## dataset
 
 http://archive.ics.uci.edu/ml/
+
+
+# R Machine learning
+
 
 ## Neural networks ##
 
@@ -19,10 +28,6 @@ https://www.r-bloggers.com/fitting-a-neural-network-in-r-neuralnet-package/
 http://web.stanford.edu/class/stats366/hmmR2.html
 
 http://yunus.hacettepe.edu.tr/~iozkan/eco742/hmm.html
-
-## Logistic Regression ##
-
-https://rdatasmith.wordpress.com/2012/05/16/programming-problem-set-2-part-1-logistic-regression/
 
 
 ## Loess 

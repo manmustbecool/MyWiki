@@ -1,11 +1,18 @@
 ---
 title: "Python ML"
 output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+
+# machine learing
+
+https://github.com/RubensZimbres/Repo-2017/blob/master/Probabilistic%20Neural%20Network
+
 
 # Time Series Forecast 
 

@@ -4,21 +4,21 @@ output:
     theme: united
     includes:
       after_body: wiki\includes\footer.html
-date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 > Home: http://manmustbecool.github.io/MyWiki/
 
-My cheat sheets
+My notes
 
 ## R
- * <a href="Wiki/R/RBasic.html">R Basic</a>
+ * <a href="Wiki/R/RBasic.html">R Basic - R cheat sheet</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
  * <a href="Wiki/R/Shiny.html">Shiny</a>
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/associationRule.html">Association Rule</a>
  * <a href="Wiki/R/graph.html">Graph</a>
+ * <a href="Wiki/R/LogisticRegression.html">Logistic regression with Gradient Descent</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/baye_network.html">Baye network</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
@@ -26,7 +26,7 @@ My cheat sheets
  * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
  * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
- * <a href="Wiki/R/GradientDescent.html">Gradient Descent.html</a>
+  * <a href="Wiki/R/MCMC.html">MCMC (Markov chain Monte Carlo)</a>
  * Development 
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
@@ -40,14 +40,15 @@ My cheat sheets
     + <a href="Wiki/R/clustering.html">Clustering techniques</a>
     + <a href="Wiki/R/clusteringComparison.html">Clustering comparison</a>
     + <a href="Wiki/R/ga_cluster.html">Genetic algorithm based clustering</a>
-    
  
+
 ## Java
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
  
 ## Python
  * <a href="Wiki/Python/python.html">Python</a>
+ * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
  * <a href="Wiki/Python/Django.html">Django</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
@@ -64,11 +65,12 @@ My cheat sheets
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
  
 
-### Others
+## Others
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/Maven.html">Maven</a>
  * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
+ * <a href="Wiki/frontend.html">front end development</a>
  * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
  * <a href="Wiki/Java/DI/di.html">Dynamic Web service invocations from WSDL endpoints</a>
  * <a href="Wiki/SoftwareDevelopment.html">Software Development </a>
@@ -83,30 +85,30 @@ My cheat sheets
 <style>
 div.non * {
  color: white !important;
+ font-size: 60%;
 }
 </style>
 
 <div class="non">
 
-### Recent Publications
+## Recent Publications
 
-[A Streaming Data Anomaly Detection Analytic Engine for Mobile Network Management](https://github.com/manmustbecool/MyWiki/blob/gh-pages/papers/A%20Streaming%20Data%20Anomaly%20Detection%20Analytic%20Engine%20for%20Mobile%20Network%20Management.pdf)
-
-
-[Enterprise search with development for network management system](https://github.com/manmustbecool/MyWiki/blob/gh-pages/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf)
+[A Streaming Data Anomaly Detection Analytic Engine for Mobile Network Management](http://manmustbecool.github.io/MyWiki/papers/A%20Streaming%20Data%20Anomaly%20Detection%20Analytic%20Engine%20for%20Mobile%20Network%20Management.pdf)
 
 
-[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
+[Enterprise search with development for network management system](http://manmustbecool.github.io/MyWiki/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf)
 
 
-[A distributed architecture for policy-customisable multi-tenant Processes-as-a-Service](https://github.com/manmustbecool/MyWiki/blob/master/papers/A%20distributed%20architecture%20for%20policy-customisable%20multi-tenant%20Processes-as-a-Service.pdf)
+[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](http://manmustbecool.github.io/MyWiki/papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
+
+
+[A distributed architecture for policy-customisable multi-tenant Processes-as-a-Service](http://manmustbecool.github.io/MyWiki/papers/A%20distributed%20architecture%20for%20policy-customisable%20multi-tenant%20Processes-as-a-Service.pdf)
 
 ...
 
 </div>
 
 
-Project: <a href="https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki">https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki</a>
+Project: https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki
 
-
-
+Contact: manmustcool[.at.]yahoo[.dot.]com
