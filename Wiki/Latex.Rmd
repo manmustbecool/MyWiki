@@ -3,8 +3,13 @@ title: "Latex"
 output: html_document
 ---
 
+## Latex editor
 
-## Convert to a image from latex algorithm 
+Texmaker
+
+http://www.xm1math.net/
+
+## Convert latex algorithm to a image
 
 ```latex
 %\documentclass{article}
