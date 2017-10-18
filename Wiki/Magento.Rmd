@@ -1,8 +1,14 @@
 ---
 title: "Magento"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
 # check magento version
 http://magentoversion.com/
  
+# DNS 
+## A record
+An A record is used to find the IP address of a computer connected to the internet from a name.
+
+For example: A website is hosted in A_site. A domain name is registered in B_site. Go to B_site to updated A record to enable the website is under the domain.

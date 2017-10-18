@@ -5,7 +5,15 @@ output: html_document
 
 # Knapsack problem
 
-Determine items to include in a collection so that the total weight is less than or equal to a given limit and the total surviva lpoints is as large as possible
+Determine items to include in a collection so that the total weight is less than or equal to a given limit and the total survival points is as large as possible
+
+It is a **Constrained Optimization** problem
+
+```bash
+Maximize survivalpoints
+subject to 
+  totalweight < weightlimit
+```
 
 ```{r}
 dataset <- data.frame(item = c("pocketknife", "beans", "potatoes", "unions", 
