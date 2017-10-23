@@ -8,6 +8,8 @@ output:
 
 > Home: http://manmustbecool.github.io/MyWiki/
 
+Contact: manmustcool[.at.]yahoo[.dot.]com 
+
 My notes
 
 ## R
@@ -99,7 +101,7 @@ div.non * {
 [Enterprise search with development for network management system](http://manmustbecool.github.io/MyWiki/papers/Enterprise%20search%20with%20development%20for%20network%20management%20system.pdf)
 
 
-[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](http://manmustbecool.github.io/MyWiki/papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%20-%20book%20chapter%20final.pdf)
+[RPig: Concise Programming Framework by Integrating R with Pig for Big Data Analytics](http://manmustbecool.github.io/MyWiki/papers/Rpig%20Concise%20Programming%20Framework%20by%20Integrating%20R%20with%20Pig%20for%20Big%20Data%20Analytics%202015.pdf)
 
 
 [A distributed architecture for policy-customisable multi-tenant Processes-as-a-Service](http://manmustbecool.github.io/MyWiki/papers/A%20distributed%20architecture%20for%20policy-customisable%20multi-tenant%20Processes-as-a-Service.pdf)
@@ -111,4 +113,3 @@ div.non * {
 
 Project: https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki
 
-Contact: manmustcool[.at.]yahoo[.dot.]com
