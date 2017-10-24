@@ -34,6 +34,7 @@ My notes
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  * Dimension Reduction
     + <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
+    + <a href="Wiki/R/dataCompression.html">Reduction into a single variable/dimension</a>
     + <a href="Wiki/R/randomForestMDS.html">MDS and Random Forest Tree classification</a>
  * Time Serie
     + <a href="Wiki/R/timeSeries.html">Time series</a>
