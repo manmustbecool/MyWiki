@@ -7,8 +7,21 @@ output: html_document
 # check magento version
 http://magentoversion.com/
  
-# DNS 
-## A record
+ 
+# Other
+
+## DNS 
+### A record
 An A record is used to find the IP address of a computer connected to the internet from a name.
 
 For example: A website is hosted in A_site. A domain name is registered in B_site. Go to B_site to updated A record to enable the website is under the domain.
+
+
+## SSL certification
+
+Download the SSL Certificate from the provider (goDaddy)
+
+Install certificate (Intermediate Certificate and Primary SSL Certificate) using ISS manager of windows server
+
+Binding the imported certification to the website in ISS manager
+

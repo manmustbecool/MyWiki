@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 23 October, 2017</em></h4>
+<h4 class="date"><em>Updated: 01 December, 2017</em></h4>
 
 </div>
 
@@ -163,17 +163,18 @@ $(document).ready(function () {
 <li><a href="#tuple"><span class="toc-section-number">2.2.2</span> Tuple</a></li>
 <li><a href="#set"><span class="toc-section-number">2.2.3</span> Set</a></li>
 <li><a href="#dictionary"><span class="toc-section-number">2.2.4</span> Dictionary</a></li>
+<li><a href="#numpyarray"><span class="toc-section-number">2.2.5</span> Numpy::Array</a></li>
+<li><a href="#pandaseries"><span class="toc-section-number">2.2.6</span> Panda::Series</a></li>
+<li><a href="#pandadataframe"><span class="toc-section-number">2.2.7</span> Panda::DataFrame</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#numpy"><span class="toc-section-number">3</span> Numpy</a></li>
-<li><a href="#panda"><span class="toc-section-number">4</span> Panda</a><ul>
-<li><a href="#series"><span class="toc-section-number">4.1</span> Series</a></li>
-<li><a href="#dataframe"><span class="toc-section-number">4.2</span> DataFrame</a></li>
-<li><a href="#read-write-csv"><span class="toc-section-number">4.3</span> read write CSV</a></li>
+<li><a href="#io"><span class="toc-section-number">3</span> IO</a><ul>
+<li><a href="#read-write-csv"><span class="toc-section-number">3.1</span> read write CSV</a></li>
+<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">3.2</span> Read head lines of a large text file</a></li>
+<li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">3.3</span> List files only in the current directory</a></li>
 </ul></li>
-<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">5</span> Read head lines of a large text file</a></li>
-<li><a href="#real-time-plot-with-python"><span class="toc-section-number">6</span> Real time plot with python</a></li>
-<li><a href="#install-package"><span class="toc-section-number">7</span> Install package</a></li>
+<li><a href="#real-time-plot-with-python"><span class="toc-section-number">4</span> Real time plot with python</a></li>
+<li><a href="#install-package"><span class="toc-section-number">5</span> Install package</a></li>
 </ul>
 </div>
 
@@ -243,10 +244,8 @@ person <span class="op">=</span> {
 <span class="cf">for</span> key <span class="kw">in</span> person:
     <span class="bu">print</span>(person[key])</code></pre></div>
 </div>
-</div>
-</div>
-<div id="numpy" class="section level1">
-<h1><span class="header-section-number">3</span> Numpy</h1>
+<div id="numpyarray" class="section level3">
+<h3><span class="header-section-number">2.2.5</span> Numpy::Array</h3>
 <p>Array can only cotain one type</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">li <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
 np_array <span class="op">=</span> np.array(li)
@@ -260,88 +259,95 @@ df <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="d
 <span class="co">#     [1 2 3]</span>
 <span class="co">#     [1 2 3]]</span></code></pre></div>
 </div>
-<div id="panda" class="section level1">
-<h1><span class="header-section-number">4</span> Panda</h1>
+<div id="pandaseries" class="section level3">
+<h3><span class="header-section-number">2.2.6</span> Panda::Series</h3>
 <p><a href="http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/" class="uri">http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/</a></p>
-<div id="series" class="section level2">
-<h2><span class="header-section-number">4.1</span> Series</h2>
 <p>A one-dimensional labeled array A capable of holding any data type</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">s <span class="op">=</span> pd.Series([<span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>])</code></pre></div>
 </div>
-<div id="dataframe" class="section level2">
-<h2><span class="header-section-number">4.2</span> DataFrame</h2>
+<div id="pandadataframe" class="section level3">
+<h3><span class="header-section-number">2.2.7</span> Panda::DataFrame</h3>
+<p><strong>Initialize data frame</strong></p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df <span class="op">=</span> pd.DataFrame(
-          {<span class="st">&quot;a&quot;</span> : [<span class="dv">11</span> ,<span class="dv">12</span>, <span class="dv">13</span>], 
-           <span class="st">&quot;b&quot;</span> : [<span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">23</span>], 
-           <span class="st">&quot;c&quot;</span> : [<span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">33</span>]},    
-        index <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])
+          {<span class="st">&quot;a&quot;</span>:[<span class="dv">11</span> ,<span class="dv">12</span>, <span class="dv">13</span>], <span class="st">&quot;b&quot;</span>:[<span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">23</span>], <span class="st">&quot;c&quot;</span>:[<span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">33</span>]},    
+          index <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])
 <span class="co">#     a   b   c</span>
 <span class="co"># 1  11  21  31</span>
 <span class="co"># 2  12  22  32</span>
 <span class="co"># 3  13  23  33</span>
 
 
-<span class="co"># Select first n rows.</span>
-df.head(n)
-<span class="co"># Select last n rows.</span>
-df.tail(n)
+df.mean()  <span class="co"># mean of each column</span>
+df.shape   <span class="co"># (rows,columns)</span>
+df.index   <span class="co"># Describe index</span>
+df.columns <span class="co"># Describe DataFrame columns</span>
+df.info()  <span class="co"># Info on DataFrame</span>
+df.count() <span class="co"># Number of non-NA values</span>
 
-<span class="co"># mean of each column</span>
-df.mean()
-<span class="co"># (rows,columns)</span>
-df.shape 
-<span class="co"># Describe index</span>
-df.index 
-<span class="co"># Describe DataFrame columns</span>
-df.columns 
-<span class="co"># Info on DataFrame</span>
-df.info() 
-<span class="co"># Number of non-NA values</span>
-df.count() 
+df.drop_duplicates() <span class="co"># Remove duplicate rows (only considers columns).</span></code></pre></div>
+<p><strong>Sort</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Order rows by values of a column </span>
+df.sort_values(<span class="st">'mpg'</span>) <span class="co"># (low to high).</span>
+df.sort_values(<span class="st">'mpg'</span>, ascending<span class="op">=</span><span class="va">False</span>) <span class="co"># (high to low).</span></code></pre></div>
+<p><strong>Subset data frame</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.head(n) <span class="co"># Select first n rows.</span>
+df.tail(n) <span class="co"># Select last n rows.</span>
 
+df[<span class="dv">0</span>:<span class="dv">3</span>] <span class="co"># select the first 3 rows (rows 0,1,2)</span>
+df[:<span class="dv">5</span>]  <span class="co"># select the first 5 rows (rows 0,1,2,3,4)</span>
+df[<span class="op">-</span><span class="dv">1</span>:] <span class="co"># select the last row </span>
 
-<span class="co"># select the first 3 rows (rows 0,1,2)</span>
-df[<span class="dv">0</span>:<span class="dv">3</span>]
-<span class="co"># select the first 5 rows (rows 0,1,2,3,4)</span>
-df[:<span class="dv">5</span>]
-<span class="co"># select the last row </span>
-df[<span class="op">-</span><span class="dv">1</span>:]
+<span class="co">#iloc: positions in the index (it only takes integers).</span>
+df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">1</span>:<span class="dv">4</span>] <span class="co"># select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)</span>
 
-<span class="co">#loc: indexing via labels</span>
-<span class="co">#iloc: indexing via integers</span>
+<span class="co">#loc: positions via labels</span>
+df.loc[:<span class="dv">3</span>] <span class="co"># slice up to and including label 3</span>
 
-<span class="co"># select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)</span>
-df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">1</span>:<span class="dv">4</span>]
-
-<span class="co"># Extract rows that meet logical criteria.</span>
-df[df.Length <span class="op">&gt;</span> <span class="dv">7</span>]
-<span class="co"># Remove duplicate rows (only considers columns).</span>
-df.drop_duplicates()
-
-<span class="co"># Order rows by values of a column (low to high).</span>
-df.sort_values(<span class="st">'mpg'</span>)
-<span class="co"># Order rows by values of a column (high to low).</span>
-df.sort_values(<span class="st">'mpg'</span>, ascending<span class="op">=</span><span class="va">False</span>)</code></pre></div>
+df[df.Length<span class="op">&gt;</span><span class="dv">7</span> ] <span class="co"># select rows that meet logical criteria.</span></code></pre></div>
 </div>
+</div>
+</div>
+<div id="io" class="section level1">
+<h1><span class="header-section-number">3</span> IO</h1>
 <div id="read-write-csv" class="section level2">
-<h2><span class="header-section-number">4.3</span> read write CSV</h2>
+<h2><span class="header-section-number">3.1</span> read write CSV</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">pd.read_csv(<span class="st">'file.csv'</span>, header<span class="op">=</span><span class="va">None</span>, nrows<span class="op">=</span><span class="dv">5</span>)
 pd.to_csv(<span class="st">'myDataFrame.csv'</span>)
 
 pd.read_excel(<span class="st">'file.xlsx'</span>)
 pd.to_excel(<span class="st">'dir/myDataFrame.xlsx'</span>, sheet_name<span class="op">=</span><span class="st">'Sheet1'</span>)</code></pre></div>
 </div>
-</div>
-<div id="read-head-lines-of-a-large-text-file" class="section level1">
-<h1><span class="header-section-number">5</span> Read head lines of a large text file</h1>
+<div id="read-head-lines-of-a-large-text-file" class="section level2">
+<h2><span class="header-section-number">3.2</span> Read head lines of a large text file</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">file_name <span class="op">=</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">xxxxx</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">2014101709-12.txt&quot;</span>
 
 <span class="cf">with</span> <span class="bu">open</span>(file_name) <span class="im">as</span> myfile:
     head <span class="op">=</span> [<span class="bu">next</span>(myfile) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>)]
 <span class="bu">print</span>(head)</code></pre></div>
 </div>
+<div id="list-files-only-in-the-current-directory" class="section level2">
+<h2><span class="header-section-number">3.3</span> List files only in the current directory</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os <span class="im">as</span> os
+files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(<span class="st">'.'</span>) <span class="cf">if</span> os.path.isfile(f)]
+<span class="cf">for</span> f <span class="kw">in</span> files:
+    <span class="bu">print</span>(f)</code></pre></div>
+<pre><code>## Django.html
+## Django.Rmd
+## python.html
+## python.Rmd
+## pythonML.html
+## pythonML.Rmd
+## pythonPlot.html
+## pythonPlot.Rmd
+## pythonRdm.html
+## pythonRdm.Rmd
+## pyton_plot_test.png
+## test.png
+## _output.yaml</code></pre>
+</div>
+</div>
 <div id="real-time-plot-with-python" class="section level1">
-<h1><span class="header-section-number">6</span> Real time plot with python</h1>
+<h1><span class="header-section-number">4</span> Real time plot with python</h1>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
 <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
 
@@ -357,7 +363,7 @@ plt.ion()
     plt.pause(<span class="fl">0.5</span>)</code></pre></div>
 </div>
 <div id="install-package" class="section level1">
-<h1><span class="header-section-number">7</span> Install package</h1>
+<h1><span class="header-section-number">5</span> Install package</h1>
 <p>in cmd comand window</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># PyPI</span>
 pip install py2exe

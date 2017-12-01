@@ -41,8 +41,5 @@ scaler = StandardScaler()
 scaler.fit(X_train)
 ```
 
-# Keras
 
-http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/
 
-https://keras.io/

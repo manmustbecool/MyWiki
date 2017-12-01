@@ -80,9 +80,8 @@ for key in person:
     print(person[key])
 ```
 
-# Numpy
+### Numpy::Array
 Array can only cotain one type
-
 ```python
 li = [3, 4, 5]
 np_array = np.array(li)
@@ -96,13 +95,10 @@ print(df)
 #     [1 2 3]
 #     [1 2 3]]
 ```
-# Panda
 
+### Panda::Series
 
 http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/
-
-
-## Series
 
 A one-dimensional labeled array A capable of holding any data type
 
@@ -110,63 +106,60 @@ A one-dimensional labeled array A capable of holding any data type
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
 
 ```
-## DataFrame
+### Panda::DataFrame
+
+**Initialize data frame**
 
 ```python
 df = pd.DataFrame(
-          {"a" : [11 ,12, 13], 
-           "b" : [21, 22, 23], 
-           "c" : [31, 32, 33]},    
-        index = [1, 2, 3])
+          {"a":[11 ,12, 13], "b":[21, 22, 23], "c":[31, 32, 33]},    
+          index = [1, 2, 3])
 #     a   b   c
 # 1  11  21  31
 # 2  12  22  32
 # 3  13  23  33
 
 
-# Select first n rows.
-df.head(n)
-# Select last n rows.
-df.tail(n)
+df.mean()  # mean of each column
+df.shape   # (rows,columns)
+df.index   # Describe index
+df.columns # Describe DataFrame columns
+df.info()  # Info on DataFrame
+df.count() # Number of non-NA values
 
-# mean of each column
-df.mean()
-# (rows,columns)
-df.shape 
-# Describe index
-df.index 
-# Describe DataFrame columns
-df.columns 
-# Info on DataFrame
-df.info() 
-# Number of non-NA values
-df.count() 
-
-
-# select the first 3 rows (rows 0,1,2)
-df[0:3]
-# select the first 5 rows (rows 0,1,2,3,4)
-df[:5]
-# select the last row 
-df[-1:]
-
-#loc: indexing via labels
-#iloc: indexing via integers
-
-# select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
-df.iloc[0:3, 1:4]
-
-# Extract rows that meet logical criteria.
-df[df.Length > 7]
-# Remove duplicate rows (only considers columns).
-df.drop_duplicates()
-
-# Order rows by values of a column (low to high).
-df.sort_values('mpg')
-# Order rows by values of a column (high to low).
-df.sort_values('mpg', ascending=False)
+df.drop_duplicates() # Remove duplicate rows (only considers columns).
 
 ```
+
+**Sort**
+
+```python
+# Order rows by values of a column 
+df.sort_values('mpg') # (low to high).
+df.sort_values('mpg', ascending=False) # (high to low).
+```
+
+**Subset data frame**
+
+```python
+df.head(n) # Select first n rows.
+df.tail(n) # Select last n rows.
+
+df[0:3] # select the first 3 rows (rows 0,1,2)
+df[:5]  # select the first 5 rows (rows 0,1,2,3,4)
+df[-1:] # select the last row 
+
+#iloc: positions in the index (it only takes integers).
+df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
+
+#loc: positions via labels
+df.loc[:3] # slice up to and including label 3
+
+df[df.Length>7 ] # select rows that meet logical criteria.
+
+```
+
+# IO
 
 ## read write CSV
 
@@ -178,8 +171,7 @@ pd.read_excel('file.xlsx')
 pd.to_excel('dir/myDataFrame.xlsx', sheet_name='Sheet1')
 ```
 
-
-# Read head lines of a large text file
+## Read head lines of a large text file
 
 ```python
 file_name = "C:\\Users\\xxxxx\\Desktop\\2014101709-12.txt"
@@ -188,6 +180,15 @@ with open(file_name) as myfile:
     head = [next(myfile) for x in range(20)]
 print(head)
 
+```
+
+## List files only in the current directory
+
+```{python}
+import os as os
+files = [f for f in os.listdir('.') if os.path.isfile(f)]
+for f in files:
+    print(f)
 ```
 
 # Real time plot with python
