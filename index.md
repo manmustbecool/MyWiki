@@ -12,6 +12,9 @@ Contact: manmustcool[.at.]yahoo[.dot.]com
 
 My notes
 
+<div style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 1px dotted #e0e0e0; -moz-column-rule: 1px dotted #e0e0e0; column-rule: 1px dotted #e0e0e0;">
+
+<div style="display: inline-block;">
 ## R
  * <a href="Wiki/R/RBasic.html">R Basic - R cheat sheet</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
@@ -44,18 +47,23 @@ My notes
     + <a href="Wiki/R/clusteringComparison.html">Clustering comparison</a>
     + <a href="Wiki/R/ga_cluster.html">Genetic algorithm based clustering</a>
  
+</div>
+<div style="display: inline-block;">
 
-## Java
- * <a href="Wiki/Java/Java.html">Java notes</a>
- * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
- 
 ## Python
- * <a href="Wiki/Python/python.html">Python</a>
+ * <a href="Wiki/Python/python.html">Python Basic - Python cheat sheet</a>
  * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
  * <a href="Wiki/Python/python_keras.html">Python Keras deep learning</a>
  * <a href="Wiki/Python/Django.html">Django</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
+
+</div>
+</div>
+
+## Java
+ * <a href="Wiki/Java/Java.html">Java notes</a>
+ * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
   
 ## Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
