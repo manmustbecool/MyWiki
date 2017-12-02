@@ -12,7 +12,7 @@ Contact: manmustcool[.at.]yahoo[.dot.]com
 
 My notes
 
-<div style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 1px dotted #e0e0e0; -moz-column-rule: 1px dotted #e0e0e0; column-rule: 1px dotted #e0e0e0;">
+<div style="display: flex; -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 1px dotted #e0e0e0; -moz-column-rule: 1px dotted #e0e0e0; column-rule: 1px dotted #e0e0e0;">
 
 <div style="display: inline-block;">
 ## R
@@ -97,7 +97,7 @@ My notes
 <style>
 div.non * {
  color: white !important;
- font-size: 60%;
+ font-size: 70%;
 }
 </style>
 
@@ -115,6 +115,9 @@ div.non * {
 
 
 [A distributed architecture for policy-customisable multi-tenant Processes-as-a-Service](http://manmustbecool.github.io/MyWiki/papers/A%20distributed%20architecture%20for%20policy-customisable%20multi-tenant%20Processes-as-a-Service.pdf)
+
+
+[https://sites.google.com/view/manmustbecool/home](https://sites.google.com/view/manmustbecool/home)
 
 ...
 
