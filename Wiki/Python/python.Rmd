@@ -9,6 +9,11 @@ Install anaconda
 
 # Data types
 
+
+```python
+type(person) # Determine the type of an object
+```
+
 ## Atomic data types
 
 ```python
@@ -129,6 +134,7 @@ df.count() # Number of non-NA values
 
 df.drop_duplicates() # Remove duplicate rows (only considers columns).
 
+df = df.values #convert a pandas dataframe (df) to a numpy ndarray,
 ```
 
 **Sort**
@@ -150,18 +156,32 @@ df[:5]  # select the first 5 rows (rows 0,1,2,3,4)
 df[-1:] # select the last row 
 
 #iloc: positions in the index (it only takes integers).
+df.iloc[0] # select the first row
+df.iloc[2:] # select every row beginning with the third row
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
+df.iloc[:,:2] # Select the first 2 columns
 
 #loc: positions via labels
 df.loc[:3] # slice up to and including label 3
 
+# Select columns by names
+df['name'] 
+df[['name', 'age']]
+
+# select rows by names/labels
+df.loc[:'john']
+
 df[df.Length>7 ] # select rows that meet logical criteria.
+
+df.drop(df.tail(n).index) # drop last n rows
+df.drop(df.head(n).index) # drop first n rows
 
 ```
 
+
 # IO
 
-## read write CSV
+## Read write CSV
 
 ```python
 pd.read_csv('file.csv', header=None, nrows=5)

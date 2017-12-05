@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 01 December, 2017</em></h4>
+<h4 class="date"><em>Updated: 04 December, 2017</em></h4>
 
 </div>
 
@@ -169,7 +169,7 @@ $(document).ready(function () {
 </ul></li>
 </ul></li>
 <li><a href="#io"><span class="toc-section-number">3</span> IO</a><ul>
-<li><a href="#read-write-csv"><span class="toc-section-number">3.1</span> read write CSV</a></li>
+<li><a href="#read-write-csv"><span class="toc-section-number">3.1</span> Read write CSV</a></li>
 <li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">3.2</span> Read head lines of a large text file</a></li>
 <li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">3.3</span> List files only in the current directory</a></li>
 </ul></li>
@@ -184,6 +184,7 @@ $(document).ready(function () {
 </div>
 <div id="data-types" class="section level1">
 <h1><span class="header-section-number">2</span> Data types</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(person) <span class="co"># Determine the type of an object</span></code></pre></div>
 <div id="atomic-data-types" class="section level2">
 <h2><span class="header-section-number">2.1</span> Atomic data types</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">str</span>() <span class="co"># convert variable to string</span>
@@ -284,7 +285,9 @@ df.columns <span class="co"># Describe DataFrame columns</span>
 df.info()  <span class="co"># Info on DataFrame</span>
 df.count() <span class="co"># Number of non-NA values</span>
 
-df.drop_duplicates() <span class="co"># Remove duplicate rows (only considers columns).</span></code></pre></div>
+df.drop_duplicates() <span class="co"># Remove duplicate rows (only considers columns).</span>
+
+df <span class="op">=</span> df.values <span class="co">#convert a pandas dataframe (df) to a numpy ndarray,</span></code></pre></div>
 <p><strong>Sort</strong></p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Order rows by values of a column </span>
 df.sort_values(<span class="st">'mpg'</span>) <span class="co"># (low to high).</span>
@@ -298,19 +301,32 @@ df[:<span class="dv">5</span>]  <span class="co"># select the first 5 rows (rows
 df[<span class="op">-</span><span class="dv">1</span>:] <span class="co"># select the last row </span>
 
 <span class="co">#iloc: positions in the index (it only takes integers).</span>
+df.iloc[<span class="dv">0</span>] <span class="co"># select the first row</span>
+df.iloc[<span class="dv">2</span>:] <span class="co"># select every row beginning with the third row</span>
 df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">1</span>:<span class="dv">4</span>] <span class="co"># select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)</span>
+df.iloc[:,:<span class="dv">2</span>] <span class="co"># Select the first 2 columns</span>
 
 <span class="co">#loc: positions via labels</span>
 df.loc[:<span class="dv">3</span>] <span class="co"># slice up to and including label 3</span>
 
-df[df.Length<span class="op">&gt;</span><span class="dv">7</span> ] <span class="co"># select rows that meet logical criteria.</span></code></pre></div>
+<span class="co"># Select columns by names</span>
+df[<span class="st">'name'</span>] 
+df[[<span class="st">'name'</span>, <span class="st">'age'</span>]]
+
+<span class="co"># select rows by names/labels</span>
+df.loc[:<span class="st">'john'</span>]
+
+df[df.Length<span class="op">&gt;</span><span class="dv">7</span> ] <span class="co"># select rows that meet logical criteria.</span>
+
+df.drop(df.tail(n).index) <span class="co"># drop last n rows</span>
+df.drop(df.head(n).index) <span class="co"># drop first n rows</span></code></pre></div>
 </div>
 </div>
 </div>
 <div id="io" class="section level1">
 <h1><span class="header-section-number">3</span> IO</h1>
 <div id="read-write-csv" class="section level2">
-<h2><span class="header-section-number">3.1</span> read write CSV</h2>
+<h2><span class="header-section-number">3.1</span> Read write CSV</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">pd.read_csv(<span class="st">'file.csv'</span>, header<span class="op">=</span><span class="va">None</span>, nrows<span class="op">=</span><span class="dv">5</span>)
 pd.to_csv(<span class="st">'myDataFrame.csv'</span>)
 
@@ -333,6 +349,7 @@ files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw
     <span class="bu">print</span>(f)</code></pre></div>
 <pre><code>## Django.html
 ## Django.Rmd
+## pima-indians-diabetes.data.txt
 ## python.html
 ## python.Rmd
 ## pythonML.html
@@ -341,6 +358,8 @@ files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw
 ## pythonPlot.Rmd
 ## pythonRdm.html
 ## pythonRdm.Rmd
+## python_keras.html
+## python_keras.Rmd
 ## pyton_plot_test.png
 ## test.png
 ## _output.yaml</code></pre>

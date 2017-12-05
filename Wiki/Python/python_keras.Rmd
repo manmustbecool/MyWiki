@@ -7,7 +7,7 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 # Keras
 
-http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/
+cheet sheet from datacamp : http://datacamp-community.s3.amazonaws.com/94fc681d-5422-40cb-a129-2218e9522f17?imm_mid=0f769c&cmp=em-data-na-na-newsltr_20171025
 
 
 ```{python}
@@ -55,7 +55,7 @@ model.add(Dense(1, activation='sigmoid'))
 # Compiling the model uses the efficient numerical libraries under the covers (the so-called backend) such as Theano or TensorFlow
 
 # use logarithmic loss, which for a binary classification problem is defined in Keras as 'binary_crossentropy'. 
-# We will also use the efficient gradient descent algorithm 'adam' for no other reason that it is an efficient default.
+# Use the efficient gradient descent algorithm 'adam' for no other reason that it is an efficient default.
 # because it is a classification problem, we will collect and report the classification accuracy as the metric.
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
@@ -69,7 +69,7 @@ model.fit(X, Y, epochs=50, batch_size=10)
 
 
 # ------------- evaluate the model ----------------------
-#  evaluate() function on your model and pass it the same input and output used to train the model.
+# evaluate() function on your model and pass it the same input and output used to train the model.
 scores = model.evaluate(X, Y)
 print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
@@ -80,6 +80,7 @@ predictions = model.predict(X)
 rounded = [round(x[0]) for x in predictions]
 print(rounded)
 ```
+reference : http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/
 
 
 
