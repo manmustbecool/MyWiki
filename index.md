@@ -22,7 +22,6 @@ My notes
  * <a href="Wiki/R/RMachineLearning.html">R Machine Learning</a>
  * <a href="Wiki/R/textMining.html">Text Mining</a>
  * <a href="Wiki/R/associationRule.html">Association Rule</a>
- * <a href="Wiki/R/graph.html">Graph</a>
  * <a href="Wiki/R/LogisticRegression.html">Logistic regression with Gradient Descent</a>
  * <a href="Wiki/R/decisionTree.html">R Decision Tree</a>
  * <a href="Wiki/R/baye_network.html">Baye network</a>
@@ -35,6 +34,9 @@ My notes
  * Development 
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
+ * Graph
+    + <a href="Wiki/R/graph.html">Plot graph</a>
+    + <a href="Wiki/R/label_propagation.html">Label propagration</a>
  * Dimension Reduction
     + <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
     + <a href="Wiki/R/dataCompression.html">Reduction into a single variable/dimension</a>
