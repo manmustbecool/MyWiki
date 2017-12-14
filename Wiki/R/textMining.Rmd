@@ -91,7 +91,7 @@ terms <-DocumentTermMatrix(corpus,control = list(weighting = function(x) weightT
 #or compute cosine distance among documents
 dissimilarity(tdm, method = "cosine")
 ```
-# word cloud
+# Word cloud
 
 ```r
 library(wordcloud)
@@ -101,6 +101,13 @@ wordcloud(corpus, scale=c(5,0.5),
     ,colors=brewer.pal(10, "Dark2")
 )
 ```
+
+# Topic Modelling
+
+LDA
+
+https://eight2late.wordpress.com/2015/09/29/a-gentle-introduction-to-topic-modeling-using-r/
+
 
 # Social Network Analysis
 

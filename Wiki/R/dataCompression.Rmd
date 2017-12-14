@@ -1,0 +1,68 @@
+---
+title: "Reduction into a single variable/dimension"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Data compression
+
+Reduce mulitple variables/dimensions into a single variable/dimension.
+
+Three different approaches: Mean, Median, and First principle component
+
+## build the dataset
+
+```{r}
+library(scales)
+
+N <- 10 # number of variables
+x1 <- sample(seq(1, 20, by=1), N, replace = T)
+x2 <- sample(seq(1, 150, by=1), N, replace = T)
+x3 <- rnorm(N, mean=50, sd=10) 
+x4 <- rnorm(N, mean=50, sd=30)
+x5 <- dlnorm(1:N, 2, 0.35)    # log distribution
+x5 <- rescale(x5  , to=c(0,150))
+df <- data.frame(x1,x2,x3,x4,x5)
+df <- t(df)
+df <- round(df, digits=2)
+```
+
+dataset contains 5 instances, each instance contains 10 variables
+
+```{r}
+df
+```
+
+
+## plot data with comparsion
+
+plot all data points
+
+```{r}
+# plot  
+plot(c(1,1), xlim=c(1, nrow(df)), ylim=c(min(df), max(df)), type = 'n')
+for(i in 1:nrow(df)){
+  points(array(i, ncol(df)), df[i,]) # plot each row
+}
+```
+
+plot data with comparsion
+
+```{r}
+# box and whisker plot
+boxplot(t(df), main="blue=mean, black_bar=median, red=1st pc")
+
+# plot average 
+row_mean <- apply(df, 1, mean)
+lines(x=c(1: nrow(df)), y=row_mean, col="blue")
+
+# plot first principle component in original scale
+pca <- prcomp(df) 
+# reverse PCA in prcomp to get original data
+# prcomp will center the variables so you need to add the subtracted means back
+ori <- t(t(pca$x %*% t(pca$rotation)) + pca$center)
+# first column of ori to get origional values based on first principle component
+lines(x=c(1: nrow(df)), y=ori[, 1], col="red") 
+```
+
+For Reducing mutiple variables into a single variable, principle component (1st) is not good comparing to mean and median.
+While, PCA can reduce mutiple variables into more than one variables

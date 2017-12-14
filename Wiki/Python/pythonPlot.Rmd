@@ -15,7 +15,7 @@ plt.plot(t, s)
 
 plt.xlabel('time (s)')
 plt.ylabel('voltage (mV)')
-plt.title('About as simple as it gets, folks')
+plt.title('Simple Plot')
 plt.grid(True)
 plt.savefig("pyton_plot_test.png")
 # plt.show()
@@ -23,3 +23,8 @@ plt.savefig("pyton_plot_test.png")
 
 Output image:
 ![output](pyton_plot_test.png)
+
+
+# Graph gallery
+
+https://python-graph-gallery.com/

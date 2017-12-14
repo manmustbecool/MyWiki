@@ -633,7 +633,7 @@ myfiles <- do.call(rbind,
 unlink(temp_dir, recursive=T)
 ```
 
-# Parallel R in Windows ##
+# Parallel R in Windows
 http://decisionstats.com/2010/09/24/parallel-programming-using-r-in-windows/
 ```r
 require(doSNOW)

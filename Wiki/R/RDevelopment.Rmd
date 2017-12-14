@@ -137,6 +137,23 @@ df <- data[data$id>6, ]
 library(dlpyr)
 df <- data %>% filter(id>6)
 
+#---------- vertorization 
+
+http://www.noamross.net/blog/2014/4/16/vectorization-in-r--why.html
+
+# ------ Pre-allocating memory, avoiding side effects.
+# bad: 
+j <- 1
+for (i in 1:10) {
+    j[i] = 10
+}
+
+# good:
+j <- rep(NA, 10)
+for (i in 1:10) {
+    j[i] = 10
+}
+
 ```
 
 performance profile
