@@ -4,8 +4,33 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+# Install Keras
+
+----- for keras -----
+
+open anaconda promt
+
+```bash
+pip install keras
+# CPU-only version of TensorFlow
+pip install --upgrade tensorflow
+```
+
+----- for Visualizing Model Structures in Keras --------
+
+download graphviz and install in windows
+
+open anaconda promt
+```bash
+conda install graphviz
+conda install pip # update pip in conda
+pip install graphviz # need both conda and pip install for graphviz to work
+
+conda install pydot  
+```
 
 # Keras
+
 
 cheet sheet from datacamp : http://datacamp-community.s3.amazonaws.com/94fc681d-5422-40cb-a129-2218e9522f17?imm_mid=0f769c&cmp=em-data-na-na-newsltr_20171025
 
@@ -65,7 +90,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 # epochs =  a fixed number of iterations through the dataset
 # batch_size = the number of instances for each iterations/batch
 # these can be chosen experimentally by trial and error.
-model.fit(X, Y, epochs=50, batch_size=10)
+model.fit(X, Y, epochs=10, batch_size=20)
 
 
 # ------------- evaluate the model ----------------------
@@ -79,7 +104,26 @@ predictions = model.predict(X)
 # round predictions
 rounded = [round(x[0]) for x in predictions]
 print(rounded)
+
+#------------ for Visualizing Model Structures ---------------
+
+import graphviz
+
+# set Graphviz path
+import os
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+
+from keras.utils import plot_model
+### Build, Load, and Compile your model
+plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
+
+
 ```
+Output image:
+![output](model.png)
+
+
+
 reference : http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/
 
 
