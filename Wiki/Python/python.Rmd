@@ -72,6 +72,19 @@ basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
 
 Dictionaries store key-value pairs, kind of like JSON objects.
 ```python
+# Creating an empty dictionary
+data = {} # OR data = dict()
+
+# Creating a dictionary with initial values
+data = {'a':1,'b':2,'c':3} # OR data = dict(a=1, b=2, c=3)
+
+# Inserting/Updating a single value
+data['a']=1  # Updates if 'a' exists, else adds 'a'
+# OR data.update(a=1)
+
+# Inserting/Updating multiple values
+data.update({'c':3,'d':4})  # Updates 'c' and adds 'd'
+
 # create a dictionary
 person = {
             "name": "Amos",
@@ -241,7 +254,7 @@ df = df.reset_index(drop=True)
 ```
 ### Handle NaN
 
-```
+```python
 df.fillna(0) # Replace all the NaN values with Zero
 ```
 
