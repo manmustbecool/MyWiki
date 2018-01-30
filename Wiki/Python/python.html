@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 24 January, 2018</em></h4>
+<h4 class="date"><em>Updated: 30 January, 2018</em></h4>
 
 </div>
 
@@ -176,14 +176,15 @@ $(document).ready(function () {
 <li><a href="#handle-nan"><span class="toc-section-number">3.4.4</span> Handle NaN</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#io"><span class="toc-section-number">4</span> IO</a><ul>
-<li><a href="#read-write-csv"><span class="toc-section-number">4.1</span> Read write CSV</a></li>
-<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">4.2</span> Read head lines of a large text file</a></li>
-<li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">4.3</span> List files only in the current directory</a></li>
+<li><a href="#regular-expression"><span class="toc-section-number">4</span> Regular expression</a></li>
+<li><a href="#io"><span class="toc-section-number">5</span> IO</a><ul>
+<li><a href="#read-write-csv"><span class="toc-section-number">5.1</span> Read write CSV</a></li>
+<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">5.2</span> Read head lines of a large text file</a></li>
+<li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">5.3</span> List files only in the current directory</a></li>
 </ul></li>
-<li><a href="#real-time-plot-with-python"><span class="toc-section-number">5</span> Real time plot with python</a></li>
-<li><a href="#plot-a-hist-graph"><span class="toc-section-number">6</span> plot a hist graph</a></li>
-<li><a href="#install-package"><span class="toc-section-number">7</span> Install package</a></li>
+<li><a href="#real-time-plot-with-python"><span class="toc-section-number">6</span> Real time plot with python</a></li>
+<li><a href="#plot-a-hist-graph"><span class="toc-section-number">7</span> plot a hist graph</a></li>
+<li><a href="#install-package"><span class="toc-section-number">8</span> Install package</a></li>
 </ul>
 </div>
 
@@ -217,6 +218,9 @@ li[<span class="dv">0</span>:<span class="dv">2</span>] <span class="co"># [incl
 li <span class="op">=</span> li <span class="op">+</span> [<span class="dv">6</span>]
 li <span class="op">=</span> <span class="kw">del</span>(li[<span class="dv">5</span>])
 
+<span class="co"># append an element</span>
+li.append(<span class="st">'bar'</span>)
+
 <span class="co"># copy: reference only</span>
 li2 <span class="op">=</span> li
 <span class="co"># copy: explicit copy </span>
@@ -235,7 +239,10 @@ t[<span class="dv">0</span>]</code></pre></div>
 <div id="set" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> Set</h3>
 <p>A set is an unordered collection with no duplicate elements</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">basket <span class="op">=</span> {<span class="st">'apple'</span>, <span class="st">'orange'</span>, <span class="st">'apple'</span>, <span class="st">'pear'</span>, <span class="st">'orange'</span>, <span class="st">'banana'</span>}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">basket <span class="op">=</span> {<span class="st">'apple'</span>, <span class="st">'orange'</span>, <span class="st">'apple'</span>, <span class="st">'pear'</span>, <span class="st">'orange'</span>, <span class="st">'banana'</span>}
+
+<span class="co"># check if a element is in the set</span>
+<span class="co">'apple'</span> <span class="kw">in</span> basket</code></pre></div>
 </div>
 <div id="dictionary" class="section level3">
 <h3><span class="header-section-number">2.2.4</span> Dictionary</h3>
@@ -280,11 +287,15 @@ df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">a
 <div id="numpyarray" class="section level2">
 <h2><span class="header-section-number">3.2</span> Numpy::Array</h2>
 <p>Array can only cotain one type</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">li <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># convert list to array</span>
+li <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
 np_array <span class="op">=</span> np.array(li)
 
 <span class="co"># shape of array</span>
 np_array.shape
+
+<span class="co"># delete an element</span>
+np.delete(a, index)
 
 df <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])
 <span class="bu">print</span>(df)
@@ -294,7 +305,10 @@ df <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="d
 
 <span class="co"># a range value</span>
 np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)
-<span class="co"># Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])</span></code></pre></div>
+<span class="co"># Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])</span>
+
+<span class="co"># a random integer value</span>
+np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">2</span>) <span class="co"># add replace=False for non duplicated values</span></code></pre></div>
 </div>
 <div id="pandaseries" class="section level2">
 <h2><span class="header-section-number">3.3</span> Panda::Series</h2>
@@ -318,10 +332,12 @@ pd.DataFrame.from_dict(<span class="bu">dict</span>)
 
 df.mean()  <span class="co"># mean of each column</span>
 df.shape   <span class="co"># (rows,columns)</span>
+df.columns <span class="co"># column names</span>
 df.index   <span class="co"># Describe index</span>
 df.columns <span class="co"># Describe DataFrame columns</span>
 df.info()  <span class="co"># Info on DataFrame</span>
 df.count() <span class="co"># Number of non-NA values</span>
+
 
 df[<span class="dv">3</span>].value_counts() <span class="co"># frequency table of a column, e.g. column 3</span>
 
@@ -339,11 +355,12 @@ df.sort_values(<span class="st">'mpg'</span>, ascending<span class="op">=</span>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.head(n) <span class="co"># Select first n rows.</span>
 df.tail(n) <span class="co"># Select last n rows.</span>
 
+<span class="co"># based on poisition</span>
 df[<span class="dv">0</span>:<span class="dv">3</span>] <span class="co"># select the first 3 rows (rows 0,1,2)</span>
 df[:<span class="dv">5</span>]  <span class="co"># select the first 5 rows (rows 0,1,2,3,4)</span>
 df[<span class="op">-</span><span class="dv">1</span>:] <span class="co"># select the last row </span>
 
-<span class="co">#iloc: positions in the index (it only takes integers).</span>
+<span class="co">#iloc: based on positions  (it only takes integers).</span>
 <span class="co"># rows:</span>
 df.iloc[<span class="dv">0</span>] <span class="co"># select the first row</span>
 df.iloc[<span class="dv">2</span>:] <span class="co"># select every row beginning with the third row</span>
@@ -355,7 +372,7 @@ data.iloc[:,<span class="op">-</span><span class="dv">1</span>] <span class="co"
 <span class="co"># rows and columns</span>
 df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">1</span>:<span class="dv">4</span>] <span class="co"># select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)</span>
 
-<span class="co">#loc: positions via labels</span>
+<span class="co">#loc: positions via labels/index</span>
 df.loc[:<span class="dv">3</span>] <span class="co"># slice up to and including label 3</span>
 df.loc[:<span class="st">'john'</span>] <span class="co"># select rows by names/labels</span>
 df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value] <span class="co"># select rows whose column value equals a scalar</span>
@@ -372,7 +389,14 @@ df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some
 df[df.Length<span class="op">&gt;</span><span class="dv">7</span> ] <span class="co"># select rows that meet logical criteria.</span>
 
 df.drop(df.tail(n).index) <span class="co"># drop last n rows</span>
-df.drop(df.head(n).index) <span class="co"># drop first n rows</span></code></pre></div>
+df.drop(df.head(n).index) <span class="co"># drop first n rows</span>
+
+<span class="co"># loop for each row</span>
+<span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():
+    <span class="bu">print</span> row[<span class="st">'column_name_1'</span>], row[<span class="st">'column_name_2'</span>]
+<span class="co"># 10 100</span>
+<span class="co"># 11 110</span>
+<span class="co"># 12 120</span></code></pre></div>
 </div>
 <div id="append" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> Append</h3>
@@ -411,10 +435,17 @@ df <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span c
 </div>
 </div>
 </div>
+<div id="regular-expression" class="section level1">
+<h1><span class="header-section-number">4</span> Regular expression</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> re
+m <span class="op">=</span> re.search(<span class="st">'(?&lt;=abc)def'</span>, <span class="st">'abcdef'</span>)
+m.group(<span class="dv">0</span>)
+<span class="co"># 'def'</span></code></pre></div>
+</div>
 <div id="io" class="section level1">
-<h1><span class="header-section-number">4</span> IO</h1>
+<h1><span class="header-section-number">5</span> IO</h1>
 <div id="read-write-csv" class="section level2">
-<h2><span class="header-section-number">4.1</span> Read write CSV</h2>
+<h2><span class="header-section-number">5.1</span> Read write CSV</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">pd.read_csv(<span class="st">'file.csv'</span>, header<span class="op">=</span><span class="va">None</span>, nrows<span class="op">=</span><span class="dv">5</span>)
 pd.to_csv(<span class="st">'myDataFrame.csv'</span>)
 
@@ -422,7 +453,7 @@ pd.read_excel(<span class="st">'file.xlsx'</span>)
 pd.to_excel(<span class="st">'dir/myDataFrame.xlsx'</span>, sheet_name<span class="op">=</span><span class="st">'Sheet1'</span>)</code></pre></div>
 </div>
 <div id="read-head-lines-of-a-large-text-file" class="section level2">
-<h2><span class="header-section-number">4.2</span> Read head lines of a large text file</h2>
+<h2><span class="header-section-number">5.2</span> Read head lines of a large text file</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">file_name <span class="op">=</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">xxxxx</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">2014101709-12.txt&quot;</span>
 
 <span class="cf">with</span> <span class="bu">open</span>(file_name) <span class="im">as</span> myfile:
@@ -430,7 +461,7 @@ pd.to_excel(<span class="st">'dir/myDataFrame.xlsx'</span>, sheet_name<span clas
 <span class="bu">print</span>(head)</code></pre></div>
 </div>
 <div id="list-files-only-in-the-current-directory" class="section level2">
-<h2><span class="header-section-number">4.3</span> List files only in the current directory</h2>
+<h2><span class="header-section-number">5.3</span> List files only in the current directory</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os <span class="im">as</span> os
 files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(<span class="st">'.'</span>) <span class="cf">if</span> os.path.isfile(f)]
 <span class="cf">for</span> f <span class="kw">in</span> files:
@@ -449,13 +480,16 @@ files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw
 ## pythonRdm.Rmd
 ## python_keras.html
 ## python_keras.Rmd
+## python_sklearn.html
+## python_sklearn.Rmd
 ## pyton_plot_test.png
+## pyton_random_forest.png
 ## test.png
 ## _output.yaml</code></pre>
 </div>
 </div>
 <div id="real-time-plot-with-python" class="section level1">
-<h1><span class="header-section-number">5</span> Real time plot with python</h1>
+<h1><span class="header-section-number">6</span> Real time plot with python</h1>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
 <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
 
@@ -471,11 +505,11 @@ plt.ion()
     plt.pause(<span class="fl">0.5</span>)</code></pre></div>
 </div>
 <div id="plot-a-hist-graph" class="section level1">
-<h1><span class="header-section-number">6</span> plot a hist graph</h1>
+<h1><span class="header-section-number">7</span> plot a hist graph</h1>
 <p>import matplotlib.pyplot as plt plt.hist(df[3].values, bins=100)</p>
 </div>
 <div id="install-package" class="section level1">
-<h1><span class="header-section-number">7</span> Install package</h1>
+<h1><span class="header-section-number">8</span> Install package</h1>
 <p>in cmd comand window</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># PyPI</span>
 pip install py2exe

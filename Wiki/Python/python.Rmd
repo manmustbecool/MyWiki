@@ -43,6 +43,9 @@ li[0:2] # [incluse, excluse] 3,4
 li = li + [6]
 li = del(li[5])
 
+# append an element
+li.append('bar')
+
 # copy: reference only
 li2 = li
 # copy: explicit copy 
@@ -66,7 +69,11 @@ t[0]
 A set is an unordered collection with no duplicate elements
 ```python
 basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+
+# check if a element is in the set
+'apple' in basket
 ```
+
 
 ### Dictionary
 
@@ -113,11 +120,15 @@ df = df[df[3].apply(lambda x: not isinstance(x, pd._libs.tslib.NaTType))]
 ## Numpy::Array
 Array can only cotain one type
 ```python
+# convert list to array
 li = [3, 4, 5]
 np_array = np.array(li)
 
 # shape of array
 np_array.shape
+
+# delete an element
+np.delete(a, index)
 
 df = np.array([[1,2,3], [1,2,3], [1,2,3]])
 print(df)
@@ -128,6 +139,9 @@ print(df)
 # a range value
 np.arange(0, 5, 0.5)
 # Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])
+
+# a random integer value
+np.random.randint(10, size=2) # add replace=False for non duplicated values
 ```
 
 ## Panda::Series
@@ -158,10 +172,12 @@ pd.DataFrame.from_dict(dict)
 
 df.mean()  # mean of each column
 df.shape   # (rows,columns)
+df.columns # column names
 df.index   # Describe index
 df.columns # Describe DataFrame columns
 df.info()  # Info on DataFrame
 df.count() # Number of non-NA values
+
 
 df[3].value_counts() # frequency table of a column, e.g. column 3
 
@@ -184,11 +200,12 @@ df.sort_values('mpg', ascending=False) # (high to low).
 df.head(n) # Select first n rows.
 df.tail(n) # Select last n rows.
 
+# based on poisition
 df[0:3] # select the first 3 rows (rows 0,1,2)
 df[:5]  # select the first 5 rows (rows 0,1,2,3,4)
 df[-1:] # select the last row 
 
-#iloc: positions in the index (it only takes integers).
+#iloc: based on positions  (it only takes integers).
 # rows:
 df.iloc[0] # select the first row
 df.iloc[2:] # select every row beginning with the third row
@@ -200,7 +217,7 @@ data.iloc[:,-1] # last column of data frame
 # rows and columns
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
 
-#loc: positions via labels
+#loc: positions via labels/index
 df.loc[:3] # slice up to and including label 3
 df.loc[:'john'] # select rows by names/labels
 df.loc[df['column_name'] == some_value] # select rows whose column value equals a scalar
@@ -219,6 +236,12 @@ df[df.Length>7 ] # select rows that meet logical criteria.
 df.drop(df.tail(n).index) # drop last n rows
 df.drop(df.head(n).index) # drop first n rows
 
+# loop for each row
+for index, row in df.iterrows():
+    print row['column_name_1'], row['column_name_2']
+# 10 100
+# 11 110
+# 12 120
 ```
 ### Append 
 
@@ -258,7 +281,14 @@ df = df.reset_index(drop=True)
 df.fillna(0) # Replace all the NaN values with Zero
 ```
 
+# Regular expression
 
+```python
+import re
+m = re.search('(?<=abc)def', 'abcdef')
+m.group(0)
+# 'def'
+```
 
 # IO
 
@@ -291,6 +321,7 @@ files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
     print(f)
 ```
+
 
 # Real time plot with python
 
