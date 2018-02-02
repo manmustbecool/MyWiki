@@ -50,19 +50,21 @@ My notes
     + <a href="Wiki/R/ga_cluster.html">Genetic algorithm based clustering</a>
  
 </div>
-<div style="display: inline-block;">
 
+<div style="display: inline-block;">
 ## Python
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
  * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
- * <a href="Wiki/Python/python_sklearn.html">scikit-learn</a>
+ * <a href="Wiki/Python/python_sklearn.html">Scikit-learn</a>
  * <a href="Wiki/Python/python_keras.html">Keras deep learning</a>
- * <a href="Wiki/Python/Django.html">Django</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
+ * Web development
+    + <a href="Wiki/Python/Django.html">Django</a>
+    + <a href="Wiki/Python/flaskReact.html">Flask + React</a>
+</div>
 
-</div>
-</div>
+</div> <!--end two columns -->
 
 ## Java
  * <a href="Wiki/Java/Java.html">Java notes</a>

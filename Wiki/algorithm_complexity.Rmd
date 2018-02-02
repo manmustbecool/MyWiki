@@ -1,0 +1,52 @@
+---
+title: "algorithm complexity"
+output: html_document
+---
+
+```{java}
+System.out.print("test");
+```
+
+Time complexity: O(1)
+
+if the 'print' statement takes one unit time to execute, then it will be O(1)
+
+
+----
+
+```{java}
+for (int i=0; i<n; i++){
+  System.out.print("test");
+}
+```
+
+Time complexity: O(n)
+
+The code will take n*unit_time to execute
+
+
+----
+
+```{java}
+for (int i=0; i<n; i++){
+  for (int i=0; i<n; i++){
+    System.out.print("test");
+  }
+}
+```
+
+Time complexity: O(n^2)
+
+
+----
+
+```{java}
+int sum = 1;
+while(sum < n){
+  sum = sum * 2;
+}
+```
+
+Time complexity: O(logn)
+
+For each loop, the sum will multiple itself with 2. let's assume that the loop exeucted x times to terminate, i.e. sum >= n, so that x^2 = n. Hence, x = logn.
