@@ -7,8 +7,11 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 Install anaconda
 
-# Data types
+```bash
+python -V # get python version
+```
 
+# Data types
 
 ```python
 type(person) # Determine the type of an object
@@ -40,6 +43,9 @@ li[0:2] # [incluse, excluse] 3,4
 li = li + [6]
 li = del(li[5])
 
+# append an element
+li.append('bar')
+
 # copy: reference only
 li2 = li
 # copy: explicit copy 
@@ -63,12 +69,29 @@ t[0]
 A set is an unordered collection with no duplicate elements
 ```python
 basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+
+# check if a element is in the set
+'apple' in basket
 ```
+
 
 ### Dictionary
 
 Dictionaries store key-value pairs, kind of like JSON objects.
 ```python
+# Creating an empty dictionary
+data = {} # OR data = dict()
+
+# Creating a dictionary with initial values
+data = {'a':1,'b':2,'c':3} # OR data = dict(a=1, b=2, c=3)
+
+# Inserting/Updating a single value
+data['a']=1  # Updates if 'a' exists, else adds 'a'
+# OR data.update(a=1)
+
+# Inserting/Updating multiple values
+data.update({'c':3,'d':4})  # Updates 'c' and adds 'd'
+
 # create a dictionary
 person = {
             "name": "Amos",
@@ -85,23 +108,43 @@ for key in person:
     print(person[key])
 ```
 
-### Numpy::Array
+# Other Data Structures
+
+## DataTime
+
+```python
+# remove data time instance is NaT
+df = df[df[3].apply(lambda x: not isinstance(x, pd._libs.tslib.NaTType))]
+```
+
+## Numpy::Array
 Array can only cotain one type
 ```python
+# convert list to array
 li = [3, 4, 5]
 np_array = np.array(li)
 
 # shape of array
 np_array.shape
 
+# delete an element
+np.delete(a, index)
+
 df = np.array([[1,2,3], [1,2,3], [1,2,3]])
 print(df)
 #     [[1 2 3]
 #     [1 2 3]
 #     [1 2 3]]
+
+# a range value
+np.arange(0, 5, 0.5)
+# Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])
+
+# a random integer value
+np.random.randint(10, size=2) # add replace=False for non duplicated values
 ```
 
-### Panda::Series
+## Panda::Series
 
 http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/
 
@@ -111,7 +154,7 @@ A one-dimensional labeled array A capable of holding any data type
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
 
 ```
-### Panda::DataFrame
+## Panda::DataFrame
 
 **Initialize data frame**
 
@@ -124,20 +167,26 @@ df = pd.DataFrame(
 # 2  12  22  32
 # 3  13  23  33
 
+# from dict to dataframe
+pd.DataFrame.from_dict(dict)
 
 df.mean()  # mean of each column
 df.shape   # (rows,columns)
+df.columns # column names
 df.index   # Describe index
 df.columns # Describe DataFrame columns
 df.info()  # Info on DataFrame
 df.count() # Number of non-NA values
+
+
+df[3].value_counts() # frequency table of a column, e.g. column 3
 
 df.drop_duplicates() # Remove duplicate rows (only considers columns).
 
 df = df.values #convert a pandas dataframe (df) to a numpy ndarray,
 ```
 
-**Sort**
+### Sort
 
 ```python
 # Order rows by values of a column 
@@ -145,39 +194,101 @@ df.sort_values('mpg') # (low to high).
 df.sort_values('mpg', ascending=False) # (high to low).
 ```
 
-**Subset data frame**
+### Subset
 
 ```python
 df.head(n) # Select first n rows.
 df.tail(n) # Select last n rows.
 
+# based on poisition
 df[0:3] # select the first 3 rows (rows 0,1,2)
 df[:5]  # select the first 5 rows (rows 0,1,2,3,4)
 df[-1:] # select the last row 
 
-#iloc: positions in the index (it only takes integers).
+#iloc: based on positions  (it only takes integers).
+# rows:
 df.iloc[0] # select the first row
 df.iloc[2:] # select every row beginning with the third row
+df.iloc[-1] # last row of data frame 
+# Columns:
+data.iloc[:,0] # first column of data frame 
+data.iloc[:,1] # second column of data frame 
+data.iloc[:,-1] # last column of data frame 
+# rows and columns
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
-df.iloc[:,:2] # Select the first 2 columns
 
-#loc: positions via labels
+#loc: positions via labels/index
 df.loc[:3] # slice up to and including label 3
+df.loc[:'john'] # select rows by names/labels
+df.loc[df['column_name'] == some_value] # select rows whose column value equals a scalar
+df.loc[~df['column_name'].isin(some_values)] # select rows whose column value is in an iterable
+df.loc[(df['column_name'] == some_value) & df['other_column'].isin(some_values)] 
 
 # Select columns by names
 df['name'] 
 df[['name', 'age']]
 
-# select rows by names/labels
-df.loc[:'john']
+# select col_name1, col_name2 from table where column_name = some_value.
+df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
 
 df[df.Length>7 ] # select rows that meet logical criteria.
 
 df.drop(df.tail(n).index) # drop last n rows
 df.drop(df.head(n).index) # drop first n rows
 
+# loop for each row
+for index, row in df.iterrows():
+    print row['column_name_1'], row['column_name_2']
+# 10 100
+# 11 110
+# 12 120
+```
+### Append 
+
+```python
+# append a column
+df['new_col'] = pd.Series(np.arange(0, 100), index=df.index)
+
+# Append a dataframe
+df = pd.DataFrame([[1, 2], [3, 4]], columns=list('AB'))
+df
+#    A  B
+# 0  1  2
+# 1  3  4
+
+df2 = pd.DataFrame([[5, 6], [7, 8]], columns=list('AB'))
+df.append(df2)
+#    A  B
+# 0  1  2
+# 1  3  4
+# 0  5  6
+# 1  7  8
+
+# With ignore_index set to True:
+df.append(df2, ignore_index=True)
+#    A  B
+# 0  1  2
+# 1  3  4
+# 2  5  6
+# 3  7  8
+
+# reset index if necessary
+df = df.reset_index(drop=True) 
+```
+### Handle NaN
+
+```python
+df.fillna(0) # Replace all the NaN values with Zero
 ```
 
+# Regular expression
+
+```python
+import re
+m = re.search('(?<=abc)def', 'abcdef')
+m.group(0)
+# 'def'
+```
 
 # IO
 
@@ -211,6 +322,7 @@ for f in files:
     print(f)
 ```
 
+
 # Real time plot with python
 
 ```python
@@ -228,6 +340,11 @@ for i in range(100):
 while True:
     plt.pause(0.5)
 ```
+
+# plot a hist graph
+
+import matplotlib.pyplot as plt
+plt.hist(df[3].values, bins=100)
 
 
 # Install package

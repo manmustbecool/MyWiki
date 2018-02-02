@@ -1,0 +1,70 @@
+---
+title: "Python scikit-learn"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# scikit-learn
+
+```python
+from sklearn.datasets import load_breast_cancer
+cancer = load_breast_cancer()
+cancer.keys()
+// dict_keys(['DESCR', 'data', 'feature_names', 'target_names', 'target'])
+
+cancer['data'].shape
+X = cancer['data']
+y = cancer['target']
+
+# Train Test Split
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+# Fit only to the training data
+scaler.fit(X_train)
+```
+
+
+# Random Forest
+
+
+```{python}
+from sklearn.datasets import make_classification
+from sklearn.ensemble import (RandomTreesEmbedding, RandomForestClassifier, GradientBoostingClassifier)
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import roc_curve
+import matplotlib.pyplot as plt
+
+# build data set
+X, y = make_classification(n_samples=80000)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
+
+
+# random forests - Supervised classifier
+n_estimator = 10
+rf = RandomForestClassifier(max_depth=3, n_estimators=n_estimator)
+rf.fit(X_train, y_train)
+
+# The random forest model by itself
+y_pred_rf = rf.predict_proba(X_test)[:, 1]
+fpr_rf, tpr_rf, _ = roc_curve(y_test, y_pred_rf)
+
+
+plt.figure(1)
+plt.plot([0, 1], [0, 1], 'k--')
+
+plt.plot(fpr_rf, tpr_rf, label='RF')
+plt.xlabel('False positive rate')
+plt.ylabel('True positive rate')
+plt.title('ROC curve')
+plt.legend(loc='best')
+
+# plt.show()
+plt.savefig("pyton_random_forest.png")
+
+```
+
+Output image:
+![output](pyton_random_forest.png)

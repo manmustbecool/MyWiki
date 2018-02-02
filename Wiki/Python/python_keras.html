@@ -149,18 +149,35 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Keras</h1>
-<h4 class="date"><em>Updated: 04 December, 2017</em></h4>
+<h4 class="date"><em>Updated: 16 January, 2018</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#keras"><span class="toc-section-number">1</span> Keras</a></li>
+<li><a href="#install-keras"><span class="toc-section-number">1</span> Install Keras</a></li>
+<li><a href="#keras"><span class="toc-section-number">2</span> Keras</a></li>
 </ul>
 </div>
 
+<div id="install-keras" class="section level1">
+<h1><span class="header-section-number">1</span> Install Keras</h1>
+<p>—– for keras —–</p>
+<p>open anaconda promt</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pip</span> install keras
+<span class="co"># CPU-only version of TensorFlow</span>
+<span class="ex">pip</span> install --upgrade tensorflow</code></pre></div>
+<p>—– for Visualizing Model Structures in Keras ——–</p>
+<p>download graphviz and install in windows</p>
+<p>open anaconda promt</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">conda</span> install graphviz
+<span class="ex">conda</span> install pip <span class="co"># update pip in conda</span>
+<span class="ex">pip</span> install graphviz <span class="co"># need both conda and pip install for graphviz to work</span>
+
+<span class="ex">conda</span> install pydot  </code></pre></div>
+</div>
 <div id="keras" class="section level1">
-<h1><span class="header-section-number">1</span> Keras</h1>
+<h1><span class="header-section-number">2</span> Keras</h1>
 <p>cheet sheet from datacamp : <a href="http://datacamp-community.s3.amazonaws.com/94fc681d-5422-40cb-a129-2218e9522f17?imm_mid=0f769c&amp;cmp=em-data-na-na-newsltr_20171025" class="uri">http://datacamp-community.s3.amazonaws.com/94fc681d-5422-40cb-a129-2218e9522f17?imm_mid=0f769c&amp;cmp=em-data-na-na-newsltr_20171025</a></p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#---------------Load Data -----------------</span>
 <span class="im">import</span> numpy
@@ -216,7 +233,7 @@ model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="
 <span class="co"># epochs =  a fixed number of iterations through the dataset</span>
 <span class="co"># batch_size = the number of instances for each iterations/batch</span>
 <span class="co"># these can be chosen experimentally by trial and error.</span>
-model.fit(X, Y, epochs<span class="op">=</span><span class="dv">50</span>, batch_size<span class="op">=</span><span class="dv">10</span>)
+model.fit(X, Y, epochs<span class="op">=</span><span class="dv">10</span>, batch_size<span class="op">=</span><span class="dv">20</span>)
 
 
 <span class="co"># ------------- evaluate the model ----------------------</span>
@@ -229,300 +246,83 @@ scores <span class="op">=</span> model.evaluate(X, Y)
 predictions <span class="op">=</span> model.predict(X)
 <span class="co"># round predictions</span>
 rounded <span class="op">=</span> [<span class="bu">round</span>(x[<span class="dv">0</span>]) <span class="cf">for</span> x <span class="kw">in</span> predictions]
-<span class="bu">print</span>(rounded)</code></pre></div>
-<pre><code>## [[   6.     148.      72.      35.       0.      33.6      0.627   50.
-##      1.   ]
-##  [   1.      85.      66.      29.       0.      26.6      0.351   31.
-##      0.   ]
-##  [   8.     183.      64.       0.       0.      23.3      0.672   32.
-##      1.   ]]
-## Epoch 1/50
+<span class="bu">print</span>(rounded)
+
+<span class="co">#------------ for Visualizing Model Structures ---------------</span>
+
+<span class="im">import</span> graphviz
+
+<span class="co"># set Graphviz path</span>
+<span class="im">import</span> os
+os.environ[<span class="st">&quot;PATH&quot;</span>] <span class="op">+=</span> os.pathsep <span class="op">+</span> <span class="st">'C:/Program Files (x86)/Graphviz2.38/bin/'</span>
+
+<span class="im">from</span> keras.utils <span class="im">import</span> plot_model
+<span class="co">### Build, Load, and Compile your model</span>
+plot_model(model, to_file<span class="op">=</span><span class="st">'model.png'</span>, show_shapes<span class="op">=</span><span class="va">True</span>, show_layer_names<span class="op">=</span><span class="va">True</span>)</code></pre></div>
+<pre><code>## [[  6.    148.     72.     35.      0.     33.6     0.627  50.      1.   ]
+##  [  1.     85.     66.     29.      0.     26.6     0.351  31.      0.   ]
+##  [  8.    183.     64.      0.      0.     23.3     0.672  32.      1.   ]]
+## Epoch 1/10
 ## 
-##  10/768 [..............................] - ETA: 29s - loss: 1.6118 - acc: 0.9000
-## 470/768 [=================&gt;............] - ETA: 0s - loss: 4.7306 - acc: 0.6383 
-## 768/768 [==============================] - 1s 655us/step - loss: 3.7508 - acc: 0.6003
-## Epoch 2/50
+##  20/768 [..............................] - ETA: 18s - loss: 3.2236 - acc: 0.8000
+## 640/768 [========================&gt;.....] - ETA: 0s - loss: 4.8747 - acc: 0.6391 
+## 768/768 [==============================] - 1s 732us/step - loss: 4.5211 - acc: 0.6393
+## Epoch 2/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4387 - acc: 0.8000
-## 360/768 [=============&gt;................] - ETA: 0s - loss: 1.0237 - acc: 0.5944
-## 768/768 [==============================] - 0s 143us/step - loss: 0.9439 - acc: 0.5951
-## Epoch 3/50
+##  20/768 [..............................] - ETA: 0s - loss: 2.6923 - acc: 0.6000
+## 600/768 [======================&gt;.......] - ETA: 0s - loss: 1.7500 - acc: 0.5267
+## 768/768 [==============================] - 0s 90us/step - loss: 1.6742 - acc: 0.5456
+## Epoch 3/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.7563 - acc: 0.9000
-## 460/768 [================&gt;.............] - ETA: 0s - loss: 0.7462 - acc: 0.6696
-## 768/768 [==============================] - 0s 122us/step - loss: 0.7515 - acc: 0.6380
-## Epoch 4/50
+##  20/768 [..............................] - ETA: 0s - loss: 1.3357 - acc: 0.6000
+## 580/768 [=====================&gt;........] - ETA: 0s - loss: 0.9878 - acc: 0.5759
+## 768/768 [==============================] - 0s 95us/step - loss: 0.9551 - acc: 0.5794
+## Epoch 4/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.7762 - acc: 0.8000
-## 560/768 [====================&gt;.........] - ETA: 0s - loss: 0.6742 - acc: 0.6625
-## 768/768 [==============================] - 0s 123us/step - loss: 0.7132 - acc: 0.6549
-## Epoch 5/50
+##  20/768 [..............................] - ETA: 0s - loss: 0.7041 - acc: 0.7000
+## 640/768 [========================&gt;.....] - ETA: 0s - loss: 0.7632 - acc: 0.6422
+## 768/768 [==============================] - 0s 85us/step - loss: 0.7820 - acc: 0.6406
+## Epoch 5/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.2250 - acc: 1.0000
-## 410/768 [===============&gt;..............] - ETA: 0s - loss: 0.6718 - acc: 0.6805
-## 768/768 [==============================] - 0s 142us/step - loss: 0.6830 - acc: 0.6719
-## Epoch 6/50
+##  20/768 [..............................] - ETA: 0s - loss: 0.5489 - acc: 0.7500
+## 580/768 [=====================&gt;........] - ETA: 0s - loss: 0.7510 - acc: 0.6569
+## 768/768 [==============================] - 0s 90us/step - loss: 0.7351 - acc: 0.6576
+## Epoch 6/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.3798 - acc: 0.8000
-## 390/768 [==============&gt;...............] - ETA: 0s - loss: 0.5930 - acc: 0.7128
-## 768/768 [==============================] - 0s 109us/step - loss: 0.6518 - acc: 0.6810
-## Epoch 7/50
+##  20/768 [..............................] - ETA: 0s - loss: 0.6226 - acc: 0.7000
+## 560/768 [====================&gt;.........] - ETA: 0s - loss: 0.6871 - acc: 0.6571
+## 768/768 [==============================] - 0s 103us/step - loss: 0.7205 - acc: 0.6471
+## Epoch 7/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6247 - acc: 0.7000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.6813 - acc: 0.6676
-## 768/768 [==============================] - 0s 142us/step - loss: 0.6502 - acc: 0.6771
-## Epoch 8/50
+##  20/768 [..............................] - ETA: 0s - loss: 0.7845 - acc: 0.6500
+## 500/768 [==================&gt;...........] - ETA: 0s - loss: 0.6995 - acc: 0.6660
+## 768/768 [==============================] - 0s 96us/step - loss: 0.7056 - acc: 0.6667
+## Epoch 8/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5251 - acc: 0.6000
-## 520/768 [===================&gt;..........] - ETA: 0s - loss: 0.6292 - acc: 0.6865
-## 768/768 [==============================] - 0s 118us/step - loss: 0.6383 - acc: 0.6836
-## Epoch 9/50
+##  20/768 [..............................] - ETA: 0s - loss: 0.7861 - acc: 0.5000
+## 660/768 [========================&gt;.....] - ETA: 0s - loss: 0.6691 - acc: 0.6818
+## 768/768 [==============================] - 0s 79us/step - loss: 0.6692 - acc: 0.6862
+## Epoch 9/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5190 - acc: 0.6000
-## 310/768 [===========&gt;..................] - ETA: 0s - loss: 0.6217 - acc: 0.7000
-## 600/768 [======================&gt;.......] - ETA: 0s - loss: 0.6372 - acc: 0.6867
-## 768/768 [==============================] - 0s 174us/step - loss: 0.6251 - acc: 0.6940
-## Epoch 10/50
+##  20/768 [..............................] - ETA: 0s - loss: 0.5999 - acc: 0.6500
+## 700/768 [==========================&gt;...] - ETA: 0s - loss: 0.6595 - acc: 0.6857
+## 768/768 [==============================] - 0s 76us/step - loss: 0.6580 - acc: 0.6836
+## Epoch 10/10
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.3469 - acc: 0.9000
-## 260/768 [=========&gt;....................] - ETA: 0s - loss: 0.6474 - acc: 0.6962
-## 530/768 [===================&gt;..........] - ETA: 0s - loss: 0.6207 - acc: 0.6868
-## 768/768 [==============================] - 0s 193us/step - loss: 0.6319 - acc: 0.6758
-## Epoch 11/50
+##  20/768 [..............................] - ETA: 0s - loss: 0.4156 - acc: 0.9000
+## 600/768 [======================&gt;.......] - ETA: 0s - loss: 0.6714 - acc: 0.6533
+## 768/768 [==============================] - 0s 90us/step - loss: 0.6756 - acc: 0.6589
 ## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4690 - acc: 0.9000
-## 220/768 [=======&gt;......................] - ETA: 0s - loss: 0.5827 - acc: 0.7000
-## 510/768 [==================&gt;...........] - ETA: 0s - loss: 0.6518 - acc: 0.6706
-## 768/768 [==============================] - 0s 182us/step - loss: 0.6497 - acc: 0.6719
-## Epoch 12/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.7025 - acc: 0.6000
-## 370/768 [=============&gt;................] - ETA: 0s - loss: 0.6401 - acc: 0.6865
-## 750/768 [============================&gt;.] - ETA: 0s - loss: 0.6301 - acc: 0.6827
-## 768/768 [==============================] - 0s 164us/step - loss: 0.6402 - acc: 0.6784
-## Epoch 13/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.9872 - acc: 0.8000
-## 540/768 [====================&gt;.........] - ETA: 0s - loss: 0.6472 - acc: 0.6537
-## 768/768 [==============================] - 0s 109us/step - loss: 0.6256 - acc: 0.6797
-## Epoch 14/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5940 - acc: 0.7000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.6021 - acc: 0.7118
-## 630/768 [=======================&gt;......] - ETA: 0s - loss: 0.6301 - acc: 0.6857
-## 768/768 [==============================] - 0s 165us/step - loss: 0.6190 - acc: 0.6953
-## Epoch 15/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6751 - acc: 0.7000
-## 220/768 [=======&gt;......................] - ETA: 0s - loss: 0.5974 - acc: 0.6727
-## 530/768 [===================&gt;..........] - ETA: 0s - loss: 0.5698 - acc: 0.7132
-## 768/768 [==============================] - 0s 182us/step - loss: 0.6029 - acc: 0.6914
-## Epoch 16/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.3138 - acc: 0.9000
-## 420/768 [===============&gt;..............] - ETA: 0s - loss: 0.6002 - acc: 0.6905
-## 768/768 [==============================] - 0s 143us/step - loss: 0.5880 - acc: 0.6966
-## Epoch 17/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6298 - acc: 0.8000
-## 440/768 [================&gt;.............] - ETA: 0s - loss: 0.6191 - acc: 0.7000
-## 768/768 [==============================] - 0s 122us/step - loss: 0.5849 - acc: 0.7005
-## Epoch 18/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5535 - acc: 0.7000
-## 400/768 [==============&gt;...............] - ETA: 0s - loss: 0.6205 - acc: 0.6725
-## 768/768 [==============================] - 0s 123us/step - loss: 0.5997 - acc: 0.6901
-## Epoch 19/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6048 - acc: 0.6000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.5818 - acc: 0.7206
-## 768/768 [==============================] - 0s 127us/step - loss: 0.5801 - acc: 0.7096
-## Epoch 20/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6478 - acc: 0.7000
-## 280/768 [=========&gt;....................] - ETA: 0s - loss: 0.5668 - acc: 0.7179
-## 740/768 [===========================&gt;..] - ETA: 0s - loss: 0.5829 - acc: 0.7162
-## 768/768 [==============================] - 0s 165us/step - loss: 0.5798 - acc: 0.7174
-## Epoch 21/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5339 - acc: 0.6000
-## 450/768 [================&gt;.............] - ETA: 0s - loss: 0.5643 - acc: 0.7133
-## 768/768 [==============================] - 0s 122us/step - loss: 0.5685 - acc: 0.7161
-## Epoch 22/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4486 - acc: 0.7000
-## 440/768 [================&gt;.............] - ETA: 0s - loss: 0.5925 - acc: 0.7023
-## 768/768 [==============================] - 0s 122us/step - loss: 0.5820 - acc: 0.6940
-## Epoch 23/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.7700 - acc: 0.6000
-## 410/768 [===============&gt;..............] - ETA: 0s - loss: 0.5691 - acc: 0.7439
-## 768/768 [==============================] - 0s 126us/step - loss: 0.5739 - acc: 0.7135
-## Epoch 24/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5804 - acc: 0.7000
-## 390/768 [==============&gt;...............] - ETA: 0s - loss: 0.6030 - acc: 0.7051
-## 768/768 [==============================] - 0s 143us/step - loss: 0.5678 - acc: 0.7305
-## Epoch 25/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.7317 - acc: 0.7000
-## 450/768 [================&gt;.............] - ETA: 0s - loss: 0.5511 - acc: 0.7378
-## 768/768 [==============================] - 0s 122us/step - loss: 0.5577 - acc: 0.7370
-## Epoch 26/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.7583 - acc: 0.6000
-## 360/768 [=============&gt;................] - ETA: 0s - loss: 0.6071 - acc: 0.6806
-## 768/768 [==============================] - 0s 142us/step - loss: 0.5703 - acc: 0.7031
-## Epoch 27/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.3222 - acc: 0.8000
-## 440/768 [================&gt;.............] - ETA: 0s - loss: 0.5677 - acc: 0.7250
-## 768/768 [==============================] - 0s 122us/step - loss: 0.5558 - acc: 0.7201
-## Epoch 28/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4953 - acc: 0.8000
-## 400/768 [==============&gt;...............] - ETA: 0s - loss: 0.5384 - acc: 0.7375
-## 768/768 [==============================] - 0s 145us/step - loss: 0.5553 - acc: 0.7305
-## Epoch 29/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.7721 - acc: 0.5000
-## 500/768 [==================&gt;...........] - ETA: 0s - loss: 0.5468 - acc: 0.7340
-## 768/768 [==============================] - 0s 123us/step - loss: 0.5746 - acc: 0.7135
-## Epoch 30/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.3873 - acc: 0.8000
-## 390/768 [==============&gt;...............] - ETA: 0s - loss: 0.5297 - acc: 0.7436
-## 768/768 [==============================] - 0s 123us/step - loss: 0.5612 - acc: 0.7227
-## Epoch 31/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4479 - acc: 0.6000
-## 320/768 [===========&gt;..................] - ETA: 0s - loss: 0.5550 - acc: 0.7188
-## 768/768 [==============================] - 0s 142us/step - loss: 0.5689 - acc: 0.7148
-## Epoch 32/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4796 - acc: 0.8000
-## 400/768 [==============&gt;...............] - ETA: 0s - loss: 0.5803 - acc: 0.7125
-## 768/768 [==============================] - 0s 122us/step - loss: 0.5625 - acc: 0.7148
-## Epoch 33/50
-## 
-##  10/768 [..............................] - ETA: 1s - loss: 0.4624 - acc: 0.7000
-## 510/768 [==================&gt;...........] - ETA: 0s - loss: 0.5386 - acc: 0.7118
-## 768/768 [==============================] - 0s 143us/step - loss: 0.5518 - acc: 0.7227
-## Epoch 34/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6032 - acc: 0.6000
-## 470/768 [=================&gt;............] - ETA: 0s - loss: 0.5781 - acc: 0.7106
-## 768/768 [==============================] - 0s 122us/step - loss: 0.5490 - acc: 0.7331
-## Epoch 35/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6506 - acc: 0.5000
-## 480/768 [=================&gt;............] - ETA: 0s - loss: 0.5360 - acc: 0.7396
-## 768/768 [==============================] - 0s 123us/step - loss: 0.5508 - acc: 0.7253
-## Epoch 36/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6568 - acc: 0.7000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.5850 - acc: 0.6971
-## 670/768 [=========================&gt;....] - ETA: 0s - loss: 0.5746 - acc: 0.6970
-## 768/768 [==============================] - 0s 155us/step - loss: 0.5655 - acc: 0.7044
-## Epoch 37/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6111 - acc: 0.7000
-## 380/768 [=============&gt;................] - ETA: 0s - loss: 0.5213 - acc: 0.7500
-## 730/768 [===========================&gt;..] - ETA: 0s - loss: 0.5331 - acc: 0.7425
-## 768/768 [==============================] - 0s 141us/step - loss: 0.5339 - acc: 0.7396
-## Epoch 38/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.2873 - acc: 0.9000
-## 320/768 [===========&gt;..................] - ETA: 0s - loss: 0.5188 - acc: 0.7406
-## 590/768 [======================&gt;.......] - ETA: 0s - loss: 0.5161 - acc: 0.7424
-## 768/768 [==============================] - 0s 165us/step - loss: 0.5408 - acc: 0.7227
-## Epoch 39/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4026 - acc: 0.9000
-## 330/768 [===========&gt;..................] - ETA: 0s - loss: 0.5130 - acc: 0.7515
-## 670/768 [=========================&gt;....] - ETA: 0s - loss: 0.5284 - acc: 0.7328
-## 768/768 [==============================] - 0s 150us/step - loss: 0.5464 - acc: 0.7266
-## Epoch 40/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5001 - acc: 0.7000
-## 350/768 [============&gt;.................] - ETA: 0s - loss: 0.5403 - acc: 0.7314
-## 660/768 [========================&gt;.....] - ETA: 0s - loss: 0.5273 - acc: 0.7333
-## 768/768 [==============================] - 0s 159us/step - loss: 0.5445 - acc: 0.7266
-## Epoch 41/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5166 - acc: 0.7000
-## 350/768 [============&gt;.................] - ETA: 0s - loss: 0.5343 - acc: 0.7314
-## 680/768 [=========================&gt;....] - ETA: 0s - loss: 0.5483 - acc: 0.7221
-## 768/768 [==============================] - 0s 151us/step - loss: 0.5431 - acc: 0.7292
-## Epoch 42/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6787 - acc: 0.6000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.5657 - acc: 0.7118
-## 670/768 [=========================&gt;....] - ETA: 0s - loss: 0.5495 - acc: 0.7299
-## 768/768 [==============================] - 0s 154us/step - loss: 0.5380 - acc: 0.7422
-## Epoch 43/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6528 - acc: 0.7000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.5445 - acc: 0.7294
-## 500/768 [==================&gt;...........] - ETA: 0s - loss: 0.5455 - acc: 0.7320
-## 670/768 [=========================&gt;....] - ETA: 0s - loss: 0.5362 - acc: 0.7448
-## 768/768 [==============================] - 0s 234us/step - loss: 0.5315 - acc: 0.7513
-## Epoch 44/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6200 - acc: 0.6000
-## 110/768 [===&gt;..........................] - ETA: 0s - loss: 0.5503 - acc: 0.7273
-## 230/768 [=======&gt;......................] - ETA: 0s - loss: 0.5424 - acc: 0.7043
-## 480/768 [=================&gt;............] - ETA: 0s - loss: 0.5169 - acc: 0.7417
-## 740/768 [===========================&gt;..] - ETA: 0s - loss: 0.5374 - acc: 0.7324
-## 768/768 [==============================] - 0s 281us/step - loss: 0.5334 - acc: 0.7383
-## Epoch 45/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.4391 - acc: 0.8000
-## 180/768 [======&gt;.......................] - ETA: 0s - loss: 0.5643 - acc: 0.7167
-## 410/768 [===============&gt;..............] - ETA: 0s - loss: 0.5394 - acc: 0.7585
-## 660/768 [========================&gt;.....] - ETA: 0s - loss: 0.5370 - acc: 0.7576
-## 768/768 [==============================] - 0s 233us/step - loss: 0.5317 - acc: 0.7565
-## Epoch 46/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.8797 - acc: 0.5000
-## 220/768 [=======&gt;......................] - ETA: 0s - loss: 0.5539 - acc: 0.7273
-## 460/768 [================&gt;.............] - ETA: 0s - loss: 0.5159 - acc: 0.7609
-## 768/768 [==============================] - 0s 193us/step - loss: 0.5277 - acc: 0.7500
-## Epoch 47/50
-## 
-##  10/768 [..............................] - ETA: 1s - loss: 0.5971 - acc: 0.7000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.5348 - acc: 0.7353
-## 570/768 [=====================&gt;........] - ETA: 0s - loss: 0.5303 - acc: 0.7368
-## 768/768 [==============================] - 0s 205us/step - loss: 0.5324 - acc: 0.7370
-## Epoch 48/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.3091 - acc: 0.8000
-## 260/768 [=========&gt;....................] - ETA: 0s - loss: 0.5493 - acc: 0.7038
-## 490/768 [==================&gt;...........] - ETA: 0s - loss: 0.5313 - acc: 0.7469
-## 720/768 [===========================&gt;..] - ETA: 0s - loss: 0.5307 - acc: 0.7417
-## 768/768 [==============================] - 0s 214us/step - loss: 0.5331 - acc: 0.7396
-## Epoch 49/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.5682 - acc: 0.8000
-## 240/768 [========&gt;.....................] - ETA: 0s - loss: 0.5600 - acc: 0.7208
-## 480/768 [=================&gt;............] - ETA: 0s - loss: 0.5267 - acc: 0.7417
-## 690/768 [=========================&gt;....] - ETA: 0s - loss: 0.5404 - acc: 0.7420
-## 768/768 [==============================] - 0s 216us/step - loss: 0.5334 - acc: 0.7474
-## Epoch 50/50
-## 
-##  10/768 [..............................] - ETA: 0s - loss: 0.6046 - acc: 0.7000
-## 340/768 [============&gt;.................] - ETA: 0s - loss: 0.5617 - acc: 0.7088
-## 530/768 [===================&gt;..........] - ETA: 0s - loss: 0.5346 - acc: 0.7208
-## 740/768 [===========================&gt;..] - ETA: 0s - loss: 0.5190 - acc: 0.7351
-## 768/768 [==============================] - 0s 223us/step - loss: 0.5271 - acc: 0.7331
-## 
-##  32/768 [&gt;.............................] - ETA: 1s
-## 768/768 [==============================] - 0s 120us/step
+##  32/768 [&gt;.............................] - ETA: 0s
+## 768/768 [==============================] - 0s 57us/step
+## C:\Users\emiewag\AppData\Local\CONTIN~1\ANACON~1\lib\site-packages\h5py\__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+##   from ._conv import register_converters as _register_converters
 ## Using TensorFlow backend.
 ## 
-## acc: 76.17%
-## [1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
-## 2017-12-04 13:57:44.925576: I C:\tf_jenkins\home\workspace\rel-win\M\windows\PY\36\tensorflow\core\platform\cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX</code></pre>
+## acc: 66.67%
+## [1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+## 2018-01-16 21:51:33.639689: I C:\tf_jenkins\home\workspace\rel-win\M\windows\PY\36\tensorflow\core\platform\cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX</code></pre>
+<p>Output image: <img src="data:image/png;base64,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" alt="output" /></p>
 <p>reference : <a href="http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/" class="uri">http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/</a></p>
 </div>
 

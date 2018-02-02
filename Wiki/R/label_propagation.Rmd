@@ -6,13 +6,11 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 # Label propagation
 
-A graph has 6 vertices. Vertex "a" has a value, rest vertices do not. The value of a is propagrated to rest vertices.
+A graph has 6 vertices. Vertex "a" has a value, rest vertices do not. The value of "a"" is propagrated to rest vertices.
 
-W: Adjacency matrix
-
-D: Degree matrix, it is a diagonal matrix.
-
-V: Values of each nodes
+* W: Adjacency matrix
+* D: Degree matrix, it is a diagonal matrix.
+* V: Values of each nodes
 
 
 
@@ -28,19 +26,27 @@ names <- c("a", "b", "c", "d", "e", "f")
 colnames(W) <- names
 rownames(W) <- colnames(W)
 
-W["c", "a"] <- 1
-W["b", "a"] <- 0.5
-W["f", "a"] <- 0.5
-W["e", "a"] <- 0.5
-W["e", "b"] <- 0.4
-W["d", "b"] <- 0.4
+W["c", "a"] <- W["a", "c"] <- 1
+W["b", "a"] <- W["a", "b"] <- 0.5
+W["f", "a"] <- W["a", "f"] <- 0.5
+W["e", "a"] <- W["a", "e"] <- 0.5
+W["e", "b"] <- W["b", "e"] <- 0.4
+W["d", "b"] <- W["b", "d"] <- 0.4
+
 
 g <- graph_from_adjacency_matrix(W, mode =  "undirected", weighted = T)
 E(g)$label <- E(g)$weight
 
+
+# assign values for each vertex
+V <- c(7,0,0,0,0,0)
+
+V(g)$label <- paste(names, V)
 E(g)$label.color <- "orange"
 V(g)$label.color <- "red"
 V(g)$color <- "white"
+V(g)$frame.color <- "grey"
+
 
 plot(g)
 
@@ -50,15 +56,13 @@ D <- degree(g)
 D
 D <- diag(D)
 
-# assign values for each vertex
-V <- c(7,0,0,0,0,0)
 
 #----- label propagration ----------
 
 Y0 <- as.matrix(V)
 Y0
 Yt <- Y0
-for(i in 1:3){
+for(i in 1:20){
   Yt_1 <- solve(D) %*% W %*% Yt
   Yt_1[1,1] <- 7
   Yt <- Yt_1

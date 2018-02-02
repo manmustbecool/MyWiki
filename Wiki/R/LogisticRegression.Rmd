@@ -50,16 +50,19 @@ hypothesis <- function(x, theta){
 
 
 
-### cost function 
+### loss and cost functions 
 
-cost function shows the error of prediction: cost(predicted_value, actural_value)
+Loss function $L$ is usually a function defined on a single traing instance loss(predicted_value, actural_value) 
+
+Cost function $J$ is usually more general. It might be a sum or average of loss functions over the whole training set
+
 
 Average error of n prediction:
 $$
-J(\theta)=\frac{1}{n}\sum_{i=1}^{n}cost(h_\theta(x),y)
+J(\theta)=\frac{1}{n}\sum_{i=1}^{n}L(h_\theta(x),y)
 $$
 $$
-cost(h_\theta(x),y)=-y\log(h_\theta(x)) - (1-y)\log(1-h_\theta(x))
+L(h_\theta(x),y)=-y\log(h_\theta(x)) - (1-y)\log(1-h_\theta(x))
 $$
 $$
 J(\theta)=\frac{1}{n}\sum_{i=1}^{n}[-y^i\log(h_\theta(x^i)) - (1-y^i)\log(1- h_\theta(x^i))]
