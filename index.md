@@ -27,10 +27,12 @@ My notes
  * <a href="Wiki/R/baye_network.html">Baye network</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/Entropy.html">Entropy</a>
- * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
  * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
  * <a href="Wiki/R/MCMC.html">MCMC (Markov chain Monte Carlo)</a>
+ * Development 
+    + <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
+    + <a href="Wiki/R/linearProgram.html">MIP</a>
  * Development 
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
