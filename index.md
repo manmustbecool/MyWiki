@@ -31,14 +31,14 @@ My notes
  * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
  * <a href="Wiki/R/MCMC.html">MCMC (Markov chain Monte Carlo)</a>
  * Development 
-    + <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
-    + <a href="Wiki/R/linearProgram.html">MIP</a>
- * Development 
     + <a href="Wiki/R/RDevelopment.html">R Development</a>
     + <a href="Wiki/R/benchmarkMrDfDt.html">Benchmark : matrix; data.frame; data.table</a>
  * Graph
     + <a href="Wiki/R/graph.html">Plot graph</a>
     + <a href="Wiki/R/label_propagation.html">Label propagration</a>
+ * Constrained Optimization
+    + <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
+    + <a href="Wiki/R/linearProgram.html">MIP</a>
  * Dimension Reduction
     + <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
     + <a href="Wiki/R/dataCompression.html">Reduction into a single variable/dimension</a>
