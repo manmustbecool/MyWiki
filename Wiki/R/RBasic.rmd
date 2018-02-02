@@ -1,5 +1,5 @@
 ---
-title: "R basic"
+title: "R Cheat Sheet"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 # output: html_notebook
