@@ -105,6 +105,11 @@ predictions = model.predict(X)
 rounded = [round(x[0]) for x in predictions]
 print(rounded)
 
+
+#-------- 
+
+The first output is the weight matrix W and the second output is the bias vector b
+
 #------------ for Visualizing Model Structures ---------------
 
 import graphviz

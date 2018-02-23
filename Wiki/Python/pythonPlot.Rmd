@@ -5,7 +5,7 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 # Basic plot
 
-```{r, engine='python'}
+```{python, engine.path='C:/Users/emiewag/AppData/Local/Continuum/anaconda3/python.exe'}
 import matplotlib.pyplot as plt
 import numpy as np
 
