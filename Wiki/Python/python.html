@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 21 February, 2018</em></h4>
+<h4 class="date"><em>Updated: 01 March, 2018</em></h4>
 
 </div>
 
@@ -203,7 +203,10 @@ $(document).ready(function () {
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">str</span>() <span class="co"># convert variable to string</span>
 <span class="bu">int</span>() 
 <span class="bu">float</span>()
-<span class="bu">bool</span>()</code></pre></div>
+<span class="bu">bool</span>()
+
+<span class="co">#convert a bool (list) to 0 or 1</span>
+B<span class="op">=</span>B<span class="op">*</span><span class="dv">1</span></code></pre></div>
 </div>
 <div id="complex-data-types" class="section level2">
 <h2><span class="header-section-number">2.2</span> Complex data types</h2>
@@ -330,7 +333,11 @@ np.<span class="bu">sum</span>(mat, axis<span class="op">=</span><span class="dv
 <h2><span class="header-section-number">3.3</span> Panda::Series</h2>
 <p><a href="http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/" class="uri">http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/</a></p>
 <p>A one-dimensional labeled array A capable of holding any data type</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">s <span class="op">=</span> pd.Series([<span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">s <span class="op">=</span> pd.Series([<span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>])
+
+<span class="co"># convert a series to an numpy.ndarray</span>
+pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).values
+<span class="co"># array([1, 2, 3])</span></code></pre></div>
 </div>
 <div id="pandadataframe" class="section level2">
 <h2><span class="header-section-number">3.4</span> Panda::DataFrame</h2>
@@ -366,7 +373,13 @@ df.sort_values(<span class="st">'mpg'</span>) <span class="co"># (low to high).<
 df.sort_values(<span class="st">'mpg'</span>, ascending<span class="op">=</span><span class="va">False</span>) <span class="co"># (high to low).</span>
 
 <span class="co"># Shuffle DataFrame rows</span>
-df.sample(frac<span class="op">=</span><span class="dv">1</span>) <span class="co"># The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.</span></code></pre></div>
+df.sample(frac<span class="op">=</span><span class="dv">1</span>) <span class="co"># The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.</span>
+
+<span class="co"># random n row selection</span>
+df.sample(n)
+
+<span class="co"># reset index</span>
+df <span class="op">=</span> df(drop<span class="op">=</span><span class="va">True</span>)</code></pre></div>
 </div>
 <div id="subset" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Subset</h3>
@@ -519,7 +532,10 @@ plt.ion()
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random
 values <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>)]
 <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
-plt.hist(values, bins<span class="op">=</span><span class="dv">11</span>)</code></pre></div>
+plt.hist(values, bins<span class="op">=</span><span class="dv">11</span>)
+
+<span class="co"># plot a vertical line</span>
+plt.axvline(x<span class="op">=</span><span class="dv">3</span>)</code></pre></div>
 </div>
 <div id="install-package" class="section level1">
 <h1><span class="header-section-number">8</span> Install package</h1>

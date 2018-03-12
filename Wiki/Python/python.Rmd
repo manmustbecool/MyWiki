@@ -25,6 +25,8 @@ int()
 float()
 bool()
 
+#convert a bool (list) to 0 or 1
+B=B*1
 ```
 
 ## Complex data types
@@ -171,6 +173,9 @@ A one-dimensional labeled array A capable of holding any data type
 ```python
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
 
+# convert a series to an numpy.ndarray
+pd.Series([1, 2, 3]).values
+# array([1, 2, 3])
 ```
 ## Panda::DataFrame
 
@@ -212,6 +217,12 @@ df.sort_values('mpg', ascending=False) # (high to low).
 
 # Shuffle DataFrame rows
 df.sample(frac=1) # The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.
+
+# random n row selection
+df.sample(n)
+
+# reset index
+df = df(drop=True)
 ```
 
 ### Subset
@@ -262,6 +273,7 @@ for index, row in df.iterrows():
 # 10 100
 # 11 110
 # 12 120
+
 ```
 
 ### Add 
@@ -384,6 +396,9 @@ import random
 values = [random.randint(0, 10) for _ in range(50)]
 import matplotlib.pyplot as plt
 plt.hist(values, bins=11)
+
+# plot a vertical line
+plt.axvline(x=3)
 ```
 
 # Install package
