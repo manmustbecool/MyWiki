@@ -131,5 +131,17 @@ Output image:
 
 reference : http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/
 
+# 
 
+get weights and biases of all layers
+```python
+for layer in model.layers: print(layer.get_config(), layer.get_weights())
+```
 
+for the weights directly returned as numpy arrays
+```python
+first_layer_weights = model.layers[0].get_weights()[0]
+first_layer_biases  = model.layers[0].get_weights()[1]
+second_layer_weights = model.layers[1].get_weights()[0]
+second_layer_biases  = model.layers[1].get_weights()[1]
+```
