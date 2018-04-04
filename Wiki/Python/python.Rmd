@@ -45,8 +45,13 @@ li[0:2] # [incluse, excluse] 3,4
 li = li + [6]
 li = del(li[5])
 
-# append an element
+# append an element - append is a destructive operation (it modifies the list in place instead of of returning a new list)
 li.append('bar')
+
+# combine two lists
+l1 = [1,2,3]
+l2 = [4,5,6]
+mergedlist = l1 + l2
 
 # copy: reference only
 li2 = li
@@ -137,12 +142,14 @@ Array can only cotain one type
 li = [3, 4, 5]
 np_array = np.array(li)
 
+# convert np array to list
+np_array.tolist()
+
 # shape of array
 np_array.shape
 
 # delete an element
 np.delete(a, index)
-
 
 # a range value
 np.arange(0, 5, 0.5)
@@ -151,6 +158,9 @@ np.arange(0, 5, 0.5)
 # a random integer value
 np.random.randint(10, size=2) # add replace=False for non duplicated values
 
+# count the occurrence of certain item in an ndarray in Python
+a = np.array([0, 3, 0, 1, 0, 1, 2, 1, 0, 0, 0, 0, 1, 3, 4])
+unique, counts = numpy.unique(a, return_counts=True)
 ```
 **Initialize data frame**
 
@@ -225,9 +235,11 @@ df.sample(n)
 df = df(drop=True)
 ```
 
-### Subset
+### Subset 
 
 ```python
+#--------- row selection ---------------
+
 df.head(n) # Select first n rows.
 df.tail(n) # Select last n rows.
 
@@ -255,10 +267,6 @@ df.loc[df['column_name'] == some_value] # select rows whose column value equals 
 df.loc[~df['column_name'].isin(some_values)] # select rows whose column value is in an iterable
 df.loc[(df['column_name'] == some_value) & df['other_column'].isin(some_values)] 
 
-# Select columns by names
-df['name'] 
-df[['name', 'age']]
-
 # select col_name1, col_name2 from table where column_name = some_value.
 df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
 
@@ -274,6 +282,14 @@ for index, row in df.iterrows():
 # 11 110
 # 12 120
 
+#--------- column selection ---------------
+
+# Select columns by names
+df['name'] 
+df[['name', 'age']]
+
+# Select columns by regural expression
+df.filter(regex='name|address')
 ```
 
 ### Add 
@@ -311,7 +327,21 @@ df = df.reset_index(drop=True)
 ### Remove
 ```python
 # delete column on i index
-df.drop(df.columns[i], axis=1) # note: it will remove both columns if there is duplicate names in columns, 
+df = df.drop(df.columns[i], axis=1) # note: it will remove both columns if there is duplicate names in columns, 
+
+# delete columns based on regular expression
+df = df[df.columns.drop(list(df.filter(regex='Test')))]
+
+# drop columns which have same values in all rows
+nunique = df.apply(pd.Series.nunique)
+cols_to_drop = nunique[nunique == 1].index
+df.drop(cols_to_drop, axis=1)
+```
+
+### summary
+```python
+# sum each row of column
+df.sum(axis=1)
 ```
 
 ### Group

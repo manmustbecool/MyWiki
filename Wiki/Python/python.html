@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 01 March, 2018</em></h4>
+<h4 class="date"><em>Updated: 03 April, 2018</em></h4>
 
 </div>
 
@@ -174,8 +174,9 @@ $(document).ready(function () {
 <li><a href="#subset"><span class="toc-section-number">3.4.2</span> Subset</a></li>
 <li><a href="#add"><span class="toc-section-number">3.4.3</span> Add</a></li>
 <li><a href="#remove"><span class="toc-section-number">3.4.4</span> Remove</a></li>
-<li><a href="#group"><span class="toc-section-number">3.4.5</span> Group</a></li>
-<li><a href="#handle-nan"><span class="toc-section-number">3.4.6</span> Handle NaN</a></li>
+<li><a href="#summary"><span class="toc-section-number">3.4.5</span> summary</a></li>
+<li><a href="#group"><span class="toc-section-number">3.4.6</span> Group</a></li>
+<li><a href="#handle-nan"><span class="toc-section-number">3.4.7</span> Handle NaN</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#regular-expression"><span class="toc-section-number">4</span> Regular expression</a></li>
@@ -223,8 +224,13 @@ li[<span class="dv">0</span>:<span class="dv">2</span>] <span class="co"># [incl
 li <span class="op">=</span> li <span class="op">+</span> [<span class="dv">6</span>]
 li <span class="op">=</span> <span class="kw">del</span>(li[<span class="dv">5</span>])
 
-<span class="co"># append an element</span>
+<span class="co"># append an element - append is a destructive operation (it modifies the list in place instead of of returning a new list)</span>
 li.append(<span class="st">'bar'</span>)
+
+<span class="co"># combine two lists</span>
+l1 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]
+l2 <span class="op">=</span> [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]
+mergedlist <span class="op">=</span> l1 <span class="op">+</span> l2
 
 <span class="co"># copy: reference only</span>
 li2 <span class="op">=</span> li
@@ -307,19 +313,25 @@ df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">a
 li <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
 np_array <span class="op">=</span> np.array(li)
 
+<span class="co"># convert np array to list</span>
+np_array.tolist()
+
 <span class="co"># shape of array</span>
 np_array.shape
 
 <span class="co"># delete an element</span>
 np.delete(a, index)
 
-
 <span class="co"># a range value</span>
 np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)
 <span class="co"># Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])</span>
 
 <span class="co"># a random integer value</span>
-np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">2</span>) <span class="co"># add replace=False for non duplicated values</span></code></pre></div>
+np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">2</span>) <span class="co"># add replace=False for non duplicated values</span>
+
+<span class="co"># count the occurrence of certain item in an ndarray in Python</span>
+a <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>])
+unique, counts <span class="op">=</span> numpy.unique(a, return_counts<span class="op">=</span><span class="va">True</span>)</code></pre></div>
 <p><strong>Initialize data frame</strong></p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">mat <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])
 <span class="bu">print</span>(mat)
@@ -383,7 +395,9 @@ df <span class="op">=</span> df(drop<span class="op">=</span><span class="va">Tr
 </div>
 <div id="subset" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Subset</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.head(n) <span class="co"># Select first n rows.</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#--------- row selection ---------------</span>
+
+df.head(n) <span class="co"># Select first n rows.</span>
 df.tail(n) <span class="co"># Select last n rows.</span>
 
 <span class="co"># based on poisition</span>
@@ -410,10 +424,6 @@ df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some
 df.loc[<span class="op">~</span>df[<span class="st">'column_name'</span>].isin(some_values)] <span class="co"># select rows whose column value is in an iterable</span>
 df.loc[(df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value) <span class="op">&amp;</span> df[<span class="st">'other_column'</span>].isin(some_values)] 
 
-<span class="co"># Select columns by names</span>
-df[<span class="st">'name'</span>] 
-df[[<span class="st">'name'</span>, <span class="st">'age'</span>]]
-
 <span class="co"># select col_name1, col_name2 from table where column_name = some_value.</span>
 df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value][[col_name1, col_name2]]
 
@@ -427,7 +437,16 @@ df.drop(df.head(n).index) <span class="co"># drop first n rows</span>
     <span class="bu">print</span> row[<span class="st">'column_name_1'</span>], row[<span class="st">'column_name_2'</span>]
 <span class="co"># 10 100</span>
 <span class="co"># 11 110</span>
-<span class="co"># 12 120</span></code></pre></div>
+<span class="co"># 12 120</span>
+
+<span class="co">#--------- column selection ---------------</span>
+
+<span class="co"># Select columns by names</span>
+df[<span class="st">'name'</span>] 
+df[[<span class="st">'name'</span>, <span class="st">'age'</span>]]
+
+<span class="co"># Select columns by regural expression</span>
+df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'name|address'</span>)</code></pre></div>
 </div>
 <div id="add" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> Add</h3>
@@ -463,17 +482,30 @@ df <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span c
 <div id="remove" class="section level3">
 <h3><span class="header-section-number">3.4.4</span> Remove</h3>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># delete column on i index</span>
-df.drop(df.columns[i], axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># note: it will remove both columns if there is duplicate names in columns, </span></code></pre></div>
+df <span class="op">=</span> df.drop(df.columns[i], axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># note: it will remove both columns if there is duplicate names in columns, </span>
+
+<span class="co"># delete columns based on regular expression</span>
+df <span class="op">=</span> df[df.columns.drop(<span class="bu">list</span>(df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'Test'</span>)))]
+
+<span class="co"># drop columns which have same values in all rows</span>
+nunique <span class="op">=</span> df.<span class="bu">apply</span>(pd.Series.nunique)
+cols_to_drop <span class="op">=</span> nunique[nunique <span class="op">==</span> <span class="dv">1</span>].index
+df.drop(cols_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</code></pre></div>
+</div>
+<div id="summary" class="section level3">
+<h3><span class="header-section-number">3.4.5</span> summary</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># sum each row of column</span>
+df.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</code></pre></div>
 </div>
 <div id="group" class="section level3">
-<h3><span class="header-section-number">3.4.5</span> Group</h3>
+<h3><span class="header-section-number">3.4.6</span> Group</h3>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">grouped <span class="op">=</span> df.groupby(<span class="st">'gender'</span>)
 <span class="cf">for</span> name, group <span class="kw">in</span> grouped:
     <span class="bu">print</span>(<span class="st">&quot;name  :&quot;</span>, name)
     <span class="bu">print</span>(<span class="st">&quot;group :&quot;</span>, group)</code></pre></div>
 </div>
 <div id="handle-nan" class="section level3">
-<h3><span class="header-section-number">3.4.6</span> Handle NaN</h3>
+<h3><span class="header-section-number">3.4.7</span> Handle NaN</h3>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.fillna(<span class="dv">0</span>) <span class="co"># Replace all the NaN values with Zero</span></code></pre></div>
 </div>
 </div>
