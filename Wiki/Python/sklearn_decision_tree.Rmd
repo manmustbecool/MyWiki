@@ -1,0 +1,53 @@
+---
+title: "sklearn Decision tree"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```python
+from sklearn import datasets
+from sklearn import tree
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# ------ Load iris -----------
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+# ----- Build decision tree classifier ------------
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 100)
+dt = tree.DecisionTreeClassifier(criterion='entropy', max_depth=5)
+dt.fit(X_train, y_train)
+
+y_pred = dt.predict(X_test)
+print("Accuracy is ", accuracy_score(y_test,y_pred)*100)
+
+# ---- plot decision tree -----------
+# plot tree in .dot file
+dotfile = open("dt.dot", 'w')
+tree.export_graphviz(dt, out_file=dotfile, feature_names=iris.feature_names, class_names=iris.target_names,  filled=True)
+dotfile.close()
+
+import os
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+
+# convert the .dot to .png
+from subprocess import check_call
+check_call(['dot','-Tpng','dt.dot','-o','dt.png'])
+
+# convert the .dot to .pdf file
+import graphviz
+g = graphviz.Source(open('dt.dot').read()) #  returns a graphviz.files.Source object
+g.render()
+g.view()
+
+```
+
+Reference: 
+https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html
+

@@ -59,6 +59,7 @@ My notes
  * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
  * <a href="Wiki/Python/python_sklearn.html">Scikit-learn</a>
+ * <a href="Wiki/Python/sklearn_decision_tree.html">sklearn decision tree</a>
  * <a href="Wiki/Python/python_keras.html">Keras deep learning</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
  * Web development
