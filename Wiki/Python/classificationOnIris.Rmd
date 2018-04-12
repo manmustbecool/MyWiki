@@ -1,0 +1,63 @@
+---
+title: "classification on Iris dataset"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Different classification algorithms
+
+* decision tree
+* random forest
+* xgboost
+
+```python
+# ------ Load iris -----------
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 100)
+
+from sklearn.metrics import accuracy_score
+
+def run_model(model, alg_name):
+    # build the model on training data
+    model.fit(X_train, y_train)
+
+    # make predictions for test data
+    y_pred = model.predict(X_test)
+    # evaluate predictions
+    print(alg_name, " accuracy is ", accuracy_score(y_test, y_pred) * 100)
+
+
+# ---- Decision Tree -----------
+from sklearn import tree
+
+model = tree.DecisionTreeClassifier(criterion='entropy', max_depth=5)
+run_model(model, "Decision Tree")
+
+# ----- Random Forest ---------------
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(n_estimators=10)
+run_model(model, "Random Forest")
+
+# ----- xgboost ------------
+
+# pip install xgboost # install XGBoost or https://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform/39811079#39811079
+
+from xgboost import XGBClassifier
+
+model = XGBClassifier()
+run_model(model, "XGBoost")
+
+```
+

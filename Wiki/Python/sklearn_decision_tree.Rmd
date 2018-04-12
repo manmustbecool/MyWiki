@@ -28,11 +28,13 @@ y_pred = dt.predict(X_test)
 print("Accuracy is ", accuracy_score(y_test,y_pred)*100)
 
 # ---- plot decision tree -----------
+
 # plot tree in .dot file
 dotfile = open("dt.dot", 'w')
 tree.export_graphviz(dt, out_file=dotfile, feature_names=iris.feature_names, class_names=iris.target_names,  filled=True)
 dotfile.close()
 
+# set graphviz path 
 import os
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
 
