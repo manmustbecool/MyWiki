@@ -14,8 +14,11 @@ knitr::opts_chunk$set(echo = TRUE)
 * decision tree
 * random forest
 * xgboost
+* SVM Classification
 
 ```python
+
+# ------ Load iris -----------
 # ------ Load iris -----------
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
@@ -24,40 +27,70 @@ iris = datasets.load_iris()
 X = iris.data
 y = iris.target
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 100)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=100)
 
+# the run model function
 from sklearn.metrics import accuracy_score
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+def run_model(model, alg_name, plot_index):
 
-def run_model(model, alg_name):
     # build the model on training data
     model.fit(X_train, y_train)
 
     # make predictions for test data
     y_pred = model.predict(X_test)
-    # evaluate predictions
-    print(alg_name, " accuracy is ", accuracy_score(y_test, y_pred) * 100)
+    # calculate the accuracy score
+    accuracy = accuracy_score(y_test, y_pred) * 100
 
+    # Compare the prediction result with ground truth
+    color_code = {0: 'red', 1: 'blue', 2: 'orange'}
+
+
+    plt.subplot(2, 2, plot_index)
+    colors = [color_code[x] for x in y_test]
+    plt.scatter(X_test[:,0], X_test[:,3], color=colors, marker='.', label='Circle = Ground truth')
+    colors = [color_code[x] for x in y_pred]
+    plt.scatter(X_test[:, 0], X_test[:, 3], color=colors, marker='o', facecolors='none', label='Dot = Prediction')
+
+    plt.legend(loc="lower right")
+    # manually set legend color to black
+    leg = plt.gca().get_legend()
+    leg.legendHandles[0].set_color('black')
+    leg.legendHandles[1].set_color('black')
+    leg.legendHandles[1].set_facecolors('none')
+
+    plt.title(alg_name + ". Accuracy: " + str(accuracy))
+    plt.show()
 
 # ---- Decision Tree -----------
 from sklearn import tree
 
 model = tree.DecisionTreeClassifier(criterion='entropy', max_depth=5)
-run_model(model, "Decision Tree")
+run_model(model, "Decision Tree", 1)
 
 # ----- Random Forest ---------------
 from sklearn.ensemble import RandomForestClassifier
 
 model = RandomForestClassifier(n_estimators=10)
-run_model(model, "Random Forest")
+run_model(model, "Random Forest", 2)
 
 # ----- xgboost ------------
-
-# pip install xgboost # install XGBoost or https://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform/39811079#39811079
+# install xgboost
+# 'pip install xgboost' or https://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform/39811079#39811079
 
 from xgboost import XGBClassifier
 
 model = XGBClassifier()
-run_model(model, "XGBoost")
+run_model(model, "XGBoost", 3)
+
+#------ SVM ----------------
+from sklearn.svm import SVC
+model = SVC()
+
+run_model(model, "SVM Classification", 4)
+
 
 ```
 

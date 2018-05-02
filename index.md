@@ -58,6 +58,7 @@ My notes
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
  * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
+ * <a href="Wiki/Python/python_nlp.html">Text mining/NLP</a>
  * <a href="Wiki/Python/python_sklearn.html">Scikit-learn</a>
  * <a href="Wiki/Python/sklearn_decision_tree.html">sklearn decision tree</a>
  * <a href="Wiki/Python/classificationOnIris.html">classification on Iris dataset</a>

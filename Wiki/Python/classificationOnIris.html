@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">classification on Iris dataset</h1>
-<h4 class="date"><em>Updated: 12 April, 2018</em></h4>
+<h4 class="date"><em>Updated: 16 April, 2018</em></h4>
 
 </div>
 
@@ -165,8 +165,11 @@ $(document).ready(function () {
 <li>decision tree</li>
 <li>random forest</li>
 <li>xgboost</li>
+<li>SVM Classification</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># ------ Load iris -----------</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">
+<span class="co"># ------ Load iris -----------</span>
+<span class="co"># ------ Load iris -----------</span>
 <span class="im">from</span> sklearn <span class="im">import</span> datasets
 <span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split
 
@@ -174,40 +177,70 @@ iris <span class="op">=</span> datasets.load_iris()
 X <span class="op">=</span> iris.data
 y <span class="op">=</span> iris.target
 
-X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.3</span>, random_state <span class="op">=</span> <span class="dv">100</span>)
+X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.4</span>, random_state<span class="op">=</span><span class="dv">100</span>)
 
+<span class="co"># the run model function</span>
 <span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score
+<span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap
+<span class="kw">def</span> run_model(model, alg_name, plot_index):
 
-<span class="kw">def</span> run_model(model, alg_name):
     <span class="co"># build the model on training data</span>
     model.fit(X_train, y_train)
 
     <span class="co"># make predictions for test data</span>
     y_pred <span class="op">=</span> model.predict(X_test)
-    <span class="co"># evaluate predictions</span>
-    <span class="bu">print</span>(alg_name, <span class="st">&quot; accuracy is &quot;</span>, accuracy_score(y_test, y_pred) <span class="op">*</span> <span class="dv">100</span>)
+    <span class="co"># calculate the accuracy score</span>
+    accuracy <span class="op">=</span> accuracy_score(y_test, y_pred) <span class="op">*</span> <span class="dv">100</span>
 
+    <span class="co"># Compare the prediction result with ground truth</span>
+    color_code <span class="op">=</span> {<span class="dv">0</span>: <span class="st">'red'</span>, <span class="dv">1</span>: <span class="st">'blue'</span>, <span class="dv">2</span>: <span class="st">'orange'</span>}
+
+
+    plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, plot_index)
+    colors <span class="op">=</span> [color_code[x] <span class="cf">for</span> x <span class="kw">in</span> y_test]
+    plt.scatter(X_test[:,<span class="dv">0</span>], X_test[:,<span class="dv">3</span>], color<span class="op">=</span>colors, marker<span class="op">=</span><span class="st">'.'</span>, label<span class="op">=</span><span class="st">'Circle = Ground truth'</span>)
+    colors <span class="op">=</span> [color_code[x] <span class="cf">for</span> x <span class="kw">in</span> y_pred]
+    plt.scatter(X_test[:, <span class="dv">0</span>], X_test[:, <span class="dv">3</span>], color<span class="op">=</span>colors, marker<span class="op">=</span><span class="st">'o'</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, label<span class="op">=</span><span class="st">'Dot = Prediction'</span>)
+
+    plt.legend(loc<span class="op">=</span><span class="st">&quot;lower right&quot;</span>)
+    <span class="co"># manually set legend color to black</span>
+    leg <span class="op">=</span> plt.gca().get_legend()
+    leg.legendHandles[<span class="dv">0</span>].set_color(<span class="st">'black'</span>)
+    leg.legendHandles[<span class="dv">1</span>].set_color(<span class="st">'black'</span>)
+    leg.legendHandles[<span class="dv">1</span>].set_facecolors(<span class="st">'none'</span>)
+
+    plt.title(alg_name <span class="op">+</span> <span class="st">&quot;. Accuracy: &quot;</span> <span class="op">+</span> <span class="bu">str</span>(accuracy))
+    plt.show()
 
 <span class="co"># ---- Decision Tree -----------</span>
 <span class="im">from</span> sklearn <span class="im">import</span> tree
 
 model <span class="op">=</span> tree.DecisionTreeClassifier(criterion<span class="op">=</span><span class="st">'entropy'</span>, max_depth<span class="op">=</span><span class="dv">5</span>)
-run_model(model, <span class="st">&quot;Decision Tree&quot;</span>)
+run_model(model, <span class="st">&quot;Decision Tree&quot;</span>, <span class="dv">1</span>)
 
 <span class="co"># ----- Random Forest ---------------</span>
 <span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier
 
 model <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">10</span>)
-run_model(model, <span class="st">&quot;Random Forest&quot;</span>)
+run_model(model, <span class="st">&quot;Random Forest&quot;</span>, <span class="dv">2</span>)
 
 <span class="co"># ----- xgboost ------------</span>
-
-<span class="co"># pip install xgboost # install XGBoost or https://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform/39811079#39811079</span>
+<span class="co"># install xgboost</span>
+<span class="co"># 'pip install xgboost' or https://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform/39811079#39811079</span>
 
 <span class="im">from</span> xgboost <span class="im">import</span> XGBClassifier
 
 model <span class="op">=</span> XGBClassifier()
-run_model(model, <span class="st">&quot;XGBoost&quot;</span>)</code></pre></div>
+run_model(model, <span class="st">&quot;XGBoost&quot;</span>, <span class="dv">3</span>)
+
+<span class="co">#------ SVM ----------------</span>
+<span class="im">from</span> sklearn.svm <span class="im">import</span> SVC
+model <span class="op">=</span> SVC()
+
+run_model(model, <span class="st">&quot;SVM Classification&quot;</span>, <span class="dv">4</span>)
+</code></pre></div>
 </div>
 
 
