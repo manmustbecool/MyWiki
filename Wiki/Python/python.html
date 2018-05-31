@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 02 May, 2018</em></h4>
+<h4 class="date"><em>Updated: 31 May, 2018</em></h4>
 
 </div>
 
@@ -382,6 +382,28 @@ pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv
 <span class="co"># 1  11  21  31</span>
 <span class="co"># 2  12  22  32</span>
 <span class="co"># 3  13  23  33</span>
+
+
+<span class="co"># numpy array to data frame</span>
+
+X <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>])
+df <span class="op">=</span> pd.DataFrame(X, index<span class="op">=</span>np.arange(<span class="dv">0</span>,<span class="bu">len</span>(X)))
+
+<span class="co"># Out[8]:</span>
+<span class="co">#    0</span>
+<span class="co"># 0  0</span>
+<span class="co"># 1  3</span>
+<span class="co"># 2  0</span>
+<span class="co"># 3  1</span>
+
+X <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>], [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>]])
+df <span class="op">=</span> pd.DataFrame(X, index<span class="op">=</span>np.arange(<span class="dv">0</span>,<span class="bu">len</span>(X)))
+
+<span class="co"># Out[10]: </span>
+<span class="co">#    0  1  2</span>
+<span class="co"># 0  0  3  0</span>
+<span class="co"># 1  2  2  2</span>
+<span class="co"># 2  7  7  7</span>
 
 <span class="co"># from dict to dataframe</span>
 pd.DataFrame.from_dict(<span class="bu">dict</span>)

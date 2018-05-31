@@ -37,12 +37,12 @@ cheet sheet from datacamp : http://datacamp-community.s3.amazonaws.com/94fc681d-
 
 ```{python}
 #---------------Load Data -----------------
-import numpy
+import numpy as np
 # fix random seed for reproducibility
-numpy.random.seed(7)
+np.random.seed(7)
 
 # load pima indians dataset. data is from: http://archive.ics.uci.edu/ml/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data
-dataset = numpy.loadtxt("pima-indians-diabetes.data.txt", delimiter=",")
+dataset = np.loadtxt("pima-indians-diabetes.data.txt", delimiter=",")
 print(dataset[0:3])
 
 # split into input (X) and output (Y) variables
@@ -100,15 +100,12 @@ print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 
 # -----------  predictions ------------------------------
+
 predictions = model.predict(X)
 # round predictions
 rounded = [round(x[0]) for x in predictions]
 print(rounded)
 
-
-#-------- 
-
-The first output is the weight matrix W and the second output is the bias vector b
 
 #------------ for Visualizing Model Structures ---------------
 
@@ -123,25 +120,28 @@ from keras.utils import plot_model
 plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
 
 
+# ------------ Model weights -----------------------------
+
+# get weights and biases of all layers
+for layer in model.layers: 
+  print(layer.get_config(), layer.get_weights(), '\n')
+
+
+# for the weights directly returned as numpy arrays
+# The first output is the weight matrix W and the second output is the bias vector b
+first_layer_weights = model.layers[0].get_weights()[0]
+first_layer_biases  = model.layers[0].get_weights()[1]
+
+second_layer_weights = model.layers[1].get_weights()[0]
+second_layer_biases  = model.layers[1].get_weights()[1]
+
 ```
+
 Output image:
 ![output](model.png)
 
-
-
 reference : http://machinelearningmastery.com/tutorial-first-neural-network-python-keras/
 
-# 
 
-get weights and biases of all layers
-```python
-for layer in model.layers: print(layer.get_config(), layer.get_weights())
-```
 
-for the weights directly returned as numpy arrays
-```python
-first_layer_weights = model.layers[0].get_weights()[0]
-first_layer_biases  = model.layers[0].get_weights()[1]
-second_layer_weights = model.layers[1].get_weights()[0]
-second_layer_biases  = model.layers[1].get_weights()[1]
 ```
