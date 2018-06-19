@@ -56,7 +56,7 @@ My notes
 <div style="display: inline-block;">
 ## Python
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
- * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
+ * <a href="Wiki/Python/python_plot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
  * <a href="Wiki/Python/python_nlp.html">Text Mining/NLP</a>
  * <a href="Wiki/Python/python_sklearn.html">Scikit-learn</a>
