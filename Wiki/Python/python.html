@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date"><em>Updated: 30 January, 2018</em></h4>
+<h4 class="date"><em>Updated: 27 June, 2018</em></h4>
 
 </div>
 
@@ -159,32 +159,40 @@ $(document).ready(function () {
 <li><a href="#data-types"><span class="toc-section-number">2</span> Data types</a><ul>
 <li><a href="#atomic-data-types"><span class="toc-section-number">2.1</span> Atomic data types</a></li>
 <li><a href="#complex-data-types"><span class="toc-section-number">2.2</span> Complex data types</a><ul>
-<li><a href="#list"><span class="toc-section-number">2.2.1</span> List</a></li>
-<li><a href="#tuple"><span class="toc-section-number">2.2.2</span> Tuple</a></li>
-<li><a href="#set"><span class="toc-section-number">2.2.3</span> Set</a></li>
-<li><a href="#dictionary"><span class="toc-section-number">2.2.4</span> Dictionary</a></li>
+<li><a href="#range"><span class="toc-section-number">2.2.1</span> Range</a></li>
+<li><a href="#list"><span class="toc-section-number">2.2.2</span> List</a></li>
+<li><a href="#tuple"><span class="toc-section-number">2.2.3</span> Tuple</a></li>
+<li><a href="#set"><span class="toc-section-number">2.2.4</span> Set</a></li>
+<li><a href="#dictionary"><span class="toc-section-number">2.2.5</span> Dictionary</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#other-data-structures"><span class="toc-section-number">3</span> Other Data Structures</a><ul>
 <li><a href="#datatime"><span class="toc-section-number">3.1</span> DataTime</a></li>
-<li><a href="#numpyarray"><span class="toc-section-number">3.2</span> Numpy::Array</a></li>
+<li><a href="#numpyarray"><span class="toc-section-number">3.2</span> Numpy::Array</a><ul>
+<li><a href="#subset"><span class="toc-section-number">3.2.1</span> subset</a></li>
+<li><a href="#compare"><span class="toc-section-number">3.2.2</span> compare</a></li>
+</ul></li>
 <li><a href="#pandaseries"><span class="toc-section-number">3.3</span> Panda::Series</a></li>
 <li><a href="#pandadataframe"><span class="toc-section-number">3.4</span> Panda::DataFrame</a><ul>
 <li><a href="#sort"><span class="toc-section-number">3.4.1</span> Sort</a></li>
-<li><a href="#subset"><span class="toc-section-number">3.4.2</span> Subset</a></li>
-<li><a href="#append"><span class="toc-section-number">3.4.3</span> Append</a></li>
-<li><a href="#handle-nan"><span class="toc-section-number">3.4.4</span> Handle NaN</a></li>
+<li><a href="#subset-1"><span class="toc-section-number">3.4.2</span> Subset</a></li>
+<li><a href="#add"><span class="toc-section-number">3.4.3</span> Add</a></li>
+<li><a href="#remove"><span class="toc-section-number">3.4.4</span> Remove</a></li>
+<li><a href="#summary"><span class="toc-section-number">3.4.5</span> summary</a></li>
+<li><a href="#group"><span class="toc-section-number">3.4.6</span> Group</a></li>
+<li><a href="#handle-nan"><span class="toc-section-number">3.4.7</span> Handle NaN</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#regular-expression"><span class="toc-section-number">4</span> Regular expression</a></li>
-<li><a href="#io"><span class="toc-section-number">5</span> IO</a><ul>
-<li><a href="#read-write-csv"><span class="toc-section-number">5.1</span> Read write CSV</a></li>
-<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">5.2</span> Read head lines of a large text file</a></li>
-<li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">5.3</span> List files only in the current directory</a></li>
+<li><a href="#data-time"><span class="toc-section-number">5</span> Data time</a></li>
+<li><a href="#io"><span class="toc-section-number">6</span> IO</a><ul>
+<li><a href="#read-write-csv"><span class="toc-section-number">6.1</span> Read write CSV</a></li>
+<li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">6.2</span> Read head lines of a large text file</a></li>
+<li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">6.3</span> List files only in the current directory</a></li>
 </ul></li>
-<li><a href="#real-time-plot-with-python"><span class="toc-section-number">6</span> Real time plot with python</a></li>
-<li><a href="#plot-a-hist-graph"><span class="toc-section-number">7</span> plot a hist graph</a></li>
-<li><a href="#install-package"><span class="toc-section-number">8</span> Install package</a></li>
+<li><a href="#real-time-plot-with-python"><span class="toc-section-number">7</span> Real time plot with python</a></li>
+<li><a href="#plot-a-hist-graph"><span class="toc-section-number">8</span> plot a hist graph</a></li>
+<li><a href="#install-package"><span class="toc-section-number">9</span> Install package</a></li>
 </ul>
 </div>
 
@@ -201,43 +209,79 @@ $(document).ready(function () {
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">str</span>() <span class="co"># convert variable to string</span>
 <span class="bu">int</span>() 
 <span class="bu">float</span>()
-<span class="bu">bool</span>()</code></pre></div>
+<span class="bu">bool</span>()
+
+<span class="co">#convert a bool (list) to 0 or 1</span>
+B<span class="op">=</span>B<span class="op">*</span><span class="dv">1</span>
+
+<span class="co"># check if a object is None</span>
+<span class="cf">if</span> foo <span class="kw">is</span> <span class="va">None</span>: 
+  <span class="bu">print</span>(<span class="st">'is None'</span>)</code></pre></div>
 </div>
 <div id="complex-data-types" class="section level2">
 <h2><span class="header-section-number">2.2</span> Complex data types</h2>
+<div id="range" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Range</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">range</span>(<span class="dv">10</span>) <span class="co"># range 0 to 9</span>
+
+<span class="bu">reversed</span>(<span class="bu">range</span>(<span class="dv">10</span>)) <span class="co"># reversed range 9 to 0</span>
+
+<span class="bu">list</span>(<span class="bu">reversed</span>(<span class="bu">range</span>(<span class="dv">10</span>))) <span class="co"># to print out </span></code></pre></div>
+</div>
 <div id="list" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> List</h3>
+<h3><span class="header-section-number">2.2.2</span> List</h3>
 <p>Lists can contain any data types (including list). mutable</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">li <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
 
 <span class="co"># sub list</span>
 li[<span class="dv">0</span>] <span class="co"># 3</span>
 li[<span class="dv">0</span>:<span class="dv">2</span>] <span class="co"># [incluse, excluse] 3,4</span>
+li[<span class="op">-</span><span class="dv">1</span>] <span class="co"># get the last element</span>
+li[<span class="op">-</span><span class="dv">2</span>] <span class="op">=</span> <span class="dv">3</span> <span class="co"># Set the second last element</span>
+
 
 <span class="co"># add or remove element</span>
 li <span class="op">=</span> li <span class="op">+</span> [<span class="dv">6</span>]
-li <span class="op">=</span> <span class="kw">del</span>(li[<span class="dv">5</span>])
+li <span class="op">=</span> <span class="kw">del</span> li[<span class="dv">5</span>]
+li.remove(<span class="dv">4</span>) <span class="co"># removes the first matching value, not a specific index:</span>
+li.pop(<span class="dv">1</span>) <span class="co"># removes the item at a specific index and returns it.</span>
 
-<span class="co"># append an element</span>
+<span class="co"># append an element - append is a destructive operation (it modifies the list in place instead of of returning a new list)</span>
 li.append(<span class="st">'bar'</span>)
+
+<span class="co"># combine two lists</span>
+l1 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]
+l2 <span class="op">=</span> [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]
+mergedlist <span class="op">=</span> l1 <span class="op">+</span> l2
 
 <span class="co"># copy: reference only</span>
 li2 <span class="op">=</span> li
 <span class="co"># copy: explicit copy </span>
 li2 <span class="op">=</span> li[:] <span class="co"># or li2 = list(li)</span>
 
+[<span class="bu">float</span>(n)] <span class="co"># convert a float to list</span>
+
 <span class="bu">len</span>(li) <span class="co"># length of list</span>
 
-matrix <span class="op">=</span> [ [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>], ] <span class="co"># nested list</span></code></pre></div>
+<span class="dv">3</span> <span class="kw">in</span> li <span class="co"># check if the element is in the list</span>
+
+matrix <span class="op">=</span> [ [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>], ] <span class="co"># nested list</span>
+
+<span class="co"># loop in the list</span>
+a <span class="op">=</span> [<span class="st">'a'</span>,<span class="st">' b'</span>, <span class="st">'c '</span>, <span class="st">' d '</span>]
+
+<span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(a):
+    a[i] <span class="op">=</span> s.strip()
+<span class="bu">print</span>(a) <span class="co"># -&gt; ['a', 'b', 'c', 'd']</span></code></pre></div>
 </div>
 <div id="tuple" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Tuple</h3>
+<h3><span class="header-section-number">2.2.3</span> Tuple</h3>
 <p>Tuples are immutable sequences</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">t <span class="op">=</span> <span class="dv">12345</span>, <span class="dv">54321</span>, <span class="st">'hello!'</span>
 t[<span class="dv">0</span>]</code></pre></div>
 </div>
 <div id="set" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Set</h3>
+<h3><span class="header-section-number">2.2.4</span> Set</h3>
 <p>A set is an unordered collection with no duplicate elements</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">basket <span class="op">=</span> {<span class="st">'apple'</span>, <span class="st">'orange'</span>, <span class="st">'apple'</span>, <span class="st">'pear'</span>, <span class="st">'orange'</span>, <span class="st">'banana'</span>}
 
@@ -245,7 +289,7 @@ t[<span class="dv">0</span>]</code></pre></div>
 <span class="co">'apple'</span> <span class="kw">in</span> basket</code></pre></div>
 </div>
 <div id="dictionary" class="section level3">
-<h3><span class="header-section-number">2.2.4</span> Dictionary</h3>
+<h3><span class="header-section-number">2.2.5</span> Dictionary</h3>
 <p>Dictionaries store key-value pairs, kind of like JSON objects.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Creating an empty dictionary</span>
 data <span class="op">=</span> {} <span class="co"># OR data = dict()</span>
@@ -281,7 +325,16 @@ person <span class="op">=</span> {
 <h1><span class="header-section-number">3</span> Other Data Structures</h1>
 <div id="datatime" class="section level2">
 <h2><span class="header-section-number">3.1</span> DataTime</h2>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># remove data time instance is NaT</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> datetime <span class="im">import</span> datetime
+
+now <span class="op">=</span> datetime.now()
+<span class="bu">print</span>(<span class="st">&quot;Now: &quot;</span>, now)
+
+now.year <span class="co">#  now.month or now.hour, etc</span>
+now.strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S'</span>) <span class="co"># fromt timestamp</span>
+now <span class="op">-</span> timedelta(days<span class="op">=</span><span class="dv">2</span>) <span class="co"># Day before Yesterday</span>
+
+<span class="co"># remove data time instance is NaT in a dataframe</span>
 df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="kw">not</span> <span class="bu">isinstance</span>(x, pd._libs.tslib.NaTType))]</code></pre></div>
 </div>
 <div id="numpyarray" class="section level2">
@@ -291,30 +344,79 @@ df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">a
 li <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]
 np_array <span class="op">=</span> np.array(li)
 
+<span class="co"># convert np array to list</span>
+np_array.tolist()
+
 <span class="co"># shape of array</span>
 np_array.shape
 
 <span class="co"># delete an element</span>
 np.delete(a, index)
 
-df <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])
-<span class="bu">print</span>(df)
-<span class="co">#     [[1 2 3]</span>
-<span class="co">#     [1 2 3]</span>
-<span class="co">#     [1 2 3]]</span>
-
 <span class="co"># a range value</span>
 np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="fl">0.5</span>)
 <span class="co"># Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])</span>
 
+<span class="co"># Return a copy of the array collapsed into one dimension</span>
+a <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>], [<span class="dv">3</span>,<span class="dv">4</span>]])
+a.flatten() 
+<span class="co"># array([1, 2, 3, 4])</span>
+
 <span class="co"># a random integer value</span>
-np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">2</span>) <span class="co"># add replace=False for non duplicated values</span></code></pre></div>
+np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span class="dv">2</span>) <span class="co"># add replace=False for non duplicated values</span>
+
+<span class="co"># count the occurrence of certain item in an ndarray in Python</span>
+a <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>])
+unique, counts <span class="op">=</span> numpy.unique(a, return_counts<span class="op">=</span><span class="va">True</span>)</code></pre></div>
+<div id="subset" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> subset</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># subset by index</span>
+arr <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>])
+arr[[<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>]]
+<span class="co"># array([20, 50, 60])</span>
+
+<span class="co"># subset by index for multidimensional arrays:</span>
+arr <span class="op">=</span> np.arange(<span class="dv">9</span>).reshape(<span class="dv">3</span>,<span class="dv">3</span>)
+arr
+<span class="co"># array([[0, 1, 2],</span>
+<span class="co">#       [3, 4, 5],</span>
+<span class="co">#       [6, 7, 8]])</span>
+arr[[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>]]
+<span class="co"># array([1, 3, 5])</span>
+
+<span class="co"># the ith column of a np multidimensional array </span>
+test <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>]])
+test[:,<span class="dv">0</span>] 
+<span class="co"># array([1, 3, 5])</span></code></pre></div>
+</div>
+<div id="compare" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> compare</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">array1 <span class="op">=</span> np.array([<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">7</span>])
+array2 <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">9</span>])
+np.in1d(array1, array2)
+<span class="co"># [False False  True  True False]</span>
+
+np.setdiff1d(array1, array2)
+<span class="co"># array([2, 3, 7])</span></code></pre></div>
+<p><strong>Initialize data frame</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">mat <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]])
+<span class="bu">print</span>(mat)
+<span class="co">#     [[1 2 3]</span>
+<span class="co">#     [1 2 3]</span>
+<span class="co">#     [1 2 3]]</span>
+
+np.<span class="bu">sum</span>(mat, axis<span class="op">=</span><span class="dv">1</span>)  <span class="co"># axis=1  &quot;get the sum of each the columns&quot; </span></code></pre></div>
+</div>
 </div>
 <div id="pandaseries" class="section level2">
 <h2><span class="header-section-number">3.3</span> Panda::Series</h2>
 <p><a href="http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/" class="uri">http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/</a></p>
 <p>A one-dimensional labeled array A capable of holding any data type</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">s <span class="op">=</span> pd.Series([<span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">s <span class="op">=</span> pd.Series([<span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>], index<span class="op">=</span>[<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>])
+
+<span class="co"># convert a series to an numpy.ndarray</span>
+pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).values
+<span class="co"># array([1, 2, 3])</span></code></pre></div>
 </div>
 <div id="pandadataframe" class="section level2">
 <h2><span class="header-section-number">3.4</span> Panda::DataFrame</h2>
@@ -327,6 +429,28 @@ np.random.randint(<span class="dv">10</span>, size<span class="op">=</span><span
 <span class="co"># 2  12  22  32</span>
 <span class="co"># 3  13  23  33</span>
 
+
+<span class="co"># numpy array to data frame</span>
+
+X <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>])
+df <span class="op">=</span> pd.DataFrame(X, index<span class="op">=</span>np.arange(<span class="dv">0</span>,<span class="bu">len</span>(X)))
+
+<span class="co"># Out[8]:</span>
+<span class="co">#    0</span>
+<span class="co"># 0  0</span>
+<span class="co"># 1  3</span>
+<span class="co"># 2  0</span>
+<span class="co"># 3  1</span>
+
+X <span class="op">=</span> np.array([[<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>], [<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>]])
+df <span class="op">=</span> pd.DataFrame(X, index<span class="op">=</span>np.arange(<span class="dv">0</span>,<span class="bu">len</span>(X)))
+
+<span class="co"># Out[10]: </span>
+<span class="co">#    0  1  2</span>
+<span class="co"># 0  0  3  0</span>
+<span class="co"># 1  2  2  2</span>
+<span class="co"># 2  7  7  7</span>
+
 <span class="co"># from dict to dataframe</span>
 pd.DataFrame.from_dict(<span class="bu">dict</span>)
 
@@ -334,9 +458,17 @@ df.mean()  <span class="co"># mean of each column</span>
 df.shape   <span class="co"># (rows,columns)</span>
 df.columns <span class="co"># column names</span>
 df.index   <span class="co"># Describe index</span>
-df.columns <span class="co"># Describe DataFrame columns</span>
 df.info()  <span class="co"># Info on DataFrame</span>
 df.count() <span class="co"># Number of non-NA values</span>
+
+<span class="co"># column rename</span>
+df <span class="op">=</span> pd.DataFrame({<span class="st">'aa'</span>:[<span class="dv">1</span>,<span class="dv">2</span>], <span class="st">'bb'</span>: [<span class="dv">10</span>,<span class="dv">20</span>]})
+df.columns <span class="op">=</span> [<span class="st">'a'</span>, <span class="st">'b'</span>]
+df
+<span class="co">#    a   b</span>
+<span class="co"># 0  1  10</span>
+<span class="co"># 1  2  20</span>
+df <span class="op">=</span> df.rename({<span class="st">'a'</span>: <span class="st">'axx'</span>}, axis<span class="op">=</span><span class="st">'columns'</span>) <span class="co"># or axis=1</span>
 
 
 df[<span class="dv">3</span>].value_counts() <span class="co"># frequency table of a column, e.g. column 3</span>
@@ -348,11 +480,22 @@ df <span class="op">=</span> df.values <span class="co">#convert a pandas datafr
 <h3><span class="header-section-number">3.4.1</span> Sort</h3>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Order rows by values of a column </span>
 df.sort_values(<span class="st">'mpg'</span>) <span class="co"># (low to high).</span>
-df.sort_values(<span class="st">'mpg'</span>, ascending<span class="op">=</span><span class="va">False</span>) <span class="co"># (high to low).</span></code></pre></div>
+df.sort_values(<span class="st">'mpg'</span>, ascending<span class="op">=</span><span class="va">False</span>) <span class="co"># (high to low).</span>
+
+<span class="co"># Shuffle DataFrame rows</span>
+df.sample(frac<span class="op">=</span><span class="dv">1</span>) <span class="co"># The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.</span>
+
+<span class="co"># random n row selection</span>
+df.sample(n)
+
+<span class="co"># reset index</span>
+df <span class="op">=</span> df(drop<span class="op">=</span><span class="va">True</span>)</code></pre></div>
 </div>
-<div id="subset" class="section level3">
+<div id="subset-1" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Subset</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.head(n) <span class="co"># Select first n rows.</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#--------- row selection ---------------</span>
+
+df.head(n) <span class="co"># Select first n rows.</span>
 df.tail(n) <span class="co"># Select last n rows.</span>
 
 <span class="co"># based on poisition</span>
@@ -372,16 +515,12 @@ data.iloc[:,<span class="op">-</span><span class="dv">1</span>] <span class="co"
 <span class="co"># rows and columns</span>
 df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">1</span>:<span class="dv">4</span>] <span class="co"># select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)</span>
 
-<span class="co">#loc: positions via labels/index</span>
+<span class="co">#loc: label based indexing.</span>
 df.loc[:<span class="dv">3</span>] <span class="co"># slice up to and including label 3</span>
 df.loc[:<span class="st">'john'</span>] <span class="co"># select rows by names/labels</span>
 df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value] <span class="co"># select rows whose column value equals a scalar</span>
 df.loc[<span class="op">~</span>df[<span class="st">'column_name'</span>].isin(some_values)] <span class="co"># select rows whose column value is in an iterable</span>
 df.loc[(df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value) <span class="op">&amp;</span> df[<span class="st">'other_column'</span>].isin(some_values)] 
-
-<span class="co"># Select columns by names</span>
-df[<span class="st">'name'</span>] 
-df[[<span class="st">'name'</span>, <span class="st">'age'</span>]]
 
 <span class="co"># select col_name1, col_name2 from table where column_name = some_value.</span>
 df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value][[col_name1, col_name2]]
@@ -396,10 +535,19 @@ df.drop(df.head(n).index) <span class="co"># drop first n rows</span>
     <span class="bu">print</span> row[<span class="st">'column_name_1'</span>], row[<span class="st">'column_name_2'</span>]
 <span class="co"># 10 100</span>
 <span class="co"># 11 110</span>
-<span class="co"># 12 120</span></code></pre></div>
+<span class="co"># 12 120</span>
+
+<span class="co">#--------- column selection ---------------</span>
+
+<span class="co"># Select columns by names</span>
+df[<span class="st">'name'</span>] 
+df[[<span class="st">'name'</span>, <span class="st">'age'</span>]]
+
+<span class="co"># Select columns by regural expression</span>
+df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'name|address'</span>)</code></pre></div>
 </div>
-<div id="append" class="section level3">
-<h3><span class="header-section-number">3.4.3</span> Append</h3>
+<div id="add" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Add</h3>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># append a column</span>
 df[<span class="st">'new_col'</span>] <span class="op">=</span> pd.Series(np.arange(<span class="dv">0</span>, <span class="dv">100</span>), index<span class="op">=</span>df.index)
 
@@ -429,8 +577,40 @@ df.append(df2, ignore_index<span class="op">=</span><span class="va">True</span>
 <span class="co"># reset index if necessary</span>
 df <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span class="va">True</span>) </code></pre></div>
 </div>
+<div id="remove" class="section level3">
+<h3><span class="header-section-number">3.4.4</span> Remove</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># delete rows based on index</span>
+df <span class="op">=</span> df.drop(df.index[<span class="dv">1</span>: <span class="dv">4</span>])
+
+<span class="co"># delete column on i index</span>
+df <span class="op">=</span> df.drop(df.columns[i], axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># note: it will remove both columns if there is duplicate names in columns, </span>
+
+<span class="co"># delete columns based on regular expression</span>
+df <span class="op">=</span> df[df.columns.drop(<span class="bu">list</span>(df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'Test'</span>)))]
+
+<span class="co"># drop columns which have same values in all rows</span>
+nunique <span class="op">=</span> df.<span class="bu">apply</span>(pd.Series.nunique)
+cols_to_drop <span class="op">=</span> nunique[nunique <span class="op">==</span> <span class="dv">1</span>].index
+df.drop(cols_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</code></pre></div>
+</div>
+<div id="summary" class="section level3">
+<h3><span class="header-section-number">3.4.5</span> summary</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># sum each row of column</span>
+df.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</code></pre></div>
+</div>
+<div id="group" class="section level3">
+<h3><span class="header-section-number">3.4.6</span> Group</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># groupby dataframe by key</span>
+grouped <span class="op">=</span> df.groupby(<span class="st">'gender'</span>)
+
+grouped.groups.keys() <span class="co"># list keys</span>
+
+<span class="cf">for</span> name, group <span class="kw">in</span> grouped:
+    <span class="bu">print</span>(<span class="st">'key:'</span> name)
+    <span class="bu">print</span>(<span class="st">'value:'</span> group)</code></pre></div>
+</div>
 <div id="handle-nan" class="section level3">
-<h3><span class="header-section-number">3.4.4</span> Handle NaN</h3>
+<h3><span class="header-section-number">3.4.7</span> Handle NaN</h3>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.fillna(<span class="dv">0</span>) <span class="co"># Replace all the NaN values with Zero</span></code></pre></div>
 </div>
 </div>
@@ -438,22 +618,33 @@ df <span class="op">=</span> df.reset_index(drop<span class="op">=</span><span c
 <div id="regular-expression" class="section level1">
 <h1><span class="header-section-number">4</span> Regular expression</h1>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> re
+<span class="co"># search</span>
 m <span class="op">=</span> re.search(<span class="st">'(?&lt;=abc)def'</span>, <span class="st">'abcdef'</span>)
 m.group(<span class="dv">0</span>)
-<span class="co"># 'def'</span></code></pre></div>
+<span class="co"># 'def'</span>
+
+<span class="co"># sub</span>
+re.sub(regex_search,regex_replace,contents)</code></pre></div>
+</div>
+<div id="data-time" class="section level1">
+<h1><span class="header-section-number">5</span> Data time</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pandas
+result_ms<span class="op">=</span>pandas.to_datetime(<span class="st">'1493530261000'</span>,unit<span class="op">=</span><span class="st">'ms'</span>)
+<span class="bu">str</span>(result_ms) <span class="co"># -&gt; '2017-04-30 05:31:01'</span></code></pre></div>
 </div>
 <div id="io" class="section level1">
-<h1><span class="header-section-number">5</span> IO</h1>
+<h1><span class="header-section-number">6</span> IO</h1>
 <div id="read-write-csv" class="section level2">
-<h2><span class="header-section-number">5.1</span> Read write CSV</h2>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">pd.read_csv(<span class="st">'file.csv'</span>, header<span class="op">=</span><span class="va">None</span>, nrows<span class="op">=</span><span class="dv">5</span>)
-pd.to_csv(<span class="st">'myDataFrame.csv'</span>)
+<h2><span class="header-section-number">6.1</span> Read write CSV</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df <span class="op">=</span> pd.read_csv(<span class="st">'file.csv'</span>, header<span class="op">=</span><span class="va">None</span>, nrows<span class="op">=</span><span class="dv">5</span>)
+
+df.to_dense().to_csv(<span class="st">&quot;myDataFrame.csv&quot;</span>, index <span class="op">=</span> <span class="va">False</span>, sep<span class="op">=</span><span class="st">','</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>)
 
 pd.read_excel(<span class="st">'file.xlsx'</span>)
 pd.to_excel(<span class="st">'dir/myDataFrame.xlsx'</span>, sheet_name<span class="op">=</span><span class="st">'Sheet1'</span>)</code></pre></div>
 </div>
 <div id="read-head-lines-of-a-large-text-file" class="section level2">
-<h2><span class="header-section-number">5.2</span> Read head lines of a large text file</h2>
+<h2><span class="header-section-number">6.2</span> Read head lines of a large text file</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">file_name <span class="op">=</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">xxxxx</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">2014101709-12.txt&quot;</span>
 
 <span class="cf">with</span> <span class="bu">open</span>(file_name) <span class="im">as</span> myfile:
@@ -461,35 +652,15 @@ pd.to_excel(<span class="st">'dir/myDataFrame.xlsx'</span>, sheet_name<span clas
 <span class="bu">print</span>(head)</code></pre></div>
 </div>
 <div id="list-files-only-in-the-current-directory" class="section level2">
-<h2><span class="header-section-number">5.3</span> List files only in the current directory</h2>
+<h2><span class="header-section-number">6.3</span> List files only in the current directory</h2>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> os <span class="im">as</span> os
 files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(<span class="st">'.'</span>) <span class="cf">if</span> os.path.isfile(f)]
 <span class="cf">for</span> f <span class="kw">in</span> files:
     <span class="bu">print</span>(f)</code></pre></div>
-<pre><code>## Django.html
-## Django.Rmd
-## model.png
-## pima-indians-diabetes.data.txt
-## python.html
-## python.Rmd
-## pythonML.html
-## pythonML.Rmd
-## pythonPlot.html
-## pythonPlot.Rmd
-## pythonRdm.html
-## pythonRdm.Rmd
-## python_keras.html
-## python_keras.Rmd
-## python_sklearn.html
-## python_sklearn.Rmd
-## pyton_plot_test.png
-## pyton_random_forest.png
-## test.png
-## _output.yaml</code></pre>
 </div>
 </div>
 <div id="real-time-plot-with-python" class="section level1">
-<h1><span class="header-section-number">6</span> Real time plot with python</h1>
+<h1><span class="header-section-number">7</span> Real time plot with python</h1>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
 <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
 
@@ -505,11 +676,17 @@ plt.ion()
     plt.pause(<span class="fl">0.5</span>)</code></pre></div>
 </div>
 <div id="plot-a-hist-graph" class="section level1">
-<h1><span class="header-section-number">7</span> plot a hist graph</h1>
-<p>import matplotlib.pyplot as plt plt.hist(df[3].values, bins=100)</p>
+<h1><span class="header-section-number">8</span> plot a hist graph</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> random
+values <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>)]
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+plt.hist(values, bins<span class="op">=</span><span class="dv">11</span>)
+
+<span class="co"># plot a vertical line</span>
+plt.axvline(x<span class="op">=</span><span class="dv">3</span>)</code></pre></div>
 </div>
 <div id="install-package" class="section level1">
-<h1><span class="header-section-number">8</span> Install package</h1>
+<h1><span class="header-section-number">9</span> Install package</h1>
 <p>in cmd comand window</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># PyPI</span>
 pip install py2exe

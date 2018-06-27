@@ -25,9 +25,25 @@ int()
 float()
 bool()
 
+#convert a bool (list) to 0 or 1
+B=B*1
+
+# check if a object is None
+if foo is None: 
+  print('is None')
 ```
 
 ## Complex data types
+
+### Range
+
+```python
+range(10) # range 0 to 9
+
+reversed(range(10)) # reversed range 9 to 0
+
+list(reversed(range(10))) # to print out 
+```
 
 ### List
   
@@ -38,22 +54,43 @@ li = [3, 4, 5]
 # sub list
 li[0] # 3
 li[0:2] # [incluse, excluse] 3,4
+li[-1] # get the last element
+li[-2] = 3 # Set the second last element
+
 
 # add or remove element
 li = li + [6]
-li = del(li[5])
+li = del li[5]
+li.remove(4) # removes the first matching value, not a specific index:
+li.pop(1) # removes the item at a specific index and returns it.
 
-# append an element
+# append an element - append is a destructive operation (it modifies the list in place instead of of returning a new list)
 li.append('bar')
+
+# combine two lists
+l1 = [1,2,3]
+l2 = [4,5,6]
+mergedlist = l1 + l2
 
 # copy: reference only
 li2 = li
 # copy: explicit copy 
 li2 = li[:] # or li2 = list(li)
 
+[float(n)] # convert a float to list
+
 len(li) # length of list
 
+3 in li # check if the element is in the list
+
 matrix = [ [1, 2, 3, 4], [5, 6, 7, 8], ] # nested list
+
+# loop in the list
+a = ['a',' b', 'c ', ' d ']
+
+for i, s in enumerate(a):
+    a[i] = s.strip()
+print(a) # -> ['a', 'b', 'c', 'd']
 ```
 
 ### Tuple
@@ -113,7 +150,16 @@ for key in person:
 ## DataTime
 
 ```python
-# remove data time instance is NaT
+from datetime import datetime
+
+now = datetime.now()
+print("Now: ", now)
+
+now.year #  now.month or now.hour, etc
+now.strftime('%Y-%m-%d %H:%M:%S') # fromt timestamp
+now - timedelta(days=2) # Day before Yesterday
+
+# remove data time instance is NaT in a dataframe
 df = df[df[3].apply(lambda x: not isinstance(x, pd._libs.tslib.NaTType))]
 ```
 
@@ -124,24 +170,76 @@ Array can only cotain one type
 li = [3, 4, 5]
 np_array = np.array(li)
 
+# convert np array to list
+np_array.tolist()
+
 # shape of array
 np_array.shape
 
 # delete an element
 np.delete(a, index)
 
-df = np.array([[1,2,3], [1,2,3], [1,2,3]])
-print(df)
-#     [[1 2 3]
-#     [1 2 3]
-#     [1 2 3]]
-
 # a range value
 np.arange(0, 5, 0.5)
 # Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])
 
+# Return a copy of the array collapsed into one dimension
+a = np.array([[1,2], [3,4]])
+a.flatten() 
+# array([1, 2, 3, 4])
+
 # a random integer value
 np.random.randint(10, size=2) # add replace=False for non duplicated values
+
+# count the occurrence of certain item in an ndarray in Python
+a = np.array([0, 3, 0, 1, 0, 1, 2, 1, 0, 0, 0, 0, 1, 3, 4])
+unique, counts = numpy.unique(a, return_counts=True)
+
+```
+### subset
+
+```python
+# subset by index
+arr = np.array([10, 20, 30, 40, 50, 60])
+arr[[1,4,5]]
+# array([20, 50, 60])
+
+# subset by index for multidimensional arrays:
+arr = np.arange(9).reshape(3,3)
+arr
+# array([[0, 1, 2],
+#       [3, 4, 5],
+#       [6, 7, 8]])
+arr[[0, 1, 1], [1, 0, 2]]
+# array([1, 3, 5])
+
+# the ith column of a np multidimensional array 
+test = np.array([[1, 2], [3, 4], [5, 6]])
+test[:,0] 
+# array([1, 3, 5])
+
+```
+### compare 
+
+```python
+array1 = np.array([2,3,4,6,7])
+array2 = np.array([1,4,5,5,6,8,8,9])
+np.in1d(array1, array2)
+# [False False  True  True False]
+
+np.setdiff1d(array1, array2)
+# array([2, 3, 7])
+```
+**Initialize data frame**
+
+```python
+mat = np.array([[1,2,3], [1,2,3], [1,2,3]])
+print(mat)
+#     [[1 2 3]
+#     [1 2 3]
+#     [1 2 3]]
+
+np.sum(mat, axis=1)  # axis=1  "get the sum of each the columns" 
 ```
 
 ## Panda::Series
@@ -153,6 +251,9 @@ A one-dimensional labeled array A capable of holding any data type
 ```python
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
 
+# convert a series to an numpy.ndarray
+pd.Series([1, 2, 3]).values
+# array([1, 2, 3])
 ```
 ## Panda::DataFrame
 
@@ -167,6 +268,28 @@ df = pd.DataFrame(
 # 2  12  22  32
 # 3  13  23  33
 
+
+# numpy array to data frame
+
+X = np.array([0, 3, 0, 1])
+df = pd.DataFrame(X, index=np.arange(0,len(X)))
+
+# Out[8]:
+#    0
+# 0  0
+# 1  3
+# 2  0
+# 3  1
+
+X = np.array([[0, 3, 0], [2, 2, 2], [7, 7, 7]])
+df = pd.DataFrame(X, index=np.arange(0,len(X)))
+
+# Out[10]: 
+#    0  1  2
+# 0  0  3  0
+# 1  2  2  2
+# 2  7  7  7
+
 # from dict to dataframe
 pd.DataFrame.from_dict(dict)
 
@@ -174,9 +297,17 @@ df.mean()  # mean of each column
 df.shape   # (rows,columns)
 df.columns # column names
 df.index   # Describe index
-df.columns # Describe DataFrame columns
 df.info()  # Info on DataFrame
 df.count() # Number of non-NA values
+
+# column rename
+df = pd.DataFrame({'aa':[1,2], 'bb': [10,20]})
+df.columns = ['a', 'b']
+df
+#    a   b
+# 0  1  10
+# 1  2  20
+df = df.rename({'a': 'axx'}, axis='columns') # or axis=1
 
 
 df[3].value_counts() # frequency table of a column, e.g. column 3
@@ -192,11 +323,22 @@ df = df.values #convert a pandas dataframe (df) to a numpy ndarray,
 # Order rows by values of a column 
 df.sort_values('mpg') # (low to high).
 df.sort_values('mpg', ascending=False) # (high to low).
+
+# Shuffle DataFrame rows
+df.sample(frac=1) # The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.
+
+# random n row selection
+df.sample(n)
+
+# reset index
+df = df(drop=True)
 ```
 
-### Subset
+### Subset 
 
 ```python
+#--------- row selection ---------------
+
 df.head(n) # Select first n rows.
 df.tail(n) # Select last n rows.
 
@@ -217,16 +359,12 @@ data.iloc[:,-1] # last column of data frame
 # rows and columns
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
 
-#loc: positions via labels/index
+#loc: label based indexing.
 df.loc[:3] # slice up to and including label 3
 df.loc[:'john'] # select rows by names/labels
 df.loc[df['column_name'] == some_value] # select rows whose column value equals a scalar
 df.loc[~df['column_name'].isin(some_values)] # select rows whose column value is in an iterable
 df.loc[(df['column_name'] == some_value) & df['other_column'].isin(some_values)] 
-
-# Select columns by names
-df['name'] 
-df[['name', 'age']]
 
 # select col_name1, col_name2 from table where column_name = some_value.
 df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
@@ -242,9 +380,18 @@ for index, row in df.iterrows():
 # 10 100
 # 11 110
 # 12 120
-```
-### Append 
 
+#--------- column selection ---------------
+
+# Select columns by names
+df['name'] 
+df[['name', 'age']]
+
+# Select columns by regural expression
+df.filter(regex='name|address')
+```
+
+### Add 
 ```python
 # append a column
 df['new_col'] = pd.Series(np.arange(0, 100), index=df.index)
@@ -275,6 +422,43 @@ df.append(df2, ignore_index=True)
 # reset index if necessary
 df = df.reset_index(drop=True) 
 ```
+
+### Remove
+```python
+# delete rows based on index
+df = df.drop(df.index[1: 4])
+
+# delete column on i index
+df = df.drop(df.columns[i], axis=1) # note: it will remove both columns if there is duplicate names in columns, 
+
+# delete columns based on regular expression
+df = df[df.columns.drop(list(df.filter(regex='Test')))]
+
+# drop columns which have same values in all rows
+nunique = df.apply(pd.Series.nunique)
+cols_to_drop = nunique[nunique == 1].index
+df.drop(cols_to_drop, axis=1)
+```
+
+### summary
+```python
+# sum each row of column
+df.sum(axis=1)
+```
+
+### Group
+
+```python
+# groupby dataframe by key
+grouped = df.groupby('gender')
+
+grouped.groups.keys() # list keys
+
+for name, group in grouped:
+	print('key:' name)
+	print('value:' group)
+```
+
 ### Handle NaN
 
 ```python
@@ -285,9 +469,21 @@ df.fillna(0) # Replace all the NaN values with Zero
 
 ```python
 import re
+# search
 m = re.search('(?<=abc)def', 'abcdef')
 m.group(0)
 # 'def'
+
+# sub
+re.sub(regex_search,regex_replace,contents)
+```
+
+# Data time
+
+```python
+import pandas
+result_ms=pandas.to_datetime('1493530261000',unit='ms')
+str(result_ms) # -> '2017-04-30 05:31:01'
 ```
 
 # IO
@@ -295,8 +491,9 @@ m.group(0)
 ## Read write CSV
 
 ```python
-pd.read_csv('file.csv', header=None, nrows=5)
-pd.to_csv('myDataFrame.csv')
+df = pd.read_csv('file.csv', header=None, nrows=5)
+
+df.to_dense().to_csv("myDataFrame.csv", index = False, sep=',', encoding='utf-8')
 
 pd.read_excel('file.xlsx')
 pd.to_excel('dir/myDataFrame.xlsx', sheet_name='Sheet1')
@@ -315,7 +512,7 @@ print(head)
 
 ## List files only in the current directory
 
-```{python}
+```python
 import os as os
 files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
@@ -343,9 +540,15 @@ while True:
 
 # plot a hist graph
 
+```python
+import random
+values = [random.randint(0, 10) for _ in range(50)]
 import matplotlib.pyplot as plt
-plt.hist(df[3].values, bins=100)
+plt.hist(values, bins=11)
 
+# plot a vertical line
+plt.axvline(x=3)
+```
 
 # Install package
 

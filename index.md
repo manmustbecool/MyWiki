@@ -27,7 +27,6 @@ My notes
  * <a href="Wiki/R/baye_network.html">Baye network</a>
  * <a href="Wiki/R/QLearning.html">Q-Learning</a>
  * <a href="Wiki/R/Entropy.html">Entropy</a>
- * <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
  * <a href="Wiki/R/densityEstimation.html">Density Estimation</a>
  * <a href="Wiki/R/svm.html">SVM (support vector machine)</a>
  * <a href="Wiki/R/MCMC.html">MCMC (Markov chain Monte Carlo)</a>
@@ -37,6 +36,9 @@ My notes
  * Graph
     + <a href="Wiki/R/graph.html">Plot graph</a>
     + <a href="Wiki/R/label_propagation.html">Label propagration</a>
+ * Constrained Optimization
+    + <a href="Wiki/R/GeneticAlgorithm.html">Genetic Algorithm</a>
+    + <a href="Wiki/R/linearProgram.html">MIP</a>
  * Dimension Reduction
     + <a href="Wiki/R/dimensionReduction.html">Dimension Reduction</a>
     + <a href="Wiki/R/dataCompression.html">Reduction into a single variable/dimension</a>
@@ -54,14 +56,18 @@ My notes
 <div style="display: inline-block;">
 ## Python
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
- * <a href="Wiki/Python/pythonPlot.html">Python Plot</a>
+ * <a href="Wiki/Python/python_plot.html">Python Plot</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
+ * <a href="Wiki/Python/python_nlp.html">Text Mining/NLP</a>
  * <a href="Wiki/Python/python_sklearn.html">Scikit-learn</a>
+ * <a href="Wiki/Python/sklearn_decision_tree.html">Sklearn decision tree</a>
+ * <a href="Wiki/Python/classificationOnIris.html">Classification on Iris dataset</a>
  * <a href="Wiki/Python/python_keras.html">Keras deep learning</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
  * Web development
     + <a href="Wiki/Python/Django.html">Django</a>
     + <a href="Wiki/Python/flaskReact.html">Flask + React</a>
+    + <a href="Wiki/Python/dash.html">Dash</a>
 </div>
 
 </div> <!--end two columns -->

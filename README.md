@@ -11,6 +11,9 @@
 This website is a collection of some my notes 
 
 
+Most pages were built using R markdown files.
+
+
 
 
 

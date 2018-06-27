@@ -1,0 +1,54 @@
+---
+title: "MIP"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Knapsack problem
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Determine items to include in a collection so that the total weight is less than or equal to a given limit and the total survival points is as large as possible
+
+
+```bash
+Maximize survivalpoints
+subject to 
+  totalweight < weightlimit
+```
+
+
+```{r warning=FALSE, message=FALSE}
+dataset <- data.frame(item = c("pocketknife", "beans", "potatoes", "unions", 
+    "sleeping bag", "rope", "compass"), survivalpoints = c(10, 20, 15, 2, 30, 
+    10, 30), weight = c(1, 5, 10, 1, 7, 5, 1))
+
+dataset
+weightlimit <- 20
+
+
+#install.packages("ompr")
+#install.packages("ompr.roi")
+library(ompr)
+library(ompr.roi)
+library(ROI)
+library(ROI.plugin.glpk)
+library(dplyr)
+
+
+n <- 7 # length of x
+model <- MIPModel() 
+model <- add_variable(model, x[i], i = 1:n,  type = "binary") 
+model <- set_objective(model, sum_expr(dataset$survivalpoints[i] * x[i], i = 1:n) ) 
+model <- add_constraint(model, sum_expr(dataset$weight[i] * x[i], i = 1:n) <= weightlimit )
+model <- solve_model(model, with_ROI(solver = "glpk")) 
+
+get_solution(model, x[i])
+```
+
+
+
+reference: https://dirkschumacher.github.io/ompr/articles/modelling.html
+

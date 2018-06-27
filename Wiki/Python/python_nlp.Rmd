@@ -1,0 +1,35 @@
+---
+title: "Text mining/NLP"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+
+# n-grams
+```python
+import nltk
+from nltk import word_tokenize
+from nltk.util import ngrams
+from collections import Counter
+
+text = "I need to write a program in NLTK that breaks a corpus (a large collection of \
+txt files) into unigrams, bigrams, trigrams, fourgrams and fivegrams."
+
+token = nltk.word_tokenize(text)
+bigrams = ngrams(token,2)
+counter = Counter(bigrams)
+print(counter)
+# Counter({('I', 'need'): 1, ('need', 'to'): 1, ('to', 'write'): 1, ('write', 'a'): 1, ('a', 'program'): 1, ('program', 'in'): 1, ('in', 'NLTK'): 1, ('NLTK', 'that'): 1, ('that', 'breaks'): 1, ('breaks', 'a'): 1, ('a', 'corpus'): 1, ('corpus', '('): 1, ('(', 'a'): 1, ('a', 'large'): 1, ('large', 'collection'): 1, ('collection', 'of'): 1, ('of', 'txt'): 1, ('txt', 'files'): 1, ('files', ')')....
+
+# convert counter to dataframe
+counter_df = pd.DataFrame.from_dict(counter, orient='index').reset_index()
+counter_df = counter_df.rename(columns={'index':'event', 0:'count'})
+counter_df
+counter_df
+
+#                   event  count
+# 0             (I, need)      1
+# 1            (need, to)      1
+# 2           (to, write)      1
+```
+

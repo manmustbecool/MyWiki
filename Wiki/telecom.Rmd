@@ -8,6 +8,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+![images\EUTRAN_arch.png](images\3g_4g_architecture.jpg)
+
+
+
 ![images\EUTRAN_arch.png](images\EUTRAN_arch.png)
+eNodeB
 
 x2 is the interface between eNodeB
+
+

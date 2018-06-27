@@ -1,5 +1,5 @@
 ---
-title: "R basic"
+title: "R Cheat Sheet"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 # output: html_notebook
@@ -261,7 +261,7 @@ sub_df <- df[c(1,2,5), ] # Subset by row indexes
 sub_df <- df[, c(1,2,5)] # Subset by column indexes
 
 sub_df <- df[rownames(df)=='user1', ] # Subset by row names
-sub_df <- df[rownames(df)=='user1', drop=FALSE] # passed on to the indexing method to keep data.frame and matrix format
+sub_df <- df[rownames(df)=='user1', ,drop=FALSE] # passed on to the indexing method to keep data.frame and matrix format
 sub_df <- df[, c('start','end')] # Subset by column names
 
 # filter rows with condition

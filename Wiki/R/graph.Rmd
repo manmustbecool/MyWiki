@@ -142,7 +142,6 @@ dfg <- graph.data.frame(d=df, directed=FALSE)
 V(dfg)$color="red" # set vertex color
 E(dfg)$color="blue" # set edge color
 
-# igraph_options(plot.layout=layout_as_tree) # tree graph
 plot(dfg, vertex.label=(dfg)$name)
 
 # get the various disconnected components 
@@ -153,6 +152,18 @@ components(dfg)
 tkplot(dfg)  # interactive plot
 
 rglplot(dfg) # 3D plot
+
+## igraph layout
+
+```{r}
+g <- barabasi.game(100, directed=F)
+
+layout <- layout.reingold.tilford(g, circular=T)
+layout <- layout_as_tree
+
+plot(g, layout=layout)
+```
+
 
 
 ```{r, warning=F, message=F}
