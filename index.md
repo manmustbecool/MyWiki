@@ -67,6 +67,7 @@ My notes
  * Web development
     + <a href="Wiki/Python/Django.html">Django</a>
     + <a href="Wiki/Python/flaskReact.html">Flask + React</a>
+    + <a href="Wiki/Python/dash.html">Dash</a>
 </div>
 
 </div> <!--end two columns -->

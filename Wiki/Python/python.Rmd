@@ -35,6 +35,16 @@ if foo is None:
 
 ## Complex data types
 
+### Range
+
+```python
+range(10) # range 0 to 9
+
+reversed(range(10)) # reversed range 9 to 0
+
+list(reversed(range(10))) # to print out 
+```
+
 ### List
   
 Lists can contain any data types (including list). mutable
@@ -44,10 +54,15 @@ li = [3, 4, 5]
 # sub list
 li[0] # 3
 li[0:2] # [incluse, excluse] 3,4
+li[-1] # get the last element
+li[-2] = 3 # Set the second last element
+
 
 # add or remove element
 li = li + [6]
-li = del(li[5])
+li = del li[5]
+li.remove(4) # removes the first matching value, not a specific index:
+li.pop(1) # removes the item at a specific index and returns it.
 
 # append an element - append is a destructive operation (it modifies the list in place instead of of returning a new list)
 li.append('bar')
@@ -61,6 +76,8 @@ mergedlist = l1 + l2
 li2 = li
 # copy: explicit copy 
 li2 = li[:] # or li2 = list(li)
+
+[float(n)] # convert a float to list
 
 len(li) # length of list
 
@@ -166,6 +183,11 @@ np.delete(a, index)
 np.arange(0, 5, 0.5)
 # Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])
 
+# Return a copy of the array collapsed into one dimension
+a = np.array([[1,2], [3,4]])
+a.flatten() 
+# array([1, 2, 3, 4])
+
 # a random integer value
 np.random.randint(10, size=2) # add replace=False for non duplicated values
 
@@ -173,7 +195,33 @@ np.random.randint(10, size=2) # add replace=False for non duplicated values
 a = np.array([0, 3, 0, 1, 0, 1, 2, 1, 0, 0, 0, 0, 1, 3, 4])
 unique, counts = numpy.unique(a, return_counts=True)
 
-# ******** compare differences **********
+```
+### subset
+
+```python
+# subset by index
+arr = np.array([10, 20, 30, 40, 50, 60])
+arr[[1,4,5]]
+# array([20, 50, 60])
+
+# subset by index for multidimensional arrays:
+arr = np.arange(9).reshape(3,3)
+arr
+# array([[0, 1, 2],
+#       [3, 4, 5],
+#       [6, 7, 8]])
+arr[[0, 1, 1], [1, 0, 2]]
+# array([1, 3, 5])
+
+# the ith column of a np multidimensional array 
+test = np.array([[1, 2], [3, 4], [5, 6]])
+test[:,0] 
+# array([1, 3, 5])
+
+```
+### compare 
+
+```python
 array1 = np.array([2,3,4,6,7])
 array2 = np.array([1,4,5,5,6,8,8,9])
 np.in1d(array1, array2)
@@ -181,7 +229,6 @@ np.in1d(array1, array2)
 
 np.setdiff1d(array1, array2)
 # array([2, 3, 7])
-
 ```
 **Initialize data frame**
 
@@ -252,6 +299,15 @@ df.columns # column names
 df.index   # Describe index
 df.info()  # Info on DataFrame
 df.count() # Number of non-NA values
+
+# column rename
+df = pd.DataFrame({'aa':[1,2], 'bb': [10,20]})
+df.columns = ['a', 'b']
+df
+#    a   b
+# 0  1  10
+# 1  2  20
+df = df.rename({'a': 'axx'}, axis='columns') # or axis=1
 
 
 df[3].value_counts() # frequency table of a column, e.g. column 3
@@ -369,6 +425,9 @@ df = df.reset_index(drop=True)
 
 ### Remove
 ```python
+# delete rows based on index
+df = df.drop(df.index[1: 4])
+
 # delete column on i index
 df = df.drop(df.columns[i], axis=1) # note: it will remove both columns if there is duplicate names in columns, 
 
