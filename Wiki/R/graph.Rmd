@@ -32,7 +32,51 @@ shortest.paths()
 get.data.frame(xg, what=c("edges"))
 
 
+
 ```
+
+## filter by edges
+
+```r
+# filter graph by edge weight
+
+filtered_edges <- E(g)[weight>0.05]
+g1 <- subgraph.edges(g, filtered_edges)
+
+# filter neighbor nodes
+# second order neighbors of select_v
+g2_list <- make_ego_graph(g, order=2, nodes = select_v, mode = c("all"), mindist = 0)
+
+```
+## path multiplication 
+
+ \( x\cdot y = (log_b(x \cdot y))^b = (log_bx+log_by)^b \) 
+
+```r
+
+# use use log to tranform product to addition problem
+
+g2 <- subgraph.edges(g2, E(g2)[weight>0]) # remove edge weight ==0
+
+select_v = V(g2)[V(g2)$name==select_cell] # target nodes
+
+E(g2)$weight<- -log(E(g2)$weight)
+
+paths_1 <- shortest.paths(g2, v=V(g2), to=select_v) # use shorest path from verticies to vertice, it is addition problem
+
+paths_2 <- shortest.paths(g2, v=select_v, V(g2))
+
+paths <- rbind(paths_1, t(paths_2))
+
+paths <- exp(-paths) # tranform back the value before log
+
+paths <- paths[paths[, 1] > threshold, ,drop=F]
+
+# g2 only contains second order neighbours where the multiplication of strength > threshold. to plus result of g1 for first order neighbours
+
+g2 <- subgraph(g2, V(g2)[V(g2)$name %in% rownames(paths)])
+```
+
 
 # DAG
 ```{r, warning=F, message=F}
