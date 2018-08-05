@@ -377,13 +377,46 @@ df[,colSums(is.na(df))<nrow(df)]   # Remove columns where All values are NA
 **Multiple data frames**
 ```r
 # ----- join two data frames
-merge(x=df1, y=df2, by="CustomerId")          # default all=FALSE. natural join, a special case of an inner join
-merge(x=df1, y=df2, by="CustomerId", all = T) # (full) outer join
-merge(x=df1, y=df2, by="CustomerId", all.x=T) # left (outer) join
-merge(x=df1, y=df2, by="CustomerId", all.y=T) # right (outer) join
-merge(x=df1, y=df2, by=NULL)                  # cross join
+df1<- data.frame(CustomerId=c(1,2),y=c(1,1))
+df2<- data.frame(CustomerId=c(3,4),y=c(2,2))
 
-merge(df1, df2, by = c("k1","k2")) 
+merge(x=df1, y=df2, by="CustomerId")          # default all=FALSE. natural join, a special case of an inner join
+# CustomerId y.x        y.y # 0 row
+
+merge(x=df1, y=df2, by="CustomerId", all = T) # (full) outer join
+#  CustomerId y.x y.y
+# 1          1   1  NA
+# 2          2   1  NA
+# 3          3  NA   2
+# 4          4  NA   2
+
+merge(x=df1, y=df2, by="CustomerId", all.x=T) # left (outer) join
+#   CustomerId y.x y.y
+# 1          1   1  NA
+# 2          2   1  NA
+
+merge(x=df1, y=df2, by="CustomerId", all.y=T) # right (outer) join
+#   CustomerId y.x y.y
+# 1          3  NA   2
+# 2          4  NA   2
+
+merge(x=df1, y=df2, by=NULL)                  # cross join
+#   CustomerId.x y.x CustomerId.y y.y
+# 1            1   1            3   2
+# 2            2   1            3   2
+# 3            1   1            4   2
+# 4            2   1            4   2
+
+merge(x=df1, y=df2, by=c("CustomerId","y"))
+# CustomerId y         
+# <0 rows> 
+
+merge(x=df1, y=df2, by=c("CustomerId","y"), all=T)
+#   CustomerId y
+# 1          1 1
+# 2          2 1
+# 3          3 2
+# 4          4 2
 
 # ----- compare two data frames
 a1 <- data.frame(a = 1:5, b=letters[1:5])
