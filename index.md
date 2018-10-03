@@ -73,6 +73,7 @@ My notes
 </div> <!--end two columns -->
 
 ## Java
+* <a href="Wiki/Java/jdk.html">Java JDK</a>
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
   
