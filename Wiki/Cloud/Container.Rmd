@@ -167,7 +167,7 @@ wget https://raw.githubusercontent.com/nginxinc/docker-nginx/ddbbbdf9c410d105f82
 microk8s.docker build -t localhost:32000/nginx:testlocal . microk8s.docker push localhost:32000/nginx:testlocal
 ```
 
-# Snap
+## Snap
 
 Desktop application container
 
@@ -180,10 +180,8 @@ snap list
 
 sudo snap remove microk8s
 
-# disk space 
-df -h /var/snap/
+df -h /var/snap/ # disk space 
 ```
-
 
 # Kubernetes
 
@@ -246,6 +244,97 @@ In many cases, the node IPs, pod IPs, and some service IPs on a cluster will not
  --eviction-hard="memory.available<500Mi,nodefs.available<1Gi,imagefs.available<1Gi"
 And then you will need to restart kubelet: sudo systemctl restart snap.microk8s.daemon-kubelet
 
+
+
+# minikube
+```r
+minikube start --cpus 4 --memory 8096 --disk-size=40g
+minikube stop
+minikube delete
+
+minikube status
+minikube start
+```
+
+
+# Ksonnet
+
+```base
+Set up a ksonnet application
+ks init
+Generate components for your app (e.g. Redis)
+ks generate (alias of ks prototype use)
+Deploy to a cluster
+ks apply
+Delete resources running on a cluster
+ks delete
+```
+
+
+# Kubeflow
+
+Installing Kubeflow using Bootstrapper
+
+https://www.kubeflow.org/docs/started/getting-started-minikube/
+
+
+https://www.ubuntu.com/ai/install
+
+
+Kubeflow uses Ksonnet to deploy the required components. 
+
+Jupyter Hub - for collaborative & interactive training
+A TensorFlow Training Controller with native distributed training
+A TensorFlow Serving for hosting
+Argo for workflows
+SeldonCore for complex inference and non TF models
+Ambassador for Reverse Proxy
+
+
+```bash
+kubectl get ns
+kubectl get svc
+kubectl -n kubeflow get svc -o wide
+kubectl -n kubeflow get pod
+
+kubectl logs -p -n kubeflow tf-hub-0
+
+sudo rm -fr my-kubeflow
+
+#----------
+
+sudo snap disable microk8s
+sudo snap enable microk8s
+
+sudo microk8s.enable dns dashboard
+sudo microk8s.enable storage
+
+sudo iptables -P FORWARD ACCEPT
+
+# forward ambassador service to from port 80 to 8080. we can access it from port 8080
+POD=`kubectl -n kubeflow get pods --selector=service=ambassador | awk '{print $1}' | tail -1`
+kubectl -n kubeflow port-forward $POD 8080:80 2>&1 >/dev/null &
+
+# forward tf-hub service which contain juper notebook
+POD=`kubectl -n kubeflow get pods --selector=app=tf-hub | awk '{print $1}' | tail -1`
+kubectl -n kubeflow port-forward $POD 8000:8000 2>&1 >/dev/null &
+
+http://localhost:8000/hub/login
+
+# ACCESSING THE DASHBOARD
+http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://localhost:8080/api/v1/namespaces/kube-system/services/http:monitoring-grafana:/proxy/
+
+
+POD=`kubectl -n kube-system get pods --selector=k8s-app=influxGrafana | awk '{print $1}' | tail -1`
+kubectl -n kube-system port-forward $POD 8011:8000 2>&1 >/dev/null &
+
+```
+
+Argo, a container-native workflow engine for Kubernetes
+
+
+# Source to Image (s2i)
 
 
 

@@ -166,9 +166,13 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#microk8s"><span class="toc-section-number">2</span> microk8s</a><ul>
 <li><a href="#microk8s-docker"><span class="toc-section-number">2.1</span> microk8s docker</a></li>
+<li><a href="#snap"><span class="toc-section-number">2.2</span> Snap</a></li>
 </ul></li>
-<li><a href="#snap"><span class="toc-section-number">3</span> Snap</a></li>
-<li><a href="#kubernetes"><span class="toc-section-number">4</span> Kubernetes</a></li>
+<li><a href="#kubernetes"><span class="toc-section-number">3</span> Kubernetes</a></li>
+<li><a href="#minikube"><span class="toc-section-number">4</span> minikube</a></li>
+<li><a href="#ksonnet"><span class="toc-section-number">5</span> Ksonnet</a></li>
+<li><a href="#kubeflow"><span class="toc-section-number">6</span> Kubeflow</a></li>
+<li><a href="#source-to-image-s2i"><span class="toc-section-number">7</span> Source to Image (s2i)</a></li>
 </ul>
 </div>
 
@@ -309,9 +313,8 @@ $(document).ready(function () {
 <span class="co"># And build it</span>
 <span class="ex">microk8s.docker</span> build -t localhost:32000/nginx:testlocal . microk8s.docker push localhost:32000/nginx:testlocal</code></pre></div>
 </div>
-</div>
-<div id="snap" class="section level1">
-<h1><span class="header-section-number">3</span> Snap</h1>
+<div id="snap" class="section level2">
+<h2><span class="header-section-number">2.2</span> Snap</h2>
 <p>Desktop application container</p>
 <p>Integrated in terms of network, so share the system IP address, unlike Docker, where each container gets its own IP address.</p>
 <p>Uou can imagine this as a lighter weight version of a Docker container. It uses a lot of the same underlying technologies for isolation just without all the overhead of network isolation.</p>
@@ -319,11 +322,11 @@ $(document).ready(function () {
 
 <span class="fu">sudo</span> snap remove microk8s
 
-<span class="co"># disk space </span>
-<span class="fu">df</span> -h /var/snap/</code></pre></div>
+<span class="fu">df</span> -h /var/snap/ <span class="co"># disk space </span></code></pre></div>
+</div>
 </div>
 <div id="kubernetes" class="section level1">
-<h1><span class="header-section-number">4</span> Kubernetes</h1>
+<h1><span class="header-section-number">3</span> Kubernetes</h1>
 <p>A Kubernetes Service is an abstraction which defines a logical set of Pods and a policy by which to access them - sometimes called a micro-service.</p>
 <p>The set of Pods targeted by a Service is (usually) determined by a Label Selector</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Create the Pod:</span>
@@ -365,6 +368,74 @@ $(document).ready(function () {
 <span class="ex">kubectl</span> delete pod POD_NAME --grace-period=0 --force</code></pre></div>
 <p>In Kubernetes, nodes, pods and services all have their own IPs. In many cases, the node IPs, pod IPs, and some service IPs on a cluster will not be routable, so they will not be reachable from a machine outside the cluster, such as your desktop machine</p>
 <p>/var/snap/microk8s/current/args/kubelet –eviction-hard=“memory.available&lt;500Mi,nodefs.available&lt;1Gi,imagefs.available&lt;1Gi” And then you will need to restart kubelet: sudo systemctl restart snap.microk8s.daemon-kubelet</p>
+</div>
+<div id="minikube" class="section level1">
+<h1><span class="header-section-number">4</span> minikube</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minikube start <span class="op">--</span>cpus <span class="dv">4</span> <span class="op">--</span>memory <span class="dv">8096</span> <span class="op">--</span>disk<span class="op">-</span>size=40g
+minikube stop
+minikube delete
+
+minikube status
+minikube start</code></pre></div>
+</div>
+<div id="ksonnet" class="section level1">
+<h1><span class="header-section-number">5</span> Ksonnet</h1>
+<pre class="base"><code>Set up a ksonnet application
+ks init
+Generate components for your app (e.g. Redis)
+ks generate (alias of ks prototype use)
+Deploy to a cluster
+ks apply
+Delete resources running on a cluster
+ks delete</code></pre>
+</div>
+<div id="kubeflow" class="section level1">
+<h1><span class="header-section-number">6</span> Kubeflow</h1>
+<p>Installing Kubeflow using Bootstrapper</p>
+<p><a href="https://www.kubeflow.org/docs/started/getting-started-minikube/" class="uri">https://www.kubeflow.org/docs/started/getting-started-minikube/</a></p>
+<p><a href="https://www.ubuntu.com/ai/install" class="uri">https://www.ubuntu.com/ai/install</a></p>
+<p>Kubeflow uses Ksonnet to deploy the required components.</p>
+<p>Jupyter Hub - for collaborative &amp; interactive training A TensorFlow Training Controller with native distributed training A TensorFlow Serving for hosting Argo for workflows SeldonCore for complex inference and non TF models Ambassador for Reverse Proxy</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">kubectl</span> get ns
+<span class="ex">kubectl</span> get svc
+<span class="ex">kubectl</span> -n kubeflow get svc -o wide
+<span class="ex">kubectl</span> -n kubeflow get pod
+
+<span class="ex">kubectl</span> logs -p -n kubeflow tf-hub-0
+
+<span class="fu">sudo</span> rm -fr my-kubeflow
+
+<span class="co">#----------</span>
+
+<span class="fu">sudo</span> snap disable microk8s
+<span class="fu">sudo</span> snap enable microk8s
+
+<span class="fu">sudo</span> microk8s.enable dns dashboard
+<span class="fu">sudo</span> microk8s.enable storage
+
+<span class="fu">sudo</span> iptables -P FORWARD ACCEPT
+
+<span class="co"># forward ambassador service to from port 80 to 8080. we can access it from port 8080</span>
+<span class="va">POD=</span><span class="kw">`</span><span class="ex">kubectl</span> -n kubeflow get pods --selector=service=ambassador <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $1}'</span> <span class="kw">|</span> <span class="fu">tail</span> -1<span class="kw">`</span>
+<span class="ex">kubectl</span> -n kubeflow port-forward <span class="va">$POD</span> 8080:80 <span class="op">2&gt;&amp;1</span> <span class="op">&gt;</span>/dev/null <span class="kw">&amp;</span>
+
+<span class="co"># forward tf-hub service which contain juper notebook</span>
+<span class="va">POD=</span><span class="kw">`</span><span class="ex">kubectl</span> -n kubeflow get pods --selector=app=tf-hub <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $1}'</span> <span class="kw">|</span> <span class="fu">tail</span> -1<span class="kw">`</span>
+<span class="ex">kubectl</span> -n kubeflow port-forward <span class="va">$POD</span> 8000:8000 <span class="op">2&gt;&amp;1</span> <span class="op">&gt;</span>/dev/null <span class="kw">&amp;</span>
+
+<span class="ex">http</span>://localhost:8000/hub/login
+
+<span class="co"># ACCESSING THE DASHBOARD</span>
+<span class="ex">http</span>://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+<span class="ex">http</span>://localhost:8080/api/v1/namespaces/kube-system/services/http:monitoring-grafana:/proxy/
+
+
+<span class="va">POD=</span><span class="kw">`</span><span class="ex">kubectl</span> -n kube-system get pods --selector=k8s-app=influxGrafana <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $1}'</span> <span class="kw">|</span> <span class="fu">tail</span> -1<span class="kw">`</span>
+<span class="ex">kubectl</span> -n kube-system port-forward <span class="va">$POD</span> 8011:8000 <span class="op">2&gt;&amp;1</span> <span class="op">&gt;</span>/dev/null <span class="kw">&amp;</span></code></pre></div>
+<p>Argo, a container-native workflow engine for Kubernetes</p>
+</div>
+<div id="source-to-image-s2i" class="section level1">
+<h1><span class="header-section-number">7</span> Source to Image (s2i)</h1>
 </div>
 
 
