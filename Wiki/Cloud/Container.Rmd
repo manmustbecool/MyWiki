@@ -1,0 +1,251 @@
+---
+title: "Container"
+output: html_document
+---
+
+
+# Docker
+
+Docker allows you to run containers. All containers are started based on a Docker Image. 
+
+These images contain everything required to launch the process; the host doesn't require any configuration or dependencies.
+
+Docker tutorial:
+
+https://docs.docker.com/get-started/
+
+## Install 
+
+install Docker in Ubuntu 18.04
+
+```bash
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt update
+apt-cache policy docker-ce
+sudo apt install docker-ce
+```
+
+## Check status
+```bash
+sudo systemctl status docker
+sudo docker info
+
+docker run hello-world
+
+docker --version
+docker version
+```
+
+## Docker command
+
+```bash
+# -------------- Image ------------------
+
+docker search ubuntu   # search a image
+docker pull ubuntu     # pull image 
+docker images     # list all images
+docker image ls # List Docker images
+
+docker run -it ubuntu # run IMAGE_ID. Run: create a new container of an image, and execute the container. You can create N clones of the same image. -it for inactive shell in this case
+
+docker build -t my-im:latest . # build own image # -t <name>
+docker run -d -p 80:80 my-im:latest # run the built image
+
+sudo docker image prune # prefer removing only dangling images:
+
+docker rmi $(docker images | grep "^<none" | awk '{print $3}') # Remove images which have none repository name 
+docker rmi $(docker images | grep "none" | awk '{print $3}')   # Remove images which have none tag or repository name
+
+# -------------- Container ---------------
+
+docker ps -a  # list all containers
+docker ps     # list all active containers
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+
+docker start 9f10e00e872a  # start CONTAINER_ID. Launch a container previously stopped
+docker stop 9f10e00e872a   # stop CONTAINER_ID
+
+docker rm hello-world  # remove a container
+
+# One liner to stop / remove all of Docker containers
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+```
+
+
+## Build image
+
+Dockerfile
+
+```bash
+# All Docker images start from a base image. 
+# A base image is the same images from the Docker Registry which are used to start containers.
+#  FROM <image-name>:<tag>
+FROM nginx:1.11-alpine
+
+# COPY <src> <dest> allows you to copy files from the directory containing the Dockerfile to the container's image
+COPY index.html /usr/share/nginx/html/index.html
+
+# Using the EXPOSE <port> command you tell Docker which ports should be open and can be bound too. 
+EXPOSE 80
+
+# CMD []  defines the default command to run when a container is launched. For example ["cmd", "-a", "arga value", "-b", "argb-value"] 
+# The command to run NGINX:
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+In CMD window 
+
+```bash
+# Using the docker build command to build the image # -t <name>
+docker build -t my-nginx-image:latest .
+
+#NGINX is designed to run as a background service so you should include the option -d. To make the web server accessible, bind it to port 80 using p 80:80
+docker run -d -p 80:80 my-nginx-image:latest
+
+# will return our index file via NGINX and the image we built.
+curl -i http://docker 
+
+# You can check the container is running using 
+docker ps
+```
+## Data container
+
+Data Containers are containers which sole responsibility to be a place to store/manage data.
+
+check and add DNS in the OS
+
+```bash
+cat /run/systemd/resolve/resolv.conf # for ubuntu 18.04
+cat /etc/resolv.conf
+sudo su "echo 'nameserver 193.181.14.10' > /etc/resolv.conf"
+```
+# microk8s
+
+microk8s is designed to be a fast and lightweight upstream Kubernetes install isolated from your host but not via a virtual machine. 
+
+This isolation is achieved by packaging all the upstream binaries for Kubernetes, Docker.io, iptables, and CNI in a single snap package. The snap package is an application container
+
+```bash
+snap info microk8s
+
+microk8s.kubectl get no # inspect the cluster 
+
+# microk8s can be shutdown using the snap command
+snap disable microk8s 
+snap enable microk8s  # restart the microk8s
+
+# Removing microk8s
+microk8s.reset #  Before removing microk8s, use microk8s.reset to stop all running pods.
+snap remove microk8s
+
+# If you already have kubectl installed and you want to use it to access the microk8s deployment you can export the cluster's config with:
+microk8s.kubectl config view --raw > $HOME/.kube/config
+```
+
+## microk8s docker
+
+```bash
+
+microk8s.docker
+
+microk8s.enable registry
+
+http://localhost:32000/
+
+# Lets get a Docker file first
+wget https://raw.githubusercontent.com/nginxinc/docker-nginx/ddbbbdf9c410d105f82aa1b4dbf05c0021c84fd6/mainline/stretch/Dockerfile
+
+# And build it
+microk8s.docker build -t localhost:32000/nginx:testlocal . microk8s.docker push localhost:32000/nginx:testlocal
+```
+
+# Snap
+
+Desktop application container
+
+Integrated in terms of network, so share the system IP address, unlike Docker, where each container gets its own IP address.
+
+Uou can imagine this as a lighter weight version of a Docker container. It uses a lot of the same underlying technologies for isolation just without all the overhead of network isolation.
+
+```bash
+snap list
+
+sudo snap remove microk8s
+
+# disk space 
+df -h /var/snap/
+```
+
+
+# Kubernetes
+
+A Kubernetes Service is an abstraction which defines a logical set of Pods and a policy by which to access them - sometimes called a micro-service. 
+
+The set of Pods targeted by a Service is (usually) determined by a Label Selector 
+
+```bash
+# Create the Pod:
+kubectl create -f https://k8s.io/examples/application/shell-demo.yaml
+
+# Verify that the Container is running:
+kubectl get pod shell-demo
+
+# Get a shell to the running Container:
+kubectl exec -it shell-demo -- /bin/bash
+
+# In your shell, list the root directory:
+root@shell-demo:/# ls /
+
+# Running individual commands in a Container
+kubectl exec shell-demo ps aux
+kubectl exec shell-demo ls /
+
+```
+
+Kubernetes manifests can be defined in json or yaml. ( .yaml, .yml, and .json)
+
+Kubernetes Objects are persistent entities in the Kubernetes system. Kubernetes uses these entities to represent the state of your cluster.
+
+
+```bash
+#------- Creating Objects ---------
+kubectl create -f ./my-manifest.yaml           # create resource(s)
+kubectl explain pods,svc                       # get the documentation for pod and svc manifests
+
+#------- Viewing, Finding Resources ----------------
+# Get commands with basic output
+kubectl get services                          # List all services in the namespace
+kubectl get pods --all-namespaces             # List all pods in all namespaces
+kubectl get pods -o wide                      # List all pods in the namespace, with more details
+kubectl get deployment my-dep                 # List a particular deployment
+kubectl get pods --include-uninitialized      # List all pods in the namespace, including uninitialized ones
+
+# for troube shooting
+# Describe commands with verbose output
+kubectl describe nodes NODE_NAME
+kubectl describe pods POD_NAME
+
+#------- Deleting Resources -----------
+# delete the POD forcefully. if Pods stuck at terminating status
+kubectl delete pod POD_NAME --grace-period=0 --force
+
+```
+In Kubernetes, nodes, pods and services all have their own IPs. 
+In many cases, the node IPs, pod IPs, and some service IPs on a cluster will not be routable, so they will not be reachable from a machine outside the cluster, such as your desktop machine
+
+
+/var/snap/microk8s/current/args/kubelet
+ --eviction-hard="memory.available<500Mi,nodefs.available<1Gi,imagefs.available<1Gi"
+And then you will need to restart kubelet: sudo systemctl restart snap.microk8s.daemon-kubelet
+
+
+
+

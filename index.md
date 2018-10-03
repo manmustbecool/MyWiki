@@ -78,6 +78,7 @@ My notes
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
   
+
 ## Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
  * <a href="Wiki/Pig.html">Pig</a> 
@@ -88,12 +89,14 @@ My notes
  * <a href="Wiki/Flink.html">Flink</a> 
  * <a href="Wiki/Kafka.html">Kafka</a> 
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
- 
 
+## Cloud
+ * <a href="Wiki/Cloud/VirtualMachine.html">Virtual Machine</a>
+ * <a href="Wiki/Cloud/Container.html">Container</a>
+ 
 ## Others
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/Maven.html">Maven</a>
- * <a href="Wiki/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Latex.html">Latex</a>
  * <a href="Wiki/frontend.html">front end development</a>
  * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
