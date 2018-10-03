@@ -64,6 +64,7 @@ My notes
  * <a href="Wiki/Python/classificationOnIris.html">Classification on Iris dataset</a>
  * <a href="Wiki/Python/python_keras.html">Keras deep learning</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
+ * <a href="Wiki/Python/python_java.html">Call Java from Python</a>
  * Web development
     + <a href="Wiki/Python/Django.html">Django</a>
     + <a href="Wiki/Python/flaskReact.html">Flask + React</a>
@@ -73,7 +74,7 @@ My notes
 </div> <!--end two columns -->
 
 ## Java
-* <a href="Wiki/Java/jdk.html">Java JDK</a>
+ * <a href="Wiki/Java/jdk.html">Java JDK</a>
  * <a href="Wiki/Java/Java.html">Java notes</a>
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
   
