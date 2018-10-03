@@ -3,6 +3,6 @@ title: "jdk"
 output: html_document
 ---
 
-# install JDK 11
+# Install JDK 11
 
 https://stackoverflow.com/questions/52511778/how-to-install-openjdk-11-on-windows
