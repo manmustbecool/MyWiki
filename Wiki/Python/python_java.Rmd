@@ -1,0 +1,63 @@
+---
+title: "Call Java from Python"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Call Java from Python
+
+## Using py4j 
+
+ * Create the java file
+ 
+```java
+import py4j.GatewayServer;
+
+public class AdditionApplication {
+  public int addition(int first, int second) {
+    return first + second;
+  }
+
+  public static void main(String[] args) {
+    AdditionApplication app = new AdditionApplication();
+    // app is now the gateway.entry_point
+    // GatewayServer server = new GatewayServer(app,25334); to change default port
+    GatewayServer server = new GatewayServer(app);
+    server.start();
+    System.out.print("AdditionApplication started")
+  }
+}
+```
+
+ * Compile the java file
+ 
+```bash
+javac -cp /usr/local/share/py4j/py4j0.10.5.jar  AdditionApplication.java
+```
+py4j0.10.5.jar must be used. AdditionApplication.class will be generated
+
+
+ * Run the compiled class to start the py4j gateway,
+ 
+```bash
+java -cp /usr/local/share/py4j/py4j0.10.5.jar:. AdditionApplication
+```
+
+py4j0.10.5.jar must be used. 
+
+And in windows using ';' instead of ':' (e.g. xxx/py4j0.10.5.jar;. AdditionApplication)
+
+ * Call the java app from python script
+
+```python
+from py4j.java_gateway import JavaGateway
+gateway = JavaGateway()                   # connect to the JVM
+random = gateway.jvm.java.util.Random()   # create a java.util.Random instance
+number1 = random.nextInt(10)              # call the Random.nextInt method
+print(number1)
+
+AdditionApplication addition_app = new gateway.jvm.AdditionApplication() # get the AdditionApplication instance
+value = addition_app.addition(4, 5)) # call the addition method
+print(value)
+```
+
