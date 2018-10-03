@@ -30,6 +30,8 @@ http://vis.supstat.com/2013/04/plotting-symbols-and-color-palettes/
 
 http://www.endmemo.com/program/R/color.php
 
+http://sape.inf.usi.ch/quick-reference/ggplot2/colour
+
 ## Histogram
 
 ```{r}
