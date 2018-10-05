@@ -270,3 +270,14 @@ minikube delete
 minikube status
 minikube start
 ```
+
+# Example
+
+https://github.com/manmustbecool/MyWiki/tree/gh-pages/Wiki/Cloud/cloud_example
+
+run deploy.sh for deploying the flash app to microk8s cluster
+```bash
+./deploy.sh 
+```
+
+
