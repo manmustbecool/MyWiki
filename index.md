@@ -54,6 +54,7 @@ My notes
 </div>
 
 <div style="display: inline-block;">
+
 ## Python
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
  * <a href="Wiki/Python/python_plot.html">Python Plot</a>
@@ -69,8 +70,7 @@ My notes
     + <a href="Wiki/Python/Django.html">Django</a>
     + <a href="Wiki/Python/flaskReact.html">Flask + React</a>
     + <a href="Wiki/Python/dash.html">Dash</a>
-</div>
-
+    
 ## Cloud
  * <a href="Wiki/Cloud/VirtualMachine.html">Virtual Machine</a>
  * <a href="Wiki/Cloud/Container.html">Container - Docker</a>
@@ -85,7 +85,9 @@ My notes
  * <a href="Wiki/Solr.html">Solr</a>
  * <a href="Wiki/Flink.html">Flink</a> 
  * <a href="Wiki/Kafka.html">Kafka</a> 
- * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
+ * <a href="Wiki/ClouderaCm.html">Cloudera manager</a>   
+    
+</div>
 
 </div> <!--end two columns -->
 
