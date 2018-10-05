@@ -1,0 +1,86 @@
+---
+title: "kubeflow"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+# Kubeflow
+
+Installing Kubeflow using Bootstrapper
+
+https://www.kubeflow.org/docs/started/getting-started-minikube/
+
+
+https://www.ubuntu.com/ai/install
+
+
+Kubeflow uses Ksonnet to deploy the required components. 
+
+Jupyter Hub - for collaborative & interactive training
+A TensorFlow Training Controller with native distributed training
+A TensorFlow Serving for hosting
+Argo for workflows
+SeldonCore for complex inference and non TF models
+Ambassador for Reverse Proxy
+
+
+```bash
+kubectl get ns
+kubectl get svc
+kubectl -n kubeflow get svc -o wide
+kubectl -n kubeflow get pod
+
+kubectl logs -p -n kubeflow tf-hub-0
+
+sudo rm -fr my-kubeflow
+
+#----------
+
+sudo snap disable microk8s
+sudo snap enable microk8s
+
+sudo microk8s.enable dns dashboard
+sudo microk8s.enable storage
+
+sudo iptables -P FORWARD ACCEPT
+
+# forward ambassador service to from port 80 to 8080. we can access it from port 8080
+POD=`kubectl -n kubeflow get pods --selector=service=ambassador | awk '{print $1}' | tail -1`
+kubectl -n kubeflow port-forward $POD 8080:80 2>&1 >/dev/null &
+
+# forward tf-hub service which contain juper notebook
+POD=`kubectl -n kubeflow get pods --selector=app=tf-hub | awk '{print $1}' | tail -1`
+kubectl -n kubeflow port-forward $POD 8000:8000 2>&1 >/dev/null &
+
+http://localhost:8000/hub/login
+
+# ACCESSING THE DASHBOARD
+http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://localhost:8080/api/v1/namespaces/kube-system/services/http:monitoring-grafana:/proxy/
+
+
+POD=`kubectl -n kube-system get pods --selector=k8s-app=influxGrafana | awk '{print $1}' | tail -1`
+kubectl -n kube-system port-forward $POD 8011:8000 2>&1 >/dev/null &
+
+```
+
+## Ksonnet
+
+```base
+Set up a ksonnet application
+ks init
+Generate components for your app (e.g. Redis)
+ks generate (alias of ks prototype use)
+Deploy to a cluster
+ks apply
+Delete resources running on a cluster
+ks delete
+```
+
+
+## Argo
+a container-native workflow engine for Kubernetes
+
+
+##  Source to Image (s2i)
+

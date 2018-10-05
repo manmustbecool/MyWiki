@@ -1,5 +1,6 @@
 ---
-title: "Container"
+title: "Container - Docker"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
@@ -44,9 +45,9 @@ docker version
 ```bash
 # -------------- Image ------------------
 
-docker search ubuntu   # search a image
-docker pull ubuntu     # pull image 
-docker images     # list all images
+docker search ubuntu # search a image
+docker pull ubuntu # pull image 
+docker images # list all images
 docker image ls # List Docker images
 
 docker run -it ubuntu # run IMAGE_ID. Run: create a new container of an image, and execute the container. You can create N clones of the same image. -it for inactive shell in this case
@@ -116,6 +117,7 @@ curl -i http://docker
 # You can check the container is running using 
 docker ps
 ```
+
 ## Data container
 
 Data Containers are containers which sole responsibility to be a place to store/manage data.
@@ -148,12 +150,25 @@ snap remove microk8s
 
 # If you already have kubectl installed and you want to use it to access the microk8s deployment you can export the cluster's config with:
 microk8s.kubectl config view --raw > $HOME/.kube/config
+
+# enable dashboard
+sudo microk8s.enable dns dashboard
+sudo microk8s.enable storage
+
+sudo iptables -P FORWARD ACCEPT
+
+# forward ambassador service to from port 80 to 8080. we can access it from port 8080
+POD=`kubectl -n kubeflow get pods --selector=service=ambassador | awk '{print $1}' | tail -1`
+kubectl -n kubeflow port-forward $POD 8080:80 2>&1 >/dev/null &
+
+# ACCESSING THE DASHBOARD
+http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://localhost:8080/api/v1/namespaces/kube-system/services/http:monitoring-grafana:/proxy/
 ```
 
 ## microk8s docker
 
 ```bash
-
 microk8s.docker
 
 microk8s.enable registry
@@ -255,86 +270,3 @@ minikube delete
 minikube status
 minikube start
 ```
-
-
-# Ksonnet
-
-```base
-Set up a ksonnet application
-ks init
-Generate components for your app (e.g. Redis)
-ks generate (alias of ks prototype use)
-Deploy to a cluster
-ks apply
-Delete resources running on a cluster
-ks delete
-```
-
-
-# Kubeflow
-
-Installing Kubeflow using Bootstrapper
-
-https://www.kubeflow.org/docs/started/getting-started-minikube/
-
-
-https://www.ubuntu.com/ai/install
-
-
-Kubeflow uses Ksonnet to deploy the required components. 
-
-Jupyter Hub - for collaborative & interactive training
-A TensorFlow Training Controller with native distributed training
-A TensorFlow Serving for hosting
-Argo for workflows
-SeldonCore for complex inference and non TF models
-Ambassador for Reverse Proxy
-
-
-```bash
-kubectl get ns
-kubectl get svc
-kubectl -n kubeflow get svc -o wide
-kubectl -n kubeflow get pod
-
-kubectl logs -p -n kubeflow tf-hub-0
-
-sudo rm -fr my-kubeflow
-
-#----------
-
-sudo snap disable microk8s
-sudo snap enable microk8s
-
-sudo microk8s.enable dns dashboard
-sudo microk8s.enable storage
-
-sudo iptables -P FORWARD ACCEPT
-
-# forward ambassador service to from port 80 to 8080. we can access it from port 8080
-POD=`kubectl -n kubeflow get pods --selector=service=ambassador | awk '{print $1}' | tail -1`
-kubectl -n kubeflow port-forward $POD 8080:80 2>&1 >/dev/null &
-
-# forward tf-hub service which contain juper notebook
-POD=`kubectl -n kubeflow get pods --selector=app=tf-hub | awk '{print $1}' | tail -1`
-kubectl -n kubeflow port-forward $POD 8000:8000 2>&1 >/dev/null &
-
-http://localhost:8000/hub/login
-
-# ACCESSING THE DASHBOARD
-http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-http://localhost:8080/api/v1/namespaces/kube-system/services/http:monitoring-grafana:/proxy/
-
-
-POD=`kubectl -n kube-system get pods --selector=k8s-app=influxGrafana | awk '{print $1}' | tail -1`
-kubectl -n kube-system port-forward $POD 8011:8000 2>&1 >/dev/null &
-
-```
-
-Argo, a container-native workflow engine for Kubernetes
-
-
-# Source to Image (s2i)
-
-
-

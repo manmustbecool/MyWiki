@@ -71,13 +71,10 @@ My notes
     + <a href="Wiki/Python/dash.html">Dash</a>
 </div>
 
-</div> <!--end two columns -->
-
-## Java
- * <a href="Wiki/Java/jdk.html">Java JDK</a>
- * <a href="Wiki/Java/Java.html">Java notes</a>
- * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
-  
+## Cloud
+ * <a href="Wiki/Cloud/VirtualMachine.html">Virtual Machine</a>
+ * <a href="Wiki/Cloud/Container.html">Container - Docker</a>
+ * <a href="Wiki/Cloud/Kubeflow.html">Kubeflow</a>
 
 ## Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
@@ -90,9 +87,14 @@ My notes
  * <a href="Wiki/Kafka.html">Kafka</a> 
  * <a href="Wiki/ClouderaCm.html">Cloudera manager</a> 
 
-## Cloud
- * <a href="Wiki/Cloud/VirtualMachine.html">Virtual Machine</a>
- * <a href="Wiki/Cloud/Container.html">Container</a>
+</div> <!--end two columns -->
+
+## Java
+ * <a href="Wiki/Java/jdk.html">Java JDK</a>
+ * <a href="Wiki/Java/Java.html">Java notes</a>
+ * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
+  
+
  
 ## Others
  * <a href="Wiki/Linux.html">Linux</a>
