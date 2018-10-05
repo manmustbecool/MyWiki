@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-py-app-svc
+  namespace: 
+  labels:
+    app: my-py-app
+spec:
+  type: NodePort
+  ports:
+  - port: 81
+    protocol: TCP
+    name: http
+  selector:
+    app: my-py-app
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: my-py-app-svc
+  namespace: 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-py-app
+    spec:
+      containers:
+      - name: my-py-app
+        image: localhost:32000/py_app_img
+        ports:
+        - containerPort: 81
