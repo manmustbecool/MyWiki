@@ -122,6 +122,8 @@ docker ps
 
 Data Containers are containers which sole responsibility to be a place to store/manage data.
 
+DNS problem
+
 check and add DNS in the OS
 
 ```bash
@@ -129,6 +131,11 @@ cat /run/systemd/resolve/resolv.conf # for ubuntu 18.04
 cat /etc/resolv.conf
 sudo su "echo 'nameserver 193.181.14.10' > /etc/resolv.conf"
 ```
+
+https://serverfault.com/a/694649
+
+
+
 # microk8s
 
 microk8s is designed to be a fast and lightweight upstream Kubernetes install isolated from your host but not via a virtual machine. 
@@ -279,5 +286,4 @@ run deploy.sh for deploying the flash app to microk8s cluster
 ```bash
 ./deploy.sh 
 ```
-
 
