@@ -37,7 +37,7 @@ do
     POD=`kubectl get pods --selector=app=my-py-app --field-selector=status.phase=Running| awk '{print $1}' | tail -1`
     if [ "$POD" = "" ]
     then
-            echo "Waiting anomaly service deployment finish..."
+            echo "Waiting my-py-app deployment finish..."
 
     else
             break
@@ -49,14 +49,14 @@ echo $POD
 xdg-open 'http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/'
 sleep 1
 
-xdg-open 'http://0.0.0.0:9081/'
+xdg-open 'http://0.0.0.0:9081/' # for display JAVA_Home
 sleep 1
 
-xdg-open 'http://0.0.0.0:9081/addpy_api?x=3&y=4'
+xdg-open 'http://0.0.0.0:9081/addpy_api?x=3&y=4' # for addpy api
 sleep 2
 
 POD=`kubectl get pods --selector=app=my-py-app --field-selector=status.phase=Running| awk '{print $1}' | tail -1`
-kubectl port-forward $POD 9081:81
+kubectl port-forward $POD 9081:81 #2>&1 >/dev/null &
 
 
 

@@ -11,6 +11,8 @@ Installing Kubeflow using Bootstrapper
 https://www.kubeflow.org/docs/started/getting-started-minikube/
 
 
+Deploy Kubeflow to Kubernetes in Ubuntu
+
 https://www.ubuntu.com/ai/install
 
 

@@ -14,7 +14,7 @@ My notes
 
 <div style="display: flex; -webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 1px dotted #e0e0e0; -moz-column-rule: 1px dotted #e0e0e0; column-rule: 1px dotted #e0e0e0;">
 
-<div style="display: inline-block;">
+<div style="display: inline-block; padding-right:10px;">
 ## R
  * <a href="Wiki/R/RBasic.html">R Basic - cheat sheet</a>
  * <a href="Wiki/R/plot.html">R Plot</a>
@@ -97,7 +97,7 @@ My notes
  * <a href="Wiki/Java/JavaCollection.html">Java Collection</a>
   
 
- 
+
 ## Others
  * <a href="Wiki/Linux.html">Linux</a>
  * <a href="Wiki/Maven.html">Maven</a>
