@@ -373,9 +373,11 @@ data.iloc[:,-1] # last column of data frame
 # rows and columns
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
 
-#loc: label based indexing.
+#loc: based on label 
 df.loc[:3] # slice up to and including label 3
 df.loc[:'john'] # select rows by names/labels
+df.loc['john':'mark',:] # select rows from john to mark
+df.loc[['john','mark'],:] # select rows by multiple names/labels
 df.loc[df['column_name'] == some_value] # select rows whose column value equals a scalar
 df.loc[~df['column_name'].isin(some_values)] # select rows whose column value is in an iterable
 df.loc[(df['column_name'] == some_value) & df['other_column'].isin(some_values)] 

@@ -135,76 +135,6 @@ sudo su "echo 'nameserver 193.181.14.10' > /etc/resolv.conf"
 https://serverfault.com/a/694649
 
 
-
-# microk8s
-
-microk8s is designed to be a fast and lightweight upstream Kubernetes install isolated from your host but not via a virtual machine. 
-
-This isolation is achieved by packaging all the upstream binaries for Kubernetes, Docker.io, iptables, and CNI in a single snap package. The snap package is an application container
-
-```bash
-snap info microk8s
-
-microk8s.kubectl get no # inspect the cluster 
-
-# microk8s can be shutdown using the snap command
-snap disable microk8s 
-snap enable microk8s  # restart the microk8s
-
-# Removing microk8s
-microk8s.reset #  Before removing microk8s, use microk8s.reset to stop all running pods.
-snap remove microk8s
-
-# If you already have kubectl installed and you want to use it to access the microk8s deployment you can export the cluster's config with:
-microk8s.kubectl config view --raw > $HOME/.kube/config
-
-# enable dashboard
-sudo microk8s.enable dns dashboard
-sudo microk8s.enable storage
-
-sudo iptables -P FORWARD ACCEPT
-
-# forward ambassador service to from port 80 to 8080. we can access it from port 8080
-POD=`kubectl -n kubeflow get pods --selector=service=ambassador | awk '{print $1}' | tail -1`
-kubectl -n kubeflow port-forward $POD 8080:80 2>&1 >/dev/null &
-
-# ACCESSING THE DASHBOARD
-http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-http://localhost:8080/api/v1/namespaces/kube-system/services/http:monitoring-grafana:/proxy/
-```
-
-## microk8s docker
-
-```bash
-microk8s.docker
-
-microk8s.enable registry
-
-http://localhost:32000/
-
-# Lets get a Docker file first
-wget https://raw.githubusercontent.com/nginxinc/docker-nginx/ddbbbdf9c410d105f82aa1b4dbf05c0021c84fd6/mainline/stretch/Dockerfile
-
-# And build it
-microk8s.docker build -t localhost:32000/nginx:testlocal . microk8s.docker push localhost:32000/nginx:testlocal
-```
-
-## Snap
-
-Desktop application container
-
-Integrated in terms of network, so share the system IP address, unlike Docker, where each container gets its own IP address.
-
-Uou can imagine this as a lighter weight version of a Docker container. It uses a lot of the same underlying technologies for isolation just without all the overhead of network isolation.
-
-```bash
-snap list
-
-sudo snap remove microk8s
-
-df -h /var/snap/ # disk space 
-```
-
 # Kubernetes
 
 A Kubernetes Service is an abstraction which defines a logical set of Pods and a policy by which to access them - sometimes called a micro-service. 
@@ -259,13 +189,84 @@ kubectl delete pod POD_NAME --grace-period=0 --force
 
 ```
 In Kubernetes, nodes, pods and services all have their own IPs. 
+
 In many cases, the node IPs, pod IPs, and some service IPs on a cluster will not be routable, so they will not be reachable from a machine outside the cluster, such as your desktop machine
 
 
+# microk8s
+
+microk8s is designed to be a fast and lightweight upstream Kubernetes install isolated from your host but not via a virtual machine. 
+
+This isolation is achieved by packaging all the upstream binaries for Kubernetes, Docker.io, iptables, and CNI in a single snap package. The snap package is an application container
+
+```bash
+snap info microk8s
+
+microk8s.kubectl get no # inspect the cluster 
+
+# microk8s can be shutdown using the snap command
+snap disable microk8s 
+snap enable microk8s  # restart the microk8s
+
+# Removing microk8s
+microk8s.reset #  Before removing microk8s, use microk8s.reset to stop all running pods.
+snap remove microk8s
+
+# If you already have kubectl installed and you want to use it to access the microk8s deployment you can export the cluster's config with:
+microk8s.kubectl config view --raw > $HOME/.kube/config
+
+# enable dashboard
+sudo microk8s.enable dns dashboard
+sudo microk8s.enable storage
+
+sudo iptables -P FORWARD ACCEPT
+
+# forward ambassador service to from port 80 to 8080. we can access it from port 8080
+POD=`kubectl -n kubeflow get pods --selector=service=ambassador | awk '{print $1}' | tail -1`
+kubectl -n kubeflow port-forward $POD 8080:80 2>&1 >/dev/null &
+
+# ACCESSING THE DASHBOARD
+http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://localhost:8080/api/v1/namespaces/kube-system/services/http:monitoring-grafana:/proxy/
+```
+
+## microk8s docker
+
+```bash
+microk8s.docker
+
+microk8s.enable registry
+
+http://localhost:32000/
+
+# Lets get a Docker file first
+wget https://raw.githubusercontent.com/nginxinc/docker-nginx/ddbbbdf9c410d105f82aa1b4dbf05c0021c84fd6/mainline/stretch/Dockerfile
+
+# And build it
+microk8s.docker build -t localhost:32000/nginx:testlocal . microk8s.docker push localhost:32000/nginx:testlocal
+```
+
 /var/snap/microk8s/current/args/kubelet
  --eviction-hard="memory.available<500Mi,nodefs.available<1Gi,imagefs.available<1Gi"
+ 
 And then you will need to restart kubelet: sudo systemctl restart snap.microk8s.daemon-kubelet
 
+
+## Snap
+
+Desktop application container
+
+Integrated in terms of network, so share the system IP address, unlike Docker, where each container gets its own IP address.
+
+Uou can imagine this as a lighter weight version of a Docker container. It uses a lot of the same underlying technologies for isolation just without all the overhead of network isolation.
+
+```bash
+snap list
+
+sudo snap remove microk8s
+
+df -h /var/snap/ # disk space 
+```
 
 
 # minikube
