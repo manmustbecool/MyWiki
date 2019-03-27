@@ -4,6 +4,20 @@ output: html_document
 ---
 
 
+# Git 
+
+create ssh key in local laptop
+upload the public key to the remote git repository
+
+#### fatal: unable to access 'https://github.com/...': SSL certificate problem: unable to get local issuer certificate
+
+The following command will by pass the SSL certificate verification
+```bash
+git config --global http.sslVerify false
+```
+
+
+
 # Can not find repository
 
 Eclipse -> preferences > Maven -> User setting 

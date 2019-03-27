@@ -6,3 +6,4 @@ bin
 MyWiki.Rproj
 /.classpath
 /.project
+.Rproj.user

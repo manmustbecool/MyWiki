@@ -100,7 +100,7 @@ My notes
  
 ## Others
  * <a href="Wiki/Linux.html">Linux</a>
- * <a href="Wiki/Maven.html">Maven</a>
+ * <a href="Wiki/Maven.html">Git, Maven</a>
  * <a href="Wiki/Latex.html">Latex</a>
  * <a href="Wiki/frontend.html">front end development</a>
  * <a href="Wiki/eclipseModeling.html">Eclipse Modeling</a>
