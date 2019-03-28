@@ -444,6 +444,14 @@ df <- as.data.frame.matrix(dt)
 # select colum by names
 dt <- dt[ ,c("time","count"), with=F] # need set with=F
 
+# delete a column by name in data.table
+dt <- dt[,foo:=NULL]
+
+dt <- dt[, c("foo","bar"):=NULL]  # remove two columns
+
+myVar = "foo"
+dt <- dt[, (myVar):=NULL]   # lookup myVar contents
+
 # ------ group by with data.table
 dt[, list(mean=mean(age), sd=sd(age)), by=company] # summarize
 dt[, list(ages=list(age)), by=company] # list
