@@ -693,7 +693,7 @@ dt &lt;-<span class="st"> </span>dt[, (myVar)<span class="op">:</span><span clas
 <span class="co">#------- merge tables -----</span>
 dt1 &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">2</span>)
 dt2 &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">y=</span><span class="dv">1</span>, <span class="dt">x=</span><span class="dv">2</span>)
-dt3 &lt;-<span class="st"> </span><span class="kw">rbindlist</span>(<span class="kw">list</span>(dt1,dt2), <span class="dt">use.names=</span>T, <span class="dt">fill=</span>F)
+dt3 &lt;-<span class="st"> </span><span class="kw">rbindlist</span>(<span class="kw">list</span>(dt1,dt2), <span class="dt">use.names=</span>T, <span class="dt">fill=</span>F) <span class="co"># use fill=T for binding by names and fill missing columns</span>
 <span class="co">#    x y</span>
 <span class="co"># 1: 1 2</span>
 <span class="co"># 2: 2 1</span>

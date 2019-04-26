@@ -471,7 +471,7 @@ dt <- dt[, (myVar):=NULL]   # lookup myVar contents
 #------- merge tables -----
 dt1 <- data.table(x=1, y=2)
 dt2 <- data.table(y=1, x=2)
-dt3 <- rbindlist(list(dt1,dt2), use.names=T, fill=F)
+dt3 <- rbindlist(list(dt1,dt2), use.names=T, fill=F) # use fill=T for binding by names and fill missing columns
 #    x y
 # 1: 1 2
 # 2: 2 1
