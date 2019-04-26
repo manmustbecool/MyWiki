@@ -4,10 +4,13 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+```
+pip install dash
+```
+
 # live update plot
 
 ```python
-
 import dash
 from dash.dependencies import Output, Event
 import dash_core_components as dcc
