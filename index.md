@@ -8,7 +8,7 @@ output:
 
 > Home: http://manmustbecool.github.io/MyWiki/
 
-Contact: manmustcool[.at.]yahoo[.dot.]com
+Contact: manmustcool[.at.]yahoo[.dot.]com 
 
 My notes
 
