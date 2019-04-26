@@ -12,3 +12,6 @@ pip install dash
 
  * <a href="python_code/dash_live_plot.py">dash_live_plot.py</a>
 
+# dash_slider_demo
+
+ * <a href="python_code/dash_slider_demo.py">dash_slider_demo.py</a>
