@@ -10,6 +10,9 @@ pip install dash
 
 # live update plot
 
+ * <a href="Wiki/Python/python_code/dash_live_plot.py">dash_live_plot.py</a>
+
+
 ```python
 import dash
 from dash.dependencies import Output, Event
@@ -67,6 +70,5 @@ def update_graph_scatter():
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-
 ```
 
