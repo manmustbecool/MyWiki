@@ -242,7 +242,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R Cheat Sheet</h1>
-<h4 class="date">Updated: 28 March, 2019</h4>
+<h4 class="date">Updated: 26 April, 2019</h4>
 
 </div>
 
@@ -256,7 +256,10 @@ $(document).ready(function () {
 <li><a href="#factor"><span class="toc-section-number">4.2</span> factor</a></li>
 <li><a href="#matrix"><span class="toc-section-number">4.3</span> matrix</a></li>
 <li><a href="#array"><span class="toc-section-number">4.4</span> array</a></li>
-<li><a href="#data.frame"><span class="toc-section-number">4.5</span> data.frame</a></li>
+<li><a href="#data.frame"><span class="toc-section-number">4.5</span> data.frame</a><ul>
+<li><a href="#data.table"><span class="toc-section-number">4.5.1</span> data.table</a></li>
+<li><a href="#tidyr"><span class="toc-section-number">4.5.2</span> tidyr</a></li>
+</ul></li>
 <li><a href="#list"><span class="toc-section-number">4.6</span> list</a></li>
 </ul></li>
 <li><a href="#other-data-structures"><span class="toc-section-number">5</span> Other data structures</a><ul>
@@ -653,7 +656,21 @@ a1NotIna2 &lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span clas
 <span class="kw">require</span>(dplyr)
 <span class="kw">semi_join</span>(a1,a2) <span class="co"># for rows  are in both data frames</span>
 <span class="kw">anti_join</span>(a1,a2)</code></pre></div>
-<p><strong>Use data.table for data.fame</strong></p>
+<p><strong>Stack columns</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">b=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">c=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))
+<span class="co"># Stack the data:</span>
+sdf &lt;-<span class="st"> </span><span class="kw">stack</span>(df)
+
+<span class="co">#   values ind</span>
+<span class="co"># 1      1   a</span>
+<span class="co"># 2      1   a</span>
+<span class="co"># 3      2   b</span>
+<span class="co"># 4      2   b</span>
+<span class="co"># 5      3   c</span>
+<span class="co"># 6      3   c</span></code></pre></div>
+<div id="data.table" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> data.table</h3>
+<p>use data.table for data.frame</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
 
 <span class="co"># convert the data frame to data table</span>
@@ -673,6 +690,14 @@ dt &lt;-<span class="st"> </span>dt[, <span class="kw">c</span>(<span class="st"
 myVar =<span class="st"> &quot;foo&quot;</span>
 dt &lt;-<span class="st"> </span>dt[, (myVar)<span class="op">:</span><span class="er">=</span><span class="ot">NULL</span>]   <span class="co"># lookup myVar contents</span>
 
+<span class="co">#------- merge tables -----</span>
+dt1 &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">2</span>)
+dt2 &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">y=</span><span class="dv">1</span>, <span class="dt">x=</span><span class="dv">2</span>)
+dt3 &lt;-<span class="st"> </span><span class="kw">rbindlist</span>(<span class="kw">list</span>(dt1,dt2), <span class="dt">use.names=</span>T, <span class="dt">fill=</span>F)
+<span class="co">#    x y</span>
+<span class="co"># 1: 1 2</span>
+<span class="co"># 2: 2 1</span>
+
 <span class="co"># ------ group by with data.table</span>
 dt[, <span class="kw">list</span>(<span class="dt">mean=</span><span class="kw">mean</span>(age), <span class="dt">sd=</span><span class="kw">sd</span>(age)), by=company] <span class="co"># summarize</span>
 dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), by=company] <span class="co"># list</span>
@@ -680,19 +705,10 @@ dt[, count<span class="op">:</span><span class="er">=</span>.N, by=<span class="
 
 expr &lt;-<span class="st"> </span><span class="kw">parse</span>(<span class="dt">text =</span> <span class="kw">paste</span>(<span class="st">&quot;by=&quot;</span>, <span class="kw">colnames</span>(dt)<span class="dv">2</span>)) <span class="co"># dynamic column names with groupping</span>
 dt[, <span class="kw">list</span>(<span class="dt">ages=</span><span class="kw">list</span>(age)), <span class="kw">eval</span>(expr)]</code></pre></div>
-<p><strong>Stack columns</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">b=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="dt">c=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))
-<span class="co"># Stack the data:</span>
-sdf &lt;-<span class="st"> </span><span class="kw">stack</span>(df)
-
-<span class="co">#   values ind</span>
-<span class="co"># 1      1   a</span>
-<span class="co"># 2      1   a</span>
-<span class="co"># 3      2   b</span>
-<span class="co"># 4      2   b</span>
-<span class="co"># 5      3   c</span>
-<span class="co"># 6      3   c</span></code></pre></div>
-<p><strong>Reshape data frame with tidyr</strong></p>
+</div>
+<div id="tidyr" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> tidyr</h3>
+<p>reshape data.frame with tidyr</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">month=</span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">2</span>),
                  <span class="dt">student=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;Bob&quot;</span>), <span class="dt">each=</span><span class="dv">3</span>),
@@ -724,6 +740,7 @@ df_w &lt;-<span class="st"> </span><span class="kw">spread</span>(df, student, s
 <span class="co"># 4     1     Bob     8</span>
 <span class="co"># 5     2     Bob     6</span>
 <span class="co"># 6     3     Bob     9</span></code></pre></div>
+</div>
 </div>
 <div id="list" class="section level2">
 <h2><span class="header-section-number">4.6</span> list</h2>
