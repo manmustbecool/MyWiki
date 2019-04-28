@@ -174,7 +174,7 @@ np.random.randint(10, size=2) # add replace=False for non duplicated values
 ay.tolist()
 ```
 
-### Shape
+### shape
 ```python
 ay = np.array([[1,2], [3,4]])
 
@@ -189,7 +189,7 @@ np.reshape(ay, 4)
 # array([1, 2, 3, 4])
 ```
 
-### Append and Delete
+### append / delete
 ```python
 
 # append an array
@@ -204,7 +204,7 @@ unique, counts = numpy.unique(a, return_counts=True)
 
 ```
 
-### Subset
+### subset
 ```python
 # subset by index
 arr = np.array([10, 20, 30, 40, 50, 60])
@@ -271,7 +271,7 @@ pd.Series([1, 2, 3]).values
 ```
 ## Panda::DataFrame
 
-**Initialize data frame**
+**initialize data frame**
 
 ```python
 df = pd.DataFrame(
@@ -331,7 +331,7 @@ df.drop_duplicates() # Remove duplicate rows (only considers columns).
 df = df.values #convert a pandas dataframe (df) to a numpy ndarray,
 ```
 
-### Sort
+### sort
 
 ```python
 # Order rows by values of a column 
@@ -348,7 +348,7 @@ df.sample(n)
 df = df(drop=True)
 ```
 
-### Subset 
+### subset 
 
 ```python
 #--------- row selection ---------------
@@ -410,7 +410,7 @@ df[['name', 'age']]
 df.filter(regex='name|address')
 ```
 
-### Add 
+### add 
 ```python
 # append a column
 df['new_col'] = pd.Series(np.arange(0, 100), index=df.index)
@@ -442,7 +442,7 @@ df.append(df2, ignore_index=True)
 df = df.reset_index(drop=True) 
 ```
 
-### Remove
+### remove
 ```python
 # delete rows based on index
 df = df.drop(df.index[1: 4])
@@ -465,7 +465,7 @@ df.drop(cols_to_drop, axis=1)
 df.sum(axis=1)
 ```
 
-### Group
+### group
 
 ```python
 # groupby dataframe by key
@@ -478,7 +478,7 @@ for name, group in grouped:
 	print('value:' group)
 ```
 
-### Handle NaN
+### handle NaN
 
 ```python
 df.fillna(0) # Replace all the NaN values with Zero
@@ -491,6 +491,9 @@ from datetime import datetime
 
 now = datetime.now()
 print("Now: ", now)
+
+now.month # 4
+'%02d' % d.month # ‘04’
 
 now.year #  now.month or now.hour, etc
 now.strftime('%Y-%m-%d %H:%M:%S') # fromt timestamp
