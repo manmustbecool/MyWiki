@@ -557,6 +557,22 @@ files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
     print(f)
 ```
+# lambda 
+
+Anonymous function objects 
+
+```python
+# --- function ----
+def add(x, y): 
+  return x + y
+  
+add(2, 3)  # Output: 5
+
+# --- lambda arguments : expression ---
+add = lambda x, y : x + y 
+  
+add(2, 3) # Output: 5
+```
 
 
 # Real time plot with python
