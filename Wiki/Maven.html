@@ -247,7 +247,9 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#git"><span class="toc-section-number">1</span> Git</a></li>
+<li><a href="#git"><span class="toc-section-number">1</span> Git</a><ul>
+<li><a href="#delete-unpushed-git-commits"><span class="toc-section-number">1.1</span> delete unpushed git commits</a></li>
+</ul></li>
 <li><a href="#can-not-find-repository"><span class="toc-section-number">2</span> Can not find repository</a></li>
 </ul>
 </div>
@@ -259,6 +261,14 @@ $(document).ready(function () {
 <h4><span class="header-section-number">1.0.0.1</span> fatal: unable to access ‘<a href="https://github.com/" class="uri">https://github.com/</a>…’: SSL certificate problem: unable to get local issuer certificate</h4>
 <p>The following command will by pass the SSL certificate verification</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global http.sslVerify false</code></pre></div>
+</div>
+<div id="delete-unpushed-git-commits" class="section level2">
+<h2><span class="header-section-number">1.1</span> delete unpushed git commits</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Delete the most recent commit, keeping the work you've done:</span>
+<span class="fu">git</span> reset --soft HEAD~1
+
+<span class="co"># Delete the most recent commit, destroying the work you've done:</span>
+<span class="fu">git</span> reset --hard HEAD~1</code></pre></div>
 </div>
 </div>
 <div id="can-not-find-repository" class="section level1">
