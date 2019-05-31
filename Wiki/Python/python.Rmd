@@ -557,8 +557,8 @@ files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
     print(f)
 ```
-# lambda 
-
+# Others
+## lambda 
 Anonymous function objects 
 
 ```python
@@ -572,6 +572,34 @@ add(2, 3)  # Output: 5
 add = lambda x, y : x + y 
   
 add(2, 3) # Output: 5
+```
+
+## underscore _  
+```python
+# storing the value of last expression in interpreter
+>>> 10 
+10 
+>>> _ * 3  
+30
+
+# For Ignoring the values
+x, _, y = (1, 2, 3) # x = 1, y = 3
+
+# _single_leading_underscore:  
+# is used for declaring private variables, functions, methods and classes in a module
+class _Base: # private class
+    _hidden_factor = 2 # private variable
+    
+# __double_leading_underscore:
+# for mangling 
+class A:
+    def __double_method(self): # the name will be mangled in "_ClassName__method" form.
+        pass
+        
+# __double_leading_and_trailing_underscore__ : 
+#  for special variables or methods 
+__file__ # indicates the location of Python file
+__init__ # will be executed at first when a instance of class is created
 ```
 
 

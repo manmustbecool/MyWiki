@@ -242,7 +242,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 09 May, 2019</h4>
+<h4 class="date">Updated: 31 May, 2019</h4>
 
 </div>
 
@@ -285,7 +285,10 @@ $(document).ready(function () {
 <li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">6.2</span> Read head lines of a large text file</a></li>
 <li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">6.3</span> List files only in the current directory</a></li>
 </ul></li>
-<li><a href="#lambda"><span class="toc-section-number">7</span> lambda</a></li>
+<li><a href="#others"><span class="toc-section-number">7</span> Others</a><ul>
+<li><a href="#lambda"><span class="toc-section-number">7.1</span> lambda</a></li>
+<li><a href="#underscore-_"><span class="toc-section-number">7.2</span> underscore _</a></li>
+</ul></li>
 <li><a href="#real-time-plot-with-python"><span class="toc-section-number">8</span> Real time plot with python</a></li>
 <li><a href="#plot-a-hist-graph"><span class="toc-section-number">9</span> plot a hist graph</a></li>
 <li><a href="#install-package"><span class="toc-section-number">10</span> Install package</a></li>
@@ -794,8 +797,10 @@ files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw
     <span class="bu">print</span>(f)</code></pre></div>
 </div>
 </div>
-<div id="lambda" class="section level1">
-<h1><span class="header-section-number">7</span> lambda</h1>
+<div id="others" class="section level1">
+<h1><span class="header-section-number">7</span> Others</h1>
+<div id="lambda" class="section level2">
+<h2><span class="header-section-number">7.1</span> lambda</h2>
 <p>Anonymous function objects</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># --- function ----</span>
 <span class="kw">def</span> add(x, y): 
@@ -807,6 +812,34 @@ add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Ou
 add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y 
   
 add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></code></pre></div>
+</div>
+<div id="underscore-_" class="section level2">
+<h2><span class="header-section-number">7.2</span> underscore _</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># storing the value of last expression in interpreter</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="dv">10</span> 
+<span class="dv">10</span> 
+<span class="op">&gt;&gt;&gt;</span> _ <span class="op">*</span> <span class="dv">3</span>  
+<span class="dv">30</span>
+
+<span class="co"># For Ignoring the values</span>
+x, _, y <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># x = 1, y = 3</span>
+
+<span class="co"># _single_leading_underscore:  </span>
+<span class="co"># is used for declaring private variables, functions, methods and classes in a module</span>
+<span class="kw">class</span> _Base: <span class="co"># private class</span>
+    _hidden_factor <span class="op">=</span> <span class="dv">2</span> <span class="co"># private variable</span>
+    
+<span class="co"># __double_leading_underscore:</span>
+<span class="co"># for mangling </span>
+<span class="kw">class</span> A:
+    <span class="kw">def</span> __double_method(<span class="va">self</span>): <span class="co"># the name will be mangled in &quot;_ClassName__method&quot; form.</span>
+        <span class="cf">pass</span>
+        
+<span class="co"># __double_leading_and_trailing_underscore__ : </span>
+<span class="co">#  for special variables or methods </span>
+<span class="va">__file__</span> <span class="co"># indicates the location of Python file</span>
+<span class="fu">__init__</span> <span class="co"># will be executed at first when a instance of class is created</span></code></pre></div>
+</div>
 </div>
 <div id="real-time-plot-with-python" class="section level1">
 <h1><span class="header-section-number">8</span> Real time plot with python</h1>
