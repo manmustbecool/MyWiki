@@ -3,7 +3,7 @@ output:
   html_document:
     theme: united
     includes:
-      after_body: wiki\includes\footer.html 
+      after_body: wiki\includes\footer.html
 ---
 
 > Home: http://manmustbecool.github.io/MyWiki/
