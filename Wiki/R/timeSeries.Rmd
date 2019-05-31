@@ -157,6 +157,20 @@ Identify and replace outliers and missing values in a time series
 tsclean(x, replace.missing = TRUE, lambda = NULL)
 ```
 
+Subset XTS weekdays
+
+```r
+library(xts)
+dates <- seq(as.Date("2019-05-24"), length = 50, by = "days") # Create dates as a Date class object starting from 2019-05-24
+smith <- xts(x = rnorm(50), order.by = dates) # Use xts() to create smith
+
+
+smith[.indexwday(smith) %in% 1:5] # uses .indexwday 
+
+smith[!weekdays(index(smith)) %in% c("Saturday", "Sunday")]  # uses weekdays
+
+```
+
 ## Moving Averages 
 
   * TTR
