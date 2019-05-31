@@ -147,8 +147,6 @@ plot(newTs)
 ts[is.na(ts)] <- 0 
 # na.locf (Last Observation Carried Forward) from package zoo
 ts <- na.locf(ts) 
-
-
 ```
 
 Identify and replace outliers and missing values in a time series 
@@ -198,7 +196,6 @@ acf(kings1diff, lag.max = 20)
 ## Decomposition
 
 STL: Seasonal-Trend decomposition based on the Loess
-
 
 ```{r,warning=F}
 
