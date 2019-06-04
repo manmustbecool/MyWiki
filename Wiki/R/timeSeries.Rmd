@@ -129,7 +129,6 @@ rollapply(TS, width = 3, by = 2, FUN = mean, align = "left")
 ```
 
 Deal with inregular time series, time internvals are not constant
-
 ```r
 tMinHour <- trunc(min(time(ts)), units ='hour') # get minimum at an hour granularity
 tMin <- tMinHour - (30 * 60) # back off 30 minute of the current hour
@@ -156,7 +155,6 @@ tsclean(x, replace.missing = TRUE, lambda = NULL)
 ```
 
 Subset XTS weekdays
-
 ```r
 library(xts)
 dates <- seq(as.Date("2019-05-24"), length = 50, by = "days") # Create dates as a Date class object starting from 2019-05-24
@@ -185,7 +183,6 @@ kings <- c(60, 43, 67, 50, 56, 42, 50, 65, 68, 43, 65, 34, 47, 34, 49, 41, 13, 3
 kingsts = ts(kings)
 kingsts
 acf(kingsts, lag.max = 20)
-
 
 kings1diff = diff(kingsts, differences = 1)
 acf(kings1diff, lag.max = 20)
@@ -221,10 +218,8 @@ remainder <- decomposed$time.series[,"remainder"] # or decomposed$time.series[,3
 plot(decomposed)
 
 
-
 decomposed <- decompose(time.series)
 plot(decomposed)
-
 ```
 
 ## Seasonal Subseries Plot
@@ -232,7 +227,6 @@ plot(decomposed)
 For each season (or other category), a time series is plotted. 
 
 ```{r}
-
 require(graphics)
 
 ## The CO2 data
@@ -244,16 +238,13 @@ monthplot(fit, choice = "seasonal", cex.axis = 0.8)
 monthplot(fit, choice = "trend", cex.axis = 0.8)
 monthplot(fit, choice = "remainder", type = "h", cex.axis = 0.8)
 par(op)
-
 ```
 
 
 ## time series cluster
 
-R package TSclust
-
+  * TSclust
 https://cran.r-project.org/web/packages/TSclust/
-
 
 ## DTW
 
