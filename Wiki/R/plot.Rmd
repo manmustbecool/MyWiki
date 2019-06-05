@@ -15,8 +15,10 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
  
 # cheat sheet
 
+![margin cheatsheet](images/plot_margin.PNG)
 ```
 ![margin cheatsheet](images/plot_margin.PNG)
+#or
 <img src="images/plot_margin.PNG"/>
 ```
 
@@ -31,6 +33,12 @@ http://vis.supstat.com/2013/04/plotting-symbols-and-color-palettes/
 http://www.endmemo.com/program/R/color.php
 
 http://sape.inf.usi.ch/quick-reference/ggplot2/colour
+
+```r
+# Transparent color
+adjustcolor( "red", alpha.f = 0.2)
+```
+
 
 ## Histogram
 
