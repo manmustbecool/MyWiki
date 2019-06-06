@@ -460,6 +460,9 @@ df <- as.data.frame.matrix(dt)
 # select colum by names
 dt <- dt[ ,c("time","count"), with=F] # need set with=F
 
+# return a column as a vector
+dt[[2]] # select by index
+
 # delete a column by name in data.table
 dt <- dt[,foo:=NULL]
 

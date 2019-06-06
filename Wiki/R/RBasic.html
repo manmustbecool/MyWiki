@@ -242,7 +242,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R Cheat Sheet</h1>
-<h4 class="date">Updated: 26 April, 2019</h4>
+<h4 class="date">Updated: 06 June, 2019</h4>
 
 </div>
 
@@ -681,6 +681,9 @@ df &lt;-<span class="st"> </span><span class="kw">as.data.frame.matrix</span>(dt
 
 <span class="co"># select colum by names</span>
 dt &lt;-<span class="st"> </span>dt[ ,<span class="kw">c</span>(<span class="st">&quot;time&quot;</span>,<span class="st">&quot;count&quot;</span>), with=F] <span class="co"># need set with=F</span>
+
+<span class="co"># return a column as a vector</span>
+dt[[<span class="dv">2</span>]] <span class="co"># select by index</span>
 
 <span class="co"># delete a column by name in data.table</span>
 dt &lt;-<span class="st"> </span>dt[,foo<span class="op">:</span><span class="er">=</span><span class="ot">NULL</span>]
