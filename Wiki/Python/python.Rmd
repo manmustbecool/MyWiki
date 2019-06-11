@@ -98,7 +98,7 @@ print(a) # -> ['a', 'b', 'c', 'd']
 Tuples are immutable sequences
 ```python
 t = 12345, 54321, 'hello!'
-t[0]
+t[0] # 12345
 ```
 
 ### Set
@@ -484,6 +484,20 @@ for name, group in grouped:
 df.fillna(0) # Replace all the NaN values with Zero
 ```
 
+### type converting
+
+```python
+# type of each column
+df.dtypes
+
+# To Factors
+s = pd.Series(['single', 'touching', 'nuclei', 'dusts', 'touching', 'single', 'nuclei'])
+s_enc = pd.factorize(s) 
+
+# to datatime
+pd.to_datetime(pd.Series(['2005-05-23 00:00:00', '2005-05-24 00:00:00']), format="%Y-%m-%d %H:%M:%S")
+```
+
 # Data time
 
 ```python
@@ -507,8 +521,8 @@ pd.period_range(start='2017-01-01', end='2017-10-01', freq='M')
 #              '2017-07', '2017-08', '2017-09', '2017-10'],
 #             dtype='period[M]', freq='M')
 
-import pandas
-result_ms=pandas.to_datetime('1493530261000',unit='ms')
+import pandas as pd
+result_ms=pd.to_datetime('1493530261000', unit='ms')
 str(result_ms) # -> '2017-04-30 05:31:01'
 
 ```
