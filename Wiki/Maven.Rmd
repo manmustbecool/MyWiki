@@ -26,6 +26,13 @@ git reset --soft HEAD~1
 git reset --hard HEAD~1
 ```
 
+## Unset git proxy
+
+```bash
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
 
 # Can not find repository
 
