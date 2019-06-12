@@ -91,6 +91,11 @@ a = ['a',' b', 'c ', ' d ']
 for i, s in enumerate(a):
     a[i] = s.strip()
 print(a) # -> ['a', 'b', 'c', 'd']
+
+# list to string
+li = ["This" , "is", "a", "sample", "program"]
+' '.join(li) # 'This is a sample program'
+','.join(li) # 'This,is,a,sample,program'
 ```
 
 ### Tuple

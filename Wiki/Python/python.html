@@ -372,7 +372,12 @@ a <span class="op">=</span> [<span class="st">'a'</span>,<span class="st">' b'</
 
 <span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(a):
     a[i] <span class="op">=</span> s.strip()
-<span class="bu">print</span>(a) <span class="co"># -&gt; ['a', 'b', 'c', 'd']</span></code></pre></div>
+<span class="bu">print</span>(a) <span class="co"># -&gt; ['a', 'b', 'c', 'd']</span>
+
+<span class="co"># list to string</span>
+li <span class="op">=</span> [<span class="st">&quot;This&quot;</span> , <span class="st">&quot;is&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;sample&quot;</span>, <span class="st">&quot;program&quot;</span>]
+<span class="co">' '</span>.join(li) <span class="co"># 'This is a sample program'</span>
+<span class="co">','</span>.join(li) <span class="co"># 'This,is,a,sample,program'</span></code></pre></div>
 </div>
 <div id="tuple" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> Tuple</h3>
