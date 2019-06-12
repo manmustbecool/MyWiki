@@ -1,0 +1,48 @@
+---
+title: "Plotly - Python"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# realtime update
+## a self refresh html page with offline plot
+
+```python
+import numpy as np
+from plotly.offline import plot # offline plot
+import plotly.graph_objs as go
+import matplotlib.pyplot as plt
+
+refresh_time = 2 # seconds
+
+def create_a_trace():
+    N = 10
+    trace = go.Scatter(
+        x=np.random.randn(N),
+        y=np.random.randn(N),
+        mode='markers'
+    )
+    return trace
+
+def write_to_html(data, index):
+
+    html = '<meta http-equiv="refresh" content="' + str(refresh_time) + '" >' # add auto refresh html meta data
+    html = html + '<h3> plot '+str(index)+'</h3>'
+    html = html + plot(data, include_plotlyjs=True, output_type='div')
+    # html = '<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>' + html
+    html = '<html>' + html + '</html>'
+    
+    # Write HTML String to html file
+    with open("basic_refresh.html", "w") as file:
+        file.write(html)
+
+# initial plot
+data = [create_a_trace()]
+write_to_html(data, 0)
+
+# update plot
+for i in range(20):
+    plt.pause(refresh_time) # time.sleep() does not work in here
+    data = [create_a_trace()]
+    write_to_html(data, i)
+```
+
