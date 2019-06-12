@@ -242,7 +242,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 11 June, 2019</h4>
+<h4 class="date">Updated: 12 June, 2019</h4>
 
 </div>
 
@@ -373,6 +373,11 @@ a <span class="op">=</span> [<span class="st">'a'</span>,<span class="st">' b'</
 <span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(a):
     a[i] <span class="op">=</span> s.strip()
 <span class="bu">print</span>(a) <span class="co"># -&gt; ['a', 'b', 'c', 'd']</span>
+
+<span class="co"># loop for the list</span>
+li <span class="op">=</span> [(<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">3</span>), (<span class="dv">2</span>, <span class="dv">3</span>)]
+[<span class="bu">sum</span>(tup) <span class="cf">for</span> tup <span class="kw">in</span> li]
+<span class="co"># [3, 4, 5]</span>
 
 <span class="co"># list to string</span>
 li <span class="op">=</span> [<span class="st">&quot;This&quot;</span> , <span class="st">&quot;is&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;sample&quot;</span>, <span class="st">&quot;program&quot;</span>]

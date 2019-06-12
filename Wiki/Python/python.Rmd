@@ -92,6 +92,11 @@ for i, s in enumerate(a):
     a[i] = s.strip()
 print(a) # -> ['a', 'b', 'c', 'd']
 
+# loop for the list
+li = [(1, 2), (1, 3), (2, 3)]
+[sum(tup) for tup in li]
+# [3, 4, 5]
+
 # list to string
 li = ["This" , "is", "a", "sample", "program"]
 ' '.join(li) # 'This is a sample program'
