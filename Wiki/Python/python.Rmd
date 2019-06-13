@@ -101,6 +101,7 @@ li = [(1, 2), (1, 3), (2, 3)]
 li = ["This" , "is", "a", "sample", "program"]
 ' '.join(li) # 'This is a sample program'
 ','.join(li) # 'This,is,a,sample,program'
+
 ```
 
 ### Tuple
@@ -127,17 +128,33 @@ basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
 Dictionaries store key-value pairs, kind of like JSON objects.
 ```python
 # Creating an empty dictionary
-data = {} # OR data = dict()
+d = {} # OR data = dict()
 
 # Creating a dictionary with initial values
-data = {'a':1,'b':2,'c':3} # OR data = dict(a=1, b=2, c=3)
+d = {'a':2,'b':21,'c':3} # OR data = dict(a=2, b=1, c=3)
 
 # Inserting/Updating a single value
-data['a']=1  # Updates if 'a' exists, else adds 'a'
+d['a']=1  # Updates if 'a' exists, else adds 'a'
 # OR data.update(a=1)
 
 # Inserting/Updating multiple values
-data.update({'c':3,'d':4})  # Updates 'c' and adds 'd'
+d.update({'c':3,'d':4})  # Updates 'c' and adds 'd'
+
+# find max based on the key
+max(d.items(), key = lambda x: x[0])
+# ('c', 3)
+
+# find max based on the value
+max(d.items(), key = lambda x: x[0])
+# ('b', 21)
+
+# return sorted key list
+sorted(d, key=(lambda key:d[key]), reverse=True)
+# ['b', 'c', 'a']
+
+# return sorted tuple(key, value) list
+sorted(d.items(), key=lambda kv: kv[1]) 
+# [('a', 2), ('c', 3), ('b', 21)]
 
 # create a dictionary
 person = {
@@ -499,6 +516,11 @@ df.fillna(0) # Replace all the NaN values with Zero
 ```python
 # type of each column
 df.dtypes
+
+# convert ALL columns to strings
+df = df.astype(str)
+# convert selected columns 
+df[["D", "E"]] = df[["D", "E"]].astype(int) 
 
 # To Factors
 s = pd.Series(['single', 'touching', 'nuclei', 'dusts', 'touching', 'single', 'nuclei'])
