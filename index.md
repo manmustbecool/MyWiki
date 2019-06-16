@@ -57,7 +57,8 @@ My notes
 
 ## Python
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
- * <a href="Wiki/Python/python_plot.html">Python Plot</a>
+ * <a href="https://nbviewer.jupyter.org/github/manmustbecool/MyWiki/blob/gh-pages/Wiki/Python/ipynb_python_plot.ipynb">Python Plot - jupyter</a>
+ * <a href="https://nbviewer.jupyter.org/github/manmustbecool/MyWiki/blob/gh-pages/Wiki/Python/ipynb_ipywidgets.ipynb">ipywidgets - jupyter</a>
  * <a href="Wiki/Python/plotly.html">Plotly</a>
  * <a href="Wiki/Python/pythonML.html">Python ML</a>
  * <a href="Wiki/Python/python_nlp.html">Text Mining/NLP</a>
