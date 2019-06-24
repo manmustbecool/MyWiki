@@ -4,9 +4,15 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
+# dash document
+
+
 ```
 pip install dash
 ```
+
+https://dash.plot.ly/ 
+
 
 # live update plot
 
