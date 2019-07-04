@@ -3,7 +3,7 @@ title: "Linux Basic"
 ---
 
 
-# cheat sheet #
+# Ubuntu #
 
 ## user and permission
 
@@ -35,7 +35,7 @@ http://askubuntu.com/questions/24006/how-do-i-reset-a-lost-administrative-passwo
 w # Shows information about the users currently on the machine, and their processes.
 who # Shows information about users who are currently logged in.
 ```
-## manage processes
+##processes
 
 ```bash
 # top processes
@@ -55,31 +55,16 @@ ps -auroot
 # kill the process by id
 kill -9 process_id
 ```
-
+## file
 
 ```bash
+
 # rename a folder name
 mv <oldname> <newname>
 
 #  unzip 
 sudo apt-get install unzip
 unzip <file>
-
-# power down now
-shutdown -h now
-reboot -h now
-
-# list of all sockets in use
-netstat -a 
-
-# execute 'ntpdate' with the ntp daemon already up and running, use the following command which uses a different port
-ntpdate -u pool.ntp.org 
-
-# install Linux / UNIX *.tar.gz tarball files
-http://www.cyberciti.biz/faq/install-tarballs/
-
-# find out what version of Linux
-cat /etc/*-release
 
 # ---- File Search ------
 
@@ -106,6 +91,39 @@ ls -lah
 # disk space usage
 df -k
 ```
+
+
+## network and system
+```bash
+# check internet connection
+curl -Is http://www.shellhacks.com | head -1
+
+# list of all sockets in use
+netstat -a 
+
+# power down now
+shutdown -h now
+reboot -h now
+
+# execute 'ntpdate' with the ntp daemon already up and running, use the following command which uses a different port
+ntpdate -u pool.ntp.org 
+
+# install Linux / UNIX *.tar.gz tarball files
+http://www.cyberciti.biz/faq/install-tarballs/
+
+# find out what version of Linux
+cat /etc/*-release
+```
+
+# CentOS
+
+```
+adduser username
+passwd username  # Use the passwd command to update the new user's password.
+
+usermod -aG wheel username # By default, on CentOS, members of the wheel group have sudo privileges.
+```
+
 # Others #
 
 ## Windows Remote desktop ##

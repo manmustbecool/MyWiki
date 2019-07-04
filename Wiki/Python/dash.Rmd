@@ -14,6 +14,13 @@ pip install dash
 https://dash.plot.ly/ 
 
 
+https://dash.plot.ly/dash-core-components
+
+https://dash.plot.ly/cytoscape
+
+https://pypi.org/project/dash-bootstrap-components/
+
+
 # live update plot
 
  * <a href="python_code/dash_live_plot.py">dash_live_plot.py</a>

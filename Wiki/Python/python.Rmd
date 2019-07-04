@@ -15,6 +15,10 @@ python -V # get python version
 
 ```python
 type(person) # Determine the type of an object
+
+# not None test
+if not (val is None):
+    # ...
 ```
 
 ## Atomic data types
@@ -39,6 +43,7 @@ if foo is None:
 
 ```python
 range(10) # range 0 to 9
+list(range(11, 17)) # range to a list: [11, 12, 13, 14, 15, 16]
 
 reversed(range(10)) # reversed range 9 to 0
 
@@ -51,11 +56,20 @@ Lists can contain any data types (including list). mutable
 ```python
 li = [3, 4, 5]
 
+# check if it is emepy
+if not a:
+  print("List is empty")
+  
+# check if it is in the list
+if 'b' in ['a', 'b', 'c'] :
+    print('Yes, b found in List')
+
 # sub list
 li[0] # 3
 li[0:2] # [incluse, excluse] 3,4
 li[-1] # get the last element
 li[-2] = 3 # Set the second last element
+list(li[i] for i in [0, 2]) # first and third element  
 
 
 # add or remove element
@@ -102,6 +116,10 @@ li = ["This" , "is", "a", "sample", "program"]
 ' '.join(li) # 'This is a sample program'
 ','.join(li) # 'This,is,a,sample,program'
 
+# Check if all values in list are greater than a certain number
+l = [29, 500, 43]
+all(i >= 30 for i in l)
+# True
 ```
 
 ### Tuple
@@ -139,6 +157,12 @@ d['a']=1  # Updates if 'a' exists, else adds 'a'
 
 # Inserting/Updating multiple values
 d.update({'c':3,'d':4})  # Updates 'c' and adds 'd'
+
+# delete a element based on key
+del d['a']
+
+# find index of element
+index = d.index('c')
 
 # find max based on the key
 max(d.items(), key = lambda x: x[0])
@@ -292,9 +316,15 @@ A one-dimensional labeled array A capable of holding any data type
 ```python
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
 
-# convert a series to an numpy.ndarray
+# convert to an numpy.ndarray
 pd.Series([1, 2, 3]).values
 # array([1, 2, 3])
+
+# convert to a list
+pd.Series([1, 2, 3]).tolist()
+
+# regex 
+pd.Series(['f.o', 'fuz', np.nan]).str.replace('f.', 'ba', regex=False)
 ```
 ## Panda::DataFrame
 
@@ -309,6 +339,12 @@ df = pd.DataFrame(
 # 2  12  22  32
 # 3  13  23  33
 
+#  d is your list of dicts to dataframe
+l = [{"a":1, "b":1}, {"a":2, "b":2}]
+df = pd.DataFrame(l)
+#    a  b
+# 0  1  1
+# 1  2  2
 
 # numpy array to data frame
 
@@ -427,6 +463,9 @@ for index, row in df.iterrows():
 # 11 110
 # 12 120
 
+# copy as a new df, not only reference
+df2 = df[df['B'] == 'b.2'].copy()
+
 #--------- column selection ---------------
 
 # Select columns by names
@@ -441,32 +480,6 @@ df.filter(regex='name|address')
 ```python
 # append a column
 df['new_col'] = pd.Series(np.arange(0, 100), index=df.index)
-
-# Append a dataframe
-df = pd.DataFrame([[1, 2], [3, 4]], columns=list('AB'))
-df
-#    A  B
-# 0  1  2
-# 1  3  4
-
-df2 = pd.DataFrame([[5, 6], [7, 8]], columns=list('AB'))
-df.append(df2)
-#    A  B
-# 0  1  2
-# 1  3  4
-# 0  5  6
-# 1  7  8
-
-# With ignore_index set to True:
-df.append(df2, ignore_index=True)
-#    A  B
-# 0  1  2
-# 1  3  4
-# 2  5  6
-# 3  7  8
-
-# reset index if necessary
-df = df.reset_index(drop=True) 
 ```
 
 ### remove
@@ -505,10 +518,52 @@ for name, group in grouped:
 	print('value:' group)
 ```
 
+### merge
+```python
+# Append a dataframe
+df = pd.DataFrame([[1, 2], [3, 4]], columns=list('AB'))
+df
+#    A  B
+# 0  1  2
+# 1  3  4
+
+df2 = pd.DataFrame([[5, 6], [7, 8]], columns=list('AB'))
+df.append(df2)
+#    A  B
+# 0  1  2
+# 1  3  4
+# 0  5  6
+# 1  7  8
+
+# With ignore_index set to True:
+df.append(df2, ignore_index=True)
+#    A  B
+# 0  1  2
+# 1  3  4
+# 2  5  6
+# 3  7  8
+
+# reset index if necessary
+df = df.reset_index(drop=True) 
+
+# Merge a list of dataframes to create one dataframe 
+dfList = [df, df, df2]
+pd.concat(dfList)
+#   A  B
+#0  1  2
+#1  3  4
+#0  1  2
+#1  3  4
+#0  5  6
+#1  7  8
+```
+
 ### handle NaN
 
 ```python
 df.fillna(0) # Replace all the NaN values with Zero
+
+df1 = df.replace(np.nan, '', regex=True) # Replace all the NaN with blank/empty string
 ```
 
 ### type converting
@@ -658,6 +713,9 @@ import matplotlib.pyplot as plt
 
 plt.axis([0, 10, 0, 1])
 plt.ion()
+```{r}
+
+```
 
 for i in range(100):
     y = np.random.random()
@@ -700,4 +758,12 @@ No working package for Pthon3 at the moment
 
   * Install NTLM package for 2.x first
   * Download NTLM package for 3.x files and replace installed file
+  
+  
+# 
+
+```bash
+
+```
+
   
