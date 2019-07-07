@@ -653,6 +653,15 @@ data <- fread(file, header=F) # for better performance
 write.table(MyData, file = "MyData.csv", row.names=FALSE, na="", col.names=FALSE, sep=",")
 
 ``` 
+## Chinese charactor
+```r
+Sys.getlocale(category="LC_ALL")
+Sys.setlocale(category="LC_ALL", locale = "chinese")
+
+data <- fread(file, header = T,  encoding="UTF-8", sep = "\t") 
+```
+
+
 **Import zipped CSV file**
 
 ```r

@@ -242,7 +242,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R Cheat Sheet</h1>
-<h4 class="date">Updated: 06 June, 2019</h4>
+<h4 class="date">Updated: 07 July, 2019</h4>
 
 </div>
 
@@ -269,7 +269,9 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#common-functions"><span class="toc-section-number">6</span> Common functions</a></li>
 <li><a href="#regular-expression"><span class="toc-section-number">7</span> Regular expression</a></li>
-<li><a href="#csv-inputoutput"><span class="toc-section-number">8</span> CSV input/output</a></li>
+<li><a href="#csv-inputoutput"><span class="toc-section-number">8</span> CSV input/output</a><ul>
+<li><a href="#chinese-charactor"><span class="toc-section-number">8.1</span> Chinese charactor</a></li>
+</ul></li>
 <li><a href="#parallel-r-in-windows"><span class="toc-section-number">9</span> Parallel R in Windows</a></li>
 <li><a href="#trycatch-exception-handling"><span class="toc-section-number">10</span> tryCatch exception handling</a></li>
 <li><a href="#sql-query"><span class="toc-section-number">11</span> SQL query</a></li>
@@ -859,6 +861,12 @@ data &lt;-<span class="st"> </span><span class="kw">fread</span>(file, <span cla
 
 <span class="co"># ---- write CSV ------</span>
 <span class="kw">write.table</span>(MyData, <span class="dt">file =</span> <span class="st">&quot;MyData.csv&quot;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>, <span class="dt">na=</span><span class="st">&quot;&quot;</span>, <span class="dt">col.names=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</code></pre></div>
+<div id="chinese-charactor" class="section level2">
+<h2><span class="header-section-number">8.1</span> Chinese charactor</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.getlocale</span>(<span class="dt">category=</span><span class="st">&quot;LC_ALL&quot;</span>)
+<span class="kw">Sys.setlocale</span>(<span class="dt">category=</span><span class="st">&quot;LC_ALL&quot;</span>, <span class="dt">locale =</span> <span class="st">&quot;chinese&quot;</span>)
+
+data &lt;-<span class="st"> </span><span class="kw">fread</span>(file, <span class="dt">header =</span> T,  <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>) </code></pre></div>
 <p><strong>Import zipped CSV file</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># file structure</span>
 <span class="co">#  zipdata.zip</span>
@@ -890,6 +898,7 @@ myfiles &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind,
 
 <span class="co"># delete the temp dir</span>
 <span class="kw">unlink</span>(temp_dir, <span class="dt">recursive=</span>T)</code></pre></div>
+</div>
 </div>
 <div id="parallel-r-in-windows" class="section level1">
 <h1><span class="header-section-number">9</span> Parallel R in Windows</h1>
