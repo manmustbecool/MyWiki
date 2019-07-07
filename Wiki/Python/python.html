@@ -286,6 +286,7 @@ $(document).ready(function () {
 <li><a href="#read-write-csv"><span class="toc-section-number">6.1</span> Read write CSV</a></li>
 <li><a href="#read-head-lines-of-a-large-text-file"><span class="toc-section-number">6.2</span> Read head lines of a large text file</a></li>
 <li><a href="#list-files-only-in-the-current-directory"><span class="toc-section-number">6.3</span> List files only in the current directory</a></li>
+<li><a href="#read-and-write-objects-to-plk-files"><span class="toc-section-number">6.4</span> read and write objects to plk files</a></li>
 </ul></li>
 <li><a href="#others"><span class="toc-section-number">7</span> Others</a><ul>
 <li><a href="#lambda"><span class="toc-section-number">7.1</span> lambda</a></li>
@@ -673,7 +674,10 @@ df <span class="op">=</span> df(drop<span class="op">=</span><span class="va">Tr
 </div>
 <div id="subset-1" class="section level3">
 <h3><span class="header-section-number">3.3.2</span> subset</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#--------- row selection ---------------</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># change value of a cell</span>
+df.at[<span class="st">'C'</span>, <span class="st">'x'</span>] <span class="op">=</span> <span class="dv">10</span>
+
+<span class="co">#--------- row selection ---------------</span>
 
 df.head(n) <span class="co"># Select first n rows.</span>
 df.tail(n) <span class="co"># Select last n rows.</span>
@@ -704,16 +708,7 @@ df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some
 df.loc[<span class="op">~</span>df[<span class="st">'column_name'</span>].isin(some_values)] <span class="co"># select rows whose column value is in an iterable</span>
 df.loc[(df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value) <span class="op">&amp;</span> df[<span class="st">'other_column'</span>].isin(some_values)] 
 
-<span class="co"># select col_name1, col_name2 from table where column_name = some_value.</span>
-df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value][[col_name1, col_name2]]
-
-<span class="co"># select column by name</span>
-df.columns.get_loc(<span class="st">&quot;column_name&quot;</span>)
-
 df[df.Length<span class="op">&gt;</span><span class="dv">7</span> ] <span class="co"># select rows that meet logical criteria.</span>
-
-df.drop(df.tail(n).index) <span class="co"># drop last n rows</span>
-df.drop(df.head(n).index) <span class="co"># drop first n rows</span>
 
 <span class="co"># loop for each row</span>
 <span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():
@@ -730,6 +725,10 @@ df2 <span class="op">=</span> df[df[<span class="st">'B'</span>] <span class="op
 <span class="co"># Select columns by names</span>
 df[<span class="st">'name'</span>] 
 df[[<span class="st">'name'</span>, <span class="st">'age'</span>]]
+df.columns.get_loc(<span class="st">&quot;column_name&quot;</span>)
+
+<span class="co"># select col_name1, col_name2 from table where column_name = some_value.</span>
+df.loc[df[<span class="st">'column_name'</span>] <span class="op">==</span> some_value][[col_name1, col_name2]]
 
 <span class="co"># Select columns by regural expression</span>
 df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">'name|address'</span>)</code></pre></div>
@@ -741,7 +740,10 @@ df[<span class="st">'new_col'</span>] <span class="op">=</span> pd.Series(np.ara
 </div>
 <div id="remove" class="section level3">
 <h3><span class="header-section-number">3.3.4</span> remove</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># delete rows based on index</span>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df.drop(df.tail(n).index) <span class="co"># drop last n rows</span>
+df.drop(df.head(n).index) <span class="co"># drop first n rows</span>
+
+<span class="co"># delete rows based on index</span>
 df <span class="op">=</span> df.drop(df.index[<span class="dv">1</span>: <span class="dv">4</span>])
 
 <span class="co"># delete column on i index</span>
@@ -898,6 +900,20 @@ pd.to_excel(<span class="st">'dir/myDataFrame.xlsx'</span>, sheet_name<span clas
 files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(<span class="st">'.'</span>) <span class="cf">if</span> os.path.isfile(f)]
 <span class="cf">for</span> f <span class="kw">in</span> files:
     <span class="bu">print</span>(f)</code></pre></div>
+</div>
+<div id="read-and-write-objects-to-plk-files" class="section level2">
+<h2><span class="header-section-number">6.4</span> read and write objects to plk files</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> save_object(obj, filename):
+    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'wb'</span>) <span class="im">as</span> output:  <span class="co"># Overwrites any existing file.</span>
+        pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
+        
+<span class="kw">def</span> read_object(filename):
+    <span class="cf">if</span> Path(filename).is_file():
+        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">'rb'</span>) <span class="im">as</span> <span class="bu">input</span>:
+            o <span class="op">=</span> pickle.load(<span class="bu">input</span>)
+        <span class="cf">return</span> o
+    <span class="cf">else</span>:
+        <span class="cf">return</span> <span class="va">None</span>      </code></pre></div>
 </div>
 </div>
 <div id="others" class="section level1">

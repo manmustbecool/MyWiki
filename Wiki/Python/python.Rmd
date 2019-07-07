@@ -414,6 +414,9 @@ df = df(drop=True)
 ### subset 
 
 ```python
+# change value of a cell
+df.at['C', 'x'] = 10
+
 #--------- row selection ---------------
 
 df.head(n) # Select first n rows.
@@ -445,16 +448,7 @@ df.loc[df['column_name'] == some_value] # select rows whose column value equals 
 df.loc[~df['column_name'].isin(some_values)] # select rows whose column value is in an iterable
 df.loc[(df['column_name'] == some_value) & df['other_column'].isin(some_values)] 
 
-# select col_name1, col_name2 from table where column_name = some_value.
-df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
-
-# select column by name
-df.columns.get_loc("column_name")
-
 df[df.Length>7 ] # select rows that meet logical criteria.
-
-df.drop(df.tail(n).index) # drop last n rows
-df.drop(df.head(n).index) # drop first n rows
 
 # loop for each row
 for index, row in df.iterrows():
@@ -471,6 +465,10 @@ df2 = df[df['B'] == 'b.2'].copy()
 # Select columns by names
 df['name'] 
 df[['name', 'age']]
+df.columns.get_loc("column_name")
+
+# select col_name1, col_name2 from table where column_name = some_value.
+df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
 
 # Select columns by regural expression
 df.filter(regex='name|address')
@@ -484,6 +482,9 @@ df['new_col'] = pd.Series(np.arange(0, 100), index=df.index)
 
 ### remove
 ```python
+df.drop(df.tail(n).index) # drop last n rows
+df.drop(df.head(n).index) # drop first n rows
+
 # delete rows based on index
 df = df.drop(df.index[1: 4])
 
@@ -652,14 +653,31 @@ print(head)
 ```
 
 ## List files only in the current directory
-
 ```python
 import os as os
 files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
     print(f)
 ```
+
+## read and write objects to plk files
+```python
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
+        
+def read_object(filename):
+    if Path(filename).is_file():
+        with open(filename, 'rb') as input:
+            o = pickle.load(input)
+        return o
+    else:
+        return None      
+```
+
+
 # Others
+
 ## lambda 
 Anonymous function objects 
 
