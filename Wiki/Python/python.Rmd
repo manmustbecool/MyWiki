@@ -587,20 +587,22 @@ pd.to_datetime(pd.Series(['2005-05-23 00:00:00', '2005-05-24 00:00:00']), format
 ```
 
 # Data time
-
+## datetime 
 ```python
-from datetime import datetime
+import datetime
 
-now = datetime.now()
-print("Now: ", now)
+print("Now: ", datetime.now())
 
 now.month # 4
 '%02d' % d.month # ‘04’
 
-now.year #  now.month or now.hour, etc
-now.strftime('%Y-%m-%d %H:%M:%S') # fromt timestamp
-now - timedelta(days=2) # Day before Yesterday
-
+datetime.datetime.now().year #  now.month or now.hour, etc
+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') # fromt timestamp
+datetime.datetime.now() - datetime.timedelta(days=2) # Day before Yesterday
+datetime.datetime.now() - datetime.timedelta(minutes=15)
+```
+## Pandas Timestamp  
+```python
 # remove data time instance is NaT in a dataframe
 df = df[df[3].apply(lambda x: not isinstance(x, pd._libs.tslib.NaTType))]
 
@@ -614,6 +616,11 @@ str(result_ms) # -> '2017-04-30 05:31:01'
 
 (time2-time1).total_seconds() #Convert timedelta to total seconds
 
+# Converting between datetime and Pandas Timestamp objects
+ts = pd.Timestamp('2014-01-23 00:00:00', tz=None)
+# Timestamp('2014-01-23 00:00:00', tz=None)
+ts.to_pydatetime()
+# datetime.datetime(2014, 1, 23, 0, 0)
 ```
 # Regular expression
 

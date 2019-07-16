@@ -18,7 +18,7 @@ https://dash.plot.ly/dash-core-components
 
 https://dash.plot.ly/cytoscape
 
-
+https://dash.plot.ly/dash-daq
 
 https://pypi.org/project/dash-bootstrap-components/
 
