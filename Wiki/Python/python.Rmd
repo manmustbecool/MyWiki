@@ -56,6 +56,8 @@ Lists can contain any data types (including list). mutable
 ```python
 li = [3, 4, 5]
 
+li = [None]*5 # [None, None, None, None, None]
+
 # check if it is emepy
 if not a:
   print("List is empty")
@@ -77,6 +79,8 @@ li = li + [6]
 li = del li[5]
 li.remove(4) # removes the first matching value, not a specific index:
 li.pop(1) # removes the item at a specific index and returns it.
+n = 5
+li = li[n:] # remove first n element in the list
 
 # append an element - append is a destructive operation (it modifies the list in place instead of of returning a new list)
 li.append('bar')
@@ -600,6 +604,7 @@ datetime.datetime.now().year #  now.month or now.hour, etc
 datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') # fromt timestamp
 datetime.datetime.now() - datetime.timedelta(days=2) # Day before Yesterday
 datetime.datetime.now() - datetime.timedelta(minutes=15)
+datetime.datetime.now().date() # only keep date part of datetime
 ```
 ## Pandas Timestamp  
 ```python
@@ -787,10 +792,21 @@ No working package for Pthon3 at the moment
   * Download NTLM package for 3.x files and replace installed file
   
   
-# 
+# Managing environments
 
 ```bash
+$ conda -V  # Check conda is installed
+# conda 3.7.0
 
+conda create --name myenvv  #By default, environments are installed into the envs directory in the conda directory.
+
+conda activate and conda deactivate
+
+conda create -n myenv python=3.4  # create an environment with a specific version of Python
+
+conda env list # view the list of enviroment
+
+conda remove -n myenv -all #  Delete a no longer needed virtual environment
 ```
 
   

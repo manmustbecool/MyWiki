@@ -13,6 +13,7 @@ pip install dash
 
 https://dash.plot.ly/ 
 
+Dash components:
 
 https://dash.plot.ly/dash-core-components
 
@@ -22,6 +23,11 @@ https://dash.plot.ly/dash-daq
 
 https://pypi.org/project/dash-bootstrap-components/
 
+https://github.com/StratoDem/sd-material-ui
+
+community thread:
+
+https://community.plot.ly/t/show-and-tell-community-thread/7554
 
 # live update plot
 
@@ -30,3 +36,4 @@ https://pypi.org/project/dash-bootstrap-components/
 # dash_slider_demo
 
  * <a href="python_code/dash_slider_demo.py">dash_slider_demo.py</a>
+ 
