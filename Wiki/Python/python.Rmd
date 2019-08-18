@@ -73,6 +73,10 @@ li[-1] # get the last element
 li[-2] = 3 # Set the second last element
 list(li[i] for i in [0, 2]) # first and third element  
 
+# last n elements
+a = [1, 2, 3, 4, 5, 6, 7, 8]
+a[-3:]
+# [6, 7, 8]
 
 # add or remove element
 li = li + [6]
@@ -124,6 +128,13 @@ li = ["This" , "is", "a", "sample", "program"]
 l = [29, 500, 43]
 all(i >= 30 for i in l)
 # True
+
+# Sort list by given order of indices
+li =["A","B","C","D","E"]
+sortedIndex = [3,2,1,0,4]
+[li[i] for i in sortedIndex]
+# ['D', 'C', 'B', 'A', 'E']
+
 ```
 
 ### Tuple
@@ -444,6 +455,7 @@ data.iloc[:,-1] # last column of data frame
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
 
 #loc: based on label 
+# rows:
 df.loc[:3] # slice up to and including label 3
 df.loc[:'john'] # select rows by names/labels
 df.loc['john':'mark',:] # select rows from john to mark
@@ -466,6 +478,10 @@ df2 = df[df['B'] == 'b.2'].copy()
 
 #--------- column selection ---------------
 
+df = pd.DataFrame({'age':[30,24,32],
+                   'name':['john','jack','luck'],
+                   'gender':['M','M','F']})
+                   
 # Select columns by names
 df['name'] 
 df[['name', 'age']]
@@ -476,6 +492,14 @@ df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
 
 # Select columns by regural expression
 df.filter(regex='name|address')
+
+# select columns by a list
+lst = ['name','age','weight']
+df[np.intersect1d(df.columns, lst)]
+#   age  name
+#0   30  john
+#1   24  jack
+#2   32  luc
 ```
 
 ### add 
@@ -571,6 +595,11 @@ df.fillna(0) # Replace all the NaN values with Zero
 df1 = df.replace(np.nan, '', regex=True) # Replace all the NaN with blank/empty string
 ```
 
+### rolling
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html
+```python
+df['new_col'] = data['column'].rolling(5).mean() # Rolling Mean on pandas on a specific column
+```
 ### type converting
 
 ```python

@@ -247,22 +247,24 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#cheat-sheet"><span class="toc-section-number">1</span> cheat sheet</a><ul>
+<li><a href="#ubuntu"><span class="toc-section-number">1</span> Ubuntu</a><ul>
 <li><a href="#user-and-permission"><span class="toc-section-number">1.1</span> user and permission</a></li>
 <li><a href="#processes"><span class="toc-section-number">1.2</span> processes</a></li>
-<li><a href="#file"><span class="toc-section-number">1.3</span> file</a></li>
-<li><a href="#network-and-system"><span class="toc-section-number">1.4</span> network and system</a></li>
+<li><a href="#command"><span class="toc-section-number">1.3</span> command</a></li>
+<li><a href="#file"><span class="toc-section-number">1.4</span> file</a></li>
+<li><a href="#network-and-system"><span class="toc-section-number">1.5</span> network and system</a></li>
 </ul></li>
-<li><a href="#others"><span class="toc-section-number">2</span> Others</a><ul>
-<li><a href="#windows-remote-desktop"><span class="toc-section-number">2.1</span> Windows Remote desktop</a></li>
-<li><a href="#install-jdk"><span class="toc-section-number">2.2</span> Install JDK</a></li>
-<li><a href="#install-leiningen"><span class="toc-section-number">2.3</span> Install Leiningen</a></li>
+<li><a href="#centos"><span class="toc-section-number">2</span> CentOS</a></li>
+<li><a href="#others"><span class="toc-section-number">3</span> Others</a><ul>
+<li><a href="#windows-remote-desktop"><span class="toc-section-number">3.1</span> Windows Remote desktop</a></li>
+<li><a href="#install-jdk"><span class="toc-section-number">3.2</span> Install JDK</a></li>
+<li><a href="#install-leiningen"><span class="toc-section-number">3.3</span> Install Leiningen</a></li>
 </ul></li>
 </ul>
 </div>
 
-<div id="cheat-sheet" class="section level1">
-<h1><span class="header-section-number">1</span> cheat sheet</h1>
+<div id="ubuntu" class="section level1">
+<h1><span class="header-section-number">1</span> Ubuntu</h1>
 <div id="user-and-permission" class="section level2">
 <h2><span class="header-section-number">1.1</span> user and permission</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># modify permissions</span>
@@ -311,8 +313,19 @@ $(document).ready(function () {
 <span class="co"># kill the process by id</span>
 <span class="bu">kill</span> -9 process_id</code></pre></div>
 </div>
+<div id="command" class="section level2">
+<h2><span class="header-section-number">1.3</span> command</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># push a command into the background. When the terminal session is closed, the command ends.</span>
+<span class="bu">command</span> <span class="kw">&amp;</span>
+
+<span class="co"># also prevent command print messages into the terminal </span>
+<span class="bu">command</span> <span class="op">&amp;&gt;</span>/dev/null <span class="kw">&amp;</span>
+
+<span class="co"># also keep the commend runing even When the terminal session is closed.</span>
+<span class="fu">nohup</span> command <span class="op">&amp;&gt;</span>/dev/null <span class="kw">&amp;</span></code></pre></div>
+</div>
 <div id="file" class="section level2">
-<h2><span class="header-section-number">1.3</span> file</h2>
+<h2><span class="header-section-number">1.4</span> file</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">
 <span class="co"># rename a folder name</span>
 <span class="fu">mv</span> <span class="op">&lt;</span>oldname<span class="op">&gt;</span> <span class="op">&lt;</span>newname<span class="op">&gt;</span>
@@ -347,7 +360,7 @@ $(document).ready(function () {
 <span class="fu">df</span> -k</code></pre></div>
 </div>
 <div id="network-and-system" class="section level2">
-<h2><span class="header-section-number">1.4</span> network and system</h2>
+<h2><span class="header-section-number">1.5</span> network and system</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># check internet connection</span>
 <span class="ex">curl</span> -Is http://www.shellhacks.com <span class="kw">|</span> <span class="fu">head</span> -1
 
@@ -368,15 +381,22 @@ $(document).ready(function () {
 <span class="fu">cat</span> /etc/*-release</code></pre></div>
 </div>
 </div>
+<div id="centos" class="section level1">
+<h1><span class="header-section-number">2</span> CentOS</h1>
+<pre><code>adduser username
+passwd username  # Use the passwd command to update the new user's password.
+
+usermod -aG wheel username # By default, on CentOS, members of the wheel group have sudo privileges.</code></pre>
+</div>
 <div id="others" class="section level1">
-<h1><span class="header-section-number">2</span> Others</h1>
+<h1><span class="header-section-number">3</span> Others</h1>
 <div id="windows-remote-desktop" class="section level2">
-<h2><span class="header-section-number">2.1</span> Windows Remote desktop</h2>
+<h2><span class="header-section-number">3.1</span> Windows Remote desktop</h2>
 <p>install XRDP</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install xrdp</code></pre></div>
 </div>
 <div id="install-jdk" class="section level2">
-<h2><span class="header-section-number">2.2</span> Install JDK</h2>
+<h2><span class="header-section-number">3.2</span> Install JDK</h2>
 <ul>
 <li>Ubuntu 12 + Oracle JDK 6</li>
 </ul>
@@ -394,7 +414,7 @@ $(document).ready(function () {
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">http</span>://linuxdrops.com/install-jre-or-jdk-7-on-centos-rhel-fedora-ubuntu-debian/</code></pre></div>
 </div>
 <div id="install-leiningen" class="section level2">
-<h2><span class="header-section-number">2.3</span> Install Leiningen</h2>
+<h2><span class="header-section-number">3.3</span> Install Leiningen</h2>
 <p>download the “lein.bat” in a path folder to start self-install</p>
 <p>sudo apt-get install leiningen ??</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># find a path to install leiningen,  or add a folder (/usr/bin/leiningen) to the paths</span>

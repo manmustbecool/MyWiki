@@ -55,6 +55,18 @@ ps -auroot
 # kill the process by id
 kill -9 process_id
 ```
+## command
+```bash
+# push a command into the background. When the terminal session is closed, the command ends.
+command &
+
+# also prevent command print messages into the terminal 
+command &>/dev/null &
+
+# also keep the commend runing even When the terminal session is closed.
+nohup command &>/dev/null &
+```
+
 ## file
 
 ```bash
@@ -91,7 +103,6 @@ ls -lah
 # disk space usage
 df -k
 ```
-
 
 ## network and system
 ```bash
