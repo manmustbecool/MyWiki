@@ -1,0 +1,17 @@
+---
+title: "Automation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Automation engine
+
+Ansible v.s. Salt (SaltStack) v.s. StackStorm
+
+https://medium.com/@anthonypjshaw/ansible-v-s-salt-saltstack-v-s-stackstorm-3d8f57149368
+
+## spinnaker
+
