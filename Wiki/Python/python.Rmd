@@ -593,9 +593,9 @@ df.append(df2, ignore_index=True)
 # reset index if necessary
 df = df.reset_index(drop=True) 
 
-# Merge a list of dataframes to create one dataframe 
+# -----------  pd.concat  -----------------
 dfList = [df, df, df2]
-pd.concat(dfList)
+pd.concat(dfList) # concatenate a list of dataframes along row
 #   A  B
 #0  1  2
 #1  3  4
@@ -604,8 +604,10 @@ pd.concat(dfList)
 #0  5  6
 #1  7  8
 
-# concatenate DataFrames along colum
-pd.concat(dfList)
+pd.concat(dfList, axis=1) # concatenate a list of dataframes along column
+#   A  B  A  B  A  B
+#0  1  2  1  2  5  6
+#1  3  4  3  4  7  8
 ```
 
 ### handle NaN
