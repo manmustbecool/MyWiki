@@ -340,6 +340,18 @@ pd.Series([1, 2, 3]).tolist()
 
 # regex 
 pd.Series(['f.o', 'fuz', np.nan]).str.replace('f.', 'ba', regex=False)
+
+# Factorize
+s_class = pd.Series(['a','b','c','d'])
+
+s_class_id = s_class.factorize()[0] # convert string to numbers
+s_class_id
+# array([0, 1, 2, 3], dtype=int64)
+
+s_class_id, mapping = s_class.factorize() # keep mapping class
+mapped_back_to_class = mapping.take(pd.Series([3,2,3,1]))
+mapped_back_to_class
+# Index(['d', 'c', 'd', 'b'], dtype='object')
 ```
 ## Panda::DataFrame
 
@@ -454,12 +466,21 @@ data.iloc[:,-1] # last column of data frame
 # rows and columns
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
 
-#loc: based on label 
+
+df=pd.DataFrame(
+          {'age':[30,24,32], 'name':['john','jack','luck'], 'gender':['M','M','F']},
+          index=['a', 'b', 'c'])
+#   age  name gender
+# a   30  john      M
+# b   24  jack      M
+# c   32  luck      F
+
+#loc: Select Column & Rows by name/index_label - dataFrame.loc[<ROWS RANGE> , <COLUMNS RANGE>]
 # rows:
-df.loc[:3] # slice up to and including label 3
-df.loc[:'john'] # select rows by names/labels
-df.loc['john':'mark',:] # select rows from john to mark
-df.loc[['john','mark'],:] # select rows by multiple names/labels
+df.loc[:3] # slice up to and including label 3 (in the case of label is integer)
+df.loc[:'b'] # select rows by b
+df.loc['b':'c',:] # select rows from b to c
+df.loc[['b','c'],:] # select rows by multiple names/labels
 df.loc[df['column_name'] == some_value] # select rows whose column value equals a scalar
 df.loc[~df['column_name'].isin(some_values)] # select rows whose column value is in an iterable
 df.loc[(df['column_name'] == some_value) & df['other_column'].isin(some_values)] 
@@ -478,15 +499,12 @@ df2 = df[df['B'] == 'b.2'].copy()
 
 #--------- column selection ---------------
 
-df = pd.DataFrame({'age':[30,24,32],
-                   'name':['john','jack','luck'],
-                   'gender':['M','M','F']})
-                   
 # Select columns by names
 df['name'] 
-df[['name', 'age']]
+df[['age', 'name']] 
 df.columns.get_loc("column_name")
 
+df.loc[:, ['age', 'name']] # = df[['age', 'name']] 
 # select col_name1, col_name2 from table where column_name = some_value.
 df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
 
