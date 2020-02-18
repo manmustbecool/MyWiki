@@ -428,7 +428,7 @@ summary {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 30 January, 2020</h4>
+<h4 class="date">Updated: 18 February, 2020</h4>
 
 </div>
 
@@ -808,7 +808,13 @@ summary {
 <a class="sourceLine" id="cb15-20" title="20">s_class_id, mapping <span class="op">=</span> s_class.factorize() <span class="co"># keep mapping class</span></a>
 <a class="sourceLine" id="cb15-21" title="21">mapped_back_to_class <span class="op">=</span> mapping.take(pd.Series([<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>]))</a>
 <a class="sourceLine" id="cb15-22" title="22">mapped_back_to_class</a>
-<a class="sourceLine" id="cb15-23" title="23"><span class="co"># Index([&#39;d&#39;, &#39;c&#39;, &#39;d&#39;, &#39;b&#39;], dtype=&#39;object&#39;)</span></a></code></pre></div>
+<a class="sourceLine" id="cb15-23" title="23"><span class="co"># Index([&#39;d&#39;, &#39;c&#39;, &#39;d&#39;, &#39;b&#39;], dtype=&#39;object&#39;)</span></a>
+<a class="sourceLine" id="cb15-24" title="24"></a>
+<a class="sourceLine" id="cb15-25" title="25"><span class="co"># apply </span></a>
+<a class="sourceLine" id="cb15-26" title="26">pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).<span class="bu">apply</span>(<span class="kw">lambda</span> x :x<span class="op">*</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb15-27" title="27"><span class="co"># 0    2</span></a>
+<a class="sourceLine" id="cb15-28" title="28"><span class="co"># 1    4</span></a>
+<a class="sourceLine" id="cb15-29" title="29"><span class="co"># 2    6</span></a></code></pre></div>
 </div>
 <div id="pandadataframe" class="section level2">
 <h2><span class="header-section-number">3.3</span> Panda::DataFrame</h2>

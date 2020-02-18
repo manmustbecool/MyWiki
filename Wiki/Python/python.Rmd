@@ -352,6 +352,12 @@ s_class_id, mapping = s_class.factorize() # keep mapping class
 mapped_back_to_class = mapping.take(pd.Series([3,2,3,1]))
 mapped_back_to_class
 # Index(['d', 'c', 'd', 'b'], dtype='object')
+
+# apply 
+pd.Series([1, 2, 3]).apply(lambda x :x*2)
+# 0    2
+# 1    4
+# 2    6
 ```
 ## Panda::DataFrame
 
