@@ -428,7 +428,7 @@ summary {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 30 January, 2020</h4>
+<h4 class="date">Updated: 18 November, 2020</h4>
 
 </div>
 
@@ -656,28 +656,39 @@ summary {
 <a class="sourceLine" id="cb8-25" title="25"><span class="bu">max</span>(d.items(), key <span class="op">=</span> <span class="kw">lambda</span> x: x[<span class="dv">0</span>])</a>
 <a class="sourceLine" id="cb8-26" title="26"><span class="co"># (&#39;b&#39;, 21)</span></a>
 <a class="sourceLine" id="cb8-27" title="27"></a>
-<a class="sourceLine" id="cb8-28" title="28"><span class="co"># return sorted key list</span></a>
-<a class="sourceLine" id="cb8-29" title="29"><span class="bu">sorted</span>(d, key<span class="op">=</span>(<span class="kw">lambda</span> key:d[key]), reverse<span class="op">=</span><span class="va">True</span>)</a>
-<a class="sourceLine" id="cb8-30" title="30"><span class="co"># [&#39;b&#39;, &#39;c&#39;, &#39;a&#39;]</span></a>
+<a class="sourceLine" id="cb8-28" title="28"><span class="co"># return a key list</span></a>
+<a class="sourceLine" id="cb8-29" title="29">key_list <span class="op">=</span> <span class="bu">list</span>(d.keys())</a>
+<a class="sourceLine" id="cb8-30" title="30"><span class="co"># [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span></a>
 <a class="sourceLine" id="cb8-31" title="31"></a>
-<a class="sourceLine" id="cb8-32" title="32"><span class="co"># return sorted tuple(key, value) list</span></a>
-<a class="sourceLine" id="cb8-33" title="33"><span class="bu">sorted</span>(d.items(), key<span class="op">=</span><span class="kw">lambda</span> kv: kv[<span class="dv">1</span>]) </a>
-<a class="sourceLine" id="cb8-34" title="34"><span class="co"># [(&#39;a&#39;, 2), (&#39;c&#39;, 3), (&#39;b&#39;, 21)]</span></a>
+<a class="sourceLine" id="cb8-32" title="32"><span class="co"># return sorted key list</span></a>
+<a class="sourceLine" id="cb8-33" title="33"><span class="bu">sorted</span>(d, key<span class="op">=</span>(<span class="kw">lambda</span> key:d[key]), reverse<span class="op">=</span><span class="va">True</span>)</a>
+<a class="sourceLine" id="cb8-34" title="34"><span class="co"># [&#39;b&#39;, &#39;c&#39;, &#39;a&#39;]</span></a>
 <a class="sourceLine" id="cb8-35" title="35"></a>
-<a class="sourceLine" id="cb8-36" title="36"><span class="co"># create a dictionary</span></a>
-<a class="sourceLine" id="cb8-37" title="37">person <span class="op">=</span> {</a>
-<a class="sourceLine" id="cb8-38" title="38">            <span class="st">&quot;name&quot;</span>: <span class="st">&quot;Amos&quot;</span>,</a>
-<a class="sourceLine" id="cb8-39" title="39">            <span class="st">&quot;age&quot;</span>: <span class="dv">23</span>,</a>
-<a class="sourceLine" id="cb8-40" title="40">            <span class="st">&quot;hobbies&quot;</span>: [<span class="st">&quot;Travelling&quot;</span>, <span class="st">&quot;Swimming&quot;</span>, <span class="st">&quot;Coding&quot;</span>, <span class="st">&quot;Music&quot;</span>]</a>
-<a class="sourceLine" id="cb8-41" title="41">        }</a>
-<a class="sourceLine" id="cb8-42" title="42"></a>
-<a class="sourceLine" id="cb8-43" title="43"><span class="co"># iterate through the dict and print the keys</span></a>
-<a class="sourceLine" id="cb8-44" title="44"><span class="cf">for</span> key <span class="kw">in</span> person:</a>
-<a class="sourceLine" id="cb8-45" title="45">    <span class="bu">print</span>(key)</a>
+<a class="sourceLine" id="cb8-36" title="36"><span class="co"># return sorted tuple(key, value) list</span></a>
+<a class="sourceLine" id="cb8-37" title="37"><span class="bu">sorted</span>(d.items(), key<span class="op">=</span><span class="kw">lambda</span> kv: kv[<span class="dv">1</span>]) </a>
+<a class="sourceLine" id="cb8-38" title="38"><span class="co"># [(&#39;a&#39;, 2), (&#39;c&#39;, 3), (&#39;b&#39;, 21)]</span></a>
+<a class="sourceLine" id="cb8-39" title="39"></a>
+<a class="sourceLine" id="cb8-40" title="40"><span class="co"># create a dictionary</span></a>
+<a class="sourceLine" id="cb8-41" title="41">person <span class="op">=</span> {</a>
+<a class="sourceLine" id="cb8-42" title="42">            <span class="st">&quot;name&quot;</span>: <span class="st">&quot;Amos&quot;</span>,</a>
+<a class="sourceLine" id="cb8-43" title="43">            <span class="st">&quot;age&quot;</span>: <span class="dv">23</span>,</a>
+<a class="sourceLine" id="cb8-44" title="44">            <span class="st">&quot;hobbies&quot;</span>: [<span class="st">&quot;Travelling&quot;</span>, <span class="st">&quot;Swimming&quot;</span>, <span class="st">&quot;Coding&quot;</span>, <span class="st">&quot;Music&quot;</span>]</a>
+<a class="sourceLine" id="cb8-45" title="45">        }</a>
 <a class="sourceLine" id="cb8-46" title="46"></a>
-<a class="sourceLine" id="cb8-47" title="47"><span class="co"># iterate through the dict&#39;s keys and print their values</span></a>
+<a class="sourceLine" id="cb8-47" title="47"><span class="co"># iterate through the dict and print the keys</span></a>
 <a class="sourceLine" id="cb8-48" title="48"><span class="cf">for</span> key <span class="kw">in</span> person:</a>
-<a class="sourceLine" id="cb8-49" title="49">    <span class="bu">print</span>(person[key])</a></code></pre></div>
+<a class="sourceLine" id="cb8-49" title="49">    <span class="bu">print</span>(key)</a>
+<a class="sourceLine" id="cb8-50" title="50"></a>
+<a class="sourceLine" id="cb8-51" title="51"><span class="co"># iterate through the dict&#39;s keys and print their values</span></a>
+<a class="sourceLine" id="cb8-52" title="52"><span class="cf">for</span> key <span class="kw">in</span> person:</a>
+<a class="sourceLine" id="cb8-53" title="53">    <span class="bu">print</span>(person[key])</a>
+<a class="sourceLine" id="cb8-54" title="54">    </a>
+<a class="sourceLine" id="cb8-55" title="55"><span class="co"># Convert two lists into a dictionary</span></a>
+<a class="sourceLine" id="cb8-56" title="56">keys <span class="op">=</span> [<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>]</a>
+<a class="sourceLine" id="cb8-57" title="57">values <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb8-58" title="58">dictionary <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(keys, values))</a>
+<a class="sourceLine" id="cb8-59" title="59"><span class="bu">print</span>(dictionary)</a>
+<a class="sourceLine" id="cb8-60" title="60"><span class="co"># {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}</span></a></code></pre></div>
 </div>
 </div>
 </div>
@@ -873,7 +884,9 @@ summary {
 <a class="sourceLine" id="cb16-58" title="58"></a>
 <a class="sourceLine" id="cb16-59" title="59">df.drop_duplicates() <span class="co"># Remove duplicate rows (only considers columns).</span></a>
 <a class="sourceLine" id="cb16-60" title="60"></a>
-<a class="sourceLine" id="cb16-61" title="61">df <span class="op">=</span> df.values <span class="co">#convert a pandas dataframe (df) to a numpy ndarray,</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-61" title="61">df <span class="op">=</span> df.values <span class="co">#convert a pandas dataframe (df) to a numpy ndarray,</span></a>
+<a class="sourceLine" id="cb16-62" title="62"></a>
+<a class="sourceLine" id="cb16-63" title="63">df <span class="op">=</span> df.rename(columns<span class="op">=</span>{<span class="st">&#39;old_name&#39;</span>:<span class="st">&#39;new_name&#39;</span>}) <span class="co"># rename a column name</span></a></code></pre></div>
 <div id="sort" class="section level3">
 <h3><span class="header-section-number">3.3.1</span> sort</h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Order rows by values of a column </span></a>
@@ -985,13 +998,16 @@ summary {
 <a class="sourceLine" id="cb20-7" title="7"><span class="co"># delete column on i index</span></a>
 <a class="sourceLine" id="cb20-8" title="8">df <span class="op">=</span> df.drop(df.columns[i], axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># note: it will remove both columns if there is duplicate names in columns, </span></a>
 <a class="sourceLine" id="cb20-9" title="9"></a>
-<a class="sourceLine" id="cb20-10" title="10"><span class="co"># delete columns based on regular expression</span></a>
-<a class="sourceLine" id="cb20-11" title="11">df <span class="op">=</span> df[df.columns.drop(<span class="bu">list</span>(df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">&#39;Test&#39;</span>)))]</a>
+<a class="sourceLine" id="cb20-10" title="10"><span class="co"># delete column with column name</span></a>
+<a class="sourceLine" id="cb20-11" title="11">df <span class="op">=</span> df.drop([<span class="st">&#39;column_name_A&#39;</span>, <span class="st">&#39;column_name_B&#39;</span>], axis<span class="op">=</span><span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb20-12" title="12"></a>
-<a class="sourceLine" id="cb20-13" title="13"><span class="co"># drop columns which have same values in all rows</span></a>
-<a class="sourceLine" id="cb20-14" title="14">nunique <span class="op">=</span> df.<span class="bu">apply</span>(pd.Series.nunique)</a>
-<a class="sourceLine" id="cb20-15" title="15">cols_to_drop <span class="op">=</span> nunique[nunique <span class="op">==</span> <span class="dv">1</span>].index</a>
-<a class="sourceLine" id="cb20-16" title="16">df.drop(cols_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb20-13" title="13"><span class="co"># delete columns based on regular expression</span></a>
+<a class="sourceLine" id="cb20-14" title="14">df <span class="op">=</span> df[df.columns.drop(<span class="bu">list</span>(df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">&#39;Test&#39;</span>)))]</a>
+<a class="sourceLine" id="cb20-15" title="15"></a>
+<a class="sourceLine" id="cb20-16" title="16"><span class="co"># drop columns which have same values in all rows</span></a>
+<a class="sourceLine" id="cb20-17" title="17">nunique <span class="op">=</span> df.<span class="bu">apply</span>(pd.Series.nunique)</a>
+<a class="sourceLine" id="cb20-18" title="18">cols_to_drop <span class="op">=</span> nunique[nunique <span class="op">==</span> <span class="dv">1</span>].index</a>
+<a class="sourceLine" id="cb20-19" title="19">df.drop(cols_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</a></code></pre></div>
 </div>
 <div id="summary" class="section level3">
 <h3><span class="header-section-number">3.3.5</span> summary</h3>
@@ -1007,7 +1023,35 @@ summary {
 <a class="sourceLine" id="cb22-5" title="5"></a>
 <a class="sourceLine" id="cb22-6" title="6"><span class="cf">for</span> name, group <span class="kw">in</span> grouped:</a>
 <a class="sourceLine" id="cb22-7" title="7">    <span class="bu">print</span>(<span class="st">&#39;key:&#39;</span> name)</a>
-<a class="sourceLine" id="cb22-8" title="8">    <span class="bu">print</span>(<span class="st">&#39;value:&#39;</span> group)</a></code></pre></div>
+<a class="sourceLine" id="cb22-8" title="8">    <span class="bu">print</span>(<span class="st">&#39;value:&#39;</span> group)</a>
+<a class="sourceLine" id="cb22-9" title="9">    </a>
+<a class="sourceLine" id="cb22-10" title="10">data <span class="op">=</span> pd.DataFrame({<span class="st">&#39;user_id&#39;</span>: [<span class="st">&#39;a1&#39;</span>, <span class="st">&#39;a1&#39;</span>, <span class="st">&#39;a1&#39;</span>, <span class="st">&#39;a2&#39;</span>, <span class="st">&#39;a2&#39;</span>, <span class="st">&#39;a2&#39;</span>, <span class="st">&#39;a3&#39;</span>, <span class="st">&#39;a3&#39;</span>, <span class="st">&#39;a3&#39;</span>],</a>
+<a class="sourceLine" id="cb22-11" title="11">                     <span class="st">&#39;product_id&#39;</span>: [<span class="st">&#39;p1&#39;</span>, <span class="st">&#39;p1&#39;</span>, <span class="st">&#39;p2&#39;</span>, <span class="st">&#39;p1&#39;</span>, <span class="st">&#39;p1&#39;</span>, <span class="st">&#39;p1&#39;</span>, <span class="st">&#39;p2&#39;</span>, <span class="st">&#39;p2&#39;</span>, <span class="st">&#39;p3&#39;</span>],</a>
+<a class="sourceLine" id="cb22-12" title="12">                     <span class="st">&#39;product_count&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">30</span>]})</a>
+<a class="sourceLine" id="cb22-13" title="13">count_series <span class="op">=</span> data.groupby([<span class="st">&#39;user_id&#39;</span>, <span class="st">&#39;product_id&#39;</span>]).size()</a>
+<a class="sourceLine" id="cb22-14" title="14">count_series</a>
+<a class="sourceLine" id="cb22-15" title="15"><span class="co"># user_id  product_id</span></a>
+<a class="sourceLine" id="cb22-16" title="16"><span class="co"># a1       p1            2</span></a>
+<a class="sourceLine" id="cb22-17" title="17"><span class="co">#          p2            1</span></a>
+<a class="sourceLine" id="cb22-18" title="18"><span class="co"># a2       p1            3</span></a>
+<a class="sourceLine" id="cb22-19" title="19"><span class="co"># a3       p2            2</span></a>
+<a class="sourceLine" id="cb22-20" title="20"><span class="co">#          p3            1</span></a>
+<a class="sourceLine" id="cb22-21" title="21">count_df <span class="op">=</span> count_series.to_frame(name <span class="op">=</span> <span class="st">&#39;size&#39;</span>).reset_index()</a>
+<a class="sourceLine" id="cb22-22" title="22">count_df</a>
+<a class="sourceLine" id="cb22-23" title="23"><span class="co"># user_id product_id  size</span></a>
+<a class="sourceLine" id="cb22-24" title="24"><span class="co"># 0      a1         p1     2</span></a>
+<a class="sourceLine" id="cb22-25" title="25"><span class="co"># 1      a1         p2     1</span></a>
+<a class="sourceLine" id="cb22-26" title="26"><span class="co"># 2      a2         p1     3</span></a>
+<a class="sourceLine" id="cb22-27" title="27"><span class="co"># 3      a3         p2     2</span></a>
+<a class="sourceLine" id="cb22-28" title="28"><span class="co"># 4      a3         p3     1</span></a>
+<a class="sourceLine" id="cb22-29" title="29">sum_series <span class="op">=</span> data.groupby([<span class="st">&#39;user_id&#39;</span>, <span class="st">&#39;product_id&#39;</span>])[<span class="st">&#39;product_count&#39;</span>].<span class="bu">sum</span>() <span class="co"># Compute sum of group values.</span></a>
+<a class="sourceLine" id="cb22-30" title="30">sum_series</a>
+<a class="sourceLine" id="cb22-31" title="31"><span class="co"># user_id  product_id</span></a>
+<a class="sourceLine" id="cb22-32" title="32"><span class="co"># a1       p1             3</span></a>
+<a class="sourceLine" id="cb22-33" title="33"><span class="co">#          p2             2</span></a>
+<a class="sourceLine" id="cb22-34" title="34"><span class="co"># a2       p1             5</span></a>
+<a class="sourceLine" id="cb22-35" title="35"><span class="co"># a3       p2            14</span></a>
+<a class="sourceLine" id="cb22-36" title="36"><span class="co">#          p3            30</span></a></code></pre></div>
 </div>
 <div id="merge" class="section level3">
 <h3><span class="header-section-number">3.3.7</span> merge</h3>
@@ -1119,7 +1163,20 @@ summary {
 <a class="sourceLine" id="cb28-15" title="15">ts <span class="op">=</span> pd.Timestamp(<span class="st">&#39;2014-01-23 00:00:00&#39;</span>, tz<span class="op">=</span><span class="va">None</span>)</a>
 <a class="sourceLine" id="cb28-16" title="16"><span class="co"># Timestamp(&#39;2014-01-23 00:00:00&#39;, tz=None)</span></a>
 <a class="sourceLine" id="cb28-17" title="17">ts.to_pydatetime()</a>
-<a class="sourceLine" id="cb28-18" title="18"><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></a></code></pre></div>
+<a class="sourceLine" id="cb28-18" title="18"><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></a>
+<a class="sourceLine" id="cb28-19" title="19"></a>
+<a class="sourceLine" id="cb28-20" title="20"><span class="co"># Convert unix time to readable date in pandas dataframe</span></a>
+<a class="sourceLine" id="cb28-21" title="21">df</a>
+<a class="sourceLine" id="cb28-22" title="22">         date  price</a>
+<a class="sourceLine" id="cb28-23" title="23"><span class="co"># 0  1349720105  12.08</span></a>
+<a class="sourceLine" id="cb28-24" title="24"><span class="co"># 1  1349806505  12.35</span></a>
+<a class="sourceLine" id="cb28-25" title="25"><span class="co"># 2  1349892905  12.15</span></a>
+<a class="sourceLine" id="cb28-26" title="26">df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;date&#39;</span>],unit<span class="op">=</span><span class="st">&#39;s&#39;</span>)</a>
+<a class="sourceLine" id="cb28-27" title="27">df</a>
+<a class="sourceLine" id="cb28-28" title="28">                 date  price</a>
+<a class="sourceLine" id="cb28-29" title="29"><span class="co"># 0 2012-10-08 18:15:05  12.08</span></a>
+<a class="sourceLine" id="cb28-30" title="30"><span class="co"># 1 2012-10-09 18:15:05  12.35</span></a>
+<a class="sourceLine" id="cb28-31" title="31"><span class="co"># 2 2012-10-10 18:15:05  12.15</span></a></code></pre></div>
 </div>
 </div>
 <div id="regular-expression" class="section level1">

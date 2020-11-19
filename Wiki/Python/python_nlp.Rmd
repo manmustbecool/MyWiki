@@ -33,3 +33,30 @@ counter_df
 # 2           (to, write)      1
 ```
 
+# Spacy
+
+## 中文
+
+```python
+# 非官方中文模型地址：https://github.com/howl-anderson/Chinese_models_for_SpaCy
+# 下载后执行： pip install ./zh_core_web_sm-2.0.5.tar.gz
+
+import spacy
+nlp = spacy.load("zh_core_web_sm")
+test_doc_1 = nlp("测试一下分词")
+print(test_doc_1.vector)
+
+for token in test_doc_1:
+    print(token.text, token.has_vector, token.vector_norm, token.is_oov)
+    
+test_doc_2 = nlp("这是什么东西")
+test_doc_3 = nlp("测试分词")
+print(test_doc_1.similarity(test_doc_2))
+print(test_doc_1.similarity(test_doc_3))
+
+doc = nlp('西门子将努力参与中国的三峡工程建设。')
+也可以使用spaCy内置的可视化工具：
+
+from spacy import displacy
+displacy.render(doc,type='ent')
+```
