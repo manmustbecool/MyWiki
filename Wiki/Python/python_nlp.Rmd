@@ -33,7 +33,6 @@ counter_df
 # 2           (to, write)      1
 ```
 
-<<<<<<< HEAD
 # spacy
 ```python
 import spacy
@@ -78,11 +77,6 @@ tokens1.similarity(tokens3)
 # 0.8992161555367724
 ```
 
-
-
-=======
-# Spacy
-
 ## 中文
 
 ```python
@@ -108,4 +102,3 @@ doc = nlp('西门子将努力参与中国的三峡工程建设。')
 from spacy import displacy
 displacy.render(doc,type='ent')
 ```
->>>>>>> 83839ff25bd2a23816d02cec81560ce4f39a9206
