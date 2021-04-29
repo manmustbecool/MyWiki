@@ -4,8 +4,8 @@ output: html_document
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-
-# n-grams
+# nltk
+## n-grams
 ```python
 import nltk
 from nltk import word_tokenize
@@ -32,4 +32,50 @@ counter_df
 # 1            (need, to)      1
 # 2           (to, write)      1
 ```
+
+# spacy
+```python
+import spacy
+import numpy as np
+
+nlp = spacy.load("en")
+
+tokens1 = nlp("dog cat banana afskfsd")
+for token in tokens1:
+    print(token.text, token.has_vector, token.vector_norm, token.is_oov)
+    
+dog True 19.266302 True
+cat True 19.220264 True
+banana True 17.748499 True
+afskfsd True 20.882006 True
+
+
+# (all packages that end in sm) don’t ship with word vectors, and only include context-sensitive tensors.
+# so same token has different vector value comparing above
+tokens2 = nlp("cat banana afskfsd dog")
+for token in tokens2:
+    print(token.text, token.has_vector, token.vector_norm, token.is_oov)
+    
+cat True 17.908854 True
+banana True 18.362368 True
+afskfsd True 20.619379 True
+dog True 17.855104 True
+
+# Word Vector Representation
+# each document is converted into a vector with 96 values
+print(tokens1.vector.shape)
+# (96,)
+print(tokens2.vector.shape)
+# (96,)
+
+
+tokens3 = nlp("dog cat banana bybe")
+
+tokens1.similarity(tokens2)
+# 0.9431841314260427
+tokens1.similarity(tokens3)
+# 0.8992161555367724
+```
+
+
 
