@@ -85,6 +85,21 @@ y <- rexp(100)
 qqplot(x, y)
 ```
 
+## Stacked area 
+
+```{r}
+library(ggplot2)
+library(plyr)
+
+#creates the values and data frame
+time<- as.numeric(rep(seq(1,7),each=7))
+value<- runif(49,30,100)
+group<- rep(LETTERS[1:7], times=7)
+data<-data.frame(time,value,group)
+
+ggplot(data, aes(x=time, y=value, fill=group))+geom_area()
+```
+
 
 ## Correlogram 
 http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram

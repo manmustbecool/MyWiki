@@ -428,12 +428,17 @@ summary {
 
 
 <h1 class="title toc-ignore">Text mining/NLP</h1>
+<<<<<<< HEAD
 <h4 class="date">Updated: 18 February, 2020</h4>
+=======
+<h4 class="date">Updated: 18 November, 2020</h4>
+>>>>>>> 83839ff25bd2a23816d02cec81560ce4f39a9206
 
 </div>
 
 <div id="TOC">
 <ul>
+<<<<<<< HEAD
 <li><a href="#nltk"><span class="toc-section-number">1</span> nltk</a><ul>
 <li><a href="#n-grams"><span class="toc-section-number">1.1</span> n-grams</a></li>
 </ul></li>
@@ -445,6 +450,17 @@ summary {
 <h1><span class="header-section-number">1</span> nltk</h1>
 <div id="n-grams" class="section level2">
 <h2><span class="header-section-number">1.1</span> n-grams</h2>
+=======
+<li><a href="#n-grams"><span class="toc-section-number">1</span> n-grams</a></li>
+<li><a href="#spacy"><span class="toc-section-number">2</span> Spacy</a><ul>
+<li><a href="#中文"><span class="toc-section-number">2.1</span> 中文</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="n-grams" class="section level1">
+<h1><span class="header-section-number">1</span> n-grams</h1>
+>>>>>>> 83839ff25bd2a23816d02cec81560ce4f39a9206
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> nltk</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="im">from</span> nltk <span class="im">import</span> word_tokenize</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="im">from</span> nltk.util <span class="im">import</span> ngrams</a>
@@ -470,6 +486,7 @@ summary {
 <a class="sourceLine" id="cb1-23" title="23"><span class="co"># 1            (need, to)      1</span></a>
 <a class="sourceLine" id="cb1-24" title="24"><span class="co"># 2           (to, write)      1</span></a></code></pre></div>
 </div>
+<<<<<<< HEAD
 </div>
 <div id="spacy" class="section level1">
 <h1><span class="header-section-number">2</span> spacy</h1>
@@ -513,6 +530,34 @@ summary {
 <a class="sourceLine" id="cb2-38" title="38"><span class="co"># 0.9431841314260427</span></a>
 <a class="sourceLine" id="cb2-39" title="39">tokens1.similarity(tokens3)</a>
 <a class="sourceLine" id="cb2-40" title="40"><span class="co"># 0.8992161555367724</span></a></code></pre></div>
+=======
+<div id="spacy" class="section level1">
+<h1><span class="header-section-number">2</span> Spacy</h1>
+<div id="中文" class="section level2">
+<h2><span class="header-section-number">2.1</span> 中文</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># 非官方中文模型地址：https://github.com/howl-anderson/Chinese_models_for_SpaCy</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"># 下载后执行： pip install ./zh_core_web_sm-2.0.5.tar.gz</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="im">import</span> spacy</a>
+<a class="sourceLine" id="cb2-5" title="5">nlp <span class="op">=</span> spacy.load(<span class="st">&quot;zh_core_web_sm&quot;</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6">test_doc_1 <span class="op">=</span> nlp(<span class="st">&quot;测试一下分词&quot;</span>)</a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="bu">print</span>(test_doc_1.vector)</a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="cf">for</span> token <span class="kw">in</span> test_doc_1:</a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="bu">print</span>(token.text, token.has_vector, token.vector_norm, token.is_oov)</a>
+<a class="sourceLine" id="cb2-11" title="11">    </a>
+<a class="sourceLine" id="cb2-12" title="12">test_doc_2 <span class="op">=</span> nlp(<span class="st">&quot;这是什么东西&quot;</span>)</a>
+<a class="sourceLine" id="cb2-13" title="13">test_doc_3 <span class="op">=</span> nlp(<span class="st">&quot;测试分词&quot;</span>)</a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="bu">print</span>(test_doc_1.similarity(test_doc_2))</a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="bu">print</span>(test_doc_1.similarity(test_doc_3))</a>
+<a class="sourceLine" id="cb2-16" title="16"></a>
+<a class="sourceLine" id="cb2-17" title="17">doc <span class="op">=</span> nlp(<span class="st">&#39;西门子将努力参与中国的三峡工程建设。&#39;</span>)</a>
+<a class="sourceLine" id="cb2-18" title="18">也可以使用spaCy内置的可视化工具：</a>
+<a class="sourceLine" id="cb2-19" title="19"></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="im">from</span> spacy <span class="im">import</span> displacy</a>
+<a class="sourceLine" id="cb2-21" title="21">displacy.render(doc,<span class="bu">type</span><span class="op">=</span><span class="st">&#39;ent&#39;</span>)</a></code></pre></div>
+</div>
+>>>>>>> 83839ff25bd2a23816d02cec81560ce4f39a9206
 </div>
 
 
