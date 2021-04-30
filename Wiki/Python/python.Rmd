@@ -689,8 +689,6 @@ df[["D", "E"]] = df[["D", "E"]].astype(int)
 s = pd.Series(['single', 'touching', 'nuclei', 'dusts', 'touching', 'single', 'nuclei'])
 s_enc = pd.factorize(s) 
 
-# to datatime
-pd.to_datetime(pd.Series(['2005-05-23 00:00:00', '2005-05-24 00:00:00']), format="%Y-%m-%d %H:%M:%S")
 ```
 
 # Data time
@@ -711,6 +709,22 @@ datetime.datetime.now().date() # only keep date part of datetime
 ```
 ## Pandas Timestamp  
 ```python
+
+# --- convert string to panda datatime
+df = pd.DataFrame({'timestamp_col':['2005-05-23 00:00:00', '2005-05-24 00:00:00']})
+#                dt_col
+#0  2005-05-23 00:00:00
+#1  2005-05-24 00:00:00
+df.timestamp_col = pd.to_datetime(df.timestamp_col, format="%Y-%m-%d %H:%M:%S")
+type(df.timestamp_col[0])
+# <class 'pandas._libs.tslibs.timestamps.Timestamp'>
+
+
+# --- Group datetime column (timestamp_col) into hour and minute aggregations for values (value_col)
+df.groupby([df.timestamp_col.dt.hour, df.timestamp_col.dt.minute]).value_col.sum()
+
+
+
 # remove data time instance is NaT in a dataframe
 df = df[df[3].apply(lambda x: not isinstance(x, pd._libs.tslib.NaTType))]
 
@@ -724,13 +738,15 @@ str(result_ms) # -> '2017-04-30 05:31:01'
 
 (time2-time1).total_seconds() #Convert timedelta to total seconds
 
-# Converting between datetime and Pandas Timestamp objects
+
+# --- Converting between python_datetime and Pandas_Timestamp objects
 ts = pd.Timestamp('2014-01-23 00:00:00', tz=None)
 # Timestamp('2014-01-23 00:00:00', tz=None)
 ts.to_pydatetime()
 # datetime.datetime(2014, 1, 23, 0, 0)
 
-# Convert unix time to readable date in pandas dataframe
+
+# --- Convert unix time to readable date in pandas dataframe
 df
          date  price
 # 0  1349720105  12.08
@@ -742,6 +758,30 @@ df
 # 0 2012-10-08 18:15:05  12.08
 # 1 2012-10-09 18:15:05  12.35
 # 2 2012-10-10 18:15:05  12.15
+
+
+
+
+# --- round time with dt.round ---
+df = pd.DataFrame(
+  {'Date' : pd.date_range('1/1/2011', periods=5, freq='3675S'),
+   'Num' : np.random.rand(5)})
+#                 Date       Num
+#0 2011-01-01 00:00:00  0.580997
+#1 2011-01-01 01:01:15  0.407332
+#2 2011-01-01 02:02:30  0.786035
+#3 2011-01-01 03:03:45  0.821792
+#4 2011-01-01 04:05:00  0.807869
+
+# hourly round
+df.assign(Date=df.Date.dt.round('H'))
+#                 Date       Num
+#0 2011-01-01 00:00:00  0.577957
+#1 2011-01-01 01:00:00  0.995748
+#2 2011-01-01 02:00:00  0.864013
+#3 2011-01-01 03:00:00  0.468762
+#4 2011-01-01 04:00:00  0.866827
+
 
 ```
 # Regular expression
