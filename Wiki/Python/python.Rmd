@@ -448,6 +448,9 @@ df = df.rename(columns={'old_name':'new_name'}) # rename a column name
 df.sort_values('mpg') # (low to high).
 df.sort_values('mpg', ascending=False) # (high to low).
 
+#sort by two or more columns?
+df1 = df1.sort_values(['a', 'b'], ascending=[True, False])
+
 # Shuffle DataFrame rows
 df.sample(frac=1) # The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.
 
@@ -456,6 +459,8 @@ df.sample(n)
 
 # reset index
 df = df(drop=True)
+
+
 ```
 
 ### subset 

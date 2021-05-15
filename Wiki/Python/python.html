@@ -249,7 +249,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 30 April, 2021</h4>
+<h4 class="date">Updated: 10 May, 2021</h4>
 
 </div>
 
@@ -728,14 +728,18 @@ pre code {
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">&#39;mpg&#39;</span>) <span class="co"># (low to high).</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df.sort_values(<span class="st">&#39;mpg&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>) <span class="co"># (high to low).</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle DataFrame rows</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>df.sample(frac<span class="op">=</span><span class="dv">1</span>) <span class="co"># The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#sort by two or more columns?</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df1.sort_values([<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># random n row selection</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>df.sample(n)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle DataFrame rows</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>df.sample(frac<span class="op">=</span><span class="dv">1</span>) <span class="co"># The frac  specifies the fraction of rows to return in the random sample,  frac=1 means return all rows.</span></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># reset index</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df(drop<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># random n row selection</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>df.sample(n)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># reset index</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
 </div>
 <div id="subset-1" class="section level3" number="3.3.2">
 <h3 number="3.3.2"><span class="header-section-number">3.3.2</span> subset</h3>
