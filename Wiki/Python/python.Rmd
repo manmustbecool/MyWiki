@@ -964,19 +964,67 @@ No working package for Pthon3 at the moment
   
 # Managing environments
 
+Conda 
 ```bash
 $ conda -V  # Check conda is installed
 # conda 3.7.0
 
 conda create --name myenvv  #By default, environments are installed into the envs directory in the conda directory.
 
-conda activate and conda deactivate
+conda create --name myenv python=3.4  # create an environment with a specific version of Python
 
-conda create -n myenv python=3.4  # create an environment with a specific version of Python
+conda activate and conda deactivate
 
 conda env list # view the list of enviroment
 
-conda remove -n myenv -all #  Delete a no longer needed virtual environment
+conda remove --name myenv --all #  Delete an virtual environment
 ```
+
+Pipenv
+```bash
+pip install pipenv
+
+pipenv --venv # list enviroment
+
+pipenv --rm # remove enviroment
+
+pipenv install #  go to the folder containing your Python project, and create a new environment. This will create two new files, Pipfile and Pipfile.lock, in your project directory, and a new virtual environment for your project if it doesn’t exist already.
+
+pipenv shell # activate it
+
+pipenv install beautifulsoup4 # install a Python package for your project
+
+```
+
+build pipenv enviroment from conda enviroment
+```bash
+# go to project directory
+cd C:\Users\user_name\Desktop\my_projects\chatbot
+
+# create python 3.7.5 version
+conda create -n pipenv3.7 python=3.7
+
+# active the enviroement
+conda activate pipenv3.7
+
+# find python path
+where python
+
+# create a pipenv with the python path under the actived pipenv3.7
+pipenv --python=C:\Users\user_name\.conda\envs\pipenv3.7\python.exe
+
+# install package based on pipfile from the project directory
+pipenv install
+
+# for import _ssl DLL load fail error
+# copy from C:\ProgramData\Anaconda3\Library\bin to C:\Users\user_name\.conda\envs\pipenv3.7\DLLs
+libcrypto-1_1-x64.dll
+libssl-1_1-x64.dll
+sqlite3.dll
+sqlite3.exe
+
+```
+
+
 
   
