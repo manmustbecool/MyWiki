@@ -72,6 +72,7 @@ My notes
     + <a href="Wiki/Python/Django.html">Django</a>
     + <a href="Wiki/Python/flaskReact.html">Flask + React</a>
     + <a href="Wiki/Python/dash.html">Dash</a>
+    + <a href="Wiki/Python/dash_collapsed_sidebar.html">Dash collapsed sidebar</a>
  * <a href="Wiki/Python/unit_test.html">Unit testing</a>
     
 ## Cloud

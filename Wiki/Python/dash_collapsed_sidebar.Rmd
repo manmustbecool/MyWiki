@@ -1,0 +1,106 @@
+---
+title: "Dash collapsed sidebar"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# dash collapsed sidebar
+
+css file in the assets folder
+
+```css
+/* the style arguments for the sidebar. We use position:fixed and a fixed width */
+.sidebar {
+    position: fixed;
+    bottom: 0;
+    width: 16rem;
+    height: 100%;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: all 0.5s;
+    background-color: #f8f9fa;
+}
+
+.sidebar_show {
+    right: 0;
+}
+
+.sidebar_hidden {
+    right: -16rem;
+}
+
+/* the styles for the main content position it to the right of the sidebar and add some padding. */
+.content {
+    transition: margin-right .5s;
+    background-color: #b8f9fa;
+}
+
+.content_show {
+    margin-right: 18rem;
+}
+
+.content_hidden {
+    margin-right: 2rem;
+}
+
+```
+
+Dash python code
+
+```python
+import dash
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output, State
+
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+
+sidebar = html.Div([
+    html.Hr(),
+    html.P("A simple sidebar panel"),
+],
+    id="sidebar", className="sidebar sidebar_show",
+)
+
+content = html.Div([
+    html.P("Content panel"),
+    html.Hr(),
+    dbc.Button("Sidebar", id="btn_sidebar")
+], id="page-content",
+    className="content content_show")
+
+app.layout = html.Div([
+    dcc.Store(id='store_side_click'),
+    sidebar,
+    content,
+])
+
+
+@app.callback(
+    Output("sidebar", "className"),
+    Output("page-content", "className"),
+    Output("store_side_click", "data"),
+    Input("btn_sidebar", "n_clicks"),
+    State("store_side_click", "data"),
+)
+def toggle_sidebar(n, nclick):
+    print(n)
+    if n is None or nclick == "HIDDEN":
+        sidebar_classname = "sidebar sidebar_show"
+        content_classname = "content content_show"
+        side_nclick = "SHOW"
+    else:
+        sidebar_classname = "sidebar sidebar_hidden"
+        content_classname = "content content_hidden"
+        side_nclick = "HIDDEN"
+
+    print(side_nclick)
+
+    return sidebar_classname, content_classname, side_nclick
+
+
+if __name__ == "__main__":
+    app.run_server(debug=True, port=8086)
+
+```
