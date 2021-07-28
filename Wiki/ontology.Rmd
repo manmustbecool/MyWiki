@@ -1,0 +1,77 @@
+---
+title: "Ontology"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Model
+
+
+
+| Model      |      Metadata     |  Data            | Identifier    | Query 
+|----------  |-------------      |------              | ----        |---
+| Relational |   Table sechma    | Table Cell Values | Primary Key  | SQL
+| semantic   |    RDFS/OWL       |   RDF              | URI          | SPARQL
+
+
+
+Vocabulary - A collection of terms given a well-defined meaning that is consistent across contexts.
+
+Ontology - Allows you to define contextual relationships behind a defined vocabulary. It is the cornerstone of defining a knowledge domain. A formal syntax for defining ontologies is OWL 
+
+OWL (Web Ontology Language) which is an extension to RDFS (RDF Schema)
+
+
+## OWL 
+
+OWL Classes, Subclasses & Individuals
+
+define our semantic terms, or classes, in a hierarchy. this hierarchy of terms is called a taxonomy
+
+OWL Properties
+
+Object properties ```owl:ObjectProperty``` relates individuals (instances) of two OWL classes.
+
+Datatype properties ```owl:DatatypeProperty``` relates individuals ```instances``` of OWL classes to literal values.
+
+### OWL vs RDFS
+
+OWL provides a far, far larger vocabulary than RDFS
+
+or example, OWL includes vocabulary from RDFS such as ```rdfs:type```, ```rdfs:domain```, and ```rdfs:subPropertyOf```. 
+
+OWL also gives you new vocabulary. For example, OWL lets you describe you data in terms of set operations:
+
+```Example:Mother owl:unionOf(Example:Parent, Example:Woman)```
+
+It lets you define equivalences across databases:
+
+```AcmeCompany:JohnSmith owl:sameAs PersonalDatabase:JohnQSmith```
+
+It lets you restrict property values:
+
+```Example:MyState owl:allValuesFrom (State:NewYork, State:California, …)```
+
+https://www.cambridgesemantics.com/blog/semantic-university/learn-owl-rdfs/rdfs-vs-owl/
+
+
+##
+Rule Interchange Format (RIF) 
+
+SHACL is for validation, OWL for modelling, which can include rules but not only rules (e.g. class declarations, relations etc). RIF is indeed a more general-purpose rule language that isn't at all 1:1 with wither OWL or SHACL which aren't 1:1 with each other!
+
+# VOWL
+The Visual Notation for OWL Ontologies (VOWL) defines a visual language for the user-oriented representation of ontologies. It provides graphical depictions for elements of the Web Ontology Language (OWL) that are combined to a force-directed graph layout visualizing the ontology.
+
+## 
+
+serialisation of OWL axioms in RDF/XML, Turtle, or N3 formats.
+
+
+RDF/OWL platforms require complex layers of loosely coupled components from many different systems, such as ontology editors (e.g. Protege), storage (RDF triple stores), query engines (e.g. SPARQL), reasoners (e.g. Pellet, other OWL reasoners).
+
+
+reference: http://www.linkeddatatools.com/semantic-web-basics

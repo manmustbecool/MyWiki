@@ -1,0 +1,62 @@
+---
+title: "Decorator"
+output: html_document
+---
+
+
+A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure
+
+## Decorators
+
+```{python}
+def uppercase_decorator(function):
+  
+  def wrapper(*args,**kwargs):
+    fun_output = function()   
+    make_uppercase = fun_output.upper()
+    return make_uppercase
+  
+  return wrapper
+
+
+@uppercase_decorator
+def say_hi():
+  return 'hello there'
+
+say_hi()
+```
+
+
+## Accepting Arguments in Decorator Functions 
+
+*args and **kwargs collect all positional and keyword arguments and stores them in the args and kwargs variables.
+
+```{python}
+def a_decorator_passing_arbitrary_arguments(function_to_decorate):
+  def a_wrapper_accepting_arbitrary_arguments(*args,**kwargs):
+      print('The positional arguments are', args)
+      print('The keyword arguments are', kwargs)
+      return function_to_decorate(*args,**kwargs)
+  return a_wrapper_accepting_arbitrary_arguments
+```
+
+
+```{python}
+@a_decorator_passing_arbitrary_arguments
+def function_with_arguments(a, b, c):
+  print(a, b, c)
+
+function_with_arguments(1,"a",3)
+
+
+@a_decorator_passing_arbitrary_arguments
+@uppercase_decorator
+def function_with_keyword_arguments():
+  return "This has shown keyword arguments"
+
+function_with_keyword_arguments(first_name="Derrick", last_name="Mwiti")
+function_with_keyword_arguments()
+```
+reference: https://www.datacamp.com/community/tutorials/decorators-python?utm_source=adwords_ppc&utm_campaignid=898687156&utm_adgroupid=48947256715&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=&utm_creative=332602034349&utm_targetid=dsa-429603003980&utm_loc_interest_ms=&utm_loc_physical_ms=1007902&gclid=Cj0KCQjwxJqHBhC4ARIsAChq4auLdHANG3TPX9tcImvOVjRo9ty7ms1Ky2JAeuRDxUy51bZoatCSsGgaAtXTEALw_wcB
+
+

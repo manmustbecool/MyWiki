@@ -74,6 +74,7 @@ My notes
     + <a href="Wiki/Python/dash.html">Dash</a>
     + <a href="Wiki/Python/dash_collapsed_sidebar.html">Dash collapsed sidebar</a>
  * <a href="Wiki/Python/unit_test.html">Unit testing</a>
+  * <a href="Wiki/Python/python_decorator.html">Decorator</a>
     
 ## Cloud
  * <a href="Wiki/Cloud/VirtualMachine.html">Virtual Machine</a>
@@ -118,7 +119,7 @@ My notes
  * <a href="Wiki/commonSoftware.html">Common Software</a>
  * <a href="Wiki/smartphone.html">Smartphone</a>
  * <a href="Wiki/blockchain.html">Block chain</a>
- 
+* <a href="Wiki/ontology.html">Ontology</a>
 
 <style>
 div.non * {
