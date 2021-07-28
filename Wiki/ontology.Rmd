@@ -1,20 +1,17 @@
 ---
 title: "Ontology"
 output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Data Model
 
 
 
-| Model      |      Metadata     |  Data            | Identifier    | Query 
-|----------  |-------------      |------              | ----        |---
-| Relational |   Table sechma    | Table Cell Values | Primary Key  | SQL
-| semantic   |    RDFS/OWL       |   RDF              | URI          | SPARQL
+| Model      | Metadata          |Data                | Identifier    | Query 
+|----        |----               |----                | ----          |----
+| Relational | Table sechma      | Table Cell Values  | Primary Key   | SQL
+| semantic   | RDFS/OWL          | RDF                | URI           | SPARQL
 
 
 
@@ -58,17 +55,16 @@ It lets you restrict property values:
 https://www.cambridgesemantics.com/blog/semantic-university/learn-owl-rdfs/rdfs-vs-owl/
 
 
-##
-Rule Interchange Format (RIF) 
+## Rule Interchange Format (RIF) 
 
 SHACL is for validation, OWL for modelling, which can include rules but not only rules (e.g. class declarations, relations etc). RIF is indeed a more general-purpose rule language that isn't at all 1:1 with wither OWL or SHACL which aren't 1:1 with each other!
 
-# VOWL
+## VOWL
 The Visual Notation for OWL Ontologies (VOWL) defines a visual language for the user-oriented representation of ontologies. It provides graphical depictions for elements of the Web Ontology Language (OWL) that are combined to a force-directed graph layout visualizing the ontology.
 
-## 
+## serialization
 
-serialisation of OWL axioms in RDF/XML, Turtle, or N3 formats.
+serialization of OWL axioms in RDF/XML, Turtle, or N3 formats.
 
 
 RDF/OWL platforms require complex layers of loosely coupled components from many different systems, such as ontology editors (e.g. Protege), storage (RDF triple stores), query engines (e.g. SPARQL), reasoners (e.g. Pellet, other OWL reasoners).
