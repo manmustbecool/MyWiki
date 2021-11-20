@@ -1,0 +1,28 @@
+---
+title: "AWS"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# Elastic Beanstalk 
+
+## Elastic Load Balancer
+"single-instance" environments can be configured in "load-balancing environment" configurations.
+
+## Application log accss from 
+
+```bash
+.ebextensions
+   applog.config
+```
+
+
+```bash
+files:
+  "/opt/python/log/application.log" :
+   mode: "000666"
+   owner: ec2-user
+   group: ec2-user
+   content: |
+       # Askbot log file
+```
+
