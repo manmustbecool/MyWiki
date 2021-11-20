@@ -81,6 +81,7 @@ My notes
  * <a href="Wiki/Cloud/Container.html">Container - Docker</a>
  * <a href="Wiki/Cloud/Kubeflow.html">Kubeflow</a>
  * <a href="Wiki/Cloud/automation.html">Automation</a>
+ * <a href="Wiki/Cloud/AWS.html">AWS</a>
 
 ## Big Data
  * <a href="Wiki/Hadoop.html">Hadoop</a> 
