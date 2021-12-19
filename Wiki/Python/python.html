@@ -250,7 +250,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 19 November, 2021</h4>
+<h4 class="date">Updated: 19 December, 2021</h4>
 
 </div>
 
@@ -310,9 +310,10 @@ pre code {
 </ul></li>
 <li><a href="#others"><span class="toc-section-number">7</span> Others</a>
 <ul>
-<li><a href="#lambda"><span class="toc-section-number">7.1</span> lambda</a></li>
-<li><a href="#underscore-_"><span class="toc-section-number">7.2</span> underscore _</a></li>
-<li><a href="#reload-imported-module"><span class="toc-section-number">7.3</span> reload imported module</a></li>
+<li><a href="#logging"><span class="toc-section-number">7.1</span> logging</a></li>
+<li><a href="#lambda"><span class="toc-section-number">7.2</span> lambda</a></li>
+<li><a href="#underscore-_"><span class="toc-section-number">7.3</span> underscore _</a></li>
+<li><a href="#reload-imported-module"><span class="toc-section-number">7.4</span> reload imported module</a></li>
 </ul></li>
 <li><a href="#real-time-plot-with-python"><span class="toc-section-number">8</span> Real time plot with python</a></li>
 <li><a href="#plot-a-hist-graph"><span class="toc-section-number">9</span> plot a hist graph</a></li>
@@ -365,8 +366,8 @@ pre code {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span><span class="dv">5</span> <span class="co"># [None, None, None, None, None]</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check if it is emepy</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> a:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check if it is empty</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> li:</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;List is empty&quot;</span>)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># check if it is in the list</span></span>
@@ -414,33 +415,37 @@ pre code {
 <span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> [ [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>], ] <span class="co"># nested list</span></span>
 <span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co"># loop in the list</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="st">&#39;a&#39;</span>,<span class="st">&#39; b&#39;</span>, <span class="st">&#39;c &#39;</span>, <span class="st">&#39; d &#39;</span>]</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(a):</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> s.strip()</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a) <span class="co"># -&gt; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="co"># loop for the list</span></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span> [(<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">3</span>), (<span class="dv">2</span>, <span class="dv">3</span>)]</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>[<span class="bu">sum</span>(tup) <span class="cf">for</span> tup <span class="kw">in</span> li]</span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="co"># [3, 4, 5]</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="co"># list to string</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span> [<span class="st">&quot;This&quot;</span> , <span class="st">&quot;is&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;sample&quot;</span>, <span class="st">&quot;program&quot;</span>]</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co">&#39; &#39;</span>.join(li) <span class="co"># &#39;This is a sample program&#39;</span></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;,&#39;</span>.join(li) <span class="co"># &#39;This,is,a,sample,program&#39;</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if all values in list are greater than a certain number</span></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> [<span class="dv">29</span>, <span class="dv">500</span>, <span class="dv">43</span>]</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="bu">all</span>(i <span class="op">&gt;=</span> <span class="dv">30</span> <span class="cf">for</span> i <span class="kw">in</span> l)</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="co"># True</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort list by given order of indices</span></span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span>[<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>]</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>sortedIndex <span class="op">=</span> [<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">4</span>]</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>[li[i] <span class="cf">for</span> i <span class="kw">in</span> sortedIndex]</span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="co"># [&#39;D&#39;, &#39;C&#39;, &#39;B&#39;, &#39;A&#39;, &#39;E&#39;]</span></span></code></pre></div>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co"># if all elements of a list are False</span></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span> [<span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>]</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="kw">not</span> <span class="bu">any</span>(data) <span class="co"># any() will return True if there&#39;s any truth value in the iterable.</span></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt; True</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="co"># loop in the list</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span> [<span class="st">&#39;a&#39;</span>,<span class="st">&#39; b&#39;</span>, <span class="st">&#39;c &#39;</span>, <span class="st">&#39; d &#39;</span>]</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, s <span class="kw">in</span> <span class="bu">enumerate</span>(li):</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>  li[i] <span class="op">=</span> s.strip()</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(li) <span class="co"># -&gt; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="co"># loop for the list</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span> [(<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">3</span>), (<span class="dv">2</span>, <span class="dv">3</span>)]</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>[<span class="bu">sum</span>(tup) <span class="cf">for</span> tup <span class="kw">in</span> li]</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co"># [3, 4, 5]</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="co"># list to string</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span> [<span class="st">&quot;This&quot;</span> , <span class="st">&quot;is&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;sample&quot;</span>, <span class="st">&quot;program&quot;</span>]</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="co">&#39; &#39;</span>.join(li) <span class="co"># &#39;This is a sample program&#39;</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;,&#39;</span>.join(li) <span class="co"># &#39;This,is,a,sample,program&#39;</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if all values in list are greater than a certain number</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> [<span class="dv">29</span>, <span class="dv">500</span>, <span class="dv">43</span>]</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a><span class="bu">all</span>(i <span class="op">&gt;=</span> <span class="dv">30</span> <span class="cf">for</span> i <span class="kw">in</span> l)</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="co"># True</span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort list by given order of indices</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>li <span class="op">=</span>[<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>]</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>sortedIndex <span class="op">=</span> [<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">4</span>]</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>[li[i] <span class="cf">for</span> i <span class="kw">in</span> sortedIndex]</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="co"># [&#39;D&#39;, &#39;C&#39;, &#39;B&#39;, &#39;A&#39;, &#39;E&#39;]</span></span></code></pre></div>
 </div>
 <div id="tuple" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Tuple</h3>
@@ -639,7 +644,7 @@ pre code {
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># regex </span></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&#39;f.o&#39;</span>, <span class="st">&#39;fuz&#39;</span>, np.nan]).<span class="bu">str</span>.replace(<span class="st">&#39;f.&#39;</span>, <span class="st">&#39;ba&#39;</span>, regex<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Factorize</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Factorize ---</span></span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>s_class <span class="op">=</span> pd.Series([<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>])</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>s_class_id <span class="op">=</span> s_class.factorize()[<span class="dv">0</span>] <span class="co"># convert string to numbers</span></span>
@@ -651,11 +656,14 @@ pre code {
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>mapped_back_to_class</span>
 <span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Index([&#39;d&#39;, &#39;c&#39;, &#39;d&#39;, &#39;b&#39;], dtype=&#39;object&#39;)</span></span>
 <span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># apply </span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).<span class="bu">apply</span>(<span class="kw">lambda</span> x :x<span class="op">*</span><span class="dv">2</span>)</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 0    2</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 1    4</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 2    6</span></span></code></pre></div>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># -- check if ALL values are NaN in Series</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>se.isnull().<span class="bu">all</span>()</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># -- apply </span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).<span class="bu">apply</span>(<span class="kw">lambda</span> x :x<span class="op">*</span><span class="dv">2</span>)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 0    2</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 1    4</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 2    6</span></span></code></pre></div>
 </div>
 <div id="pandadataframe" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Panda::DataFrame</h2>
@@ -1124,90 +1132,99 @@ pre code {
 </div>
 <div id="others" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> Others</h1>
-<div id="lambda" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> lambda</h2>
+<div id="logging" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> logging</h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="dv">5</span> <span class="op">/</span> <span class="dv">0</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    logging.warning(e.__traceback__, exc_info<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+</div>
+<div id="lambda" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> lambda</h2>
 <p>Anonymous function objects</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- function ----</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x, y): </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --- lambda arguments : expression ---</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span></code></pre></div>
-</div>
-<div id="underscore-_" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> underscore _</h2>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storing the value of last expression in interpreter</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">10</span> </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> </span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">*</span> <span class="dv">3</span>  </span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span></span>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- function ----</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x, y): </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For Ignoring the values</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>x, _, y <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># x = 1, y = 3</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co"># _single_leading_underscore:  </span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># is used for declaring private variables, functions, methods and classes in a module</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> _Base: <span class="co"># private class</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    _hidden_factor <span class="op">=</span> <span class="dv">2</span> <span class="co"># private variable</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_underscore:</span></span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co"># for mangling </span></span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> A:</span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __double_method(<span class="va">self</span>): <span class="co"># the name will be mangled in &quot;_ClassName__method&quot; form.</span></span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_and_trailing_underscore__ : </span></span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  for special variables or methods </span></span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="va">__file__</span> <span class="co"># indicates the location of Python file</span></span>
-<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="fu">__init__</span> <span class="co"># will be executed at first when a instance of class is created</span></span></code></pre></div>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --- lambda arguments : expression ---</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span></code></pre></div>
 </div>
-<div id="reload-imported-module" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> reload imported module</h2>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> foo <span class="co">#import the module here, so that it can be reloaded.</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(foo)</span></code></pre></div>
+<div id="underscore-_" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> underscore _</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storing the value of last expression in interpreter</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">10</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">*</span> <span class="dv">3</span>  </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For Ignoring the values</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>x, _, y <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># x = 1, y = 3</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># _single_leading_underscore:  </span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co"># is used for declaring private variables, functions, methods and classes in a module</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> _Base: <span class="co"># private class</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    _hidden_factor <span class="op">=</span> <span class="dv">2</span> <span class="co"># private variable</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_underscore:</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># for mangling </span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> A:</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __double_method(<span class="va">self</span>): <span class="co"># the name will be mangled in &quot;_ClassName__method&quot; form.</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_and_trailing_underscore__ : </span></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  for special variables or methods </span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="va">__file__</span> <span class="co"># indicates the location of Python file</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="fu">__init__</span> <span class="co"># will be executed at first when a instance of class is created</span></span></code></pre></div>
+</div>
+<div id="reload-imported-module" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> reload imported module</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> foo <span class="co">#import the module here, so that it can be reloaded.</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(foo)</span></code></pre></div>
 </div>
 </div>
 <div id="real-time-plot-with-python" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Real time plot with python</h1>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>plt.axis([<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>plt.ion()</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.random()</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    plt.scatter(i, y)</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>plt.axis([<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>plt.ion()</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.random()</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    plt.scatter(i, y)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span></code></pre></div>
 </div>
 <div id="plot-a-hist-graph" class="section level1" number="9">
 <h1><span class="header-section-number">9</span> plot a hist graph</h1>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>)]</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>plt.hist(values, bins<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot a vertical line</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>)]</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>plt.hist(values, bins<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot a vertical line</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
 </div>
 <div id="install-package" class="section level1" number="10">
 <h1><span class="header-section-number">10</span> Install package</h1>
 <p>in cmd comand window</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PyPI</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>pip install py2exe</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">#conda</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>conda install <span class="op">--</span>channel https:<span class="op">//</span>conda.anaconda.org<span class="op">/</span>manmadescience py2exe</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>conda install pandas</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>pip install pandas</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PyPI</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>pip install py2exe</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#conda</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>conda install <span class="op">--</span>channel https:<span class="op">//</span>conda.anaconda.org<span class="op">/</span>manmadescience py2exe</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>conda install pandas</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>pip install pandas</span></code></pre></div>
 <p>NTLM support for Python3</p>
 <p>No working package for Pthon3 at the moment</p>
 <ul>
@@ -1218,55 +1235,65 @@ pre code {
 <div id="managing-environments" class="section level1" number="11">
 <h1><span class="header-section-number">11</span> Managing environments</h1>
 <p>Conda</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda <span class="at">-V</span>  <span class="co"># Check conda is installed</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># conda 3.7.0</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenvv  <span class="co">#By default, environments are installed into the envs directory in the conda directory.</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv python=3.4  <span class="co"># create an environment with a specific version of Python</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate and conda deactivate</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list <span class="co"># view the list of enviroment</span></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co">#  Delete an virtual environment</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda <span class="at">-V</span>  <span class="co"># Check conda is installed</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># conda 3.7.0</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenvv  <span class="co">#By default, environments are installed into the envs directory in the conda directory.</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv python=3.4  <span class="co"># create an environment with a specific version of Python</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate and conda deactivate</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list <span class="co"># view the list of enviroment</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co">#  Delete an virtual environment</span></span></code></pre></div>
 <p>Pipenv</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pipenv</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--venv</span> <span class="co"># list environment. must go to the project folder containing the environment firstly</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--rm</span> <span class="co"># remove environment</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install <span class="co">#  go to the folder containing your Python project, and create a new environment. This will create two new files, Pipfile and Pipfile.lock, in your project directory, and a new virtual environment for your project if it doesn’t exist already.</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> shell <span class="co"># activate it</span></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install beautifulsoup4 <span class="co"># install a Python package for your project</span></span></code></pre></div>
-<p>build pipenv enviroment from conda enviroment</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go to project directory</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\D</span>esktop<span class="dt">\m</span>y_projects<span class="dt">\c</span>hatbot</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create python 3.7.5 version</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pipenv3.7 python=3.7</span>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pipenv</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--venv</span> <span class="co"># list environment. must go to the project folder containing the environment firstly</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--rm</span> <span class="co"># remove environment</span></span>
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># active the enviroement</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipenv3.7</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># find python path</span></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="ex">where</span> python</span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a pipenv with the python path under the actived pipenv3.7</span></span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--python</span><span class="op">=</span>C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\.</span>conda<span class="dt">\e</span>nvs<span class="dt">\p</span>ipenv3.7<span class="dt">\p</span>ython.exe</span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install package based on pipfile from the project directory</span></span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install</span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="co"># for import _ssl DLL load fail error</span></span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="co"># copy from C:\ProgramData\Anaconda3\Library\bin to C:\Users\user_name\.conda\envs\pipenv3.7\DLLs</span></span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="ex">libcrypto-1_1-x64.dll</span></span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a><span class="ex">libssl-1_1-x64.dll</span></span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.dll</span></span>
-<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.exe</span></span></code></pre></div>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install <span class="co">#  go to the folder containing your Python project, and create a new environment. This will create two new files, Pipfile and Pipfile.lock, in your project directory, and a new virtual environment for your project if it doesn’t exist already.</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> shell <span class="co"># activate it</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install beautifulsoup4 <span class="co"># install a Python package for your project</span></span></code></pre></div>
+<p>build pipenv enviroment from conda enviroment</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go to project directory</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\D</span>esktop<span class="dt">\m</span>y_projects<span class="dt">\c</span>hatbot</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create python 3.7.5 version</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pipenv3.7 python=3.7</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># active the enviroement</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipenv3.7</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co"># find python path</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="ex">where</span> python</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a pipenv with the python path under the actived pipenv3.7</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--python</span><span class="op">=</span>C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\.</span>conda<span class="dt">\e</span>nvs<span class="dt">\p</span>ipenv3.7<span class="dt">\p</span>ython.exe</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install package based on pipfile from the project directory</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="co"># for import _ssl DLL load fail error</span></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="co"># copy from C:\ProgramData\Anaconda3\Library\bin to C:\Users\user_name\.conda\envs\pipenv3.7\DLLs</span></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="ex">libcrypto-1_1-x64.dll</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="ex">libssl-1_1-x64.dll</span></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.dll</span></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.exe</span></span></code></pre></div>
+<p>virtualenv</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install virtualenv <span class="co"># Install the virtualenv package</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="ex">virtualenv</span> mypython <span class="co"># Create the virtual environment</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the virtual environment</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> mypython/bin/activate <span class="co"># Mac OS / Linux</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mypthon\Scripts\activate</span> <span class="co"># Windows</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span> <span class="co"># Deactivate the virtual environment</span></span></code></pre></div>
 </div>
 
 
