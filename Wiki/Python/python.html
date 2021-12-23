@@ -250,7 +250,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 19 December, 2021</h4>
+<h4 class="date">Updated: 23 December, 2021</h4>
 
 </div>
 
@@ -570,16 +570,15 @@ pre code {
 </div>
 <div id="append-delete" class="section level3" number="3.1.3">
 <h3><span class="header-section-number">3.1.3</span> append / delete</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># append an array</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ay <span class="op">=</span> np.append(ay, ay1)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># delete an element</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>np.delete(a, index)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># count the occurrence of certain item in an ndarray in Python</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>unique, counts <span class="op">=</span> numpy.unique(a, return_counts<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># append an array</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ay <span class="op">=</span> np.append(ay, ay1)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># delete an element</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>np.delete(a, index)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># count the occurrence of certain item in an ndarray in Python</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>unique, counts <span class="op">=</span> numpy.unique(a, return_counts<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="subset" class="section level3" number="3.1.4">
 <h3><span class="header-section-number">3.1.4</span> subset</h3>
@@ -641,29 +640,32 @@ pre code {
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to a list</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).tolist()</span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># regex </span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&#39;f.o&#39;</span>, <span class="st">&#39;fuz&#39;</span>, np.nan]).<span class="bu">str</span>.replace(<span class="st">&#39;f.&#39;</span>, <span class="st">&#39;ba&#39;</span>, regex<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># reset the index</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>s.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>) <span class="co"># drop: delete the index entirely; inplace: directly modify and overwrite your original DataFrame</span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Factorize ---</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>s_class <span class="op">=</span> pd.Series([<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>])</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># regex </span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="st">&#39;f.o&#39;</span>, <span class="st">&#39;fuz&#39;</span>, np.nan]).<span class="bu">str</span>.replace(<span class="st">&#39;f.&#39;</span>, <span class="st">&#39;ba&#39;</span>, regex<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>s_class_id <span class="op">=</span> s_class.factorize()[<span class="dv">0</span>] <span class="co"># convert string to numbers</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>s_class_id</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># array([0, 1, 2, 3], dtype=int64)</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>s_class_id, mapping <span class="op">=</span> s_class.factorize() <span class="co"># keep mapping class</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>mapped_back_to_class <span class="op">=</span> mapping.take(pd.Series([<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>]))</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>mapped_back_to_class</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Index([&#39;d&#39;, &#39;c&#39;, &#39;d&#39;, &#39;b&#39;], dtype=&#39;object&#39;)</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># -- check if ALL values are NaN in Series</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>se.isnull().<span class="bu">all</span>()</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Factorize ---</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>s_class <span class="op">=</span> pd.Series([<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>])</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>s_class_id <span class="op">=</span> s_class.factorize()[<span class="dv">0</span>] <span class="co"># convert string to numbers</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>s_class_id</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># array([0, 1, 2, 3], dtype=int64)</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>s_class_id, mapping <span class="op">=</span> s_class.factorize() <span class="co"># keep mapping class</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>mapped_back_to_class <span class="op">=</span> mapping.take(pd.Series([<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>]))</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>mapped_back_to_class</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Index([&#39;d&#39;, &#39;c&#39;, &#39;d&#39;, &#39;b&#39;], dtype=&#39;object&#39;)</span></span>
 <span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># -- apply </span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).<span class="bu">apply</span>(<span class="kw">lambda</span> x :x<span class="op">*</span><span class="dv">2</span>)</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 0    2</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 1    4</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 2    6</span></span></code></pre></div>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># -- check if ALL values are NaN in Series</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>se.isnull().<span class="bu">all</span>()</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co"># -- apply </span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]).<span class="bu">apply</span>(<span class="kw">lambda</span> x :x<span class="op">*</span><span class="dv">2</span>)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 0    2</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 1    4</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 2    6</span></span></code></pre></div>
 </div>
 <div id="pandadataframe" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Panda::DataFrame</h2>
@@ -994,237 +996,260 @@ pre code {
 <span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co"># combine date and time strings to single datetime object </span></span>
 <span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>mytime <span class="op">=</span> dt.datetime.strptime(<span class="st">&#39;0130&#39;</span>,<span class="st">&#39;%H%M&#39;</span>).time()</span>
 <span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>mydatetime <span class="op">=</span> dt.datetime.combine(dt.date.today(), mytime)</span></code></pre></div>
+<p>Convert string to datetime <a href="https://stackoverflow.com/questions/53892450/get-the-format-in-dateutil-parse" class="uri">https://stackoverflow.com/questions/53892450/get-the-format-in-dateutil-parse</a> <a href="https://stackabuse.com/converting-strings-to-datetime-in-python/" class="uri">https://stackabuse.com/converting-strings-to-datetime-in-python/</a></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>formats <span class="op">=</span> [<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S*</span><span class="sc">%f</span><span class="st">%z&#39;</span>,<span class="st">&#39;%Y %b </span><span class="sc">%d</span><span class="st"> %H:%M:%S.</span><span class="sc">%f</span><span class="st"> %Z&#39;</span>,<span class="st">&#39;%b </span><span class="sc">%d</span><span class="st"> %H:%M:%S %z %Y&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st">/%b/%Y:%H:%M:%S %z&#39;</span>,<span class="st">&#39;%b </span><span class="sc">%d</span><span class="st">, %Y %I:%M:%S %p&#39;</span>,<span class="st">&#39;%b </span><span class="sc">%d</span><span class="st"> %Y %H:%M:%S&#39;</span>,<span class="st">&#39;%b </span><span class="sc">%d</span><span class="st"> %H:%M:%S %Y&#39;</span>,<span class="st">&#39;%b </span><span class="sc">%d</span><span class="st"> %H:%M:%S %z&#39;</span>,<span class="st">&#39;%b </span><span class="sc">%d</span><span class="st"> %H:%M:%S&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S%z&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S.</span><span class="sc">%f</span><span class="st">%z&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S %z&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S%z&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S,</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%Y/%m/</span><span class="sc">%d</span><span class="st">*%H:%M:%S&#39;</span>,<span class="st">&#39;%Y %b </span><span class="sc">%d</span><span class="st"> %H:%M:%S.</span><span class="sc">%f</span><span class="st">*%Z&#39;</span>,<span class="st">&#39;%Y %b </span><span class="sc">%d</span><span class="st"> %H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S,</span><span class="sc">%f</span><span class="st">%z&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S.</span><span class="sc">%f</span><span class="st">%z&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S%Z&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">T%H:%M:%S&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">*%H:%M:%S:</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%Y-%m-</span><span class="sc">%d</span><span class="st">*%H:%M:%S&#39;</span>,<span class="st">&#39;%y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S,</span><span class="sc">%f</span><span class="st"> %z&#39;</span>,<span class="st">&#39;%y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S,</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S&#39;</span>,<span class="st">&#39;%y/%m/</span><span class="sc">%d</span><span class="st"> %H:%M:%S&#39;</span>,<span class="st">&#39;%y%m</span><span class="sc">%d</span><span class="st"> %H:%M:%S&#39;</span>,<span class="st">&#39;%Y%m</span><span class="sc">%d</span><span class="st"> %H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%m/</span><span class="sc">%d</span><span class="st">/%y*%H:%M:%S&#39;</span>,<span class="st">&#39;%m/</span><span class="sc">%d</span><span class="st">/%Y*%H:%M:%S&#39;</span>,<span class="st">&#39;%m/</span><span class="sc">%d</span><span class="st">/%Y*%H:%M:%S*</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%m/</span><span class="sc">%d</span><span class="st">/%y %H:%M:%S %z&#39;</span>,<span class="st">&#39;%m/</span><span class="sc">%d</span><span class="st">/%Y %H:%M:%S %z&#39;</span>,<span class="st">&#39;%H:%M:%S&#39;</span>,<span class="st">&#39;%H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%H:%M:%S,</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st">/%b %H:%M:%S,</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st">/%b/%Y:%H:%M:%S&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st">/%b/%Y %H:%M:%S&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st">-%b-%Y %H:%M:%S&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st">-%b-%Y %H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st"> %b %Y %H:%M:%S&#39;</span>,<span class="st">&#39;</span><span class="sc">%d</span><span class="st"> %b %Y %H:%M:%S*</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%m</span><span class="sc">%d</span><span class="st">_%H:%M:%S&#39;</span>,<span class="st">&#39;%m</span><span class="sc">%d</span><span class="st">_%H:%M:%S.</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%m/</span><span class="sc">%d</span><span class="st">/%Y %I:%M:%S %p:</span><span class="sc">%f</span><span class="st">&#39;</span>,<span class="st">&#39;%m/</span><span class="sc">%d</span><span class="st">/%Y %H:%M:%S %p&#39;</span>]</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>datestrings <span class="op">=</span> [<span class="st">&#39;2018-08-20T13:20:10*633+0000&#39;</span>,<span class="st">&#39;2017 Mar 03 05:12:41.211 PDT&#39;</span>,<span class="st">&#39;Jan 21 18:20:11 +0000 2017&#39;</span>,<span class="st">&#39;19/Apr/2017:06:36:15 -0700&#39;</span>,<span class="st">&#39;Dec 2, 2017 2:39:58 AM&#39;</span>,<span class="st">&#39;Jun 09 2018 15:28:14&#39;</span>,<span class="st">&#39;Apr 20 00:00:35 2010&#39;</span>,<span class="st">&#39;Sep 28 19:00:00 +0000&#39;</span>,<span class="st">&#39;Mar 16 08:12:04&#39;</span>,<span class="st">&#39;2017-10-14T22:11:20+0000&#39;</span>,<span class="st">&#39;2017-07-01T14:59:55.711+0000&#39;</span>,<span class="st">&#39;2017-08-19 12:17:55 -0400&#39;</span>,<span class="st">&#39;2017-08-19 12:17:55-0400&#39;</span>,<span class="st">&#39;2017-06-26 02:31:29,573&#39;</span>,<span class="st">&#39;2017/04/12*19:37:50&#39;</span>,<span class="st">&#39;2018 Apr 13 22:08:13.211*PDT&#39;</span>,<span class="st">&#39;2017 Mar 10 01:44:20.392&#39;</span>,<span class="st">&#39;2017-03-10 14:30:12,655+0000&#39;</span>,<span class="st">&#39;2018-02-27 15:35:20.311&#39;</span>,<span class="st">&#39;2017-03-12 13:11:34.222-0700&#39;</span>,<span class="st">&#39;2017-07-22T16:28:55.444&#39;</span>,<span class="st">&#39;2017-09-08T03:13:10&#39;</span>,<span class="st">&#39;2017-03-12T17:56:22-0700&#39;</span>,<span class="st">&#39;2017-11-22T10:10:15.455&#39;</span>,<span class="st">&#39;2017-02-11T18:31:44&#39;</span>,<span class="st">&#39;2017-10-30*02:47:33:899&#39;</span>,<span class="st">&#39;2017-07-04*13:23:55&#39;</span>,<span class="st">&#39;11-02-11 16:47:35,985 +0000&#39;</span>,<span class="st">&#39;10-06-26 02:31:29,573&#39;</span>,<span class="st">&#39;10-04-19 12:00:17&#39;</span>,<span class="st">&#39;06/01/22 04:11:05&#39;</span>,<span class="st">&#39;150423 11:42:35&#39;</span>,<span class="st">&#39;20150423 11:42:35.173&#39;</span>,<span class="st">&#39;08/10/11*13:33:56&#39;</span>,<span class="st">&#39;11/22/2017*05:13:11&#39;</span>,<span class="st">&#39;05/09/2017*08:22:14*612&#39;</span>,<span class="st">&#39;04/23/17 04:34:22 +0000&#39;</span>,<span class="st">&#39;10/03/2017 07:29:46 -0700&#39;</span>,<span class="st">&#39;11:42:35&#39;</span>,<span class="st">&#39;11:42:35.173&#39;</span>,<span class="st">&#39;11:42:35,173&#39;</span>,<span class="st">&#39;23/Apr 11:42:35,173&#39;</span>,<span class="st">&#39;23/Apr/2017:11:42:35&#39;</span>,<span class="st">&#39;23/Apr/2017 11:42:35&#39;</span>,<span class="st">&#39;23-Apr-2017 11:42:35&#39;</span>,<span class="st">&#39;23-Apr-2017 11:42:35.883&#39;</span>,<span class="st">&#39;23 Apr 2017 11:42:35&#39;</span>,<span class="st">&#39;23 Apr 2017 10:32:35*311&#39;</span>,<span class="st">&#39;0423_11:42:35&#39;</span>,<span class="st">&#39;0423_11:42:35.883&#39;</span>,<span class="st">&#39;8/5/2011 3:31:18 AM:234&#39;</span>,<span class="st">&#39;9/28/2011 2:23:15 PM&#39;</span>]</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_timestamp(datestring, formats):</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> f <span class="kw">in</span> formats:</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>            d <span class="op">=</span> datetime.strptime(datestring, f)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span>:</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (d, f)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (datestring, <span class="st">&#39;Unable to parse format&#39;</span>)</span></code></pre></div>
 </div>
 <div id="pandas-timestamp" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Pandas Timestamp</h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># --- convert string to panda datatime</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;timestamp_col&#39;</span>:[<span class="st">&#39;2005-05-23 00:00:00&#39;</span>, <span class="st">&#39;2005-05-24 00:00:00&#39;</span>]})</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                dt_col</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#0  2005-05-23 00:00:00</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#1  2005-05-24 00:00:00</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>df.timestamp_col <span class="op">=</span> pd.to_datetime(df.timestamp_col, <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S&quot;</span>)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df.timestamp_col[<span class="dv">0</span>])</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;class &#39;pandas._libs.tslibs.timestamps.Timestamp&#39;&gt;</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Group datetime column (timestamp_col) into hour and minute aggregations for values (value_col)</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>df.groupby([df.timestamp_col.dt.hour, df.timestamp_col.dt.minute]).value_col.<span class="bu">sum</span>()</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="co"># remove data time instance is NaT in a dataframe</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="kw">not</span> <span class="bu">isinstance</span>(x, pd._libs.tslib.NaTType))]</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>pd.period_range(start<span class="op">=</span><span class="st">&#39;2017-01-01&#39;</span>, end<span class="op">=</span><span class="st">&#39;2017-10-01&#39;</span>, freq<span class="op">=</span><span class="st">&#39;M&#39;</span>)</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="co"># PeriodIndex([&#39;2017-01&#39;, &#39;2017-02&#39;, &#39;2017-03&#39;, &#39;2017-04&#39;, &#39;2017-05&#39;, &#39;2017-06&#39;,</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co">#              &#39;2017-07&#39;, &#39;2017-08&#39;, &#39;2017-09&#39;, &#39;2017-10&#39;],</span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="co">#             dtype=&#39;period[M]&#39;, freq=&#39;M&#39;)</span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>result_ms<span class="op">=</span>pd.to_datetime(<span class="st">&#39;1493530261000&#39;</span>, unit<span class="op">=</span><span class="st">&#39;ms&#39;</span>)</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(result_ms) <span class="co"># -&gt; &#39;2017-04-30 05:31:01&#39;</span></span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>(time2<span class="op">-</span>time1).total_seconds() <span class="co">#Convert timedelta to total seconds</span></span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Converting between python_datetime and Pandas_Timestamp objects</span></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Timestamp(<span class="st">&#39;2014-01-23 00:00:00&#39;</span>, tz<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Timestamp(&#39;2014-01-23 00:00:00&#39;, tz=None)</span></span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>ts.to_pydatetime()</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Convert unix time to readable date in pandas dataframe</span></span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>         date  price</span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 0  1349720105  12.08</span></span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 1  1349806505  12.35</span></span>
-<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  1349892905  12.15</span></span>
-<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;date&#39;</span>],unit<span class="op">=</span><span class="st">&#39;s&#39;</span>)</span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a>                 date  price</span>
-<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 2012-10-08 18:15:05  12.08</span></span>
-<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 2012-10-09 18:15:05  12.35</span></span>
-<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 2012-10-10 18:15:05  12.15</span></span>
-<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a><span class="co"># --- round time with dt.round ---</span></span>
-<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a>  {<span class="st">&#39;Date&#39;</span> : pd.date_range(<span class="st">&#39;1/1/2011&#39;</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">&#39;3675S&#39;</span>),</span>
-<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;Num&#39;</span> : np.random.rand(<span class="dv">5</span>)})</span>
-<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
-<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.580997</span></span>
-<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:01:15  0.407332</span></span>
-<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:02:30  0.786035</span></span>
-<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:03:45  0.821792</span></span>
-<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:05:00  0.807869</span></span>
-<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a><span class="co"># hourly round</span></span>
-<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a>df.assign(Date<span class="op">=</span>df.Date.dt.<span class="bu">round</span>(<span class="st">&#39;H&#39;</span>))</span>
-<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
-<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.577957</span></span>
-<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:00:00  0.995748</span></span>
-<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:00:00  0.864013</span></span>
-<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:00:00  0.468762</span></span>
-<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:00:00  0.866827</span></span>
-<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># --- convert string to panda datatime</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;timestamp_col&#39;</span>:[<span class="st">&#39;2005-05-23 00:00:00&#39;</span>, <span class="st">&#39;2005-05-24 00:00:00&#39;</span>]})</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                dt_col</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#0  2005-05-23 00:00:00</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#1  2005-05-24 00:00:00</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>df.timestamp_col <span class="op">=</span> pd.to_datetime(df.timestamp_col, <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S&quot;</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df.timestamp_col[<span class="dv">0</span>])</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;class &#39;pandas._libs.tslibs.timestamps.Timestamp&#39;&gt;</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Group datetime column (timestamp_col) into hour and minute aggregations for values (value_col)</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>df.groupby([df.timestamp_col.dt.hour, df.timestamp_col.dt.minute]).value_col.<span class="bu">sum</span>()</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co"># remove data time instance is NaT in a dataframe</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="kw">not</span> <span class="bu">isinstance</span>(x, pd._libs.tslib.NaTType))]</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>pd.period_range(start<span class="op">=</span><span class="st">&#39;2017-01-01&#39;</span>, end<span class="op">=</span><span class="st">&#39;2017-10-01&#39;</span>, freq<span class="op">=</span><span class="st">&#39;M&#39;</span>)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co"># PeriodIndex([&#39;2017-01&#39;, &#39;2017-02&#39;, &#39;2017-03&#39;, &#39;2017-04&#39;, &#39;2017-05&#39;, &#39;2017-06&#39;,</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co">#              &#39;2017-07&#39;, &#39;2017-08&#39;, &#39;2017-09&#39;, &#39;2017-10&#39;],</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="co">#             dtype=&#39;period[M]&#39;, freq=&#39;M&#39;)</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>result_ms<span class="op">=</span>pd.to_datetime(<span class="st">&#39;1493530261000&#39;</span>, unit<span class="op">=</span><span class="st">&#39;ms&#39;</span>)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(result_ms) <span class="co"># -&gt; &#39;2017-04-30 05:31:01&#39;</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>(time2<span class="op">-</span>time1).total_seconds() <span class="co">#Convert timedelta to total seconds</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Converting between python_datetime and Pandas_Timestamp objects</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Timestamp(<span class="st">&#39;2014-01-23 00:00:00&#39;</span>, tz<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Timestamp(&#39;2014-01-23 00:00:00&#39;, tz=None)</span></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>ts.to_pydatetime()</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Convert unix time to readable date in pandas dataframe</span></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>         date  price</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 0  1349720105  12.08</span></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 1  1349806505  12.35</span></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  1349892905  12.15</span></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;date&#39;</span>],unit<span class="op">=</span><span class="st">&#39;s&#39;</span>)</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>                 date  price</span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 2012-10-08 18:15:05  12.08</span></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 2012-10-09 18:15:05  12.35</span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 2012-10-10 18:15:05  12.15</span></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a><span class="co"># --- round time with dt.round ---</span></span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>  {<span class="st">&#39;Date&#39;</span> : pd.date_range(<span class="st">&#39;1/1/2011&#39;</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">&#39;3675S&#39;</span>),</span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;Num&#39;</span> : np.random.rand(<span class="dv">5</span>)})</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.580997</span></span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:01:15  0.407332</span></span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:02:30  0.786035</span></span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:03:45  0.821792</span></span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:05:00  0.807869</span></span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a><span class="co"># hourly round</span></span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>df.assign(Date<span class="op">=</span>df.Date.dt.<span class="bu">round</span>(<span class="st">&#39;H&#39;</span>))</span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.577957</span></span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:00:00  0.995748</span></span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:00:00  0.864013</span></span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:00:00  0.468762</span></span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:00:00  0.866827</span></span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Use Pandas rolling method, 3600s = 1 Hour -----</span></span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>df_sample[<span class="st">&#39;occurrences_in_last_hour&#39;</span>] <span class="op">=</span> df_sample[<span class="st">&#39;occurrences&#39;</span>].rolling(<span class="st">&#39;3600s&#39;</span>).<span class="bu">sum</span>()</span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>df_sample.head(<span class="dv">15</span>)</span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a><span class="co">#                     occurrences  occurrences_in_last_hour</span></span>
+<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a><span class="co">#Run time                                                   </span></span>
+<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:00:00            1                       1.0</span></span>
+<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:04:10            1                       2.0</span></span>
+<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:08:20            1                       3.0</span></span>
+<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:12:30            1                       4.0</span></span>
+<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:16:40            1                       5.0</span></span>
+<span id="cb29-83"><a href="#cb29-83" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:25:00            1                       6.0</span></span></code></pre></div>
 </div>
 </div>
 <div id="regular-expression" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Regular expression</h1>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># search</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> re.search(<span class="st">&#39;(?&lt;=abc)def&#39;</span>, <span class="st">&#39;abcdef&#39;</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>m.group(<span class="dv">0</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;def&#39;</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># sub</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>re.sub(regex_search,regex_replace,contents)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># search</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> re.search(<span class="st">&#39;(?&lt;=abc)def&#39;</span>, <span class="st">&#39;abcdef&#39;</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>m.group(<span class="dv">0</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;def&#39;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># sub</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>re.sub(regex_search,regex_replace,contents)</span></code></pre></div>
 </div>
 <div id="io" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> IO</h1>
 <div id="file-path" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> file path</h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>CODE_PATH <span class="op">=</span> pathlib.Path(<span class="va">__file__</span>).parent</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>DATA_PATH <span class="op">=</span> CODE_PATH.joinpath(<span class="st">&#39;data&#39;</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>LOG_PATH <span class="op">=</span> CODE_PATH.joinpath(<span class="st">&#39;log.txt&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>CODE_PATH <span class="op">=</span> pathlib.Path(<span class="va">__file__</span>).parent</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>DATA_PATH <span class="op">=</span> CODE_PATH.joinpath(<span class="st">&#39;data&#39;</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>LOG_PATH <span class="op">=</span> CODE_PATH.joinpath(<span class="st">&#39;log.txt&#39;</span>)</span></code></pre></div>
 </div>
 <div id="read-write-csv" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Read write CSV</h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;file.csv&#39;</span>, header<span class="op">=</span><span class="va">None</span>, nrows<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>df.to_dense().to_csv(<span class="st">&quot;myDataFrame.csv&quot;</span>, index <span class="op">=</span> <span class="va">False</span>, sep<span class="op">=</span><span class="st">&#39;,&#39;</span>, encoding<span class="op">=</span><span class="st">&#39;utf-8&#39;</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>pd.read_excel(<span class="st">&#39;file.xlsx&#39;</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>pd.to_excel(<span class="st">&#39;dir/myDataFrame.xlsx&#39;</span>, sheet_name<span class="op">=</span><span class="st">&#39;Sheet1&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&#39;file.csv&#39;</span>, header<span class="op">=</span><span class="va">None</span>, nrows<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df.to_dense().to_csv(<span class="st">&quot;myDataFrame.csv&quot;</span>, index <span class="op">=</span> <span class="va">False</span>, sep<span class="op">=</span><span class="st">&#39;,&#39;</span>, encoding<span class="op">=</span><span class="st">&#39;utf-8&#39;</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>pd.read_excel(<span class="st">&#39;file.xlsx&#39;</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>pd.to_excel(<span class="st">&#39;dir/myDataFrame.xlsx&#39;</span>, sheet_name<span class="op">=</span><span class="st">&#39;Sheet1&#39;</span>)</span></code></pre></div>
 </div>
 <div id="read-head-lines-of-a-large-text-file" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Read head lines of a large text file</h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>file_name <span class="op">=</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">xxxxx</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">2014101709-12.txt&quot;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(file_name) <span class="im">as</span> myfile:</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> [<span class="bu">next</span>(myfile) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>)]</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(head)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>file_name <span class="op">=</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">xxxxx</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">2014101709-12.txt&quot;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(file_name) <span class="im">as</span> myfile:</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> [<span class="bu">next</span>(myfile) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>)]</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(head)</span></code></pre></div>
 </div>
 <div id="list-files-only-in-the-current-directory" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> List files only in the current directory</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os <span class="im">as</span> os</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(<span class="st">&#39;.&#39;</span>) <span class="cf">if</span> os.path.isfile(f)]</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> files:</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os <span class="im">as</span> os</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> os.listdir(<span class="st">&#39;.&#39;</span>) <span class="cf">if</span> os.path.isfile(f)]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> files:</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f)</span></code></pre></div>
 </div>
 <div id="read-and-write-objects-to-plk-files" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> read and write objects to plk files</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_object(obj, filename):</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">&#39;wb&#39;</span>) <span class="im">as</span> output:  <span class="co"># Overwrites any existing file.</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_object(filename):</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> Path(filename).is_file():</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> <span class="bu">input</span>:</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>            o <span class="op">=</span> pickle.load(<span class="bu">input</span>)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> o</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>      </span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_object(obj, filename):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">&#39;wb&#39;</span>) <span class="im">as</span> output:  <span class="co"># Overwrites any existing file.</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>        pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_object(filename):</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> Path(filename).is_file():</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> <span class="bu">input</span>:</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>            o <span class="op">=</span> pickle.load(<span class="bu">input</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> o</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>      </span></code></pre></div>
 </div>
 </div>
 <div id="others" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> Others</h1>
 <div id="logging" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> logging</h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="dv">5</span> <span class="op">/</span> <span class="dv">0</span>)</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    logging.warning(e.__traceback__, exc_info<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="dv">5</span> <span class="op">/</span> <span class="dv">0</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    logging.warning(e.__traceback__, exc_info<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 </div>
 <div id="lambda" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> lambda</h2>
 <p>Anonymous function objects</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- function ----</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x, y): </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --- lambda arguments : expression ---</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- function ----</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x, y): </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --- lambda arguments : expression ---</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span></code></pre></div>
 </div>
 <div id="underscore-_" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> underscore _</h2>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storing the value of last expression in interpreter</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">10</span> </span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> </span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">*</span> <span class="dv">3</span>  </span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For Ignoring the values</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>x, _, y <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># x = 1, y = 3</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># _single_leading_underscore:  </span></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co"># is used for declaring private variables, functions, methods and classes in a module</span></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> _Base: <span class="co"># private class</span></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    _hidden_factor <span class="op">=</span> <span class="dv">2</span> <span class="co"># private variable</span></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_underscore:</span></span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># for mangling </span></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> A:</span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __double_method(<span class="va">self</span>): <span class="co"># the name will be mangled in &quot;_ClassName__method&quot; form.</span></span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_and_trailing_underscore__ : </span></span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  for special variables or methods </span></span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="va">__file__</span> <span class="co"># indicates the location of Python file</span></span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="fu">__init__</span> <span class="co"># will be executed at first when a instance of class is created</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># storing the value of last expression in interpreter</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">10</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> _ <span class="op">*</span> <span class="dv">3</span>  </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># For Ignoring the values</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>x, _, y <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># x = 1, y = 3</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># _single_leading_underscore:  </span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># is used for declaring private variables, functions, methods and classes in a module</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> _Base: <span class="co"># private class</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    _hidden_factor <span class="op">=</span> <span class="dv">2</span> <span class="co"># private variable</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_underscore:</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co"># for mangling </span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> A:</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __double_method(<span class="va">self</span>): <span class="co"># the name will be mangled in &quot;_ClassName__method&quot; form.</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="co"># __double_leading_and_trailing_underscore__ : </span></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  for special variables or methods </span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="va">__file__</span> <span class="co"># indicates the location of Python file</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="fu">__init__</span> <span class="co"># will be executed at first when a instance of class is created</span></span></code></pre></div>
 </div>
 <div id="reload-imported-module" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> reload imported module</h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> foo <span class="co">#import the module here, so that it can be reloaded.</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(foo)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> foo <span class="co">#import the module here, so that it can be reloaded.</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(foo)</span></code></pre></div>
 </div>
 </div>
 <div id="real-time-plot-with-python" class="section level1" number="8">
 <h1><span class="header-section-number">8</span> Real time plot with python</h1>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>plt.axis([<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>plt.ion()</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.random()</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    plt.scatter(i, y)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plt.axis([<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>plt.ion()</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.random()</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    plt.scatter(i, y)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    plt.pause(<span class="fl">0.5</span>)</span></code></pre></div>
 </div>
 <div id="plot-a-hist-graph" class="section level1" number="9">
 <h1><span class="header-section-number">9</span> plot a hist graph</h1>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>)]</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>plt.hist(values, bins<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot a vertical line</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="dv">10</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>)]</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>plt.hist(values, bins<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot a vertical line</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
 </div>
 <div id="install-package" class="section level1" number="10">
 <h1><span class="header-section-number">10</span> Install package</h1>
 <p>in cmd comand window</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PyPI</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>pip install py2exe</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#conda</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>conda install <span class="op">--</span>channel https:<span class="op">//</span>conda.anaconda.org<span class="op">/</span>manmadescience py2exe</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>conda install pandas</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>pip install pandas</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PyPI</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>pip install py2exe</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#conda</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>conda install <span class="op">--</span>channel https:<span class="op">//</span>conda.anaconda.org<span class="op">/</span>manmadescience py2exe</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>conda install pandas</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>pip install pandas</span></code></pre></div>
 <p>NTLM support for Python3</p>
 <p>No working package for Pthon3 at the moment</p>
 <ul>
@@ -1235,65 +1260,65 @@ pre code {
 <div id="managing-environments" class="section level1" number="11">
 <h1><span class="header-section-number">11</span> Managing environments</h1>
 <p>Conda</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda <span class="at">-V</span>  <span class="co"># Check conda is installed</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># conda 3.7.0</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenvv  <span class="co">#By default, environments are installed into the envs directory in the conda directory.</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv python=3.4  <span class="co"># create an environment with a specific version of Python</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate and conda deactivate</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list <span class="co"># view the list of enviroment</span></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co">#  Delete an virtual environment</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda <span class="at">-V</span>  <span class="co"># Check conda is installed</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># conda 3.7.0</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenvv  <span class="co">#By default, environments are installed into the envs directory in the conda directory.</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv python=3.4  <span class="co"># create an environment with a specific version of Python</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate and conda deactivate</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list <span class="co"># view the list of enviroment</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co">#  Delete an virtual environment</span></span></code></pre></div>
 <p>Pipenv</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pipenv</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--venv</span> <span class="co"># list environment. must go to the project folder containing the environment firstly</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--rm</span> <span class="co"># remove environment</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install <span class="co">#  go to the folder containing your Python project, and create a new environment. This will create two new files, Pipfile and Pipfile.lock, in your project directory, and a new virtual environment for your project if it doesn’t exist already.</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> shell <span class="co"># activate it</span></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install beautifulsoup4 <span class="co"># install a Python package for your project</span></span></code></pre></div>
-<p>build pipenv enviroment from conda enviroment</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go to project directory</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\D</span>esktop<span class="dt">\m</span>y_projects<span class="dt">\c</span>hatbot</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create python 3.7.5 version</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pipenv3.7 python=3.7</span>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pipenv</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--venv</span> <span class="co"># list environment. must go to the project folder containing the environment firstly</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--rm</span> <span class="co"># remove environment</span></span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># active the enviroement</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipenv3.7</span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co"># find python path</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="ex">where</span> python</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a pipenv with the python path under the actived pipenv3.7</span></span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--python</span><span class="op">=</span>C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\.</span>conda<span class="dt">\e</span>nvs<span class="dt">\p</span>ipenv3.7<span class="dt">\p</span>ython.exe</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install package based on pipfile from the project directory</span></span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install</span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="co"># for import _ssl DLL load fail error</span></span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="co"># copy from C:\ProgramData\Anaconda3\Library\bin to C:\Users\user_name\.conda\envs\pipenv3.7\DLLs</span></span>
-<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="ex">libcrypto-1_1-x64.dll</span></span>
-<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="ex">libssl-1_1-x64.dll</span></span>
-<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.dll</span></span>
-<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.exe</span></span></code></pre></div>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install <span class="co">#  go to the folder containing your Python project, and create a new environment. This will create two new files, Pipfile and Pipfile.lock, in your project directory, and a new virtual environment for your project if it doesn’t exist already.</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> shell <span class="co"># activate it</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install beautifulsoup4 <span class="co"># install a Python package for your project</span></span></code></pre></div>
+<p>build pipenv enviroment from conda enviroment</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go to project directory</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\D</span>esktop<span class="dt">\m</span>y_projects<span class="dt">\c</span>hatbot</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create python 3.7.5 version</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pipenv3.7 python=3.7</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># active the enviroement</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipenv3.7</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="co"># find python path</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="ex">where</span> python</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a pipenv with the python path under the actived pipenv3.7</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--python</span><span class="op">=</span>C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\.</span>conda<span class="dt">\e</span>nvs<span class="dt">\p</span>ipenv3.7<span class="dt">\p</span>ython.exe</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install package based on pipfile from the project directory</span></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a><span class="co"># for import _ssl DLL load fail error</span></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="co"># copy from C:\ProgramData\Anaconda3\Library\bin to C:\Users\user_name\.conda\envs\pipenv3.7\DLLs</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="ex">libcrypto-1_1-x64.dll</span></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a><span class="ex">libssl-1_1-x64.dll</span></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.dll</span></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.exe</span></span></code></pre></div>
 <p>virtualenv</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install virtualenv <span class="co"># Install the virtualenv package</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="ex">virtualenv</span> mypython <span class="co"># Create the virtual environment</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the virtual environment</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> mypython/bin/activate <span class="co"># Mac OS / Linux</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mypthon\Scripts\activate</span> <span class="co"># Windows</span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span> <span class="co"># Deactivate the virtual environment</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install virtualenv <span class="co"># Install the virtualenv package</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="ex">virtualenv</span> mypython <span class="co"># Create the virtual environment</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the virtual environment</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> mypython/bin/activate <span class="co"># Mac OS / Linux</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mypthon\Scripts\activate</span> <span class="co"># Windows</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span> <span class="co"># Deactivate the virtual environment</span></span></code></pre></div>
 </div>
 
 
