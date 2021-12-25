@@ -250,7 +250,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 23 December, 2021</h4>
+<h4 class="date">Updated: 25 December, 2021</h4>
 
 </div>
 
@@ -311,7 +311,7 @@ pre code {
 <li><a href="#others"><span class="toc-section-number">7</span> Others</a>
 <ul>
 <li><a href="#logging"><span class="toc-section-number">7.1</span> logging</a></li>
-<li><a href="#lambda"><span class="toc-section-number">7.2</span> lambda</a></li>
+<li><a href="#lambda-map-filter-reduce"><span class="toc-section-number">7.2</span> lambda, map, filter, reduce</a></li>
 <li><a href="#underscore-_"><span class="toc-section-number">7.3</span> underscore _</a></li>
 <li><a href="#reload-imported-module"><span class="toc-section-number">7.4</span> reload imported module</a></li>
 </ul></li>
@@ -903,7 +903,10 @@ pre code {
 <span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="co">#          p2             2</span></span>
 <span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="co"># a2       p1             5</span></span>
 <span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="co"># a3       p2            14</span></span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co">#          p3            30</span></span></code></pre></div>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="co">#          p3            30</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="co"># select top n row from each group after group by in pandas</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>data.sort_values(<span class="st">&#39;product_count&#39;</span>, ascending<span class="op">=</span><span class="va">False</span>).groupby([<span class="st">&#39;user_id&#39;</span>], sort<span class="op">=</span><span class="va">False</span>).head(<span class="dv">3</span>)</span></code></pre></div>
 </div>
 <div id="merge" class="section level3" number="3.3.7">
 <h3><span class="header-section-number">3.3.7</span> merge</h3>
@@ -1170,19 +1173,43 @@ pre code {
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    logging.warning(e.__traceback__, exc_info<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 </div>
-<div id="lambda" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> lambda</h2>
-<p>Anonymous function objects</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- function ----</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x, y): </span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># --- lambda arguments : expression ---</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span></code></pre></div>
+<div id="lambda-map-filter-reduce" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> lambda, map, filter, reduce</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --------- lambda -----------</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">lambda</span> arguments: expression <span class="co"># Anonymous function objects </span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - function -</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x, y): </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># - lambda arguments : expression -</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -------- map ----------</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="bu">map</span>(function, iterable(s)) <span class="co"># The map() iterates through all items in the given iterable and executes the function </span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>map_object <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">*</span><span class="dv">2</span>, li)</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(map_object)) <span class="co"># map() function returns the map_object type, can be convert to list</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co"># -------- filter ----------</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="bu">filter</span>(function, iterable(s)) <span class="co"># filter() forms a new list that contains only elements that satisfy a certain condition, i.e. the function we passed returns True.</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>filter_object  <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: x<span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span>, li)</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(filter_object))</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="co"># --------- reduce ----------</span></span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(function, sequence[, initial]) <span class="co"># reduce() works by calling the function we passed for the first two items in the sequence. The result returned by the function is used in another call to function alongside with the next (third in this case), element</span></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>reduce_object  <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> x,y: x<span class="op">+</span>y, li)</span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reduce_object)</span></code></pre></div>
 </div>
 <div id="underscore-_" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> underscore _</h2>
