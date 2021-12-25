@@ -1019,89 +1019,88 @@ pre code {
 </div>
 <div id="pandas-timestamp" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Pandas Timestamp</h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># --- convert string to panda datatime</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;timestamp_col&#39;</span>:[<span class="st">&#39;2005-05-23 00:00:00&#39;</span>, <span class="st">&#39;2005-05-24 00:00:00&#39;</span>]})</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                dt_col</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#0  2005-05-23 00:00:00</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#1  2005-05-24 00:00:00</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>df.timestamp_col <span class="op">=</span> pd.to_datetime(df.timestamp_col, <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S&quot;</span>)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df.timestamp_col[<span class="dv">0</span>])</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;class &#39;pandas._libs.tslibs.timestamps.Timestamp&#39;&gt;</span></span>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- convert string to panda datatime</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;timestamp_col&#39;</span>:[<span class="st">&#39;2005-05-23 00:00:00&#39;</span>, <span class="st">&#39;2005-05-24 00:00:00&#39;</span>]})</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                dt_col</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#0  2005-05-23 00:00:00</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#1  2005-05-24 00:00:00</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>df.timestamp_col <span class="op">=</span> pd.to_datetime(df.timestamp_col, <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y-%m-</span><span class="sc">%d</span><span class="st"> %H:%M:%S&quot;</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(df.timestamp_col[<span class="dv">0</span>])</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;class &#39;pandas._libs.tslibs.timestamps.Timestamp&#39;&gt;</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Group datetime column (timestamp_col) into hour and minute aggregations for values (value_col)</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>df.groupby([df.timestamp_col.dt.hour, df.timestamp_col.dt.minute]).value_col.<span class="bu">sum</span>()</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Group datetime column (timestamp_col) into hour and minute aggregations for values (value_col)</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>df.groupby([df.timestamp_col.dt.hour, df.timestamp_col.dt.minute]).value_col.<span class="bu">sum</span>()</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co"># remove data time instance is NaT in a dataframe</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="kw">not</span> <span class="bu">isinstance</span>(x, pd._libs.tslib.NaTType))]</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>pd.period_range(start<span class="op">=</span><span class="st">&#39;2017-01-01&#39;</span>, end<span class="op">=</span><span class="st">&#39;2017-10-01&#39;</span>, freq<span class="op">=</span><span class="st">&#39;M&#39;</span>)</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co"># PeriodIndex([&#39;2017-01&#39;, &#39;2017-02&#39;, &#39;2017-03&#39;, &#39;2017-04&#39;, &#39;2017-05&#39;, &#39;2017-06&#39;,</span></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co">#              &#39;2017-07&#39;, &#39;2017-08&#39;, &#39;2017-09&#39;, &#39;2017-10&#39;],</span></span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a><span class="co">#             dtype=&#39;period[M]&#39;, freq=&#39;M&#39;)</span></span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>result_ms<span class="op">=</span>pd.to_datetime(<span class="st">&#39;1493530261000&#39;</span>, unit<span class="op">=</span><span class="st">&#39;ms&#39;</span>)</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(result_ms) <span class="co"># -&gt; &#39;2017-04-30 05:31:01&#39;</span></span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>(time2<span class="op">-</span>time1).total_seconds() <span class="co">#Convert timedelta to total seconds</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co"># remove data time instance is NaT in a dataframe</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="dv">3</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="kw">not</span> <span class="bu">isinstance</span>(x, pd._libs.tslib.NaTType))]</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>pd.period_range(start<span class="op">=</span><span class="st">&#39;2017-01-01&#39;</span>, end<span class="op">=</span><span class="st">&#39;2017-10-01&#39;</span>, freq<span class="op">=</span><span class="st">&#39;M&#39;</span>)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="co"># PeriodIndex([&#39;2017-01&#39;, &#39;2017-02&#39;, &#39;2017-03&#39;, &#39;2017-04&#39;, &#39;2017-05&#39;, &#39;2017-06&#39;,</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co">#              &#39;2017-07&#39;, &#39;2017-08&#39;, &#39;2017-09&#39;, &#39;2017-10&#39;],</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co">#             dtype=&#39;period[M]&#39;, freq=&#39;M&#39;)</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>result_ms<span class="op">=</span>pd.to_datetime(<span class="st">&#39;1493530261000&#39;</span>, unit<span class="op">=</span><span class="st">&#39;ms&#39;</span>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(result_ms) <span class="co"># -&gt; &#39;2017-04-30 05:31:01&#39;</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>(time2<span class="op">-</span>time1).total_seconds() <span class="co">#Convert timedelta to total seconds</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Converting between python_datetime and Pandas_Timestamp objects</span></span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Timestamp(<span class="st">&#39;2014-01-23 00:00:00&#39;</span>, tz<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Timestamp(&#39;2014-01-23 00:00:00&#39;, tz=None)</span></span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>ts.to_pydatetime()</span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Converting between python_datetime and Pandas_Timestamp objects</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Timestamp(<span class="st">&#39;2014-01-23 00:00:00&#39;</span>, tz<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Timestamp(&#39;2014-01-23 00:00:00&#39;, tz=None)</span></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>ts.to_pydatetime()</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Convert unix time to readable date in pandas dataframe</span></span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>         date  price</span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 0  1349720105  12.08</span></span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 1  1349806505  12.35</span></span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  1349892905  12.15</span></span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;date&#39;</span>],unit<span class="op">=</span><span class="st">&#39;s&#39;</span>)</span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>                 date  price</span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 2012-10-08 18:15:05  12.08</span></span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 2012-10-09 18:15:05  12.35</span></span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 2012-10-10 18:15:05  12.15</span></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Convert unix time to readable date in pandas dataframe</span></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>         date  price</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a><span class="co"># 0  1349720105  12.08</span></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 1  1349806505  12.35</span></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  1349892905  12.15</span></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;date&#39;</span>],unit<span class="op">=</span><span class="st">&#39;s&#39;</span>)</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>                 date  price</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 2012-10-08 18:15:05  12.08</span></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 2012-10-09 18:15:05  12.35</span></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 2012-10-10 18:15:05  12.15</span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a><span class="co"># --- round time with dt.round ---</span></span>
-<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>  {<span class="st">&#39;Date&#39;</span> : pd.date_range(<span class="st">&#39;1/1/2011&#39;</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">&#39;3675S&#39;</span>),</span>
-<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;Num&#39;</span> : np.random.rand(<span class="dv">5</span>)})</span>
-<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
-<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.580997</span></span>
-<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:01:15  0.407332</span></span>
-<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:02:30  0.786035</span></span>
-<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:03:45  0.821792</span></span>
-<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:05:00  0.807869</span></span>
-<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a><span class="co"># hourly round</span></span>
-<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>df.assign(Date<span class="op">=</span>df.Date.dt.<span class="bu">round</span>(<span class="st">&#39;H&#39;</span>))</span>
-<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
-<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.577957</span></span>
-<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:00:00  0.995748</span></span>
-<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:00:00  0.864013</span></span>
-<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:00:00  0.468762</span></span>
-<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:00:00  0.866827</span></span>
-<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Use Pandas rolling method, 3600s = 1 Hour -----</span></span>
-<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>df_sample[<span class="st">&#39;occurrences_in_last_hour&#39;</span>] <span class="op">=</span> df_sample[<span class="st">&#39;occurrences&#39;</span>].rolling(<span class="st">&#39;3600s&#39;</span>).<span class="bu">sum</span>()</span>
-<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>df_sample.head(<span class="dv">15</span>)</span>
-<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a><span class="co">#                     occurrences  occurrences_in_last_hour</span></span>
-<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a><span class="co">#Run time                                                   </span></span>
-<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:00:00            1                       1.0</span></span>
-<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:04:10            1                       2.0</span></span>
-<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:08:20            1                       3.0</span></span>
-<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:12:30            1                       4.0</span></span>
-<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:16:40            1                       5.0</span></span>
-<span id="cb29-83"><a href="#cb29-83" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:25:00            1                       6.0</span></span></code></pre></div>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a><span class="co"># --- round time with dt.round ---</span></span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>  {<span class="st">&#39;Date&#39;</span> : pd.date_range(<span class="st">&#39;1/1/2011&#39;</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">&#39;3675S&#39;</span>),</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;Num&#39;</span> : np.random.rand(<span class="dv">5</span>)})</span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.580997</span></span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:01:15  0.407332</span></span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:02:30  0.786035</span></span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:03:45  0.821792</span></span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:05:00  0.807869</span></span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a><span class="co"># hourly round</span></span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>df.assign(Date<span class="op">=</span>df.Date.dt.<span class="bu">round</span>(<span class="st">&#39;H&#39;</span>))</span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.577957</span></span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:00:00  0.995748</span></span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:00:00  0.864013</span></span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:00:00  0.468762</span></span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:00:00  0.866827</span></span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Use Pandas rolling method, 3600s = 1 Hour -----</span></span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a>df_sample[<span class="st">&#39;occurrences_in_last_hour&#39;</span>] <span class="op">=</span> df_sample[<span class="st">&#39;occurrences&#39;</span>].rolling(<span class="st">&#39;3600s&#39;</span>).<span class="bu">sum</span>()</span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>df_sample.head(<span class="dv">15</span>)</span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a><span class="co">#                     occurrences  occurrences_in_last_hour</span></span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a><span class="co">#Run time                                                   </span></span>
+<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:00:00            1                       1.0</span></span>
+<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:04:10            1                       2.0</span></span>
+<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:08:20            1                       3.0</span></span>
+<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:12:30            1                       4.0</span></span>
+<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:16:40            1                       5.0</span></span>
+<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:25:00            1                       6.0</span></span></code></pre></div>
 </div>
 </div>
 <div id="regular-expression" class="section level1" number="5">
@@ -1181,35 +1180,33 @@ pre code {
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - function -</span></span>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x, y): </span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">+</span> y</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># - lambda arguments : expression -</span></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -------- map ----------</span></span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="bu">map</span>(function, iterable(s)) <span class="co"># The map() iterates through all items in the given iterable and executes the function </span></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>map_object <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">*</span><span class="dv">2</span>, li)</span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(map_object)) <span class="co"># map() function returns the map_object type, can be convert to list</span></span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co"># -------- filter ----------</span></span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="bu">filter</span>(function, iterable(s)) <span class="co"># filter() forms a new list that contains only elements that satisfy a certain condition, i.e. the function we passed returns True.</span></span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
-<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>filter_object  <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: x<span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span>, li)</span>
-<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(filter_object))</span>
-<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="co"># --------- reduce ----------</span></span>
-<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(function, sequence[, initial]) <span class="co"># reduce() works by calling the function we passed for the first two items in the sequence. The result returned by the function is used in another call to function alongside with the next (third in this case), element</span></span>
-<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
-<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
-<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>reduce_object  <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> x,y: x<span class="op">+</span>y, li)</span>
-<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reduce_object)</span></code></pre></div>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>)  <span class="co"># Output: 5</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># - lambda arguments : expression -</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y : x <span class="op">+</span> y </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>add(<span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># Output: 5</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># -------- map ----------</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="bu">map</span>(function, iterable(s)) <span class="co"># The map() iterates through all items in the given iterable and executes the function </span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>map_object <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">*</span><span class="dv">2</span>, li)</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(map_object)) <span class="co"># map() function returns the map_object type, can be convert to list</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="co"># -------- filter ----------</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="bu">filter</span>(function, iterable(s)) <span class="co"># filter() forms a new list that contains only elements that satisfy a certain condition, i.e. the function we passed returns True.</span></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>filter_object  <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: x<span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span>, li)</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(filter_object))</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="co"># --------- reduce ----------</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="bu">reduce</span>(function, sequence[, initial]) <span class="co"># reduce() works by calling the function we passed for the first two items in the sequence. The result returned by the function is used in another call to function alongside with the next (third in this case), element</span></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>li<span class="op">=</span> [<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>]</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>reduce_object  <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> x,y: x<span class="op">+</span>y, li)</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(reduce_object)</span></code></pre></div>
 </div>
 <div id="underscore-_" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> underscore _</h2>

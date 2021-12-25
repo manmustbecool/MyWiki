@@ -754,7 +754,6 @@ def parse_timestamp(datestring, formats):
 ```
 ## Pandas Timestamp  
 ```python
-
 # --- convert string to panda datatime
 df = pd.DataFrame({'timestamp_col':['2005-05-23 00:00:00', '2005-05-24 00:00:00']})
 #                dt_col
@@ -929,12 +928,10 @@ lambda arguments: expression # Anonymous function objects
 # - function -
 def add(x, y): 
   return x + y
-  
 add(2, 3)  # Output: 5
 
 # - lambda arguments : expression -
 add = lambda x, y : x + y 
-  
 add(2, 3) # Output: 5
 
 # -------- map ----------
