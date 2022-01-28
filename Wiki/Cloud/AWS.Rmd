@@ -15,7 +15,6 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
    applog.config
 ```
 
-
 ```bash
 files:
   "/opt/python/log/application.log" :
@@ -25,4 +24,14 @@ files:
    content: |
        # Askbot log file
 ```
+
+## not authorized error for using AWS SES
+
+Error message:
+```
+ User `arn:aws:sts::xxxxx:assumed-role/aws-elasticbeanstalk-ec2-role/i-xxxx' is not authorized to perform `ses:SendEmail' on resource `arn:aws:ses:eu-west-1:xxxx:identity/xxxx@gmail.com'
+```
+Solution:   
+
+go to -> Identity and Access Management (IAM)  ->  Attach policies -> add AmazonSESFullAccess
 

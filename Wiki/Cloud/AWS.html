@@ -250,7 +250,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">AWS</h1>
-<h4 class="date">Updated: 19 November, 2021</h4>
+<h4 class="date">Updated: 28 January, 2022</h4>
 
 </div>
 
@@ -260,6 +260,7 @@ pre code {
 <ul>
 <li><a href="#elastic-load-balancer"><span class="toc-section-number">1.1</span> Elastic Load Balancer</a></li>
 <li><a href="#application-log-accss-from"><span class="toc-section-number">1.2</span> Application log accss from</a></li>
+<li><a href="#not-authorized-error-for-using-aws-ses"><span class="toc-section-number">1.3</span> not authorized error for using AWS SES</a></li>
 </ul></li>
 </ul>
 </div>
@@ -281,6 +282,13 @@ pre code {
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">group:</span> ec2-user</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   <span class="ex">content:</span> <span class="kw">|</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Askbot log file</span></span></code></pre></div>
+</div>
+<div id="not-authorized-error-for-using-aws-ses" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> not authorized error for using AWS SES</h2>
+<p>Error message:</p>
+<pre><code> User `arn:aws:sts::xxxxx:assumed-role/aws-elasticbeanstalk-ec2-role/i-xxxx&#39; is not authorized to perform `ses:SendEmail&#39; on resource `arn:aws:ses:eu-west-1:xxxx:identity/xxxx@gmail.com&#39;</code></pre>
+<p>Solution:</p>
+<p>go to -&gt; Identity and Access Management (IAM) -&gt; Attach policies -&gt; add AmazonSESFullAccess</p>
 </div>
 </div>
 
