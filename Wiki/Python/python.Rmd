@@ -490,7 +490,7 @@ df[0:3] # select the first 3 rows (rows 0,1,2)
 df[:5]  # select the first 5 rows (rows 0,1,2,3,4)
 df[-1:] # select the last row 
 
-#iloc: Select Column Indexes & Rows Index Positions (it only takes integers). dataFrame.iloc[<ROWS INDEX RANGE> , <COLUMNS INDEX RANGE>]
+#iloc: Select Column & Row Positions (it only takes integers).
 # rows:
 df.iloc[0] # select the first row
 df.iloc[2:] # select every row beginning with the third row
@@ -502,7 +502,6 @@ data.iloc[:,-1] # last column of data frame
 # rows and columns
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
 
-
 df=pd.DataFrame(
           {'age':[30,24,32], 'name':['john','jack','luck'], 'gender':['M','M','F']},
           index=['a', 'b', 'c'])
@@ -511,7 +510,7 @@ df=pd.DataFrame(
 # b   24  jack      M
 # c   32  luck      F
 
-#loc: Select Column & Rows by name/index_label - dataFrame.loc[<ROWS RANGE> , <COLUMNS RANGE>]
+#loc: Select Column & Rows by name/index_label
 # rows:
 df.loc[:3] # slice up to and including label 3 (in the case of label is integer)
 df.loc[:'b'] # select rows by b
@@ -554,12 +553,42 @@ df[np.intersect1d(df.columns, lst)]
 #0   30  john
 #1   24  jack
 #2   32  luc
+
+# --------- Cell value selection ---------------
+
+# if subset is one row dataframe, use .values[0] to get the value
+df.loc[df['name']=='jack'] # subset result has only one row
+#    age  name gender
+# b   24  jack      M
+df.loc[df['name']=='jack']['age'] # it return a series
+# b    24
+# Name: age, dtype: int64
+df.loc[df['name']=='jack']['age'].values[0]
+# 24
 ```
 
 ### add 
 ```python
 # append a column
 df['new_col'] = pd.Series(np.arange(0, 100), index=df.index)
+
+# append a list as a row
+df = pd.DataFrame([[1, 2], [3, 4]], columns = ["a", "b"])
+#    a  b
+# 0  1  2
+# 1  3  4
+
+# fist approach
+li = [5, 6]
+df.loc[len(df)] = li
+#    a  b
+# 0  1  2
+# 1  3  4
+# 2  5  6
+
+# second approach
+a_series = pd.Series(li, index = df.columns)
+df = df.append(a_series, ignore_index=True) # not use the index labels of a_series
 ```
 
 ### remove
