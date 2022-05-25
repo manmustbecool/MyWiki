@@ -71,7 +71,8 @@ li[0] # 3
 li[0:2] # [incluse, excluse] 3,4
 li[-1] # get the last element
 li[-2] = 3 # Set the second last element
-list(li[i] for i in [0, 2]) # first and third element  
+list(li[i] for i in [0, 2]) # first and third element 
+li[::2] # every second element from default start and stop index. s[start:stop:step]
 
 # last n elements
 a = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -139,6 +140,18 @@ sortedIndex = [3,2,1,0,4]
 [li[i] for i in sortedIndex]
 # ['D', 'C', 'B', 'A', 'E']
 
+# concatenate element-wise two lists
+a = [0, 1, 5] 
+b = ['as', 'ap', 'asp']
+[m+str(n) for m,n in zip(b,a)]
+
+# Convert a list to a string and back
+import json
+with open(data_file, 'wb') as dump:
+    dump.write(json.dumps(arbitrary_data))
+
+source = open(data_file, 'rb').read()
+data = json.loads(source)
 ```
 
 ### Tuple
@@ -756,6 +769,7 @@ dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S') # format time stamp
 dt.datetime.now() - datetime.timedelta(days=2) # Day before Yesterday
 dt.datetime.now() - datetime.timedelta(minutes=15)
 dt.datetime.now().date() # only keep date part of datetime
+dt.datetime.today() + dt.timedelta(days=2)  # after 2 days
 
 # combine date and time strings to single datetime object 
 mytime = dt.datetime.strptime('0130','%H%M').time()
@@ -763,6 +777,10 @@ mydatetime = dt.datetime.combine(dt.date.today(), mytime)
 ```
 
 Convert string to datetime
+
+from datetime import datetime
+datetime.strptime('Jun 1 2005  1:33PM', '%b %d %Y %I:%M%p')
+
 https://stackoverflow.com/questions/53892450/get-the-format-in-dateutil-parse
 https://stackabuse.com/converting-strings-to-datetime-in-python/
 ```python
