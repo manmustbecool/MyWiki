@@ -528,12 +528,12 @@ df.at['C', 'x'] = 10
 df.head(n) # Select first n rows.
 df.tail(n) # Select last n rows.
 
-# based on poisition
+# based on position
 df[0:3] # select the first 3 rows (rows 0,1,2)
 df[:5]  # select the first 5 rows (rows 0,1,2,3,4)
 df[-1:] # select the last row 
 
-#iloc: Select Column & Row Positions (it only takes integers).
+#iloc: Select Column & Row by Positions (it only takes integers).
 # rows:
 df.iloc[0] # select the first row
 df.iloc[2:] # select every row beginning with the third row
@@ -563,7 +563,7 @@ df.loc[df['column_name'] == some_value] # select rows whose column value equals 
 df.loc[~df['column_name'].isin(some_values)] # select rows whose column value is in an iterable
 df.loc[(df['column_name'] == some_value) & df['other_column'].isin(some_values)] 
 
-df[df.Length>7 ] # select rows that meet logical criteria.
+df[df.Length>7] # select rows that meet logical criteria.
 
 # loop for each row
 for index, row in df.iterrows():
@@ -586,7 +586,7 @@ df.loc[:, ['age', 'name']] # = df[['age', 'name']]
 # select col_name1, col_name2 from table where column_name = some_value.
 df.loc[df['column_name'] == some_value][[col_name1, col_name2]]
 
-# Select columns by regural expression
+# Select columns by regular expression
 df.filter(regex='name|address')
 
 # select columns by a list
@@ -596,6 +596,11 @@ df[np.intersect1d(df.columns, lst)]
 #0   30  john
 #1   24  jack
 #2   32  luc
+
+# select Rows by integers and Columns by names
+df.loc[df.index[1], 'name'] # second index by df.index[1]:
+# or 
+df.iloc[1, df.columns.get_loc('name')] # get position of column name by get_loc
 
 # --------- Cell value selection ---------------
 
