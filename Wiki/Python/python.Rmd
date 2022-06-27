@@ -242,9 +242,8 @@ print(dictionary)
 
 # Other Data Structures
 
-
 ## Numpy::Array
-Array can only cotain one type
+Array can contain one data type
 
 ### initialization
 ```python
@@ -257,6 +256,32 @@ np.full((3, 5), 7)
 # array([[ 7,  7,  7,  7.,  7],
 #        [ 7,  7,  7,  7.,  7],
 #        [ 7,  7,  .,  7.,  7]])
+
+# to contain multiple data type. assign datatype as object
+ay = np.array([["a", 0]] * 5, dtype='O')
+# array([['a', 0],
+#        ['a', 0],
+#        ['a', 0],
+#        ['a', 0],
+#        ['a', 0]], dtype=object)
+
+# get second value of each element in the array
+ay[:, 1]
+# array([0, 0, 0, 0, 0], dtype=object)
+
+# get second value of first element in the array
+ay[0, 1]
+# 0
+
+# set the value 
+ay[0, 1] = 15
+
+# find the index of element which second value > 3
+np.where(ay[:,1]>3)
+# (array([0], dtype=int64),)
+
+# check if has an element which second value = 5
+if len(np.where(ay[:,1]==5)[0]) >0 
 
 # a range value
 np.arange(0, 5, 0.5)
@@ -358,6 +383,11 @@ A one-dimensional labeled array A capable of holding any data type
 
 ```python
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
+
+# get the last element 
+s.iloc[-1]
+s[-1]
+
 
 # convert to an numpy.ndarray
 pd.Series([1, 2, 3]).values
