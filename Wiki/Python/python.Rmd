@@ -495,6 +495,32 @@ df = df.rename(columns={'old_name':'new_name'}) # rename a column name
 df.isnull().all() # check if ALL values are NaN in DataFrame
 ```
 
+### to numpy array
+```python
+df = pd.DataFrame({'P': [1, 2], 'Q': [0.7, 0.85]},
+                  index=['p', 'q'])
+#    P     Q
+# p  1  0.70
+# q  2  0.85
+
+# to structure numpy array. it will keep column name and data type information
+df.to_records()
+# rec.array([('p', 1, 0.7 ), ('q', 2, 0.85)],
+#           dtype=[('index', 'O'), ('P', '<i8'), ('Q', '<f8')])
+
+# convert back to dataframe
+pd.DataFrame(df.to_records())
+#   index  P     Q
+# 0     p  1  0.70
+# 1     q  2  0.85
+
+pd.DataFrame(df.to_records()).set_index('index')
+#        P     Q
+# index         
+# p      1  0.70
+# q      2  0.85
+```
+
 ### sort
 
 ```python
