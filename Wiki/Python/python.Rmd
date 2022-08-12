@@ -95,6 +95,11 @@ l1 = [1,2,3]
 l2 = [4,5,6]
 mergedlist = l1 + l2
 
+# concatenate element-wise two lists in Python
+a = [0, 1, 5, 6, 10, 11] 
+b = ['asp1', 'asp1', 'asp1', 'asp1', 'asp2', 'asp2']
+[m+str(n) for m,n in zip(b,a)]
+
 # copy: reference only
 li2 = li
 # copy: explicit copy 
@@ -486,13 +491,18 @@ df = df.rename({'a': 'axx'}, axis='columns') # or axis=1
 
 df[3].value_counts() # frequency table of a column, e.g. column 3
 
-df.drop_duplicates() # Remove duplicate rows (only considers columns).
-
 df = df.values #convert a pandas dataframe (df) to a numpy ndarray,
 
 df = df.rename(columns={'old_name':'new_name'}) # rename a column name
 
 df.isnull().all() # check if ALL values are NaN in DataFrame
+```
+
+# duplicates
+```python
+df.drop_duplicates() # Remove duplicate rows (only considers columns).
+
+df3 = df3[~df3.index.duplicated(keep='first')] #Remove rows with duplicate indices, using the duplicated method on the Pandas Index itself
 ```
 
 ### to numpy array
@@ -1023,6 +1033,18 @@ def read_object(filename):
 
 
 # Others
+## zip 
+```python
+numbers = [1, 2, 3]
+letters = ['a', 'b', 'c']
+zipped = zip(numbers, letters)
+zipped  # Holds an iterator object
+# <zip object at 0x7fa4831153c8>
+type(zipped)
+# <class 'zip'>
+list(zipped)
+# [(1, 'a'), (2, 'b'), (3, 'c')]
+```
 
 ## logging
 ```python
