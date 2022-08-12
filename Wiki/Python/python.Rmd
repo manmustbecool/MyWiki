@@ -795,6 +795,13 @@ df1 = df.replace(np.nan, '', regex=True) # Replace all the NaN with blank/empty 
 https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html
 ```python
 df['new_col'] = data['column'].rolling(5).mean() # Rolling Mean on pandas on a specific column
+
+# Pandas Rolling Apply custom function
+def my_test(vals):
+    values = vals.values
+    return values[0]
+    
+df['new_col'] = data['column'].rolling(5).apply(my_test)
 ```
 ### type converting
 
