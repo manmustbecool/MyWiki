@@ -6,7 +6,6 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 # dash document
 
-
 ```
 pip install dash
 ```
@@ -37,3 +36,25 @@ https://community.plot.ly/t/show-and-tell-community-thread/7554
 
  * <a href="python_code/dash_slider_demo.py">dash_slider_demo.py</a>
  
+# candlestick
+```python
+candlestick = go.Candlestick(
+                            x=apple_df.index,
+                            open=apple_df['Open'],
+                            high=apple_df['High'],
+                            low=apple_df['Low'],
+                            close=apple_df['Close']
+                            )
+
+fig = go.Figure(data=[candlestick])
+
+fig.update_layout(
+    width=800, height=600,
+    title="Apple, March - 2020",
+    yaxis_title='AAPL Stock'
+)
+
+fig.show()
+
+```
+
