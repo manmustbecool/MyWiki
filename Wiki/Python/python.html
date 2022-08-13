@@ -1062,74 +1062,79 @@ type</p>
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co"># rows and columns</span></span>
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>df.iloc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="dv">1</span>:<span class="dv">4</span>] <span class="co"># select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)</span></span>
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.DataFrame(</span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>          {<span class="st">&#39;age&#39;</span>:[<span class="dv">30</span>,<span class="dv">24</span>,<span class="dv">32</span>], <span class="st">&#39;name&#39;</span>:[<span class="st">&#39;john&#39;</span>,<span class="st">&#39;jack&#39;</span>,<span class="st">&#39;luck&#39;</span>], <span class="st">&#39;gender&#39;</span>:[<span class="st">&#39;M&#39;</span>,<span class="st">&#39;M&#39;</span>,<span class="st">&#39;F&#39;</span>]},</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>          index<span class="op">=</span>[<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>])</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   age  name gender</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co"># a   30  john      M</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co"># b   24  jack      M</span></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co"># c   32  luck      F</span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">#loc: Select Column &amp; Rows by name/index_label</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co"># rows:</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>df.loc[:<span class="dv">3</span>] <span class="co"># slice up to and including label 3 (in the case of label is integer)</span></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>df.loc[:<span class="st">&#39;b&#39;</span>] <span class="co"># select rows by b</span></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="st">&#39;b&#39;</span>:<span class="st">&#39;c&#39;</span>,:] <span class="co"># select rows from b to c</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>df.loc[[<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>],:] <span class="co"># select rows by multiple names/labels</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;column_name&#39;</span>] <span class="op">==</span> some_value] <span class="co"># select rows whose column value equals a scalar</span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="op">~</span>df[<span class="st">&#39;column_name&#39;</span>].isin(some_values)] <span class="co"># select rows whose column value is in an iterable</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>df.loc[(df[<span class="st">&#39;column_name&#39;</span>] <span class="op">==</span> some_value) <span class="op">&amp;</span> df[<span class="st">&#39;other_column&#39;</span>].isin(some_values)] </span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>df[df.Length<span class="op">&gt;</span><span class="dv">7</span>] <span class="co"># select rows that meet logical criteria.</span></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="co"># loop for each row</span></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> row[<span class="st">&#39;column_name_1&#39;</span>], row[<span class="st">&#39;column_name_2&#39;</span>]</span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 100</span></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 11 110</span></span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="co"># 12 120</span></span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="co"># copy as a new df, not only reference</span></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df[df[<span class="st">&#39;B&#39;</span>] <span class="op">==</span> <span class="st">&#39;b.2&#39;</span>].copy()</span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="co">#--------- column selection ---------------</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co"># return type</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>df.iloc[<span class="dv">3</span>]    <span class="co"># return a pandas series when one row is selected</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>df.iloc[[<span class="dv">3</span>]]  <span class="co"># return a pandas dataframe. pass a single valued list to return a dataframe</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>df.iloc[<span class="dv">2</span>:<span class="dv">3</span>]  <span class="co"># return a pandas dataframe when multiple rows are selected</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.DataFrame(</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>          {<span class="st">&#39;age&#39;</span>:[<span class="dv">30</span>,<span class="dv">24</span>,<span class="dv">32</span>], <span class="st">&#39;name&#39;</span>:[<span class="st">&#39;john&#39;</span>,<span class="st">&#39;jack&#39;</span>,<span class="st">&#39;luck&#39;</span>], <span class="st">&#39;gender&#39;</span>:[<span class="st">&#39;M&#39;</span>,<span class="st">&#39;M&#39;</span>,<span class="st">&#39;F&#39;</span>]},</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>          index<span class="op">=</span>[<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>])</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   age  name gender</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co"># a   30  john      M</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co"># b   24  jack      M</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co"># c   32  luck      F</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co">#loc: Select Column &amp; Rows by name/index_label</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co"># rows:</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>df.loc[:<span class="dv">3</span>] <span class="co"># slice up to and including label 3 (in the case of label is integer)</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>df.loc[:<span class="st">&#39;b&#39;</span>] <span class="co"># select rows by b</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="st">&#39;b&#39;</span>:<span class="st">&#39;c&#39;</span>,:] <span class="co"># select rows from b to c</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>df.loc[[<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>],:] <span class="co"># select rows by multiple names/labels</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;column_name&#39;</span>] <span class="op">==</span> some_value] <span class="co"># select rows whose column value equals a scalar</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="op">~</span>df[<span class="st">&#39;column_name&#39;</span>].isin(some_values)] <span class="co"># select rows whose column value is in an iterable</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>df.loc[(df[<span class="st">&#39;column_name&#39;</span>] <span class="op">==</span> some_value) <span class="op">&amp;</span> df[<span class="st">&#39;other_column&#39;</span>].isin(some_values)] </span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>df[df.Length<span class="op">&gt;</span><span class="dv">7</span>] <span class="co"># select rows that meet logical criteria.</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="co"># loop for each row</span></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> row[<span class="st">&#39;column_name_1&#39;</span>], row[<span class="st">&#39;column_name_2&#39;</span>]</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="co"># 10 100</span></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="co"># 11 110</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="co"># 12 120</span></span>
 <span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Select columns by names</span></span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;name&#39;</span>] </span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">&#39;age&#39;</span>, <span class="st">&#39;name&#39;</span>]] </span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>df.columns.get_loc(<span class="st">&quot;column_name&quot;</span>)</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="co"># copy as a new df, not only reference</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df[df[<span class="st">&#39;B&#39;</span>] <span class="op">==</span> <span class="st">&#39;b.2&#39;</span>].copy()</span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="co">#--------- column selection ---------------</span></span>
 <span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>df.loc[:, [<span class="st">&#39;age&#39;</span>, <span class="st">&#39;name&#39;</span>]] <span class="co"># = df[[&#39;age&#39;, &#39;name&#39;]] </span></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="co"># select col_name1, col_name2 from table where column_name = some_value.</span></span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;column_name&#39;</span>] <span class="op">==</span> some_value][[col_name1, col_name2]]</span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Select columns by regular expression</span></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">&#39;name|address&#39;</span>)</span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a><span class="co"># select columns by a list</span></span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>lst <span class="op">=</span> [<span class="st">&#39;name&#39;</span>,<span class="st">&#39;age&#39;</span>,<span class="st">&#39;weight&#39;</span>]</span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>df[np.intersect1d(df.columns, lst)]</span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a><span class="co">#   age  name</span></span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a><span class="co">#0   30  john</span></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="co">#1   24  jack</span></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a><span class="co">#2   32  luc</span></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a><span class="co"># select Rows by integers and Columns by names</span></span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>df.loc[df.index[<span class="dv">1</span>], <span class="st">&#39;name&#39;</span>] <span class="co"># second index by df.index[1]:</span></span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>df.iloc[<span class="dv">1</span>, df.columns.get_loc(<span class="st">&#39;name&#39;</span>)] <span class="co"># get position of column name by get_loc</span></span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Select columns by names</span></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;name&#39;</span>] </span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">&#39;age&#39;</span>, <span class="st">&#39;name&#39;</span>]] </span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>df.columns.get_loc(<span class="st">&quot;column_name&quot;</span>)</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>df.loc[:, [<span class="st">&#39;age&#39;</span>, <span class="st">&#39;name&#39;</span>]] <span class="co"># = df[[&#39;age&#39;, &#39;name&#39;]] </span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a><span class="co"># select col_name1, col_name2 from table where column_name = some_value.</span></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;column_name&#39;</span>] <span class="op">==</span> some_value][[col_name1, col_name2]]</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Select columns by regular expression</span></span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>df.<span class="bu">filter</span>(regex<span class="op">=</span><span class="st">&#39;name|address&#39;</span>)</span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="co"># select columns by a list</span></span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>lst <span class="op">=</span> [<span class="st">&#39;name&#39;</span>,<span class="st">&#39;age&#39;</span>,<span class="st">&#39;weight&#39;</span>]</span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>df[np.intersect1d(df.columns, lst)]</span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a><span class="co">#   age  name</span></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a><span class="co">#0   30  john</span></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a><span class="co">#1   24  jack</span></span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a><span class="co">#2   32  luc</span></span>
 <span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="co"># --------- Cell value selection ---------------</span></span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="co"># if subset is one row dataframe, use .values[0] to get the value</span></span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;name&#39;</span>]<span class="op">==</span><span class="st">&#39;jack&#39;</span>] <span class="co"># subset result has only one row</span></span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="co">#    age  name gender</span></span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a><span class="co"># b   24  jack      M</span></span>
-<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;name&#39;</span>]<span class="op">==</span><span class="st">&#39;jack&#39;</span>][<span class="st">&#39;age&#39;</span>] <span class="co"># it return a series</span></span>
-<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="co"># b    24</span></span>
-<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: age, dtype: int64</span></span>
-<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;name&#39;</span>]<span class="op">==</span><span class="st">&#39;jack&#39;</span>][<span class="st">&#39;age&#39;</span>].values[<span class="dv">0</span>]</span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="co"># 24</span></span></code></pre></div>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="co"># select Rows by integers and Columns by names</span></span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>df.loc[df.index[<span class="dv">1</span>], <span class="st">&#39;name&#39;</span>] <span class="co"># second index by df.index[1]:</span></span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="co"># or </span></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>df.iloc[<span class="dv">1</span>, df.columns.get_loc(<span class="st">&#39;name&#39;</span>)] <span class="co"># get position of column name by get_loc</span></span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a><span class="co"># --------- Cell value selection ---------------</span></span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="co"># if subset is one row dataframe, use .values[0] to get the value</span></span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;name&#39;</span>]<span class="op">==</span><span class="st">&#39;jack&#39;</span>] <span class="co"># subset result has only one row</span></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a><span class="co">#    age  name gender</span></span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="co"># b   24  jack      M</span></span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;name&#39;</span>]<span class="op">==</span><span class="st">&#39;jack&#39;</span>][<span class="st">&#39;age&#39;</span>] <span class="co"># it return a series</span></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a><span class="co"># b    24</span></span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: age, dtype: int64</span></span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">&#39;name&#39;</span>]<span class="op">==</span><span class="st">&#39;jack&#39;</span>][<span class="st">&#39;age&#39;</span>].values[<span class="dv">0</span>]</span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a><span class="co"># 24</span></span></code></pre></div>
 </div>
 <div id="add" class="section level3" number="4.0.4">
 <h3><span class="header-section-number">4.0.4</span> add</h3>
@@ -1323,7 +1328,12 @@ converting</h3>
 <span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co"># combine date and time strings to single datetime object </span></span>
 <span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>mytime <span class="op">=</span> dt.datetime.strptime(<span class="st">&#39;0130&#39;</span>,<span class="st">&#39;%H%M&#39;</span>).time()</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>mydatetime <span class="op">=</span> dt.datetime.combine(dt.date.today(), mytime)</span></code></pre></div>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>mydatetime <span class="op">=</span> dt.datetime.combine(dt.date.today(), mytime)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="co"># convert (Unix) timestamp (the number of seconds since January 1st, 1970). </span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>datetime.fromtimestamp(<span class="dv">1485714600</span>).strftime(<span class="st">&quot;%A, %B </span><span class="sc">%d</span><span class="st">, %Y %I:%M:%S&quot;</span>)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;Sunday, January 29, 2017 08:30:00&#39;</span></span></code></pre></div>
 <p>Convert string to datetime</p>
 <p>from datetime import datetime datetime.strptime(‘Jun 1 2005 1:33PM’,
 ‘%b %d %Y %I:%M%p’)</p>

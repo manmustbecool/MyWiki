@@ -581,6 +581,11 @@ data.iloc[:,-1] # last column of data frame
 # rows and columns
 df.iloc[0:3, 1:4] # select the first 3 rows (rows 0,1,2) and (columns 1, 2 and 3)
 
+# return type
+df.iloc[3]    # return a pandas series when one row is selected
+df.iloc[[3]]  # return a pandas dataframe. pass a single valued list to return a dataframe
+df.iloc[2:3]  # return a pandas dataframe when multiple rows are selected
+
 df=pd.DataFrame(
           {'age':[30,24,32], 'name':['john','jack','luck'], 'gender':['M','M','F']},
           index=['a', 'b', 'c'])
@@ -852,6 +857,11 @@ dt.datetime.today() + dt.timedelta(days=2)  # after 2 days
 # combine date and time strings to single datetime object 
 mytime = dt.datetime.strptime('0130','%H%M').time()
 mydatetime = dt.datetime.combine(dt.date.today(), mytime)
+
+# convert (Unix) timestamp (the number of seconds since January 1st, 1970). 
+from datetime import datetime
+datetime.fromtimestamp(1485714600).strftime("%A, %B %d, %Y %I:%M:%S")
+'Sunday, January 29, 2017 08:30:00'
 ```
 
 Convert string to datetime
