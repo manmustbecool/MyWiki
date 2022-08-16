@@ -65,7 +65,6 @@ My notes
  * <a href="Wiki/Python/python_sklearn.html">Scikit-learn</a>
  * <a href="Wiki/Python/sklearn_decision_tree.html">Sklearn decision tree</a>
  * <a href="Wiki/Python/classificationOnIris.html">Classification on Iris dataset</a>
- * <a href="Wiki/Python/python_keras.html">Keras deep learning</a>
  * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
  * <a href="Wiki/Python/python_java.html">Call Java from Python</a>
  * Web development
@@ -74,7 +73,10 @@ My notes
     + <a href="Wiki/Python/dash.html">Dash</a>
     + <a href="Wiki/Python/dash_collapsed_sidebar.html">Dash collapsed sidebar</a>
  * <a href="Wiki/Python/unit_test.html">Unit testing</a>
-  * <a href="Wiki/Python/python_decorator.html">Decorator</a>
+ * <a href="Wiki/Python/python_decorator.html">Decorator</a>
+ * Deep learning
+    + <a href="Wiki/Python/python_keras.html">Keras - simple neural network</a>
+    + <a href="Wiki/Python/python_keras_lstm.html">Keras - LSTM</a>
     
 ## Cloud
  * <a href="Wiki/Cloud/VirtualMachine.html">Virtual Machine</a>

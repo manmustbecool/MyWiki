@@ -1,0 +1,17 @@
+---
+title: "python_keras_lstm"
+output: html_document
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## LSTM in Keras
+
+ * Simple LSTM for Sequence Classification   
+ * Bidirectional LSTM for Sequence Classification  
+ * LSTM and Convolutional Neural Network for Sequence Classification  
+
+https://machinelearningmastery.com/sequence-classification-lstm-recurrent-neural-networks-python-keras/
