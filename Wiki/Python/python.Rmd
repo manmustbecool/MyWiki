@@ -555,9 +555,7 @@ df.sample(frac=1) # The frac  specifies the fraction of rows to return in the ra
 df.sample(n)
 
 # reset index
-df = df(drop=True)
-
-
+df = df.reset_index(drop=True)
 ```
 
 ### subset 
@@ -1137,6 +1135,43 @@ import importlib
 import foo #import the module here, so that it can be reloaded.
 importlib.reload(foo)
 ```
+
+## yield
+The yield statement suspends a function’s execution and sends a value back to the caller. After the caller finish processing the value, the function continues execution immediately after the last yield run.
+```python
+import time
+# the following two generator functions are same
+def simpleGeneratorFun():
+    print("sending 1")
+    yield 1
+    print("sending 2")
+    yield 2
+    print("sending 3")
+    yield 3
+
+def simpleGeneratorFun():
+    for x in [1, 2, 3]:
+        print(f"sending {x}")
+        yield x
+
+# caller code to check above generator function
+for value in simpleGeneratorFun():
+    print(f"received {value}")
+    time.sleep(5)
+    print(f"finished sleep")
+
+# - output -  
+# sending 1
+# received 1
+# finished sleep
+# sending 2
+# received 2
+# finished sleep
+# sending 3
+# received 3
+# finished sleep
+```
+
 
 # Real time plot with python
 
