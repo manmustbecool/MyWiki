@@ -759,49 +759,42 @@ sum_series
 data.sort_values('product_count', ascending=False).groupby(['user_id'], sort=False).head(3)
 ```
 
-### merge
+### combining DataFrames 
 ```python
 # Append a dataframe
-df = pd.DataFrame([[1, 2], [3, 4]], columns=list('AB'))
-df
+df1 = pd.DataFrame([[1, 2], [3, 4]], columns=list('AB'))
+df1
 #    A  B
 # 0  1  2
 # 1  3  4
 
-df2 = pd.DataFrame([[5, 6], [7, 8]], columns=list('AB'))
-df.append(df2)
-#    A  B
-# 0  1  2
-# 1  3  4
-# 0  5  6
-# 1  7  8
+df2 = pd.DataFrame([[1, 6], [7, 8]], columns=list('AB'))
 
-# With ignore_index set to True:
-df.append(df2, ignore_index=True)
-#    A  B
-# 0  1  2
-# 1  3  4
-# 2  5  6
-# 3  7  8
+# -----------  pd.concat  -----------------
+df = pd.concat([df1, df2]) # concatenate a list of dataframes along row
+#   A  B
+#0  1  2
+#1  3  4
+#0  1  6
+#1  7  8
 
 # reset index if necessary
 df = df.reset_index(drop=True) 
 
-# -----------  pd.concat  -----------------
-dfList = [df, df, df2]
-pd.concat(dfList) # concatenate a list of dataframes along row
-#   A  B
-#0  1  2
-#1  3  4
-#0  1  2
-#1  3  4
-#0  5  6
-#1  7  8
+pd.concat([df1, df2], axis=1) # concatenate a list of dataframes along column
+#   A  B  A  B  
+#0  1  2  1  6
+#1  3  4  7  8
 
-pd.concat(dfList, axis=1) # concatenate a list of dataframes along column
-#   A  B  A  B  A  B
-#0  1  2  1  2  5  6
-#1  3  4  3  4  7  8
+# -----------  pd.merge, Database-style  -----------------
+df = pd.merge(df1, df2, on="A") # how='inner' by default.
+#   A  B_x  B_y
+#0  1    2    6
+
+df = pd.merge(df1, df2, on="A", how="left") 
+#   A  B_x  B_y
+#0  1    2  6.0
+#1  3    4  NaN
 ```
 
 ### rolling
