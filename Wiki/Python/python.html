@@ -998,7 +998,21 @@ type</p>
 duplicates</h3>
 <div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df.drop_duplicates() <span class="co"># Remove duplicate rows (only considers columns).</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> df3[<span class="op">~</span>df3.index.duplicated(keep<span class="op">=</span><span class="st">&#39;first&#39;</span>)] <span class="co">#Remove rows with duplicate indices, using the duplicated method on the Pandas Index itself</span></span></code></pre></div>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> df3[<span class="op">~</span>df3.index.duplicated(keep<span class="op">=</span><span class="st">&#39;first&#39;</span>)] <span class="co">#Remove rows with duplicate indices, using the duplicated method on the Pandas Index itself</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># keep only the last entry from duplicate values</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;A&#39;</span>: [<span class="st">&#39;x1&#39;</span>, <span class="st">&#39;x2&#39;</span>, <span class="st">&#39;x3&#39;</span>, <span class="st">&#39;x1&#39;</span>,], <span class="st">&#39;B&#39;</span>: [<span class="dv">85</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">85</span>]})               </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    A   B</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#0  x1  85</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#1  x2  70</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#2  x3  80</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#3  x1  85</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df.drop_duplicates(subset <span class="op">=</span> [<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>], keep <span class="op">=</span><span class="st">&#39;last&#39;</span>).reset_index(drop <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>df2</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    A   B</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#0  x2  70</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#1  x3  80</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#2  x1  85</span></span></code></pre></div>
 </div>
 <div id="handle-nan" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> handle NaN</h3>

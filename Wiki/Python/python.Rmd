@@ -504,6 +504,20 @@ df.isnull().all() # check if ALL values are NaN in DataFrame
 df.drop_duplicates() # Remove duplicate rows (only considers columns).
 
 df3 = df3[~df3.index.duplicated(keep='first')] #Remove rows with duplicate indices, using the duplicated method on the Pandas Index itself
+
+# keep only the last entry from duplicate values
+df = pd.DataFrame({'A': ['x1', 'x2', 'x3', 'x1',], 'B': [85, 70, 80, 85]})               
+#    A   B
+#0  x1  85
+#1  x2  70
+#2  x3  80
+#3  x1  85
+df2 = df.drop_duplicates(subset = ['A','B'], keep ='last').reset_index(drop = True)
+df2
+#    A   B
+#0  x2  70
+#1  x3  80
+#2  x1  85
 ```
 
 ### handle NaN
