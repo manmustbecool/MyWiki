@@ -292,8 +292,9 @@ if len(np.where(ay[:,1]==5)[0]) >0
 np.arange(0, 5, 0.5)
 # Out[32]: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])
 
-# a random integer value
-np.random.randint(10, size=2) # add replace=False for non duplicated values
+# a random value
+np.random.randint(10, size=2) # integer value, add replace=False for non duplicated values
+np.random.rand(5) # random float between 0 and 1
 
 # convert np array to list
 ay.tolist()
