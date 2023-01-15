@@ -7,13 +7,13 @@ date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 
 Install anaconda
 
-```bash
+``` bash
 python -V # get python version
 ```
 
 # Data types
 
-```python
+``` python
 type(person) # Determine the type of an object
 
 # not None test
@@ -23,7 +23,7 @@ if not (val is None):
 
 ## Atomic data types
 
-```python
+``` python
 str() # convert variable to string
 int() 
 float()
@@ -41,7 +41,7 @@ if foo is None:
 
 ### Range
 
-```python
+``` python
 range(10) # range 0 to 9
 list(range(11, 17)) # range to a list: [11, 12, 13, 14, 15, 16]
 
@@ -51,9 +51,10 @@ list(reversed(range(10))) # to print out
 ```
 
 ### List
-  
+
 Lists can contain any data types (including list). mutable
-```python
+
+``` python
 li = [3, 4, 5]
 
 li = [None]*5 # [None, None, None, None, None]
@@ -160,28 +161,30 @@ data = json.loads(source)
 ```
 
 ### Tuple
-  
+
 Tuples are immutable sequences
-```python
+
+``` python
 t = 12345, 54321, 'hello!'
 t[0] # 12345
 ```
 
 ### Set
-  
+
 A set is an unordered collection with no duplicate elements
-```python
+
+``` python
 basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
 
 # check if a element is in the set
 'apple' in basket
 ```
 
-
 ### Dictionary
 
 Dictionaries store key-value pairs, kind of like JSON objects.
-```python
+
+``` python
 # Creating an empty dictionary
 d = {} # OR data = dict()
 
@@ -242,16 +245,17 @@ values = [1, 2, 3]
 dictionary = dict(zip(keys, values))
 print(dictionary)
 # {'a': 1, 'b': 2, 'c': 3}
-
 ```
 
 # Other Data Structures
 
 ## Numpy::Array
+
 Array can contain one data type
 
 ### initialization
-```python
+
+``` python
 # convert list to array
 li = [3, 4, 5]
 ay = np.array(li)
@@ -301,7 +305,8 @@ ay.tolist()
 ```
 
 ### shape
-```python
+
+``` python
 ay = np.array([[1,2], [3,4]])
 
 # shape of array
@@ -316,7 +321,8 @@ np.reshape(ay, 4)
 ```
 
 ### append / delete
-```python
+
+``` python
 # append an array
 ay = np.append(ay, ay1)
 
@@ -326,11 +332,11 @@ np.delete(a, index)
 # count the occurrence of certain item in an ndarray in Python
 a = np.array([0, 3, 0, 1, 0, 1, 2, 1, 0, 0, 0, 0, 1, 3, 4])
 unique, counts = numpy.unique(a, return_counts=True)
-
 ```
 
 ### subset
-```python
+
+``` python
 # subset by index
 arr = np.array([10, 20, 30, 40, 50, 60])
 arr[[1,4,5]]
@@ -351,9 +357,9 @@ test[:,0]
 # array([1, 3, 5])
 ```
 
+### compare
 
-### compare 
-```python
+``` python
 ay1 = np.array([2,3,4,6,7])
 ay2 = np.array([1,4,5,5,6,8,8,9])
 
@@ -369,9 +375,10 @@ np.isin(ay1, ay2)
 np.where(np.isin(ay1, ay2))
 # (array([2, 3], dtype=int64),)   
 ```
+
 **Initialize data frame**
 
-```python
+``` python
 mat = np.array([[1,2,3], [1,2,3], [1,2,3]])
 print(mat)
 #     [[1 2 3]
@@ -383,11 +390,11 @@ np.sum(mat, axis=1)  # axis=1  "get the sum of each the columns"
 
 ## Panda::Series
 
-http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/
+<http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/>
 
 A one-dimensional labeled array A capable of holding any data type
 
-```python
+``` python
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
 
 # get the last element 
@@ -429,11 +436,12 @@ pd.Series([1, 2, 3]).apply(lambda x :x*2)
 # 1    4
 # 2    6
 ```
+
 ## Panda::DataFrame
 
 **initialize data frame**
 
-```python
+``` python
 df = pd.DataFrame(
           {"a":[11 ,12, 13], "b":[21, 22, 23], "c":[31, 32, 33]},    
           index = [1, 2, 3])
@@ -500,7 +508,8 @@ df.isnull().all() # check if ALL values are NaN in DataFrame
 ```
 
 ### handle duplicates
-```python
+
+``` python
 df.drop_duplicates() # Remove duplicate rows (only considers columns).
 
 df3 = df3[~df3.index.duplicated(keep='first')] #Remove rows with duplicate indices, using the duplicated method on the Pandas Index itself
@@ -521,14 +530,16 @@ df2
 ```
 
 ### handle NaN
-```python
+
+``` python
 df.fillna(0) # Replace all the NaN values with Zero
 
 df1 = df.replace(np.nan, '', regex=True) # Replace all the NaN with blank/empty string
 ```
 
 ### to numpy array
-```python
+
+``` python
 df = pd.DataFrame({'P': [1, 2], 'Q': [0.7, 0.85]},
                   index=['p', 'q'])
 #    P     Q
@@ -555,7 +566,7 @@ pd.DataFrame(df.to_records()).set_index('index')
 
 ### sort
 
-```python
+``` python
 # Order rows by values of a column 
 df.sort_values('mpg') # (low to high).
 df.sort_values('mpg', ascending=False) # (high to low).
@@ -573,9 +584,9 @@ df.sample(n)
 df = df.reset_index(drop=True)
 ```
 
-### subset 
+### subset
 
-```python
+``` python
 # change value of a cell
 df.at['C', 'x'] = 10
 
@@ -676,8 +687,9 @@ df.loc[df['name']=='jack']['age'].values[0]
 # 24
 ```
 
-### add 
-```python
+### add
+
+``` python
 # append a column
 df['new_col'] = pd.Series(np.arange(0, 100), index=df.index)
 
@@ -701,7 +713,8 @@ df = df.append(a_series, ignore_index=True) # not use the index labels of a_seri
 ```
 
 ### remove
-```python
+
+``` python
 df.drop(df.tail(n).index) # drop last n rows
 df.drop(df.head(n).index) # drop first n rows
 
@@ -724,23 +737,24 @@ df.drop(cols_to_drop, axis=1)
 ```
 
 ### summary
-```python
+
+``` python
 # sum each row of column
 df.sum(axis=1)
 ```
 
 ### group
 
-```python
+``` python
 # groupby dataframe by key
 grouped = df.groupby('gender')
 
 grouped.groups.keys() # list keys
 
 for name, group in grouped:
-	print('key:' name)
-	print('value:' group)
-	
+    print('key:' name)
+    print('value:' group)
+    
 data = pd.DataFrame({'user_id': ['a1', 'a1', 'a1', 'a2', 'a2', 'a2', 'a3', 'a3', 'a3'],
                      'product_id': ['p1', 'p1', 'p2', 'p1', 'p1', 'p1', 'p2', 'p2', 'p3'],
                      'product_count': [1, 2, 2, 2, 2, 1, 4, 10, 30]})
@@ -773,8 +787,9 @@ sum_series
 data.sort_values('product_count', ascending=False).groupby(['user_id'], sort=False).head(3)
 ```
 
-### combining DataFrames 
-```python
+### combining DataFrames
+
+``` python
 # Append a dataframe
 df1 = pd.DataFrame([[1, 2], [3, 4]], columns=list('AB'))
 df1
@@ -812,8 +827,10 @@ df = pd.merge(df1, df2, on="A", how="left")
 ```
 
 ### rolling
-https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html
-```python
+
+<https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rolling.html>
+
+``` python
 df['new_col'] = data['column'].rolling(5).mean() # Rolling Mean on pandas on a specific column
 
 # Pandas Rolling Apply custom function
@@ -823,9 +840,10 @@ def my_test(vals):
     
 df['new_col'] = data['column'].rolling(5).apply(my_test)
 ```
+
 ### type converting
 
-```python
+``` python
 # type of each column
 df.dtypes
 
@@ -837,12 +855,13 @@ df[["D", "E"]] = df[["D", "E"]].astype(int)
 # To Factors
 s = pd.Series(['single', 'touching', 'nuclei', 'dusts', 'touching', 'single', 'nuclei'])
 s_enc = pd.factorize(s) 
-
 ```
 
 # Data time
-## datetime 
-```python
+
+## datetime
+
+``` python
 import datetime as dt
 
 # date 
@@ -871,12 +890,11 @@ datetime.fromtimestamp(1485714600).strftime("%A, %B %d, %Y %I:%M:%S")
 
 Convert string to datetime
 
-from datetime import datetime
-datetime.strptime('Jun 1 2005  1:33PM', '%b %d %Y %I:%M%p')
+from datetime import datetime datetime.strptime('Jun 1 2005 1:33PM', '%b %d %Y %I:%M%p')
 
-https://stackoverflow.com/questions/53892450/get-the-format-in-dateutil-parse
-https://stackabuse.com/converting-strings-to-datetime-in-python/
-```python
+<https://stackoverflow.com/questions/53892450/get-the-format-in-dateutil-parse> <https://stackabuse.com/converting-strings-to-datetime-in-python/>
+
+``` python
 formats = ['%Y-%m-%dT%H:%M:%S*%f%z','%Y %b %d %H:%M:%S.%f %Z','%b %d %H:%M:%S %z %Y','%d/%b/%Y:%H:%M:%S %z','%b %d, %Y %I:%M:%S %p','%b %d %Y %H:%M:%S','%b %d %H:%M:%S %Y','%b %d %H:%M:%S %z','%b %d %H:%M:%S','%Y-%m-%dT%H:%M:%S%z','%Y-%m-%dT%H:%M:%S.%f%z','%Y-%m-%d %H:%M:%S %z','%Y-%m-%d %H:%M:%S%z','%Y-%m-%d %H:%M:%S,%f','%Y/%m/%d*%H:%M:%S','%Y %b %d %H:%M:%S.%f*%Z','%Y %b %d %H:%M:%S.%f','%Y-%m-%d %H:%M:%S,%f%z','%Y-%m-%d %H:%M:%S.%f','%Y-%m-%d %H:%M:%S.%f%z','%Y-%m-%dT%H:%M:%S.%f','%Y-%m-%dT%H:%M:%S','%Y-%m-%dT%H:%M:%S%Z','%Y-%m-%dT%H:%M:%S.%f','%Y-%m-%dT%H:%M:%S','%Y-%m-%d*%H:%M:%S:%f','%Y-%m-%d*%H:%M:%S','%y-%m-%d %H:%M:%S,%f %z','%y-%m-%d %H:%M:%S,%f','%y-%m-%d %H:%M:%S','%y/%m/%d %H:%M:%S','%y%m%d %H:%M:%S','%Y%m%d %H:%M:%S.%f','%m/%d/%y*%H:%M:%S','%m/%d/%Y*%H:%M:%S','%m/%d/%Y*%H:%M:%S*%f','%m/%d/%y %H:%M:%S %z','%m/%d/%Y %H:%M:%S %z','%H:%M:%S','%H:%M:%S.%f','%H:%M:%S,%f','%d/%b %H:%M:%S,%f','%d/%b/%Y:%H:%M:%S','%d/%b/%Y %H:%M:%S','%d-%b-%Y %H:%M:%S','%d-%b-%Y %H:%M:%S.%f','%d %b %Y %H:%M:%S','%d %b %Y %H:%M:%S*%f','%m%d_%H:%M:%S','%m%d_%H:%M:%S.%f','%m/%d/%Y %I:%M:%S %p:%f','%m/%d/%Y %H:%M:%S %p']
 
 datestrings = ['2018-08-20T13:20:10*633+0000','2017 Mar 03 05:12:41.211 PDT','Jan 21 18:20:11 +0000 2017','19/Apr/2017:06:36:15 -0700','Dec 2, 2017 2:39:58 AM','Jun 09 2018 15:28:14','Apr 20 00:00:35 2010','Sep 28 19:00:00 +0000','Mar 16 08:12:04','2017-10-14T22:11:20+0000','2017-07-01T14:59:55.711+0000','2017-08-19 12:17:55 -0400','2017-08-19 12:17:55-0400','2017-06-26 02:31:29,573','2017/04/12*19:37:50','2018 Apr 13 22:08:13.211*PDT','2017 Mar 10 01:44:20.392','2017-03-10 14:30:12,655+0000','2018-02-27 15:35:20.311','2017-03-12 13:11:34.222-0700','2017-07-22T16:28:55.444','2017-09-08T03:13:10','2017-03-12T17:56:22-0700','2017-11-22T10:10:15.455','2017-02-11T18:31:44','2017-10-30*02:47:33:899','2017-07-04*13:23:55','11-02-11 16:47:35,985 +0000','10-06-26 02:31:29,573','10-04-19 12:00:17','06/01/22 04:11:05','150423 11:42:35','20150423 11:42:35.173','08/10/11*13:33:56','11/22/2017*05:13:11','05/09/2017*08:22:14*612','04/23/17 04:34:22 +0000','10/03/2017 07:29:46 -0700','11:42:35','11:42:35.173','11:42:35,173','23/Apr 11:42:35,173','23/Apr/2017:11:42:35','23/Apr/2017 11:42:35','23-Apr-2017 11:42:35','23-Apr-2017 11:42:35.883','23 Apr 2017 11:42:35','23 Apr 2017 10:32:35*311','0423_11:42:35','0423_11:42:35.883','8/5/2011 3:31:18 AM:234','9/28/2011 2:23:15 PM']
@@ -892,8 +910,10 @@ def parse_timestamp(datestring, formats):
         return (d, f)
     return (datestring, 'Unable to parse format')
 ```
-## Pandas Timestamp  
-```python
+
+## Pandas Timestamp
+
+``` python
 # --- convert string to panda datatime
 df = pd.DataFrame({'timestamp_col':['2005-05-23 00:00:00', '2005-05-24 00:00:00']})
 #                dt_col
@@ -976,11 +996,11 @@ df_sample.head(15)
 #2020-01-01 00:12:30            1                       4.0
 #2020-01-01 00:16:40            1                       5.0
 #2020-01-01 00:25:00            1                       6.0
-
 ```
+
 # Regular expression
 
-```python
+``` python
 import re
 # search
 m = re.search('(?<=abc)def', 'abcdef')
@@ -995,7 +1015,7 @@ re.sub(regex_search,regex_replace,contents)
 
 ## file path
 
-```python
+``` python
 CODE_PATH = pathlib.Path(__file__).parent
 DATA_PATH = CODE_PATH.joinpath('data')
 LOG_PATH = CODE_PATH.joinpath('log.txt')
@@ -1003,7 +1023,7 @@ LOG_PATH = CODE_PATH.joinpath('log.txt')
 
 ## Read write CSV
 
-```python
+``` python
 df = pd.read_csv('file.csv', header=None, nrows=5)
 
 df.to_dense().to_csv("myDataFrame.csv", index = False, sep=',', encoding='utf-8')
@@ -1014,17 +1034,17 @@ pd.to_excel('dir/myDataFrame.xlsx', sheet_name='Sheet1')
 
 ## Read head lines of a large text file
 
-```python
+``` python
 file_name = "C:\\Users\\xxxxx\\Desktop\\2014101709-12.txt"
 
 with open(file_name) as myfile:
     head = [next(myfile) for x in range(20)]
 print(head)
-
 ```
 
 ## List files only in the current directory
-```python
+
+``` python
 import os as os
 files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
@@ -1032,7 +1052,8 @@ for f in files:
 ```
 
 ## read and write objects to plk files
-```python
+
+``` python
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
         pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
@@ -1046,10 +1067,11 @@ def read_object(filename):
         return None      
 ```
 
-
 # Others
-## zip 
-```python
+
+## zip
+
+``` python
 numbers = [1, 2, 3]
 letters = ['a', 'b', 'c']
 zipped = zip(numbers, letters)
@@ -1062,7 +1084,8 @@ list(zipped)
 ```
 
 ## logging
-```python
+
+``` python
 import logging
 
 try:
@@ -1073,7 +1096,7 @@ except Exception as e:
 
 ## lambda, map, filter, reduce
 
-```python
+``` python
 # --------- lambda -----------
 lambda arguments: expression # Anonymous function objects 
 
@@ -1109,8 +1132,9 @@ reduce_object  = reduce(lambda x,y: x+y, li)
 print(reduce_object)
 ```
 
-## underscore _  
-```python
+## underscore \_
+
+``` python
 # storing the value of last expression in interpreter
 >>> 10 
 10 
@@ -1138,15 +1162,18 @@ __init__ # will be executed at first when a instance of class is created
 ```
 
 ## reload imported module
-```python
+
+``` python
 import importlib
 import foo #import the module here, so that it can be reloaded.
 importlib.reload(foo)
 ```
 
 ## yield
-The yield statement suspends a function’s execution and sends a value back to the caller. After the caller finish processing the value, the function continues execution immediately after the last yield run.
-```python
+
+The yield statement suspends a function's execution and sends a value back to the caller. After the caller finish processing the value, the function continues execution immediately after the last yield run.
+
+``` python
 import time
 # the following two generator functions are same
 def simpleGeneratorFun():
@@ -1180,10 +1207,70 @@ for value in simpleGeneratorFun():
 # finished sleep
 ```
 
+## Abstract Classes
+
+``` python
+from abc import ABC, abstractmethod
+
+
+# abc is a builtin module, we have to import ABC and abstractmethod
+class Animal(ABC):  # Inherit from ABC(Abstract base class)
+    @property
+    def food_eaten(self):
+        return self._food
+
+    @food_eaten.setter
+    def food_eaten(self, food):
+        if food in self.diet:
+            self._food = food
+        else:
+            raise ValueError(f"You can't feed this animal with {food}.")
+
+    @property
+    @abstractmethod  # combination of @property and @abstractmethod in order to define an abstract property.
+    def diet(self):
+        pass
+
+    @abstractmethod  # Decorator to define an abstract method. # If a class inherits from an ABC, it must implement all it's abstract methods!
+    def feed(self, time):
+        pass
+
+
+class Lion(Animal):
+    @property
+    def diet(self):
+        return ["antelope", "cheetah", "buffaloe"]
+
+    def feed(self, time):
+        print(f"Feeding a lion with {self._food} meat! At {time}")
+
+
+class Snake(Animal):
+    @property
+    def diet(self):
+        return ["frog", "rabbit"]
+
+    def feed(self, time):
+        print(f"Feeding a snake with {self._food} meat! At {time}")
+
+
+leo = Lion()
+print(leo.diet)
+leo.food_eaten = "antelope"
+leo.feed("10:10 AM")
+
+adam = Snake()
+adam.food_eaten = "frog"
+adam.feed("10:20 AM")
+
+# ['antelope', 'cheetah', 'buffaloe']
+# Feeding a lion with antelope meat! At 10:10 AM
+# Feeding a snake with frog meat! At 10:20 AM
+``` 
 
 # Real time plot with python
 
-```python
+``` python
 import numpy as np
 import matplotlib.pyplot as plt
 plt.axis([0, 10, 0, 1])
@@ -1200,7 +1287,7 @@ while True:
 
 # plot a hist graph
 
-```python
+``` python
 import random
 values = [random.randint(0, 10) for _ in range(50)]
 import matplotlib.pyplot as plt
@@ -1213,7 +1300,8 @@ plt.axvline(x=3)
 # Install package
 
 in cmd comand window
-```python
+
+``` python
 # PyPI
 pip install py2exe
 #conda
@@ -1224,18 +1312,18 @@ conda install pandas
 pip install pandas
 ```
 
-  NTLM support for Python3
-   
+NTLM support for Python3
+
 No working package for Pthon3 at the moment
 
-  * Install NTLM package for 2.x first
-  * Download NTLM package for 3.x files and replace installed file
-  
-  
+-   Install NTLM package for 2.x first
+-   Download NTLM package for 3.x files and replace installed file
+
 # Managing environments
 
-Conda 
-```bash
+Conda
+
+``` bash
 $ conda -V  # Check conda is installed
 # conda 3.7.0
 
@@ -1251,7 +1339,8 @@ conda remove --name myenv --all #  Delete an virtual environment
 ```
 
 Pipenv
-```bash
+
+``` bash
 pip install pipenv
 
 pipenv --venv # list environment. must go to the project folder containing the environment firstly
@@ -1263,11 +1352,11 @@ pipenv install #  go to the folder containing your Python project, and create a 
 pipenv shell # activate it
 
 pipenv install beautifulsoup4 # install a Python package for your project
-
 ```
 
 build pipenv enviroment from conda enviroment
-```bash
+
+``` bash
 # go to project directory
 cd C:\Users\user_name\Desktop\my_projects\chatbot
 
@@ -1292,11 +1381,11 @@ libcrypto-1_1-x64.dll
 libssl-1_1-x64.dll
 sqlite3.dll
 sqlite3.exe
-
 ```
 
 virtualenv
-```bash
+
+``` bash
 pip install virtualenv # Install the virtualenv package
 
 virtualenv mypython # Create the virtual environment
@@ -1306,9 +1395,4 @@ source mypython/bin/activate # Mac OS / Linux
 mypthon\Scripts\activate # Windows
 
 deactivate # Deactivate the virtual environment
-
 ```
-
-
-
-  
