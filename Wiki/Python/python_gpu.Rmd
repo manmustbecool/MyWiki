@@ -1,0 +1,13 @@
+---
+title: "GPU"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# to find CUDA version on Windows CMD
+
+``` python
+nvcc --version
+or
+nvidia-smi
+```
+

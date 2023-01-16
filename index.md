@@ -76,6 +76,7 @@ My notes
  * <a href="Wiki/Python/unit_test.html">Unit testing</a>
  * <a href="Wiki/Python/python_decorator.html">Decorator</a>
  * Deep learning
+    + <a href="Wiki/Python/python_gpu.html">GPU</a>
     + <a href="Wiki/Python/python_keras.html">Keras - simple neural network</a>
     + <a href="Wiki/Python/python_keras_lstm.html">Keras - LSTM</a>
     + <a href="https://colab.research.google.com/drive/1c2L4QmSRQo44iGbmWK5rA4muT7RgkJoW">TensorFlow1.x - Basic classification</a>
