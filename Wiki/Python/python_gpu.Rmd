@@ -3,11 +3,23 @@ title: "GPU"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-# to find CUDA version on Windows CMD
+# to find CUDA version on Windows
 
+on Windows CMD
 ``` python
 nvcc --version
 or
 nvidia-smi
 ```
+or 
+
+right click desktop -> Navida control panel -> Help -> System information -> component -> Navida CUDA driver version
+
+or 
+
+Anaconda Prompt -> type in "numba -s" -> ```check  __CUDA Information__```
+
+# install GPU versio of Pytorch
+
+go to Pytorch website -> select the pytorch version with the CUDA version -> generate installation command e.g. ```conda install pytorch torchvision torchaudio cudatoolkit=11.6 -c pytorch -c conda-forge```
 

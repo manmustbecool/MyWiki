@@ -436,17 +436,33 @@ display: none;
 
 <div id="TOC">
 <ul>
-<li><a href="#to-find-cuda-version-on-windows-cmd" id="toc-to-find-cuda-version-on-windows-cmd"><span class="toc-section-number">1</span> to find CUDA version on Windows
-CMD</a></li>
+<li><a href="#to-find-cuda-version-on-windows" id="toc-to-find-cuda-version-on-windows"><span class="toc-section-number">1</span> to find CUDA version on
+Windows</a></li>
+<li><a href="#install-gpu-versio-of-pytorch" id="toc-install-gpu-versio-of-pytorch"><span class="toc-section-number">2</span> install GPU versio of
+Pytorch</a></li>
 </ul>
 </div>
 
-<div id="to-find-cuda-version-on-windows-cmd" class="section level1" number="1">
+<div id="to-find-cuda-version-on-windows" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> to find CUDA version on
-Windows CMD</h1>
+Windows</h1>
+<p>on Windows CMD</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nvcc <span class="op">--</span>version</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">or</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>nvidia<span class="op">-</span>smi</span></code></pre></div>
+<p>or</p>
+<p>right click desktop -&gt; Navida control panel -&gt; Help -&gt;
+System information -&gt; component -&gt; Navida CUDA driver version</p>
+<p>or</p>
+<p>Anaconda Prompt -&gt; type in “numba -s” -&gt;
+<code>check  __CUDA Information__</code></p>
+</div>
+<div id="install-gpu-versio-of-pytorch" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> install GPU versio of
+Pytorch</h1>
+<p>go to Pytorch website -&gt; select the pytorch version with the CUDA
+version -&gt; generate installation command
+e.g. <code>conda install pytorch torchvision torchaudio cudatoolkit=11.6 -c pytorch -c conda-forge</code></p>
 </div>
 
 
