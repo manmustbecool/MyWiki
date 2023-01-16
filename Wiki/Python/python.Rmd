@@ -411,12 +411,19 @@ np.sum(mat, axis=1)  # axis=1  "get the sum of each the columns"
 A one-dimensional labeled array A capable of holding any data type
 
 ``` python
+# initialized a series from a list
+s = pd.Series(['string1', 'string2', 'string3'])
+s
+# 0    string
+# 1    string2
+# 2    string3
+# dtype: object
+
 s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
 
 # get the last element 
 s.iloc[-1]
 s[-1]
-
 
 # convert to an numpy.ndarray
 pd.Series([1, 2, 3]).values
