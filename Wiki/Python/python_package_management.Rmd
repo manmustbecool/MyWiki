@@ -1,0 +1,131 @@
+---
+title: "Package management"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+
+# pycharm clean uninstall on windows
+
+https://www.jetbrains.com/help/pycharm/uninstall.html#standalone
+
+1. uninstall pycharm 
+2. Remove the following directories:
+```bash
+%APPDATA%\JetBrains\<product><version>
+%LOCALAPPDATA%\JetBrains\<product><version>
+```
+
+# Install package
+
+in cmd command window
+
+``` python
+# PyPI
+pip install py2exe
+# conda
+conda install --channel https://conda.anaconda.org/manmadescience py2exe
+
+conda install pandas
+pip install pandas
+```
+
+NTLM support for Python3
+
+No working package for Pthon3 at the moment
+
+-   Install NTLM package for 2.x first
+-   Download NTLM package for 3.x files and replace installed file
+
+# Managing environments
+
+## Conda
+
+``` bash
+$ conda -V  # Check conda is installed
+# conda 3.7.0
+
+conda create --name myenvv  #By default, environments are installed into the envs directory in the conda directory.
+
+conda create --name myenv python=3.4  # create an environment with a specific version of Python
+
+conda activate and conda deactivate
+
+conda env list # view the list of enviroment
+
+conda remove --name myenv --all #  Delete an virtual environment
+```
+
+## Pipenv
+
+``` bash
+pip install pipenv
+
+pipenv --venv # list environment. must go to the project folder containing the environment firstly
+
+pipenv --rm # remove environment
+
+pipenv install #  go to the folder containing your Python project, and create a new environment. This will create two new files, Pipfile and Pipfile.lock, in your project directory, and a new virtual environment for your project if it doesn’t exist already.
+
+pipenv shell # activate it
+
+pipenv install beautifulsoup4 # install a Python package for your project
+```
+
+build pipenv enviroment from conda enviroment
+
+``` bash
+# go to project directory
+cd C:\Users\user_name\Desktop\my_projects\chatbot
+
+# create python 3.7.5 version
+conda create -n pipenv3.7 python=3.7
+
+# active the enviroement
+conda activate pipenv3.7
+
+# find python path
+where python
+
+# create a pipenv with the python path under the actived pipenv3.7
+pipenv --python=C:\Users\user_name\.conda\envs\pipenv3.7\python.exe
+
+# install package based on pipfile from the project directory
+pipenv install
+
+# for import _ssl DLL load fail error
+# copy from C:\ProgramData\Anaconda3\Library\bin to C:\Users\user_name\.conda\envs\pipenv3.7\DLLs
+libcrypto-1_1-x64.dll
+libssl-1_1-x64.dll
+sqlite3.dll
+sqlite3.exe
+```
+
+## virtualenv
+
+``` bash
+pip install virtualenv # Install the virtualenv package
+
+virtualenv mypython # Create the virtual environment
+
+# Activate the virtual environment
+source mypython/bin/activate # Mac OS / Linux
+mypthon\Scripts\activate # Windows
+
+deactivate # Deactivate the virtual environment
+```
+## poetry
+
+
+install 
+
+in windows cmd
+``` bash
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+```
+
+uninstall
+``` bash
+# 1. in whindows cmd
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py - --uninstall
+# 2. remove file in the following directory
+C:\Users\user_name\AppData\Local\pypoetry
+```

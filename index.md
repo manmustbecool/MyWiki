@@ -57,6 +57,7 @@ My notes
 
 ## Python
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
+ * <a href="Wiki/Python/python_package_management.html">Package management</a>
  * <a href="Wiki/Python/python_asyncio.html">Asyncio</a>
  * <a href="https://nbviewer.jupyter.org/github/manmustbecool/MyWiki/blob/gh-pages/Wiki/Python/ipynb_python_plot.ipynb">Python Plot - jupyter</a>
  * <a href="https://nbviewer.jupyter.org/github/manmustbecool/MyWiki/blob/gh-pages/Wiki/Python/ipynb_ipywidgets.ipynb">ipywidgets - jupyter</a>
