@@ -430,7 +430,7 @@ display: none;
 
 
 <h1 class="title toc-ignore">Python</h1>
-<h4 class="date">Updated: 17 January, 2023</h4>
+<h4 class="date">Updated: 18 January, 2023</h4>
 
 </div>
 
@@ -510,8 +510,6 @@ reduce</a></li>
 </ul></li>
 <li><a href="#real-time-plot-with-python" id="toc-real-time-plot-with-python"><span class="toc-section-number">8</span> Real time plot with python</a></li>
 <li><a href="#plot-a-hist-graph" id="toc-plot-a-hist-graph"><span class="toc-section-number">9</span> plot a hist graph</a></li>
-<li><a href="#install-package" id="toc-install-package"><span class="toc-section-number">10</span> Install package</a></li>
-<li><a href="#managing-environments" id="toc-managing-environments"><span class="toc-section-number">11</span> Managing environments</a></li>
 </ul>
 </div>
 
@@ -1756,88 +1754,6 @@ python</h1>
 <span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot a vertical line</span></span>
 <span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div>
-</div>
-<div id="install-package" class="section level1" number="10">
-<h1><span class="header-section-number">10</span> Install package</h1>
-<p>in cmd comand window</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PyPI</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>pip install py2exe</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#conda</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>conda install <span class="op">--</span>channel https:<span class="op">//</span>conda.anaconda.org<span class="op">/</span>manmadescience py2exe</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>conda install pandas</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>pip install pandas</span></code></pre></div>
-<p>NTLM support for Python3</p>
-<p>No working package for Pthon3 at the moment</p>
-<ul>
-<li>Install NTLM package for 2.x first</li>
-<li>Download NTLM package for 3.x files and replace installed file</li>
-</ul>
-</div>
-<div id="managing-environments" class="section level1" number="11">
-<h1><span class="header-section-number">11</span> Managing
-environments</h1>
-<p>Conda</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda <span class="at">-V</span>  <span class="co"># Check conda is installed</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># conda 3.7.0</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenvv  <span class="co">#By default, environments are installed into the envs directory in the conda directory.</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> myenv python=3.4  <span class="co"># create an environment with a specific version of Python</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate and conda deactivate</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list <span class="co"># view the list of enviroment</span></span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> remove <span class="at">--name</span> myenv <span class="at">--all</span> <span class="co">#  Delete an virtual environment</span></span></code></pre></div>
-<p>Pipenv</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pipenv</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--venv</span> <span class="co"># list environment. must go to the project folder containing the environment firstly</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--rm</span> <span class="co"># remove environment</span></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install <span class="co">#  go to the folder containing your Python project, and create a new environment. This will create two new files, Pipfile and Pipfile.lock, in your project directory, and a new virtual environment for your project if it doesn’t exist already.</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> shell <span class="co"># activate it</span></span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install beautifulsoup4 <span class="co"># install a Python package for your project</span></span></code></pre></div>
-<p>build pipenv enviroment from conda enviroment</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go to project directory</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\D</span>esktop<span class="dt">\m</span>y_projects<span class="dt">\c</span>hatbot</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create python 3.7.5 version</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> pipenv3.7 python=3.7</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># active the enviroement</span></span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate pipenv3.7</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co"># find python path</span></span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="ex">where</span> python</span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a pipenv with the python path under the actived pipenv3.7</span></span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> <span class="at">--python</span><span class="op">=</span>C:<span class="dt">\U</span>sers<span class="dt">\u</span>ser_name<span class="dt">\.</span>conda<span class="dt">\e</span>nvs<span class="dt">\p</span>ipenv3.7<span class="dt">\p</span>ython.exe</span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install package based on pipfile from the project directory</span></span>
-<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="ex">pipenv</span> install</span>
-<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="co"># for import _ssl DLL load fail error</span></span>
-<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a><span class="co"># copy from C:\ProgramData\Anaconda3\Library\bin to C:\Users\user_name\.conda\envs\pipenv3.7\DLLs</span></span>
-<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a><span class="ex">libcrypto-1_1-x64.dll</span></span>
-<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a><span class="ex">libssl-1_1-x64.dll</span></span>
-<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.dll</span></span>
-<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3.exe</span></span></code></pre></div>
-<p>virtualenv</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install virtualenv <span class="co"># Install the virtualenv package</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="ex">virtualenv</span> mypython <span class="co"># Create the virtual environment</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the virtual environment</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> mypython/bin/activate <span class="co"># Mac OS / Linux</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mypthon\Scripts\activate</span> <span class="co"># Windows</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span> <span class="co"># Deactivate the virtual environment</span></span></code></pre></div>
 </div>
 
 
