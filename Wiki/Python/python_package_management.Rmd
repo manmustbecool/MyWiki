@@ -21,8 +21,10 @@ in cmd command window
 ``` python
 # PyPI
 pip install py2exe
-# conda
+
+#conda
 conda install --channel https://conda.anaconda.org/manmadescience py2exe
+
 
 conda install pandas
 pip install pandas
@@ -113,7 +115,6 @@ mypthon\Scripts\activate # Windows
 deactivate # Deactivate the virtual environment
 ```
 ## poetry
-
 
 install 
 
