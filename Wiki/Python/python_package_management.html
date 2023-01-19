@@ -466,11 +466,12 @@ on windows</h1>
 <p>in cmd command window</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PyPI</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pip install py2exe</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># conda</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>conda install <span class="op">--</span>channel https:<span class="op">//</span>conda.anaconda.org<span class="op">/</span>manmadescience py2exe</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>conda install pandas</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>pip install pandas</span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#conda</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>conda install <span class="op">--</span>channel https:<span class="op">//</span>conda.anaconda.org<span class="op">/</span>manmadescience py2exe</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>conda install pandas</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>pip install pandas</span></code></pre></div>
 <p>NTLM support for Python3</p>
 <p>No working package for Pthon3 at the moment</p>
 <ul>
@@ -550,8 +551,8 @@ environments</h1>
 <div id="poetry" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> poetry</h2>
 <p>install</p>
-<p>in windows cmd</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">Invoke-WebRequest</span> <span class="at">-Uri</span> https://install.python-poetry.org <span class="at">-UseBasicParsing</span><span class="kw">)</span><span class="ex">.Content</span> <span class="kw">|</span> <span class="ex">py</span> <span class="at">-</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in windows cmd</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">Invoke-WebRequest</span> <span class="at">-Uri</span> https://install.python-poetry.org <span class="at">-UseBasicParsing</span><span class="kw">)</span><span class="ex">.Content</span> <span class="kw">|</span> <span class="ex">py</span> <span class="at">-</span></span></code></pre></div>
 <p>uninstall</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. in whindows cmd</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">Invoke-WebRequest</span> <span class="at">-Uri</span> https://install.python-poetry.org <span class="at">-UseBasicParsing</span><span class="kw">)</span><span class="ex">.Content</span> <span class="kw">|</span> <span class="ex">py</span> <span class="at">-</span> <span class="at">--uninstall</span></span>

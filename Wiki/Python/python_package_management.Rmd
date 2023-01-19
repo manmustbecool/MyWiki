@@ -25,7 +25,6 @@ pip install py2exe
 #conda
 conda install --channel https://conda.anaconda.org/manmadescience py2exe
 
-
 conda install pandas
 pip install pandas
 ```
@@ -117,12 +116,10 @@ deactivate # Deactivate the virtual environment
 ## poetry
 
 install 
-
-in windows cmd
 ``` bash
+# in windows cmd
 (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
 ```
-
 uninstall
 ``` bash
 # 1. in whindows cmd
