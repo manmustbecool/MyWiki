@@ -1,0 +1,43 @@
+---
+title: "Optimization"
+date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
+---
+# Using SciPy for Optimization
+
+## Minimizing a Function With One Variable
+
+``` python
+from scipy.optimize import minimize_scalar
+
+def objective_function(x):
+    return abs(x - 2)
+
+res = minimize_scalar(objective_function)
+
+print(res.x)
+# 2.000000021496313
+print(res)
+```
+## Minimizing a Function With Many Variables
+
+```python
+def objective_function(x):
+    # x is a 2 variables in this case. x[0], x[1]
+    v1, v2 = x
+    return abs(v1 + v2 * 6 - 20)
+
+# an initial guess for the values of the solution
+x0 = [1, 2]
+# sequence of bounds on the solution variables
+bounds = [[0, 5], [0, 5]]
+
+res = minimize(objective_function, x0, bounds=bounds)
+
+print(res.x)
+# [1.41288475 3.09785254]
+print(res)
+
+```
+
+
+

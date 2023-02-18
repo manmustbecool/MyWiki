@@ -57,8 +57,6 @@ My notes
 
 ## Python
  * <a href="Wiki/Python/python.html">Python Basic - cheat sheet</a>
- * <a href="Wiki/Python/python_package_management.html">Package management</a>
- * <a href="Wiki/Python/python_asyncio.html">Asyncio</a>
  * <a href="https://nbviewer.jupyter.org/github/manmustbecool/MyWiki/blob/gh-pages/Wiki/Python/ipynb_python_plot.ipynb">Python Plot - jupyter</a>
  * <a href="https://nbviewer.jupyter.org/github/manmustbecool/MyWiki/blob/gh-pages/Wiki/Python/ipynb_ipywidgets.ipynb">ipywidgets - jupyter</a>
  * <a href="Wiki/Python/plotly.html">Plotly</a>
@@ -67,15 +65,19 @@ My notes
  * <a href="Wiki/Python/python_sklearn.html">Scikit-learn</a>
  * <a href="Wiki/Python/sklearn_decision_tree.html">Sklearn decision tree</a>
  * <a href="Wiki/Python/classificationOnIris.html">Classification on Iris dataset</a>
- * <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
- * <a href="Wiki/Python/python_java.html">Call Java from Python</a>
+ * <a href="Wiki/Python/python_optimization.html">Optimization</a>
+ * Development
+    + <a href="Wiki/Python/python_package_management.html">Package management</a>
+    + <a href="Wiki/Python/python_asyncio.html">Asyncio</a>
+    + <a href="Wiki/Python/python_decorator.html">Decorator</a>
+    + <a href="Wiki/Python/unit_test.html">Unit testing</a>
+    + <a href="Wiki/Python/python_java.html">Call Java from Python</a>
+    + <a href="Wiki/Python/pythonRdm.html">Python R markdown</a>
  * Web development
     + <a href="Wiki/Python/Django.html">Django</a>
     + <a href="Wiki/Python/flaskReact.html">Flask + React</a>
     + <a href="Wiki/Python/dash.html">Dash</a>
     + <a href="Wiki/Python/dash_collapsed_sidebar.html">Dash collapsed sidebar</a>
- * <a href="Wiki/Python/unit_test.html">Unit testing</a>
- * <a href="Wiki/Python/python_decorator.html">Decorator</a>
  * Deep learning
     + <a href="Wiki/Python/python_gpu.html">GPU</a>
     + <a href="Wiki/Python/python_keras.html">Keras - simple neural network</a>
