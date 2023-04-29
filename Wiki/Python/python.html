@@ -1371,16 +1371,16 @@ converting</h3>
 <span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- unix time ------</span></span>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="co"># convert (Unix) timestamp (the number of seconds since January 1st, 1970). </span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>datetime.datetime.fromtimestamp(<span class="dv">1485714600</span>).strftime(<span class="st">&quot;%A, %B </span><span class="sc">%d</span><span class="st">, %Y %I:%M:%S&quot;</span>)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>dt.datetime.fromtimestamp(<span class="dv">1485714600</span>).strftime(<span class="st">&quot;%A, %B </span><span class="sc">%d</span><span class="st">, %Y %I:%M:%S&quot;</span>)</span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;Sunday, January 29, 2017 08:30:00&#39;</span></span>
 <span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="co"># DateTime to Unix timestamp with 13 digits</span></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>presentDate <span class="op">=</span> datetime.datetime.now()</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>unix_timestamp <span class="op">=</span> datetime.datetime.timestamp(presentDate)<span class="op">*</span><span class="dv">1000</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>presentDate <span class="op">=</span> dt.datetime.now()</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>unix_timestamp <span class="op">=</span> dt.datetime.timestamp(presentDate)<span class="op">*</span><span class="dv">1000</span></span>
 <span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(unix_timestamp)</span>
 <span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="co"># substract 5 minutes from a Unix timestamp</span></span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>fiveminutesbefore<span class="op">=</span>$((timestamp <span class="op">-</span> <span class="dv">5</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">1000</span>))</span></code></pre></div>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>five_minutes_before<span class="op">=</span>$((timestamp <span class="op">-</span> <span class="dv">5</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">1000</span>))</span></code></pre></div>
 <p>Convert string to datetime</p>
 <p>from datetime import datetime datetime.strptime(‘Jun 1 2005 1:33PM’,
 ‘%b %d %Y %I:%M%p’)</p>
@@ -1427,61 +1427,55 @@ converting</h3>
 <span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>(time2<span class="op">-</span>time1).total_seconds() <span class="co">#Convert timedelta to total seconds</span></span>
 <span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Converting between python_datetime and Pandas_Timestamp objects</span></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Timestamp(<span class="st">&#39;2014-01-23 00:00:00&#39;</span>, tz<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Timestamp(&#39;2014-01-23 00:00:00&#39;, tz=None)</span></span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>ts.to_pydatetime()</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Convert unix time to panda.datetime</span></span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>         date  price</span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 0  1349720105  12.08</span></span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 1  1349806505  12.35</span></span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;date&#39;</span>],unit<span class="op">=</span><span class="st">&#39;s&#39;</span>)</span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>                 date  price</span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 2012-10-08 18:15:05  12.08</span></span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 2012-10-09 18:15:05  12.35</span></span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>result_ms<span class="op">=</span>pd.to_datetime(<span class="st">&#39;1493530261000&#39;</span>, unit<span class="op">=</span><span class="st">&#39;ms&#39;</span>)</span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(result_ms) <span class="co"># -&gt; &#39;2017-04-30 05:31:01&#39;</span></span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="co"># --- round time with dt.round ---</span></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>  {<span class="st">&#39;Date&#39;</span> : pd.date_range(<span class="st">&#39;1/1/2011&#39;</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">&#39;3675S&#39;</span>),</span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;Num&#39;</span> : np.random.rand(<span class="dv">5</span>)})</span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.580997</span></span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:01:15  0.407332</span></span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:02:30  0.786035</span></span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:03:45  0.821792</span></span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:05:00  0.807869</span></span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a><span class="co"># hourly round</span></span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>df.assign(Date<span class="op">=</span>df.Date.dt.<span class="bu">round</span>(<span class="st">&#39;H&#39;</span>))</span>
-<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
-<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.577957</span></span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:00:00  0.995748</span></span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:00:00  0.864013</span></span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:00:00  0.468762</span></span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a><span class="co">#4 2011-01-01 04:00:00  0.866827</span></span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Use Pandas rolling method, 3600s = 1 Hour -----</span></span>
-<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>df_sample[<span class="st">&#39;occurrences_in_last_hour&#39;</span>] <span class="op">=</span> df_sample[<span class="st">&#39;occurrences&#39;</span>].rolling(<span class="st">&#39;3600s&#39;</span>).<span class="bu">sum</span>()</span>
-<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a>df_sample.head(<span class="dv">15</span>)</span>
-<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a><span class="co">#                     occurrences  occurrences_in_last_hour</span></span>
-<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a><span class="co">#Run time                                                   </span></span>
-<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:00:00            1                       1.0</span></span>
-<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:04:10            1                       2.0</span></span>
-<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:08:20            1                       3.0</span></span>
-<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:12:30            1                       4.0</span></span>
-<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:16:40            1                       5.0</span></span>
-<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:25:00            1                       6.0</span></span></code></pre></div>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Converting between python_datetime and Pandas_Timestamp objects</span></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Timestamp(<span class="st">&#39;2014-01-23 00:00:00&#39;</span>, tz<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Timestamp(&#39;2014-01-23 00:00:00&#39;, tz=None)</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>ts.to_pydatetime()</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a><span class="co"># datetime.datetime(2014, 1, 23, 0, 0)</span></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Convert unix time to panda.datetime</span></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>         date  price</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 0  1349720105  12.08</span></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 1  1349806505  12.35</span></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;date&#39;</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">&#39;date&#39;</span>],unit<span class="op">=</span><span class="st">&#39;s&#39;</span>)</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>                 date  price</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 2012-10-08 18:15:05  12.08</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 2012-10-09 18:15:05  12.35</span></span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>result_ms<span class="op">=</span>pd.to_datetime(<span class="st">&#39;1493530261000&#39;</span>, unit<span class="op">=</span><span class="st">&#39;ms&#39;</span>)</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a><span class="bu">str</span>(result_ms) <span class="co"># -&gt; &#39;2017-04-30 05:31:01&#39;</span></span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="co"># --- round time with dt.round ---</span></span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>  {<span class="st">&#39;Date&#39;</span> : pd.date_range(<span class="st">&#39;1/1/2011&#39;</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">&#39;3675S&#39;</span>),</span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;Num&#39;</span> : np.random.rand(<span class="dv">5</span>)})</span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.580997</span></span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:01:15  0.407332</span></span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:02:30  0.786035</span></span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:03:45  0.821792</span></span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a><span class="co"># hourly round</span></span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>df.assign(Date<span class="op">=</span>df.Date.dt.<span class="bu">round</span>(<span class="st">&#39;H&#39;</span>))</span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a><span class="co">#                 Date       Num</span></span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a><span class="co">#0 2011-01-01 00:00:00  0.577957</span></span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a><span class="co">#1 2011-01-01 01:00:00  0.995748</span></span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a><span class="co">#2 2011-01-01 02:00:00  0.864013</span></span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a><span class="co">#3 2011-01-01 03:00:00  0.468762</span></span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Use Pandas rolling method, 3600s = 1 Hour -----</span></span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>df_sample[<span class="st">&#39;occurrences_in_last_hour&#39;</span>] <span class="op">=</span> df_sample[<span class="st">&#39;occurrences&#39;</span>].rolling(<span class="st">&#39;3600s&#39;</span>).<span class="bu">sum</span>()</span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>df_sample.head(<span class="dv">15</span>)</span>
+<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a><span class="co">#                     occurrences  occurrences_in_last_hour</span></span>
+<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a><span class="co">#Run time                                                   </span></span>
+<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:00:00            1                       1.0</span></span>
+<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:04:10            1                       2.0</span></span>
+<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:08:20            1                       3.0</span></span>
+<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:12:30            1                       4.0</span></span>
+<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a><span class="co">#2020-01-01 00:16:40            1                       5.0</span></span></code></pre></div>
 </div>
 </div>
 <div id="regular-expression" class="section level1" number="5">
