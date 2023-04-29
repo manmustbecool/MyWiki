@@ -920,17 +920,16 @@ mytime = dt.datetime.strptime('0130','%H%M').time()
 mydatetime = dt.datetime.combine(dt.date.today(), mytime)
 
 # ---- unix time ------
-
 # convert (Unix) timestamp (the number of seconds since January 1st, 1970). 
 datetime.datetime.fromtimestamp(1485714600).strftime("%A, %B %d, %Y %I:%M:%S")
 'Sunday, January 29, 2017 08:30:00'
 
-DateTime to Unix timestamp with 13 digits
+# DateTime to Unix timestamp with 13 digits
 presentDate = datetime.datetime.now()
 unix_timestamp = datetime.datetime.timestamp(presentDate)*1000
 print(unix_timestamp)
 
-substract 5 minutes from a Unix timestamp
+# substract 5 minutes from a Unix timestamp
 fiveminutesbefore=$((timestamp - 5 * 60 * 1000))
 ```
 

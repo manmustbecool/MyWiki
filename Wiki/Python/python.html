@@ -1370,18 +1370,17 @@ converting</h3>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>mydatetime <span class="op">=</span> dt.datetime.combine(dt.date.today(), mytime)</span>
 <span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- unix time ------</span></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="co"># convert (Unix) timestamp (the number of seconds since January 1st, 1970). </span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>datetime.datetime.fromtimestamp(<span class="dv">1485714600</span>).strftime(<span class="st">&quot;%A, %B </span><span class="sc">%d</span><span class="st">, %Y %I:%M:%S&quot;</span>)</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;Sunday, January 29, 2017 08:30:00&#39;</span></span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>DateTime to Unix timestamp <span class="cf">with</span> <span class="dv">13</span> digits</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>presentDate <span class="op">=</span> datetime.datetime.now()</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>unix_timestamp <span class="op">=</span> datetime.datetime.timestamp(presentDate)<span class="op">*</span><span class="dv">1000</span></span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(unix_timestamp)</span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>substract <span class="dv">5</span> minutes <span class="im">from</span> a Unix timestamp</span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>fiveminutesbefore<span class="op">=</span>$((timestamp <span class="op">-</span> <span class="dv">5</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">1000</span>))</span></code></pre></div>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="co"># convert (Unix) timestamp (the number of seconds since January 1st, 1970). </span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>datetime.datetime.fromtimestamp(<span class="dv">1485714600</span>).strftime(<span class="st">&quot;%A, %B </span><span class="sc">%d</span><span class="st">, %Y %I:%M:%S&quot;</span>)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;Sunday, January 29, 2017 08:30:00&#39;</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="co"># DateTime to Unix timestamp with 13 digits</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>presentDate <span class="op">=</span> datetime.datetime.now()</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>unix_timestamp <span class="op">=</span> datetime.datetime.timestamp(presentDate)<span class="op">*</span><span class="dv">1000</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(unix_timestamp)</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="co"># substract 5 minutes from a Unix timestamp</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>fiveminutesbefore<span class="op">=</span>$((timestamp <span class="op">-</span> <span class="dv">5</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">1000</span>))</span></code></pre></div>
 <p>Convert string to datetime</p>
 <p>from datetime import datetime datetime.strptime(‘Jun 1 2005 1:33PM’,
 ‘%b %d %Y %I:%M%p’)</p>
