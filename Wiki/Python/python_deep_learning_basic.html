@@ -11,7 +11,7 @@
 
 
 
-<title>GPU</title>
+<title>Deep learning basic</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -429,24 +429,42 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">GPU</h1>
-<h4 class="date">Updated: 16 January, 2023</h4>
+<h1 class="title toc-ignore">Deep learning basic</h1>
+<h4 class="date">Updated: 06 May, 2023</h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#to-find-cuda-version-on-windows" id="toc-to-find-cuda-version-on-windows"><span class="toc-section-number">1</span> to find CUDA version on
+<li><a href="#pytorch" id="toc-pytorch"><span class="toc-section-number">1</span> PyTorch</a>
+<ul>
+<li><a href="#develop-a-simple-deep-learning-model" id="toc-develop-a-simple-deep-learning-model"><span class="toc-section-number">1.1</span> develop a simple Deep Learning
+Model</a></li>
+</ul></li>
+<li><a href="#gpu" id="toc-gpu"><span class="toc-section-number">2</span> GPU</a>
+<ul>
+<li><a href="#find-cuda-version-on-windows" id="toc-find-cuda-version-on-windows"><span class="toc-section-number">2.1</span> find CUDA version on
 Windows</a></li>
-<li><a href="#install-gpu-versio-of-pytorch" id="toc-install-gpu-versio-of-pytorch"><span class="toc-section-number">2</span> install GPU versio of
+<li><a href="#install-gpu-version-of-pytorch" id="toc-install-gpu-version-of-pytorch"><span class="toc-section-number">2.2</span> install GPU version of
 Pytorch</a></li>
+</ul></li>
 <li><a href="#hugging-face" id="toc-hugging-face"><span class="toc-section-number">3</span> Hugging Face</a></li>
 </ul>
 </div>
 
-<div id="to-find-cuda-version-on-windows" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> to find CUDA version on
-Windows</h1>
+<div id="pytorch" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> PyTorch</h1>
+<div id="develop-a-simple-deep-learning-model" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> develop a simple Deep
+Learning Model</h2>
+<p><a href="https://machinelearningmastery.com/pytorch-tutorial-develop-deep-learning-models/" class="uri">https://machinelearningmastery.com/pytorch-tutorial-develop-deep-learning-models/</a></p>
+</div>
+</div>
+<div id="gpu" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> GPU</h1>
+<div id="find-cuda-version-on-windows" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> find CUDA version on
+Windows</h2>
 <p>on Windows CMD</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>nvcc <span class="op">--</span>version</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">or</span></span>
@@ -458,12 +476,13 @@ System information -&gt; component -&gt; Navida CUDA driver version</p>
 <p>Anaconda Prompt -&gt; type in “numba -s” -&gt;
 <code>check  __CUDA Information__</code></p>
 </div>
-<div id="install-gpu-versio-of-pytorch" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> install GPU versio of
-Pytorch</h1>
+<div id="install-gpu-version-of-pytorch" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> install GPU version
+of Pytorch</h2>
 <p>go to Pytorch website -&gt; select the pytorch version with the CUDA
 version -&gt; generate installation command
 e.g. <code>conda install pytorch torchvision torchaudio cudatoolkit=11.6 -c pytorch -c conda-forge</code></p>
+</div>
 </div>
 <div id="hugging-face" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Hugging Face</h1>

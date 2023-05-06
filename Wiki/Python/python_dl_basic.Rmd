@@ -1,9 +1,17 @@
 ---
-title: "GPU"
+title: "Deep learning basic"
 date: "Updated: `r format(Sys.time(), '%d %B, %Y')`"
 ---
 
-# to find CUDA version on Windows
+# PyTorch
+
+## develop a simple Deep Learning Model
+
+https://machinelearningmastery.com/pytorch-tutorial-develop-deep-learning-models/
+
+# GPU
+
+## find CUDA version on Windows
 
 on Windows CMD
 ``` python
@@ -19,7 +27,7 @@ or
 
 Anaconda Prompt -> type in "numba -s" -> ```check  __CUDA Information__```
 
-# install GPU versio of Pytorch
+## install GPU version of Pytorch
 
 go to Pytorch website -> select the pytorch version with the CUDA version -> generate installation command e.g. ```conda install pytorch torchvision torchaudio cudatoolkit=11.6 -c pytorch -c conda-forge```
 

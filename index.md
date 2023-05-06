@@ -79,7 +79,7 @@ My notes
     + <a href="Wiki/Python/dash.html">Dash</a>
     + <a href="Wiki/Python/dash_collapsed_sidebar.html">Dash collapsed sidebar</a>
  * Deep learning
-    + <a href="Wiki/Python/python_gpu.html">GPU</a>
+    + <a href="Wiki/Python/python_dl_basic.html">Basic</a>
     + <a href="Wiki/Python/python_keras.html">Keras - simple neural network</a>
     + <a href="Wiki/Python/python_keras_lstm.html">Keras - LSTM</a>
     + <a href="https://colab.research.google.com/drive/1c2L4QmSRQo44iGbmWK5rA4muT7RgkJoW">TensorFlow1.x - Basic classification</a>
