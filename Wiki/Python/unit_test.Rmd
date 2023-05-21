@@ -32,3 +32,6 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
+# Web Scraping
+
+https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html

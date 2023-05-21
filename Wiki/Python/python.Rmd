@@ -859,8 +859,44 @@ df = pd.merge(df1, df2, on="A", how="left")
 
 ### SQL query
 ``` python
+import pandas as pd
+table_name = "test"
+df = pd.DataFrame(
+    {"a": [11, 12, 13], "b": [21, 22, 23], "c": ["c1", "c2", "c3"]},
+    index=[1, 2, 3])
+sql = '''select a, c from test where b >=22 '''
+
+# ----------- sqlite3 -----------------------
+import sqlite3
+cnx = sqlite3.connect(':memory:')  # create a db connection
+df.to_sql(name=table_name, con=cnx)  # load data into db
+output = pd.read_sql(sql, cnx)
+print(output)
+#     a   c
+# 0  12  c2
+# 1  13  c3
+
+# --------- sqlglot -------------------------
+from sqlglot.executor import execute
+tables = {table_name: df.to_dict("records")}  # load data into a dict
+# {'test': [{'a': 11, 'b': 21, 'c': 'c1'}, {'a': 12, 'b': 22, 'c': 'c2'}, {'a': 13, 'b': 23, 'c': 'c3'}]}
+output = execute(sql, tables=tables)
+sql_df = pd.DataFrame(output.rows, columns=output.columns)
+print(sql_df)
+
+# ------- duckdb -----------------
+import duckdb
+g = globals()
+g[table_name] = df  # load data in global variable
+output = duckdb.query(sql).to_df()
+print(output)
+
+# --------- pandasql ------------
 from pandasql import sqldf
-output = sqldf("select * from df")
+g = globals()
+g[table_name] = df  # load data in global variable
+output = sqldf(sql)
+print(output)
 ``` 
 
 ### rolling
