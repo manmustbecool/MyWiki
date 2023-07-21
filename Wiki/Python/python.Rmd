@@ -563,6 +563,8 @@ df2
 df.fillna(0) # Replace all the NaN values with Zero
 
 df1 = df.replace(np.nan, '', regex=True) # Replace all the NaN with blank/empty string
+
+df.dropna(axis=1, how='all') # Drop the columns where all elements are NaN
 ```
 
 ### to numpy array
